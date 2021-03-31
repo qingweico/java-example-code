@@ -1,0 +1,71 @@
+package thread;
+
+import java.util.concurrent.*;
+
+import static util.Print.print;
+
+/**
+ * @author:qiming
+ * @date: 2020/12/19
+ */
+public class ThreadPool {
+    public static void main(String[] args) throws InterruptedException {
+
+        // On the basis of three Executors tools,but it's not recommended
+        // Single threaded thread pool.
+        // ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        // Controllable maximum number of concurrent threads pool.
+        // ExecutorService executorService = Executors.newFixedThreadPool(5);
+
+        // The cache thread pool can be reclaimed.
+        // ExecutorService executorService = Executors.newCachedThreadPool();
+
+        // Thread pools that support timed and periodic execution of tasks.
+         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(3);
+         scheduledThreadPool.schedule(() -> {
+             // This is executed once after a delay of 3 seconds.
+             print("delay 3 second... execute!");
+         }, 3, TimeUnit.SECONDS);
+
+
+         scheduledThreadPool.scheduleAtFixedRate(() -> {
+             // Perform every three seconds after a delay of one second.
+             print("delay 1 second... every three seconds execute!");
+         },1,3, TimeUnit.SECONDS);
+
+
+        // Good
+        ExecutorService executorService = new ThreadPoolExecutor(
+                2,
+                3,
+                1,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(2),
+                Executors.defaultThreadFactory(),
+
+                // There are four methods of this strategy:
+                // 1.Throw an exception directly.
+                // The default policy for thread pools.
+                new ThreadPoolExecutor.AbortPolicy()
+
+                // 2.Try to compete with the task at the top of the waiting queue without
+                // throwing an exception.
+                // new ThreadPoolExecutor.DiscardOldestPolicy().
+
+                // 3.Abort the task without throwing an exception.
+                // new ThreadPoolExecutor.DiscardPolicy().
+
+                // 4.Who calls who handles it.
+                // new ThreadPoolExecutor.CallerRunsPolicy()
+        );
+        // If i < 6,there has an RejectedExecutionException will be thrown because maximumPoolSize is 3
+        // and the waiting queue's size is 2,when using the default policy for thread pool, drop the task
+        // and throw exception if the thread pool queue is full.
+        for (int i = 0; i < 5; i++) {
+            final int finalI = i;
+            executorService.execute(() -> System.out.println(Thread.currentThread().getName() + "----->" + finalI));
+        }
+        executorService.shutdown();
+    }
+}
