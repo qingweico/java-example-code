@@ -1,9 +1,7 @@
 package thinking.container.map.hashcode;
 
-import java.util.Objects;
-
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/24
  */
 // A class that's used as a key in a HashMap must override hashcode() and equals().

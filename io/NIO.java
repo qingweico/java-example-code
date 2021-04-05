@@ -13,35 +13,35 @@ import java.nio.channels.FileChannel;
  */
 public class NIO {
     public static void fastCopy(String src, String dist) throws IOException {
-        //获得源文件的输入节字流
+        // Get the input section stream of the source file
         FileInputStream fin = new FileInputStream(src);
-        //获取输入字节流的文件通道
+        // Get the input section stream of the source file
         FileChannel fileInChannel = fin.getChannel();
-        //获取文件的输出节字流
+        // Get the output section stream of the file
         FileOutputStream fo = new FileOutputStream(dist);
-        //获取输出字节流的文件通道
+        // Obtain the file channel of the output byte stream
         FileChannel fileOutChannel = fo.getChannel();
-        //为缓冲区分配1024个字节
+        // Allocate 1024 bytes for the buffer
         ByteBuffer buffer = ByteBuffer.allocateDirect(1024);
         while (true) {
-            //从输入通道中读取数据到缓冲区中 //
+            // Read data from the input channel to the buffer
             int r = fileInChannel.read(buffer);
-            //read返回-1则表示EOF
+            // If read returns -1, it means EOF
             if (r == -1) {
                 break;
             }
-            //切换读写
+            // Switch read and write
             buffer.flip();
-            //把缓冲的文件写入输出文件中
+            // Write the buffered file to the output file
             fileOutChannel.write(buffer);
-            //清空缓冲区
+            // Empty the buffer
             buffer.clear();
         }
     }
 
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();
-        fastCopy("E:\\ppt\\1.mp4", "X:\\2.mp4");
-        System.out.println("本次读写花费的时间为" + (System.currentTimeMillis() - startTime) + "ms");
+        fastCopy(args[0], args[1]);
+        System.out.println("The time spent in this read and write is" + (System.currentTimeMillis() - startTime) + "ms");
     }
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * @author 周庆伟
+ * @author:qiming 
  * @date: 2020/10/23
  */
 public class IceCream {

@@ -17,6 +17,7 @@ import static util.Print.print;
 public class SocketProxy {
     static final int port = 8002;
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
         final ExecutorService exec = Executors.newCachedThreadPool();
@@ -24,8 +25,9 @@ public class SocketProxy {
         print("proxy server start at " + sdf.format(new Date()));
         print("listening port: " + port);
 
+
         while (true) {
-            Socket socket = null;
+            Socket socket;
             try {
                 socket = serverSocket.accept();
                 socket.setKeepAlive(true);

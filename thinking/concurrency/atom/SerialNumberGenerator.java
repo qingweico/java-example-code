@@ -1,7 +1,7 @@
 package thinking.concurrency.atom;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/19
  */
 public class SerialNumberGenerator {

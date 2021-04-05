@@ -1,7 +1,7 @@
 package thinking.concurrency.share;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/19
  */
 public class EvenGenerator extends IntGenerator{

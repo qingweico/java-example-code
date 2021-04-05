@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 周庆伟
+ * @author:qiming
  * @date: 2020/10/11
  */
 class CountedInteger {

@@ -3,7 +3,7 @@ package thinking.holding;
 import java.util.LinkedList;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/18
  */
 public class Stack<T> {

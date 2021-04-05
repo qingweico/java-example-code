@@ -64,8 +64,8 @@ public class CharacterStream {
      * @throws IOException IOException
      */
     public static void method() throws IOException {
-        InputStreamReader fo = new InputStreamReader(new FileInputStream("D:\\picture\\1.jpg"));
-        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream("X:\\5.jpg"));
+        InputStreamReader fo = new InputStreamReader(new FileInputStream("E:\\picture\\1.jpg"));
+        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream("E:\\5.jpg"));
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -80,7 +80,7 @@ public class CharacterStream {
      * @throws IOException IOException
      */
     public static void methodOne() throws IOException {
-        InputStreamReader fo = new InputStreamReader(new FileInputStream("D:\\picture\\1.jpg"));
+        InputStreamReader fo = new InputStreamReader(new FileInputStream("E:\\picture\\1.jpg"));
         OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream("X:\\6.jpg"));
         char[] ch = new char[1024 * 1024];
         int len;

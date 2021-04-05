@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static util.Print.*;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/20
  */
 public class AtomicityIntegerTest implements Runnable{
@@ -27,6 +27,7 @@ public class AtomicityIntegerTest implements Runnable{
             evenIncrement();
         }
     }
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) {
         new Timer().schedule(new TimerTask() {
             @Override

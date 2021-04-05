@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/12
  */
 public class CompilerIntelligence {

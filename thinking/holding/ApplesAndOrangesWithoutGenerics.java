@@ -3,7 +3,7 @@ package thinking.holding;
 import java.util.ArrayList;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/17
  */
 public class ApplesAndOrangesWithoutGenerics {

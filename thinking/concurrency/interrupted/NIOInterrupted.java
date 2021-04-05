@@ -17,7 +17,7 @@ import static util.Print.print;
 /**
  * Blocked NIO channels automatically respond to interrupts
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/7
  */
 public class NIOInterrupted {

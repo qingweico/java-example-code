@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * @author:÷‹«ÏŒ∞
+ * @author:qiming
  * @date: 2021/1/7
  */
 
@@ -43,7 +43,7 @@ public class ProcessController {
         // javac ProcessController.java
         // cd ../../
         // java thinking.io.ProcessController
-        //command("javap thinking.io.ProcessController");
+        // command("javap thinking.io.ProcessController");
         command("javap bin/thinking/io/ProcessController");
 
     }

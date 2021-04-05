@@ -1,13 +1,11 @@
 package thinking.container.map;
 
-import java.util.Map;
-
 import static util.Print.print;
 
 /**
  * Associates keys and values
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/19
  */
 public class AssociativeArray<K, V> {

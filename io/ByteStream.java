@@ -12,38 +12,38 @@ import java.io.IOException;
  */
 public class ByteStream {
     /**
-     * 四种字节流读写文件方式
+     * Four ways to read and write files with byte stream
      *
      * @param args args
      * @throws IOException IOException
      */
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();
-        method();
+        readByte(args[0], args[1]);
         long endTime = System.currentTimeMillis();
-        System.out.println("基本字节流读写一个字节这种方式花费的时间为" + (endTime - startTime) + "ms");
-        long startTimeOne = System.currentTimeMillis();
-        methodOne();
-        long endTimeOne = System.currentTimeMillis();
-        System.out.println("基本字节流读写一个字节数组这种方式花费的时间为" + (endTimeOne - startTimeOne) + "ms");
-        long startTimeTwo = System.currentTimeMillis();
-        methodTwo();
-        long endTimeTwo = System.currentTimeMillis();
-        System.out.println("高效字节流读写一个字节这种方式花费的时间为" + (endTimeTwo - startTimeTwo) + "ms");
-        long startTimeThree = System.currentTimeMillis();
-        methodThree();
-        long endTimeThree = System.currentTimeMillis();
-        System.out.println("高效字节流读写一个字节数组这种方式花费的时间为" + (endTimeThree - startTimeThree) + "ms");
+        System.out.println("The time it takes for the basic byte stream to read and write a byte is: " + (endTime - startTime) + "ms");
+        startTime = System.currentTimeMillis();
+        readByteArray(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("The time it takes for the basic byte stream to read and write a byte array is: " + (endTime - startTime) + "ms");
+        startTime = System.currentTimeMillis();
+        readBufferByte(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("The time it takes for an efficient byte stream to read and write a byte is: " + (endTime - startTime) + "ms");
+        startTime = System.currentTimeMillis();
+        readBufferByteArray(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("The time it takes for an efficient byte stream to read and write a byte array is: " + (endTime - startTime) + "ms");
     }
 
     /**
-     * 基本字节流一次读写一个字节
+     * Basic byte stream reads and writes one byte at a time
      *
      * @throws IOException IOException
      */
-    public static void method() throws IOException {
-        FileInputStream fo = new FileInputStream("E:\\photos\\franck-v-9HkyszvcRBY-unsplash.jpg");
-        FileOutputStream fs = new FileOutputStream("E:\\1.jpg");
+    public static void readByte(String path, String dst) throws IOException {
+        FileInputStream fo = new FileInputStream(path);
+        FileOutputStream fs = new FileOutputStream(dst);
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -54,13 +54,13 @@ public class ByteStream {
     }
 
     /**
-     * 基本字节流一次读写一个字节数组
+     * Basic byte stream reads and writes one byte array at a time
      *
      * @throws IOException IOException
      */
-    public static void methodOne() throws IOException {
-        FileInputStream fo = new FileInputStream("E:\\photos\\franck-v-9HkyszvcRBY-unsplash.jpg");
-        FileOutputStream fs = new FileOutputStream("E:\\2.jpg");
+    public static void readByteArray(String path, String dst) throws IOException {
+        FileInputStream fo = new FileInputStream(path);
+        FileOutputStream fs = new FileOutputStream(dst);
         byte[] bys = new byte[1024];
         int len;
         while ((len = fo.read(bys)) != -1) {
@@ -72,15 +72,15 @@ public class ByteStream {
     }
 
     /**
-     * 高效字节流一次读写一个字节
+     * Efficient byte stream reads and writes one byte at a time
      * <p>
-     * java内置数组缓存
+     * Java built-in array cache
      *
      * @throws IOException IOException
      */
-    public static void methodTwo() throws IOException {
-        BufferedInputStream fo = new BufferedInputStream(new FileInputStream("E:\\photos\\franck-v-9HkyszvcRBY-unsplash.jpg"));
-        BufferedOutputStream fs = new BufferedOutputStream(new FileOutputStream("E:\\3.jpg"));
+    public static void readBufferByte(String path, String dst) throws IOException {
+        BufferedInputStream fo = new BufferedInputStream(new FileInputStream(path));
+        BufferedOutputStream fs = new BufferedOutputStream(new FileOutputStream(dst));
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -90,13 +90,13 @@ public class ByteStream {
     }
 
     /**
-     * 高效字节流读写一个字节数组
+     * Efficient byte stream reads and writes a byte
      *
      * @throws IOException IOException
      */
-    public static void methodThree() throws IOException {
-        BufferedInputStream fo = new BufferedInputStream(new FileInputStream("E:\\photos\\franck-v-9HkyszvcRBY-unsplash.jpg"));
-        BufferedOutputStream fs = new BufferedOutputStream(new FileOutputStream("E:\\4.jpg"));
+    public static void readBufferByteArray(String path, String dst) throws IOException {
+        BufferedInputStream fo = new BufferedInputStream(new FileInputStream(path));
+        BufferedOutputStream fs = new BufferedOutputStream(new FileOutputStream(dst));
         byte[] bys = new byte[1024];
         int len;
         while ((len = fo.read(bys)) != -1) {

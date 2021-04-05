@@ -1,16 +1,14 @@
 package thinking.container.map.hashcode;
-
+import java.util.*;
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/24
  */
-//: containers/MapEntry.java
+
 // A simple Map.Entry for sample Map implementations.
 
-import java.util.*;
-
 public class MapEntry<K, V> implements Map.Entry<K, V> {
-    private K key;
+    private final K key;
     private V value;
 
     public MapEntry(K key, V value) {
@@ -36,12 +34,11 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
         return (key == null ? 0 : key.hashCode()) ^
                 (value == null ? 0 : value.hashCode());
     }
-
+    @SuppressWarnings("rawtypes")
     public boolean equals(Object o) {
         if (!(o instanceof MapEntry)) return false;
         MapEntry me = (MapEntry) o;
-        return
-                (key == null ?
+        return (key == null ?
                         me.getKey() == null : key.equals(me.getKey())) &&
                         (value == null ?
                                 me.getValue() == null : value.equals(me.getValue()));

@@ -3,7 +3,7 @@ package thinking.io;
 import java.io.*;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/2
  */
 public class BufferedInputFile {

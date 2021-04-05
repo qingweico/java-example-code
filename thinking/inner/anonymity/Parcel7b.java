@@ -5,11 +5,11 @@ import thinking.inner.Contents;
 /**
  * Expanded version of Parcel7.java
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/31
  */
 public class Parcel7b {
-    class MyContents implements Contents {
+    static class MyContents implements Contents {
         private int i = 11;
         public int value() {
             return i;

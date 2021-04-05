@@ -2,7 +2,7 @@ package thinking.inner.anonymity;
 
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/31
  */
 public class Wrapping {

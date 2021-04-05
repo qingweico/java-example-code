@@ -9,12 +9,12 @@ import static util.Print.print;
 /**
  * A Map implements with ArrayLists
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/24
  */
 public class SlowMap<K, V> extends AbstractMap<K, V> {
-    private List<K> keys = new ArrayList<>();
-    private List<V> values = new ArrayList<>();
+    private final List<K> keys = new ArrayList<>();
+    private final List<V> values = new ArrayList<>();
     public V put(K key, V value) {
         // The old value or null
         V oldValue = get(key);
@@ -27,7 +27,7 @@ public class SlowMap<K, V> extends AbstractMap<K, V> {
         }
         return oldValue;
     }
-    public V get(Objects key) { // Key is type object, not K
+    public V get(Object key) { // Key is type object, not K
         if(!keys.contains(key)) {
             return null;
         }
@@ -40,7 +40,7 @@ public class SlowMap<K, V> extends AbstractMap<K, V> {
         Iterator<K> ki = keys.iterator();
         Iterator<V> vi = values.iterator();
         while (ki.hasNext()) {
-            set.add(new MapEntry<K, V>(ki.next(), vi.next()));
+            set.add(new MapEntry<>(ki.next(), vi.next()));
         }
         return set;
     }

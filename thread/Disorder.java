@@ -36,6 +36,7 @@ public class Disorder {
             one.start();
             other.start();
             latch.await();
+
             if (x == 0 && y == 0) {
                 System.err.println("第[" + i + "]次执行: " + "a = " + a + ", b = " + b);
                 break;

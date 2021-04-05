@@ -9,7 +9,7 @@ import static util.Print.print;
 /**
  * A simple column example of file lock-up
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/4
  */
 
@@ -34,9 +34,9 @@ public class FileLocking {
         // fl.isShared();
     }
 
-    //  Locks part of the file
-    //  tryLock(long position, long size, boolean shared)
-    //  lock(long position, long size, boolean shared)
+    // Locks part of the file
+    // tryLock(long position, long size, boolean shared)
+    // lock(long position, long size, boolean shared)
 
     // A lock with a fixed size does not change as the file size changes, locking only a certain
     // area, whereas a lock with no arguments locks the entire file, even as the file grows.

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * Thread local storage: Automatically giving each thread its own storage.
  * Create different stores for different threads that use the same variable.
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/31
  */
 public class ThreadLocalVariableHolder {

@@ -6,7 +6,7 @@ import java.io.RandomAccessFile;
 import static util.Print.print;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/4
  */
 public class UsingRandomAccessFile {

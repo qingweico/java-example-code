@@ -9,32 +9,20 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
 
+
 /**
  * @author:qiming
  * @date: 2021/3/27
  */
 public class Solution {
-    static{
-        int x=5;
-    }
-    static int x,y;
-    public static void main(String args[]){
-        int i = 5;
-        int j = 10;
-        System.out.println(~j);
-
-    }
-    public static void myMethod(){
-       Thread t = new Thread(() -> {
-
-       });
+    public static void main(String[] args) {
 
     }
 }
 enum AccountType
 {
     SAVING, FIXED, CURRENT;
-    private AccountType()
+     AccountType()
     {
         System.out.println("It is a account type");
     }
@@ -46,9 +34,35 @@ class EnumOne
         System.out.println(AccountType.FIXED);
     }
 }
-interface A {
-
+class Test {
+    public static void main(String[] args) {
+        System.out.println(new B().getValue());
+    }
+    static class A {
+        protected int value;
+        public A (int v) {
+            setValue(v);
+        }
+        public void setValue(int value) {
+            this.value= value;
+        }
+        public int getValue() {
+            try {
+                value ++;
+                return value;
+            } finally {
+                this.setValue(value);
+                System.out.println(value);
+            }
+        }
+    }
+    static class B extends A {
+        public B () {
+            super(5);
+            setValue(getValue()- 3);
+        }
+        public void setValue(int value) {
+            super.setValue(2 * value);
+        }
+    }
 }
-
-
-

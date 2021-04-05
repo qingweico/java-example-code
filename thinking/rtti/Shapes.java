@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * RTTI Run-Time Type Identification: 在运行时,识别一个对象的类型
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/8
  */
 public class Shapes {

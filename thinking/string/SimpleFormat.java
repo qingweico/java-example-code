@@ -1,7 +1,7 @@
 package thinking.string;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/5
  */
 public class SimpleFormat {

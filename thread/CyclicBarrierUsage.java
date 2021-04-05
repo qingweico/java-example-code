@@ -4,7 +4,7 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 /**
- * 加法计数器
+ * Addition counter
  *
  * @author:qiming
  * @date: 2020/12/19

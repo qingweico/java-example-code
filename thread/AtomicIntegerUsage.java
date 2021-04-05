@@ -13,6 +13,7 @@ import static util.Print.print;
 public class AtomicIntegerUsage {
     static AtomicInteger threadNo = new AtomicInteger(1);
 
+
     public static void main(String[] args) {
         char[] numbers = "123456".toCharArray();
         char[] words = "ABCDEF".toCharArray();

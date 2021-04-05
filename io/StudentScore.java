@@ -2,7 +2,6 @@ package io;
 
 import java.util.TreeSet;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -14,7 +13,7 @@ public class StudentScore {
             int num = s2.getSum() - s1.getSum();
             return num == 0 ? s1.getName().compareTo(s2.getName()) : num;
         });
-        System.out.println("------------开始录入学生---------------");
+        System.out.println("------------开始录入学生------------");
         Scanner input = new Scanner(System.in);
         System.out.print("请输入您要录入的学生个数:");
         int number = input.nextInt();
@@ -37,7 +36,7 @@ public class StudentScore {
             set.add(s);
         }
         System.out.println("--------------录入学生结束----------------");
-        BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("E:\\student.txt"))));
+        BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("E:\\student.txt")));
         fw.write("姓名 语文成绩 数学成绩 英语成绩");
         fw.newLine();
         fw.flush();

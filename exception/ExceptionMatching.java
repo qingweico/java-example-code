@@ -9,6 +9,7 @@ import static util.Print.print;
  * @date: 2021/1/19
  */
 public class ExceptionMatching {
+
     public static void main(String[] args) {
         // Catch the exact exception
         try {

@@ -131,66 +131,63 @@ public class LoginRegister {
         }
     }
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) {
-
         while (true) {
-            // 欢迎界面
-            print("********************欢迎光临********************");
-            print("******************** 1 登陆 ********************");
-            print("******************** 2 注册 ********************");
-            print("******************** 3 退出 ********************");
-            print("************************************************");
-            //键盘录入数据
+            // Welcome Screen
+            print("******************** Welcome  *******************");
+            print("******************** 1 Login  *******************");
+            print("******************** 2 Regist *******************");
+            print("******************** 3 exit   *******************");
+            print("*************************************************");
             Scanner sc = new Scanner(System.in);
             String choiceString = sc.nextLine();
-            //多处使用
             UserDao ud = new UserDaoImpl();
             switch (choiceString) {
                 case "1":
-                    print("---------------登陆界面---------------");
-                    printnb("请输入用户名: ");
+                    print("---------------Login---------------");
+                    printnb("please enter user name: ");
                     String username = sc.nextLine();
-                    printnb("请输入密码: ");
+                    printnb("Please enter the password: ");
                     String password = sc.nextLine();
                     //调用功能
                     boolean flag = ud.isLogin(username, password);
                     if (flag) {
-                        print("登陆成功!");
-                        print("准备好了吗？开始玩游戏啦~~~~~!");
+                        print("login successfully!");
+                        print("Are you ready? Let's play the game~~~~~!");
                         String y;
                         do {
-                            // 启动游戏
+                            // Start the game
                             GuessNumber.start();
-                            print("您还要玩吗? 亲! 继续的话请输入yes 否则输入no");
+                            print("Do you want to play? Dear! Please enter yes to continue, otherwise enter no");
                             y = sc.nextLine();
                             if ("no".equals(y)) {
                                 break;
                             }
                         } while (y.equals("yes"));
                     } else {
-                        print("未查询该账户信息,请您先注册 亲!");
+                        print("The account information has not been queried, please register first, dear!");
                     }
                     break;
                 case "2":
-                    print("-------------注册界面------------");
-                    printnb("请输入用户名: ");
+                    print("-------------Register------------");
+                    printnb("please enter user name: ");
                     String registerName = sc.nextLine();
-                    printnb("请输入密码：");
+                    printnb("Please enter the password: ");
                     String registerPassword = sc.nextLine();
-                    printnb("请再一次输入密码: ");
+                    printnb("Please enter the password again: ");
                     String checkPassword = sc.nextLine();
                     checkPassword(registerPassword, checkPassword);
-                    // 调用功能
-                    // 把数据封装到对象中
+                    // Encapsulate data in objects
                     User user = new User();
                     user.setUsername(registerName);
                     user.setPassword(registerPassword);
                     ud.userRegister(user);
-                    print("注册成功 您的用户名为: " + user.getUsername() + "您的密码为: " + user.getPassword());
+                    print("Registered successfully. Your username is: " + user.getUsername() + "Your password is: " + user.getPassword());
                     break;
                 case "3":
                 default:
-                    print("谢谢光临，欢迎下次再来！");
+                    print("Thank you for coming, welcome to come again next time！");
                     exit(0);
                     break;
             }

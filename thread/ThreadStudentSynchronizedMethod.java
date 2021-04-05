@@ -27,14 +27,14 @@ class Person {
                 e.printStackTrace();
             }
         }
-        System.out.println(this.name + "--------------" + this.age);
+        System.out.println(this.name + " -------------- " + this.age);
         this.flag = false;
         this.notify();
     }
 }
 
 class Get implements Runnable {
-    private Person p;
+    private final Person p;
 
     public Get(Person p) {
         this.p = p;
@@ -73,10 +73,10 @@ class Set implements Runnable {
 
 public class ThreadStudentSynchronizedMethod {
     public static void main(String[] args) {
-        //创建一个资源对象
+        // Create a resource object
         Person s = new Person();
 
-        //创建线程对象
+        // Create thread object
         Set set = new Set(s);
         Get get = new Get(s);
 

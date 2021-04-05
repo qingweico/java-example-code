@@ -69,7 +69,7 @@ public class Article26 {
         // illegal!
         // Because the generic information is erased at run time.
         // o instance Set<String>
-        if(o instanceof Set) {     // Raw type
+        if(o instanceof Set) {      // Raw type
             // Replace primitive types with unrestricted wildcard types,
             // this is a checked transformation, so it does not cause compile-time warnings.
             Set<?> s = (Set<?>)o;   // Wildcard type

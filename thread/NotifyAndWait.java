@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
  * @author:qiming
  * @date: 2020/10/23
  * <p>
- * 交替打印ABCDEF 123456
+ * Print ABCDEF 123456 alternately
  */
 public class NotifyAndWait {
     // Let the t2 thread run first

@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 import static util.Print.*;
 
 /**
- * 阻塞队列
+ * Blocking queue
  * Alternate print ABCDEF 123456
  *
  * @author:qiming

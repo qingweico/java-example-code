@@ -8,7 +8,7 @@ package thinking.rtti;
  * A Java program is not fully loaded before it starts running, its parts are loaded
  * only when needed
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/16
  */
 public class SweetShop {

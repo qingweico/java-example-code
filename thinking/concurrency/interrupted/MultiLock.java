@@ -3,7 +3,7 @@ package thinking.concurrency.interrupted;
 import static util.Print.print;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/7
  */
 public class MultiLock {
@@ -23,11 +23,6 @@ public class MultiLock {
 
     public static void main(String[] args) {
         final MultiLock multiLock = new MultiLock();
-        new Thread() {
-            public void run() {
-                multiLock.f1(10);
-
-            }
-        }.start();
+        new Thread(() -> multiLock.f1(10)).start();
     }
 }

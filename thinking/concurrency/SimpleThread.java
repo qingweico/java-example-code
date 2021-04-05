@@ -3,7 +3,7 @@ package thinking.concurrency;
 /**
  * Direct Inheriting Thread
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/17
  */
 public class SimpleThread extends Thread {

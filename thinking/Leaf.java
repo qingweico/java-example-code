@@ -1,7 +1,7 @@
 package thinking;
 
 /**
- * @author 周庆伟
+ * @author:qiming
  * @date: 2020/10/23
  *
  * this

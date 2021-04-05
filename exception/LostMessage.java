@@ -36,7 +36,7 @@ public class LostMessage {
                 lm.dispose();
             }
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace(System.out);
         }
     }
 

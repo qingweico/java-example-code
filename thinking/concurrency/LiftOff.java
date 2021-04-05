@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2020/11/30
  */
 public class LiftOff implements Runnable {

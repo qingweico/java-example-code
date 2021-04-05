@@ -2,10 +2,10 @@ package thinking.container;
 
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/17
  */
 public class QueueBehavior {
-    private static int count = 10;
+    private static final int count = 10;
 
 }

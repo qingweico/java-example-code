@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * 覆盖equals时总要覆盖hashcode
  *
- * @author 周庆伟
+ * @author:qiming
  * @date: 2020/10/25
  */
 class Student {
@@ -44,5 +44,7 @@ public class Article11 {
         System.out.println(student);
         System.out.println(student1);
         System.out.println(student.equals(student1)); //true
+        System.out.println(student.hashCode());
+        System.out.println(student1.hashCode());
     }
 }

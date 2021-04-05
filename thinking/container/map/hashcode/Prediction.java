@@ -3,7 +3,7 @@ package thinking.container.map.hashcode;
 import java.util.Random;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/24
  */
 // Predicting the weather with groundhogs.

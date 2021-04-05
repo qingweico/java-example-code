@@ -9,7 +9,7 @@ import static util.Print.print;
  * object, if the contents have not been changed, a String method simply returns a
  * reference to the original object.
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/5
  */
 public class OperateString {

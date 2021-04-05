@@ -1,7 +1,5 @@
 package thinking.concurrency.interrupted;
 
-import thinking.concurrency.interrupted.IOBlocked;
-
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,7 +12,7 @@ import static util.Print.print;
 /**
  * Interrupted a blocked task by closing the underlying resource.
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/31
  */
 public class CloseResource {
@@ -35,7 +33,6 @@ public class CloseResource {
         print("Closing " + System.in.getClass().getName());
         // Releases blocked thread
         System.in.close();
-
 
     }
 }

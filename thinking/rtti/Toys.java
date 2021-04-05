@@ -3,7 +3,7 @@ package thinking.rtti;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/16
  */
 public class Toys {

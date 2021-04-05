@@ -8,7 +8,7 @@ import static util.Print.print;
 /**
  * Catch exceptions
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/18
  */
 public class ExceptionThread implements Runnable{

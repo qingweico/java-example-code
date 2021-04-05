@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * 读写锁
+ * Read-write lock
  *
  * @author:qiming
  * @date: 2020/12/19

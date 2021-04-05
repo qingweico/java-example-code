@@ -6,7 +6,7 @@ import static util.Print.print;
 
 /**
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/17
  */
 public class ClassInitialization {

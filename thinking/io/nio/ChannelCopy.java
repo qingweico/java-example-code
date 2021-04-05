@@ -9,7 +9,7 @@ import java.nio.channels.FileChannel;
 /**
  * Copying the file using channels and buffers
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/8
  */
 public class ChannelCopy {

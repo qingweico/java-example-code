@@ -7,6 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
+import static util.Print.print;
+
 public class Server extends Thread {
     private final ServerSocket serverSocket;
 
@@ -18,16 +20,16 @@ public class Server extends Thread {
     public void run() {
         while (true) {
             try {
-                System.out.println("Waiting for remote connection...,the port number is" + serverSocket.getLocalPort());
+                print("Waiting for remote connection...,the port number is" + serverSocket.getLocalPort());
                 Socket server = serverSocket.accept();
-                System.out.println("The remote host address: " + server.getRemoteSocketAddress());
+                print("The remote host address: " + server.getRemoteSocketAddress());
                 DataInputStream in = new DataInputStream(server.getInputStream());
-                System.out.println(in.readUTF());
+                print(in.readUTF());
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
                 out.writeUTF("Thanks for connecting me! " + server.getLocalSocketAddress() + "\nGoodBye!");
                 server.close();
             } catch (SocketTimeoutException e) {
-                System.out.println("Socket Time Out!");
+                print("Socket Time Out!");
                 break;
             } catch (IOException e) {
                 e.printStackTrace();

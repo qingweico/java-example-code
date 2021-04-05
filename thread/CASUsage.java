@@ -1,7 +1,7 @@
 package thread;
 
 /**
- * 自旋锁
+ * CAS
  * Alternate print ABCDEF 123456
  *
  * @author:qiming

@@ -5,6 +5,8 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
+import static util.Print.print;
+
 /**
  * @author:qiming
  * @date: 2020/10/18
@@ -16,29 +18,29 @@ enum Explore {
 
 public class Reflection {
     public static Set<String> analyse(Class<?> enumClass) {
-        System.out.println("-----Analysing-----" + enumClass + "-----");
-        System.out.println("interface : ");
+        print("-----Analysing-----" + enumClass + "-----");
+        print("interface : ");
         for (Type t : enumClass.getGenericInterfaces()) {
-            System.out.print("\t");
-            System.out.println(t);
+            print("\t");
+            print(t);
         }
-        System.out.println("Base : " + enumClass.getSuperclass());
-        System.out.println("Method : ");
+        print("Base : " + enumClass.getSuperclass());
+        print("Method : ");
         HashSet<String> methods = new HashSet<>();
         for (Method m : enumClass.getMethods()) {
             methods.add(m.getName());
         }
-        System.out.println(methods);
+        print(methods);
         return methods;
     }
 
-    //
+
     public static void main(String[] args) {
         Set<String> exploreMethods = analyse(Explore.class);
         Set<String> enumMethods = analyse(Enum.class);
-        System.out.println(exploreMethods.contains(enumMethods));
-        System.out.println(exploreMethods.removeAll(enumMethods));
-        System.out.println(exploreMethods);
+        print(exploreMethods.contains(enumMethods));
+        print(exploreMethods.removeAll(enumMethods));
+        print(exploreMethods);
     }
 }
 
@@ -47,7 +49,7 @@ enum Search {
 }
 
 class UpcastEnum {
-    //
+
     public static void main(String[] args) {
         // It could compile
         Search[] values = Search.values();
@@ -56,8 +58,8 @@ class UpcastEnum {
         // s.values();
         //
         for (Enum en : s.getClass().getEnumConstants()) {
-            System.out.println(en);
+            print(en);
         }
-        System.out.println();
+        print();
     }
 }

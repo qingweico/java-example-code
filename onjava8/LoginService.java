@@ -25,7 +25,7 @@ public interface LoginService {
 }
 
 class UserService {
-    private static User user;
+    private static final User user;
 
     static {
         user = new User();

@@ -7,7 +7,7 @@ import static util.Print.printnb;
  * override: An operator is given a particular meaning when applied to
  * a particular class.
  * *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/19
  */
 // The '+' and "+=" operators for Sting are the only two overloaded operators in Java.

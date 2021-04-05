@@ -5,7 +5,7 @@ package thinking.concurrency.atom;
  *
  * Atomicity applies to all basic types except long and double, it is guaranteed that
  * they will operate on memory as non-separable (atomic) operations.
- * @author:÷‹«ÏŒ∞
+ * @author:qiming
  * @date: 2021/1/19
  */
 public class Atomicity {

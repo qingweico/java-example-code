@@ -4,7 +4,7 @@ package thinking.concurrency;
 import static util.Print.print;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/18
  */
 public class ResponsiveUI extends Thread{

@@ -6,7 +6,7 @@ import thinking.concurrency.share.IntGenerator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/20
  */
 public class AtomicEvenGenerator extends IntGenerator {

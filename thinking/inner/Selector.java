@@ -3,7 +3,7 @@ package thinking.inner;
 /**
  * Holding a sequence of Objects
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/29
  */
 public interface Selector {

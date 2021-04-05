@@ -4,7 +4,7 @@ import static util.Print.print;
 import static util.Print.printnb;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/18
  */
 public class StackCollision {

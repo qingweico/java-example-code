@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Use the displayed Lock object
  * While the code is less elegant than synchronized, it is more flexible
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/19
  */
 public class MutexEvenGenerator extends IntGenerator {

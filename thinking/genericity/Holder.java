@@ -2,7 +2,7 @@ package thinking.genericity;
 
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/12
  */
 public class Holder<T> {

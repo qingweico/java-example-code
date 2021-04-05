@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/16
  */
 public class DaemonFromFactory implements Runnable {

@@ -4,7 +4,7 @@ package thinking.inner;
 /**
  * Returning a reference to an inner class
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/29
  */
 public class Parcel2 {

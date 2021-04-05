@@ -4,7 +4,7 @@ import static util.Print.print;
 
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/18
  */
 //TODO
@@ -14,7 +14,6 @@ public class ThreadVariations {
 
 class InnerThread {
     private int countDown = 5;
-    private Inner inner;
 
     class Inner extends Thread {
         Inner(String name) {
@@ -42,7 +41,7 @@ class InnerThread {
     }
 
     public InnerThread(String name) {
-        inner = new Inner(name);
+        Inner inner = new Inner(name);
     }
 }
 

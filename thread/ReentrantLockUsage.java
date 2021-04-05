@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 重入锁
+ * Reentry lock
  *
  * @author:qiming
  * @date: 2020/12/18

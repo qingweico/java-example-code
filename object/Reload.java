@@ -1,5 +1,7 @@
 package object;
 
+import static util.Print.print;
+
 /**
  * Method overloading
  *
@@ -17,22 +19,22 @@ public class Reload {
     }
 
     public static void main(String args) {
-        System.out.println("Override main");
+        print("Override main");
     }
 
     public static void method(Object o) {
-        System.out.println("Object method");
+        print("Object method");
     }
 
     public static void method(String s) {
-        System.out.println("String method");
+        print("String method");
     }
 
     // However, when an overloaded method contains both Integer and String arguments, the compiler
     // fails, because both String and Integer are concrete types, and the compiler cannot make a choice
     // so it needs to be seen as having made the choice(For example, cast using Integer).
     public static void method(Integer i) {
-        System.out.println("Integer method");
+        print("Integer method");
     }
 
 }

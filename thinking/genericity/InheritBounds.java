@@ -3,7 +3,7 @@ package thinking.genericity;
 import java.awt.*;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/12
  */
 public class InheritBounds {

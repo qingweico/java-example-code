@@ -20,7 +20,7 @@ public class Login {
     static final String USER = "root";
     static final String PASS = "990712";
 
-
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         print("---------------------欢迎来到一刀999游戏厅---------------------");
         print("|-----------------------------------------------------------|");

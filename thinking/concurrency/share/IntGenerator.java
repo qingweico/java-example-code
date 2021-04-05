@@ -1,7 +1,7 @@
 package thinking.concurrency.share;
 
 /**
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/18
  */
 public abstract class IntGenerator {

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 无界通配符 <?>
+ * Unbounded wildcard <?>
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/14
  */
 public class UnboundedWildcards {

@@ -3,7 +3,7 @@ package thinking.inner;
 /**
  * Creating an inner class directly using the .new syntax
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/30
  */
 public class DotNew {

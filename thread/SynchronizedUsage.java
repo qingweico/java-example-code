@@ -11,6 +11,7 @@ public class SynchronizedUsage {
 
     public static void main(String[] args) {
         Data data = new Data();
+
         new Thread(data::f1, "t1").start();
         new Thread(data::f2, "t2").start();
 

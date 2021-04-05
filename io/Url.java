@@ -11,13 +11,13 @@ public class Url {
     public static void main(String[] args) throws IOException {
         URL url = new URL("https://www.taobao.com");
 
-        /* 字节流 */
+        /* Byte stream */
         InputStream is = url.openStream();
 
-        /* 字符流 */
+        /* Character stream */
         InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
 
-        /* 提供缓存功能 */
+        /* Provide caching function */
         BufferedReader br = new BufferedReader(isr);
 
         String line;

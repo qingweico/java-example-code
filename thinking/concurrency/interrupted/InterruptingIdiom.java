@@ -8,7 +8,7 @@ import static util.Print.print;
  * It is important to clean up resources properly when a program exits
  * the loop via an exception.
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/7
  */
 public class InterruptingIdiom {

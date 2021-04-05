@@ -13,7 +13,7 @@ import static util.Print.print;
  * It is used to synchronize one or more tasks, forcing them to wait for the completion
  * of a set of operations performed by another task.
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/1
  */
 
