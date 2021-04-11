@@ -13,6 +13,9 @@ import static util.Print.print;
 import static util.Print.printf;
 
 /**
+ * Comparing the performance of explicit locks and
+ * Atomic versus the synchronized keyword.
+ *
  * @author:qiming
  * @date: 2021/2/3
  */

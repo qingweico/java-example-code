@@ -1,6 +1,9 @@
 package util;
 
 /**
+ * Tuple:
+ * A single object in which a group of objects is packaged directly
+ *
  * @author:qiming
  * @date: 2021/3/23
  */

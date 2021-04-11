@@ -9,7 +9,7 @@ import static util.Print.print;
  * @date: 2021/1/29
  */
 public class Joining {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Sleeper sleeper = new Sleeper("Sleeper", 1500),
                 grumpy = new Sleeper("Grumpy", 1500);
 
@@ -52,6 +52,8 @@ class Joiner extends Thread {
 
     public void run() {
         try {
+            // Timeout parameter: default 0 millis
+            // The Joiner thread will be suspended until the Sleep thread ends.
             sleeper.join();
         } catch (InterruptedException e) {
             print("Interrupted");

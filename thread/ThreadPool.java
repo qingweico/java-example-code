@@ -66,6 +66,14 @@ public class ThreadPool {
             final int finalI = i;
             executorService.execute(() -> System.out.println(Thread.currentThread().getName() + "----->" + finalI));
         }
+
+        // The shutdown method performs a gentle process of shutting down: no new tasks are accepted,
+        // while tasks that have already been committed are completed, including those that have not
+        // yet begun.
         executorService.shutdown();
+
+        // The shutdownNow method performs a brutal shutdown: It tries to cancel all running tasks and
+        // no longer starts tasks in the queue that have not yet started.
+        executorService.shutdownNow();
     }
 }

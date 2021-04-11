@@ -3,7 +3,7 @@ package effective;
 /**
  * 谨慎地使用本地方法
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/19
  */
 // Java Native Interface (JNI) allows Java applications to call native methods,

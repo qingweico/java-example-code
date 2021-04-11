@@ -10,6 +10,7 @@ import static util.Print.print;
  *
  * @author:qiming
  * @date: 2021/1/18
+ * {ThrowsException}
  */
 public class ExceptionThread implements Runnable{
     @Override
@@ -18,11 +19,7 @@ public class ExceptionThread implements Runnable{
     }
 
     public static void main(String[] args) {
-        try {
-            ExecutorService exec = Executors.newCachedThreadPool();
-            exec.execute(new ExceptionThread());
-        }catch (Exception e){
-            print("Exception has been handled");
-        }
+        ExecutorService exec = Executors.newCachedThreadPool();
+        exec.execute(new ExceptionThread());
     }
 }

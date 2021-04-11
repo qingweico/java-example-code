@@ -1,6 +1,5 @@
 package effective;
 
-
 import java.awt.*;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +10,7 @@ import static util.Print.print;
 /**
  * 覆盖equals时请遵守通用约定
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2020/11/1
  */
 
@@ -33,6 +32,7 @@ final class CaseInsensitiveString {
     public boolean equals(Object o) {
 
 //        Solved! Remove code that attempts to inter-operate with String.
+
 //        return o instanceof CaseInsensitiveString &&
 //                s.equalsIgnoreCase(((CaseInsensitiveString) o).s);
 
@@ -131,9 +131,10 @@ class ColorPoint extends Point {
 
     }
 }
+
 class SmellPoint extends Point {
     public enum Smell {
-       TASTY, SALTY
+        TASTY, SALTY
     }
 
     private final Smell smell;
@@ -142,6 +143,7 @@ class SmellPoint extends Point {
         super(x, y);
         this.smell = smell;
     }
+
     public boolean equals(Object o) {
         if (!(o instanceof Point)) return false;
         // If o is a normal Point, do a smell-blind comparision.
@@ -151,13 +153,14 @@ class SmellPoint extends Point {
     }
 
     public static void main(String[] args) {
-        ColorPoint myColorPoint = new ColorPoint(1, 2 , Color.RED);
+        ColorPoint myColorPoint = new ColorPoint(1, 2, Color.RED);
         SmellPoint mySmellPoint = new SmellPoint(1, 2, Smell.SALTY);
         // StackOverflowError
         System.out.println(myColorPoint.equals(mySmellPoint));
     }
 
 }
+
 class CounterPoint extends Point {
     private static final AtomicInteger counter = new AtomicInteger();
 
@@ -165,6 +168,7 @@ class CounterPoint extends Point {
         super(x, y);
         counter.incrementAndGet();
     }
+
     public static int numberCreated() {
         return counter.get();
     }
@@ -174,12 +178,14 @@ public class Article10 {
 
     // Initialize unitCircle to contain all Points on the unit circle.
     private static final Set<Point> unitCircle = Set.of(
-            new Point(1, 0), new Point(0 ,1),
-            new Point(-1, 0) , new Point(0, -1)
+            new Point(1, 0), new Point(0, 1),
+            new Point(-1, 0), new Point(0, -1)
     );
+
     public static boolean onUnitCircle(Point p) {
         return unitCircle.contains(p);
     }
+
     public static void main(String[] args) {
         System.out.println(onUnitCircle(new CounterPoint(1, 0)));
         System.out.println(CounterPoint.numberCreated());

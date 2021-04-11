@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 只针对异常的情况才使用异常
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/6
  */
 public class Article69 {

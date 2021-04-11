@@ -13,7 +13,7 @@ import static util.Print.print;
  */
 // Generate different types of Coffee
 public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coffee> {
-    private final Class[] types = {
+    private final Class<?>[] types = {
             Latte.class,
             Mocha.class,
             Cappuccino.class,
@@ -32,6 +32,7 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
         this.size = size;
     }
 
+    @SuppressWarnings("unchecked")
     public Coffee next() {
         try {
             return (Coffee) types[rand.nextInt(types.length)].getConstructor().newInstance();
@@ -70,6 +71,7 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
             print(gen.next());
         }
         System.out.println();
+        // TODO
         CoffeeGenerator coffeeGenerator = new CoffeeGenerator(5);
         coffeeGenerator.forEach(System.out::println);
     }

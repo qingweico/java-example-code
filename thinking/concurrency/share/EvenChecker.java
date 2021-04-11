@@ -24,7 +24,7 @@ public class EvenChecker implements Runnable {
             int val = generator.next();
             if (val % 2 != 0) {
                 print("ThreadName " + id + ": " + val + " not even");
-                // Cancels all EvenChecker
+                // Cancels all EvenCheckers
                 generator.cancel();
             }
         }
@@ -43,9 +43,5 @@ public class EvenChecker implements Runnable {
     // Default value for count
     public static void test(IntGenerator g) {
         test(g, 10);
-    }
-
-    public static void main(String[] args) {
-
     }
 }

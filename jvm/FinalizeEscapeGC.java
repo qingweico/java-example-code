@@ -24,6 +24,7 @@ public class FinalizeEscapeGC {
         SAVE_HOOK = new FinalizeEscapeGC();
 
         SAVE_HOOK = null;
+
         // Finalize methods can only be called
         // automatically by the system at most once.
         System.gc();

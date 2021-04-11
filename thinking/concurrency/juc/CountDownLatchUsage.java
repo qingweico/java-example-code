@@ -41,7 +41,7 @@ class TaskPortion implements Runnable {
 
     private static int counter = 0;
     private final int id = counter++;
-    private final Random random = new Random(47);
+    private static final Random random = new Random(47);
     private final CountDownLatch latch;
 
     TaskPortion(CountDownLatch latch) {
@@ -73,7 +73,6 @@ class TaskPortion implements Runnable {
 class WaitingTask implements Runnable {
     private static int counter = 0;
     private final int id = counter++;
-    private final Random random = new Random(47);
     private final CountDownLatch latch;
 
     WaitingTask(CountDownLatch latch) {
@@ -86,7 +85,7 @@ class WaitingTask implements Runnable {
             // Any call to await() method on this object(latch) will block until the
             // count reaches 0.
             latch.await();
-            print("Latched barrier pass for" + this);
+            print("Latched barrier pass for " + this);
         } catch (InterruptedException ex) {
             print(this + " interrupted");
         }

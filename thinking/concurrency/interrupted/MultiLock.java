@@ -3,6 +3,7 @@ package thinking.concurrency.interrupted;
 import static util.Print.print;
 
 /**
+ * One thread can reacquire the same lock
  * @author:qiming
  * @date: 2021/2/7
  */

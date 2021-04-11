@@ -5,7 +5,7 @@ import static effective.PhysConstants.*;
 /**
  * 接口只用于定义类型
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/21
  */
 public class Article22 {

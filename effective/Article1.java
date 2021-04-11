@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 用静态工厂方法代替构造器
  *
- * @author 周庆伟
+ * @author:qiming
  * @date: 2020/10/25
  * <p>
  * 优点 ：

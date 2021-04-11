@@ -7,6 +7,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * Use the displayed Lock object
  * While the code is less elegant than synchronized, it is more flexible
  *
+ * Preventing thread collisions with mutexes
+ * {RunByHand}
+ *
  * @author:qiming
  * @date: 2021/1/19
  */

@@ -1,9 +1,10 @@
 package thinking.concurrency;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.Executors;;
 import java.util.concurrent.TimeUnit;
+
+import static util.Print.print;
 
 /**
  * @author:qiming
@@ -12,33 +13,25 @@ import java.util.concurrent.TimeUnit;
 public class DaemonFromFactory implements Runnable {
 
     @Override
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
         try {
-            while (true){
+            while (true) {
                 TimeUnit.MICROSECONDS.sleep(100);
-                System.out.println(Thread.currentThread() + " " + this);
+                print(Thread.currentThread() + " " + this);
             }
-        }catch (InterruptedException e){
-            System.out.println("Interrupted");
+        } catch (InterruptedException e) {
+            print("Interrupted");
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool(new DaemonThreadFactory());
-        for(int i = 0;i < 10;i++){
+        for (int i = 0; i < 10; i++) {
             exec.execute(new DaemonFromFactory());
         }
-        System.out.println("All daemon started");
-        TimeUnit.SECONDS.sleep(2);
+        print("All daemon started");
+        TimeUnit.MILLISECONDS.sleep(500);
     }
 }
 
-class DaemonThreadFactory implements ThreadFactory {
-
-    @Override
-    public Thread newThread(Runnable r) {
-        Thread t = new Thread(r);
-        t.setDaemon(true);
-        return t;
-    }
-}

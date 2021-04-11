@@ -6,6 +6,7 @@ package util;
  */
 
 // A generic interface
+@FunctionalInterface
 public interface Generator<T> {
     T next();
 }

@@ -12,6 +12,7 @@ import static util.Print.*;
  * @author:qiming
  * @date: 2021/1/20
  */
+@SuppressWarnings("InfiniteLoopStatement")
 public class AtomicityIntegerTest implements Runnable{
 
     private final AtomicInteger i = new AtomicInteger(0);
@@ -27,7 +28,7 @@ public class AtomicityIntegerTest implements Runnable{
             evenIncrement();
         }
     }
-    @SuppressWarnings("InfiniteLoopStatement")
+
     public static void main(String[] args) {
         new Timer().schedule(new TimerTask() {
             @Override
@@ -35,6 +36,7 @@ public class AtomicityIntegerTest implements Runnable{
                 err("Aborting");
                 exit(0);
             }
+            // Terminate after 5 seconds
         },5000);
 
         ExecutorService exec = Executors.newCachedThreadPool();

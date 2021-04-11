@@ -71,6 +71,6 @@ public class Article9 {
     }
 
 
-    // Always give priority to try-with-resource over try-finally when dealing with
-    // resources that must be closed.
+    // Always give priority to try-with-resource over try-finally
+    // when dealing with resources that must be closed.
 }

@@ -9,7 +9,7 @@ package effective;
  *      <4 对于参数类型,要优先使用接口而不是类
  *      <5 对于boolean参数,要优先使用两个元素的枚举类型
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/1/6
  */
 public class Article51 {

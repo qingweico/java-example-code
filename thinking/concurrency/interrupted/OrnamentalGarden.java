@@ -19,6 +19,7 @@ public class OrnamentalGarden {
         for (int i = 0; i < 5; i++) {
             exec.execute(new Entrance(i));
         }
+        // Run for a while, then stop and collect the data:
         TimeUnit.SECONDS.sleep(3);
         Entrance.cancel();
         exec.shutdown();
@@ -39,6 +40,7 @@ class Count {
     // Remove the synchronized keyword to see counting fail
     public synchronized int increment() {
         int temp = count;
+        // Yield half the time
         if (random.nextBoolean()) {
             Thread.yield();
         }
@@ -58,8 +60,9 @@ class Entrance implements Runnable {
 
     private int number = 0;
 
+    // Doesn't need synchronization to read:
     private final int id;
-
+    // Atomic operation on a volatile field:
     private static volatile boolean canceled = false;
 
     public static void cancel() {
@@ -68,6 +71,7 @@ class Entrance implements Runnable {
 
     public Entrance(int id) {
         this.id = id;
+        // Keep this task in a list, Also prevents garbage collection of dead task:
         entrances.add(this);
     }
 

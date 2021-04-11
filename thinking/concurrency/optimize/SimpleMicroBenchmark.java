@@ -10,6 +10,8 @@ import static util.Print.printf;
  * @author:qiming
  * @date: 2021/2/3
  */
+
+// The dangers of microbenchmark
 public class SimpleMicroBenchmark {
     static long test(Incrementable incr) {
         long start = System.nanoTime();

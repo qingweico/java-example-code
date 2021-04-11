@@ -65,6 +65,7 @@ public class AttemptLocking {
                 }
             }
         }.start();
+
         Thread.sleep(100);
         al.untimed();
         al.timed();

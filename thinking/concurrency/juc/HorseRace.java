@@ -53,10 +53,13 @@ public class HorseRace {
     public static void main(String[] args) {
         int nHorse = 7;
         int pause = 200;
+
+        // Optional argument
         if (args.length > 0) {
             int n = Integer.parseInt(args[0]);
             nHorse = n > 0 ? n : nHorse;
         }
+        // Optional argument
         if (args.length > 1) {
             int p = Integer.parseInt(args[1]);
             pause = p > -1 ? p : pause;

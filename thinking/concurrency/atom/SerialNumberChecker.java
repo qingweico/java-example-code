@@ -9,6 +9,8 @@ import static util.Print.*;
 
 
 /**
+ * Operations that may seem safe are not, when thread are present.
+ *
  * @author:qiming
  * @date: 2021/1/19
  */
@@ -23,8 +25,8 @@ public class SerialNumberChecker {
             while (true) {
                 int serial = SerialNumberGenerator.nextSerialNumber();
                 if (serials.contains(serial)) {
-                    // When using synchronized keywords to modify methods nextSerialNumber(),
-                    // this will not be executed.
+                    // When using synchronized keywords to modify
+                    // methods nextSerialNumber(), this will not be executed.
                     print("Duplicate: " + serial);
                 }
                 serials.add(serial);
@@ -44,7 +46,7 @@ public class SerialNumberChecker {
         }
     }
 }
-
+// Reuses storage so we don't out of memory
 class CircularSet {
     private final int[] array;
     private final int len;

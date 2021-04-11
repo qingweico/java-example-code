@@ -1,10 +1,12 @@
 package thinking.concurrency.sync;
 
+import annotation.NotThreadSafe;
+
 /**
  * @author:qiming
  * @date: 2021/1/29
  */
-// Not thread-safe
+@NotThreadSafe
 public class Pair {
     private int x, y;
 

@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
  * @author:qiming
  * @date: 2020/11/30
  */
+// Demonstration of the Runnable interface
 public class LiftOff implements Runnable {
     protected int countDown = 10;
     private static int taskCount = 0;
@@ -29,6 +30,8 @@ public class LiftOff implements Runnable {
         while (countDown-- > 0) {
             System.out.print(status());
             try {
+                // Old-style
+                // Thread.sleep(1000);
                 TimeUnit.SECONDS.sleep(1);
                 // Exceptions cannot be propagated across threads, so you must handle all
                 // exceptions generated within the task locally.
@@ -39,13 +42,21 @@ public class LiftOff implements Runnable {
             // Calling the yield method will signal to the thread scheduler that you've
             // done your job and that it's time for another thread to use the CPU, but
             // this is just a hint, and there is no mechanism to guarantee that it will
-            // be adopted.
+            // be adopted, you're just suggesting that other threads of the same priority
+            // can run, you shouldn't rely on yield() for any vital control or for adjust
+            // applications.
             Thread.yield();
         }
+
+    }
+}
+class MainThread {
+    public static void main(String[] args) {
+        LiftOff launch = new LiftOff();
+        launch.run();
     }
 
 }
-
 class BasicThreads {
     public static void main(String[] args) {
         Thread t = new Thread(new LiftOff(4));
@@ -56,7 +67,7 @@ class BasicThreads {
 class MoreBasicThread {
     public static void main(String[] args) {
         for (int i = 0; i < 5; i++) {
-            Thread t = new Thread(new LiftOff(4));
+            Thread t = new Thread(new LiftOff());
             t.start();
         }
         System.out.println("Waiting for LiftOff");
@@ -64,8 +75,8 @@ class MoreBasicThread {
 }
 
 // Using Executor
-// Executor allows you to manage the execution of asynchronous tasks without explicitly managing
-// cycles in a thread's declaration, and is the preferred way to start a thread.
+// Executor allows you to manage the execution of asynchronous tasks without explicitly
+// managing cycles in a thread's declaration, and is the preferred way to start a thread.
 class CachedThreadPool {
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool();

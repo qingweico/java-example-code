@@ -23,8 +23,10 @@ public class CallableUsage {
         for (Future<String> fs : results) {
             try {
                 System.out.println(fs.isDone());
-                System.out.println(fs.get());
-            } catch (InterruptedException | ExecutionException e) {
+                // CancellationException
+                fs.cancel(true);
+                System.out.println(fs.get(1, TimeUnit.SECONDS));
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 e.printStackTrace();
             } finally {
                 exec.shutdown();
@@ -33,6 +35,7 @@ public class CallableUsage {
         }
     }
 }
+// Its type parameter represents the value returned from the method call.
 class TaskWithTResult implements Callable<String> {
     private final int id;
 
@@ -42,6 +45,7 @@ class TaskWithTResult implements Callable<String> {
 
     @Override
     public String call() throws Exception {
+        TimeUnit.SECONDS.sleep(2);
         return "result of TaskWithResult " + id;
     }
 }

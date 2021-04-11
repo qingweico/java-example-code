@@ -7,8 +7,8 @@ import java.util.*;
 import static util.Print.*;
 
 /**
- * É÷ÓÃÖØÔØ
- * Ê¼ÖÕ¿ÉÒÔ¸ø·½·¨Æğ²»Í¬µÄÃû³Æ£¬¶ø²»Ê¹ÓÃÖØÔØ»úÖÆ
+ * æ…ç”¨é‡è½½
+ * å§‹ç»ˆå¯ä»¥ç»™æ–¹æ³•èµ·ä¸åŒçš„åç§°ï¼Œè€Œä¸ä½¿ç”¨é‡è½½æœºåˆ¶
  */
 class CollectionClassifier {
 
@@ -49,7 +49,7 @@ class CollectionClassifier {
 
 
 /**
- * ÆÏÌÑ¾Æ
+ * è‘¡è„é…’
  */
 class Wine {
     String name() {
@@ -58,7 +58,7 @@ class Wine {
 }
 
 /**
- * ÆøÅİÆÏÌÑ¾Æ
+ * æ°”æ³¡è‘¡è„é…’
  */
 class SparklingWine extends Wine {
     String name() {
@@ -67,7 +67,7 @@ class SparklingWine extends Wine {
 }
 
 /**
- * ÏãéÄ
+ * é¦™æ§Ÿ
  */
 class Champagne extends SparklingWine {
     String name() {
@@ -104,7 +104,7 @@ class SetList {
         for (int i = 0; i < 3; i++) {
             set.remove(i);
             list.remove((Integer) i); //boolean remove(Object o);
-            //list.remove(i); Ñ¡Ôñ¸ÃÖØÔØ·½·¨ E remove(int index); »á¸Ä±ä¼¯ºÏÖĞÔªËØµÄË³Ğò
+            //list.remove(i); é€‰æ‹©è¯¥é‡è½½æ–¹æ³• E remove(int index); ä¼šæ”¹å˜é›†åˆä¸­å…ƒç´ çš„é¡ºåº
         }
         System.out.println(set + " " + list);
     }

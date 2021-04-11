@@ -35,7 +35,7 @@ public class ThreadLocalVariableHolder {
         TimeUnit.SECONDS.sleep(1);
 
         // All Accessor will quit
-        exec.shutdown();
+        exec.shutdownNow();
 
     }
 }

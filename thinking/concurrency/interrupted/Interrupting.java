@@ -11,6 +11,8 @@ import static util.Print.exit;
 import static util.Print.print;
 
 /**
+ * Interrupting a blocked thread
+ *
  * @author:qiming
  * @date: 2021/1/31
  */
@@ -32,6 +34,7 @@ public class Interrupting {
         test(new SynchronizedBlocked());
         TimeUnit.SECONDS.sleep(3);
         print("Aborting with System.exit(0)");
+        // Since last 2 interrupts failed
         exit(0);
     }
 }
@@ -82,13 +85,8 @@ class SynchronizedBlocked implements Runnable {
     }
 
     public SynchronizedBlocked() {
-        new Thread() {
-            @Override
-            public void run() {
-                // lock acquired by this thread
-                f();
-            }
-        }.start();
+        // Lock acquired by this thread
+        new Thread(this::f).start();
     }
 
     @Override

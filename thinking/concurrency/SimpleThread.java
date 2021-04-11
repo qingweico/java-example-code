@@ -11,6 +11,7 @@ public class SimpleThread extends Thread {
     private static int threadCount = 0;
 
     public SimpleThread() {
+        // Store the thread name
         super(Integer.toString(++threadCount));
         start();
     }
@@ -37,6 +38,9 @@ class SelfManaged implements Runnable {
     private int countDown = 5;
 
     public SelfManaged() {
+        // Starting threads in the constructor can become problematic,
+        // This is why the Executor is preferred rather than the Thread
+        // object being created explicitly.
         Thread t = new Thread(this);
         t.start();
     }

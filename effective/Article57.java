@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 将局部变量的作用域最小化
  *
- * @author 周庆伟
+ * @author:qiming
  * @date: 2020/10/25
  */
 // The most powerful way to minimize the scope of a local variable

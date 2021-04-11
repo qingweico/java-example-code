@@ -4,6 +4,8 @@ package thinking.concurrency;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Daemon threads spawn daemon threads
+ *
  * @author:qiming
  * @date: 2021/1/16
  */
@@ -13,6 +15,7 @@ public class Daemons {
         t.setDaemon(true);
         t.start();
         System.out.println("d.isDaemon() = " + t.isDaemon() + ". ");
+        // Allow the daemon threads to finish their startup process.
         TimeUnit.SECONDS.sleep(2);
     }
 
@@ -54,16 +57,17 @@ class DaemonDontRunFinally {
         t.start();
     }
 }
-class ADaemon implements Runnable{
+
+class ADaemon implements Runnable {
 
     @Override
     public void run() {
         try {
             System.out.println("Starting ADaemon");
             TimeUnit.SECONDS.sleep(1);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println("Exiting via Interruption");
-        }finally {
+        } finally {
             System.out.println("This should always run?");
         }
     }

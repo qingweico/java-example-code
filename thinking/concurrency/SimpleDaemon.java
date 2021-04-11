@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SimpleDaemon implements Runnable {
     @Override
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
         try {
             while (true) {
@@ -29,11 +30,14 @@ public class SimpleDaemon implements Runnable {
             // are still running,For example, main is executed by a background process.
             // tips: The setDaemon method must be called before the thread starts to
             // make it a background thread.
+
+            // you must call setDaemon method before thread starting in order to set it
+            // up as a background thread.
             daemon.setDaemon(true);
             daemon.start();
         }
         System.out.println("All daemons started");
-        // After 2s, the main method ends and the background program will stop.
-        TimeUnit.SECONDS.sleep(2);
+        // After 1s, the main method ends and the background program will stop.
+        TimeUnit.SECONDS.sleep(1);
     }
 }

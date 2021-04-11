@@ -1,18 +1,21 @@
 package thinking.genericity;
 
 /**
+ * A stack implemented with an internal linked structure.
+ *
  * @author:qiming
  * @date: 2021/3/23
  */
 public class LinkedStack<T> {
-    private static class Node<U> {
-        U item;
-        Node<U> next;
+
+    private class Node {
+        Node next;
+        T item;
         Node() {
             item = null;
             next = null;
         }
-        Node(U item, Node<U> next) {
+        Node(T item, Node next) {
             this.item = item;
             this.next = next;
         }
@@ -21,9 +24,10 @@ public class LinkedStack<T> {
         }
     }
     // End Sentinel
-    private Node<T> top = new Node<>();
+    // head insert
+    private Node top = new Node();
     public void push(T item) {
-        top = new Node<>(item, top);
+        top = new Node(item, top);
     }
     public T pop() {
         T result = top.item;

@@ -16,10 +16,6 @@ public class Disorder {
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            x = 0;
-            y = 0;
-            a = 0;
-            b = 0;
             CountDownLatch latch = new CountDownLatch(2);
             Thread one = new Thread(() -> {
                 a = 1;
@@ -35,10 +31,11 @@ public class Disorder {
 
             one.start();
             other.start();
+
             latch.await();
 
             if (x == 0 && y == 0) {
-                System.err.println("第[" + i + "]次执行: " + "a = " + a + ", b = " + b);
+                System.err.println("第[" + i + "]次执行: " + "x = " + x + ", y = " + y);
                 break;
             }
         }

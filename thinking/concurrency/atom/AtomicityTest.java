@@ -3,6 +3,7 @@ package thinking.concurrency.atom;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
 
@@ -14,7 +15,10 @@ import static util.Print.print;
 public class AtomicityTest implements Runnable {
     private int i = 0;
 
-    public synchronized int getValue() {
+    // TODO
+    // The lack of synchronization allows the value
+    // to be read in an unstable intermediate state. why?
+    public int getValue() {
         return i;
     }
 
@@ -30,13 +34,15 @@ public class AtomicityTest implements Runnable {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
         AtomicityTest at = new AtomicityTest();
         exec.execute(at);
+        TimeUnit.MICROSECONDS.sleep(100);
         while (true) {
             int value = at.getValue();
             if (value % 2 != 0) {
+                // 102983
                 print(value);
                 System.exit(0);
             }

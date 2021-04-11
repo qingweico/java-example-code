@@ -4,6 +4,7 @@ package thinking.concurrency.share;
  * @author:qiming
  * @date: 2021/1/19
  */
+//When threads collide
 public class EvenGenerator extends IntGenerator{
 
     private int currentEvenValue = 0;

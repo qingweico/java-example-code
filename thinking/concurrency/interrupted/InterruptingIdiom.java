@@ -5,17 +5,18 @@ import java.util.concurrent.TimeUnit;
 import static util.Print.print;
 
 /**
- * It is important to clean up resources properly when a program exits
- * the loop via an exception.
+ * It is important to clean up resources properly
+ * when a program exits the loop via an exception.
  *
  * @author:qiming
  * @date: 2021/2/7
  */
+// General idiom for interrupted a task
 public class InterruptingIdiom {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(new Blocked());
         t.start();
-        TimeUnit.MILLISECONDS.sleep(1900);
+        TimeUnit.MILLISECONDS.sleep(1000);
         t.interrupt();
     }
 }
