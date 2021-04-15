@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * RTTI Run-Time Type Identification: 在运行时,识别一个对象的类型
+ * RTTI Run-Time Type Identification: At runtime, identify the type of an object
  *
  * @author:qiming
  * @date: 2021/1/8

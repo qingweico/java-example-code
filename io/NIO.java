@@ -10,6 +10,7 @@ import java.nio.channels.FileChannel;
  * The following shows how to quickly copy files using NIO
  *
  * @author:qiming
+ * @date: 2020/03/23
  */
 public class NIO {
     public static void fastCopy(String src, String dist) throws IOException {

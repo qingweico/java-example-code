@@ -8,9 +8,10 @@ import static util.Print.print;
  * @author:qiming
  * @date: 2020/10/28
  * <p>
- * 线程的三大特性 可见性 原子性 有序性
+ * Three characteristics of threads: visibility, atomicity, orderliness
  * <p>
- * volatile关键字是JVM提供的轻量级的同步机制, 主内存对象线程可见
+ * The volatile keyword is a lightweight synchronization mechanism provided
+ * by the JVM, visible to the main memory object thread.
  */
 public class VolatileUsage {
 
@@ -96,7 +97,7 @@ class VisibilityOfVolatile {
 
             // Normal ends after one second!
             while (num == 0) {
-                //print("Tasks in the t1 thread.");
+                // print("Tasks in the t1 thread.");
             }
         }, "t1").start();
 

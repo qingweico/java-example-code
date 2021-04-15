@@ -56,7 +56,6 @@ class UpcastEnum {
         Enum<Search> s = Search.HITHER;
         // Won't compile
         // s.values();
-        //
         for (Enum en : s.getClass().getEnumConstants()) {
             print(en);
         }

@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toMap;
 
 /**
- * ÓÃenum´úÌæint³£Á¿
+ * ç”¨enumä»£æ›¿intå¸¸é‡
  *
- * @author ÖÜÇìÎ°
+ * @author:qiming
  * @date: 2020/10/23
  */
 // Java supports two special-purpose reference types,
@@ -28,54 +28,54 @@ public class Article34 {
 
 // Enumeration in Java is essentially an int value
 enum Planet {
-    // Ã¶¾Ù³£Á¿
+    // æšä¸¾å¸¸é‡
     /**
-     * Ë®ĞÇ
+     * æ°´æ˜Ÿ
      */
     MERCURY(3.302e+23, 2.439e6),
     /**
-     * ½ğĞÇ
+     * é‡‘æ˜Ÿ
      */
     VENUS(4.869e+24, 6.052e6),
     /**
-     * µØÇò
+     * åœ°çƒ
      */
     EARTH(5.975e+24, 6.378e6),
     /**
-     * »ğĞÇ
+     * ç«æ˜Ÿ
      */
     MARS(6.419e+23, 3.393e6),
     /**
-     * Ä¾ĞÇ
+     * æœ¨æ˜Ÿ
      */
     JUPITER(1.899e+27, 7.149e7),
     /**
-     * ÍÁĞÇ
+     * åœŸæ˜Ÿ
      */
     SATURN(5.685e+26, 6.027e7),
     /**
-     * ÌìÍõĞÇ
+     * å¤©ç‹æ˜Ÿ
      */
     URANUS(8.683e+25, 2.556e7),
     /**
-     * º£ÍõĞÇ
+     * æµ·ç‹æ˜Ÿ
      */
     NEPTUNE(1.024e+26, 2.477e7);
-    // ÊµÀıÓò
+    // å®ä¾‹åŸŸ
     /**
-     * ĞĞĞÇÖÊÁ¿
+     * è¡Œæ˜Ÿè´¨é‡
      */
     private final double mass;
     /**
-     * ĞĞĞÇ°ë¾¶
+     * è¡Œæ˜ŸåŠå¾„
      */
     private final double radius;
     /**
-     * ÖØÁ¦¼ÓËÙ¶È
+     * é‡åŠ›åŠ é€Ÿåº¦
      */
     private final double surfaceGravity;
     /**
-     * ¿¨ÎÄµÏĞí³£Á¿
+     * å¡æ–‡è¿ªè®¸å¸¸é‡
      */
     private static final double G = 6.67300E-11;
 

@@ -6,7 +6,9 @@ import java.util.concurrent.TimeUnit;
 import static util.Print.print;
 
 /**
- * semaphore维护当前访问自身的线程个数, 并提供了同步机制
+ * Semaphore:
+ * Maintain the current number of threads accessing itself,
+ * and provide a synchronization mechanism.
  *
  * @author:qiming
  * @date: 2020/12/19

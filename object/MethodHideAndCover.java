@@ -5,7 +5,7 @@ import static util.Print.print;
 /**
  * Method hiding and method overriding
  * <p>
- * RTTI Run-Time Type Identification 运行时类型识别
+ * RTTI Run-Time Type Identification
  *
  * @author:qiming
  * @date: 2020/12/12

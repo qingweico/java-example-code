@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * 如果需要精确的答案，请避免使用float和double
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2020/11/23
  */
 public class Article60 {

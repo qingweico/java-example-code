@@ -12,7 +12,7 @@ public class TestReentrantLockAndAtomic {
         AtomicPseudoRandom aRand = new AtomicPseudoRandom(20);
         long start = System.currentTimeMillis();
         ExecutorService exec = Executors.newFixedThreadPool(10);
-        for(int i = 0;i < 3;i++) {
+        for(int i = 0;i < 10;i++) {
             exec.execute(() -> {
                 for(int j = 0;j < 1000;j++) {
                     aRand.next(20);
@@ -24,14 +24,14 @@ public class TestReentrantLockAndAtomic {
 
         ReentrantLockPseudoRandom rRand = new ReentrantLockPseudoRandom(20);
         start = System.currentTimeMillis();
-        for(int i = 0;i < 3;i++) {
-
+        for(int i = 0;i < 10;i++) {
             exec.execute(() -> {
                 for(int j = 0;j < 1000;j++) {
                     rRand.next(20);
                 }
             });
-        }exec.shutdown();
+        }
+        exec.shutdown();
         System.out.println(System.currentTimeMillis() - start + "ms");
     }
 }

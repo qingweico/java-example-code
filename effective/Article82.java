@@ -47,13 +47,13 @@ public class Article82<K, V> {
         public int i = 0;
 
         // Unsafe!
-        private int[] lock = new int[10];
+        private int[] lock = new int[0];
 
         public void add() {
             synchronized (lock) {
                 i++;
             }
-            lock = new int[3];
+            lock = new int[0];
         }
     }
 

@@ -1,6 +1,5 @@
 package effective;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -55,8 +54,11 @@ class ArrayGeneric {
         // List<String>[] stringLists = new List<String>[1];
         // List<Integer> intList = List.of(42);
         // Object[] objects = stringLists;
+
         // objects[0] = intList;
         // String s =stringLists[0].get(0);
+
+
         // List<?>[] lists = new List<String>[1];
     }
 }

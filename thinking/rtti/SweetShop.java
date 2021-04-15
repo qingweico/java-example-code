@@ -5,6 +5,7 @@ package thinking.rtti;
  * the class is loaded when the program creates the first reference to a static
  * member of the class. This proof constructor is also a static method of the class,
  * even if the static keyword was not used before the constructor.
+ *
  * A Java program is not fully loaded before it starts running, its parts are loaded
  * only when needed
  *

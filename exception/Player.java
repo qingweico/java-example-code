@@ -24,6 +24,7 @@ public class Player {
             try {
                 throw new NoThisSoundException("The currently playing song does not exist!");
             } catch (NoThisSoundException e) {
+
                 // This method will prints the sequence of method calls from the method call
                 // until the exception is thrown, by default, the information is output to the
                 // standard error stream, that is to say e.printStackTrace() is equal to

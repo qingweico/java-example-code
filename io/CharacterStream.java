@@ -16,46 +16,47 @@ import java.io.BufferedWriter;
  */
 public class CharacterStream {
     /**
-     * 五种字符流读写文件方式
+     * Five ways to read and write files with character streams
      *
      * @param args args
      * @throws IOException IOException
      */
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();
-        method();
+        readChar(args[0], args[1]);
         long endTime = System.currentTimeMillis();
-        System.out.println("基本字符流读写一个字节花费的时间为" + (endTime - startTime) + "ms");
-        long startTimeOne = System.currentTimeMillis();
-        methodOne();
-        long endTimeOne = System.currentTimeMillis();
-        System.out.println("基本字符流读写一个字符数组花费的时间为" + (endTimeOne - startTimeOne) + "ms");
-        long startTimeFour = System.currentTimeMillis();
-        methodFour();
-        long endTimeFour = System.currentTimeMillis();
-        System.out.println("基本字符流(FileReader)读写一个字符花费的时间为" + (endTimeFour - startTimeFour) + "ms");
-        long startTimeFive = System.currentTimeMillis();
-        methodFive();
-        long endTimeFive = System.currentTimeMillis();
-        System.out.println("基本字符流(FileReader)读写一个字符数组花费的的时间为" + (endTimeFive - startTimeFive) + "ms");
-        long startTimeTwo = System.currentTimeMillis();
-        methodTwo();
-        long endTimeTwo = System.currentTimeMillis();
-        System.out.println("高效字符流读写一个字符花费的时间为" + (endTimeTwo - startTimeTwo) + "ms");
-        long startTimeThree = System.currentTimeMillis();
-        methodThree();
-        long endTimeThree = System.currentTimeMillis();
-        System.out.println("高效字符流读写一个字符数组花费的时间为" + (endTimeThree - startTimeThree) + "ms");
-        long startTimeSix = System.currentTimeMillis();
-        methodSix();
-        long endTimeSix = System.currentTimeMillis();
-        System.out.println("高效字符流读写一个字符串花费的时间为" + (endTimeSix - startTimeSix) + "ms");
-        long startTimeSeven = System.currentTimeMillis();
-        methodSeven();
-        System.out.println("高效字符流读取一个字符(0.98G的电影)花费的时间为" + (System.currentTimeMillis() - startTimeSeven) + "ms");
-        long startTimeEight = System.currentTimeMillis();
-        methodEight();
-        System.out.println("高效字符流读取一个字符数组(0.98G的电影花费的时间为" + (System.currentTimeMillis() - startTimeEight) + "ms");
+        System.out.println("readChar:" + (endTime - startTime) + "ms");
+
+        startTime = System.currentTimeMillis();
+        readCharArray(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("readArray: " + (endTime - startTime) + "ms");
+
+        startTime = System.currentTimeMillis();
+        readCharByFileReader(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("readCharByFileReader: " + (endTime - startTime) + "ms");
+
+        startTime = System.currentTimeMillis();
+        readCharArrayByFileReader(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("readCharArrayByFileReader: " + (endTime - startTime) + "ms");
+
+        startTime = System.currentTimeMillis();
+        readCharByBuffered(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("readCharByBuffered: " + (endTime - startTime) + "ms");
+
+        startTime = System.currentTimeMillis();
+        readCharArrayByBuffered(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("readCharArrayByBuffered: " + (endTime - startTime) + "ms");
+
+        startTime = System.currentTimeMillis();
+        readStringByBuffered(args[0], args[1]);
+        endTime = System.currentTimeMillis();
+        System.out.println("readStringByBuffered: " + (endTime - startTime) + "ms");
+
     }
 
     /**
@@ -63,9 +64,9 @@ public class CharacterStream {
      *
      * @throws IOException IOException
      */
-    public static void method() throws IOException {
-        InputStreamReader fo = new InputStreamReader(new FileInputStream("E:\\picture\\1.jpg"));
-        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream("E:\\5.jpg"));
+    public static void readChar(String path, String dest) throws IOException {
+        InputStreamReader fo = new InputStreamReader(new FileInputStream(path));
+        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream(dest));
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -79,9 +80,9 @@ public class CharacterStream {
      *
      * @throws IOException IOException
      */
-    public static void methodOne() throws IOException {
-        InputStreamReader fo = new InputStreamReader(new FileInputStream("E:\\picture\\1.jpg"));
-        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream("X:\\6.jpg"));
+    public static void readCharArray(String path, String dest) throws IOException {
+        InputStreamReader fo = new InputStreamReader(new FileInputStream(path));
+        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream(dest));
         char[] ch = new char[1024 * 1024];
         int len;
         while ((len = fo.read(ch)) != -1) {
@@ -96,9 +97,9 @@ public class CharacterStream {
      *
      * @throws IOException IOException
      */
-    public static void methodTwo() throws IOException {
-        BufferedReader fo = new BufferedReader(new FileReader("D:\\picture\\1.jpg"));
-        BufferedWriter fs = new BufferedWriter(new FileWriter("X:\\7.jpg"));
+    public static void readCharByBuffered(String path, String dest) throws IOException {
+        BufferedReader fo = new BufferedReader(new FileReader(path));
+        BufferedWriter fs = new BufferedWriter(new FileWriter(dest));
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -112,9 +113,9 @@ public class CharacterStream {
      *
      * @throws IOException IOException
      */
-    public static void methodThree() throws IOException {
-        BufferedReader fo = new BufferedReader(new FileReader("D:\\picture\\1.jpg"));
-        BufferedWriter fs = new BufferedWriter(new FileWriter("X:\\8.jpg"));
+    public static void readCharArrayByBuffered(String path, String dest) throws IOException {
+        BufferedReader fo = new BufferedReader(new FileReader(path));
+        BufferedWriter fs = new BufferedWriter(new FileWriter(dest));
         char[] ch = new char[1024 * 1024];
         int len;
         while ((len = fo.read(ch)) != -1) {
@@ -129,9 +130,9 @@ public class CharacterStream {
      *
      * @throws IOException IOException
      */
-    public static void methodFour() throws IOException {
-        FileReader fo = new FileReader("D:\\picture\\1.jpg");
-        FileWriter fs = new FileWriter("X:\\9.jpg");
+    public static void readCharByFileReader(String path, String dest) throws IOException {
+        FileReader fo = new FileReader(path);
+        FileWriter fs = new FileWriter(dest);
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -145,9 +146,9 @@ public class CharacterStream {
      *
      * @throws IOException IOException
      */
-    public static void methodFive() throws IOException {
-        FileReader fo = new FileReader("D:\\picture\\1.jpg");
-        FileWriter fs = new FileWriter("X:\\10.jpg");
+    public static void readCharArrayByFileReader(String path, String dest) throws IOException {
+        FileReader fo = new FileReader(path);
+        FileWriter fs = new FileWriter(dest);
         char[] ch = new char[1024];
         int len;
         while ((len = fo.read(ch)) != -1) {
@@ -162,47 +163,14 @@ public class CharacterStream {
      *
      * @throws IOException IOException
      */
-    public static void methodSix() throws IOException {
-        BufferedReader fo = new BufferedReader(new FileReader("D:\\picture\\1.jpg"));
-        BufferedWriter fs = new BufferedWriter(new FileWriter("X:\\11.jpg"));
+    public static void readStringByBuffered(String path, String dest) throws IOException {
+        BufferedReader fo = new BufferedReader(new FileReader(path));
+        BufferedWriter fs = new BufferedWriter(new FileWriter(dest));
         String s;
         while ((s = fo.readLine()) != null) {
             fs.write(s);
             // fs.newLine();
             fs.flush();
-        }
-        fo.close();
-        fs.close();
-    }
-
-    /**
-     * 高效字符流读取一个字符
-     *
-     * @throws IOException IOException
-     */
-    public static void methodSeven() throws IOException {
-        BufferedReader fo = new BufferedReader(new FileReader("E:\\ppt\\1.mp4"));
-        BufferedWriter fs = new BufferedWriter(new FileWriter("X:\\1.mp4"));
-        int len;
-        while ((len = fo.read()) != -1) {
-            fs.write(len);
-        }
-        fo.close();
-        fs.close();
-    }
-
-    /**
-     * 高效字符流读取一个字符数组
-     *
-     * @throws IOException IOException
-     */
-    public static void methodEight() throws IOException {
-        BufferedReader fo = new BufferedReader(new FileReader("E:\\ppt\\1.mp4"));
-        BufferedWriter fs = new BufferedWriter(new FileWriter("X:\\2.mp4"));
-        int len = 0;
-        char[] ch = new char[1024];
-        while ((fo.read()) != -1) {
-            fs.write(ch, 0, len);
         }
         fo.close();
         fs.close();

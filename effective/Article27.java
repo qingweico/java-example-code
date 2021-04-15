@@ -1,8 +1,5 @@
 package effective;
 
-
-import java.util.ArrayList;
-
 /**
  * 消除非受检的警告
  * >1 非受检转换警告(unchecked cast warning)
