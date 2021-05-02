@@ -16,8 +16,6 @@ public class Singleton {
             });
         }
         Arrays.asList(threads).forEach(Thread::start);
-
-
     }
 
 }

@@ -55,5 +55,5 @@ public class ShowMethods {
         }
     }
 
-    //usage: input 'java ShowMethods.java reflect.ShowMethods' in terminal
+    // Usage: input 'java ShowMethods.java reflect.ShowMethods' in terminal
 }
