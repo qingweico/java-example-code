@@ -9,8 +9,11 @@ import java.util.Random;
  */
 public class IceCream {
     private static final Random RANDOM = new Random(47);
-    static final String[] FLAVORS = {"Chocolate", "Strawberry", "Vanilla Fudge Swirl",
-            "Mint Chip", "Mocha Almond Fudge", "Rum Raisin", "Praline Cream", "Mud pie"
+    static final String[] FLAVORS = {
+            "Chocolate", "Strawberry",
+            "Vanilla Fudge Swirl", "Mint Chip",
+            "Mocha Almond Fudge", "Rum Raisin",
+            "Praline Cream", "Mud pie"
     };
 
     public static String[] flavorSet(int n) {

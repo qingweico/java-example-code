@@ -1,3 +1,5 @@
+
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
@@ -118,10 +120,9 @@ public class Solution {
 
     }
     public static void main(String[] args) {
-        //maxProfit(new int[]{7, 1, 5, 4, 6, 4});
-        //System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+        maxProfit(new int[]{7, 1, 5, 4, 6, 4});
+        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
         System.out.println(Arrays.toString(topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2)));
-
 
     }
 
