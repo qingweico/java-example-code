@@ -12,6 +12,7 @@ import java.lang.annotation.*;
  */
 
 
+
 /**
  * The class to which this annotation is applied is not thread-safe.
  * This annotation primarily exists for clarifying the non-thread-safety of a class
