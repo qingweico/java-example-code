@@ -1,15 +1,4 @@
-
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.security.KeyStore;
-import java.sql.Array;
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -81,14 +70,14 @@ public class Solution {
 
     }
 
-    static void merge_sort(int[] nums, int l, int r, int[] temp) {
+    static void mergeSort(int[] nums, int l, int r, int[] temp) {
         if (l + 1 >= r) {
             return;
         }
         int m = l + (r - l) / 2;
-        merge_sort(nums, l, m, temp);
-        merge_sort(nums, m, r, temp);
-// conquer
+        mergeSort(nums, l, m, temp);
+        mergeSort(nums, m, r, temp);
+       // conquer
         int p = l, q = m, i = l;
         while (p < m || q < r) {
             if (q >= r || (p < m && nums[p] <= nums[q])) {

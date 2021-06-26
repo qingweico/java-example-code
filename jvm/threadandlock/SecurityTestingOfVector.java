@@ -20,7 +20,7 @@ public class SecurityTestingOfVector {
 
             Thread removeThread = new Thread(() -> {
 
-                // Synchronization must be added to secure vector access！
+                // Synchronization must be added to secure vector access!
                 synchronized (vector) {
                     for(int i = 0;i < vector.size();i++) {
                         vector.remove(i);

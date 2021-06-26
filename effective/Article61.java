@@ -11,7 +11,7 @@ import java.util.*;
 
 /*基本类型和装箱基本类型的三个区别:
    1): 基本类型只有值, 而装箱基本类型则具有与它们的值不同的同一性
-   2): 基本类型只有函数值，而装箱基本类型则都有一个非函数值，除了它对应的基本类型的所有函数值以外，还有个null
+   2): 基本类型只有函数值, 而装箱基本类型则都有一个非函数值, 除了它对应的基本类型的所有函数值以外, 还有个null
    3): 基本类型通常比装箱基本类型更节省时间和空间
  */
 
@@ -28,7 +28,7 @@ public class Article61 {
 
     public static void main(String[] args) {
 
-        // There will be got back -1 ,not 0 why?
+        // There will be got back -1, not 0 why?
         // The expression i < j performs a calculation that results in the Integer instances of
         // references to i and j being automatically boxed, that is, it extracts their base types
         // executes the expression i == j which performs an identity comparison on the references
