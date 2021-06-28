@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @date: 2021/6/24
  */
 public class CustomLock {
+
     volatile int status;
 
     private static long stateOffset;
@@ -34,12 +35,12 @@ public class CustomLock {
     }
 
     void lock() {
-        while(!compareAndSet(0, 1)) {
+        while(!compareAndSet()) {
             // System call
         }
     }
-    boolean compareAndSet(int expected, int x) {
-        return unsafe.compareAndSwapInt(this, stateOffset, expected, x);
+    boolean compareAndSet() {
+        return unsafe.compareAndSwapInt(this, stateOffset, 0, 1);
     }
     void unlock() {
         status = 0;

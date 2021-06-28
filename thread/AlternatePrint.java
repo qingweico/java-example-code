@@ -35,16 +35,14 @@ public class AlternatePrint {
         new Thread(() ->
         {
             for (char n : numbers) {
-                while (threadNo.get() != 1) {
-                }
+                while (threadNo.get() != 1) {}
                 prints(n);
                 threadNo.set(2);
             }
         }, "t1").start();
         new Thread(() -> {
             for (char c : words) {
-                while (threadNo.get() != 2) {
-                }
+                while (threadNo.get() != 2) {}
                 prints(c);
                 threadNo.set(1);
             }
@@ -93,8 +91,7 @@ public class AlternatePrint {
         new Thread(() ->
         {
             for (char n : numbers) {
-                while (r != ReadyToRun.T1) {
-                }
+                while (r != ReadyToRun.T1) {}
                 prints(n);
                 r = ReadyToRun.T2;
             }
@@ -102,8 +99,7 @@ public class AlternatePrint {
 
         new Thread(() -> {
             for (char w : words) {
-                while (r != ReadyToRun.T2) {
-                }
+                while (r != ReadyToRun.T2) {}
                 prints(w);
                 r = ReadyToRun.T1;
             }
