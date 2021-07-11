@@ -1,9 +1,5 @@
 package jvm;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Objects;
-
 import static util.Print.print;
 
 /**
@@ -13,7 +9,6 @@ import static util.Print.print;
 public class StringIntern {
     public static void main(String[] args) {
         String s = new String("a");
-        s.intern();
         String ss = s.intern();
         String str = "a";
         // false
@@ -34,7 +29,6 @@ public class StringIntern {
 
         String s3 = new String("a") + new String("b");
         String s4 = "ab";
-        s3.intern();
         String s5 = s3.intern();
         // false
         print(s3 == s4);

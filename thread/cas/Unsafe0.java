@@ -16,7 +16,7 @@ public class Unsafe0 {
     private static final Unsafe0 t = new Unsafe0();
 
     public static void main(String[] args) throws Exception {
-        // Unsafe unsafe1 = Unsafe.getUnsafe();
+         Unsafe unsafe1 = Unsafe.getUnsafe();
 
 
         Field unsafeField = Unsafe.class.getDeclaredFields()[0];

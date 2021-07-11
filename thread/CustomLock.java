@@ -33,7 +33,6 @@ public class CustomLock {
         }
 
     }
-
     void lock() {
         while(!compareAndSet()) {
             // System call

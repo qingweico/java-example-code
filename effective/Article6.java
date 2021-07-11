@@ -33,8 +33,8 @@ public class Article6 {
 }
 // Reusing expensive object for improved performance
  class RomanNumeral {
-    private static final Pattern ROMAN = Pattern.compile("^(?=.)M*(C[MD] | " +
-            "D?C* 3})(X[CL] | L?X* 3})(I[XV] | V?I* 3})$");
+    private static final Pattern ROMAN = Pattern.compile(
+            "^(?=.)M*(C[MD] | D?C* 3})(X[CL] | L?X* 3})(I[XV] | V?I* 3})$");
     // 169us
     static boolean isRomanNumeral(String s) {
         return ROMAN.matcher(s).matches();

@@ -59,8 +59,8 @@ public class ThreadPool {
                 // 4.Who calls who handles it.
                 // new ThreadPoolExecutor.CallerRunsPolicy()
         );
-        // If i < 6,there has an RejectedExecutionException will be thrown because maximumPoolSize is 3
-        // and the waiting queue's size is 2,when using the default policy for thread pool, drop the task
+        // If i < 6, there has a RejectedExecutionException will be thrown because maximumPoolSize is 3
+        // and the waiting queue's size is 2, when using the default policy for thread pool, drop the task
         // and throw exception if the thread pool queue is full.
         for (int i = 0; i < 5; i++) {
             final int finalI = i;

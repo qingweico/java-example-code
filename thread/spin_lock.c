@@ -1,10 +1,3 @@
-/*************************************************************************
-	> File Name: spin_lock.c
-	> Author: qiming
-	> Mail: zqingwei99@gmail.com 
-	> Created Time: Sat 26 Jun 2021 02:23:34 PM CST
- ************************************************************************/
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<pthread.h>
@@ -35,7 +28,7 @@ int main() {
 void increment(void) {
 
 	long tmp;
-	for(long i = 0;i <= 9999;i++) {
+	for(long i = 0; i <= 9999; i++) {
 
 	 pthread_spin_lock(&spin_lock);
 

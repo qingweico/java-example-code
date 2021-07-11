@@ -17,7 +17,7 @@ class GetThread implements Runnable {
     @Override
     @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
-        //Student s=new Student();
+        //Student s = new Student();
         while (true) {
             synchronized (s) {
                 if (!s.flag) {  // Wait if there is no data
@@ -46,7 +46,7 @@ class SetThread implements Runnable {
     @Override
     @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
-        // Student s=new Student();
+        // Student s = new Student();
         while (true) {
             synchronized (s) {
                 if (s.flag) {

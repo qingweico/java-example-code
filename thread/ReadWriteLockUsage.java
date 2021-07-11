@@ -14,7 +14,6 @@ public class ReadWriteLockUsage {
     static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     public static void main(String[] args) throws IOException {
-        final Object o = new Object();
         // Read locks, also known as shared locks, can be held by multiple threads simultaneously.
         for (int i = 0; i < 5; i++) {
             final int finalI = i;
@@ -41,7 +40,7 @@ public class ReadWriteLockUsage {
             InputStream is = new FileInputStream("src/io/temp");
             System.out.println(Thread.currentThread().getName() + finalI + "线程开始读取!");
             try {
-                int len = is.read();
+                is.read();
             } catch (IOException e) {
                 e.printStackTrace();
             }

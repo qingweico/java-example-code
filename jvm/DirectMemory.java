@@ -24,9 +24,8 @@ public class DirectMemory {
         Field field = Unsafe.class.getDeclaredFields()[0];
         field.setAccessible(true);
         Unsafe unsafe = (Unsafe)field.get(null);
-        while (true) {
+        for(;;) {
             unsafe.allocateMemory(500 * 1024 * 1024);
         }
-
     }
 }

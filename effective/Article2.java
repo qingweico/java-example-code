@@ -26,7 +26,7 @@ class NutritionFacts {
     private final int calories;    // (per serving)    optional
     private final int fat;         // (g/serving)      optional
     private final int sodium;      // (mg/serving)     optional
-    private final int carbohydrate;// (g/serving)     optional
+    private final int carbohydrate;// (g/serving)      optional
 
     public NutritionFacts(int servingSize, int servings) {
         this(servingSize, servings, 0);
@@ -61,15 +61,15 @@ class NutritionFacts {
 
 
 // JavaBeans Pattern - allows inconsistency, mandates mutability
-class NutritionFactsOfUseJavaBeans {
-    private int servingSize = -1; // Required; not default value
-    private int servings = -1;    // Required; not default value
-    private int calories = 0;
-    private int fat = 0;
-    private int sodium = 0;
+class NutritionFactsOfUsingJavaBeans {
+    private int servingSize  = -1; // Required; not default value
+    private int servings     = -1;    // Required; not default value
+    private int calories     = 0;
+    private int fat          = 0;
+    private int sodium       = 0;
     private int carbohydrate = 0;
 
-    public NutritionFactsOfUseJavaBeans() {
+    public NutritionFactsOfUsingJavaBeans() {
     }
 
     public void setServingSize(int servingSize) {
@@ -101,7 +101,7 @@ class NutritionFactsOfUseJavaBeans {
         // Instances are easy to create and the code is easy to read,
         // but the serious disadvantage is that JavaBeans can be in
         // inconsistent states during construction.
-        NutritionFactsOfUseJavaBeans cocaCola = new NutritionFactsOfUseJavaBeans();
+        NutritionFactsOfUsingJavaBeans cocaCola = new NutritionFactsOfUsingJavaBeans();
         cocaCola.setServingSize(240);
         cocaCola.setServings(8);
         cocaCola.setCalories(100);
@@ -110,7 +110,7 @@ class NutritionFactsOfUseJavaBeans {
     }
 }
 
-class NutritionFactsOfUseBuilder {
+class NutritionFactsOfUsingBuilder {
     private final int servingSize;
     private final int servings;
     private final int calories;
@@ -124,9 +124,9 @@ class NutritionFactsOfUseBuilder {
         private final int servings;
 
         // Optionals parameters - initialized to default values
-        private int calories = 0;
-        private int fat = 0;
-        private int sodium = 0;
+        private int calories     = 0;
+        private int fat          = 0;
+        private int sodium       = 0;
         private int carbohydrate = 0;
 
         public Builder(int servingSize, int servings) {
@@ -154,12 +154,12 @@ class NutritionFactsOfUseBuilder {
             return this;
         }
 
-        public NutritionFactsOfUseBuilder builder() {
-            return new NutritionFactsOfUseBuilder(this);
+        public NutritionFactsOfUsingBuilder builder() {
+            return new NutritionFactsOfUsingBuilder(this);
         }
     }
 
-    private NutritionFactsOfUseBuilder(Builder builder) {
+    private NutritionFactsOfUsingBuilder(Builder builder) {
         servingSize = builder.servingSize;
         servings = builder.servings;
         calories = builder.calories;
@@ -170,7 +170,7 @@ class NutritionFactsOfUseBuilder {
 
     @Override
     public String toString() {
-        return "NutritionFactsOfUseBuilder{" +
+        return "NutritionFactsOfUsingBuilder{" +
                 "servingSize=" + servingSize +
                 ", servings=" + servings +
                 ", calories=" + calories +
@@ -181,7 +181,7 @@ class NutritionFactsOfUseBuilder {
     }
 
     public static void main(String[] args) {
-        NutritionFactsOfUseBuilder cocaCoal = new NutritionFactsOfUseBuilder
+        NutritionFactsOfUsingBuilder cocaCoal = new NutritionFactsOfUsingBuilder
                 .Builder(240, 8)
                 .calories(100)
                 .sodium(35)

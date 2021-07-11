@@ -17,7 +17,7 @@ public class Article4 {
 
 }
 class UtilityClass {
-    // Suppress default construct for in-instantiability
+    // Suppress default construct for non-instantiability
     private UtilityClass() {
         throw new AssertionError();
     }
