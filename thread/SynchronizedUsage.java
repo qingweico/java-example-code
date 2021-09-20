@@ -23,7 +23,7 @@ public class SynchronizedUsage {
                 e.printStackTrace();
             }
             data.f1();
-        },"t1").start();
+        }, "t1").start();
 
         new Thread(() -> {
             data.f2();

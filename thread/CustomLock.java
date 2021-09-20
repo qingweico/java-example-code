@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class CustomLock {
 
-    volatile int status;
+    volatile int status = 0;
 
     private static long stateOffset;
 

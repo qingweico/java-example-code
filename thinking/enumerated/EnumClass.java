@@ -8,11 +8,15 @@ import static util.Print.printnb;
  * @date: 2021/4/3
  */
 enum Shrubbery {
-    GROUND, CRAWLING, HANGING
+    GROUND, CRAWLING, HANGING;
+    Shrubbery() {
+        print();
+    }
 }
+
 public class EnumClass {
     public static void main(String[] args) {
-        for(Shrubbery s : Shrubbery.values()) {
+        for (Shrubbery s : Shrubbery.values()) {
             // Returns the order in which each enum instance is declared(from 0 begin)
             print(s + " ordinal: " + s.ordinal());
             printnb(s.compareTo(Shrubbery.CRAWLING) + " ");
@@ -24,8 +28,8 @@ public class EnumClass {
 
         }
 
-        for(String s : "GROUND CRAWLING HANGING".split(" ")) {
-            Shrubbery shrub = Enum.valueOf(Shrubbery.class,s );
+        for (String s : "GROUND CRAWLING HANGING".split(" ")) {
+            Shrubbery shrub = Enum.valueOf(Shrubbery.class, s);
             print(shrub);
         }
     }
