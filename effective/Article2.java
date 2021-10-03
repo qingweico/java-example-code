@@ -62,11 +62,11 @@ class NutritionFacts {
 
 // JavaBeans Pattern - allows inconsistency, mandates mutability
 class NutritionFactsOfUsingJavaBeans {
-    private int servingSize  = -1; // Required; not default value
-    private int servings     = -1;    // Required; not default value
-    private int calories     = 0;
-    private int fat          = 0;
-    private int sodium       = 0;
+    private int servingSize = -1; // Required; not default value
+    private int servings = -1;    // Required; not default value
+    private int calories = 0;
+    private int fat = 0;
+    private int sodium = 0;
     private int carbohydrate = 0;
 
     public NutritionFactsOfUsingJavaBeans() {
@@ -124,9 +124,9 @@ class NutritionFactsOfUsingBuilder {
         private final int servings;
 
         // Optionals parameters - initialized to default values
-        private int calories     = 0;
-        private int fat          = 0;
-        private int sodium       = 0;
+        private int calories = 0;
+        private int fat = 0;
+        private int sodium = 0;
         private int carbohydrate = 0;
 
         public Builder(int servingSize, int servings) {

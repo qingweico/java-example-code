@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * synchronized see openjdk
- * os_linux.cpp>>>os::PlatformEvent::park()>>> pthread_mutex_lock>>>pthread_mutex_unlock
+ * os_linux.cpp>>>os::PlatformEvent::park()>>>pthread_mutex_lock>>>pthread_mutex_unlock
  * <p>
  * ObjectMonitor: JVM C++ a object include: WaitSet, EntryList, OwnerThread, recursions
  *
@@ -24,7 +24,7 @@ public class SyncObjectMonitor {
             Thread thread = new Thread(() -> {
 
                 synchronized (lock) {
-                    // Don't get lock and Enter EntryList
+                    // Don't get lock and enter EntryList
                     // The EntryList of synchronized follows the FILO
                     System.out.println("\t" + Thread.currentThread().getName() + " -----> thread execute...\t");
 

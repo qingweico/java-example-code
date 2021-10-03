@@ -29,7 +29,7 @@ public class CustomThread {
 
 // 1: javah thread.CustomThread   -----> thread_CustomThread.h
 
-// see thead.new.c
+// see thread.new.c
 // 2: gcc -fPIC -I /usr/local/jdk8/include/linux -I /usr/local/jdk8/include/linux
 //        -shared -o libCustomThreadNative.so thread_new.c   -----> libCustomThreadNative.so
 

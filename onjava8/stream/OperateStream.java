@@ -1,10 +1,11 @@
-package onjava8;
+package onjava8.stream;
 
 import util.Print;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static util.Print.print;
@@ -54,5 +55,12 @@ public class OperateStream {
             res.add(c);
         }
         return res.stream();
+    }
+
+    public void transfer() {
+        var set = Stream.of("hello", "world")
+                .flatMap(str -> str.chars().mapToObj((i) -> (char)i))
+                .collect(Collectors.toSet());
+        System.out.println(set);
     }
 }
