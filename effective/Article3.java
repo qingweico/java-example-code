@@ -37,8 +37,6 @@ class Elvis0 {
 
     public void leaveTheBuilding() {
     }
-
-
 }
 
 // Enum singleton - the preferred approach

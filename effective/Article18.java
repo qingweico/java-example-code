@@ -44,7 +44,6 @@ class InstrumentedHashSet<E> extends HashSet<E> {
         // 6 It's wrong
         System.out.println(s.getAddCount());
     }
-
 }
 
 

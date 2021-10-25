@@ -1,6 +1,8 @@
 package thread;
 
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author:qiming
  * @date: 2021/1/30
@@ -21,6 +23,11 @@ public class NoVisibility {
 
     public static void main(String[] args) throws InterruptedException {
         new ReaderThread().start();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         num = 42;
         ready = true;
     }

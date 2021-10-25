@@ -55,7 +55,7 @@ public class RethrowException {
             h();
         }catch (Exception e){
             System.out.println("main: printStackTrace()");
-            e.printStackTrace(System.out);;
+            e.printStackTrace(System.out);
         }
 
     }

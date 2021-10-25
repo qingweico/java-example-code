@@ -6,6 +6,7 @@ import thinking.holding.pets.Pets;
 import thinking.holding.pets.Rat;
 
 import java.util.LinkedList;
+
 import static util.Print.print;
 
 /**
@@ -52,7 +53,6 @@ public class LinkedListFeatures {
 
         // The removeLast() method removes and returns the last element in the list.
         print("pets.removeLast(): " + pets.removeLast());
-
 
 
     }

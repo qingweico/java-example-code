@@ -3,7 +3,7 @@ package jcip;
 import annotation.ThreadSafe;
 
 /**
- * Non-blocking counter based on CAS implementation
+ * Non-blocking counter based on cas implementation
  *
  * @author:qiming
  * @date: 2021/3/30

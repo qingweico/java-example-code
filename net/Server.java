@@ -20,7 +20,7 @@ public class Server extends Thread {
     public void run() {
         while (true) {
             try {
-                print("Waiting for remote connection...,the port number is" + serverSocket.getLocalPort());
+                print("Waiting for remote connection..., the port number is " + serverSocket.getLocalPort());
                 Socket server = serverSocket.accept();
                 print("The remote host address: " + server.getRemoteSocketAddress());
                 DataInputStream in = new DataInputStream(server.getInputStream());

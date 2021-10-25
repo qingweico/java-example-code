@@ -11,7 +11,6 @@ public class FiveTuple<A, B, C, D, F> extends FourTuple<A, B, C, D> {
         super(a, b, c, d);
         fifth = f;
     }
-
     @Override
     public String toString() {
         return "(" + first + ", " + second + ", " + third + ", " + fourth + ", " + fifth + ")";

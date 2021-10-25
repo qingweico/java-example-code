@@ -49,7 +49,9 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
 
     public V get(Object key) {
         int index = Math.abs(key.hashCode()) % SIZE;
-        if (buckets[index] == null) return null;
+        if (buckets[index] == null) {
+            return null;
+        }
         for (MapEntry<K, V> iPair : buckets[index]) {
             if (iPair.getKey().equals(key)) {
                 return iPair.getValue();
@@ -63,7 +65,9 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
     public Set<Entry<K, V>> entrySet() {
         Set<Map.Entry<K, V>> set = new HashSet<>();
         for (LinkedList<MapEntry<K, V>> bucket : buckets) {
-            if (bucket == null) continue;
+            if (bucket == null) {
+                continue;
+            }
             set.addAll(bucket);
         }
         return set;

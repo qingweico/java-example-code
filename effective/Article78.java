@@ -40,8 +40,9 @@ class NotStopThread {
         // The virtual machine makes improvements to the code, which are called hoisting,
         // but it is a liveness failure!
         if(!stopRequested) {
-            while (true)
-              i++;
+            while (true) {
+                i++;
+            }
         }
         backgroundThread.start();
 

@@ -50,7 +50,9 @@ class WaitPerson implements Runnable {
          while(!Thread.interrupted()) {
             synchronized (this) {
                // Wait for the chef to produce a meal
-               while (restaurant.meal == null) wait();
+               while (restaurant.meal == null) {
+                   wait();
+               }
             }
             print("WaitPerson got " + restaurant.meal);
             synchronized (restaurant.chef) {

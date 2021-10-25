@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * @author:qiming
  * @date: 2021/9/30
  */
-public class _DelayQueue {
+public class DelayQ {
     static class DelayItem<T> implements Delayed {
 
         T value;

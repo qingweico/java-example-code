@@ -30,7 +30,9 @@ public class ABC {
                 for (int i = 0; i < 10; i++) {
                     printnb("A");
                     cB.signal();
-                    if (i == 0) latchB.countDown();
+                    if (i == 0) {
+                        latchB.countDown();
+                    }
                     cA.await();
                 }
                 cB.signal();
@@ -53,7 +55,9 @@ public class ABC {
                 for (int i = 0; i < 10; i++) {
                     printnb("B");
                     cC.signal();
-                    if (i == 0) latchC.countDown();
+                    if (i == 0) {
+                        latchC.countDown();
+                    }
                     cB.await();
                 }
                 cC.signal();

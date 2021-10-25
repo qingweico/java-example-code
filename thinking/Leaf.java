@@ -3,7 +3,7 @@ package thinking;
 /**
  * @author:qiming
  * @date: 2020/10/23
- *
+ * <p>
  * this
  */
 class Person {
@@ -24,7 +24,7 @@ class Peeler {
 }
 
 class Apple {
-    //this
+    // this
     Apple getPeeled() {
         return Peeler.peel(this);
     }

@@ -12,7 +12,7 @@ public class MoviesTicketLock implements Runnable {
     public void run() {
         while (true) {
             try {
-                //lock
+                // lock
                 lock.lock();
                 if (ticket > 0) {
                     try {
@@ -25,7 +25,7 @@ public class MoviesTicketLock implements Runnable {
                     return;
                 }
             } finally {
-                //Release the lock
+                // Release the lock
                 lock.unlock();
             }
         }

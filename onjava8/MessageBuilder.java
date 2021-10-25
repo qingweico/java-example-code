@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.function.Consumer;
 
+import static util.Print.err;
 import static util.Print.print;
 
 /**
@@ -60,7 +61,7 @@ public class MessageBuilder {
     public void show() {
         showLog("warn", () -> {
             // The this keyword points to the peripheral instance
-            print("[" + Thread.currentThread().getName() + "]WARN: "
+            err("[" + Thread.currentThread().getName() + "]WARN: "
                     + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:sss")
                     .format(new Date()) + " " + this + " warn message...");
         });

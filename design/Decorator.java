@@ -34,7 +34,6 @@ class BufferedReader extends Reader {
 
     }
 }
-
 public class Decorator {
     public static void main(String[] args) {
         Reader reader = new FileReader();

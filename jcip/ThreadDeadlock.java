@@ -22,6 +22,7 @@ public class ThreadDeadlock {
             return fileName;
         }
     }
+
     public class RenderPageTask implements Callable<String> {
 
         @Override
@@ -32,6 +33,7 @@ public class ThreadDeadlock {
             String page = renderBody();
             return header.get() + page + footer.get();
         }
+
         private String renderBody() {
             // Here's where we would actually render the page
             return "";

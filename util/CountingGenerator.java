@@ -58,8 +58,9 @@ public class CountingGenerator {
 
         public java.lang.String next() {
             char[] buf = new char[length];
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++) {
                 buf[i] = cg.next();
+            }
             return new java.lang.String(buf);
         }
     }

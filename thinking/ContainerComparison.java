@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static util.Print.print;
+
 class BerylliumSphere {
     private static long counter;
     private final long id = counter++;
@@ -19,13 +21,13 @@ public class ContainerComparison {
         for (int i = 0; i < 5; i++) {
             berylliumSpheres[i] = new BerylliumSphere();
         }
-        System.out.println(Arrays.toString(berylliumSpheres));
-        System.out.println(berylliumSpheres.length);
+        print(Arrays.toString(berylliumSpheres));
+        print(berylliumSpheres.length);
         List<BerylliumSphere> berylliumSphereList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             berylliumSphereList.add(new BerylliumSphere());
         }
-        System.out.println(berylliumSphereList);
+        print(berylliumSphereList);
     }
 
 }

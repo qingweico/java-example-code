@@ -26,9 +26,14 @@ public class SortedMap0 {
 
         Iterator<Integer> iterator = sortedMap.keySet().iterator();
         for (int i = 0; i <= 6; i++) {
-            if (i == 3) low = iterator.next();
-            if (i == 6) high = iterator.next();
-            else iterator.next();
+            if (i == 3) {
+                low = iterator.next();
+            }
+            if (i == 6) {
+                high = iterator.next();
+            } else {
+                iterator.next();
+            }
         }
 
         print(low);

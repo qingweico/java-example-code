@@ -6,8 +6,8 @@ import java.lang.reflect.Field;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * Customize a lock
+ *
  * @author:qiming
  * @date: 2021/6/24
  */
@@ -28,19 +28,20 @@ public class CustomLock {
 
             stateOffset = unsafe.objectFieldOffset(
                     CustomLock.class.getDeclaredField("status"));
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
 
     }
+
     void lock() {
-        while(!compareAndSet()) {
-            // System call
-        }
+        while (!compareAndSet()) {}
     }
+
     boolean compareAndSet() {
         return unsafe.compareAndSwapInt(this, stateOffset, 0, 1);
     }
+
     void unlock() {
         status = 0;
     }
@@ -49,20 +50,15 @@ public class CustomLock {
         CustomLock cl = new CustomLock();
         new Thread(() -> {
             cl.lock();
+            System.out.println("t1...");
             try {
                 TimeUnit.SECONDS.sleep(2);
-            }catch (InterruptedException ex) {
+            } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
-            System.out.println("t1...");
+            System.out.println("t1 release the lock");
             cl.unlock();
         }, "t1").start();
-
-        try {
-            TimeUnit.MILLISECONDS.sleep(100);
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         new Thread(() -> {
             cl.lock();

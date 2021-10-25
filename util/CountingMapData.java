@@ -13,7 +13,9 @@ public class CountingMapData extends AbstractMap<Integer, String> {
                     .split(" ");
 
     public CountingMapData(int size) {
-        if (size < 0) this.size = 0;
+        if (size < 0) {
+            this.size = 0;
+        }
         this.size = size;
     }
 
@@ -49,8 +51,9 @@ public class CountingMapData extends AbstractMap<Integer, String> {
     public Set<Map.Entry<Integer, String>> entrySet() {
         // LinkedHashSet retains initialization order:
         Set<Map.Entry<Integer, String>> entries = new LinkedHashSet<>();
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++) {
             entries.add(new Entry(i));
+        }
         return entries;
     }
 

@@ -15,7 +15,7 @@ public class ConcurrentModificationException {
         // ArrayList is thread-unsafe, so we could use Vector instead of ArrayList.
         // List<String> list = new Vector<>();
 
-        // Or using the Collections.synchronizedList also is a good choice.
+        // Or using the Collections.synchronizedList(Synchronous container class) also is a good choice.
         // List<String> list = Collections.synchronizedList(new ArrayList<>());
 
         // Or using CopyOnWriteArrayList

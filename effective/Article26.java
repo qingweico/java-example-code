@@ -46,7 +46,9 @@ public class Article26 {
     static int numElementsInCommon(Set s1, Set s2) {
         int result = 0;
         for (Object o1 : s1) {
-            if (s2.contains(o1)) result++;
+            if (s2.contains(o1)) {
+                result++;
+            }
         }
         return result;
     }
@@ -129,8 +131,9 @@ class SuperWildCard {
         double s = 0.0;
 
         // Want to just take it out, not insert it, use it <? extends>.
-        for (Number n : list)
+        for (Number n : list) {
             s += n.doubleValue();
+        }
         return s;
     }
 }

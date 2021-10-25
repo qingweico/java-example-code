@@ -11,16 +11,19 @@ import java.io.File;
 public class FileList {
 
    public static void fileList(File target) {
-      if(target.isFile()) return;
+      if(target.isFile()) {
+          return;
+      }
       File[] files = target.listFiles();
-      if(files == null) return;
+      if(files == null) {
+          return;
+      }
       for(File file : files) {
          System.out.println(file.getName());
          fileList(file);
       }
    }
    public static void main(String[] args) {
-         String filePath = "e://pic";
-         fileList(new File(filePath));
+         fileList(new File(args[0]));
    }
 }

@@ -36,7 +36,9 @@ class InnerThread {
             try {
                 while (true) {
                     print(this);
-                    if (--countDown == 0) return;
+                    if (--countDown == 0) {
+                        return;
+                    }
                     sleep(10);
                 }
 
@@ -67,7 +69,9 @@ class InnerThread0 {
                 try {
                     while (true) {
                         print(this);
-                        if (--countDown == 0) return;
+                        if (--countDown == 0) {
+                            return;
+                        }
                         sleep(10);
                     }
                 } catch (InterruptedException e) {
@@ -102,7 +106,9 @@ class InnerRunnable {
             try {
                 while (true) {
                     print(this);
-                    if (--countDown == 0) return;
+                    if (--countDown == 0) {
+                        return;
+                    }
                     TimeUnit.MILLISECONDS.sleep(10);
                 }
             } catch (InterruptedException e) {
@@ -132,7 +138,9 @@ class InnerRunnable0 {
                 try {
                     while (true) {
                         print(this);
-                        if (--countDown == 0) return;
+                        if (--countDown == 0) {
+                            return;
+                        }
                         TimeUnit.MILLISECONDS.sleep(10);
                     }
                 } catch (InterruptedException e) {
@@ -165,7 +173,9 @@ class ThreadMethod {
                     try {
                         while (true) {
                             print(this);
-                            if (--countDown == 0) return;
+                            if (--countDown == 0) {
+                                return;
+                            }
                             sleep(10);
                         }
                     } catch (InterruptedException e) {

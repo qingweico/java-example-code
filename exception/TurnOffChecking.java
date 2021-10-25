@@ -28,7 +28,7 @@ public class TurnOffChecking {
         // RuntimeExceptions leave the method:
         wce.throwRuntimeException(3);
 
-        // Or ,you can choose to catch exception:
+        // Or, you can choose to catch exception:
         for (int i = 0; i < 4; i++) {
             try {
                 if (i < 3) {

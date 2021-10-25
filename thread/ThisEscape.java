@@ -10,6 +10,7 @@ import java.io.IOException;
  */
 public class ThisEscape {
     private final int num = 1;
+
     public ThisEscape() {
 
         // Before the constructor finishes executing, the thread may start, and

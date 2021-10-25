@@ -31,8 +31,7 @@ final class CaseInsensitiveString {
     @Override
     public boolean equals(Object o) {
 
-//        Solved! Remove code that attempts to inter-operate with String.
-
+//      Solved! Remove code that attempts to inter-operate with String.
 //        return o instanceof CaseInsensitiveString &&
 //                s.equalsIgnoreCase(((CaseInsensitiveString) o).s);
 
@@ -75,7 +74,9 @@ class Point {
     @Override
     public boolean equals(Object o) {
         // Broken
-        if (!(o instanceof Point)) return false;
+        if (!(o instanceof Point)) {
+            return false;
+        }
         Point point = (Point) o;
         return x == point.x &&
                 y == point.y;
@@ -112,9 +113,13 @@ class ColorPoint extends Point {
 //        return super.equals(o) && ((ColorPoint) o).color == color;
 
 //        Broken - violates transitivity!
-        if (!(o instanceof Point)) return false;
+        if (!(o instanceof Point)) {
+            return false;
+        }
         // If o is a normal Point, do a color-blind comparision.
-        if (!(o instanceof ColorPoint)) return o.equals(this);
+        if (!(o instanceof ColorPoint)) {
+            return o.equals(this);
+        }
         // The o is a ColorPoint, do a full comparision.
         return super.equals(o) && ((ColorPoint) o).color == color;
     }
@@ -145,9 +150,13 @@ class SmellPoint extends Point {
     }
 
     public boolean equals(Object o) {
-        if (!(o instanceof Point)) return false;
+        if (!(o instanceof Point)) {
+            return false;
+        }
         // If o is a normal Point, do a smell-blind comparision.
-        if (!(o instanceof SmellPoint)) return o.equals(this);
+        if (!(o instanceof SmellPoint)) {
+            return o.equals(this);
+        }
         // The o is a SmellPoint, do a full comparision.
         return super.equals(o) && ((SmellPoint) o).smell == smell;
     }

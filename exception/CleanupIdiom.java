@@ -39,7 +39,6 @@ public class CleanupIdiom {
         } catch (ConstructorException e) {
             print(e);
         }
-
     }
 }
 

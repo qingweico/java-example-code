@@ -10,12 +10,12 @@ public class Client {
         String serveName = "localhost";
         int port = Integer.parseInt("8080");
         try {
-            System.out.println("Connect to host " + serveName + "-----" + "port: " + port);
+            System.out.println("Connect to " + serveName + ":" + port);
             Socket client = new Socket(serveName, port);
             print("Remote host address: " + client.getRemoteSocketAddress());
             OutputStream outToServe = client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServe);
-            out.writeUTF("Hello from" + client.getLocalSocketAddress());
+            out.writeUTF("Hello from " + client.getLocalSocketAddress());
             InputStream inFromServe = client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServe);
             print("Server response: " + in.readUTF());

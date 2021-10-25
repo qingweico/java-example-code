@@ -25,8 +25,10 @@ public class StormyInning extends Inning implements Storm {
     // void work() throws PopFoul{}
 
     // Interface cannot add exceptions to existing methods from the base class.
-    // @Override
-    // public void event() throws RainedOut {}
+
+
+//     @Override
+//     public void event() throws RainedOut {}
 
 
     // If the method doesn't already exist in the base class, the exception is ok.
@@ -58,7 +60,7 @@ public class StormyInning extends Inning implements Storm {
             print("Generic baseball exception");
         }
 
-        // Strikes not throw in derived version
+        // Strikes not throw in derived version.
 
         try {
             // What happen if you upcast?

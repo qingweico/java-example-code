@@ -21,19 +21,14 @@ public class LifecycleWebServer {
         while (!exec.isShutdown()) {
             try {
                 final Socket coon = socket.accept();
-                exec.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        handleRequest(coon);
-                    }
-                });
+                exec.execute(() -> handleRequest(coon));
             }catch (RejectedExecutionException e) {
-                log("task submission rejected", e);
+                log(e);
             }
         }
     }
-    private void log(String msg, Exception e) {
-        Logger.getAnonymousLogger().log(Level.WARNING, msg, e);
+    private void log(Exception e) {
+        Logger.getAnonymousLogger().log(Level.WARNING, "task submission rejected", e);
     }
     void handleRequest(Socket connection) {
         // request-handling logic here

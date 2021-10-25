@@ -8,7 +8,7 @@ import static util.Print.print;
  * @author:qiming
  * @date: 2021/9/30
  */
-public class _WeakReference {
+public class WeakRef {
     public static void main(String[] args) {
 
         Object o1 = new Object();

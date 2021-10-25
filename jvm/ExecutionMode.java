@@ -25,8 +25,6 @@ public class ExecutionMode {
         print(countDepth());
 
         print(countDepth());
-
-
     }
 
     static int countDepth() {

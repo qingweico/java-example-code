@@ -19,7 +19,6 @@ public class ForkJoinPoolUsage {
         long spendTime = endTime - startTime;
         Long result = forkJoinTask.get();
         System.out.println(result + " -----> Time spent " + spendTime / 1000.0 + "s");
-
     }
 
 }

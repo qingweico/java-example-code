@@ -32,7 +32,7 @@ public class Print {
         System.err.println(o);
     }
 
-    // exit
+    // Exit
     public static void exit(int status) {
         System.exit(status);
     }

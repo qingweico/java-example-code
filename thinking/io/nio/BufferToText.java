@@ -26,7 +26,7 @@ public class BufferToText {
         ByteBuffer buffer = ByteBuffer.allocate(BSIZE);
         fc.read(buffer);
         buffer.flip();
-        
+
         // Doesn't work
         System.out.println(buffer.asCharBuffer());
 

@@ -20,8 +20,9 @@ public class Article83 {
     // If you use delay optimization to break the initialized loop,
     // use the synchronous access method.
     private synchronized FieldType getField() {
-        if (field == null)
+        if (field == null) {
             field = computeFieldValue();
+        }
         return field;
     }
 

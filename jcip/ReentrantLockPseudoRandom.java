@@ -4,6 +4,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * The random number generator based on ReentrantLock
+ *
  * @author:qiming
  * @date: 2021/3/30
  */

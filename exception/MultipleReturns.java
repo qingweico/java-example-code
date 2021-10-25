@@ -13,11 +13,17 @@ public class MultipleReturns {
         print("Initialization that requires cleanup");
         try {
             print("Point 1");
-            if(i == 1) return;
+            if(i == 1) {
+                return;
+            }
             print("Point 2");
-            if(i == 2) return;
+            if(i == 2) {
+                return;
+            }
             print("Point 3");
-            if(i == 3) return;
+            if(i == 3) {
+                return;
+            }
             print("End");
             return;
             // It doesn't matter where you return from.

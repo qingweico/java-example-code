@@ -147,7 +147,9 @@ class BaseLine extends Accumulator {
     @Override
     public void accumulate() {
         value += preloaded[index++];
-        if (index >= SIZE) index = 0;
+        if (index >= SIZE) {
+            index = 0;
+        }
     }
 
     @Override
@@ -164,7 +166,9 @@ class SynchronizedTest extends Accumulator {
     @Override
     public synchronized void accumulate() {
         value += preloaded[index++];
-        if (index >= SIZE) index = 0;
+        if (index >= SIZE) {
+            index = 0;
+        }
     }
 
     @Override
@@ -185,7 +189,9 @@ class LockTest extends Accumulator {
         lock.lock();
         try {
             value += preloaded[index++];
-            if (index >= SIZE) index = 0;
+            if (index >= SIZE) {
+                index = 0;
+            }
         } finally {
             lock.unlock();
         }
@@ -216,7 +222,9 @@ class AtomicTest extends Accumulator {
         // gives us a performance indicator:
         int i = index.getAndIncrement();
         value.getAndAdd(preloaded[i]);
-        if (++i >= SIZE) index.set(0);
+        if (++i >= SIZE) {
+            index.set(0);
+        }
     }
 
     @Override

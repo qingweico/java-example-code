@@ -4,6 +4,7 @@ import annotation.GuardedBy;
 import annotation.ThreadSafe;
 
 /**
+ * Simulate the operation of the cas
  * @author:qiming
  * @date: 2021/3/30
  */

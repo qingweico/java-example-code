@@ -7,7 +7,7 @@ import java.util.Random;
  * @date: 2021/4/8
  */
 public class RandomGenerator {
-    private static Random r = new Random(47);
+    private static final Random r = new Random(47);
     public static class
     Boolean implements Generator<java.lang.Boolean> {
         public java.lang.Boolean next() {
@@ -55,7 +55,7 @@ public class RandomGenerator {
         public Long() {}
         public Long(int modulo) { mod = modulo; }
         public java.lang.Long next() {
-            return new java.lang.Long(r.nextInt(mod));
+            return (long) r.nextInt(mod);
         }
     }
     public static class

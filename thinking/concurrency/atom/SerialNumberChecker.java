@@ -67,7 +67,9 @@ class CircularSet {
 
     public synchronized boolean contains(int val) {
         for (int item : array) {
-            if (item == val) return true;
+            if (item == val) {
+                return true;
+            }
         }
         return false;
     }

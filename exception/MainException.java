@@ -13,7 +13,7 @@ public class MainException {
     public static void main(String[] args) throws IOException {
         // Open the file
         FileInputStream is =
-                new FileInputStream("src/exception/MainException.java");
+                new FileInputStream("exception/MainException.java");
         // Use the file
         // Close the file
         is.close();

@@ -15,6 +15,7 @@ public class CovariantArrays {
             // Compiler allows you to add Fruit.
             fruits[0] = new Fruit();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println(e.getMessage());
         }
         try {

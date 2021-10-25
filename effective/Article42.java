@@ -10,7 +10,7 @@ import java.util.function.DoubleBinaryOperator;
 /**
  * Lambda优先于匿名类
  *
- * @author:周庆伟
+ * @author:qiming
  * @date: 2021/2/4
  */
 // An interface with an abstract method (or, almost always, a class that is not abstract)

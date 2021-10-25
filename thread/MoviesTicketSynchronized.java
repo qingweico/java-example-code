@@ -3,7 +3,7 @@ package thread;
 import java.util.concurrent.TimeUnit;
 
 public class MoviesTicketSynchronized implements Runnable {
-    private int ticket = 10;
+    private int ticket = 100;
 
     @Override
     public void run() {
@@ -11,7 +11,7 @@ public class MoviesTicketSynchronized implements Runnable {
             synchronized (this) {
                 if (ticket > 0) {
                     try {
-                        TimeUnit.SECONDS.sleep(1);
+                        TimeUnit.MILLISECONDS.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

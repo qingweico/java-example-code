@@ -1,6 +1,7 @@
 package jcip;
 
 /**
+ * Pseudo random integer
  * @author:qiming
  * @date: 2021/3/30
  */

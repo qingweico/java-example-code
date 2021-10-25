@@ -13,7 +13,8 @@ public class SettingDefaultHandle {
                 new MyUncaughtExceptionHandler()
         );
         ExecutorService exc = Executors.newCachedThreadPool();
-        exc.execute(new ExceptionThread0());
+        exc.execute(new ExceptionThread());
+        exc.shutdown();
 
         // caught java.lang.RuntimeException
 

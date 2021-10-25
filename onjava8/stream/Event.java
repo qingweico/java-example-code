@@ -44,12 +44,22 @@ public class Event<T> {
         }
     }
 
-    <B> Event<?> map (FN<T, B> f) {
+    <B> Event<?> map (Fn<T, B> f) {
         return new Event<>(f.apply(this.data));
     }
 
+    /**
+     * monad
+     * @param <A>
+     * @param <B>
+     */
     @FunctionalInterface
-    interface FN<A, B> {
+    interface Fn<A, B> {
+        /**
+         * apply
+         * @param a A
+         * @return B
+         */
         B apply(A a);
     }
 

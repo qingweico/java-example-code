@@ -8,6 +8,7 @@ import org.openjdk.jol.info.ClassLayout;
  */
 public class ObjectLayout {
     static final Object o = new Object();
+
     public static void main(String[] args) {
 
         System.out.println(ClassLayout.parseInstance(o).toPrintable());

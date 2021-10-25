@@ -12,7 +12,9 @@ import java.io.OutputStreamWriter;
 public class StringSort {
     public static void main(String[] args) throws IOException {
         // Sort the strings and write the sorted strings to the file
-        BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("src/io/temp"), true)));
+        BufferedWriter fw = new BufferedWriter(
+                new OutputStreamWriter(
+                        new FileOutputStream("io/temp", true)));
         Scanner sc = new Scanner(System.in);
         System.out.println("please input strings: ");
         String s = sc.nextLine();
@@ -23,7 +25,7 @@ public class StringSort {
         fw.newLine();
         sc.close();
         fw.close();
-        BufferedReader fo = new BufferedReader(new FileReader("src/io/temp"));
+        BufferedReader fo = new BufferedReader(new FileReader("io/temp"));
         String ss;
         while ((ss = fo.readLine()) != null) {
             System.out.println(ss);

@@ -8,7 +8,7 @@ import java.io.IOException;
 import static util.Print.print;
 
 /**
- * Paying attention to exception in constructors
+ * Paying attention to exception in constructors.
  *
  * @author:qiming
  * @date: 2021/1/18

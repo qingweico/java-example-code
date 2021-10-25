@@ -7,7 +7,6 @@ package array;
  * @date: 2020/10/6
  *
  */
-
 class ClassParameter<T> {
     public T[] f(T[] args) {
         return args;

@@ -38,11 +38,15 @@ class Car {
     }
 
     public synchronized void waitForWaxing() throws InterruptedException {
-        while (!waxOn) wait();
+        while (!waxOn) {
+            wait();
+        }
     }
 
     public synchronized void waitForBuffing() throws InterruptedException {
-        while (waxOn) wait();
+        while (waxOn) {
+            wait();
+        }
     }
 }
 

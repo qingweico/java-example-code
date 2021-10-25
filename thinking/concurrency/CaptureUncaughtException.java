@@ -13,12 +13,13 @@ import static util.Print.print;
 public class CaptureUncaughtException {
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool(new HandleThreadFactory());
-        exec.execute(new ExceptionThread0());
+        exec.execute(new ExceptionThread());
+        exec.shutdown();
     }
 
 }
 
-class ExceptionThread0 implements Runnable {
+class ExceptionThreadCaught implements Runnable {
 
     @Override
     public void run() {

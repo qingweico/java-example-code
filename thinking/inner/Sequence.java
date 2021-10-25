@@ -34,7 +34,9 @@ public class Sequence {
 
         @Override
         public void next() {
-            if (i < items.length) i++;
+            if (i < items.length) {
+                i++;
+            }
         }
     }
 

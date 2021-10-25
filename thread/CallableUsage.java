@@ -19,6 +19,7 @@ public class CallableUsage implements Callable<String> {
         t.start();
         String returnValue = null;
         try {
+            // block
             returnValue = futureTask.get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -30,20 +31,20 @@ public class CallableUsage implements Callable<String> {
 
         List<Future<String>> list = new ArrayList<>();
         ExecutorService service = Executors.newFixedThreadPool(5);
-        for(int i = 0; i < 5;i++) {
+        for (int i = 0; i < 5; i++) {
             Callable<String> callable = new CallableUsage();
             Future<String> f = service.submit(callable);
             list.add(f);
         }
         service.shutdown();
-        for(Future<String> f : list) {
+        for (Future<String> f : list) {
             System.out.println(f.get());
         }
-
     }
 
     @Override
     public String call() throws Exception {
+        Thread.sleep(1000);
         return "Hello Callable";
     }
 }

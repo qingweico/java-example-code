@@ -12,7 +12,7 @@ public class Article63 {
     private final int numItems = 10;
     private static final int LINE_WIDTH = 10;
     // Inappropriate use of string concatenation - Performs poorly!
-    // bad!
+    // Bad!
     public String statement() {
         String result = "";
         for(int i = 0; i < numItems; i++) {

@@ -46,22 +46,30 @@ public final class BinaryStdOut {
     * Writes the specified bit to standard output.
     */
    private static void writeBit(boolean bit) {
-      if (!isInitialized) initialize();
+      if (!isInitialized) {
+         initialize();
+      }
 
       // add bit to buffer
       buffer <<= 1;
-      if (bit) buffer |= 1;
+      if (bit) {
+         buffer |= 1;
+      }
 
       // if buffer is full (8 bits), write out as a single byte
       n++;
-      if (n == 8) clearBuffer();
+      if (n == 8) {
+         clearBuffer();
+      }
    }
 
    /**
     * Writes the 8-bit byte to standard output.
     */
    private static void writeByte(int x) {
-      if (!isInitialized) initialize();
+      if (!isInitialized) {
+         initialize();
+      }
 
       assert x >= 0 && x < 256;
 
@@ -85,10 +93,16 @@ public final class BinaryStdOut {
 
    // write out any remaining bits in buffer to standard output, padding with 0s
    private static void clearBuffer() {
-      if (!isInitialized) initialize();
+      if (!isInitialized) {
+         initialize();
+      }
 
-      if (n == 0) return;
-      if (n > 0) buffer <<= (8 - n);
+      if (n == 0) {
+         return;
+      }
+      if (n > 0) {
+         buffer <<= (8 - n);
+      }
       try {
          out.write(buffer);
       }
@@ -168,8 +182,12 @@ public final class BinaryStdOut {
          write(x);
          return;
       }
-      if (r < 1 || r > 32)        throw new IllegalArgumentException("Illegal value for r = " + r);
-      if (x < 0 || x >= (1 << r)) throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
+      if (r < 1 || r > 32) {
+         throw new IllegalArgumentException("Illegal value for r = " + r);
+      }
+      if (x < 0 || x >= (1 << r)) {
+         throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
+      }
       for (int i = 0; i < r; i++) {
          boolean bit = ((x >>> (r - i - 1)) & 1) == 1;
          writeBit(bit);
@@ -226,7 +244,9 @@ public final class BinaryStdOut {
     * @throws IllegalArgumentException if {@code x} is not betwen 0 and 255.
     */
    public static void write(char x) {
-      if (x >= 256) throw new IllegalArgumentException("Illegal 8-bit char = " + x);
+      if (x >= 256) {
+         throw new IllegalArgumentException("Illegal 8-bit char = " + x);
+      }
       writeByte(x);
    }
 
@@ -242,8 +262,12 @@ public final class BinaryStdOut {
          write(x);
          return;
       }
-      if (r < 1 || r > 16) throw new IllegalArgumentException("Illegal value for r = " + r);
-      if (x >= (1 << r))   throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
+      if (r < 1 || r > 16) {
+         throw new IllegalArgumentException("Illegal value for r = " + r);
+      }
+      if (x >= (1 << r)) {
+         throw new IllegalArgumentException("Illegal " + r + "-bit char = " + x);
+      }
       for (int i = 0; i < r; i++) {
          boolean bit = ((x >>> (r - i - 1)) & 1) == 1;
          writeBit(bit);
@@ -257,8 +281,9 @@ public final class BinaryStdOut {
     * between 0 and 255.
     */
    public static void write(String s) {
-      for (int i = 0; i < s.length(); i++)
+      for (int i = 0; i < s.length(); i++) {
          write(s.charAt(i));
+      }
    }
 
    /**
@@ -270,8 +295,9 @@ public final class BinaryStdOut {
     * between 0 and 2<sup>r</sup> - 1.
     */
    public static void write(String s, int r) {
-      for (int i = 0; i < s.length(); i++)
+      for (int i = 0; i < s.length(); i++) {
          write(s.charAt(i), r);
+      }
    }
 
    /**

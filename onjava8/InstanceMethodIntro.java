@@ -33,7 +33,7 @@ public class InstanceMethodIntro {
         l.walking();
 
         // Using Instance method introduction
-        Walk  w = instanceMethodIntro::walking;
+        Walk w = instanceMethodIntro::walking;
         w.walking();
     }
 

@@ -175,13 +175,15 @@ public class Countries {
             private int size;
 
             EntrySet(int size) {
-                if (size < 0)
+                if (size < 0) {
                     this.size = 0;
+                }
                     // Can't be any bigger than the array:
-                else if (size > DATA.length)
+                else if (size > DATA.length) {
                     this.size = DATA.length;
-                else
+                } else {
                     this.size = size;
+                }
             }
 
             public int size() {

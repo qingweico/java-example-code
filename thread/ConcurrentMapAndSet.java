@@ -26,8 +26,8 @@ public class ConcurrentMapAndSet {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                 set.add("a");
-                 System.out.println(set);
+                set.add("a");
+                System.out.println(set);
                 map.put(UUID.randomUUID().toString().substring(0, finalI + 1), String.valueOf(finalI));
                 System.out.println(map);
             }, "t").start();

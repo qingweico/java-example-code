@@ -21,6 +21,5 @@ public class ReferenceCounting {
 
         // -Xlog:gc*
         System.gc();
-
     }
 }

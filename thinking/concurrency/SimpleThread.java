@@ -23,7 +23,9 @@ public class SimpleThread extends Thread {
     public void run() {
         while (true) {
             System.out.print(this);
-            if (--countDown == 0) return;
+            if (--countDown == 0) {
+                return;
+            }
         }
     }
 
@@ -53,7 +55,10 @@ class SelfManaged implements Runnable {
     public void run() {
         while (true){
             System.out.print(this);
-            if(--countDown == 0) return;;
+            if(--countDown == 0) {
+                return;
+            }
+            ;
         }
     }
 

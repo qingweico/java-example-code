@@ -26,6 +26,6 @@ class LoadingClass {
     static {
         System.out.println("The LoadingClass class has " +
                 "been initialized by the " +
-                Thread.currentThread().getName() +  " thread.");
+                Thread.currentThread().getName() + " thread.");
     }
 }

@@ -35,8 +35,9 @@ public class Article59 {
         int n = 2 * (Integer.MAX_VALUE / 3);
         int low = 0;
         for(int i = 0;i < 1000000;i++){
-            if(random(n) < n / 2)
+            if(random(n) < n / 2) {
                 low++;
+            }
         }
         // 接近666666 说明random方法产生的数字有三分之二落在了随机数取值的前半部分
         System.out.println(low);

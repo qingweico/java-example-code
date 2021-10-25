@@ -52,7 +52,9 @@ public class TextFile extends ArrayList<String> {
     public TextFile(String fileName, String splitter) {
         super(Arrays.asList(read(fileName).split(splitter)));
         // Regular expression split() often leaves an empty String at the first position
-        if ("".equals(get(0))) remove(0);
+        if ("".equals(get(0))) {
+            remove(0);
+        }
     }
 
     // Normally read by lines:

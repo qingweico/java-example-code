@@ -39,7 +39,9 @@ public class ThreadPriority implements Runnable {
                 }
             }
             System.out.println(this);
-            if (--countDown == 0) return;
+            if (--countDown == 0) {
+                return;
+            }
         }
     }
 

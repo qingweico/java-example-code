@@ -3,7 +3,9 @@ package thread;
 import java.util.concurrent.TimeUnit;
 
 public class MoviesTicket implements Runnable {
+
     private static int ticket = 20;
+
     private int x = 0;
 
     @Override

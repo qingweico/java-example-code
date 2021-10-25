@@ -10,12 +10,21 @@ public class BlockQueue {
 
     public static void main(String[] args) {
         BlockingQueue<Integer> queue;
+        // Must init a capacity
         queue = new ArrayBlockingQueue<>(10);
+
 //        queue = new LinkedBlockingQueue<>(10);
 //        queue = new LinkedBlockingDeque<>();
+          // Not follow FIFO, but according to priority
 //        queue = new PriorityBlockingQueue<>();
+          // LinkedBlockingQueue + SynchronousQueue => LinkedTransferQueue lock-free
+          // it has a higher performance than LinkedBlockingQueue, and store more element
+          // than SynchronousQueue.
 //        queue = new LinkedTransferQueue<>();
+          // only store a element and it will blocking when try to add the second.
 //        queue = new SynchronousQueue<>();
+          // @see thinking/concurrency/juc/DelayQueueUsage.java
+          // @see thread/queue/DelayQ.java
 //        queue = new DelayQueue<>();
 
 
@@ -23,7 +32,7 @@ public class BlockQueue {
         for (int i = 0; i < 100; i++) {
             new Thread(() -> {
                 try {
-                    queue.put((int) (Math.random() * 1000));
+                    queue.offer((int) (Math.random() * 1000), 3, TimeUnit.SECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -37,7 +46,7 @@ public class BlockQueue {
                 while (true) {
                     Integer x = null;
                     try {
-                        x = queue.take();
+                        x = queue.poll(3, TimeUnit.SECONDS);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

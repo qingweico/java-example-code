@@ -4,7 +4,7 @@ import static util.Print.print;
 
 /**
  * Finally
- * <p>
+ *
  * What does finally do?
  * The finally clause is used when resources other
  * than memory are restored to their initial state.

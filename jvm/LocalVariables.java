@@ -11,6 +11,7 @@ public class LocalVariables {
 
         localVariables.test();
     }
+
     public void test() {
         int a = 0;
         {
@@ -19,6 +20,7 @@ public class LocalVariables {
         }
         int c = 4;
     }
+
     {
         int i = 78;
     }

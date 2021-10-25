@@ -10,7 +10,7 @@ import static util.Print.print;
 public class Cleanup {
     public static void main(String[] args) throws Exception {
         try {
-            InputFile in = new InputFile("src/exception/Cleanup.java");
+            InputFile in = new InputFile("exception/Cleanup.java");
             try {
                 String s;
                 while ((s = in.getLine()) != null){
