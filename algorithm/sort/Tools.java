@@ -16,6 +16,7 @@ public class Tools {
         int tmp = A[i];
         A[i] = A[j];
         A[j] = tmp;
+        
     }
 
     static <E> void swap(E[] A, int i, int j) {
