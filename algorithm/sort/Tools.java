@@ -35,10 +35,19 @@ public class Tools {
         }
         return list;
     }
+
     static List<Integer> genOrder(int N) {
+        return genOrder(N, N);
+    }
+
+    static List<Integer> genOrder(int N, int bound) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            list.add(i);
+            if (N != bound) {
+                list.add(bound);
+            } else {
+                list.add(i);
+            }
         }
         return list;
     }
@@ -55,5 +64,10 @@ public class Tools {
             }
             min = i;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(genOrder(100, 100));
+        ;
     }
 }

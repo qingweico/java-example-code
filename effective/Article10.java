@@ -21,7 +21,7 @@ import static util.Print.print;
         3>:  传递性 x.equals(y) return true, y.equals(z), return true; x.equals(z) return true
         4>:  一致性 Calling x.equals(y) multiple times always returns consistent results as
                    long as the information used in the object has not been modified.
-        5>:  非空性 x.equals(null) return true
+        5>:  非空性 x.equals(null) return false;
  */
 
 // Broken - violates symmetry

@@ -4,12 +4,13 @@ package algorithm.sort;
  * @author:qiming
  * @date: 2021/10/19
  */
-public class MQuickSort implements MutableSorter{
+public class MQuickSort implements MutableSorter {
     public void sort(int[] A) {
         quickSort(A, 0, A.length);
     }
-    private void quickSort(int[] A,int l, int r) {
-        if(r - l <= 1) {
+
+    private void quickSort(int[] A, int l, int r) {
+        if (r - l <= 1) {
             return;
         }
         int i = partition(A, l, r);
@@ -22,10 +23,10 @@ public class MQuickSort implements MutableSorter{
         int pivot = A[l];
         int i = l + 1;
         int j = r;
-        while(i != j) {
-            if(A[i] < pivot) {
+        while (i != j) {
+            if (A[i] < pivot) {
                 i++;
-            }else {
+            } else {
                 Tools.swap(A, i, --j);
             }
         }

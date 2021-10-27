@@ -4,6 +4,11 @@ import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import static util.Print.printf;
 
 /**
  * @author:qiming
@@ -11,69 +16,105 @@ import java.util.Arrays;
  */
 public class SortTest {
 
+    ExecutorService exec = Executors.newFixedThreadPool(10);
+
+
     @Test
     public void insert() {
-        sortTest(InsertSort.class, 100000);
+        CountDownLatch latch = new CountDownLatch(3);
+        exec.execute(() -> {
+            sortTest(InsSortImproved.class, 10000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(InsSort.class, 10000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(InsertSort.class, 10000);
+            latch.countDown();
+        });
+
+        exec.shutdown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void select() {
         sortTest(SelectionSort.class, 100000);
+        sortTest(SelSort.class, 100000);
     }
 
     @Test
     public void bubble() {
-        sortTest(BubbleSort.class, 10000);
+        sortTest(DualQuiSort.class, 5000000);
     }
 
     @Test
     public void merge() {
-        sortTest(MergeSort.class, 10000);
+        CountDownLatch latch = new CountDownLatch(2);
+        exec.execute(() -> {
+            sortTest(MerSortBottomUp.class, 100000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(MerSortBottomUpImproved.class, 100000);
+            latch.countDown();
+        });
+        exec.shutdown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void quick() {
-        sortTest(QuickSort.class, 10000);
-    }
-
-    @Test
-    public void mQuick() {
-        sortTest(MQuickSort.class, 10);
-    }
-
-    @Test
-    public void selSort() {
-        sortTest(SelSort.class, 100);
-    }
-    @Test
-    public void InsSort() {
-        sortTest(InsSort.class, 100000);
+        CountDownLatch latch = new CountDownLatch(2);
+        exec.execute(() -> {
+            sortTest(DualQuiSort.class, 100000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(ThreeWaysQuiSort.class, 100000);
+            latch.countDown();
+        });
+        exec.shutdown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void sortTest(Class<?> cls, int N) {
         try {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();
-            var start  = System.nanoTime();
+            var start = System.nanoTime();
             if (rawInstance instanceof IMutableSorter) {
                 var A = Tools.gen(N);
                 var instance = (IMutableSorter) rawInstance;
                 A = instance.sort(A);
-                System.out.format("time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
+                printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(A);
             } else if (rawInstance instanceof MutableSorter) {
-                var A = Tools.gen(N).stream().mapToInt(x -> x).toArray();
+                var A = Tools.genOrder(N, 1).stream().mapToInt(x -> x).toArray();
                 var instance = (MutableSorter) rawInstance;
                 instance.sort(A);
-                System.out.format("time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
+                printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(A);
-            }else {
-                int[] raw = Tools.gen(N, 10000).stream().mapToInt(x -> x).toArray();
-                Integer[] A  = Arrays.stream(raw).boxed().toArray(Integer[]::new);
-                // rawInstance.getClass().getMethod("sort", Object[].class).invoke(rawInstance, (Object[]) A);
-                var instance = (InsSort)rawInstance;
-                instance.sort(A);
-                System.out.format("time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
+            } else {
+                int[] raw = Tools.genOrder(N).stream().mapToInt(x -> x).toArray();
+                Integer[] A = Arrays.stream(raw).boxed().toArray(Integer[]::new);
+                rawInstance.getClass().getMethod("sort",
+                        Comparable[].class).invoke(rawInstance, (Object) A);
+                printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(Arrays.asList(A));
             }
         } catch (NoSuchMethodException

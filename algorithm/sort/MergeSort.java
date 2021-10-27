@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class MergeSort implements MutableSorter {
     @Override
     public void sort(int[] A) {
+        // [)
         mergeSort(A, 0, A.length);
     }
 
@@ -19,10 +20,15 @@ public class MergeSort implements MutableSorter {
         int mid = l + ((r - l) >> 1);
         mergeSort(A, l, mid);
         mergeSort(A, mid, r);
-        merge(A, l, mid + 1, r);
+        if (A[mid - 1] > A[mid]) {
+            merge(A, l, mid, r);
+
+        }
+
     }
 
     private void merge(int[] A, int l, int mid, int r) {
+        // [)
         int[] B = Arrays.copyOfRange(A, l, mid + 1);
         int[] C = Arrays.copyOfRange(A, mid, r + 1);
         B[B.length - 1] = C[C.length - 1] = Integer.MAX_VALUE;
