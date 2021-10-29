@@ -75,13 +75,43 @@ public class SortTest {
 
     @Test
     public void quick() {
-        CountDownLatch latch = new CountDownLatch(2);
+        CountDownLatch latch = new CountDownLatch(4);
         exec.execute(() -> {
             sortTest(DualQuiSort.class, 100000);
             latch.countDown();
         });
         exec.execute(() -> {
+            sortTest(HeapSort.class, 100000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(MerSort.class, 100000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
             sortTest(ThreeWaysQuiSort.class, 100000);
+            latch.countDown();
+        });
+        exec.shutdown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void heapSort() {
+        CountDownLatch latch = new CountDownLatch(3);
+        exec.execute(() -> {
+            sortTest(HeapSort.class, 1000000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(HeapSortImproved.class, 1000000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(InPlaceHeapSort.class, 1000000);
             latch.countDown();
         });
         exec.shutdown();
@@ -110,7 +140,7 @@ public class SortTest {
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(A);
             } else {
-                int[] raw = Tools.genOrder(N).stream().mapToInt(x -> x).toArray();
+                int[] raw = Tools.gen(N, 100000).stream().mapToInt(x -> x).toArray();
                 Integer[] A = Arrays.stream(raw).boxed().toArray(Integer[]::new);
                 rawInstance.getClass().getMethod("sort",
                         Comparable[].class).invoke(rawInstance, (Object) A);

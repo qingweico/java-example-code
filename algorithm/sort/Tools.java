@@ -26,7 +26,7 @@ public class Tools {
     }
 
     static List<Integer> gen(int N) {
-        return gen(N, 1000);
+        return gen(N, 10000);
     }
 
     static List<Integer> gen(int N, int bound) {

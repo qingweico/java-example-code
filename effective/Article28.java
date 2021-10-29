@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author:qiming
  * @date: 2021/3/5
  */
-public class Article28 {
+public class Article28<E> {
     // First, Arrays are covariant, if Sub is a subtype of Super, then the type Sub[] is
     // a subtype of Super[]; In contrast, generics are mutable, and for any two different
     // types, Type1 and Type2, List<Type1> neither List<Type2> subtype of, also not
@@ -31,11 +31,15 @@ public class Article28 {
 
     // Second, Arrays are reified, and arrays know and enforce their data types at run time, but
     // Generics are implemented by erasure. Generics only reinforce their type information
-    // at compile time and discard their element type information at run time.
+    // at compile time and erasure their element type information at run time.
 
 
     // The effect of erasure is make generics freely interoperability with code that doesn't
     // use generics to ensure a smooth transition to generics in Java5.
+
+
+    // generic array creation exception, such as new ArrayList<E>[],
+    // new ArrayList<String>[] or new E[]. because it's not type safe!
 
 
     public static void main(String[] args) {
@@ -51,15 +55,16 @@ public class Article28 {
 class ArrayGeneric {
     public static void main(String[] args) {
         // generic array creation
-        // List<String>[] stringLists = new List<String>[1];
-        // List<Integer> intList = List.of(42);
-        // Object[] objects = stringLists;
+//         List<String>[] stringLists = new List<String>[1];
+//         List<Integer> intList = List.of(42);
+//         Object[] objects = stringLists;
+//
+//         objects[0] = intList;
+//         String s =stringLists[0].get(0);
 
-        // objects[0] = intList;
-        // String s =stringLists[0].get(0);
 
-
-        // List<?>[] lists = new List<String>[1];
+         // legal
+         List<?>[] lists = new List<?>[1];
     }
 }
 

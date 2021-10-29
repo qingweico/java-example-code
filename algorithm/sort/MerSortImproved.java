@@ -42,10 +42,4 @@ public class MerSortImproved {
             }
         }
     }
-
-    public static void main(String[] args) {
-        Integer[] A = new Integer[]{9, 1, 3, 4 ,2 , 7 ,6};
-        new MerSortImproved().sort(A);
-        System.out.println(Arrays.toString(A));
-    }
 }

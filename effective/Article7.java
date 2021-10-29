@@ -1,5 +1,6 @@
 package effective;
 
+import java.security.interfaces.ECKey;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
@@ -13,31 +14,36 @@ public class Article7 {
 }
 
 // Can you spot the "memory leak"?
-class Stack {
-    private Object[] elements;
-    private int size                                  = 0;
+// Object-based collection - a prime candidate for generics
+class Stack<E> {
+    // private Object[] elements;
+    private E[] elements;
+    private int size = 0;
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
+
+    // The elements array will contain only E instance from push(E).
+    // This is sufficient to ensure type safety, but the rt type of
+    // the array won't be E[]; it will always be Object!
+    @SuppressWarnings("unchecked")
     public Stack() {
-        elements = new Object[DEFAULT_INITIAL_CAPACITY];
+        // It can be used, but it not the type safe!
+        elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];
+        // generic array creation
+        // elements = new E[DEFAULT_INITIAL_CAPACITY];
     }
-    public void push(Object e) {
+
+    public void push(E e) {
         ensureCapacity();
         elements[size++] = e;
     }
-    // Broken!
-    // Unintentional object retention.
-    public Object pop() {
-        if(size == 0) {
-            throw new EmptyStackException();
-        }
-        return elements[--size];
-    }
 
-    public Object pop0() {
-        if(size == 0) {
+    public E pop() {
+        if (size == 0) {
             throw new EmptyStackException();
         }
-        Object result = elements[--size];
+        // Owning to E is a non-reifiable type, the compiler couldn't check conversion at rt.
+        @SuppressWarnings("unchecked") E result = (E) elements[--size];
+        // Eliminate obsolete reference, otherwise unintentional object retention, it's broken
         elements[size] = null;
         return result;
 
@@ -48,7 +54,7 @@ class Stack {
      * doubling the space each time the array needs to grew.
      */
     private void ensureCapacity() {
-        if(elements.length == size) {
+        if (elements.length == size) {
             elements = Arrays.copyOf(elements, size * 2 + 1);
         }
     }

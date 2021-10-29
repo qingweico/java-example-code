@@ -52,6 +52,30 @@ public class BST<E extends Comparable<E>> {
         return node;
     }
 
+    public void put(E e) {
+        Node node = new Node(e);
+        if (root == null) {
+            root = node;
+            return;
+        }
+        put(root, e);
+    }
+
+    private void put(Node node, E e) {
+
+        if (e.compareTo(node.e) < 0) {
+            if (node.left == null) {
+                node.left = new Node(e);
+            }
+            put(node.left, e);
+        } else if (e.compareTo(node.e) > 0) {
+            if (node.right == null) {
+                node.right = new Node(e);
+            }
+            put(node.right, e);
+        }
+    }
+
     public boolean contains(E e) {
         return contains(root, e);
     }
@@ -228,6 +252,44 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    public void print() {
+        print(root);
+    }
+
+    private void print(Node root) {
+        int h = depth(root);
+        int W = 2 * (int) Math.pow(2, h);
+        var lines = new StringBuilder[h * 2];
+        for (int i = 0; i < h * 2; i++) {
+            lines[i] = new StringBuilder(String.format("%" + W + "s", ""));
+        }
+
+        printNode(lines, W, root, 0, 0);
+        for (var line : lines) {
+            System.out.println(line.toString());
+        }
+
+    }
+
+    private void printNode(StringBuilder[] lines, int W, Node node, int h, int base) {
+        var nums = Math.pow(2, h);
+        var pos = base + (int) (W / (nums * 2));
+
+        var str = node.e.toString();
+        for (int i = 0; i < str.length(); i++) {
+            lines[h * 2].setCharAt(pos + i, str.charAt(i));
+        }
+
+        if (node.left != null) {
+            lines[h * 2 + 1].setCharAt(pos - 1, '/');
+            printNode(lines, W, node.left, h + 1, base);
+        }
+
+        if (node.right != null) {
+            lines[h * 2 + 1].setCharAt(pos + str.length() + 1, '\\');
+            printNode(lines, W, node.right, h + 1, pos);
+        }
+    }
 
     @Override
     public String toString() {
@@ -251,16 +313,6 @@ public class BST<E extends Comparable<E>> {
     }
 
     @Test
-    public void print() {
-        int[] nums = {5, 6, 1, 8, 3, 0, 9};
-        BST<Integer> bst = new BST<>();
-        for (var i : nums) {
-            bst.add(i);
-        }
-        bst.levelOrder();
-    }
-
-    @Test
     public void testBst() {
         BST<Integer> bst = new BST<>();
         int count = 1000;
@@ -277,8 +329,12 @@ public class BST<E extends Comparable<E>> {
     }
 
     @Test
-    public void nam() {
-        int depth = 4;
-        System.out.printf("%" + depth + "s", "");
+    public void testPrint() {
+        int[] nums = {5, 6, 1, 8, 3, 0, 9};
+        BST<Integer> bst = new BST<>();
+        for (var i : nums) {
+            bst.add(i);
+        }
+        bst.print();
     }
 }
