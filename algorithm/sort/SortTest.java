@@ -51,7 +51,21 @@ public class SortTest {
 
     @Test
     public void bubble() {
-        sortTest(DualQuiSort.class, 5000000);
+        CountDownLatch latch = new CountDownLatch(2);
+        exec.execute(() -> {
+            sortTest(BubSort.class, 1000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            sortTest(BubbleSort.class, 1000);
+            latch.countDown();
+        });
+        exec.shutdown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -134,7 +148,7 @@ public class SortTest {
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(A);
             } else if (rawInstance instanceof MutableSorter) {
-                var A = Tools.genOrder(N, 1).stream().mapToInt(x -> x).toArray();
+                var A = Tools.gen(N, 100000).stream().mapToInt(x -> x).toArray();
                 var instance = (MutableSorter) rawInstance;
                 instance.sort(A);
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");

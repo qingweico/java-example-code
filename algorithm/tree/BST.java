@@ -12,6 +12,7 @@ import java.util.Stack;
  * @date: 2021/10/28
  */
 public class BST<E extends Comparable<E>> {
+
     private class Node {
         E e;
         Node left;
@@ -89,7 +90,7 @@ public class BST<E extends Comparable<E>> {
         } else if (e.compareTo(node.e) < 0) {
             return contains(node.left, e);
         } else {
-            return contains(node, e);
+            return contains(node.right, e);
         }
     }
 

@@ -15,11 +15,13 @@ public class Array<E> {
     public Array() {
         this(DEFAULT_CAPACITY);
     }
+
     @SuppressWarnings("unchecked")
     public Array(int capacity) {
-       data = (E[]) new Object[capacity];
+        data = (E[]) new Object[capacity];
         this.capacity = capacity;
     }
+
     @SuppressWarnings("unchecked")
     public Array(E[] A) {
         data = (E[]) new Object[A.length];
@@ -39,7 +41,7 @@ public class Array<E> {
         return size == 0;
     }
 
-    public boolean add(E e, int index) {
+    public void add(E e, int index) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("index = " + index);
         }
@@ -49,12 +51,10 @@ public class Array<E> {
         }
         data[index] = e;
         size++;
-        return true;
     }
 
     private void ensureCapacity() {
-        int minCapacity = capacity;
-        if (size >= minCapacity) {
+        if (size >= capacity()) {
             resize(capacity << 1);
         }
     }
@@ -65,11 +65,13 @@ public class Array<E> {
     }
 
     public boolean addLast(E e) {
-        return add(e, size);
+        add(e, size());
+        return true;
     }
 
     public boolean addFirst(E e) {
-        return add(e, 0);
+        add(e, 0);
+        return true;
     }
 
     public E get(int index) {
@@ -77,6 +79,14 @@ public class Array<E> {
             throw new IllegalArgumentException("index = " + index);
         }
         return data[index];
+    }
+
+    public E getLast() {
+        return get(size() - 1);
+    }
+
+    public E getFirst() {
+        return get(0);
     }
 
     public Object set(int index, E e) {
@@ -107,8 +117,7 @@ public class Array<E> {
         }
 
         size--;
-        int minCapacity = capacity;
-        if (size <= minCapacity >> 2 && minCapacity >> 1 != 0) {
+        if (size <= capacity() >> 2 && capacity() >> 1 != 0) {
             resize(capacity >> 1);
         }
         // loiter object != memory leak
