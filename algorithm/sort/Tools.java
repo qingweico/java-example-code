@@ -29,7 +29,7 @@ public class Tools {
         return gen(N, 10000);
     }
 
-    static List<Integer> gen(int N, int bound) {
+    public static List<Integer> gen(int N, int bound) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             list.add((int) (Math.random() * bound));

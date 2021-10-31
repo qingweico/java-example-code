@@ -337,5 +337,7 @@ public class BST<E extends Comparable<E>> {
             bst.add(i);
         }
         bst.print();
+        bst.levelOrder();
+        bst.preOrderNr();
     }
 }

@@ -1,6 +1,6 @@
 package algorithm.queue;
 
-import algorithm.Array;
+import algorithm.array.Array;
 
 /**
  * @author:qiming

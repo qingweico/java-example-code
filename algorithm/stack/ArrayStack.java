@@ -1,7 +1,6 @@
 package algorithm.stack;
 
-import algorithm.Array;
-import algorithm.Stack;
+import algorithm.array.Array;
 
 /**
  * @author:qiming

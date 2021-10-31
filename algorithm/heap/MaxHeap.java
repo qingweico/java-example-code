@@ -1,7 +1,8 @@
 package algorithm.heap;
 
-import algorithm.Array;
+import algorithm.array.Array;
 import algorithm.sort.Tools;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -89,11 +90,12 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void testHeap() {
         MaxHeap<Integer> maxHeap = new MaxHeap<>();
         int count = 100000;
         for (int i = 0; i < count; i++) {
-            maxHeap.add((int) (Math.random() * 1000));
+            maxHeap.add((int) (Math.random() * 1000000));
         }
         System.out.println(maxHeap.size());
         ArrayList<Integer> list = new ArrayList<>();

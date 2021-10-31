@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.map;
 
 /**
  * @author:qiming

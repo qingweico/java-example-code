@@ -12,7 +12,7 @@ import static util.Print.print;
  */
 
 // What you can do with a LinkedHashMap
-public class LinkedHashMap0 {
+public class LinkedHMap {
     public static void main(String[] args) {
         LinkedHashMap<Integer, String> linkedMap = new LinkedHashMap<>(
                 new CountingMapData(9));
@@ -22,7 +22,7 @@ public class LinkedHashMap0 {
         // When the accessOrder parameter is true, the LinkedHashMap uses the access-based Least
         // Recently Used (LRU) algorithm, elements that have not been accessed appear at the
         // front of the queue (and can be considered to need to be deleted).
-        linkedMap = new LinkedHashMap<>(16,
+        linkedMap = new java.util.LinkedHashMap<>(16,
                 0.75f,
                 true);
         linkedMap.putAll(new CountingMapData(9));

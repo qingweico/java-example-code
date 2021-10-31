@@ -18,15 +18,12 @@ public class TextFile extends ArrayList<String> {
     public static String read(String fileName) {
         StringBuilder sb = new StringBuilder();
         try {
-            BufferedReader in = new BufferedReader(new FileReader(fileName));
-            try {
+            try (BufferedReader in = new BufferedReader(new FileReader(fileName))) {
                 String s;
                 while ((s = in.readLine()) != null) {
                     sb.append(s);
                     sb.append("\n");
                 }
-            } finally {
-                in.close();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -37,11 +34,8 @@ public class TextFile extends ArrayList<String> {
     // Write a single file in one method call:
     public static void write(String fileName, String text) {
         try {
-            PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile());
-            try {
+            try (PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile())) {
                 out.print(text);
-            } finally {
-                out.close();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -64,13 +58,10 @@ public class TextFile extends ArrayList<String> {
 
     public void write(String fileName) {
         try {
-            PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile());
-            try {
+            try (PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile())) {
                 for (String item : this) {
                     out.println(item);
                 }
-            } finally {
-                out.close();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -78,13 +69,13 @@ public class TextFile extends ArrayList<String> {
     }
 
     public static void main(String[] args) {
-        String file = read("src/util/TextFile.java");
-        write("src/util/test.txt", file);
-        TextFile text = new TextFile("src/util/test.txt");
-        text.write("src/util/test2.txt");
+        String file = read("util/TextFile.java");
+        write("util/test.txt", file);
+        TextFile text = new TextFile("util/test.txt");
+        text.write("util/test2.txt");
         // Break into unique sorted list of word:
         TreeSet<String> words = new TreeSet<>(
-                new TextFile("src/util/TextFile.java", "\\W+")
+                new TextFile("util/TextFile.java", "\\W+")
         );
         // Display the capitalized words:
         System.out.println(words.headSet("a"));
