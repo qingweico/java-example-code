@@ -1,5 +1,7 @@
 package collection;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,15 +21,20 @@ public class RandomStringGenerator<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
+            int cursor;
+            final int size = list.size();
+
             @Override
             public boolean hasNext() {
-                return true;
+                return cursor != size;
             }
 
             @Override
             public T next() {
-                return list.get((int) (list.size() * Math.random()));
+                int i = cursor;
+                cursor = i + 1;
+                return list.get(i);
             }
         };
     }
@@ -43,10 +50,9 @@ public class RandomStringGenerator<T> implements Iterable<T> {
         // Passing the type
         arr.toArray(new String[0]);
         // Lazy evaluation
-        arr.toArray(String[] :: new);
-        for(var s : arr) {
-           System.out.println(s);
+        arr.toArray(String[]::new);
+        for (var s : arr) {
+            System.out.println(s);
         }
-
     }
 }

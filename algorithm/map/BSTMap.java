@@ -1,8 +1,5 @@
 package algorithm.map;
 
-import util.FileOperation;
-
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
@@ -170,21 +167,5 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
         }
         node.left = deleteMin(node.left);
         return node;
-    }
-
-    public static void main(String[] args) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        FileOperation.readFile("algorithm/set/pride-and-prejudice.txt", arrayList);
-        BSTMap<String, Integer> bstMap = new BSTMap<>();
-        for (String s : arrayList) {
-            if (bstMap.contains(s)) {
-                bstMap.set(s, bstMap.get(s) + 1);
-            } else {
-                bstMap.add(s, 1);
-            }
-        }
-        System.out.println(bstMap.size());
-        System.out.println(bstMap.get("pride"));
-        System.out.println(bstMap.get("prejudice"));
     }
 }

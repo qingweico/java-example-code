@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
+import static util.Print.print;
+import static util.Print.printnb;
+
 /**
  * @author:qiming
  * @date: 2021/10/28
@@ -102,7 +105,7 @@ public class BST<E extends Comparable<E>> {
         if (node == null) {
             return;
         }
-        System.out.print(node.e + " ");
+        printnb(node.e + " ");
         preOrder(node.left);
         preOrder(node.right);
     }
@@ -116,7 +119,7 @@ public class BST<E extends Comparable<E>> {
         stack.add(node);
         while (!stack.isEmpty()) {
             Node cur = stack.pop();
-            System.out.print(cur.e + " ");
+            printnb(cur.e + " ");
             if (cur.right != null) {
                 stack.push(cur.right);
             }
@@ -135,7 +138,7 @@ public class BST<E extends Comparable<E>> {
         queue.add(node);
         while (!queue.isEmpty()) {
             Node cur = queue.remove();
-            System.out.print(cur.e + " ");
+            printnb(cur.e + " ");
             if (cur.left != null) {
                 queue.add(cur.left);
             }
@@ -143,6 +146,21 @@ public class BST<E extends Comparable<E>> {
                 queue.add(cur.right);
             }
         }
+    }
+
+    public void reverse() {
+        reverse(root);
+    }
+
+    private void reverse(Node node) {
+        if (node == null) {
+            return;
+        }
+        Node n = node.left;
+        node.left = node.right;
+        node.right = n;
+        reverse(node.left);
+        reverse(node.right);
     }
 
     public int depth() {
@@ -253,11 +271,11 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
-    public void print() {
-        print(root);
+    public void printTree() {
+        printTree(root);
     }
 
-    private void print(Node root) {
+    private void printTree(Node root) {
         int h = depth(root);
         int W = 2 * (int) Math.pow(2, h);
         var lines = new StringBuilder[h * 2];
@@ -267,7 +285,7 @@ public class BST<E extends Comparable<E>> {
 
         printNode(lines, W, root, 0, 0);
         for (var line : lines) {
-            System.out.println(line.toString());
+            print(line.toString());
         }
 
     }
@@ -320,13 +338,13 @@ public class BST<E extends Comparable<E>> {
         for (int i = 0; i < count; i++) {
             bst.add((int) (Math.random() * 1000));
         }
-        System.out.println(bst.size());
+        print(bst.size());
         ArrayList<Integer> list = new ArrayList<>();
         while (!bst.isEmpty()) {
             list.add(bst.deleteMax());
         }
         Tools.assertSorted(list, true);
-        System.out.println(list);
+        print(list);
     }
 
     @Test
@@ -336,8 +354,11 @@ public class BST<E extends Comparable<E>> {
         for (var i : nums) {
             bst.add(i);
         }
-        bst.print();
+        bst.printTree();
+        bst.reverse();
+        bst.printTree();
         bst.levelOrder();
+        print();
         bst.preOrderNr();
     }
 }

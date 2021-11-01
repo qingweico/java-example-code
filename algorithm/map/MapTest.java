@@ -17,6 +17,7 @@ public class MapTest {
     @Test
     public void test() {
         queueTest(BSTMap.class);
+        queueTest(AVLMap.class);
         queueTest(LinkedListMap.class);
     }
 
@@ -39,6 +40,7 @@ public class MapTest {
             print("distinct: " + inst.size());
             printf(rawInstance.getClass().getSimpleName()
                     + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
+            print("===================================================");
         } catch (NoSuchMethodException
                 | InvocationTargetException
                 | InstantiationException

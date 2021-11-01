@@ -16,11 +16,12 @@ import static util.Print.printf;
 public class SetTest {
     @Test
     public void test() {
-        queueTest(BSTSet.class);
-        queueTest(LinkedListSet.class);
+        setTest(BSTSet.class);
+        setTest(AVLSet.class);
+        setTest(LinkedListSet.class);
     }
 
-    public void queueTest(Class<?> cls) {
+    public void setTest(Class<?> cls) {
         try {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();
@@ -35,6 +36,7 @@ public class SetTest {
             print(inst.size());
             printf(rawInstance.getClass().getSimpleName()
                     + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
+            print("===================================================");
         } catch (NoSuchMethodException
                 | InvocationTargetException
                 | InstantiationException
