@@ -7,7 +7,7 @@ import java.io.Reader;
 
 public class BufferedReader0 {
     private final Reader r;
-    private final LineNumberReader0 myLineNumberReader = new LineNumberReader0();
+    private final LineNumReader myLineNumberReader = new LineNumReader();
 
     public BufferedReader0(Reader r) {
         this.r = r;

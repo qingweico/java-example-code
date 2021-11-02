@@ -38,7 +38,28 @@ public class Example {
         }
     }
 
-   public static void main(String[] args) {
-      System.out.println(new B().getValue());
-   }
+    public static void main(String[] args) {
+        System.out.println(new B().getValue());
+    }
+}
+
+class C {
+    // TODO
+    // For the same object, respectively called a b c method, not the
+    // same object is locked?
+    private synchronized void a() {
+    }
+
+    private void b() {
+        synchronized (this) {
+        }
+    }
+
+    private synchronized static void c() {
+    }
+
+    private void d() {
+        synchronized (C.class) {
+        }
+    }
 }

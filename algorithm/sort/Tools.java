@@ -25,7 +25,7 @@ public class Tools {
         A[j] = tmp;
     }
 
-    static List<Integer> gen(int N) {
+    public static List<Integer> gen(int N) {
         return gen(N, 10000);
     }
 
@@ -37,11 +37,11 @@ public class Tools {
         return list;
     }
 
-    static List<Integer> genOrder(int N) {
+    public static List<Integer> genOrder(int N) {
         return genOrder(N, N);
     }
 
-    static List<Integer> genOrder(int N, int bound) {
+    public static List<Integer> genOrder(int N, int bound) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             if (N != bound) {

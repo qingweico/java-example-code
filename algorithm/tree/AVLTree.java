@@ -23,16 +23,16 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
 
-   public int size() {
-      return size;
-   }
+    public int size() {
+        return size;
+    }
 
 
-   public boolean isEmpty() {
-      return size == 0;
-   }
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-   private class Node {
+    private class Node {
         K key;
         V value;
         Node left, right;
@@ -58,82 +58,84 @@ public class AVLTree<K extends Comparable<K>, V> {
         return getHeight(node.left) - getHeight(node.right);
     }
 
-   /**
-    * LL
-    * +================================================================+
-    * +                                                                +
-    * +                                                                +
-    * +          unbalance                          l                  +
-    * +           /    \                          /  \                 +
-    * +          l     x                         y   unbalance         +
-    * +         / \             ======>         /\      /  \           +
-    * +        y   node                        m n     node x          +
-    * +       /\                                                       +
-    * +      m  n                                                      +
-    * +================================================================+
-    * LR
-    * +================================================================+
-    * +                                                                +
-    * +                                                                +
-    * +     unbalance             unbalance              node          +
-    * +      /    \                 /    \              /   \          +
-    * +     l     x   (l)LL       node    x   RR       l   unbalance   +
-    * +    / \        ======>     / \       =====>    / \     /  \     +
-    * +   y   node               l   n               y  m    n   x     +
-    * +       / \               /\                                     +
-    * +      m  n              y m                                     +
-    * +================================================================+
-    * @param unbalance unbalance node
-    * @return new balance node
-    */
+    /**
+     * LL
+     * +================================================================+
+     * +                                                                +
+     * +                                                                +
+     * +          unbalance                          l                  +
+     * +           /    \                          /  \                 +
+     * +          l     x                         y   unbalance         +
+     * +         / \             ======>         /\      /  \           +
+     * +        y   node                        m n     node x          +
+     * +       /\                                                       +
+     * +      m  n                                                      +
+     * +================================================================+
+     * LR
+     * +================================================================+
+     * +                                                                +
+     * +                                                                +
+     * +     unbalance             unbalance              node          +
+     * +      /    \                 /    \              /   \          +
+     * +     l     x   (l)LL       node    x   RR       l   unbalance   +
+     * +    / \        ======>     / \       =====>    / \     /  \     +
+     * +   y   node               l   n               y  m    n   x     +
+     * +       / \               /\                                     +
+     * +      m  n              y m                                     +
+     * +================================================================+
+     *
+     * @param unbalance unbalance node
+     * @return new balance node
+     */
     private Node rightRotate(Node unbalance) {
-       Node l = unbalance.left;
-       Node node = l.right;
-       l.right = unbalance;
-       unbalance.left = node;
+        Node l = unbalance.left;
+        Node node = l.right;
+        l.right = unbalance;
+        unbalance.left = node;
 
-       unbalance.height = Math.max(getHeight(unbalance.left), getHeight(unbalance.right)) + 1;
-       l.height = Math.max(getHeight(l.left), getHeight(l.right)) + 1;
-       return l;
+        unbalance.height = Math.max(getHeight(unbalance.left), getHeight(unbalance.right)) + 1;
+        l.height = Math.max(getHeight(l.left), getHeight(l.right)) + 1;
+        return l;
     }
 
-   /**
-    * RR
-    * +================================================================+
-    * +                                                                +
-    * +                                                                +
-    * +           unbalance                         r                  +
-    * +            /    \                         /  \                 +
-    * +           x      r        =====>   unbalance  y                +
-    * +                 / \                  /  \    / \               +
-    * +               node y                x  node  m  n              +
-    * +                   / \                                          +
-    * +                  m   n                                         +
-    * +================================================================+
-    *
-    * RL
-    * +================================================================+
-    * +                                                                +
-    * +                                                                +
-    * +     unbalance             unbalance                 node       +
-    * +      /    \                 /    \                /     \      +
-    * +     x     r     (r)RR      x    node    LL     unbalance  r    +
-    * +          / \    ======>           / \  =====>     / \    / \   +
-    * +        node y                    m   r             x  m   n  y +
-    * +        / \                          / \                        +
-    * +       m  n                          n  y                       +
-    * +================================================================+
-    * @param unbalance unbalance node
-    * @return new balance node
-    */
+    /**
+     * RR
+     * +================================================================+
+     * +                                                                +
+     * +                                                                +
+     * +           unbalance                         r                  +
+     * +            /    \                         /  \                 +
+     * +           x      r        =====>   unbalance  y                +
+     * +                 / \                  /  \    / \               +
+     * +               node y                x  node  m  n              +
+     * +                   / \                                          +
+     * +                  m   n                                         +
+     * +================================================================+
+     * <p>
+     * RL
+     * +================================================================+
+     * +                                                                +
+     * +                                                                +
+     * +     unbalance             unbalance                 node       +
+     * +      /    \                 /    \                /     \      +
+     * +     x     r     (r)RR      x    node    LL     unbalance  r    +
+     * +          / \    ======>           / \  =====>     / \    / \   +
+     * +        node y                    m   r             x  m   n  y +
+     * +        / \                          / \                        +
+     * +       m  n                          n  y                       +
+     * +================================================================+
+     *
+     * @param unbalance unbalance node
+     * @return new balance node
+     */
     private Node leftRotate(Node unbalance) {
-       Node r = unbalance.right;
-       Node node = r.left;
-       r.left = unbalance;
-       unbalance.right = node;
-       unbalance.height = Math.max(getHeight(unbalance.left), getHeight(unbalance.right)) + 1;
-       r.height = Math.max(getHeight(r.left), getHeight(r.right)) + 1;
-       return r;
+        Node r = unbalance.right;
+        Node node = r.left;
+        r.left = unbalance;
+        unbalance.right = node;
+        unbalance.height = Math.max(getHeight(unbalance.left), getHeight(unbalance.right)) + 1;
+        r.height = Math.max(getHeight(r.left), getHeight(r.right)) + 1;
+        return r;
     }
 
     public boolean isBalanced() {
@@ -170,182 +172,155 @@ public class AVLTree<K extends Comparable<K>, V> {
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
         int balanceFactor = getBalanceFactor(node);
         // LL
-        if(balanceFactor > 1 && getBalanceFactor((node.left)) >= 0)  {
+        if (balanceFactor > 1 && getBalanceFactor((node.left)) >= 0) {
             return rightRotate(node);
         }
         // RR
-       if(balanceFactor < -1 && getBalanceFactor((node.right)) <= 0)  {
-          return leftRotate(node);
-       }
-       // LR
-       if(balanceFactor > 1 && getBalanceFactor((node.left)) < 0)  {
-          node.left = leftRotate(node.left);
-          return rightRotate(node);
-       }
-       // RL
-       if(balanceFactor < -1 && getBalanceFactor((node.right)) > 0)  {
-          node.right = rightRotate(node.right);
-          return leftRotate(node);
-       }
+        if (balanceFactor < -1 && getBalanceFactor((node.right)) <= 0) {
+            return leftRotate(node);
+        }
+        // LR
+        if (balanceFactor > 1 && getBalanceFactor((node.left)) < 0) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
+        }
+        // RL
+        if (balanceFactor < -1 && getBalanceFactor((node.right)) > 0) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
+        }
         return node;
     }
-   private Node getNode(Node node, K k) {
-      if (node == null) {
-         return null;
-      }
-      if (k.compareTo(node.key) == 0) {
-         return node;
-      } else if (k.compareTo(node.key) < 0) {
-         return getNode(node.left, k);
-      } else {
-         return getNode(node.right, k);
-      }
-   }
-   public K min() {
-      if (size == 0) {
-         throw new IllegalStateException();
-      }
-      return min(root).key;
-   }
 
-   private Node min(Node node) {
-      if (node.left == null) {
-         return node;
-      }
-      return min(node.left);
-   }
-   public V remove(K k) {
+    private Node getNode(Node node, K k) {
+        if (node == null) {
+            return null;
+        }
+        if (k.compareTo(node.key) == 0) {
+            return node;
+        } else if (k.compareTo(node.key) < 0) {
+            return getNode(node.left, k);
+        } else {
+            return getNode(node.right, k);
+        }
+    }
+
+    public K min() {
+        if (size == 0) {
+            throw new IllegalStateException();
+        }
+        return min(root).key;
+    }
+
+    private Node min(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return min(node.left);
+    }
+
+    public V remove(K k) {
         Node node = getNode(root, k);
-        if(node != null) {
+        if (node != null) {
             root = remove(root, k);
             return node.value;
-        }else {
+        } else {
             throw new NoSuchElementException();
         }
 
-   }
+    }
 
-   private Node remove(Node node, K k) {
-      if (node == null) {
-         return null;
-      }
-      Node cur;
-      if (k.compareTo(node.key) < 0) {
-         node.left = remove(node.left, k);
-         cur = node;
-      } else if (k.compareTo(node.key) > 0) {
-         node.right = remove(node.right, k);
-         cur = node;
-      } else {
-         // e == node.e
+    private Node remove(Node node, K k) {
+        if (node == null) {
+            return null;
+        }
+        Node cur;
+        if (k.compareTo(node.key) < 0) {
+            node.left = remove(node.left, k);
+            cur = node;
+        } else if (k.compareTo(node.key) > 0) {
+            node.right = remove(node.right, k);
+            cur = node;
+        } else {
+            // e == node.e
 
-         if (node.left == null) {
-            Node rightNode = node.right;
-            node.right = null;
-            size--;
-             cur = rightNode;
-         }
-         else if (node.right == null) {
-            Node leftNode = node.left;
-            node.left = null;
-            size--;
-            cur = leftNode;
-         }else {
-            Node successor = min(node.right);
-            successor.right = remove(node.right, successor.key);
-            successor.left = node.left;
-            node.left = null;
-            node.right = null;
-            cur = successor;
-         }
-      }
-      if(cur == null) {
-         return null;
-      }
-      cur.height = 1 + Math.max(getHeight(cur.left), getHeight(cur.right));
-      int balanceFactor = getBalanceFactor(cur);
-      // LL
-      if(balanceFactor > 1 && getBalanceFactor((cur.left)) >= 0)  {
-         return rightRotate(cur);
-      }
-      // RR
-      if(balanceFactor < -1 && getBalanceFactor((cur.right)) <= 0)  {
-         return leftRotate(cur);
-      }
-      // LR
-      if(balanceFactor > 1 && getBalanceFactor((cur.left)) < 0)  {
-         node.left = leftRotate(cur.left);
-         return rightRotate(cur);
-      }
-      // RL
-      if(balanceFactor < 1 && getBalanceFactor((cur.right)) > 0)  {
-         node.right = leftRotate(cur.right);
-         return leftRotate(cur);
-      }
-      return cur;
-   }
-   public boolean contains(K k) {
-      return contains(root, k);
-   }
+            if (node.left == null) {
+                Node rightNode = node.right;
+                node.right = null;
+                size--;
+                cur = rightNode;
+            } else if (node.right == null) {
+                Node leftNode = node.left;
+                node.left = null;
+                size--;
+                cur = leftNode;
+            } else {
+                Node successor = min(node.right);
+                successor.right = remove(node.right, successor.key);
+                successor.left = node.left;
+                node.left = null;
+                node.right = null;
+                cur = successor;
+            }
+        }
+        if (cur == null) {
+            return null;
+        }
+        cur.height = 1 + Math.max(getHeight(cur.left), getHeight(cur.right));
+        int balanceFactor = getBalanceFactor(cur);
+        // LL
+        if (balanceFactor > 1 && getBalanceFactor((cur.left)) >= 0) {
+            return rightRotate(cur);
+        }
+        // RR
+        if (balanceFactor < -1 && getBalanceFactor((cur.right)) <= 0) {
+            return leftRotate(cur);
+        }
+        // LR
+        if (balanceFactor > 1 && getBalanceFactor((cur.left)) < 0) {
+            node.left = leftRotate(cur.left);
+            return rightRotate(cur);
+        }
+        // RL
+        if (balanceFactor < 1 && getBalanceFactor((cur.right)) > 0) {
+            node.right = leftRotate(cur.right);
+            return leftRotate(cur);
+        }
+        return cur;
+    }
 
-   private boolean contains(Node node, K k) {
-      if (node == null) {
-         return false;
-      }
-      if (k.compareTo(node.key) == 0) {
-         return true;
-      } else if (k.compareTo(node.key) < 0) {
-         return contains(node.left, k);
-      } else {
-         return contains(node.right, k);
-      }
-   }
+    public boolean contains(K k) {
+        return getNode(root, k) != null;
+    }
 
-   public V get(K k) {
-      Node node = getNode(root, k);
-      return node == null ? null : node.value;
-   }
-   public void set(K k, V v) {
-      Node node = getNode(root, k);
-      if (node == null) {
-         throw new NoSuchElementException();
-      }
-      node.value = v;
-   }
-   public boolean isValidBST() {
+    public V get(K k) {
+        Node node = getNode(root, k);
+        return node == null ? null : node.value;
+    }
+
+    public void set(K k, V v) {
+        Node node = getNode(root, k);
+        if (node == null) {
+            throw new NoSuchElementException();
+        }
+        node.value = v;
+    }
+
+    public boolean isValidBST() {
         K min = min();
-       return isValidBST(root, min);
-   }
+        return isValidBST(root, min);
+    }
+
     private boolean isValidBST(Node node, K min) {
-        if(node == null) {
+        if (node == null) {
             return true;
         }
-        if(isValidBST(node.left, min)) {
-            if(min.compareTo(node.key) <= 0) {
-               min = node.key;
-               return isValidBST(node.right, min);
+        if (isValidBST(node.left, min)) {
+            if (min.compareTo(node.key) <= 0) {
+                min = node.key;
+                return isValidBST(node.right, min);
             }
         }
         return false;
     }
-   @Test
-   public void testAvl() {
-      var start = System.nanoTime();
-      ArrayList<String> arrayList = new ArrayList<>();
-      FileOperation.readFile("algorithm/set/pride-and-prejudice.txt", arrayList);
-      AVLTree<String, Integer> avlTree = new AVLTree<>();
-      print("words: " + arrayList.size());
-      for (String s : arrayList) {
-         if (avlTree.contains(s)) {
-            avlTree.set(s, avlTree.get(s) + 1);
-         } else {
-            avlTree.add(s, 1);
-         }
-      }
-      print("distinct: " + avlTree.size());
-      print(avlTree.isBalanced());
-       print(avlTree.isValidBST());
-      printf("time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
-   }
-
 }

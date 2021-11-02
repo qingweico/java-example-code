@@ -4,14 +4,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-public class LineNumberReader0 {
+public class LineNumReader {
     private Reader r;
     private int lineNumber;
 
-    public LineNumberReader0() {
+    public LineNumReader() {
     }
 
-    public LineNumberReader0(Reader r) {
+    public LineNumReader(Reader r) {
         super();
         this.r = r;
     }
@@ -54,10 +54,10 @@ public class LineNumberReader0 {
     }
 
     public static void main(String[] args) throws IOException {
-        LineNumberReader0 myLineNumberReader = new LineNumberReader0(new FileReader("io/MyLineNumberReader.java"));
+        LineNumReader lineNumReader = new LineNumReader(new FileReader("io/LineNumReader.java"));
         String s;
-        while ((s = myLineNumberReader.readLine()) != null) {
-            System.out.println(myLineNumberReader.getLineNumber() + ":" + s);
+        while ((s = lineNumReader.readLine()) != null) {
+            System.out.println(lineNumReader.getLineNumber() + ":" + s);
         }
 
 

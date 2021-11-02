@@ -19,7 +19,7 @@ public class Reload {
     }
 
     public static void main(String args) {
-        print("Override main");
+        print("Override main " + args);
     }
 
     public static void method(Object o) {
@@ -36,5 +36,4 @@ public class Reload {
     public static void method(Integer i) {
         print("Integer method");
     }
-
 }
