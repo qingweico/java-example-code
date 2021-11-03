@@ -69,10 +69,6 @@ public class TextFile extends ArrayList<String> {
     }
 
     public static void main(String[] args) {
-        String file = read("util/TextFile.java");
-        write("util/test.txt", file);
-        TextFile text = new TextFile("util/test.txt");
-        text.write("util/test2.txt");
         // Break into unique sorted list of word:
         TreeSet<String> words = new TreeSet<>(
                 new TextFile("util/TextFile.java", "\\W+")

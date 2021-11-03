@@ -86,6 +86,12 @@ public class SortTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void shell() {
+        sortTest(ShellSort.class, 1000000);
+        sortTest(ShellSortImproved.class, 1000000);
+        sortTest(MergeSort.class, 1000000);
+    }
 
     @Test
     public void quick() {

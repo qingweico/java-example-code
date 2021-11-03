@@ -1,12 +1,10 @@
 package algorithm.sort;
 
-import java.nio.channels.Selector;
-
 /**
  * @author:qiming
  * @date: 2021/10/16
  */
-public class SelectionSort implements MutableSorter{
+public class SelectionSort implements MutableSorter {
 
     public void sort(int[] A) {
         for (int i = A.length - 1; i >= 0; i--) {

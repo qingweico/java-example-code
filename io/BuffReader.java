@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.Reader;
 
 
-public class BufferedReader0 {
+public class BuffReader {
     private final Reader r;
     private final LineNumReader myLineNumberReader = new LineNumReader();
 
-    public BufferedReader0(Reader r) {
+    public BuffReader(Reader r) {
         this.r = r;
     }
 
@@ -19,15 +19,15 @@ public class BufferedReader0 {
 
     @Override
     public String toString() {
-        return "MyBufferedReader{" +
+        return "BuffReader{" +
                 "r=" + r +
                 '}';
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedReader0 mbr = new BufferedReader0(new FileReader("io/MyBufferedReader.java"));
+        BuffReader mr = new BuffReader(new FileReader("io/BuffReader.java"));
         String line;
-        while ((line = mbr.readLine()) != null) {
+        while ((line = mr.readLine()) != null) {
             System.out.println(line);
         }
     }

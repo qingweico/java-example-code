@@ -46,8 +46,7 @@ public class BufferExample {
 
         var start = System.currentTimeMillis();
         byte[] bytes = new byte[1024 * 4];
-        while ((is.read(bytes)) != -1) {
-        }
+        while ((is.read(bytes)) != -1) { }
         System.out.format("%dms", (System.currentTimeMillis() - start));
         is.close();
     }
@@ -81,7 +80,7 @@ public class BufferExample {
 
     @Test
     public void handleMessyCode() {
-        var raw = "人生如梦,一樽还酹江月";
+        var raw = "人生如梦, 一樽还酹江月";
         var characterSet = StandardCharsets.UTF_8;
         var bytes = characterSet.encode(raw).array();
         var target = Arrays.copyOfRange(bytes, 0, 11);

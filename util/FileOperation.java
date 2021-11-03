@@ -16,10 +16,10 @@ import java.util.Scanner;
  * @date: 2021/10/31
  */
 public class FileOperation {
-    public static boolean readFile(String filename, ArrayList<String> words) {
+    public static void readFile(String filename, ArrayList<String> words) {
 
         if (filename == null || words == null) {
-            return false;
+            return;
         }
         Scanner scanner;
 
@@ -30,10 +30,10 @@ public class FileOperation {
                 scanner = new Scanner(new BufferedInputStream(fis), StandardCharsets.UTF_8);
                 scanner.useLocale(Locale.ENGLISH);
             } else
-                return false;
+                return;
         } catch (IOException ioe) {
             System.out.println("Cannot open " + filename);
-            return false;
+            return;
         }
 
         if (scanner.hasNextLine()) {
@@ -51,7 +51,6 @@ public class FileOperation {
                     i++;
         }
 
-        return true;
     }
 
     private static int firstCharacterIndex(String s, int start) {

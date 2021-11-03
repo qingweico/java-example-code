@@ -2,7 +2,6 @@ package util;
 
 
 import java.io.*;
-import java.util.Arrays;
 
 /**
  * Utility for reading files in binary form
