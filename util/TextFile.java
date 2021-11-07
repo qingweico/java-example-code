@@ -73,6 +73,7 @@ public class TextFile extends ArrayList<String> {
         TreeSet<String> words = new TreeSet<>(
                 new TextFile("util/TextFile.java", "\\W+")
         );
+        System.out.println(new TextFile("util/TextFile.java"));
         // Display the capitalized words:
         System.out.println(words.headSet("a"));
     }

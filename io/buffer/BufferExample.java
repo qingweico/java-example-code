@@ -29,7 +29,7 @@ public class BufferExample {
         var os = new BufferedOutputStream(new FileOutputStream(fileName));
 
         var t = System.currentTimeMillis();
-        for (int i = 0; i < 1_000_0000; i++) {
+        for (int i = 0; i < 1_000; i++) {
             for (int j = 0; j < 5; j++) {
                 os.write(97 + r.nextInt(5));
             }
@@ -44,9 +44,17 @@ public class BufferExample {
 
         var is = new BufferedInputStream(new FileInputStream(fileName));
 
+        int count = 50;
         var start = System.currentTimeMillis();
-        byte[] bytes = new byte[1024 * 4];
-        while ((is.read(bytes)) != -1) { }
+        byte[] bytes = new byte[24];
+        while ((is.read(bytes)) != -1) {
+            System.out.print('.');
+            count--;
+            if(count < 0) {
+                System.out.println();
+                count = 50;
+            }
+        }
         System.out.format("%dms", (System.currentTimeMillis() - start));
         is.close();
     }

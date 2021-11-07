@@ -31,3 +31,4 @@ public class ClassInit {
         print(number);
     }
 }
+

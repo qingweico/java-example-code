@@ -112,7 +112,8 @@ public class LockFreeStack<T> {
         System.out.format("c = %d", count);
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void lockFree() {
         var stack = new LockFreeStack<Integer>();
         var pushLatch = new CountDownLatch(100);
         var popLatch = new CountDownLatch(100);

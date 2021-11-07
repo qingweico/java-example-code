@@ -1,8 +1,8 @@
 package thread;
 
 /**
- *  // Thread.start() ----->  see openjdk
- *      thread.cpp>>>JavaThread*>>>os::create_thread
+ * Thread.start() ----->  see openjdk
+ * thread.cpp>>>JavaThread*>>>os::create_thread
  *
  * @author:qiming
  * @date: 2021/6/25

@@ -2,20 +2,20 @@ package thread.aqs;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author:qiming
  * @date: 2021/10/17
  */
-public class PhaserUsage {
-    Phaser phaser = new Phaser();
+public class Phaser {
+    java.util.concurrent.Phaser phaser = new java.util.concurrent.Phaser();
 
     ExecutorService exec = Executors.newFixedThreadPool(10);
 
     class Worker implements Runnable {
         @Override
+        @SuppressWarnings("InfiniteLoopStatement")
         public void run() {
             phaser.register();
             while (true) {
@@ -31,6 +31,7 @@ public class PhaserUsage {
 
     }
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
         // main register
         phaser.register();
@@ -45,7 +46,7 @@ public class PhaserUsage {
     }
 
     public static void main(String[] args) {
-        var phaser = new PhaserUsage();
+        var phaser = new Phaser();
         phaser.run();
     }
 }

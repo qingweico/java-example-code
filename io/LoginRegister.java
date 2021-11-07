@@ -144,7 +144,7 @@ public class LoginRegister {
             String choiceString = sc.nextLine();
             UserDao ud = new UserDaoImpl();
             switch (choiceString) {
-                case "1":
+                case "1" -> {
                     print("---------------Login---------------");
                     printnb("please enter user name: ");
                     String username = sc.nextLine();
@@ -168,8 +168,8 @@ public class LoginRegister {
                     } else {
                         print("The account information has not been queried, please register first, dear!");
                     }
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     print("-------------Register------------");
                     printnb("please enter user name: ");
                     String registerName = sc.nextLine();
@@ -184,12 +184,11 @@ public class LoginRegister {
                     user.setPassword(registerPassword);
                     ud.userRegister(user);
                     print("Registered successfully. Your username is: " + user.getUsername() + "Your password is: " + user.getPassword());
-                    break;
-                case "3":
-                default:
+                }
+                default -> {
                     print("Thank you for coming, welcome to come again next time！");
                     exit(0);
-                    break;
+                }
             }
         }
     }

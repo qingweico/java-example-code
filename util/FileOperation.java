@@ -22,35 +22,35 @@ public class FileOperation {
             return;
         }
         Scanner scanner;
-
         try {
             File file = new File(filename);
             if (file.exists()) {
                 FileInputStream fis = new FileInputStream(file);
                 scanner = new Scanner(new BufferedInputStream(fis), StandardCharsets.UTF_8);
                 scanner.useLocale(Locale.ENGLISH);
-            } else
+            } else {
                 return;
+            }
+
         } catch (IOException ioe) {
             System.out.println("Cannot open " + filename);
             return;
         }
 
         if (scanner.hasNextLine()) {
-
             String contents = scanner.useDelimiter("\\A").next();
-
             int start = firstCharacterIndex(contents, 0);
-            for (int i = start + 1; i <= contents.length(); )
+            for (int i = start + 1; i <= contents.length(); ) {
                 if (i == contents.length() || !Character.isLetter(contents.charAt(i))) {
                     String word = contents.substring(start, i).toLowerCase();
                     words.add(word);
                     start = firstCharacterIndex(contents, i);
                     i = start + 1;
-                } else
+                } else {
                     i++;
+                }
+            }
         }
-
     }
 
     private static int firstCharacterIndex(String s, int start) {

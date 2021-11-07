@@ -7,6 +7,8 @@ import java.util.concurrent.*;
 import static util.Print.print;
 
 /**
+ * the basic of the Callable
+ *
  * @author:qiming
  * @date: 2020/12/17
  */

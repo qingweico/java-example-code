@@ -21,7 +21,7 @@ public class DeadLock {
          lock.lock();
          System.out.format("%s: %s bow to me!\n", this.name, bow.getName());
          // Dead lock! Didn't release the lock, you should firstly
-         //  release the lock and then release the resource.
+         // release the lock and then release the resource.
          bow.release(this);
          lock.unlock();
       }

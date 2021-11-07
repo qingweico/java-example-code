@@ -1,7 +1,5 @@
 package thread.cas;
 
-import sun.misc.Unsafe;
-
 import java.lang.reflect.Field;
 
 import static util.Print.print;
@@ -10,18 +8,18 @@ import static util.Print.print;
  * @author:qiming
  * @date: 2021/3/5
  */
-public class Unsafe0 {
+public class Unsafe {
 
     int i = 0;
-    private static final Unsafe0 t = new Unsafe0();
+    private static final Unsafe t = new Unsafe();
 
     public static void main(String[] args) throws Exception {
 
-        Field unsafeField = Unsafe.class.getDeclaredFields()[0];
+        Field unsafeField = sun.misc.Unsafe.class.getDeclaredFields()[0];
         unsafeField.setAccessible(true);
-        Unsafe unsafe = (Unsafe) unsafeField.get(null);
+        sun.misc.Unsafe unsafe = (sun.misc.Unsafe) unsafeField.get(null);
 
-        Field f = Unsafe0.class.getDeclaredField("i");
+        Field f = Unsafe.class.getDeclaredField("i");
         long offset = unsafe.objectFieldOffset(f);
 
         print(offset);

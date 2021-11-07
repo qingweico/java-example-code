@@ -9,12 +9,12 @@ import java.util.concurrent.TimeUnit;
  * @author:qiming
  * @date: 2021/10/18
  */
-public class ExchangerUsage {
+public class Exg {
     private final static Exchanger<String> exchanger = new Exchanger<>();
 
     public static void main(String[] args) {
-        // girl
         ExecutorService exec = Executors.newFixedThreadPool(2);
+        // girl
         exec.execute(() -> {
             try {
                 // 女生对男生说的话

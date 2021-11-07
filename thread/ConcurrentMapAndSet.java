@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ConcurrentMapAndSet {
     public static void main(String[] args) {
-        // Use ConcurrentHashMap instead of HashMap can avoid throw ConcurrentModificationException
+        // Use ConcurrentHashMap instead of HashMap can
+        // avoid throw ConcurrentModificationException
         Map<String, String> map = new ConcurrentHashMap<>(2);
 
         Set<String> set = new CopyOnWriteArraySet<>();

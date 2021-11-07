@@ -9,6 +9,7 @@ import static util.Print.printnb;
  */
 enum Shrubbery {
     GROUND, CRAWLING, HANGING;
+
     Shrubbery() {
         print();
     }

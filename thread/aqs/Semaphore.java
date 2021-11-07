@@ -1,7 +1,5 @@
 package thread.aqs;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
@@ -38,11 +36,8 @@ public class Semaphore extends AbstractQueuedSynchronizer {
     public static void main(String[] args) {
 
         var semaphore = new Semaphore(5);
-        ExecutorService exec = Executors.newFixedThreadPool(10);
-        for (int i = 0; i < 10; i++) {
-
-            exec.execute(() -> {
-
+        for (int i = 0; i < 100; i++) {
+            new Thread(() -> {
                 try {
                     semaphore.acquireShared(0);
                     TimeUnit.SECONDS.sleep(1);
@@ -52,8 +47,7 @@ public class Semaphore extends AbstractQueuedSynchronizer {
                     semaphore.releaseShared(0);
                     System.out.println(Thread.currentThread().getId() + " pass");
                 }
-            });
+            }).start();
         }
-        exec.shutdown();
     }
 }

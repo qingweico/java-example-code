@@ -7,14 +7,14 @@ import java.io.Reader;
 
 public class BuffReader {
     private final Reader r;
-    private final LineNumReader myLineNumberReader = new LineNumReader();
+    private final LineNumReader lineNumReader = new LineNumReader();
 
     public BuffReader(Reader r) {
         this.r = r;
     }
 
     public String readLine() throws IOException {
-       return myLineNumberReader.getString(r);
+       return lineNumReader.getString(r);
     }
 
     @Override

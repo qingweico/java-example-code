@@ -38,18 +38,18 @@ public class Login {
             Scanner sc = new Scanner(System.in);
             String choiceString = sc.nextLine();
             switch (choiceString) {
-                case "1":
+                case "1" -> {
                     print("-----------------登陆界面-----------------");
-                    printnb("please input you username : ");
+                    printnb("用户名: ");
                     String username = sc.nextLine();
-                    printnb("please input you password : ");
+                    printnb("密码: ");
                     String password = sc.nextLine();
-                    //加载驱动
+                    // 加载驱动
                     Class.forName(JDBC_DRIVER);
-                    //建立连接
+                    // 建立连接
                     Connection coon = DriverManager.getConnection(DB_URL, USER, PASS);
-                    //创建Statement
-                    String sql = "select  * from account where username= ? and password = ?";
+                    // 创建Statement
+                    String sql = "select  * from account where username = ? and password = ?";
                     PreparedStatement statement = coon.prepareStatement(sql);
                     statement.setString(1, username);
                     statement.setString(2, password);
@@ -58,25 +58,25 @@ public class Login {
                         print("-----开始游戏(请输入1到10之间的数字)-----");
                         String yes;
                         do {
-                            //登陆成功开始游戏
+                            // 登陆成功开始游戏
                             GuessNumber.start();
-                            print("Whether or not to quit? yes, please say yes or no");
+                            print("还要玩吗？ 亲, 继续请输入yes, 退出请输入no");
                             yes = sc.nextLine();
                             if ("no".equals(yes)) {
                                 break;
                             }
                         } while ("yes".equals(yes));
                     } else {
-                        print("sorry your account is not exist! please register firstly.......");
+                        print("对不起 你的账户不存在! 请先注册一个吧!");
                     }
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     print("-----------注册界面----------");
-                    print("Please enter the user name you want to register : ");
+                    print("请输入您的账户昵称: ");
                     String registerName = sc.nextLine();
-                    print("Please enter the password : ");
+                    print("请输入您的密码: ");
                     String registerPassword = sc.nextLine();
-                    print("input password again : ");
+                    print("确定您的密码: ");
                     String checkPassword = sc.nextLine();
                     LoginRegister.checkPassword(registerPassword, checkPassword);
                     String Sql = "insert into account(username, password) values ('" + registerName + "','" + registerPassword + "')";
@@ -84,10 +84,11 @@ public class Login {
                     Statement state = con.createStatement();
                     state.executeUpdate(Sql);
                     print("注册成功!" + "您的用户名是 " + registerName + ", 密码为 " + registerPassword);
-                    break;
-                case "3":
+                }
+                case "3" -> {
                     print("欢迎下次光临呦........");
                     exit(0);
+                }
             }
         }
     }

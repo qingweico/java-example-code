@@ -1,5 +1,7 @@
 package jvm;
 
+import org.junit.Test;
+
 import static util.Print.print;
 
 /**
@@ -7,6 +9,15 @@ import static util.Print.print;
  * @date: 2021/3/27
  */
 public class StringIntern {
+    @Test
+    public void testFinal() {
+        final String a = "a";
+        final String b = "b";
+        String s = "ab";
+        // true
+        // Using string constant or constant ref not use StringBuilder
+        print(s == a + b);
+    }
     public static void main(String[] args) {
         String s = new String("a");
         String ss = s.intern();

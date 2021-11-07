@@ -35,7 +35,9 @@ public class CustomLock {
     }
 
     void lock() {
-        while (!compareAndSet()) {}
+        while (!compareAndSet()) {
+            System.out.println("cas...");
+        }
     }
 
     boolean compareAndSet() {
