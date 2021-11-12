@@ -3,6 +3,7 @@ package algorithm.list;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 
 import static util.Print.print;
 
@@ -79,6 +80,17 @@ public class LinkedList<E> {
         return cur.e;
     }
 
+    public Node find(Predicate<E> predicate) {
+        Node p = dummy.next;
+        while (p != null) {
+            if (predicate.test(p.e)) {
+                return p;
+            }
+            p = p.next;
+        }
+        return null;
+    }
+
     public E getFirst() {
         return get(0);
     }
@@ -91,11 +103,16 @@ public class LinkedList<E> {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("index = " + index);
         }
+        if (size() == 0) {
+            return;
+        }
         Node cur = dummy.next;
         for (int i = 0; i < index; i++) {
             cur = cur.next;
         }
         cur.e = e;
+
+
     }
 
     public boolean contains(E e) {
@@ -122,6 +139,23 @@ public class LinkedList<E> {
         cur.next = null;
         size--;
         return cur.e;
+    }
+
+    public E remove(E e) {
+        Node slow = dummy;
+        Node fast = dummy.next;
+        while (fast != null && fast.e != e) {
+            slow = fast;
+            fast = fast.next;
+        }
+        E old = null;
+        if(fast != null) {
+            slow.next = fast.next;
+            old = fast.e;
+            fast.e = null;
+            size--;
+        }
+        return old;
     }
 
     public void removeElement(E e) {
@@ -186,6 +220,29 @@ public class LinkedList<E> {
         return rev;
     }
 
+    public Node reverseBetween(Node head, int m, int n) {
+        Node p = dummy;
+        p.next = head;
+        Node curr = p;
+        int i = 1;
+        while (i < m) {
+            curr = curr.next;
+            i++;
+        }
+        Node q = curr;
+        curr = curr.next;
+        Node old = curr.next;
+        for (i = 0; i < n - m; i++) {
+            Node temp = old.next;
+            old.next = curr;
+            curr = old;
+            old = temp;
+        }
+        q.next = curr;
+        q.next.next = old;
+        return head;
+    }
+
     @Test
     public void testRev() {
         LinkedList<Integer> linkedList = new LinkedList<>();
@@ -196,6 +253,8 @@ public class LinkedList<E> {
         linkedList.dummy.next = reverseList(linkedList.dummy.next);
         print(linkedList);
         linkedList.dummy.next = reverseListR(linkedList.dummy.next);
+        print(linkedList);
+        reverseBetween(dummy.next, 2, 5);
         print(linkedList);
     }
 }

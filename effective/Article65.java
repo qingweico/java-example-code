@@ -16,7 +16,9 @@ import static util.Print.print;
  */
 public class Article65 {
     public static void main(String[] args) {
-
+        if(args[0] == null) {
+            throw new IllegalArgumentException("args null!");
+        }
         // Translate the class name into a Class object
         Class<? extends Set<String>> cls = null;
         try {

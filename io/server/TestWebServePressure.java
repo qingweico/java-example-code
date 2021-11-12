@@ -26,7 +26,7 @@ public class TestWebServePressure {
                 var clientSocket = serverSocket.accept();
                 pool.submit(() -> {
                     try {
-                        // -Xms128m -Xlog:gc
+                        // -Xms128m -Xlog:gc*
                         var resp = "HTTP/1.1 200 OK ";
                         resp += faker.shakespeare().asYouLikeItQuote();
                         var outputStream = clientSocket.getOutputStream();
