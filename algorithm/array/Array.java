@@ -65,7 +65,7 @@ public class Array<E> {
     }
 
     public boolean addLast(E e) {
-        add(e, size());
+        add(e, size);
         return true;
     }
 

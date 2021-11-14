@@ -1,6 +1,7 @@
 package exception;
 
 /**
+ * 测试异常模式和正常模式的性能
  * @author:qiming
  * @date: 2021/10/17
  */

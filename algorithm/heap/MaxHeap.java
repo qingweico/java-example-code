@@ -70,7 +70,7 @@ public class MaxHeap<E extends Comparable<E>> {
     private void siftDown(int k) {
         while (leftChild(k) < size()) {
             int max = leftChild(k);
-            // find the larger of the left and right child nodes.
+            // find the largest of the left and right child nodes.
             if (rightChild(k) < size() && data.get(rightChild(k)).
                     compareTo(data.get(max)) > 0) {
                 max = rightChild(k);

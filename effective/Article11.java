@@ -9,15 +9,28 @@ import java.util.Objects;
  * @date: 2020/10/25
  */
 class Student {
-    int age;
     String name;
+    Integer score;
 
-    Student(int age, String name) {
-        this.age = age;
+    Student(Integer age, String name) {
+        this.score = age;
         this.name = name;
     }
-    public void move() {
 
+    public Student(){}
+
+    public Student setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Student setScore(Integer score) {
+        this.score = score;
+        return this;
+    }
+
+    public String get() {
+        return this.name + ": " + this.score + "\n";
     }
 
 
@@ -30,21 +43,21 @@ class Student {
             return false;
         }
         Student student = (Student) o;
-        return age == student.age &&
+        return Objects.equals(score, student.score) &&
                 Objects.equals(name, student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(age, name);
+        return Objects.hash(score, name);
     }
 }
 
 public class Article11 {
 
     public static void main(String[] args) {
-        Student student = new Student(22, "we");
-        Student student1 = new Student(22, "we");
+        Student student = new Student(22, "li");
+        Student student1 = new Student(22, "li");
         System.out.println(student);
         System.out.println(student1);
         System.out.println(student.equals(student1)); //true

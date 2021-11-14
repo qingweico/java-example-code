@@ -61,9 +61,30 @@ public class SegTree<E> {
 
     public E get(int index) {
         if (index < 0 || index >= size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("index = " + index);
         }
         return data[index];
+    }
+    public void set(int index, E e) {
+        if (index < 0 || index >= size()) {
+            throw new IllegalArgumentException("index = " + index);
+        }
+        set(0, 0, data.length - 1, index, e);
+    }
+    private void set(int root, int l ,int r, int index, E e) {
+        if(l == r) {
+            tree[root] = e;
+            return;
+        }
+        int mid = l + ((r - l) >> 1);
+        int left = leftChild(root);
+        int right = rightChild(root);
+        if(index >= mid + 1) {
+            set(right, mid + 1, r, index, e);
+        }else {
+            set(left, l, mid, index, e);
+        }
+        tree[root] = merge.merge(tree[left], tree[right]);
     }
 
     private int leftChild(int index) {
@@ -90,13 +111,5 @@ public class SegTree<E> {
         }
         res.append("]");
         return res.toString();
-    }
-
-    public static void main(String[] args) {
-        Integer[] nums = {-2, 0, 3, -5, 2, -1};
-        SegTree<Integer> segtree = new SegTree<>(nums, Integer::sum);
-        System.out.println(segtree.query(0 ,2));
-        System.out.println(segtree.query(2 ,5));
-        System.out.println(segtree.query(0 ,5));
     }
 }

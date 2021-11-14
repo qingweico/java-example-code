@@ -17,19 +17,21 @@ public class RethrowException {
         System.out.println("originating the exception in f()");
         throw new Exception("thrown from f()");
     }
+
     public static void g() throws Exception {
         try {
             f();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Inside g(), e.printStackTrack()");
             e.printStackTrace(System.out);
             throw e;
         }
     }
+
     public static void h() throws Exception {
         try {
             f();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Inside h(), e.printStackTrace()");
             e.printStackTrace(System.out);
 
@@ -42,10 +44,11 @@ public class RethrowException {
             throw (Exception) e.fillInStackTrace();
         }
     }
+
     public static void main(String[] args) {
         try {
             g();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("main: printStackTrace()");
             e.printStackTrace(System.out);
         }
@@ -53,7 +56,7 @@ public class RethrowException {
 
         try {
             h();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("main: printStackTrace()");
             e.printStackTrace(System.out);
         }
@@ -65,14 +68,20 @@ public class RethrowException {
  * The effect of catching an exception and then rethrowing
  * another one is similar to using fillInStackTrace().
  */
-class OneException extends Exception{
-    public OneException(String message){super(message);}
+class OneException extends Exception {
+    public OneException(String message) {
+        super(message);
+    }
 }
-class TwoException extends Exception{
-    public TwoException(String message){super(message);}
+
+class TwoException extends Exception {
+    public TwoException(String message) {
+        super(message);
+    }
 }
-class RethrowNew{
-    public static void f() throws OneException{
+
+class RethrowNew {
+    public static void f() throws OneException {
         System.out.println("originating the exception in f()");
         throw new OneException("throw from f()");
     }
@@ -81,12 +90,12 @@ class RethrowNew{
         try {
             try {
                 f();
-            }catch (OneException e){
+            } catch (OneException e) {
                 System.out.println("Caught in inner try. e.printStackTrace()");
                 e.printStackTrace(System.out);
                 throw new TwoException("from inner try");
             }
-        }catch (TwoException e){
+        } catch (TwoException e) {
             System.out.println("Caught in outer try. e.printStackTrace()");
             // You just know that you're from main, I don't know anything about f().
             e.printStackTrace(System.out);

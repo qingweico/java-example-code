@@ -86,7 +86,7 @@ class StopThread {
 class GenerateSerialNumber {
     private static volatile int nextSerialNumber = 0;
 
-    // Broken! required synchronized!
+    // Broken! required to be synchronized!
     // because the problem is that the increment operator ++ is not atomic,
     // it performs two operations in the nextSerialNumber field: first it
     // reads the value, and then it writes back a new value equivalent to
