@@ -5,7 +5,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static util.Print.*;
+import static util.Print.exit;
+import static util.Print.print;
 
 
 /**
@@ -46,6 +47,7 @@ public class SerialNumberChecker {
         }
     }
 }
+
 // Reuses storage so we don't out of memory
 class CircularSet {
     private final int[] array;

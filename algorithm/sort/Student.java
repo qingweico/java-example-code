@@ -7,5 +7,4 @@ package algorithm.sort;
 public class Student {
    private String name;
    private Integer score;
-
 }
