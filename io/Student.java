@@ -48,9 +48,6 @@ public class Student {
         return Math + Chinese + English;
     }
 
-    public static void main(String[] args) {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -1,9 +1,6 @@
 package effective;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -18,10 +15,10 @@ public class Article28<E> {
     // types, Type1 and Type2, List<Type1> neither List<Type2> subtype of, also not
     // List<Type2> the type of super.
     // eg: Double[] is subtype of Number[].
-    private abstract class N {
+    private abstract static class N {
         abstract Number[] n();
     }
-    class D extends N {
+    static class D extends N {
 
         @Override
         Double[] n() {
@@ -55,18 +52,27 @@ public class Article28<E> {
 class ArrayGeneric {
     public static void main(String[] args) {
         // generic array creation
-//         List<String>[] stringLists = new List<String>[1];
-//         List<Integer> intList = List.of(42);
-//         Object[] objects = stringLists;
-//
-//         objects[0] = intList;
-//         String s =stringLists[0].get(0);
+        // List<String>[] stringLists = new List<String>[1];
+        // List<Integer> intList = List.of(42);
+        // Object[] objects = stringLists;
+        //
+        // objects[0] = intList;
+        // String s =stringLists[0].get(0);
 
 
-         // legal
+        // legal
          List<?>[] lists = new List<?>[1];
     }
 }
+
+// E, List<E>, List<String> be called non-reifiable type:
+// A type whose rt representation contains less information
+// that its compile-time information.
+// The only parameterized types that can be reifiable are unrestricted types,
+// such as List<?>, Map<?>
+
+
+
 
 // Chooser - a class badly in need of generic
 class Chooser {
@@ -104,6 +110,11 @@ class ChooserUseList <T>{
     public Object choose() {
         Random rnd = ThreadLocalRandom.current();
         return choiceList.get(rnd.nextInt(choiceList.size()));
+    }
+
+    public static void main(String[] args) {
+        List<Integer> rs = Arrays.asList(1, 2 ,3);
+        new ChooserUseList<>(rs).choose();
     }
 
 

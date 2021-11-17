@@ -10,23 +10,25 @@ package effective;
 // concatenate n strings takes n orders of squares of time.
 public class Article63 {
     private final int numItems = 10;
-    private static final int LINE_WIDTH = 10;
+
     // Inappropriate use of string concatenation - Performs poorly!
     // Bad!
     public String statement() {
         String result = "";
-        for(int i = 0; i < numItems; i++) {
+        for (int i = 0; i < numItems; i++) {
             result += lineForItem(i);
         }
         return result;
     }
+
     private String lineForItem(int i) {
         return String.valueOf(i);
     }
+
     // Using StringBuilder instead of String!
-    public String statement0() {
-        StringBuilder res = new StringBuilder(numItems * LINE_WIDTH);
-        for(int i = 0;i < numItems;i++) {
+    public String statement(int lineWidth) {
+        StringBuilder res = new StringBuilder(numItems * lineWidth);
+        for (int i = 0; i < numItems; i++) {
             res.append(lineForItem(i));
         }
         return res.toString();

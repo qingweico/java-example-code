@@ -9,7 +9,6 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  */
 public class Semaphore extends AbstractQueuedSynchronizer {
 
-    // TODO
     public Semaphore(int permits) {
         setState(permits);
     }
@@ -38,15 +37,15 @@ public class Semaphore extends AbstractQueuedSynchronizer {
         var semaphore = new Semaphore(5);
         for (int i = 0; i < 100; i++) {
             new Thread(() -> {
+                semaphore.acquireShared(0);
                 try {
-                    semaphore.acquireShared(0);
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    semaphore.releaseShared(0);
                     System.out.println(Thread.currentThread().getId() + " pass");
                 }
+                semaphore.releaseShared(0);
             }).start();
         }
     }

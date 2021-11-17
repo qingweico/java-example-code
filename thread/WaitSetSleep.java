@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author:qiming
  * @date: 2021/9/21
+ * @see WaitSetNotify
  */
 public class WaitSetSleep {
 
@@ -62,9 +63,9 @@ public class WaitSetSleep {
             System.out.println("wo ye jin bu lai a!");
             new Thread(() -> {
                 synchronized (lock) {
-                   if(hasGoodNetwork) {
-                       System.out.println("rendering...");
-                   }
+                    if (hasGoodNetwork) {
+                        System.out.println("rendering...");
+                    }
                 }
             }, "browser").start();
         }

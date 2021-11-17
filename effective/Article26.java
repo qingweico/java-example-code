@@ -29,14 +29,16 @@ import java.util.*;
 public class Article26 {
     public static void main(String[] args) {
         List<String> string = new ArrayList<>();
-        // List<String> is a subtype of primitive type List, not a subtype of parameterized type List<Object>.
+        // Generics have rules for subtyping:
+        // List<String> is a subtype of primitive type List,
+        // not a subtype of parameterized type List<Object>.
         unsafeAdd(string, Integer.valueOf(42));
-        // It could be compiled but an exception of ClassCastException is thrown at runtime.
+        // It could be compiled but an exception to ClassCastException is thrown at runtime.
+        // Has compile-generated cast
         String s = string.get(0);
 
-
-
     }
+
 
     private static void unsafeAdd(List list, Object o) {
         list.add(o);
@@ -52,6 +54,7 @@ public class Article26 {
         }
         return result;
     }
+    // Set<?>: a collection of some type
     // Using primitive type is danger, the safe alternative is to use unrestricted wildcards.
     // Using unbounded wildcard type - typesafe and flexible.
     // static int numElementsInCommon(Set<?> s1, Set<?> s2){...}
@@ -73,12 +76,15 @@ public class Article26 {
         // o instance Set<String>
         if(o instanceof Set) {      // Raw type
             // Replace primitive types with unrestricted wildcard types,
-            // this is a checked transformation, so it does not cause compile-time warnings.
+            // this is a checked transformation,
+            // so it does not cause compile-time warnings.
             Set<?> s = (Set<?>)o;   // Wildcard type
 
             // Set s = (Set)o;
         }
     }
+
+
 
 
     // Generics have subtyping rules:

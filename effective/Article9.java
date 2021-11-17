@@ -42,7 +42,7 @@ public class Article9 {
     }
 
 
-    // try-with-resources - the the best way to close resources!
+    // try-with-resources - the best way to close resources!
     static String firstLineOfFile0(String path) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             return br.readLine();

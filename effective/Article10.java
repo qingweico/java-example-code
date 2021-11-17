@@ -116,11 +116,11 @@ class ColorPoint extends Point {
         if (!(o instanceof Point)) {
             return false;
         }
-        // If o is a normal Point, do a color-blind comparision.
+        // If o is a normal Point, do a color-blind comparison.
         if (!(o instanceof ColorPoint)) {
             return o.equals(this);
         }
-        // The o is a ColorPoint, do a full comparision.
+        // The o is a ColorPoint, do a full comparison.
         return super.equals(o) && ((ColorPoint) o).color == color;
     }
 
@@ -153,11 +153,11 @@ class SmellPoint extends Point {
         if (!(o instanceof Point)) {
             return false;
         }
-        // If o is a normal Point, do a smell-blind comparision.
+        // If o is a normal Point, do a smell-blind comparison.
         if (!(o instanceof SmellPoint)) {
             return o.equals(this);
         }
-        // The o is a SmellPoint, do a full comparision.
+        // The o is a SmellPoint, do a full comparison.
         return super.equals(o) && ((SmellPoint) o).smell == smell;
     }
 

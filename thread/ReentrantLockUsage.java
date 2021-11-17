@@ -34,7 +34,6 @@ public class ReentrantLockUsage {
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
             }
-
         }
     }
 }

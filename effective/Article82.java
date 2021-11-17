@@ -25,7 +25,7 @@ public class Article82<K, V> {
         }
     }
     // Common accessible lock objects - not recommended!
-    // It can be accessed outside of the class and may be subject to access denial
+    // It can be accessed outside the class and may be subject to access denial
     // attacks (the client only needs to hold the public accessible lock for a timeout).
     // public final Object lock = new Object();
 

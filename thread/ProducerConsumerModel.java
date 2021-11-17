@@ -18,7 +18,7 @@ public class ProducerConsumerModel {
     Condition empty = lock.newCondition();
 
     double readData() throws InterruptedException {
-        Thread.sleep((long) (Math.random()) * 1000);
+        Thread.sleep((long) (Math.random() * 1000));
         return Math.random() * 10;
     }
 

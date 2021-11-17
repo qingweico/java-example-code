@@ -1,6 +1,7 @@
 package effective;
 
 import com.github.javafaker.Faker;
+import object.Student;
 
 import java.util.*;
 

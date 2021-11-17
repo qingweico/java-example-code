@@ -2,6 +2,7 @@ package thread;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author:qiming
@@ -14,7 +15,7 @@ public class QueueTransfer {
     static final Semaphore semaphore = new Semaphore(1);
     static boolean flag = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new Thread(() -> {
             synchronized (lock) {
                 while (!flag) {
@@ -34,7 +35,7 @@ public class QueueTransfer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        TimeUnit.MILLISECONDS.sleep(10);
         synchronized (lock) {
 
 
@@ -50,11 +51,13 @@ public class QueueTransfer {
                     }
                 }, String.valueOf(i)).start();
                 semaphore.release();
-                // FIXME
                 System.out.println("thread: " + i + " enter entryList...");
             }
+
             flag = true;
             lock.notify();
+            // WaitSet -> EntryList
+            TimeUnit.MILLISECONDS.sleep(10);
         }
     }
 }

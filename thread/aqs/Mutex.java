@@ -19,7 +19,13 @@ public class Mutex extends AbstractQueuedSynchronizer {
 
     @Override
     protected boolean tryRelease(int arg) {
-        return compareAndSetState(1, 0);
+        setState(0);
+        return true;
+    }
+
+    @Override
+    protected boolean isHeldExclusively() {
+        return getState() == 1;
     }
 
     public static void main(String[] args) {

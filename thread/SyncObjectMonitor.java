@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * synchronized see openjdk
  * os_linux.cpp>>>os::PlatformEvent::park()>>>pthread_mutex_lock>>>pthread_mutex_unlock
  * <p>
- * ObjectMonitor: JVM C++ a object include: WaitSet, EntryList, OwnerThread, recursions
+ * ObjectMonitor: JVM C++ an object include: WaitSet, EntryList, OwnerThread, recursions
  *
  * @author:qiming
  * @date: 2021/6/27

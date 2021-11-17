@@ -32,7 +32,7 @@ public class Article43 {
         System.out.println(toMap);
 
 
-        // Seeing src/onjava8/MessageBuilder.java
+        // @see src.onjava8.MessageBuilder
         // Lambda is preferred if the method and Lambda are in the same class.
 
         // Static reference

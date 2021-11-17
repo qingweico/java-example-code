@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author:qiming
  * @date: 2020/11/23
  */
-// 从java7开始，就不应该再使用Random ThreadLocalRandom可以产生更高质量的随机数，并且速度非常快
+// 从java7开始, 就不应该再使用Random ThreadLocalRandom可以产生更高质量的随机数，并且速度非常快
 class ThreadLocalRandomTest{
     static ThreadLocalRandom threadLocalRandom =  ThreadLocalRandom.current();
 
@@ -44,7 +44,7 @@ public class Article59 {
     }
 }
 // 在java9中InputStream中增加了transferTo方法
-// 打印出命令行指定一条URL(url需要加协议)的内容，Linux中curl命令作用大体如此
+// 打印出命令行指定一条URL(url需要加协议)的内容, Linux中curl命令作用大体如此
 class InputStreamOfTransferTo{
     public static void main(String[] args) throws IOException {
         try(InputStream in = new URL(args[0]).openStream()){
