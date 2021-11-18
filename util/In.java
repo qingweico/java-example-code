@@ -137,7 +137,7 @@ public final class In {
      * Initializes an input stream from a file.
      *
      * @param file the file
-     * @throws IllegalArgumentException if cannot open {@code file}
+     * @throws IllegalArgumentException if you cannot open {@code file}
      * @throws IllegalArgumentException if {@code file} is {@code null}
      */
     public In(File file) {

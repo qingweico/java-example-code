@@ -1,9 +1,7 @@
 package effective;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ScheduledFuture;
 
 import static util.Print.print;
 
@@ -13,6 +11,7 @@ import static util.Print.print;
  * @author:qiming
  * @date: 2021/11/17
  * @see Stack
+ * @see Article30#max
  */
 public class Article31 {
 
@@ -32,6 +31,28 @@ public class Article31 {
         // Explicit type parameter - require prior to Java 8
         // Set<Number> numbers = Article30.<Number>union(integers, doubles);
         print(numbers);
+
+        List<ScheduledFuture<?>> scheduledFutures = new ArrayList<>();
+        Article30.max(scheduledFutures);
+
+    }
+
+    public static <E> void swap(List<E> list, int i, int j) {
+        list.set(i, list.set(j, list.get(i)));
+    }
+
+    // you can replace a type parameter with a wildcard
+    // if it appears only once in the method declaration.
+    public static void swap(int i, int j, List<?> list) {
+        // can't compile
+        // list.set(i, list.set(j, list.get(i)));
+
+        swapHelper(list, i, j);
+
+    }
+
+    private static <E> void swapHelper(List<E> list, int i, int j) {
+        list.set(i, list.set(j, list.get(i)));
 
     }
 }

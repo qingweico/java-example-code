@@ -48,7 +48,8 @@ public class Article30 {
 
     // Using a recursive type bound to express mutual comparability,
     // return max value in a collection - use recursive type bound
-    public <E extends Comparable<E>> E max(Collection<E> c) {
+    // All Comparable and Comparator are consumers.
+    public static <E extends Comparable<? super E>> E max(Collection<? extends E> c) {
         if (c.isEmpty()) {
             throw new IllegalArgumentException("Empty Collection");
         }
