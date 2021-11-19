@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Article43 {
     public static void main(String[] args) {
         Map<String, Integer> map = new HashMap<>();
-        map.put("key", 2);
+        map.put("ke", 2);
         // When JDK8 adding
         // If the specified key is not mapped, the method inserts the specified value, if
         // there's a mapping, the merge() method applies the specified function to the current
@@ -32,7 +32,7 @@ public class Article43 {
         System.out.println(toMap);
 
 
-        // @see src.onjava8.MessageBuilder
+        // @see javaeight.MessageBuilder
         // Lambda is preferred if the method and Lambda are in the same class.
 
         // Static reference

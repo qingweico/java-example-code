@@ -1,4 +1,4 @@
-package onjava8.stream;
+package onjavaeight.stream;
 
 import java.util.Optional;
 

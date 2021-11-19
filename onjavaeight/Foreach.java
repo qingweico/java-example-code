@@ -1,4 +1,4 @@
-package onjava8;
+package onjavaeight;
 
 import util.Print;
 

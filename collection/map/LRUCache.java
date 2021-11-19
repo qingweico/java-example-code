@@ -48,9 +48,10 @@ public class LRUCache<K, V> implements Iterable<K> {
         lru.cache("A", "1");
         lru.cache("B", "2");
         lru.cache("C", "3");
-
+        lru.cache.get("A");
         lru.cache("D", "4");
-        lru.cache("C", "5");
+        lru.cache.get("C");
+        lru.cache("E", "5");
         System.out.println("leave <-" + StreamSupport.stream(lru.spliterator(), false)
                 .map(Object::toString)
                 .collect(Collectors.joining("<-")));
