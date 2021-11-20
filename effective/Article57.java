@@ -22,6 +22,10 @@ public class Article57 {
         List<Integer> c2 = new ArrayList<>();
         c2.add(1);
         c2.add(2);
+        // Preferred idiom for iterating over a collection or array.
+        for(Integer i : c) {
+            System.out.println(i);
+        }
         Iterator<Integer> i = c.iterator();
         while (i.hasNext()) {
             System.out.println(i.next());

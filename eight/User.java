@@ -1,4 +1,4 @@
-package onjavaeight;
+package eight;
 
 /**
  * @author:qiming

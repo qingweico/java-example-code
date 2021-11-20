@@ -1,4 +1,4 @@
-package onjavaeight;
+package eight;
 
 import java.util.ArrayList;
 import java.util.Arrays;

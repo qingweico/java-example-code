@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 /**
+ * Break Parents Delegation Model
+ *
  * @author:qiming
  * @date: 2021/10/21
  */

@@ -1,4 +1,4 @@
-package onjavaeight.stream;
+package eight.stream;
 
 import util.Print;
 

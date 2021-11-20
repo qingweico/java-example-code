@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * url: https://github.com/jasongoodwin/better-java-monads/blob/master/src/main/java/com/jasongoodwin/monads/Try.java
  * Monadic Try type.
  * Represents a result type that could have succeeded with type T or failed with a Throwable.
- * Originally was Exception but due to seeing issues with eg play with checked Throwable,
+ * Originally was Exception but due to seeing issues with e.g. play with checked Throwable,
  * And also seeing that Scala deals with throwable,
  * I made the decision to change it to use Throwable.
  *
@@ -64,7 +64,7 @@ public abstract class Try<T> {
 
     /**
      * Specifies a result to use in case of failure.
-     * Gives access to the exception which can be pattern matched on.
+     * Gives access to the exception which can be patterned matched on.
      *
      * Try.ofFailable(() -&gt; "not a number")
      * .&lt;Integer&gt;flatMap((x) -&gt; Try.ofFailable(() -&gt;Integer.valueOf(x)))
