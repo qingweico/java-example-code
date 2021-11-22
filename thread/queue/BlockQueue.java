@@ -21,7 +21,7 @@ public class BlockQueue {
           // it has a higher performance than LinkedBlockingQueue, and store more element
           // than SynchronousQueue.
 //        queue = new LinkedTransferQueue<>();
-          // only store a element and it will blocking when try to add the second.
+          // only store a element, and it will block when try to add the second.
 //        queue = new SynchronousQueue<>();
           // @see thinking/concurrency/juc/DelayQueueUsage.java
           // @see thread/queue/DelayQ.java
@@ -32,7 +32,8 @@ public class BlockQueue {
         for (int i = 0; i < 100; i++) {
             new Thread(() -> {
                 try {
-                    queue.offer((int) (Math.random() * 1000), 3, TimeUnit.SECONDS);
+                    boolean offer = queue.offer((int) (Math.random() * 1000), 3, TimeUnit.SECONDS);
+                    System.out.println(offer);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

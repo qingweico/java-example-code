@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * ReentrantLock WaitSet and EntryList
+ *
  * @author:qiming
  * @date: 2021/6/27
  */

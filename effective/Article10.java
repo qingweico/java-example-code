@@ -60,7 +60,7 @@ final class CaseInsensitiveString {
     }
 }
 
-// Using getClass() instead of instanceof in the equals method extends the instantiable class
+// Using getClass() instead of instanceof in the equals' method extends the instantiable class
 // and adds new components while preserving the equals component.
 class Point {
     private final int x;

@@ -1,6 +1,7 @@
 package thread;
 
 /**
+ * A simple deadlock
  * @author:qiming
  * @date: 2021/6/17
  */

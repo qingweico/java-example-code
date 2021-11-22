@@ -39,6 +39,7 @@ public class Example {
     }
 
     public static void main(String[] args) {
+        // 22 34 17
         System.out.println(new B().getValue());
     }
 }

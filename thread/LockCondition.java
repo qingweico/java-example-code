@@ -7,12 +7,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import static util.Print.printnb;
 
 /**
- * Use three threads to alternate output ABC ABC ABC ABC...
+ * Use three threads to alternate output ABC...
  *
  * @author:qiming
  * @date: 2021/1/30
  */
-public class ABC {
+public class LockCondition {
 
     private static final ReentrantLock lock = new ReentrantLock();
 
@@ -23,11 +23,13 @@ public class ABC {
     private static final CountDownLatch latchB = new CountDownLatch(1);
     private static final CountDownLatch latchC = new CountDownLatch(1);
 
+    private static final int COUNT = 10;
+
     public static void main(String[] args) {
         Thread t1 = new Thread(() -> {
             lock.lock();
             try {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < COUNT; i++) {
                     printnb("A");
                     cB.signal();
                     if (i == 0) {
@@ -52,7 +54,7 @@ public class ABC {
             }
             lock.lock();
             try {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < COUNT; i++) {
                     printnb("B");
                     cC.signal();
                     if (i == 0) {
@@ -77,7 +79,7 @@ public class ABC {
             }
             lock.lock();
             try {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < COUNT; i++) {
                     printnb("C");
                     cA.signal();
                     cC.await();

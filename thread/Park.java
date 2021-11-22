@@ -38,20 +38,11 @@ public class Park {
          System.out.println("unpark after t2");
       });
 
-
-
-
       t1.start();
       t2.start();
 
 
-
-
-
-
-
-
-      // if there no using CountDownLatch, may be output
+      // if there are no using CountDownLatch, may be output
       // unpark before t2
       // park before t1
       // unpark after t2

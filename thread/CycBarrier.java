@@ -4,12 +4,12 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 /**
- * Addition counter
  *
  * @author:qiming
  * @date: 2020/12/19
+ * @see thread.aqs.CycBarrier
  */
-public class CyclicBarrierUsage {
+public class CycBarrier {
     public static void main(String[] args) {
         // It can be used multiple times
         CyclicBarrier cyclicBarrier = new CyclicBarrier(2, () -> System.out.println("main"));

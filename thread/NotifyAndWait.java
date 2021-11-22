@@ -56,7 +56,7 @@ public class NotifyAndWait {
             synchronized (o) {
                 for (char w : words) {
                     System.out.print(w);
-                    // latch.countDown();
+                    latch.countDown();
                     t2Start = true;
                     try {
                         o.notify();

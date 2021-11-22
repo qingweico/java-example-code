@@ -12,8 +12,9 @@ import static util.Print.print;
  *
  * @author:qiming
  * @date: 2020/12/19
+ * @see thread.aqs.Semaphore
  */
-public class SemaphoreUsage {
+public class SemaphoreExample {
     public static void main(String[] args) {
 
         Semaphore semaphore = new Semaphore(5);

@@ -5,12 +5,12 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Read-write lock
+ * read-write lock
  *
  * @author:qiming
  * @date: 2020/12/19
  */
-public class ReadWriteLockUsage {
+public class RwLock {
     static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     public static void main(String[] args) throws IOException {
@@ -37,14 +37,14 @@ public class ReadWriteLockUsage {
     // read
     public static void read(int finalI) {
         try {
-            InputStream is = new FileInputStream("src/io/temp");
-            System.out.println(Thread.currentThread().getName() + finalI + "线程开始读取!");
+            InputStream is = new FileInputStream("io/temp");
+            System.out.println(Thread.currentThread().getName() + finalI + " thread starts reading!");
             try {
-                is.read();
+                System.out.println(is.read());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + finalI + "线程读取完毕!");
+            System.out.println(Thread.currentThread().getName() + finalI + " thread reading is complete!");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -53,15 +53,15 @@ public class ReadWriteLockUsage {
     // write
     public static void write(int finalI) {
         try {
-            OutputStream os = new FileOutputStream("src/io/temp", true);
-            System.out.println(Thread.currentThread().getName() + finalI + "线程开始写入!");
+            OutputStream os = new FileOutputStream("io/temp", true);
+            System.out.println(Thread.currentThread().getName() + finalI + " thread starts writing!");
 
             try {
                 os.write(String.valueOf(finalI).getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + finalI + "线程写入完毕!");
+            System.out.println(Thread.currentThread().getName() + finalI + " thread is written!");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

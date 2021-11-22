@@ -12,11 +12,11 @@ import static util.Print.print;
  * @author:qiming
  * @date: 2020/12/17
  */
-public class CallableUsage implements Callable<String> {
+public class CallableTask implements Callable<String> {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        CallableUsage callableUsage = new CallableUsage();
-        FutureTask<String> futureTask = new FutureTask<>(callableUsage);
+        CallableTask callableTask = new CallableTask();
+        FutureTask<String> futureTask = new FutureTask<>(callableTask);
         Thread t = new Thread(futureTask);
         t.start();
         String returnValue = null;
@@ -34,7 +34,7 @@ public class CallableUsage implements Callable<String> {
         List<Future<String>> list = new ArrayList<>();
         ExecutorService service = Executors.newFixedThreadPool(5);
         for (int i = 0; i < 5; i++) {
-            Callable<String> callable = new CallableUsage();
+            Callable<String> callable = new CallableTask();
             Future<String> f = service.submit(callable);
             list.add(f);
         }
@@ -46,7 +46,7 @@ public class CallableUsage implements Callable<String> {
 
     @Override
     public String call() throws Exception {
-        Thread.sleep(1000);
-        return "Hello Callable";
+        Thread.sleep(3000);
+        return "Callable Task";
     }
 }

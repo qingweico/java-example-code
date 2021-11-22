@@ -21,5 +21,6 @@ public class ThisEscape {
     public static void main(String[] args) throws IOException {
         new ThisEscape();
         int n = System.in.read();
+        System.out.println(n);
     }
 }

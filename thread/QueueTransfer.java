@@ -5,6 +5,8 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * waiting ->  blocking
+ * WaitSet -> EntryList
  * @author:qiming
  * @date: 2021/9/22
  */

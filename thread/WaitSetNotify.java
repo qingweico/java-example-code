@@ -4,6 +4,8 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * wait and unlock
+ *
  * @author:qiming
  * @date: 2021/9/21
  * @see WaitSetSleep

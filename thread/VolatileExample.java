@@ -13,7 +13,7 @@ import static util.Print.print;
  * The volatile keyword is a lightweight synchronization mechanism provided
  * by the JVM, visible to the main memory object thread.
  */
-public class VolatileUsage {
+public class VolatileExample {
 
     public static void main(String[] args) {
         // Access resource class
@@ -53,7 +53,7 @@ class MyData {
      */
     // The use of the volatile keyword guarantees thread visibility, but not atomicity.
     volatile int num = 0;
-    // Using Atomic class could guarantees atomicity
+    // Using Atomic class could guarantee atomicity
     // AtomicInteger ai = new AtomicInteger();
 
     /**
@@ -85,8 +85,9 @@ class VisibilityOfVolatile {
 
     public static void main(String[] args) {
         new Thread(() -> {
-            // This thread will not end, because t1 thread will save the variable back to main memory after it
-            // completes the task and re-read the latest value of the variable in main memory, whereas if it
+            // This thread will not end, because t1 thread will save the variable
+            // back to main memory after it completes the task and re-read the
+            // latest value of the variable in main memory, whereas if it
             // is an empty task, it will not perform the latter.
 
             // while (num == 0) {}
