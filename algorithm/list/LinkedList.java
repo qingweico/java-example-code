@@ -149,7 +149,7 @@ public class LinkedList<E> {
             fast = fast.next;
         }
         E old = null;
-        if(fast != null) {
+        if (fast != null) {
             slow.next = fast.next;
             old = fast.e;
             fast.e = null;
@@ -254,6 +254,7 @@ public class LinkedList<E> {
         print(linkedList);
         linkedList.dummy.next = reverseListR(linkedList.dummy.next);
         print(linkedList);
+        // TODO
         reverseBetween(dummy.next, 2, 5);
         print(linkedList);
     }

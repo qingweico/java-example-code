@@ -9,7 +9,7 @@ import static util.Print.print;
  * @author:qiming
  * @date: 2021/1/6
  */
-public class ClassLoaderUsage {
+public class ClassLoaders {
     public static void main(String[] args) {
 
         // Gets the system class loader
@@ -25,7 +25,7 @@ public class ClassLoaderUsage {
         print(bootstrapClassLoader);
 
         // User-defined classes are loaded by default using the system class loader
-        ClassLoader userDefinedClassLoader = ClassLoaderUsage.class.getClassLoader();
+        ClassLoader userDefinedClassLoader = ClassLoaders.class.getClassLoader();
         print(userDefinedClassLoader);
 
         // Java's core class libraries are loaded using bootstrap classLoaders

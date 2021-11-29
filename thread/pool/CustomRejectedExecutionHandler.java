@@ -21,9 +21,7 @@ public class CustomRejectedExecutionHandler implements RejectedExecutionHandler 
         ExecutorService executorService = pool.newFixedThreadPool(3, 4, 5);
         for (int i = 0; i < 10; i++) {
             int finalI = i;
-            executorService.execute(() -> {
-                System.out.println(Thread.currentThread().getName() + ": " + finalI);
-            });
+            executorService.execute(() -> System.out.println(Thread.currentThread().getName() + ": " + finalI));
         }
         executorService.shutdown();
 

@@ -6,7 +6,7 @@ package jvm;
  */
 public class EmptyObject {
     public static void main(String[] args) {
-        // VM　options: -javaagent:@lib\InstrumentationAgent.jar
+        // VM　options: -javaagent:lib\InstrumentationAgent.jar
         System.out.println(InstrumentationAgent.getObjectSize(new Object()));
         System.out.println(InstrumentationAgent.getObjectSize(new int[0]));
         System.out.println(InstrumentationAgent.getObjectSize(""));

@@ -3,7 +3,7 @@ package effective;
 import java.util.*;
 
 /**
- * 基本类型优于装箱基本类型
+ * 基本类型优先于装箱基本类型
  *
  * @author:qiming
  * @date: 2020/11/23
@@ -28,14 +28,14 @@ public class Article61 {
 
     public static void main(String[] args) {
 
-        // There will be got back -1, not 0 why?
+        // There will be got back 1, not 0 why?
         // The expression i < j performs a calculation that results in the Integer instances of
         // references to i and j being automatically boxed, that is, it extracts their base types
         // executes the expression i == j which performs an identity comparison on the references
         // of the two objects,if i and j refer to different instances of Integers representing the
-        // same int value, this comparison returns false, and the comparator mistakenly returns -1,
-        // indicating that the first Integer is greater than the second,
-        // so it is almost always wrong to use the == operator on boxing base types.
+        // same int value, this comparison returns false, and the comparator mistakenly returns 1,
+        // indicating that the first Integer is greater than the second, so it is almost always
+        // wrong to use the == operator on boxing base types.
         System.out.println(naturalOrder.compare(new Integer(42), new Integer(42)));
 
 
@@ -77,10 +77,11 @@ class UseBoxingAsLocalVariable{
     // 3> You must use boxed primitive types when making calls to reflection methods.
 
 
-    // To sum up: 1: Basic boxing is better than basic boxing types, which are simpler and faster.
-    //            2: Autoboxing reduces the complexity of using the basic type of boxing, but it does not reduce its complexity.
-    //            3: A null pointer exception is thrown when the program is unboxing.
-    //            4: When a program boxes a base-type value, it results in high resource consumption and unnecessary object creation.
+    //  To sum up:
+    //  1: Basic boxing is better than basic boxing types, which are simpler and faster.
+    //  2: Autoboxing reduces the complexity of using the basic type of boxing, but it does not reduce its risk.
+    //  3: A null pointer exception is thrown when the program is unboxing.
+    //  4: When a program boxes a base-type value, it results in high resource consumption and unnecessary object creation.
 
 }
 

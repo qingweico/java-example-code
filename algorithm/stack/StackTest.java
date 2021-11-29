@@ -14,11 +14,11 @@ import static util.Print.printf;
 public class StackTest {
     @Test
     public void test() {
-        queueTest(ArrayStack.class, 1000000);
-        queueTest(LinkedListStack.class, 1000000);
+        stackTest(ArrayStack.class, 1000000);
+        stackTest(LinkedListStack.class, 1000000);
     }
 
-    public void queueTest(Class<?> cls, int N) {
+    public void stackTest(Class<?> cls, int N) {
         try {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();

@@ -93,7 +93,7 @@ public class MaxHeap<E extends Comparable<E>> {
     @Test
     public void testHeap() {
         MaxHeap<Integer> maxHeap = new MaxHeap<>();
-        int count = 100000;
+        int count = 100_000;
         for (int i = 0; i < count; i++) {
             maxHeap.add((int) (Math.random() * 1000000));
         }

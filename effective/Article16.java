@@ -12,20 +12,20 @@ public class Article16 {
 }
 
 // Degenerate classes like this should not be public!
-class rectangle {
+class Rectangle {
     public int w;
     public int h;
 }
 
 // Encapsulation of data by accessor methods and mutators
-class square {
+class Square {
     private int length;
 
-    public square(int length) {
+    public Square(int length) {
         this.length = length;
     }
 
-    public square setLength(int length) {
+    public Square setLength(int length) {
         this.length = length;
         return this;
     }

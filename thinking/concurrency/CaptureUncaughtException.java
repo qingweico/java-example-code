@@ -13,7 +13,7 @@ import static util.Print.print;
 public class CaptureUncaughtException {
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool(new HandleThreadFactory());
-        exec.execute(new ExceptionThread());
+        exec.execute(new ExceptionThreadCaught());
         exec.shutdown();
     }
 
