@@ -1,5 +1,8 @@
 package collection;
 
+import org.junit.Test;
+
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -25,5 +28,11 @@ public class CustomerComparator implements Comparator<Customer> {
         set.add(new Customer("Jerry", 20));
         set.add(new Customer("Rose", 24));
         System.out.println(set);
+     }
+     @Test
+     public void bitComparable() {
+         Integer[] a = new Integer[]{1, 8, 2 ,0};
+         Arrays.sort(a, (o1, o2) -> Integer.bitCount(o1) > Integer.bitCount(o2) ? o1 - o2 : o2 - o1);
+         System.out.println(Arrays.toString(a));
      }
 }

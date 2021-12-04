@@ -1,4 +1,4 @@
-package enums;
+package thinking.enums;
 
 /**
  * @author:qiming
@@ -7,6 +7,7 @@ package enums;
 enum Signal {
     RED, YELLOW, GREEN
 }
+
 public class TrafficLight {
     Signal color = Signal.RED;
 

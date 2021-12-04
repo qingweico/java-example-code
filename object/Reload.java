@@ -11,10 +11,10 @@ import static util.Print.print;
 public class Reload {
     public static void main(String[] args) {
         // Output "String method"
-        // Because null is not a object and the compiler selects the
+        // Because null is not an object and the compiler selects the
         // most specific argument to invoke the overloaded method.
-        method((Integer) null);
-        // The main method could be reloaded in java but must be invoke in main(String[] args).
+        method((String) null);
+        // The main method could be reloaded in java but must be invoked in main(String[] args).
         main("args");
     }
 
@@ -31,7 +31,7 @@ public class Reload {
     }
 
     // However, when an overloaded method contains both Integer and String arguments, the compiler
-    // fails, because both String and Integer are concrete types, and the compiler cannot make a choice
+    // fails, because both String and Integer are concrete types, and the compiler cannot make a choice,
     // so it needs to be seen as having made the choice(For example, cast using Integer).
     public static void method(Integer i) {
         print("Integer method");

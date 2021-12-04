@@ -1,4 +1,4 @@
-package reflect;
+package thinking.reflect;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
  * @author:qiming
  * @date: 2020/12/1
  */
-
-
 public class ShowMethods {
     private static final Pattern p = Pattern.compile("\\w+\\.");
 
@@ -56,5 +54,5 @@ public class ShowMethods {
         }
     }
 
-    // Usage: input 'java ShowMethods.java reflect.ShowMethods' in terminal
+    // Program arguments: `thinking.reflect.ShowMethods`
 }

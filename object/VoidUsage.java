@@ -1,8 +1,7 @@
 package object;
 
 /**
- * Void
- * The void's wrapper class
+ * Void: The void's wrapper class
  *
  * @author:qiming
  * @date: 2021/1/2
@@ -23,6 +22,7 @@ public class VoidUsage {
         return calculateAndCheck(n, rangeCheck(n));
     }
 
+    @SuppressWarnings("unused")
     public static int calculateAndCheck(int n, Void v) {
         return n + 10;
     }

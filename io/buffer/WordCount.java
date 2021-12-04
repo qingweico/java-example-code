@@ -91,7 +91,7 @@ public class WordCount {
 
     /**
      * Single Thread
-     * @throws IOException IOException
+     * @throws IOException @throw IOException
      */
     @Test
     public void single() throws IOException {
@@ -116,8 +116,8 @@ public class WordCount {
 
     /**
      * ForkJoin
-     * @throws ExecutionException ExecutionException
-     * @throws InterruptedException InterruptedException
+     * @throws ExecutionException @throw ExecutionException
+     * @throws InterruptedException @throw InterruptedException
      */
     @Test
     public void count() throws ExecutionException, InterruptedException {

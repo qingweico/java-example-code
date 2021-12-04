@@ -1,4 +1,4 @@
-package enums;
+package thinking.enums;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
