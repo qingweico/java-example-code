@@ -19,7 +19,7 @@ public interface Aspect {
 
     void after();
 
-    static <T> T geProxy(Class<T> cls, String... aspects) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    static <T> T getProxy(Class<T> cls, String... aspects) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         var aspectInstances = Arrays.stream(aspects).map(name -> Try.ofFailable(() -> {
             var cl = Class.forName(name);
             return (Aspect) cl.getDeclaredConstructor().newInstance();

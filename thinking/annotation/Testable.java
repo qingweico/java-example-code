@@ -1,4 +1,4 @@
-package thinking.annotations;
+package thinking.annotation;
 
 import thinking.atunit.Test;
 

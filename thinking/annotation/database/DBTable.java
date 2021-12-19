@@ -1,6 +1,4 @@
-package thinking.annotations.database;
-
-import org.w3c.dom.Element;
+package thinking.annotation.database;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,10 +9,9 @@ import java.lang.annotation.Target;
  * @author:qiming
  * @date: 2021/4/8
  */
-@Target(ElementType.FIELD)
+// Applies to classes only
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Constraints {
-    boolean primaryKey() default false;
-    boolean allowNull() default true;
-    boolean unique() default false;
+public @interface DBTable {
+    String name() default "";
 }

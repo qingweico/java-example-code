@@ -5,16 +5,16 @@ package eight;
  * @date: 2021/2/23
  */
 public class User {
-    private String Username;
+    private String username;
     private String password;
     private boolean isVIP;
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {

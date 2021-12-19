@@ -16,7 +16,7 @@ public class Order implements IOrder {
     @Override
     public void pay() {
         try {
-            TimeUnit.MILLISECONDS.sleep(10);
+            TimeUnit.MILLISECONDS.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -25,6 +25,7 @@ public class Order implements IOrder {
 
     @Override
     public void show() {
+        System.out.println("pay success!");
         System.out.println("order status: " + this.state);
     }
 }

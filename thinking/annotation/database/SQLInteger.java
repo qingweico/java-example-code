@@ -1,4 +1,4 @@
-package thinking.annotations.database;
+package thinking.annotation.database;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
  * @author:qiming
  * @date: 2021/4/8
  */
-// Applies to classes only
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DBTable {
+public @interface SQLInteger {
     String name() default "";
+    Constraints constraints() default @Constraints;
 }

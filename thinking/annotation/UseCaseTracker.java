@@ -1,4 +1,4 @@
-package thinking.annotations;
+package thinking.annotation;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

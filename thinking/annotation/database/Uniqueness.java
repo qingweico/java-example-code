@@ -1,4 +1,4 @@
-package thinking.annotations.database;
+package thinking.annotation.database;
 
 /**
  * Sample of nested annotations

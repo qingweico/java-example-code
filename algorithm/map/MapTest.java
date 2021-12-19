@@ -48,6 +48,34 @@ public class MapTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void testQuery() {
+        CountDownLatch latch = new CountDownLatch(4);
+        exec.execute(() -> {
+            mapTest(BSTMap.class, 1000000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            mapTest(AVLMap.class, 1000000);
+            latch.countDown();
+        });
+        exec.execute(() -> {
+            mapTest(RedBlackTreeMap.class, 1000000);
+            latch.countDown();
+        });
+
+        exec.execute(() -> {
+            mapTest(LinkedListMap.class, 1000000);
+            latch.countDown();
+        });
+
+        exec.shutdown();
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void mapTest(Class<?> cls) {
         try {

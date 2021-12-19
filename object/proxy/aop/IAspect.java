@@ -6,6 +6,5 @@ package object.proxy.aop;
  */
 public interface IAspect {
     void before();
-
     void after();
 }

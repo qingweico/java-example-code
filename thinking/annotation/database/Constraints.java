@@ -1,4 +1,4 @@
-package thinking.annotations.database;
+package thinking.annotation.database;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,7 +11,8 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SQLInteger {
-    String name() default "";
-    Constraints constraints() default @Constraints;
+public @interface Constraints {
+    boolean primaryKey() default false;
+    boolean allowNull() default true;
+    boolean unique() default false;
 }

@@ -1,4 +1,4 @@
-package thinking.annotations.database;
+package thinking.annotation.database;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
