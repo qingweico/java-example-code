@@ -74,8 +74,7 @@ class MoreBasicThread {
     }
 }
 
-// Using Executor
-// Executor allows you to manage the execution of asynchronous tasks without explicitly
+// Using Executor allows you to manage the execution of asynchronous tasks without explicitly
 // managing cycles in a thread's declaration, and is the preferred way to start a thread.
 class CachedThreadPool {
     public static void main(String[] args) {

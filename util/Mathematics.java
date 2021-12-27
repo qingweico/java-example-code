@@ -37,4 +37,21 @@ public final class Mathematics {
         return ans;
 
     }
+
+    /**
+     * variable-precision SWAR
+     * @param i the input number(decimal)
+     * @return the number of one in binary
+     */
+    public static int swar(int i) {
+        i = (i & 0x55555555) + ((i >> 1) & 0x55555555);
+
+        i = (i & 0x33333333) + ((i >> 2) & 0x33333333);
+
+        i = (i & 0x0f0f0f0f) + ((i >> 4) & 0x0f0f0f0f);
+
+        i = (i * (0x01010101) >> 24);
+
+        return i;
+    }
 }

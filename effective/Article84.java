@@ -31,4 +31,8 @@ class SlowCountDownLatch {
             count--;
         }
     }
+
+    public static void main(String[] args) {
+
+    }
 }

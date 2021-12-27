@@ -20,6 +20,8 @@ public class QuiSort {
 
     public <E extends Comparable<E>> int partition(E[] A, int l, int r) {
         int j = l;
+        // A[l + 1, j] < v
+        // A[j + 1, i - 1] >= v
         for (int i = l + 1; i <= r; i++) {
             if (A[i].compareTo(A[l]) < 0) {
                 j++;
