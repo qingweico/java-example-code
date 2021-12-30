@@ -60,6 +60,7 @@ public class BST<E extends Comparable<E>> {
         Node node = new Node(e);
         if (root == null) {
             root = node;
+            size++;
             return;
         }
         put(root, e);
@@ -70,14 +71,17 @@ public class BST<E extends Comparable<E>> {
         if (e.compareTo(node.e) < 0) {
             if (node.left == null) {
                 node.left = new Node(e);
+                size++;
             }
             put(node.left, e);
         } else if (e.compareTo(node.e) > 0) {
             if (node.right == null) {
                 node.right = new Node(e);
+                size++;
             }
             put(node.right, e);
         }
+        // ignore e.compareTo(node.e) == 0
     }
 
     public boolean contains(E e) {
@@ -173,7 +177,7 @@ public class BST<E extends Comparable<E>> {
 
     public E min() {
         if (size == 0) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("tree size = 0");
         }
         return min(root).e;
     }
@@ -187,7 +191,7 @@ public class BST<E extends Comparable<E>> {
 
     public E max() {
         if (size == 0) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("tree size = 0");
         }
         return max(root).e;
     }
@@ -205,7 +209,13 @@ public class BST<E extends Comparable<E>> {
         return e;
     }
 
-    private Node deleteMin(Node node) {
+    /**
+     *
+     * @param node 删除掉以 node 为根的二叉搜索树中最小的节点
+     * @return 返回删除节点后新的二叉搜索树的根
+     * @see BST#deleteMax(Node)
+     */
+    private Node    deleteMin(Node node) {
         if (node.left == null) {
             Node rightNode = node.right;
             node.right = null;
@@ -221,7 +231,12 @@ public class BST<E extends Comparable<E>> {
         root = deleteMax(root);
         return e;
     }
-
+    /**
+     *
+     * @param node 删除掉以 node 为根的二叉搜索树中最大的节点
+     * @return 返回删除节点后新的二叉搜索树的根
+     * @see BST#deleteMin(Node)
+     */
     private Node deleteMax(Node node) {
         if (node.right == null) {
             Node leftNode = node.left;
@@ -248,20 +263,31 @@ public class BST<E extends Comparable<E>> {
             node.right = remove(node.right, e);
             return node;
         } else {
-            // e == node.e
+            // e.compareTo(node.e) == 0
 
+            //     x
+            //    / \
+            //  null  y
             if (node.left == null) {
                 Node rightNode = node.right;
                 node.right = null;
                 size--;
                 return rightNode;
             }
+            //     x
+            //    / \
+            //   y  null
             if (node.right == null) {
                 Node leftNode = node.left;
                 node.left = null;
                 size--;
                 return leftNode;
             }
+            //              node                successor
+            //              / \                  /     \
+            //             x   y      ==>       x       y
+            //                / \                      / \
+            //        successor   o                  null o
             Node successor = min(node.right);
             successor.right = deleteMin(node.right);
             successor.left = node.left;

@@ -1,13 +1,6 @@
 package algorithm.tree;
 
-import org.junit.Test;
-import util.FileOperation;
-
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
-
-import static util.Print.print;
-import static util.Print.printf;
 
 /**
  * @author:qiming
@@ -59,15 +52,15 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * LL
+     * RR
      * +================================================================+
      * +                                                                +
      * +                                                                +
      * +          unbalance                          l                  +
      * +           /    \                          /  \                 +
      * +          l     x                         y   unbalance         +
-     * +         / \             ======>         /\      /  \           +
-     * +        y   node                        m n     node x          +
+     * +         / \             ======>         /\     /  \            +
+     * +        y  node                         m  n   node x           +
      * +       /\                                                       +
      * +      m  n                                                      +
      * +================================================================+
@@ -77,15 +70,16 @@ public class AVLTree<K extends Comparable<K>, V> {
      * +                                                                +
      * +     unbalance             unbalance              node          +
      * +      /    \                 /    \              /   \          +
-     * +     l     x   (l)LL       node    x   RR       l   unbalance   +
+     * +     l     x      LL       node    x   RR       l   unbalance   +
      * +    / \        ======>     / \       =====>    / \     /  \     +
      * +   y   node               l   n               y  m    n   x     +
-     * +       / \               /\                                     +
-     * +      m  n              y m                                     +
+     * +       / \               / \                                    +
+     * +      m  n              y   m                                   +
      * +================================================================+
      *
      * @param unbalance unbalance node
      * @return new balance node
+     * @see AVLTree#leftRotate(Node)
      */
     private Node rightRotate(Node unbalance) {
         Node l = unbalance.left;
@@ -99,7 +93,7 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * RR
+     * LL
      * +================================================================+
      * +                                                                +
      * +                                                                +
@@ -118,9 +112,9 @@ public class AVLTree<K extends Comparable<K>, V> {
      * +                                                                +
      * +     unbalance             unbalance                 node       +
      * +      /    \                 /    \                /     \      +
-     * +     x     r     (r)RR      x    node    LL     unbalance  r    +
-     * +          / \    ======>           / \  =====>     / \    / \   +
-     * +        node y                    m   r             x  m   n  y +
+     * +     x     r       RR      x    node      LL     unbalance  r   +
+     * +          / \    ======>           / \  ======>     / \    / \  +
+     * +        node y                    m   r           x  m   n  y   +
      * +        / \                          / \                        +
      * +       m  n                          n  y                       +
      * +================================================================+
@@ -171,11 +165,11 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
         int balanceFactor = getBalanceFactor(node);
-        // LL
+        // RR
         if (balanceFactor > 1 && getBalanceFactor((node.left)) >= 0) {
             return rightRotate(node);
         }
-        // RR
+        // LL
         if (balanceFactor < -1 && getBalanceFactor((node.right)) <= 0) {
             return leftRotate(node);
         }
@@ -207,7 +201,7 @@ public class AVLTree<K extends Comparable<K>, V> {
 
     public K min() {
         if (size == 0) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("AVLTree size = 0");
         }
         return min(root).key;
     }
@@ -242,7 +236,7 @@ public class AVLTree<K extends Comparable<K>, V> {
             node.right = remove(node.right, k);
             cur = node;
         } else {
-            // e == node.e
+            // e.compareTo(node.e) == 0
 
             if (node.left == null) {
                 Node rightNode = node.right;
@@ -268,11 +262,11 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
         cur.height = 1 + Math.max(getHeight(cur.left), getHeight(cur.right));
         int balanceFactor = getBalanceFactor(cur);
-        // LL
+        // RR
         if (balanceFactor > 1 && getBalanceFactor((cur.left)) >= 0) {
             return rightRotate(cur);
         }
-        // RR
+        // LL
         if (balanceFactor < -1 && getBalanceFactor((cur.right)) <= 0) {
             return leftRotate(cur);
         }
