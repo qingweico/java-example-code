@@ -1,5 +1,7 @@
 package io.server;
 
+import org.junit.Test;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -12,14 +14,13 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * @author:qiming
- * @date: 2021/10/18
+ * @author zqw
+ * @date 2021/10/18
  */
 public class NIOPlanEchoServer {
     public static void serve(int port) throws IOException {
-        System.out.println("Listening for connection on port: " + port);
         ServerSocketChannel channel = ServerSocketChannel.open();
-        ServerSocket socket = new ServerSocket();
+        ServerSocket socket = channel.socket();
         InetSocketAddress address = new InetSocketAddress(port);
 
         socket.bind(address);
@@ -28,6 +29,7 @@ public class NIOPlanEchoServer {
         channel.configureBlocking(false);
         Selector selector = Selector.open();
         channel.register(selector, SelectionKey.OP_ACCEPT);
+        System.out.println("Listening for connection on port: " + port);
         while (true) {
             try {
                 selector.select();
@@ -39,12 +41,11 @@ public class NIOPlanEchoServer {
             Iterator<SelectionKey> iterator = readyKeys.iterator();
             while (iterator.hasNext()) {
                 SelectionKey key = iterator.next();
-                iterator.remove();
                 try {
                     if (key.isAcceptable()) {
                         ServerSocketChannel server = (ServerSocketChannel) key.channel();
                         SocketChannel client = server.accept();
-                        System.out.println("Accepted connection from: " + client);
+                        System.out.println("Accepted connection from: " + client.getRemoteAddress());
                         client.configureBlocking(false);
                         client.register(selector, SelectionKey.OP_WRITE | SelectionKey.OP_READ,
                                 ByteBuffer.allocate(1000));
@@ -53,7 +54,8 @@ public class NIOPlanEchoServer {
                     if (key.isReadable()) {
                         SocketChannel client = (SocketChannel) key.channel();
                         ByteBuffer output = (ByteBuffer) key.attachment();
-                        client.read(output);
+                        int read = client.read(output);
+                        System.out.println("client " + client.getRemoteAddress() + " send: " + new String(output.array(), 0, read));
                     }
                     if (key.isWritable()) {
                         SocketChannel client = (SocketChannel) key.channel();
@@ -62,6 +64,7 @@ public class NIOPlanEchoServer {
                         client.write(output);
                         output.compact();
                     }
+                    iterator.remove();
                 } catch (IOException e) {
                     key.cancel();
                     key.channel().close();
@@ -69,6 +72,18 @@ public class NIOPlanEchoServer {
             }
         }
 
+    }
+    @Test
+    public void NioClient() throws IOException {
+        final SocketChannel socketChannel = SocketChannel.open();
+        socketChannel.configureBlocking(false);
+        InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1",8080);
+        socketChannel.connect(inetSocketAddress);
+        System.out.println("client " + socketChannel.getLocalAddress() + " connected");
+        String s = "hello";
+        ByteBuffer buffer = ByteBuffer.wrap(s.getBytes());
+        socketChannel.write(buffer);
+        System.in.read();
     }
 
     public static void main(String[] args) throws IOException {

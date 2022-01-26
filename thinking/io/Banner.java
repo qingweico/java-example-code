@@ -1,8 +1,8 @@
 package thinking.io;
 
 /**
- * @author:qiming
- * @date: 2021/1/7
+ * @author zqw
+ * @date 2021/1/7
  */
 public class Banner {
     public static void main(String[] args) {

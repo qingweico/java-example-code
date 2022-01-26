@@ -3,8 +3,8 @@ package algorithm.array;
 import java.util.Arrays;
 
 /**
- * @author:qiming
- * @date: 2021/10/25
+ * @author zqw
+ * @date 2021/10/25
  */
 public class Array<E> {
     private E[] data;

@@ -1,8 +1,8 @@
 package eight;
 
 /**
- * @author:qiming
- * @date: 2021/2/23
+ * @author zqw
+ * @date 2021/2/23
  */
 public class User {
     private String username;

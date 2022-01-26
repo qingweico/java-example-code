@@ -14,8 +14,8 @@ import java.util.concurrent.Future;
 
 /**
  * Word frequency statistics
- * @author:qiming
- * @date: 2021/9/27
+ * @author qiming
+ * @date 2021/9/27
  */
 public class WordCount {
 

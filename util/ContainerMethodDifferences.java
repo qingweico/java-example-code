@@ -6,8 +6,8 @@ import java.util.*;
 /**
  * Method differences between the various Collection and Map classes
  *
- * @author:qiming
- * @date: 2021/4/11
+ * @author zqw
+ * @date 2021/4/11
  */
 public class ContainerMethodDifferences {
     static Set<String> methodSet(Class<?> type) {

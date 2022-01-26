@@ -7,8 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * @author:qiming
- * @date: 2020/04/23
+ * @author zqw
+ * @date 2020/04/23
  */
 public class ByteStream {
     /**

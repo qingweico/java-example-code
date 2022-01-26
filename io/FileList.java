@@ -5,8 +5,8 @@ import java.io.File;
 /**
  * Recursively traverse all the files in a folder
  *
- * @author:qiming
- * @date: 2021/6/17
+ * @author zqw
+ * @date 2021/6/17
  */
 public class FileList {
 

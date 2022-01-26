@@ -11,8 +11,8 @@ import java.util.concurrent.Executors;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/22
+ * @author qiming
+ * @date 2021/1/22
  */
 public class SocketProxy {
     static final int port = 8002;

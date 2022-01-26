@@ -9,8 +9,8 @@ import java.nio.channels.FileChannel;
 /**
  * The following shows how to quickly copy files using NIO
  *
- * @author:qiming
- * @date: 2020/03/23
+ * @author zqw
+ * @date 2020/03/23
  */
 public class NIO {
     public static void fastCopy(String src, String dist) throws IOException {
@@ -35,14 +35,16 @@ public class NIO {
             buffer.flip();
             // Write the buffered file to the output file
             fileOutChannel.write(buffer);
-            // Empty the buffer
+            // Empty the buffer, else position == limit, then r == 0
             buffer.clear();
         }
+        fo.close();
+        fin.close();
     }
 
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();
         fastCopy(args[0], args[1]);
-        System.out.println("The time spent in this read and write is" + (System.currentTimeMillis() - startTime) + "ms");
+        System.out.println("The time spent in this read and write is " + (System.currentTimeMillis() - startTime) + "ms");
     }
 }

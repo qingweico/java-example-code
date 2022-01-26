@@ -1,8 +1,8 @@
 package algorithm.array;
 
 /**
- * @author:qiming
- * @date: 2021/11/9
+ * @author zqw
+ * @date 2021/11/9
  */
 public class SparseArray {
    public static void main(String[] args) {

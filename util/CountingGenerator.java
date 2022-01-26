@@ -1,8 +1,8 @@
 package util;
 
 /**
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
 public class CountingGenerator {
     public static class

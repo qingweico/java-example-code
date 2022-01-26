@@ -12,17 +12,19 @@ import java.nio.charset.StandardCharsets;
 /**
  * Converting text to and from ByteBuffers
  *
- * @author:qiming
- * @date: 2021/2/5
+ * @author zqw
+ * @date 2021/2/5
  */
 public class BufferToText {
     private final static int BSIZE = 1024;
+    private static final String path = "thinking/io/nio/";
+    private static final String fileName = "data.txt";
 
     public static void main(String[] args) throws IOException {
-        FileChannel fc = new FileOutputStream("data.txt").getChannel();
+        FileChannel fc = new FileOutputStream(path + fileName).getChannel();
         fc.write(ByteBuffer.wrap("some text".getBytes()));
         fc.close();
-        fc = new FileInputStream("data.txt").getChannel();
+        fc = new FileInputStream(path + fileName).getChannel();
         ByteBuffer buffer = ByteBuffer.allocate(BSIZE);
         fc.read(buffer);
         buffer.flip();
@@ -37,19 +39,19 @@ public class BufferToText {
                 ": " + Charset.forName(encoding).decode(buffer));
 
         // Or, we could encode with something that will print:
-        fc = new FileOutputStream("data.txt").getChannel();
+        fc = new FileOutputStream(path + fileName).getChannel();
         fc.write(ByteBuffer.wrap("some text".getBytes(StandardCharsets.UTF_16BE)));
         fc.close();
 
         // Now try reading again:
-        fc = new FileInputStream("data.txt").getChannel();
+        fc = new FileInputStream(path + fileName).getChannel();
         buffer.clear();
         fc.read(buffer);
         buffer.flip();
         System.out.println(buffer.asCharBuffer());
 
         // Use a CharBuffer to write through:
-        fc = new FileOutputStream("data.txt").getChannel();
+        fc = new FileOutputStream(path + fileName).getChannel();
         buffer = ByteBuffer.allocate(24);
         buffer.asCharBuffer().put("some text");
         fc.write(buffer);
@@ -57,11 +59,10 @@ public class BufferToText {
 
 
         // Read and Display
-        fc = new FileInputStream("data.txt").getChannel();
+        fc = new FileInputStream(path + fileName).getChannel();
         buffer.clear();
         fc.read(buffer);
         buffer.flip();
         System.out.println(buffer.asCharBuffer());
-
     }
 }
