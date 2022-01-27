@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/2/5
+ * @author zqw
+ * @date 2021/2/5
  */
 public class GenerateStream {
     public static void main(String[] args) {

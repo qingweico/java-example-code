@@ -8,8 +8,9 @@ import static util.Print.err;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/19
+ * @author zqw
+ * @date 2021/1/19
+ * Four Method References
  */
 @FunctionalInterface
 interface Builder {
@@ -17,71 +18,66 @@ interface Builder {
 }
 
 public class MessageBuilder {
-    public static void f() {
-        print("f");
+    private static final String DEFAULT_LEVEL = "INFO";
+    private static final String DEBUG_LEVEL = "DEBUG";
+
+    public static void printMessage() {
+        print("printMessage");
+    }
+
+    public MessageBuilder() {
+        System.out.println("MessageBuilder() constructor");
     }
 
     public static void main(String[] args) {
-        // new MessageBuilder().show();
+        // Static method reference
+        Builder staticMethodRefBuilder = MessageBuilder::printMessage;
+        staticMethodRefBuilder.show();
 
-        // Static method introduction
-        Builder staticIntro = MessageBuilder::f;
-        staticIntro.show();
+        // Instance method reference
+        Builder instanceMethodRef = new MessageBuilder()::log;
+        instanceMethodRef.show();
 
+        // Constructor reference
+        Builder constructorRef = MessageBuilder::new;
+        constructorRef.show();
 
-        // Object method introduction
-        Consumer<MessageBuilder> objectMethodIntro = MessageBuilder::show;
-
-
-        // Instance method introduction
-        Builder instanceMethodIntro = new MessageBuilder()::show;
-        instanceMethodIntro.show();
-
-        // Constructor introduction
-        Builder constructorIntro = MessageBuilder::new;
-        constructorIntro.show();
-
-        // Using Lambda
-        Builder builder = () -> print("show");
-        builder.show();
-
-
-        // Using anonymous inner class
-        Builder b = new Builder() {
-            @Override
-            public void show() {
-                print("show");
-            }
-        };
-        b.show();
-
-
+        // Object method reference
+        Consumer<MessageBuilder> consumer = MessageBuilder::log;
+        consumer.accept(new MessageBuilder());
     }
 
-    public void show() {
-        showLog("warn", () -> {
-            // The this keyword points to the peripheral instance
-            err("[" + Thread.currentThread().getName() + "]WARN: "
-                    + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:sss")
-                    .format(new Date()) + " " + this + " warn message...");
+    public void log() {
+        this.log(DEFAULT_LEVEL);
+    }
+
+    public void log(String level) {
+        log(level, () -> {
+            // The 'this' keyword points to the peripheral instance.
+            err("[" + Thread.currentThread().getName() + "]" + level + ": "
+                    + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .format(new Date()) + " " + this);
         });
 
         // Good
-        // showLog("warn", () -> f());
+        // log(level, () -> printMessage());
 
         // Lambda is preferred if the method and Lambda are in the same class.
-        showLog("warn", MessageBuilder::f);
+        log(level, MessageBuilder::printMessage);
     }
 
     @Override
     public String toString() {
-        return "MessageBuilder{}";
+        return "[MessageBuilder]";
     }
 
-    public static void showLog(String level, Builder builder) {
-        if ("warn".equals(level)) {
-            print("The show method is executed!");
+    public void log(String level, Builder builder) {
+        if (DEBUG_LEVEL.equals(level)) {
+            System.out.print(DEBUG_LEVEL);
             builder.show();
+        } else {
+            log();
         }
     }
+
 }

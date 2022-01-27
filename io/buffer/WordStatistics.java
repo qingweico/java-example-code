@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
  * @author qiming
  * @date 2021/9/27
  */
-public class WordCount {
+public class WordStatistics {
 
     final ForkJoinPool pool = ForkJoinPool.commonPool();
 
@@ -121,7 +121,7 @@ public class WordCount {
      */
     @Test
     public void count() throws ExecutionException, InterruptedException {
-        var count = new WordCount();
+        var count = new WordStatistics();
         count.run("word", 1024 * 1024);
 
     }

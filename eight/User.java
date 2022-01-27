@@ -1,12 +1,13 @@
 package eight;
 
+import com.google.common.base.MoreObjects;
+
 /**
  * @author zqw
  * @date 2021/2/23
  */
 public class User {
     private String username;
-    private String password;
     private boolean isVIP;
 
     public String getUsername() {
@@ -17,19 +18,19 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public boolean isVIP() {
         return isVIP;
     }
 
     public void setVIP(boolean VIP) {
         isVIP = VIP;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("username", username)
+                .add("isVIP", isVIP)
+                .toString();
     }
 }

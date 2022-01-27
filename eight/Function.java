@@ -1,8 +1,8 @@
 package eight;
 
 /**
- * @author:qiming
- * @date: 2021/1/22
+ * @author zqw
+ * @date 2021/1/22
  */
 public class Function {
     public static void startThread(Runnable r){

@@ -10,9 +10,10 @@ import static util.Print.print;
 import static util.Print.printnb;
 
 /**
- * @author:qiming
- * @date: 2021/2/24
+ * @author zqw
+ * @date 2021/2/24
  */
+@SuppressWarnings("all")
 public class Foreach {
     public static void main(String[] args) {
         List<String> strings = Arrays.asList("you", "and", "me");
@@ -22,7 +23,8 @@ public class Foreach {
                 printnb(s);
             }
         });
-        // strings.forEach((s) -> printnb(s));
+        print();
+        strings.forEach((s) -> printnb(s));
         print();
         strings.forEach(Print::printnb);
     }

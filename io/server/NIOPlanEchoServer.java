@@ -32,6 +32,7 @@ public class NIOPlanEchoServer {
         System.out.println("Listening for connection on port: " + port);
         while (true) {
             try {
+                // 通过一个阻塞对象监听多路连接请求
                 selector.select();
             } catch (IOException e) {
                 e.printStackTrace();

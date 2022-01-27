@@ -7,7 +7,7 @@ import java.nio.channels.SocketChannel;
 import java.util.LinkedList;
 
 /**
- * @author qiming
+ * @author zqw
  * @date 2021/12/30
  */
 public class SocketNIO {

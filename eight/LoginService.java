@@ -7,14 +7,14 @@ import java.util.Date;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/2/23
+ * @author zqw
+ * @date 2021/2/23
  */
 @FunctionalInterface
 public interface LoginService {
     void login(UserService userService);
 
-    default boolean isVIP() {
+    default boolean isVIP(UserService userService) {
         return false;
     }
 
@@ -33,16 +33,14 @@ class UserService {
         user.setVIP(true);
     }
 
-
-    public static void login(UserService userService) {
-        print("[" + userService.getUser().getUsername() + "]INFO: "
-                + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:sss")
-                .format(new Date()) + " " + "is login...");
+    public static void login() {
+        System.out.println("[UserService::login]");
     }
 
-    public boolean isVIP(UserService userService) {
-        return userService.getUser().isVIP();
+    public static void isVIP() {
+        System.out.println("[UserService::isVIP]");
     }
+
 
     public User getUser() {
         return user;
@@ -52,26 +50,39 @@ class UserService {
     public static void main(String[] args) {
 
 
-        // Static method introduction
-        LoginService staticIntro = UserService::login;
-        staticIntro.login(new UserService());
-
-        LoginService anonymousInnerClass = new LoginService() {
+        // Static method reference >> UserService::login or UserService::isVIP
+        LoginService loginService = new LoginService() {
             @Override
             public void login(UserService userService) {
-                UserService.login(userService);
+                UserService.login();
+            }
+
+            @Override
+            public boolean isVIP(UserService userService) {
+                UserService.isVIP();
+                return LoginService.super.isVIP(userService);
             }
         };
-        anonymousInnerClass.login(new UserService());
+        UserService userService = new UserService();
+        loginService.login(userService);
 
-        LoginService lambda = (t) -> UserService.login(t);
-        lambda.login(new UserService());
+        // Anonymous Inner Class
+        LoginService ls = new LoginService() {
+            @Override
+            public void login(UserService userService) {
+                print("[" + userService.getUser().getUsername() + "]INFO: "
+                        + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                        .format(new Date()) + " " + "is login...");
+            }
 
-        print("--------------------");
+            @Override
+            public boolean isVIP(UserService userService) {
+                return userService.getUser().isVIP();
+            }
+        };
 
+        ls.login(userService);
     }
-
-
 }
 /*Function interfaces that come with the JDK:
     java.lang.Runnable
