@@ -1,30 +1,28 @@
 package io.chat;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+import util.DateUtil;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author zqw
  * @date 2022/1/26
  */
 public class ChatClient {
-    private static final String HOST = "127.0.0.1";
-    private static final int PORT = 8888;
+    private static final String HOST = Constants.LOOP_BACK;
+    private static final int PORT = Constants.QOMOLANGMA;
     private Selector selector;
     private SocketChannel socketChannel;
-    private final SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private final Date date = new Date();
     private String username;
 
     public ChatClient() {
@@ -45,7 +43,7 @@ public class ChatClient {
             msg = username + ": " + msg;
             socketChannel.write(ByteBuffer.wrap(msg.getBytes()));
         } catch (IOException e) {
-            System.out.printf("[%s] server error%n", sfd.format(date.getTime()));
+            System.out.printf("[%s] server error%n", DateUtil.format());
         }
     }
 
@@ -61,7 +59,8 @@ public class ChatClient {
                         ByteBuffer buffer = ByteBuffer.allocate(1000);
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         int read = socketChannel.read(buffer);
-                        System.out.printf("[%s] %s%n", sfd.format(date.getTime()), new String(buffer.array(), 0, read));
+                        System.out.printf("[%s] %s%n", DateUtil.format(),
+                                new String(buffer.array(), 0, read));
                     }
                     iterator.remove();
                 }
@@ -74,8 +73,8 @@ public class ChatClient {
 
     public static void main(String[] args) {
         ChatClient chatClient = new ChatClient();
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
-        executorService.execute(chatClient::readMsgFromServer);
+        CustomThreadPool pool = new CustomThreadPool(2, 1);
+        pool.execute(chatClient::readMsgFromServer);
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String msg = scanner.next();

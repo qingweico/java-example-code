@@ -1,0 +1,333 @@
+package thread;
+
+import org.junit.Test;
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.locks.ReentrantLock;
+
+import static util.Print.prints;
+
+/**
+ * Alternate print ABCDEF 123456
+ * output: 1A2B3C4D5E6F
+ *
+ * @author zqw
+ * @date 2021/4/15
+ */
+public class AlternatePrintTest {
+
+    enum ReadyToRun {
+        /**
+         * the sign of t1 thread run
+         */
+        T1,
+        /**
+         * the sign of t2 thread run
+         */
+        T2
+    }
+
+    static volatile ReadyToRun r = ReadyToRun.T1;
+
+    private final CountDownLatch terminated = new CountDownLatch(Constants.TWO);
+
+    private final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+
+    private final char[] numbers = "123456".toCharArray();
+    private final char[] chars = "ABCDEF".toCharArray();
+
+    @Test
+    public void atomicPrint() {
+        AtomicInteger threadNo = new AtomicInteger(Constants.ONE);
+
+        pool.execute(() ->
+        {
+            for (char n : numbers) {
+
+                for (; ; ) {
+                    if (threadNo.get() == Constants.ONE) {
+                        break;
+                    }
+                }
+                prints(n);
+                threadNo.set(Constants.TWO);
+            }
+            terminated.countDown();
+        });
+        pool.execute(() -> {
+            for (char c : chars) {
+                for (; ; ) {
+                    if (threadNo.get() == Constants.TWO) {
+                        break;
+                    }
+                }
+                prints(c);
+                threadNo.set(Constants.ONE);
+            }
+            terminated.countDown();
+        });
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void blockingQueuePrint() {
+        BlockingQueue<String> q1 = new ArrayBlockingQueue<>(Constants.ONE);
+        BlockingQueue<String> q2 = new ArrayBlockingQueue<>(Constants.ONE);
+
+        pool.execute(() -> {
+            for (char n : numbers) {
+                prints(n);
+                try {
+                    q1.put("ok");
+                    q2.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            terminated.countDown();
+        });
+        pool.execute(() -> {
+            for (char c : chars) {
+                try {
+                    q1.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                prints(c);
+                try {
+                    q2.put("ok");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            terminated.countDown();
+        });
+
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void casPrint() {
+        pool.execute(() -> {
+            for (char w : chars) {
+                for (; ; ) {
+                    if (r == ReadyToRun.T2) {
+                        break;
+                    }
+                }
+                prints(w);
+                r = ReadyToRun.T1;
+            }
+            terminated.countDown();
+        });
+        pool.execute(() ->
+        {
+            for (char n : numbers) {
+                for (; ; ) {
+                    if (r == ReadyToRun.T1) {
+                        break;
+                    }
+                }
+                prints(n);
+                r = ReadyToRun.T2;
+            }
+            terminated.countDown();
+        });
+
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static final CountDownLatch run = new CountDownLatch(1);
+    @Test
+    public void lockConditionPrint() {
+        Lock lock = new ReentrantLock();
+        Condition conditionT1 = lock.newCondition();
+        Condition conditionT2 = lock.newCondition();
+
+
+        execute(lock, conditionT1, conditionT2, chars);
+        execute(lock, conditionT2, conditionT1, numbers);
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // TODO
+    void execute(Lock lock, Condition conditionT1, Condition conditionT2, char[] arr) {
+        pool.execute(() -> {
+            lock.lock();
+            try {
+                for (char c : arr) {
+                    conditionT1.signal();
+                    prints(c);
+                    conditionT2.await();
+                }
+                conditionT1.signal();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+                terminated.countDown();
+            }
+        });
+    }
+
+    static Thread t1 = null, t2 = null;
+
+    @Test
+    public void lockSupportPrint() {
+
+        pool.execute(() ->
+
+        {
+            t1 = Thread.currentThread();
+            for (char n : numbers) {
+                prints(n);
+                // Wake up the t2 thread
+                LockSupport.unpark(t2);
+                // Blocking the current thread
+                LockSupport.park();
+            }
+            terminated.countDown();
+        });
+        pool.execute(() ->
+        {
+            t2 = Thread.currentThread();
+            for (char w : chars) {
+                // Blocking the current thread
+                LockSupport.park();
+                prints(w);
+                // Wake up the t1 thread
+                LockSupport.unpark(t1);
+            }
+            terminated.countDown();
+        });
+
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void pipedStreamPrint() throws IOException {
+
+        PipedInputStream input1 = new PipedInputStream();
+        PipedInputStream input2 = new PipedInputStream();
+        PipedOutputStream output1 = new PipedOutputStream();
+        PipedOutputStream output2 = new PipedOutputStream();
+
+        input1.connect(output2);
+        input2.connect(output1);
+
+        String message = "Your turn";
+        int bufferSize = Constants.TEN;
+
+        pool.execute(() -> {
+            byte[] buffer = new byte[bufferSize];
+            try {
+                for (char n : numbers) {
+                    int read;
+                    read = input1.read(buffer);
+                    if (new String(buffer, 0, read).equals(message)) {
+                        prints(n);
+                    }
+                    output1.write(message.getBytes());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                terminated.countDown();
+            }
+        });
+
+        pool.execute(() -> {
+            byte[] buffer = new byte[bufferSize];
+            try {
+                for (char c : chars) {
+                    prints(c);
+                    output2.write(message.getBytes());
+                    int read;
+                    read = input2.read(buffer);
+                    System.out.println(read);
+                    read = input2.read(buffer);
+                    System.out.println(read);
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                terminated.countDown();
+            }
+        });
+
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void transferQueuePrint() {
+
+        TransferQueue<Character> transferQueue = new LinkedTransferQueue<>();
+
+        pool.execute(() -> {
+            try {
+                for (char n : numbers) {
+                    transferQueue.transfer(n);
+                    prints(transferQueue.take());
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                terminated.countDown();
+            }
+        });
+
+        pool.execute(() -> {
+            try {
+                for (char c : chars) {
+                    prints(transferQueue.take());
+                    transferQueue.transfer(c);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                terminated.countDown();
+            }
+        });
+
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}

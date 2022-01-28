@@ -9,6 +9,10 @@ import java.net.SocketTimeoutException;
 
 import static util.Print.print;
 
+/**
+ * @author zqw
+ * @date 2019/12/10
+ */
 public class Server extends Thread {
     private final ServerSocket serverSocket;
 
@@ -17,6 +21,7 @@ public class Server extends Thread {
         serverSocket.setSoTimeout(100000);
     }
 
+    @Override
     public void run() {
         while (true) {
             try {

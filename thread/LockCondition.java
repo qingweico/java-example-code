@@ -9,8 +9,8 @@ import static util.Print.printnb;
 /**
  * Use three threads to alternate output ABC...
  *
- * @author:qiming
- * @date: 2021/1/30
+ * @author zqw
+ * @date 2021/1/30
  */
 public class LockCondition {
 

@@ -1,26 +1,29 @@
 package thread.pool;
 
+import util.Constants;
+
 import java.util.concurrent.*;
 
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2020/12/19
+ * @author zqw
+ * @date 2020/12/19
  */
 public class ThreadPool {
     public static void main(String[] args) throws InterruptedException {
 
-        // On the basis of three Executors tools,but it's not recommended
+        // On the basis of three Executors tools, but it's not recommended
         // Single threaded thread pool.
-        // ExecutorService executorService = Executors.newSingleThreadExecutor();
+         ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
+         singleThreadPool.execute(() -> {});
 
         // Controllable maximum number of concurrent threads pool.
-        // ExecutorService executorService = Executors.newFixedThreadPool(5);
-
+         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        fixedThreadPool.execute(() -> {});
         // The cache thread pool can be reclaimed.
-        // ExecutorService executorService = Executors.newCachedThreadPool();
-
+         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+        cachedThreadPool.execute(() -> {});
         // Thread pools that support timed and periodic execution of tasks.
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(3);
         scheduledThreadPool.schedule(() -> {
@@ -62,9 +65,9 @@ public class ThreadPool {
         // If i < 6, there has a RejectedExecutionException will be thrown because maximumPoolSize is 3
         // and the waiting queue's size is 2, when using the default policy for thread pool, drop the task
         // and throw exception if the thread pool queue is full.
-        for (int i = 0; i < 5; i++) {
-            final int finalI = i;
-            executorService.execute(() -> System.out.println(Thread.currentThread().getName() + "----->" + finalI));
+        for (int i = 0; i < Constants.FIVE; i++) {
+            int finalI = i;
+            executorService.execute(() -> System.out.println(Thread.currentThread().getName() + ": " + finalI));
         }
 
         // The shutdown method performs a gentle process of shutting down: no new tasks are accepted,

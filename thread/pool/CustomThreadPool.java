@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * @author:qiming
- * @date: 2021/9/29
+ * @author zqw
+ * @date 2021/9/29
  */
 public class CustomThreadPool {
 
-    private BlockingDeque<Runnable> workQueue;
+    private final BlockingDeque<Runnable> workQueue;
+    private static final int DEFAULT_MAX_THREAD_SIZE = 5;
+    private static final int DEFAULT_DEQUE_SIZE = 5;
 
     private boolean isRun = true;
 
@@ -27,6 +29,7 @@ public class CustomThreadPool {
     }
 
     public CustomThreadPool() {
+        this(DEFAULT_MAX_THREAD_SIZE, DEFAULT_DEQUE_SIZE);
     }
 
     public void shutdown() {
@@ -49,23 +52,12 @@ public class CustomThreadPool {
         return workQueue.offer(command);
     }
 
-    public ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
+    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
         return new ThreadPoolExecutor(corePoolSize,
                 maxPoolSize,
                 60L,
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(blockQueueSize),
                 new CustomRejectedExecutionHandler());
-    }
-
-    public static void main(String[] args) {
-        CustomThreadPool pool = new CustomThreadPool(2, 10);
-        for (int i = 0; i < 10; i++) {
-            int finalI = i;
-            pool.execute(() -> {
-                System.out.println(Thread.currentThread().getName() + " :" + finalI);
-            });
-        }
-        pool.shutdown();
     }
 }

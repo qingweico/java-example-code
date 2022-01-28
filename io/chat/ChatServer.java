@@ -1,11 +1,12 @@
 package io.chat;
 
+import util.Constants;
+import util.DateUtil;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -14,11 +15,9 @@ import java.util.Set;
  * @date 2022/1/26
  */
 public class ChatServer {
-    private static final int PORT = 8888;
+    private static final int PORT = Constants.QOMOLANGMA;
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
-    private final SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private final Date date = new Date();
 
     public ChatServer() {
         try {
@@ -44,7 +43,7 @@ public class ChatServer {
                     if (selectionKey.isAcceptable()) {
                         SocketChannel socketChannel = serverSocketChannel.accept();
                         System.out.printf("[%s] Accepted connection from: %s%n",
-                                sfd.format(date.getTime()), socketChannel.getRemoteAddress().toString().substring(1));
+                                DateUtil.format(), socketChannel.getRemoteAddress().toString().substring(1));
                         socketChannel.configureBlocking(false);
                         socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1000));
                     }
@@ -72,7 +71,7 @@ public class ChatServer {
         } catch (IOException ex) {
             try {
                 System.out.printf("[%s] %s has disconnected... %n",
-                        sfd.format(date.getTime()), socketChannel.getRemoteAddress().toString().substring(1));
+                        DateUtil.format(), socketChannel.getRemoteAddress().toString().substring(1));
                 key.cancel();
                 socketChannel.close();
             } catch (IOException e) {
@@ -82,21 +81,21 @@ public class ChatServer {
     }
 
     private void relayMessage(String msg, SocketChannel sender) throws IOException {
-        System.out.printf("[%s] received the message from %s%n", sfd.format(date.getTime()), sender.getRemoteAddress().toString().substring(1));
+        System.out.printf("[%s] received the message from %s%n", DateUtil.format(), sender.getRemoteAddress().toString().substring(1));
         try {
             for (SelectionKey selectionKey : selector.keys()) {
                 SelectableChannel selectableChannel = selectionKey.channel();
                 if (selectableChannel instanceof SocketChannel) {
-                    System.out.printf("[%s] message relaying...%n", sfd.format(date.getTime()));
+                    System.out.printf("[%s] message relaying...%n", DateUtil.format());
                     SocketChannel socketChannel = (SocketChannel) selectableChannel;
                     ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
                     socketChannel.write(buffer);
-                    System.out.printf("[%s] message has forwarding to %s%n", sfd.format(date.getTime()),
+                    System.out.printf("[%s] message has forwarding to %s%n", DateUtil.format(),
                             socketChannel.getRemoteAddress().toString().substring(1));
                 }
             }
         } catch (Exception ex) {
-            System.out.printf("[%s] server error%n", sfd.format(date.getTime()));
+            System.out.printf("[%s] server error%n", DateUtil.format());
         }
 
     }
