@@ -8,15 +8,14 @@ import static util.Print.*;
 /**
  * Use sql statement
  *
- * @author:qiming
- * @date: 2020/03/12
+ * @author zqw
+ * @date 2020/03/12
  */
 
 public class Login {
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/sys?useSSL=false&serverTimezone=UTC";
-
     static final String USER = "root";
     static final String PASS = "990712";
 
@@ -79,15 +78,18 @@ public class Login {
                     print("确定您的密码: ");
                     String checkPassword = sc.nextLine();
                     LoginRegister.checkPassword(registerPassword, checkPassword);
-                    String Sql = "insert into account(username, password) values ('" + registerName + "','" + registerPassword + "')";
+                    String sql = "insert into account(username, password) values ('" + registerName + "','" + registerPassword + "')";
                     Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
                     Statement state = con.createStatement();
-                    state.executeUpdate(Sql);
+                    state.executeUpdate(sql);
                     print("注册成功!" + "您的用户名是 " + registerName + ", 密码为 " + registerPassword);
                 }
                 case "3" -> {
                     print("欢迎下次光临呦........");
                     exit(0);
+                }
+                default -> {
+                    System.out.println("invalid choice");
                 }
             }
         }

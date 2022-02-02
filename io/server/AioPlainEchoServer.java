@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
  * @author zqw
  * @date 2021/10/18
  */
-public class AIOPlainEchoServer {
+public class AioPlainEchoServer {
 
     public void serve(int port) throws IOException {
         System.out.println("Listening for connections on port: " + port);

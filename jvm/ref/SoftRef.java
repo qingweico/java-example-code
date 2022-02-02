@@ -3,8 +3,8 @@ package jvm.ref;
 import java.lang.ref.SoftReference;
 
 /**
- * @author:qiming
- * @date: 2021/9/30
+ * @author zqw
+ * @date 2021/9/30
  */
 public class SoftRef {
 

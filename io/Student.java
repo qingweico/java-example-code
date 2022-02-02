@@ -2,11 +2,15 @@ package io;
 
 import java.util.Objects;
 
+/**
+ * @author zqw
+ * @date 2020/1/28
+ */
 public class Student {
     private String name;
-    private int Chinese;
-    private int Math;
-    private int English;
+    private int chinese;
+    private int math;
+    private int english;
 
     public Student() {
         super();
@@ -21,31 +25,31 @@ public class Student {
     }
 
     public int getChinese() {
-        return Chinese;
+        return chinese;
     }
 
     public void setChinese(int chinese) {
-        Chinese = chinese;
+        this.chinese = chinese;
     }
 
     public int getMath() {
-        return Math;
+        return math;
     }
 
     public void setMath(int math) {
-        Math = math;
+        this.math = math;
     }
 
     public int getEnglish() {
-        return English;
+        return english;
     }
 
     public void setEnglish(int english) {
-        English = english;
+        this.english = english;
     }
 
     public int getSum() {
-        return Math + Chinese + English;
+        return math + chinese + english;
     }
 
     @Override
@@ -57,14 +61,14 @@ public class Student {
             return false;
         }
         Student student = (Student) o;
-        return Chinese == student.Chinese &&
-                Math == student.Math &&
-                English == student.English &&
+        return chinese == student.chinese &&
+                math == student.math &&
+                english == student.english &&
                 Objects.equals(name, student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, Chinese, Math, English);
+        return Objects.hash(name, chinese, math, english);
     }
 }

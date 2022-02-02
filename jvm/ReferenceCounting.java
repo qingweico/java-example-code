@@ -2,8 +2,8 @@ package jvm;
 
 
 /**
- * @author:qiming
- * @date: 2021/3/28
+ * @author zqw
+ * @date 2021/3/28
  */
 public class ReferenceCounting {
 

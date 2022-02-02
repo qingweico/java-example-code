@@ -9,8 +9,8 @@ import java.util.concurrent.*;
 /**
  * DCL instruction reordering
  *
- * @author:qiming
- * @date: 2021/11/24
+ * @author zqw
+ * @date 2021/11/24
  */
 @SuppressWarnings("all")
 public class Singleton {

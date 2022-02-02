@@ -1,13 +1,13 @@
 package io.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import org.junit.Test;
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author zqw
@@ -15,48 +15,67 @@ import java.util.concurrent.Executors;
  */
 public class BioPlainEchoServer {
 
-    public void serve(int port) throws IOException {
-        final ServerSocket socketServer = new ServerSocket(port);
+    private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(2,
+            3,
+            4);
+    private static final int PORT = Constants.QOMOLANGMA;
+
+    public static void serve() throws IOException {
+        ServerSocket server = new ServerSocket(PORT);
+        System.out.println("Listening for connection on port: " + server.getLocalPort());
         while (true) {
+            // Block
             try {
-                final Socket clientSocket = socketServer.accept();
-                System.out.println("Accepting connection from: " + clientSocket.getRemoteSocketAddress());
-                new Thread(echo(clientSocket)).start();
-            }catch (IOException e) {
+                final Socket client = server.accept();
+                System.out.println("client " + client.getPort() + " connected...");
+                POOL.execute(() -> {
+                    InputStream in;
+                    try {
+                        in = client.getInputStream();
+                        byte[] bytes = new byte[Constants.KB];
+                        int read;
+                        while ((read = in.read(bytes)) != -1) {
+                            System.out.print("client " + client.getPort() + " send: ");
+                            System.out.println(new String(bytes, 0, read));
+                        }
+                    } catch (IOException e) {
+                        System.err.println(e.getMessage());
+//                    try (BufferedReader bufferReader = new BufferedReader(
+//                            new InputStreamReader(client.getInputStream()))) {
+//                        PrintStream pw = new PrintStream(System.out, true);
+//                        String context;
+//                        while ((context = bufferReader.readLine()) != null) {
+//                            pw.print(context);
+//                            pw.flush();
+//                        }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+////                    }
+                    }
+                });
+            } catch (IOException e) {
                 e.printStackTrace();
                 break;
             }
         }
     }
 
-    public void improvedServe(int port) throws IOException {
-        final ServerSocket socketServer = new ServerSocket(port);
-        ExecutorService exec = Executors.newFixedThreadPool(5);
-        while (true) {
-            final Socket clientSocket = socketServer.accept();
-            System.out.println("Accepting connection from: " + clientSocket);
-            exec.execute(echo(clientSocket));
-        }
-    }
-
-    private Runnable echo(Socket clientSocket) {
-        return () -> {
-            try (BufferedReader bufferReader = new BufferedReader(
-                    new InputStreamReader(clientSocket.getInputStream()))) {
-                PrintStream pw = new PrintStream(clientSocket.getOutputStream(), true);
-                while (true) {
-                    pw.print(bufferReader.readLine());
-                    pw.flush();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            ;
-        };
-    }
 
     public static void main(String[] args) throws IOException {
-        BioPlainEchoServer server = new BioPlainEchoServer();
-        server.serve(8080);
+        serve();
     }
+    @Test
+    public void client() throws IOException {
+        Socket client = new Socket("127.0.0.1",8848);
+        OutputStream outputStream = client.getOutputStream();
+        String msg = "我是客户端";
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+        BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+        bufferedWriter.write(msg);
+        bufferedWriter.close();
+        outputStream.close();
+        client.close();
+    }
+
 }

@@ -5,10 +5,10 @@ import org.junit.Test;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/3/27
+ * @author zqw
+ * @date 2021/3/27
  */
-public class StringIntern {
+public class StringInternTest {
     @Test
     public void testFinal() {
         final String a = "a";

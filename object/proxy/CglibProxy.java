@@ -7,12 +7,14 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * @author:qiming
- * @date: 2021/12/14
+ * @author zqw
+ * @date 2021/12/14
  */
 public class CglibProxy implements MethodInterceptor {
 
-    // The object that needs proxy by Cglib
+    /**
+     * The object that needs proxy by Cglib
+     */
     private Object targetObject;
 
     public Object createProxyObject(Object targetObject) {

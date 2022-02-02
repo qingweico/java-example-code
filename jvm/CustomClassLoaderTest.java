@@ -2,6 +2,7 @@ package jvm;
 
 import javassist.*;
 import org.junit.Test;
+import util.Constants;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -12,21 +13,22 @@ import java.net.SocketTimeoutException;
 /**
  * Break Parents Delegation Model
  *
- * @author:qiming
- * @date: 2021/10/21
+ * @author zqw
+ * @date 2021/10/21
  */
-public class ClsLoader {
+public class CustomClassLoaderTest {
+    static String className = "jvm.GenClass";
 
     private static byte[] genClass() throws CannotCompileException, IOException {
         var classPool = ClassPool.getDefault();
-        var ctClass = classPool.getOrNull("jvm.GenClass");
+        var ctClass = classPool.getOrNull(className);
         if (ctClass != null) {
             ctClass.defrost();
         }
-        ctClass = classPool.makeClass("jvm.GenClass");
+        ctClass = classPool.makeClass(className);
         var method = new CtMethod(CtClass.voidType, "genMethod", new CtClass[0], ctClass);
         method.setModifiers(Modifier.PUBLIC);
-        method.setBody("{System.out.println(\"jvm.GenClass\");}");
+        method.setBody("{System.out.println(\"" + className + "\");}");
         ctClass.addMethod(method);
         return ctClass.toBytecode();
     }
@@ -35,9 +37,9 @@ public class ClsLoader {
 
         @Override
         protected Class<?> findClass(String name) throws ClassNotFoundException {
-            if ("jvm.GenClass".equals(name)) {
+            if (className.equals(name)) {
                 try {
-                    return defineClass("jvm.GenClass", genClass(), 0, genClass().length);
+                    return defineClass(className, genClass(), 0, genClass().length);
                 } catch (CannotCompileException | IOException e) {
                     e.printStackTrace();
                 }
@@ -56,16 +58,16 @@ public class ClsLoader {
         byte[] bytes;
 
         private void connect() throws IOException {
-            try (var socket = new Socket("localhost", 8080)) {
+            try (var socket = new Socket(Constants.LOOP_BACK, Constants.QOMOLANGMA)) {
                 bytes = socket.getInputStream().readAllBytes();
             }
         }
 
         @Override
         protected Class<?> findClass(String name) throws ClassNotFoundException {
-            if ("jvm.GenClass".equals(name)) {
+            if (className.equals(name)) {
                 try {
-                    return defineClass("jvm.GenClass", genClass(), 0, genClass().length);
+                    return defineClass(className, genClass(), 0, genClass().length);
                 } catch (CannotCompileException | IOException e) {
                     e.printStackTrace();
                 }
@@ -83,7 +85,7 @@ public class ClsLoader {
             InstantiationException,
             IllegalAccessException {
         var binClassLoader = new BinClassLoader();
-        var cls = binClassLoader.loadClass("jvm.GenClass");
+        var cls = binClassLoader.loadClass(className);
         var inst = cls.getConstructor().newInstance();
         inst.getClass().getMethod("genMethod").invoke(inst);
     }
@@ -96,14 +98,14 @@ public class ClsLoader {
             InstantiationException,
             IllegalAccessException {
         var netClassLoader = new NetClassLoader();
-        var cls = netClassLoader.loadClass("jvm.GenClass");
+        var cls = netClassLoader.loadClass(className);
         var inst = cls.getConstructor().newInstance();
         inst.getClass().getMethod("genMethod").invoke(inst);
     }
 
     @Test
     public void serve() throws IOException, CannotCompileException {
-        var serverSocket = new ServerSocket(8080);
+        var serverSocket = new ServerSocket(Constants.QOMOLANGMA);
         serverSocket.setSoTimeout(10000);
         var bytes = genClass();
         while (true) {

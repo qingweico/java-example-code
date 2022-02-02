@@ -5,8 +5,8 @@ import static util.Print.print;
 /**
  * Method overloading
  *
- * @author:qiming
- * @date: 2020/12/12
+ * @author zqw
+ * @date 2020/12/12
  */
 public class Reload {
     public static void main(String[] args) {
@@ -30,9 +30,12 @@ public class Reload {
         print("String method");
     }
 
-    // However, when an overloaded method contains both Integer and String arguments, the compiler
-    // fails, because both String and Integer are concrete types, and the compiler cannot make a choice,
-    // so it needs to be seen as having made the choice(For example, cast using Integer).
+    /**
+     * However, when an overloaded method contains both Integer and String arguments, the compiler
+     * fails, because both String and Integer are concrete types, and the compiler cannot make a choice,
+     * so it needs to be seen as having made the choice(For example, cast using Integer).
+     * @param i {@code i}
+     */
     public static void method(Integer i) {
         print("Integer method");
     }

@@ -1,28 +1,28 @@
 package thread;
 
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:qiming
- * @date: 2020/12/18
+ * @author zqw
+ * @date 2020/12/18
  */
 public class ConcurrentModificationException {
     public static void main(String[] args) {
-
+        final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
         // Using ArrayList will throw ConcurrentModificationException, because
-        // ArrayList is thread-unsafe, so we could use Vector instead of ArrayList.
-        // List<String> list = new Vector<>();
+        // ArrayList is thread-unsafe, so we could use Vector instead of ArrayList,
+        // or using CopyOnWriteArrayList, or using the Collections.synchronizedList(Synchronous container class)
+        // also is a good choice.
+        List<String> list = new ArrayList<>();
 
-        // Or using the Collections.synchronizedList(Synchronous container class) also is a good choice.
-        // List<String> list = Collections.synchronizedList(new ArrayList<>());
-
-        // Or using CopyOnWriteArrayList
-        List<String> list = new CopyOnWriteArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            new Thread(() -> {
+        for (int i = 0; i < Constants.TEN; i++) {
+            pool.execute(() -> {
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
@@ -30,7 +30,8 @@ public class ConcurrentModificationException {
                 }
                 list.add("a");
                 System.out.println(list);
-            }, String.valueOf(i)).start();
+            });
         }
+        pool.shutdown();
     }
 }

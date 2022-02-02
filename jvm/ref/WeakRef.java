@@ -5,8 +5,8 @@ import java.lang.ref.WeakReference;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/9/30
+ * @author zqw
+ * @date 2021/9/30
  */
 public class WeakRef {
     public static void main(String[] args) {

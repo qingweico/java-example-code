@@ -1,13 +1,17 @@
 package thread.aqs;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
- * @author:qiming
- * @date: 2021/10/17
+ * @author zqw
+ * @date 2021/10/17
  */
 public class Semaphore extends AbstractQueuedSynchronizer {
+    static CustomThreadPool pool = new CustomThreadPool();
 
     public Semaphore(int permits) {
         setState(permits);
@@ -34,9 +38,10 @@ public class Semaphore extends AbstractQueuedSynchronizer {
 
     public static void main(String[] args) {
 
+        // TODO
         var semaphore = new Semaphore(5);
-        for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
+        for (int i = 0; i < Constants.HUNDRED; i++) {
+            pool.execute(() -> {
                 semaphore.acquireShared(0);
                 try {
                     TimeUnit.SECONDS.sleep(1);
@@ -46,7 +51,7 @@ public class Semaphore extends AbstractQueuedSynchronizer {
                     System.out.println(Thread.currentThread().getId() + " pass");
                 }
                 semaphore.releaseShared(0);
-            }).start();
+            });
         }
     }
 }

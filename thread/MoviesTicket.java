@@ -1,18 +1,27 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author zqw
+ * @date 2020/1/03
+ */
 public class MoviesTicket implements Runnable {
 
     private static int ticket = 20;
 
     private int x = 0;
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3, 3, 1);
+
 
     @Override
     public void run() {
         while (true) {
             if (x % 4 == 0) {
-                synchronized (MoviesTicket.class) {
+                synchronized (this) {
                     if (ticket > 0) {
                         try {
                             TimeUnit.SECONDS.sleep(1);
@@ -45,14 +54,9 @@ public class MoviesTicket implements Runnable {
     public static void main(String[] args) {
         // 创建一个票资源
         MoviesTicket mt = new MoviesTicket();
-
-        // 创建三个线程
-        Thread t1 = new Thread(mt, "窗口一");
-        Thread t2 = new Thread(mt, "窗口二");
-        Thread t3 = new Thread(mt, "窗口三");
-
-        t1.start();
-        t2.start();
-        t3.start();
+        pool.execute(mt);
+        pool.execute(mt);
+        pool.execute(mt);
+        pool.shutdown();
     }
 }

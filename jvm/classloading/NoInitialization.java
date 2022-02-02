@@ -3,18 +3,22 @@ package jvm.classloading;
 import org.junit.Test;
 
 /**
- * @author:qiming
- * @date: 2021/11/19
+ * @author zqw
+ * @date 2021/11/19
  */
 public class NoInitialization {
-    // 子类引用父类的静态字段, 不会导致子类初始化
+    /**
+     * 子类引用父类的静态字段, 不会导致子类初始化
+     */
     @Test
     public void staticRef() {
         System.out.println(SubClass.value);
 
     }
 
-    // 通过数组来引用类, 不会触发此类的初始化
+    /**
+     * 通过数组来引用类, 不会触发此类的初始化
+     */
     @Test
     public void arrayRef() {
         SuperClass[] sca = new SuperClass[10];
@@ -26,7 +30,9 @@ public class NoInitialization {
     }
 }
 
-// -XX:+TraceClassLoading
+/**
+ * -XX:+TraceClassLoading
+ */
 class SuperClass {
     static {
         System.out.println("SuperClass init!");

@@ -1,14 +1,19 @@
 package thread.aqs;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ExecutorService;
 
 /**
- * @author:qiming
- * @date: 2021/10/17
+ * @author zqw
+ * @date 2021/10/17
  */
 public class CycBarrier {
     CyclicBarrier barrier;
+    final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
     int page = 0;
 
     public CycBarrier() {
@@ -19,7 +24,7 @@ public class CycBarrier {
     }
 
     void prepareProduct() {
-        while (page < 10) {
+        while (page < Constants.TEN) {
             try {
                 System.out.println("prepare product...");
                 // return the number of thread that waiting in the barrier.
@@ -31,7 +36,7 @@ public class CycBarrier {
     }
 
     void prepareDeliverOrder() {
-        while (page < 10) {
+        while (page < Constants.TEN) {
             try {
                 System.out.println("prepare deliver order...");
                 System.out.println(barrier.await());
@@ -43,8 +48,9 @@ public class CycBarrier {
 
     void run() {
 
-        new Thread(this::prepareProduct).start();
-        new Thread(this::prepareDeliverOrder).start();
+        pool.execute(this::prepareProduct);
+        pool.execute(this::prepareDeliverOrder);
+        pool.shutdown();
     }
 
     public static void main(String[] args) {

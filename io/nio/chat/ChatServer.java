@@ -1,4 +1,4 @@
-package io.chat;
+package io.nio.chat;
 
 import util.Constants;
 import util.DateUtil;
@@ -42,10 +42,14 @@ public class ChatServer {
                     SelectionKey selectionKey = iterator.next();
                     if (selectionKey.isAcceptable()) {
                         SocketChannel socketChannel = serverSocketChannel.accept();
+                        String clientName = socketChannel.getRemoteAddress().toString().substring(1);
                         System.out.printf("[%s] Accepted connection from: %s%n",
-                                DateUtil.format(), socketChannel.getRemoteAddress().toString().substring(1));
+                                DateUtil.format(), clientName);
                         socketChannel.configureBlocking(false);
                         socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1000));
+                        // 向其他客户端提示上线
+                        String msg = "[client " + clientName + " on line]";
+                        relay(msg, socketChannel, false);
                     }
                     if (selectionKey.isReadable()) {
                         readMessage(selectionKey);
@@ -67,11 +71,15 @@ public class ChatServer {
             ByteBuffer buffer = ByteBuffer.allocate(1000);
             int readBytes = socketChannel.read(buffer);
             String msg = new String(buffer.array(), 0, readBytes);
-            relayMessage(msg, socketChannel);
+            relay(msg, socketChannel, true);
         } catch (IOException ex) {
             try {
+                String clientName = socketChannel.getLocalAddress().toString().substring(1);
                 System.out.printf("[%s] %s has disconnected... %n",
-                        DateUtil.format(), socketChannel.getRemoteAddress().toString().substring(1));
+                        DateUtil.format(), clientName);
+                // 向其他客户端提示下线
+                String msg = "[client " + clientName + " off line]";
+                relay(msg, socketChannel, false);
                 key.cancel();
                 socketChannel.close();
             } catch (IOException e) {
@@ -80,18 +88,27 @@ public class ChatServer {
         }
     }
 
-    private void relayMessage(String msg, SocketChannel sender) throws IOException {
-        System.out.printf("[%s] received the message from %s%n", DateUtil.format(), sender.getRemoteAddress().toString().substring(1));
+    private void relay(String msg, SocketChannel sender, boolean textMessage) throws IOException {
+        if (textMessage) {
+            System.out.printf("[%s] received the message from %s%n", DateUtil.format(),
+                    sender.getRemoteAddress().toString().substring(1));
+        }
         try {
             for (SelectionKey selectionKey : selector.keys()) {
                 SelectableChannel selectableChannel = selectionKey.channel();
                 if (selectableChannel instanceof SocketChannel) {
-                    System.out.printf("[%s] message relaying...%n", DateUtil.format());
                     SocketChannel socketChannel = (SocketChannel) selectableChannel;
                     ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
-                    socketChannel.write(buffer);
-                    System.out.printf("[%s] message has forwarding to %s%n", DateUtil.format(),
-                            socketChannel.getRemoteAddress().toString().substring(1));
+                    if (textMessage) {
+                        System.out.printf("[%s] message relaying...%n", DateUtil.format());
+                        socketChannel.write(buffer);
+                        System.out.printf("[%s] message has forwarding to %s%n", DateUtil.format(),
+                                socketChannel.getRemoteAddress().toString().substring(1));
+                    } else {
+                        if (selectableChannel != sender) {
+                            socketChannel.write(buffer);
+                        }
+                    }
                 }
             }
         } catch (Exception ex) {

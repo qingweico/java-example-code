@@ -11,12 +11,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 /**
- * @author:qiming
- * @date: 2020/03/27
+ * @author zqw
+ * @date 2020/03/27
  */
 public class CharacterStream {
     /**
-     * Five ways to read and write files with character streams
+     * Five ways to read and write files with character streams.
      *
      * @param args args
      * @throws IOException IOException

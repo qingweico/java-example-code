@@ -3,8 +3,8 @@ package object;
 import java.util.Objects;
 
 /**
- * @author:qiming
- * @date: 2021/11/17
+ * @author zqw
+ * @date 2021/11/17
  */
 public class Student {
     String name;

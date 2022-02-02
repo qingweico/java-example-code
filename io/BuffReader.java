@@ -4,7 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-
+/**
+ * @author zqw
+ * @date 2020/03/05
+ */
 public class BuffReader {
     private final Reader r;
     private final LineNumReader lineNumReader = new LineNumReader();

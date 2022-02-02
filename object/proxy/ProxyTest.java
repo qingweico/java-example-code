@@ -25,7 +25,7 @@ public class ProxyTest {
     }
     @Test
     public void jdkProxy() {
-        JDKProxy jdkProxy = new JDKProxy();
+        JdkProxy jdkProxy = new JdkProxy();
         IOrder order = (IOrder) jdkProxy.newProxy(new Order());
         order.pay();
         order.show();

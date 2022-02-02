@@ -1,4 +1,4 @@
-package io.chat;
+package io.nio.chat;
 
 import thread.pool.CustomThreadPool;
 import util.Constants;
@@ -37,8 +37,7 @@ public class ChatClient {
             ex.printStackTrace();
         }
     }
-
-    public void sendMegToServer(String msg) {
+    public void sendMsgToServer(String msg) {
         try {
             msg = username + ": " + msg;
             socketChannel.write(ByteBuffer.wrap(msg.getBytes()));
@@ -78,7 +77,7 @@ public class ChatClient {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String msg = scanner.next();
-            chatClient.sendMegToServer(msg);
+            chatClient.sendMsgToServer(msg);
         }
     }
 }

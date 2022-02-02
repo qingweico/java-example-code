@@ -3,18 +3,18 @@ package jvm;
 import org.openjdk.jol.info.ClassLayout;
 
 /**
- * @author:qiming
- * @date: 2021/3/5
+ * @author zqw
+ * @date 2021/3/5
  */
 public class ObjectLayout {
-    static final Object o = new Object();
+    static final Object LOCK = new Object();
 
     public static void main(String[] args) {
 
-        System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        System.out.println(ClassLayout.parseInstance(LOCK).toPrintable());
 
-        synchronized (o) {
-            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        synchronized (LOCK) {
+            System.out.println(ClassLayout.parseInstance(LOCK).toPrintable());
         }
 
     }

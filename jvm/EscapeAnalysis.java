@@ -1,17 +1,19 @@
 package jvm;
 
+import util.Constants;
+
 import java.util.concurrent.TimeUnit;
 
 /**
  * Escape Analysis
  *
- * @author:qiming
- * @date: 2021/2/19
+ * @author zqw
+ * @date 2021/2/19
  */
 public class EscapeAnalysis {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 1_0000_0000; i++) {
+        for (int i = 0; i < Constants.HUNDRED_MILLION; i++) {
             alloc();
         }
         System.out.println(System.currentTimeMillis() - start + "ms");

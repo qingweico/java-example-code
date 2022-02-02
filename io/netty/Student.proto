@@ -1,0 +1,9 @@
+syntax = "proto3";
+// protobuf.jar 版本需要与 protoc.exe 版本保持一致;
+option optimize_for = SPEED;
+option java_package = "io.netty";
+option java_outer_classname = "StudentObject";
+message Student {
+  int32 id = 1;
+  string name = 2;
+}

@@ -1,22 +1,29 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * @author zqw
+ * @date 2020/1/03
+ */
 public class MoviesTicketLock implements Runnable {
     private int ticket = 100;
     private final Lock lock = new ReentrantLock();
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3, 3, 1);
 
     @Override
     public void run() {
         while (true) {
+            lock.lock();
             try {
-                // lock
-                lock.lock();
                 if (ticket > 0) {
                     try {
-                        TimeUnit.SECONDS.sleep(1);
+                        TimeUnit.MILLISECONDS.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -32,14 +39,11 @@ public class MoviesTicketLock implements Runnable {
     }
 
     public static void main(String[] args) {
-        MoviesTicketLock s = new MoviesTicketLock();
+        MoviesTicketLock mtl = new MoviesTicketLock();
 
-        Thread t1 = new Thread(s, "窗口一");
-        Thread t2 = new Thread(s, "窗口二");
-        Thread t3 = new Thread(s, "窗口三");
-
-        t1.start();
-        t2.start();
-        t3.start();
+        pool.execute(mtl);
+        pool.execute(mtl);
+        pool.execute(mtl);
+        pool.shutdown();
     }
 }

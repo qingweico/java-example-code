@@ -1,6 +1,9 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -14,19 +17,20 @@ import static util.Print.printnb;
  */
 public class LockCondition {
 
-    private static final ReentrantLock lock = new ReentrantLock();
+    static ReentrantLock lock = new ReentrantLock();
 
-    private static final Condition cA = lock.newCondition();
-    private static final Condition cB = lock.newCondition();
-    private static final Condition cC = lock.newCondition();
+    static Condition cA = lock.newCondition();
+    static Condition cB = lock.newCondition();
+    static Condition cC = lock.newCondition();
 
-    private static final CountDownLatch latchB = new CountDownLatch(1);
-    private static final CountDownLatch latchC = new CountDownLatch(1);
+    static CountDownLatch latchB = new CountDownLatch(1);
+    static CountDownLatch latchC = new CountDownLatch(1);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3, 3, 1);
 
     private static final int COUNT = 10;
 
     public static void main(String[] args) {
-        Thread t1 = new Thread(() -> {
+        pool.execute(() -> {
             lock.lock();
             try {
                 for (int i = 0; i < COUNT; i++) {
@@ -46,7 +50,7 @@ public class LockCondition {
 
         });
 
-        Thread t2 = new Thread(() -> {
+        pool.execute(() -> {
             try {
                 latchB.await();
             } catch (InterruptedException e) {
@@ -71,7 +75,7 @@ public class LockCondition {
 
         });
 
-        Thread t3 = new Thread(() -> {
+        pool.execute(() -> {
             try {
                 latchC.await();
             } catch (InterruptedException e) {
@@ -90,13 +94,7 @@ public class LockCondition {
             } finally {
                 lock.unlock();
             }
-
         });
-
-        t1.start();
-        t2.start();
-        t3.start();
-
-
+        pool.shutdown();
     }
 }

@@ -5,10 +5,10 @@ import static util.Print.print;
 /**
  * Method hiding and method overriding
  * <p>
- * RTTI Run-Time Type Identification
+ * RTTI: Run-Time Type Identification
  *
- * @author:qiming
- * @date: 2020/12/12
+ * @author zqw
+ * @date 2020/12/12
  */
 
 public class MethodHideAndCover {
@@ -55,6 +55,7 @@ class Father {
 /**
  * Declare subclass
  */
+@SuppressWarnings("unused")
 class Son extends Father {
     static int a = 1;
     int b = 1;

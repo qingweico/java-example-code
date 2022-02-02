@@ -1,5 +1,6 @@
 package io.netty;
 
+import com.github.javafaker.Faker;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -9,10 +10,17 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.ByteToMessageDecoder;
+import io.netty.handler.codec.MessageToByteEncoder;
+import io.netty.handler.codec.ReplayingDecoder;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
+import util.Constants;
 import util.DateUtil;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -21,8 +29,8 @@ import java.util.concurrent.TimeUnit;
  * @date 2022/1/28
  */
 public class NettyServerTest {
-    private static final int PORT = 8848;
-    private static final String HOST = "127.0.0.1";
+    private static final int PORT = Constants.QOMOLANGMA;
+    private static final String HOST = Constants.LOOP_BACK;
 
     @Test
     public void server() throws InterruptedException {
@@ -37,7 +45,8 @@ public class NettyServerTest {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) {
-                            socketChannel.pipeline().addLast(new NettyServerHandler());
+                            ChannelPipeline channel = socketChannel.pipeline();
+                            channel.addLast(new NettyServerHandler());
                         }
                     });
             ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
@@ -64,7 +73,8 @@ public class NettyServerTest {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) {
-                            socketChannel.pipeline().addLast(new NettyClientHandler());
+                            ChannelPipeline channel = socketChannel.pipeline();
+                            channel.addLast(new NettyClientHandler());
                         }
                     });
             ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
@@ -74,6 +84,147 @@ public class NettyServerTest {
         }
     }
 
+    @Test
+    public void testProtoBufServer() {
+        EventLoopGroup boosGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
+
+        try {
+            ServerBootstrap bootstrap = new ServerBootstrap().group(boosGroup, workerGroup);
+            bootstrap.channel(NioServerSocketChannel.class)
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) {
+                            ChannelPipeline channel = socketChannel.pipeline();
+                            StudentObject.Student instance = StudentObject.Student.getDefaultInstance();
+                            channel.addLast("decoder", new ProtobufDecoder(instance));
+                            channel.addLast(new ProtoBufServerHandler());
+                        }
+                    });
+            ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
+            channelFuture.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            boosGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
+
+    }
+
+    @Test
+    public void testProtoBufClient() {
+        EventLoopGroup eventExecutors = new NioEventLoopGroup();
+        try {
+            Bootstrap bootstrap = new Bootstrap().group(eventExecutors);
+            bootstrap.channel(NioSocketChannel.class)
+                    .handler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) {
+                            ChannelPipeline channel = socketChannel.pipeline();
+                            channel.addLast("encoder", new ProtobufEncoder());
+                            channel.addLast(new ProtoBufClientHandler());
+                        }
+                    });
+            ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
+            channelFuture.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            eventExecutors.shutdownGracefully();
+        }
+    }
+
+    @Test
+    public void testCodecServer() {
+        EventLoopGroup boosGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
+
+        try {
+            ServerBootstrap bootstrap = new ServerBootstrap().group(boosGroup, workerGroup);
+            bootstrap.channel(NioServerSocketChannel.class)
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) {
+                            ChannelPipeline channel = socketChannel.pipeline();
+                            // 入栈的handler进行解码
+                            channel.addLast(new ByteToMessageDecoder() {
+                                @Override
+                                public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
+                                    System.out.println("server: ByteToMessageDecoder");
+                                    if (in.readableBytes() >= Constants.LONG_BYTE_SIZE) {
+                                        out.add(in.readLong());
+                                    }
+                                }
+                            });
+                            // 出站的handler进行编码
+                            channel.addLast(new MessageToByteEncoder<Long>() {
+                                @Override
+                                protected void encode(ChannelHandlerContext ctx, Long msg, ByteBuf out) {
+                                    System.out.println("server: MessageToByteEncoder");
+                                    out.writeLong(msg);
+                                }
+                            });
+                            channel.addLast(new ServerCodecHandler());
+                        }
+                    });
+            ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
+            channelFuture.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            boosGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
+    }
+
+    @Test
+    public void testCodecClient() {
+        EventLoopGroup eventExecutors = new NioEventLoopGroup();
+        try {
+            Bootstrap bootstrap = new Bootstrap().group(eventExecutors);
+            bootstrap.channel(NioSocketChannel.class)
+                    .handler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) {
+                            ChannelPipeline channel = socketChannel.pipeline();
+                            // 出站的handler进行编码
+                            channel.addLast(new MessageToByteEncoder<Long>() {
+                                @Override
+                                protected void encode(ChannelHandlerContext ctx, Long msg, ByteBuf out) {
+                                    System.out.println("client: MessageToByteEncoder");
+                                    out.writeLong(msg);
+                                }
+                            });
+                            // 入栈的handler进行解码
+                            channel.addLast(new ReplayingDecoder<Void>() {
+                                @Override
+                                protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
+                                    System.out.println("client: ReplayingDecoder");
+                                    out.add(in.readLong());
+                                }
+                            });
+                            channel.addLast(new ClientCodecHandler());
+                        }
+                    });
+            ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
+            channelFuture.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            eventExecutors.shutdownGracefully();
+        }
+    }
+
+    /**
+     * 读要解码; 写要编码
+     * Inbound(decoder): server -> client(read)
+     * Outbound(encoder): client -> server(write)
+     */
     static class NettyServerHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) {
@@ -97,6 +248,78 @@ public class NettyServerTest {
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+            System.err.println("server error");
+            ctx.close();
+        }
+    }
+
+    static class ProtoBufServerHandler extends ChannelInboundHandlerAdapter {
+        @Override
+        public void channelRead(ChannelHandlerContext ctx, Object msg) {
+            // 接受从客户端发送的 StudentObject.Student 类型的数据
+            StudentObject.Student student = (StudentObject.Student) msg;
+            System.out.printf("[%s %s] [rcv: %s, from client %s]%n", DateUtil.format(),
+                    Thread.currentThread().getName(),
+                    student.getName(), ctx.channel().remoteAddress());
+        }
+
+        @Override
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+            System.err.println("server error");
+            ctx.close();
+        }
+    }
+
+    static class ProtoBufClientHandler extends ChannelInboundHandlerAdapter {
+        @Override
+        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+            StudentObject.Student student = StudentObject.Student
+                    .newBuilder()
+                    .setName(new Faker().name().fullName())
+                    .build();
+            ctx.writeAndFlush(student);
+        }
+
+        @Override
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+            System.err.println("server error");
+            ctx.close();
+        }
+    }
+
+    static class ServerCodecHandler extends SimpleChannelInboundHandler<Long> {
+        @Override
+        protected void channelRead0(ChannelHandlerContext ctx, Long msg) {
+            System.out.printf("[%s] [rcv: %s, from client %s]%n", DateUtil.format(), msg
+                    , ctx.channel().remoteAddress());
+            System.out.println("ServerCodecHandler");
+            ctx.writeAndFlush(msg);
+        }
+
+        @Override
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+            System.err.println("server error");
+            ctx.close();
+        }
+    }
+
+    static class ClientCodecHandler extends SimpleChannelInboundHandler<Long> {
+
+        @Override
+        protected void channelRead0(ChannelHandlerContext ctx, Long msg) {
+            System.out.printf("[%s] [rcv: %s, from server %s]%n", DateUtil.format(), msg
+                    , ctx.channel().remoteAddress());
+        }
+
+        @Override
+        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+            System.out.println("ClientCodecHandler");
+            ctx.channel().writeAndFlush(123456L);
+        }
+
+        @Override
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+            System.err.println("server error");
             ctx.close();
         }
     }
@@ -117,7 +340,7 @@ public class NettyServerTest {
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-            cause.printStackTrace();
+            System.err.println("server error");
             ctx.close();
         }
     }

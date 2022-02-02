@@ -1,15 +1,17 @@
 package thread;
 
 import sun.misc.Unsafe;
+import thread.pool.CustomThreadPool;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Customize a lock
  *
- * @author:qiming
- * @date: 2021/6/24
+ * @author zqw
+ * @date 2021/6/24
  */
 public class CustomLock {
 
@@ -18,6 +20,8 @@ public class CustomLock {
     private static long stateOffset;
 
     private static Unsafe unsafe = null;
+
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
 
     static {
         Field singletonInstanceField;
@@ -36,7 +40,7 @@ public class CustomLock {
 
     void lock() {
         while (!compareAndSet()) {
-            System.out.println("cas...");
+            System.out.println(Thread.currentThread().getName() + " cas...");
         }
     }
 
@@ -50,7 +54,7 @@ public class CustomLock {
 
     public static void main(String[] args) {
         CustomLock cl = new CustomLock();
-        new Thread(() -> {
+        pool.execute(() -> {
             cl.lock();
             System.out.println("t1...");
             try {
@@ -60,13 +64,14 @@ public class CustomLock {
             }
             System.out.println("t1 release the lock");
             cl.unlock();
-        }, "t1").start();
+        });
 
-        new Thread(() -> {
+        pool.execute(() -> {
             cl.lock();
             System.out.println("t2...");
             cl.unlock();
-        }, "t2").start();
+        });
+        pool.shutdown();
 
     }
 }

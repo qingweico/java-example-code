@@ -6,8 +6,8 @@ import java.security.Provider;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/6
+ * @author zqw
+ * @date 2021/1/6
  */
 public class ClassLoaders {
     public static void main(String[] args) {
@@ -33,7 +33,5 @@ public class ClassLoaders {
         print(coreLibraryClassLoader);
         ClassLoader classLoader = Provider.class.getClassLoader();
         print(classLoader);
-
-
     }
 }

@@ -4,8 +4,8 @@ package thread;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:qiming
- * @date: 2021/1/30
+ * @author zqw
+ * @date 2021/1/30
  */
 public class NoVisibility {
     private static boolean ready = false;

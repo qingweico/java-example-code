@@ -3,8 +3,8 @@ package jvm;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/2/8
+ * @author zqw
+ * @date 2021/2/8
  */
 public class HeapSize {
     public static void main(String[] args) {
@@ -16,7 +16,5 @@ public class HeapSize {
 
         print("The system memory size is " + initialMemory * 64.0 / 1024 + "G");
         print("The system memory size is " + maxMemory * 4.0 / 1024 + "G");
-
-
     }
 }

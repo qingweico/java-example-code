@@ -1,8 +1,8 @@
 package jvm;
 
 /**
- * @author:qiming
- * @date: 2021/11/10
+ * @author zqw
+ * @date 2021/11/10
  */
 public class SysGc {
    public static void main(String[] args) throws InterruptedException {

@@ -3,21 +3,21 @@ package exception;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  */
 public class CleanupIdiom {
     public static void main(String[] args) {
         NeedCleanup nc1 = new NeedCleanup();
         try {
-
+            print("nc1");
         } finally {
             nc1.dispose();
         }
         NeedCleanup nc2 = new NeedCleanup();
         NeedCleanup nc3 = new NeedCleanup();
         try {
-
+            print("nc2");
         } finally {
             nc3.dispose();
             nc2.dispose();
@@ -27,7 +27,7 @@ public class CleanupIdiom {
             try {
                 NeedCleanup2 nc5 = new NeedCleanup2();
                 try {
-
+                    print("nc2");
                 } finally {
                     nc5.dispose();
                 }

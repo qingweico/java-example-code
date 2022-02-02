@@ -1,11 +1,11 @@
 package thread;
 
 /**
- * Thread.start() ----->  see openjdk
- * thread.cpp>>>JavaThread*>>>os::create_thread
+ * Thread.start() >>> see openjdk
+ * thread.cpp >>> JavaThread* >>> os::create_thread
  *
- * @author:qiming
- * @date: 2021/6/25
+ * @author zqw
+ * @date 2021/6/25
  */
 public class CustomThread {
 
@@ -18,7 +18,9 @@ public class CustomThread {
         ct.start0();
     }
 
-    // Using JNI
+    /**
+     * Using JNI
+     */
     private native void start0();
 
 }

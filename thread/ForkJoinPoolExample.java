@@ -8,8 +8,8 @@ import java.util.concurrent.RecursiveTask;
 /**
  * Calculate the sum between one and a hundred million using ForkJoinPool.
  *
- * @author:qiming
- * @date: 2020/12/20
+ * @author zqw
+ * @date 2020/12/20
  */
 public class ForkJoinPoolExample {
     public static void main(String[] args) throws ExecutionException, InterruptedException {

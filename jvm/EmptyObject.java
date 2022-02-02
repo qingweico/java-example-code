@@ -1,8 +1,8 @@
 package jvm;
 
 /**
- * @author:qiming
- * @date: 2021/10/20
+ * @author zqw
+ * @date 2021/10/20
  */
 public class EmptyObject {
     public static void main(String[] args) {

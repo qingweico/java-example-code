@@ -1,51 +1,51 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**
- * @author:qiming
- * @date: 2021/9/8
+ * @author qiming
+ * @date 2021/9/8
  */
 public class Park {
    public static void main(String[] args) {
 
       CountDownLatch latch = new CountDownLatch(1);
-      Thread t1 = new Thread(() -> {
+      ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+      final Thread[] t1 = {null};
+      pool.execute(() -> {
          // ensure t1 go first!
          System.out.println("park before t1");
          latch.countDown();
+         t1[0] = Thread.currentThread();
          LockSupport.park();
          System.out.println("park after t1");
       });
 
-
-
-      Thread t2 = new Thread(() -> {
+      pool.execute(() -> {
          try {
             latch.await();
          } catch (InterruptedException e) {
             e.printStackTrace();
          }
-         System.out.println("unpark before t2");
+         System.out.println("un-park before t2");
          try {
             TimeUnit.SECONDS.sleep(1);
          } catch (InterruptedException e) {
             e.printStackTrace();
          }
-         LockSupport.unpark(t1);
-         System.out.println("unpark after t2");
+         LockSupport.unpark(t1[0]);
+         System.out.println("un-park after t2");
       });
-
-      t1.start();
-      t2.start();
-
-
+      pool.shutdown();
       // if there are no using CountDownLatch, may be output
-      // unpark before t2
+      // un-park before t2
       // park before t1
-      // unpark after t2
+      // un-park after t2
       // park after t1
    }
 }

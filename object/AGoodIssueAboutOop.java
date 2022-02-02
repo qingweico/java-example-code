@@ -3,8 +3,8 @@ package object;
 /**
  * this a good problem about oop from now-coder
  *
- * @author:qiming
- * @date: 2021/9/20
+ * @author zqw
+ * @date 2021/9/20
  */
 public class AGoodIssueAboutOop {
     static class A {
@@ -35,6 +35,7 @@ public class AGoodIssueAboutOop {
             setValue(getValue() - 3);
         }
 
+        @Override
         public void setValue(int value) {
             super.setValue(2 * value);
         }

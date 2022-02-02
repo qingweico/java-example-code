@@ -7,12 +7,12 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * The following shows how to quickly copy files using NIO
+ * The following shows how to quickly copy files using NIO.
  *
  * @author zqw
  * @date 2020/03/23
  */
-public class NIO {
+public class Nio {
     public static void fastCopy(String src, String dist) throws IOException {
         // Get the input section stream of the source file
         FileInputStream fin = new FileInputStream(src);

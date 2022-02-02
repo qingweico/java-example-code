@@ -10,14 +10,19 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
+import util.Constants;
 import util.DateUtil;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * @author zqw
  * @date 2022/1/28
  */
 public class HttpServerTest {
-    private static final int PORT = 8848;
+    private static final int PORT = Constants.QOMOLANGMA;
+    private static final String FAVICON = "/favicon.ico";
 
     @Test
     public void server() {
@@ -48,8 +53,13 @@ public class HttpServerTest {
     static class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
         @Override
-        protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) {
+        protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws URISyntaxException {
             if (msg instanceof HttpRequest) {
+                HttpRequest request = (HttpRequest)msg;
+                URI uri = new URI(request.uri());
+                if(FAVICON.equals(uri.getPath())) {
+                    return;
+                }
                 System.out.printf("[%s %s] [request from client %s]%n", DateUtil.format(),
                         Thread.currentThread().getName(), ctx.channel().remoteAddress());
                 ByteBuf content = Unpooled.copiedBuffer("netty http server", CharsetUtil.UTF_8);

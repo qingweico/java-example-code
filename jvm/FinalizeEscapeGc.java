@@ -4,11 +4,11 @@ import static util.Print.print;
 
 /**
  * Objects can save themselves when they are GC.
- * @author:qiming
- * @date: 2021/3/31
+ * @author zqw
+ * @date 2021/3/31
  */
-public class FinalizeEscapeGC {
-    public static FinalizeEscapeGC SAVE_HOOK = null;
+public class FinalizeEscapeGc {
+    public static FinalizeEscapeGc SAVE_HOOK = null;
 
     public void isAlive() {
         print("yes, i am still alive");
@@ -17,11 +17,11 @@ public class FinalizeEscapeGC {
     protected void finalize() throws Throwable {
         super.finalize();
         print("finalize method executed!");
-        FinalizeEscapeGC.SAVE_HOOK = this;
+        FinalizeEscapeGc.SAVE_HOOK = this;
     }
 
     public static void main(String[] args) throws InterruptedException {
-        SAVE_HOOK = new FinalizeEscapeGC();
+        SAVE_HOOK = new FinalizeEscapeGc();
 
         SAVE_HOOK = null;
 
@@ -46,7 +46,5 @@ public class FinalizeEscapeGC {
         }else {
             print("oh no, i am dead!");
         }
-
     }
-
 }

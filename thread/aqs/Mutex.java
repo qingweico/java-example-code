@@ -6,8 +6,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
- * @author:qiming
- * @date: 2021/10/17
+ * @author zqw
+ * @date 2021/10/17
  */
 public class Mutex extends AbstractQueuedSynchronizer {
     private static int shared = 0;

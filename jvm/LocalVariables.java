@@ -1,8 +1,8 @@
 package jvm;
 
 /**
- * @author:qiming
- * @date: 2021/2/3
+ * @author zqw
+ * @date 2021/2/3
  */
 public class LocalVariables {
     public static void main(String[] args) {

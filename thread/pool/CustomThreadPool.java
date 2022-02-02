@@ -11,10 +11,10 @@ import java.util.concurrent.*;
 public class CustomThreadPool {
 
     private final BlockingDeque<Runnable> workQueue;
-    private static final int DEFAULT_MAX_THREAD_SIZE = 5;
-    private static final int DEFAULT_DEQUE_SIZE = 5;
+    private static final int DEFAULT_MAX_THREAD_SIZE = 10;
+    private static final int DEFAULT_DEQUE_SIZE = 10;
 
-    private boolean isRun = true;
+    private volatile boolean isRun = true;
 
     public CustomThreadPool(int maxThreadSize, int dequeSize) {
 
@@ -58,6 +58,7 @@ public class CustomThreadPool {
                 60L,
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(blockQueueSize),
+                CustomThreadFactory.guavaThreadFactory(),
                 new CustomRejectedExecutionHandler());
     }
 }

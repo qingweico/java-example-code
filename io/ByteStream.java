@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class ByteStream {
     /**
-     * Four ways to read and write files with byte stream
+     * Four ways to read and write files with byte stream.
      *
      * @param args args
      * @throws IOException IOException
@@ -37,7 +37,7 @@ public class ByteStream {
     }
 
     /**
-     * Basic byte stream reads and writes one byte at a time
+     * Basic byte stream reads and writes one byte at a time.
      *
      * @throws IOException IOException
      */
@@ -54,7 +54,7 @@ public class ByteStream {
     }
 
     /**
-     * Basic byte stream reads and writes one byte array at a time
+     * Basic byte stream reads and writes one byte array at a time.
      *
      * @throws IOException IOException
      */
@@ -72,7 +72,7 @@ public class ByteStream {
     }
 
     /**
-     * Efficient byte stream reads and writes one byte at a time
+     * Efficient byte stream reads and writes one byte at a time.
      * <p>
      * Java built-in array cache
      *
@@ -90,7 +90,7 @@ public class ByteStream {
     }
 
     /**
-     * Efficient byte stream reads and writes a byte
+     * Efficient byte stream reads and writes a byte.
      *
      * @throws IOException IOException
      */

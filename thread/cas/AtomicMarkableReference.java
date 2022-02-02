@@ -1,23 +1,28 @@
 package thread.cas;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicStampedReference;
 
 /**
- * @author:qiming
- * @date: 2021/9/26
+ * @author zqw
+ * @date 2021/9/26
  */
 public class AtomicMarkableReference {
 
-    static final Integer INIT_NUM = 1000;
-    static final Integer UPDATE_NUM = 100;
+    static final Integer INIT_NUM = Constants.THOUSAND;
+    static final Integer UPDATE_NUM = Constants.HUNDRED;
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2,1);
     static AtomicStampedReference<Integer> atomicStampedReference = new AtomicStampedReference<>(INIT_NUM, 1);
 
     public static void main(String[] args) {
-        new Thread(() -> {
+        Runnable r = () -> {
             Integer value = atomicStampedReference.getReference();
             int stamp = atomicStampedReference.getStamp();
-            System.out.println("currentValue:" + value + "; version: " + stamp);
+            System.out.println(Thread.currentThread().getName() + " currentValue:" + value + "; version: " + stamp);
 
             try {
                 TimeUnit.MILLISECONDS.sleep(1000);
@@ -25,12 +30,14 @@ public class AtomicMarkableReference {
                 e.printStackTrace();
             }
             if (atomicStampedReference.compareAndSet(value, UPDATE_NUM, 1, stamp + 1)) {
-                System.out.println("currentValue:" + atomicStampedReference.getReference() +
+                System.out.println(Thread.currentThread().getName() + " currentValue:" + atomicStampedReference.getReference() +
                         "; version: " + atomicStampedReference.getStamp());
             } else {
-                System.out.println("update fail: version different!");
+                System.out.println(Thread.currentThread().getName() + " update fail: version different!");
             }
-        }).start();
-
+        };
+        pool.execute(r);
+        pool.execute(r);
+        pool.shutdown();
     }
 }

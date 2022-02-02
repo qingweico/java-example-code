@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * @author:qiming
- * @date: 2021/9/28
+ * @author zqw
+ * @date 2021/9/28
  */
 public interface Aspect {
 

@@ -1,8 +1,8 @@
 package jvm.ref;
 
 /**
- * @author:qiming
- * @date: 2021/9/30
+ * @author zqw
+ * @date 2021/9/30
  */
 public class StrongReference {
     public static void main(String[] args) {

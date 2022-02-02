@@ -5,10 +5,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * @author:qiming
- * @date: 2021/12/14
+ * @author zqw
+ * @date 2021/12/14
  */
-public class JDKProxy implements InvocationHandler {
+public class JdkProxy implements InvocationHandler {
 
     // The object that needs proxy
     private Object targetObject;

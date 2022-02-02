@@ -15,11 +15,10 @@ public class CustomRejectedExecutionHandler implements RejectedExecutionHandler 
     @Override
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
         System.out.println("task rejected!");
-        r.run();
     }
 
     public static void main(String[] args) {
-        ExecutorService executorService = CustomThreadPool.newFixedThreadPool(3, 4, 5);
+        ExecutorService executorService = CustomThreadPool.newFixedThreadPool(2, 2, 5);
         for (int i = 0; i < Constants.TEN; i++) {
             int finalI = i;
             executorService.execute(() -> System.out.println(Thread.currentThread().getName() + ": " + finalI));

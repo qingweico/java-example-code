@@ -6,8 +6,8 @@ import object.proxy.annotation.Aspect;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:qiming
- * @date: 2021/10/22
+ * @author zqw
+ * @date 2021/10/22
  */
 @Aspect(type = TimeUsageAspect.class)
 public class Order implements IOrder {

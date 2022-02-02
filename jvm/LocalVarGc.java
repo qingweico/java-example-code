@@ -1,9 +1,10 @@
 package jvm;
 
 /**
- * @author:qiming
- * @date: 2021/11/10
+ * @author zqw
+ * @date 2021/11/10
  */
+@SuppressWarnings("unused")
 public class LocalVarGc {
 
    public void localVar1() {

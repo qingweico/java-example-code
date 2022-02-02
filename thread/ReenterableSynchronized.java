@@ -1,22 +1,26 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Reenterable synchronized:
  * A task can acquire an object's lock multiple times.
  *
- * @author:qiming
- * @date: 2021/4/10
+ * @author zqw
+ * @date 2021/4/10
  */
-public class ReenterableSynchronized {
+class ReenterableSynchronized {
     final Object lock = new Object();
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
 
     public void f() {
-       // countLock++
+        // countLock++
         synchronized (lock) {
             System.out.println("f()");
-           // countLock++
+            // countLock++
             f2();
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -38,10 +42,9 @@ public class ReenterableSynchronized {
     public static void main(String[] args) {
         ReenterableSynchronized execute = new ReenterableSynchronized();
 
-        Thread t1 = new Thread(execute::f);
-        Thread t2 = new Thread(execute::f);
+        pool.execute(execute::f);
+        pool.execute(execute::f);
 
-        t1.start();
-        t2.start();
+        pool.shutdown();
     }
 }

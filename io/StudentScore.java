@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.*;
 
+/**
+ * @author zqw
+ * @date 2020/1/29
+ */
 public class StudentScore {
     public static void main(String[] args) throws IOException {
         TreeSet<Student> set = new TreeSet<>((s1, s2) -> {

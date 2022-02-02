@@ -4,8 +4,8 @@ package exception;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  */
 public class Cleanup {
     public static void main(String[] args) throws Exception {

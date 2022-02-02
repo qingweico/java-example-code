@@ -4,14 +4,14 @@ package jvm.threadandlock;
 import java.util.Vector;
 
 /**
- * @author:qiming
- * @date: 2021/3/31
+ * @author zqw
+ * @date 2021/3/31
  */
 public class SecurityTestingOfVector {
 
     private static final Vector<Integer> vector = new Vector<>();
 
-    @SuppressWarnings("all")
+
     public static void main(String[] args) {
         while (true) {
             for(int i = 0;i < 10;i++) {
@@ -41,7 +41,8 @@ public class SecurityTestingOfVector {
 
             // Do not spawn too many threads at the same time, as this will
             // cause the operating system to freeze.
-            while (Thread.activeCount() > 20);
+            while (Thread.activeCount() > 20) {
+            }
         }
 
 

@@ -1,24 +1,34 @@
 package jvm;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.util.concurrent.ExecutorService;
+
 import static util.Print.print;
 
 /**
  * The JVM ensures that classes are loaded into memory
- * only once in a multithreaded environment.
+ * only once in a multithreading environment.
  *
- * @author:qiming
- * @date: 2021/2/1
+ * @author zqw
+ * @date 2021/2/1
  */
 public class Loading {
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3,
+            4, 1);
+
     public static void main(String[] args) {
         Runnable r = () -> {
             print(Thread.currentThread().getName() + " begin loading...");
-            LoadingClass lc = new LoadingClass();
+            new LoadingClass();
             print(Thread.currentThread().getName() + " end loading...");
         };
 
-        new Thread(r, "t1").start();
-        new Thread(r, "t2").start();
+        for (int i = 0; i < Constants.TEN; i++) {
+            pool.execute(r);
+        }
+        pool.shutdown();
     }
 }
 

@@ -18,7 +18,7 @@ import static util.Print.prints;
 
 /**
  * Alternate print ABCDEF 123456
- * output: 1A2B3C4D5E6F
+ * Print: 1A2B3C4D5E6F
  *
  * @author zqw
  * @date 2021/4/15
@@ -75,11 +75,7 @@ public class AlternatePrintTest {
             }
             terminated.countDown();
         });
-        try {
-            terminated.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Test
@@ -159,34 +155,28 @@ public class AlternatePrintTest {
         }
     }
 
-    private static final CountDownLatch run = new CountDownLatch(1);
+    private final CountDownLatch run = new CountDownLatch(1);
+
     @Test
     public void lockConditionPrint() {
         Lock lock = new ReentrantLock();
-        Condition conditionT1 = lock.newCondition();
-        Condition conditionT2 = lock.newCondition();
+        // numbers WaitSet
+        Condition nc = lock.newCondition();
+        // chars WaitSet
+        Condition cc = lock.newCondition();
 
-
-        execute(lock, conditionT1, conditionT2, chars);
-        execute(lock, conditionT2, conditionT1, numbers);
-        try {
-            terminated.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // TODO
-    void execute(Lock lock, Condition conditionT1, Condition conditionT2, char[] arr) {
         pool.execute(() -> {
             lock.lock();
             try {
-                for (char c : arr) {
-                    conditionT1.signal();
-                    prints(c);
-                    conditionT2.await();
+                for (int i = 0; i < numbers.length; i++) {
+                    prints(numbers[i]);
+                    if (i == 0) {
+                        run.countDown();
+                    }
+                    cc.signal();
+                    nc.await();
                 }
-                conditionT1.signal();
+                cc.signal();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
@@ -194,6 +184,32 @@ public class AlternatePrintTest {
                 terminated.countDown();
             }
         });
+        pool.execute(() -> {
+            try {
+                run.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            lock.lock();
+            try {
+                for (char c : chars) {
+                    prints(c);
+                    nc.signal();
+                    cc.await();
+                }
+                nc.signal();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+                terminated.countDown();
+            }
+        });
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     static Thread t1 = null, t2 = null;
@@ -235,6 +251,7 @@ public class AlternatePrintTest {
     }
 
     @Test
+    @SuppressWarnings("all")
     public void pipedStreamPrint() throws IOException {
 
         PipedInputStream input1 = new PipedInputStream();
@@ -246,18 +263,14 @@ public class AlternatePrintTest {
         input2.connect(output1);
 
         String message = "Your turn";
-        int bufferSize = Constants.TEN;
-
+        int bufferSize = Constants.KB;
         pool.execute(() -> {
             byte[] buffer = new byte[bufferSize];
             try {
                 for (char n : numbers) {
-                    int read;
-                    read = input1.read(buffer);
-                    if (new String(buffer, 0, read).equals(message)) {
-                        prints(n);
-                    }
-                    output1.write(message.getBytes());
+                    prints(n);
+                    output2.write(message.getBytes());
+                    input2.read(buffer);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -265,19 +278,15 @@ public class AlternatePrintTest {
                 terminated.countDown();
             }
         });
-
         pool.execute(() -> {
             byte[] buffer = new byte[bufferSize];
             try {
                 for (char c : chars) {
-                    prints(c);
-                    output2.write(message.getBytes());
-                    int read;
-                    read = input2.read(buffer);
-                    System.out.println(read);
-                    read = input2.read(buffer);
-                    System.out.println(read);
-
+                    int read = input1.read(buffer);
+                    if (new String(buffer, 0, read).equals(message)) {
+                        prints(c);
+                    }
+                    output1.write(message.getBytes());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

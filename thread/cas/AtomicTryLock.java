@@ -4,8 +4,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
- * @author:qiming
- * @date: 2021/9/26
+ * @author zqw
+ * @date 2021/9/26
  */
 public class AtomicTryLock {
     AtomicInteger cas = new AtomicInteger(0);
@@ -13,12 +13,16 @@ public class AtomicTryLock {
     Thread lockCurrentThread;
 
     boolean tryLock() {
-        System.out.println(Thread.currentThread().getName() + " ----> cas");
+        int i = 1;
         boolean res;
         do {
             res = cas.compareAndSet(0, 1);
             if (res) {
                 lockCurrentThread = Thread.currentThread();
+            }
+            i--;
+            if (i < 0) {
+                System.out.println(Thread.currentThread().getName() + " >> cas");
             }
         } while (!res);
         return true;

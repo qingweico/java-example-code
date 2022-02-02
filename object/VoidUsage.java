@@ -3,8 +3,8 @@ package object;
 /**
  * Void: The void's wrapper class
  *
- * @author:qiming
- * @date: 2021/1/2
+ * @author zqw
+ * @date 2021/1/2
  */
 public class VoidUsage {
     private static final int MIN_RANGE = 0;

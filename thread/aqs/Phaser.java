@@ -1,18 +1,18 @@
 package thread.aqs;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:qiming
+ * @author zqw
  * @date: 2021/10/17
  */
 public class Phaser {
     java.util.concurrent.Phaser phaser = new java.util.concurrent.Phaser();
 
-    ExecutorService exec = Executors.newFixedThreadPool(10);
-
+    final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 5, 1);
     class Worker implements Runnable {
         @Override
         @SuppressWarnings("InfiniteLoopStatement")
@@ -35,10 +35,10 @@ public class Phaser {
     public void run() {
         // main register
         phaser.register();
-        exec.execute(new Worker());
-        exec.execute(new Worker());
-        exec.execute(new Worker());
-        exec.execute(new Worker());
+        pool.execute(new Worker());
+        pool.execute(new Worker());
+        pool.execute(new Worker());
+        pool.execute(new Worker());
         while (true) {
             phaser.arriveAndAwaitAdvance();
             System.out.println("sync..." + phaser.getPhase());

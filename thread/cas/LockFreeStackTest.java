@@ -2,26 +2,30 @@ package thread.cas;
 
 import org.junit.Test;
 import thinking.genericity.LinkedStack;
+import thread.pool.CustomThreadPool;
+import util.Constants;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicStampedReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * @author:qiming
- * @date: 2021/10/1
+ * @author zqw
+ * @date 2021/10/1
  */
-public class LockFreeStack<T> {
+public class LockFreeStackTest<T> {
     AtomicStampedReference<Node> headRef;
     Node head;
-    static AtomicInteger counter = new AtomicInteger(0);
-    static AtomicInteger casCount = new AtomicInteger(0);
-
-    public LockFreeStack() {
+    static int initialValue = Constants.ZERO;
+    static AtomicInteger counter = new AtomicInteger(initialValue);
+    static AtomicInteger casCount = new AtomicInteger(initialValue);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 1);
+    public LockFreeStackTest() {
         head = new Node();
-        this.headRef = new AtomicStampedReference<>(head, 0);
+        this.headRef = new AtomicStampedReference<>(head, initialValue);
     }
 
     private class Node {
@@ -86,7 +90,7 @@ public class LockFreeStack<T> {
         var list = IntStream.range(0, 100)
                 .mapToObj(i -> {
                     var t = new Thread(() -> {
-                        for (int j = 0; j < 10; j++) {
+                        for (int j = 0; j < Constants.TEN; j++) {
                             try {
                                 stack.push(j);
                                 Thread.sleep(1);
@@ -114,16 +118,16 @@ public class LockFreeStack<T> {
 
     @Test
     public void lockFree() {
-        var stack = new LockFreeStack<Integer>();
+        var stack = new LockFreeStackTest<Integer>();
         var pushLatch = new CountDownLatch(100);
         var popLatch = new CountDownLatch(100);
-        for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
-                for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < Constants.HUNDRED; i++) {
+            pool.execute(() -> {
+                for (int j = 0; j < Constants.TEN; j++) {
                     stack.push(j);
                 }
                 pushLatch.countDown();
-            }).start();
+            });
         }
         try {
             pushLatch.await();
@@ -131,13 +135,13 @@ public class LockFreeStack<T> {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
+        for (int i = 0; i < Constants.HUNDRED; i++) {
+            pool.execute(() -> {
                 while (stack.pop() != null) {
                     counter.getAndIncrement();
                 }
                 popLatch.countDown();
-            }).start();
+            });
         }
         try {
             popLatch.await();
