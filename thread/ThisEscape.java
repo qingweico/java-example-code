@@ -5,8 +5,8 @@ import java.io.IOException;
 /**
  * Do not open threads in constructors!
  *
- * @author:qiming
- * @date: 2021/1/30
+ * @author zqw
+ * @date 2021/1/30
  */
 public class ThisEscape {
     private final int num = 1;

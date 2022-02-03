@@ -9,13 +9,13 @@ import java.util.concurrent.*;
  * LinkedBlockingQueue
  * LinkedBlockingDeque
  * PriorityBlockingQueue: Not follow FIFO, but according to priority.
- * LinkedBlockingQueue + SynchronousQueue => LinkedTransferQueue lock-free
+ * LinkedBlockingQueue + SynchronousQueue => LinkedTransferQueue: lock-free
  * LinkedTransferQueue: it has a higher performance than LinkedBlockingQueue,
  * and store more element than SynchronousQueue.
  * SynchronousQueue: only store an element, and it will block when try to add the second.
  * DelayQueue
  * {@link thinking.concurrency.juc.DelayQueueUsage}
- * {@link thread.queue.DelayQ}
+ * {@link DelayQueueTest}
  *
  * @author zqw
  * @date 2021/9/29

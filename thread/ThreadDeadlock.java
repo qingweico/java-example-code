@@ -2,12 +2,13 @@ package thread;
 
 /**
  * A simple deadlock
- * @author:qiming
- * @date: 2021/6/17
+ *
+ * @author zqw
+ * @date 2021/6/17
  */
-public class ThreadDeadlock extends Thread {
-    private static final Object objA = new Object();
-    private static final Object objB = new Object();
+class ThreadDeadlock extends Thread {
+    private static final Object OBJ_A = new Object();
+    private static final Object OBJ_B = new Object();
     private final boolean flag;
 
     public ThreadDeadlock(boolean flag) {
@@ -17,16 +18,16 @@ public class ThreadDeadlock extends Thread {
     @Override
     public void run() {
         if (flag) {
-            synchronized (objA) {
+            synchronized (OBJ_A) {
                 System.out.println("objA...");
-                synchronized (objB) {
+                synchronized (OBJ_B) {
                     System.out.println("objB...");
                 }
             }
         } else {
-            synchronized (objB) {
+            synchronized (OBJ_B) {
                 System.out.println("objB...");
-                synchronized (objA) {
+                synchronized (OBJ_A) {
                     System.out.println("objA...");
                 }
             }

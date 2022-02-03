@@ -1,14 +1,20 @@
 package thread.queue;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import javax.annotation.Nonnull;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:qiming
- * @date: 2021/9/30
+ * @author zqw
+ * @date 2021/9/30
  */
-public class DelayQ {
+public class DelayQueueTest {
     static class DelayItem<T> implements Delayed {
 
         T value;
@@ -20,46 +26,47 @@ public class DelayQ {
         }
 
         @Override
-        public long getDelay(TimeUnit unit) {
+        public long getDelay(@Nonnull TimeUnit unit) {
             return time - System.currentTimeMillis();
         }
 
         @Override
-        public int compareTo(Delayed o) {
+        @SuppressWarnings("unchecked")
+        public int compareTo(@Nonnull Delayed o) {
             return (int) (this.time - ((DelayItem<T>) o).time);
         }
 
         @Override
         public String toString() {
-            return "DelayItem{" +
-                    "value=" + value +
-                    ", time=" + time +
-                    '}';
+            return new ToStringBuilder(this)
+                    .append("value", value)
+                    .append("time", time)
+                    .toString();
         }
     }
 
     static DelayQueue<DelayItem<Integer>> delay = new DelayQueue<>();
 
     public static void main(String[] args) {
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
 
-
-        new Thread(() -> {
-            for (int i = 0; i < 20; i++) {
+        pool.execute(() -> {
+            for (int i = 0; i < Constants.TWENTY; i++) {
                 delay.offer(new DelayItem<>(i, i * 1000));
             }
-        }).start();
+        });
 
-        new Thread(() -> {
+        pool.execute(() -> {
             while (true) {
                 try {
                     var item = delay.take();
                     System.out.println(item);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    break;
                 }
             }
-        }).start();
-
-
+        });
+        pool.shutdown();
     }
 }

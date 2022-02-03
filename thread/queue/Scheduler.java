@@ -1,27 +1,38 @@
 package thread.queue;
 
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @author:qiming
- * @date: 2021/9/30
+ * @author zqw
+ * @date 2021/9/30
  */
 public class Scheduler {
 
-    // fair ? Dual Queue : Dual Stack
+    /**
+     * fair ? Dual Queue : Dual Stack
+     */
     static SynchronousQueue<Runnable> synchronousQueue = new SynchronousQueue<>(true);
-    // Dual Queue
+    /**
+     * Dual Queue
+     */
     static LinkedTransferQueue<Runnable> transferQueue = new LinkedTransferQueue<>();
 
     static AtomicInteger idCount = new AtomicInteger(0);
 
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(1000, 1000, 100);
+
+
     public Scheduler(int works) {
         for (int i = 0; i < works; i++) {
-            new Thread(new Worker()).start();
+            pool.execute(new Worker());
         }
     }
 
@@ -42,6 +53,7 @@ public class Scheduler {
                     System.out.format("work done by id=%d\n", id);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    break;
                 }
             }
         }
@@ -50,20 +62,20 @@ public class Scheduler {
     public void synchronousSubmit(Runnable r) {
         while (!transferQueue.tryTransfer(r)) {
             Thread.onSpinWait();
-            new Thread(new Worker()).start();
+            pool.execute(new Worker());
         }
     }
 
     public void transferSubmit(Runnable r) {
         while (!synchronousQueue.offer(r)) {
             Thread.onSpinWait();
-            new Thread(new Worker()).start();
+            pool.execute(new Worker());
         }
     }
 
     public static void main(String[] args) {
         Scheduler scheduler = new Scheduler(10);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < Constants.HUNDRED; i++) {
             scheduler.transferSubmit(() -> {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
@@ -72,5 +84,6 @@ public class Scheduler {
                 }
             });
         }
+        pool.shutdown();
     }
 }

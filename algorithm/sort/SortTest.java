@@ -11,8 +11,8 @@ import java.util.concurrent.Executors;
 import static util.Print.printf;
 
 /**
- * @author:qiming
- * @date: 2021/10/16
+ * @author zqw
+ * @date 2021/10/16
  */
 public class SortTest {
 
@@ -142,30 +142,30 @@ public class SortTest {
         }
     }
 
-    public void sortTest(Class<?> cls, int N) {
+    public void sortTest(Class<?> cls, int n) {
         try {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();
             var start = System.nanoTime();
             if (rawInstance instanceof IMutableSorter) {
-                var A = Tools.gen(N);
+                var unordered = Tools.gen(n);
                 var instance = (IMutableSorter) rawInstance;
-                A = instance.sort(A);
+                unordered = instance.sort(unordered);
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
-                Tools.assertSorted(A);
+                Tools.assertSorted(unordered);
             } else if (rawInstance instanceof MutableSorter) {
-                var A = Tools.gen(N, 100000).stream().mapToInt(x -> x).toArray();
+                var unordered = Tools.gen(n, 100000).stream().mapToInt(x -> x).toArray();
                 var instance = (MutableSorter) rawInstance;
-                instance.sort(A);
+                instance.sort(unordered);
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
-                Tools.assertSorted(A);
+                Tools.assertSorted(unordered);
             } else {
-                int[] raw = Tools.gen(N, 100000).stream().mapToInt(x -> x).toArray();
-                Integer[] A = Arrays.stream(raw).boxed().toArray(Integer[]::new);
+                int[] raw = Tools.gen(n, 100000).stream().mapToInt(x -> x).toArray();
+                Integer[] unordered = Arrays.stream(raw).boxed().toArray(Integer[]::new);
                 rawInstance.getClass().getMethod("sort",
-                        Comparable[].class).invoke(rawInstance, (Object) A);
+                        Comparable[].class).invoke(rawInstance, (Object) unordered);
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
-                Tools.assertSorted(Arrays.asList(A));
+                Tools.assertSorted(Arrays.asList(unordered));
             }
         } catch (NoSuchMethodException
                 | InvocationTargetException

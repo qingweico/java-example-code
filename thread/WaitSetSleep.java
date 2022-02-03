@@ -1,32 +1,36 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
  * sleep and lock
  *
- * @author:qiming
- * @date: 2021/9/21
+ * @author zqw
+ * @date 2021/9/21
  * @see WaitSetNotify
  */
-public class WaitSetSleep {
+class WaitSetSleep {
 
-    static final Object lock = new Object();
-    static final Semaphore block = new Semaphore(1);
+    static final Object O = new Object();
+    static Semaphore block = new Semaphore(1);
     static boolean hasGoodNetwork = false;
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 20, 10);
+
 
     public static void main(String[] args) {
-        new Thread(() -> {
-            synchronized (lock) {
+        pool.execute(() -> {
+            synchronized (O) {
                 if (!hasGoodNetwork) {
                     try {
                         System.out.println("the network is worse, i will wait 5 second...");
-                        // Sleep do not release the lock, so the other thread enters BLOCKED state,
+                        // Sleep do not release the lock, so the other thread enters BLOCKED state.
                         // (ObjectMonitor::EntryList)
-                        TimeUnit.SECONDS.sleep(2);
-                        block.release();
-                        TimeUnit.SECONDS.sleep(3);
+                        TimeUnit.SECONDS.sleep(5);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -37,7 +41,7 @@ public class WaitSetSleep {
                     System.out.println("good!");
                 }
             }
-        }, "user").start();
+        });
 
         System.out.println("Loading in...");
 
@@ -47,13 +51,13 @@ public class WaitSetSleep {
             e.printStackTrace();
         }
 
-        new Thread(() -> {
-            System.out.println("wo jin bu lai a!");
-            synchronized (lock) {
+        pool.execute(() -> {
+            synchronized (O) {
                 hasGoodNetwork = true;
                 System.out.println("The network will be OK!");
+                block.release();
             }
-        }, "maintainer").start();
+        });
 
         try {
             block.acquire();
@@ -61,15 +65,17 @@ public class WaitSetSleep {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println("wo ye jin bu lai a!");
-            new Thread(() -> {
-                synchronized (lock) {
+        for (int i = 0; i < Constants.TEN; i++) {
+            pool.execute(() -> {
+                synchronized (O) {
                     if (hasGoodNetwork) {
                         System.out.println("rendering...");
+                    } else {
+                        System.out.println("nothing to do!");
                     }
                 }
-            }, "browser").start();
+            });
         }
+        pool.shutdown();
     }
 }

@@ -1,25 +1,30 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
 
 /**
- * Semaphore:
- * Maintain the current number of threads accessing itself,
- * and provide a synchronization mechanism.
+ * Semaphore: Maintain the current number of threads
+ * accessing itself, and provide a synchronization mechanism.
  *
- * @author:qiming
- * @date: 2020/12/19
+ * @author zqw
+ * @date 2020/12/19
  * @see thread.aqs.Semaphore
  */
 public class SemaphoreExample {
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 10);
+
     public static void main(String[] args) {
 
         Semaphore semaphore = new Semaphore(5);
-        for (int i = 0; i < 100; i++) {
-            new Thread(() -> {
+        for (int i = 0; i < Constants.HUNDRED; i++) {
+            pool.execute(() -> {
                 try {
                     // Obtain permission
                     semaphore.acquire();
@@ -32,7 +37,8 @@ public class SemaphoreExample {
                     semaphore.release();
                     print(Thread.currentThread().getName() + " pass!");
                 }
-            }, String.valueOf(i)).start();
+            });
         }
+        pool.shutdown();
     }
 }

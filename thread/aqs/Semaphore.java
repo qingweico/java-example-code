@@ -37,10 +37,8 @@ public class Semaphore extends AbstractQueuedSynchronizer {
     }
 
     public static void main(String[] args) {
-
-        // TODO
         var semaphore = new Semaphore(5);
-        for (int i = 0; i < Constants.HUNDRED; i++) {
+        for (int i = 0; i < Constants.TWENTY; i++) {
             pool.execute(() -> {
                 semaphore.acquireShared(0);
                 try {
@@ -53,5 +51,6 @@ public class Semaphore extends AbstractQueuedSynchronizer {
                 semaphore.releaseShared(0);
             });
         }
+        pool.shutdown();
     }
 }

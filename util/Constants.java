@@ -13,6 +13,7 @@ public interface Constants {
     int FIVE = 5;
     int LONG_BYTE_SIZE = 8;
     int TEN = 10;
+    int TWENTY = 20;
     int KB = 1024;
     int EOF = -1;
     int QOMOLANGMA = 8848;

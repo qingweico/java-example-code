@@ -9,16 +9,17 @@ import java.util.Base64;
  * @author zqw
  * @date 2022/10/22
  */
-public class NewFeature {
+public class NewFeatureTest {
     @Test
     public void localDate() {
         var date = LocalDate.of(2021, 10, 22);
         var time = LocalTime.of(19, 36);
         var dateTime = LocalDateTime.of(date, time);
         System.out.println(dateTime);
-        var zoneDT = ZonedDateTime.of(dateTime, ZoneId.of("Europe/Paris"));
-        System.out.println(zoneDT);
+        var zoneDt = ZonedDateTime.of(dateTime, ZoneId.of("Europe/Paris"));
+        System.out.println(zoneDt);
     }
+
     @Test
     public void base64() {
         Base64.Decoder decode = Base64.getDecoder();

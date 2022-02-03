@@ -9,13 +9,13 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 /**
- * @author:qiming
- * @date: 2021/10/16
+ * @author zqw
+ * @date 2021/10/16
  */
 public class Tools {
-    private static final char[] letters = new char[]{
+    private static final char[] LETTERS = new char[]{
             'A', 'B', 'C', 'D', 'E', 'F', 'G',
-            'H', 'I', 'J', 'K', 'L', 'M', 'N',
+            'H', 'I', 'J', 'K', 'L', 'M', 'n',
             'O', 'P', 'Q', 'R', 'S', 'T', 'U',
             'V', 'W', 'X', 'Y', 'Z',
             'a', 'b', 'c', 'd', 'e', 'f', 'g',
@@ -31,32 +31,32 @@ public class Tools {
 
     }
 
-    static <E> void swap(E[] A, int i, int j) {
-        E tmp = A[i];
-        A[i] = A[j];
-        A[j] = tmp;
+    static <E> void swap(E[] e, int i, int j) {
+        E tmp = e[i];
+        e[i] = e[j];
+        e[j] = tmp;
     }
 
-    public static List<Integer> gen(int N) {
-        return gen(N, 10000);
+    public static List<Integer> gen(int n) {
+        return gen(n, 10000);
     }
 
-    public static List<Integer> gen(int N, int bound) {
+    public static List<Integer> gen(int n, int bound) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             list.add((int) (Math.random() * bound));
         }
         return list;
     }
 
-    public static List<Integer> genOrder(int N) {
-        return genOrder(N, N);
+    public static List<Integer> genOrder(int n) {
+        return genOrder(n, n);
     }
 
-    public static List<Integer> genOrder(int N, int bound) {
+    public static List<Integer> genOrder(int n, int bound) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
-            if (N != bound) {
+        for (int i = 0; i < n; i++) {
+            if (n != bound) {
                 list.add(bound);
             } else {
                 list.add(i);
@@ -65,26 +65,25 @@ public class Tools {
         return list;
     }
 
-    public static List<String> genString(int N, int lineWidth) {
-        return genString(N, lineWidth, false);
+    public static List<String> genString(int n, int lineWidth) {
+        return genString(n, lineWidth, false);
     }
 
-    public static List<String> genString(int N, int lineWidth, boolean fixedLength) {
+    public static List<String> genString(int n, int lineWidth, boolean fixedLength) {
         List<String> list = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder(lineWidth);
-        while (N > 0) {
+        while (n > 0) {
             int bits;
             if (fixedLength) {
                 bits = lineWidth;
             } else {
                 bits = (int) (Math.random() * lineWidth) + 1;
             }
-
             for (int i = 0; i < bits; i++) {
-                int rndIndex = ThreadLocalRandom.current().nextInt(0, letters.length);
-                stringBuilder.append(letters[rndIndex]);
+                int rndIndex = ThreadLocalRandom.current().nextInt(0, LETTERS.length);
+                stringBuilder.append(LETTERS[rndIndex]);
             }
-            N--;
+            n--;
             list.add(stringBuilder.toString());
             stringBuilder.delete(0, lineWidth);
         }

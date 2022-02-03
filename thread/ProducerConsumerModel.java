@@ -18,7 +18,13 @@ class ProducerConsumerModel {
     final static int MAX = Constants.TEN;
     final LinkedList<Double> queue = new LinkedList<>();
     ReentrantLock lock = new ReentrantLock();
+    /**
+     * the sign of queue full
+     */
     Condition full = lock.newCondition();
+    /**
+     * the sign of queue empty
+     */
     Condition empty = lock.newCondition();
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 10);
 
@@ -48,8 +54,6 @@ class ProducerConsumerModel {
         } finally {
             lock.unlock();
         }
-
-
     }
 
 
@@ -74,12 +78,11 @@ class ProducerConsumerModel {
         } finally {
             lock.unlock();
         }
-
     }
 
     public static void main(String[] args) {
         var p = new ProducerConsumerModel();
-        for (int i = 0; i < Constants.TEN; i++) {
+        for (int i = 0; i < Constants.HUNDRED; i++) {
             pool.execute(() -> {
                 while (true) {
                     try {

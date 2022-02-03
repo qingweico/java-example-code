@@ -8,6 +8,8 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 
 /**
+ * CyclicBarrier
+ *
  * @author zqw
  * @date 2021/10/17
  */
