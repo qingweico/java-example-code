@@ -9,17 +9,24 @@ import java.util.function.Supplier;
 /**
  * 优先考虑依赖注入来引入功能
  *
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
-public class Article5 {
+class Article5 {
+    public static void main(String[] args) {
+
+    }
 }
 
-// Inappropriate use of static utility - inflexible & untestable
+/**
+ * Inappropriate use of static utility - inflexible & untestable
+ */
 class SpellChecker {
-    private static final Lexicon dictionary = null;
+    private static final Lexicon DICTIONARY = null;
 
-    // Non-instantiable
+    /**
+     *  Non-instantiable
+     */
     private SpellChecker() {
     }
 
@@ -33,11 +40,15 @@ class SpellChecker {
 
 }
 
-// Inappropriate use of singleton - inflexible & untestable
+/**
+ * Inappropriate use of singleton - inflexible & untestable
+ */
 class SpellCheckerUsingSingleton {
     private final Lexicon dictionary = null;
 
-    // Non-instantiable
+    /**
+     * Non-instantiable
+     */
     private SpellCheckerUsingSingleton() {
     }
 
@@ -56,15 +67,17 @@ class SpellCheckerUsingSingleton {
 class Lexicon {
 }
 
-// Static utility classes and Singleton classes are not appropriate for classes that need to
-// reference the underlying resources.
+// Static utility classes and Singleton classes are not appropriate
+// for classes that need to reference the underlying resources.
 
 
-// Dependency injection providers flexibility and testability
-class SpellCheckerUsingDI {
+/**
+ * Dependency injection providers flexibility and testability
+ */
+class SpellCheckerUsingDi {
     private final Lexicon dictionary;
 
-    public SpellCheckerUsingDI(Lexicon dictionary) {
+    public SpellCheckerUsingDi(Lexicon dictionary) {
         this.dictionary = Objects.requireNonNull(dictionary);
     }
 
@@ -84,9 +97,15 @@ class SpellCheckerUsingDI {
     }
 }
 
-// Pass the resource factory to the constructor, this type of factory is embodied in the
-// factory method, Supplier<T> is a good way.
+/**
+ * Pass the resource factory to the constructor, this type of factory is embodied in the
+ * factory method, Supplier<T> is a good way.
+ */
 class StringFactory {
+    /**
+     * @param supplier The string of Producer
+     * @return String
+     */
     public static String create(Supplier<? extends String> supplier) {
         return supplier.get();
     }

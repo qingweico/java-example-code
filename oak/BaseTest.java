@@ -2,6 +2,8 @@ package oak;
 
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 /**
  * @author zqw
  * @date 2022/2/3
@@ -28,5 +30,12 @@ public class BaseTest {
         System.out.println(0x7FFFFFFF);
         System.out.println(Float.NEGATIVE_INFINITY);
         System.out.println(Float.POSITIVE_INFINITY);
+    }
+
+    @Test
+    public void bitComparable() {
+        Integer[] a = new Integer[]{1, 8, 2, 0};
+        Arrays.sort(a, (o1, o2) -> Integer.bitCount(o1) > Integer.bitCount(o2) ? o1 - o2 : o2 - o1);
+        System.out.println(Arrays.toString(a));
     }
 }

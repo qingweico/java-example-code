@@ -10,6 +10,7 @@ public interface Constants {
     int ZERO = 0;
     int ONE = 1;
     int TWO = 2;
+    int THREE = 3;
     int FIVE = 5;
     int LONG_BYTE_SIZE = 8;
     int TEN = 10;

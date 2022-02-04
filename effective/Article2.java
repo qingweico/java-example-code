@@ -1,32 +1,54 @@
 package effective;
 
+import com.google.common.base.MoreObjects;
+
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static effective.Nypizza.Size.SMALL;
+import static effective.NyPizza.Size.SMALL;
 import static effective.Pizza.Topping.*;
 
 /**
  * 遇到多个构造器参数时要考虑使用构建器
  *
- * @author:qiming
- * @date: 2021/2/22
+ * @author zqw
+ * @date 2021/2/22
  */
-public class Article2 {
+class Article2 {
     public static void main(String[] args) {
 
     }
 }
 
-// Telescoping constructor pattern - does not scale well!
+/**
+ * Telescoping constructor pattern - does not scale well!
+ */
 class NutritionFacts {
-    private final int servingSize; // (ml)             required
-    private final int servings;    // (per container)  required
-    private final int calories;    // (per serving)    optional
-    private final int fat;         // (g/serving)      optional
-    private final int sodium;      // (mg/serving)     optional
-    private final int carbohydrate;// (g/serving)      optional
+    /**
+     * (ml)             required
+     */
+    private final int servingSize;
+    /**
+     * (per container)  required
+     */
+    private final int servings;
+    /**
+     * (per serving)    optional
+     */
+    private final int calories;
+    /**
+     * (g/serving)      optional
+     */
+    private final int fat;
+    /**
+     * (mg/serving)     optional
+     */
+    private final int sodium;
+    /**
+     * (g/serving)      optional
+     */
+    private final int carbohydrate;
 
     public NutritionFacts(int servingSize, int servings) {
         this(servingSize, servings, 0);
@@ -55,15 +77,40 @@ class NutritionFacts {
         this.sodium = sodium;
         this.carbohydrate = carbohydrate;
     }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("servingSize", servingSize)
+                .add("servings", servings)
+                .add("calories", calories)
+                .add("fat", fat)
+                .add("sodium", sodium)
+                .add("carbohydrate", carbohydrate)
+                .toString();
+    }
+
+    public static void main(String[] args) {
+        NutritionFacts nutritionFacts = new NutritionFacts(100, 20);
+        System.out.println(nutritionFacts);
+    }
 }
 // In short, the overlapping constructor pattern works, but the client code is
 // harder to write and harder to read when you have a lot of parameters.
 
 
-// JavaBeans Pattern - allows inconsistency, mandates mutability
+/**
+ * JavaBeans Pattern - allows inconsistency, mandates mutability
+ */
 class NutritionFactsOfUsingJavaBeans {
-    private int servingSize = -1; // Required; not default value
-    private int servings = -1;    // Required; not default value
+    /**
+     * Required; not default value
+     */
+    private int servingSize = -1;
+    /**
+     * Required; not default value
+     */
+    private int servings = -1;
     private int calories = 0;
     private int fat = 0;
     private int sodium = 0;
@@ -96,6 +143,18 @@ class NutritionFactsOfUsingJavaBeans {
         this.carbohydrate = carbohydrate;
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("servingSize", servingSize)
+                .add("servings", servings)
+                .add("calories", calories)
+                .add("fat", fat)
+                .add("sodium", sodium)
+                .add("carbohydrate", carbohydrate)
+                .toString();
+    }
+
     public static void main(String[] args) {
 
         // Instances are easy to create and the code is easy to read,
@@ -107,6 +166,8 @@ class NutritionFactsOfUsingJavaBeans {
         cocaCola.setCalories(100);
         cocaCola.setSodium(35);
         cocaCola.setCalories(27);
+        cocaCola.setCarbohydrate(200);
+        System.out.println(cocaCola);
     }
 }
 
@@ -191,10 +252,19 @@ class NutritionFactsOfUsingBuilder {
     }
 }
 
-// Builder pattern for class hierarchies
+/**
+ * Builder pattern for class hierarchies
+ */
 abstract class Pizza {
     public enum Topping {
-        HAM, MUSHROOM, ONION, PEPPER, SAUSAGE
+        /**
+         * ~
+         */
+        HAM,
+        MUSHROOM,
+        ONION,
+        PEPPER,
+        SAUSAGE
     }
 
     final Set<Topping> toppings;
@@ -207,20 +277,34 @@ abstract class Pizza {
             return self();
         }
 
+        /**
+         * The builder of Pizza
+         *
+         * @return {@code Pizza}
+         */
         public abstract Pizza build();
 
-        // Subclasses must override this method to return "this"
+        /**
+         * Subclasses must override this method to return "this".
+         *
+         * @return {@code T}
+         */
         protected abstract T self();
     }
 
     Pizza(Builder<?> builder) {
-        toppings = builder.toppings.clone(); // Set item 50
+        toppings = builder.toppings.clone();
     }
 }
 
-class Nypizza extends Pizza {
+class NyPizza extends Pizza {
     public enum Size {
-        SMALL, MEDIUM, LARGE
+        /**
+         * ~
+         */
+        SMALL,
+        MEDIUM,
+        LARGE
     }
 
     private final Size size;
@@ -233,8 +317,8 @@ class Nypizza extends Pizza {
         }
 
         @Override
-        public Nypizza build() {
-            return new Nypizza(this);
+        public NyPizza build() {
+            return new NyPizza(this);
         }
 
         @Override
@@ -243,9 +327,17 @@ class Nypizza extends Pizza {
         }
     }
 
-    Nypizza(Builder builder) {
+    NyPizza(Builder builder) {
         super(builder);
         size = builder.size;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("toppings", toppings)
+                .add("size", size)
+                .toString();
     }
 }
 
@@ -272,17 +364,26 @@ class Calzone extends Pizza {
         }
     }
 
-
     Calzone(Builder builder) {
         super(builder);
         sauceInside = builder.sauceInside;
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("toppings", toppings)
+                .add("sauceInside", sauceInside)
+                .toString();
+    }
+
     public static void main(String[] args) {
-        Nypizza pizza = new Nypizza.Builder(SMALL)
+        NyPizza pizza = new NyPizza.Builder(SMALL)
                 .addTopping(SAUSAGE).addTopping(ONION).build();
         Calzone calzone = new Calzone.Builder()
                 .addTopping(HAM).sauceInside().build();
+        System.out.println(pizza);
+        System.out.println(calzone);
 
     }
 }

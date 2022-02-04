@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author:qiming
- * @date: 2021/9/27
+ * @author zqw
+ * @date 2021/9/27
  */
 public class RandomStringGenerator<T> implements Iterable<T> {
 

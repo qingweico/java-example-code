@@ -1,7 +1,6 @@
 package thinking;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 class A {
 

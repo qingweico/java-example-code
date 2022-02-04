@@ -7,7 +7,7 @@ import annotation.NotThreadSafe;
  * @date: 2021/3/28
  */
 @NotThreadSafe
-public class MutableInteger {
+class MutableInteger {
     private int value;
 
     public int get() {

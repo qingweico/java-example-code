@@ -1,8 +1,8 @@
 package thinking;
 
 /**
- * @author:qiming
- * @date: 2020/09/12
+ * @author zqw
+ * @date 2020/09/12
  */
 public class Begin {
     public static void main(String[] args) {

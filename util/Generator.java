@@ -1,12 +1,17 @@
 package util;
 
 /**
- * @author:qiming
- * @date: 2021/3/23
+ * A generic interface
+ *
+ * @author zqw
+ * @date 2021/3/23
  */
 
-// A generic interface
 @FunctionalInterface
 public interface Generator<T> {
+    /**
+     * Generate next element
+     * @return The generic type {@code T}
+     */
     T next();
 }

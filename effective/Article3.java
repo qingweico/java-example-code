@@ -6,13 +6,18 @@ import util.Generator;
 /**
  * 用私有构造器或者枚举类型强化Singleton属性
  *
- * @author:qiming
- * @date: 2021/3/19
+ * @author zqw
+ * @date 2021/3/19
  */
-public class Article3 {
+class Article3 {
+    public static void main(String[] args) {
+
+    }
 }
 
-// Singleton with public final field
+/**
+ * Singleton with public final field
+ */
 class Elvis {
     public static final Elvis INSTANCE = new Elvis();
 
@@ -24,7 +29,9 @@ class Elvis {
 
 }
 
-// Singleton with static factory
+/**
+ * Singleton with static factory
+ */
 class Elvis0 {
     private static final Elvis0 INSTANCE = new Elvis0();
 
@@ -39,11 +46,16 @@ class Elvis0 {
     }
 }
 
-// Enum singleton - the preferred approach
-// Single-element enumerated types are often the best way to implement singletons.
-// This approach is not easy to use when a Singleton must extend a superclass rather
-// than an Enum, although an Enum can be used to implement the interface.
+/**
+ * Enum singleton - the preferred approach
+ * Single-element enumerated types are often the best way to implement singletons.
+ * This approach is not easy to use when a Singleton must extend a superclass rather
+ * than an Enum, although an Enum can be used to implement the interface.
+ */
 enum Elvis2 implements Generator<Object> {
+    /**
+     * ~
+     */
     INSTANCE;
 
     public void leaveTheBuilding() {

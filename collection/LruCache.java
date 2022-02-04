@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author:qiming
- * @date: 2021/11/19
+ * @author zqw
+ * @date 2021/11/19
  */
 public class LruCache<K, V> {
 
@@ -94,7 +94,6 @@ public class LruCache<K, V> {
 
     public static void main(String[] args) {
 
-       // TODO
         var lru = new LruCache<String, String>(3);
         lru.put("A", "1");
         lru.put("B", "2");
@@ -103,5 +102,12 @@ public class LruCache<K, V> {
         lru.put("D", "4");
         lru.get("C");
         lru.put("E", "5");
+        LruCache<String, String>.Node cur = lru.head.next;
+        System.out.print("[head<-");
+        while (cur != lru.tail) {
+            System.out.print(cur.k + "<-");
+            cur = cur.next;
+        }
+        System.out.println("tail]");
     }
 }

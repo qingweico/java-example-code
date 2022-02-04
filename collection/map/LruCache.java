@@ -1,19 +1,23 @@
 package collection.map;
 
+import util.Constants;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * @author:qiming
- * @date: 2021/9/27
+ * LRU: Least Recently Used
+ *
+ * @author zqw
+ * @date 2021/9/27
  */
-public class LRUCache<K, V> implements Iterable<K> {
+public class LruCache<K, V> implements Iterable<K> {
 
     LinkedHashMap<K, V> cache = new LinkedHashMap<>();
 
-    int MAX = 3;
+    private static final int MAX = Constants.THREE;
 
     public void cache(K key, V value) {
         if (cache.containsKey(key)) {
@@ -24,6 +28,17 @@ public class LRUCache<K, V> implements Iterable<K> {
             cache.remove(first);
         }
         cache.put(key, value);
+    }
+
+    public V get(K key) {
+        V value = cache.get(key);
+        if (value != null) {
+            var it = cache.keySet().iterator();
+            var first = it.next();
+            cache.remove(first);
+            cache.put(key, value);
+        }
+        return value;
     }
 
     @Override
@@ -44,15 +59,15 @@ public class LRUCache<K, V> implements Iterable<K> {
     }
 
     public static void main(String[] args) {
-        var lru = new LRUCache<String, String>();
+        var lru = new LruCache<String, String>();
         lru.cache("A", "1");
         lru.cache("B", "2");
         lru.cache("C", "3");
-        lru.cache.get("A");
+        lru.get("A");
         lru.cache("D", "4");
-        lru.cache.get("C");
+        lru.get("C");
         lru.cache("E", "5");
-        System.out.println("leave <-" + StreamSupport.stream(lru.spliterator(), false)
+        System.out.println("leave<-" + StreamSupport.stream(lru.spliterator(), false)
                 .map(Object::toString)
                 .collect(Collectors.joining("<-")));
 

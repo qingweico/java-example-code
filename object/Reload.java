@@ -8,7 +8,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2020/12/12
  */
-public class Reload {
+class Reload {
     public static void main(String[] args) {
         // Output "String method"
         // Because null is not an object and the compiler selects the
