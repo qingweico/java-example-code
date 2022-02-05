@@ -1,6 +1,6 @@
 package thread.cas;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
@@ -17,12 +17,12 @@ public class UnsafeExampleTest {
     int i = 0;
     private static final UnsafeExampleTest U = new UnsafeExampleTest();
 
-    public static void main(String[] args) throws Exception {
-
-        Field unsafeField = Unsafe.class.getDeclaredFields()[0];
-        unsafeField.setAccessible(true);
-        Unsafe unsafe = (Unsafe) unsafeField.get(null);
-
+    @Test
+    public void cas() throws NoSuchFieldException {
+        Unsafe unsafe = reflectGetUnsafe();
+        if (unsafe == null) {
+            return;
+        }
         Field f = UnsafeExampleTest.class.getDeclaredField("i");
         long offset = unsafe.objectFieldOffset(f);
 
@@ -31,10 +31,12 @@ public class UnsafeExampleTest {
         boolean success = unsafe.compareAndSwapInt(U, offset, 0, 1);
         print(success);
         print(U.i);
+
     }
 
     /**
      * 或者使用虚拟机参数-Xbootclasspath/a: ${path} 将调用Unsafe方法的类加入到系统类加载路径上
+     *
      * @return {@link Unsafe}
      */
     public static Unsafe reflectGetUnsafe() {

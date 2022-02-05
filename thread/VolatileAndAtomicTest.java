@@ -8,6 +8,9 @@ import util.Constants;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
+import java.util.concurrent.atomic.LongAccumulator;
+import java.util.concurrent.atomic.LongAdder;
 
 import static util.Print.print;
 
@@ -24,7 +27,7 @@ import static util.Print.print;
 public class VolatileAndAtomicTest {
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 20, 10);
     static CountDownLatch terminated = new CountDownLatch(Constants.TWENTY);
-    private static int num = 0;
+    private volatile int num = 0;
 
     /**
      * Using the synchronized keyword is also a good option, but these methods are synchronized
@@ -32,11 +35,11 @@ public class VolatileAndAtomicTest {
      *
      * @return the num
      */
-    private static synchronized int getNum() {
+    private synchronized int getNum() {
         return num;
     }
 
-    private static synchronized void setNum() {
+    private synchronized void setNum() {
         num = 1;
     }
 
@@ -69,6 +72,33 @@ public class VolatileAndAtomicTest {
         print(" The final value of num is : " + resource.num);
         print(" The final value of num(atomic) is : " + resource.ai.get());
         pool.shutdown();
+    }
+
+    @Test
+    public void atomicFieldUpdater() {
+        AtomicIntegerFieldUpdater<VolatileAndAtomicTest> fieldUpdater = AtomicIntegerFieldUpdater.
+                // Field must be volatile, or throw IllegalArgumentException
+                        newUpdater(VolatileAndAtomicTest.class, "num");
+        int updatedNum = fieldUpdater.updateAndGet(new VolatileAndAtomicTest(), (x) -> x + 1);
+        System.out.println(updatedNum);
+    }
+
+    @Test
+    public void accumulator() {
+        LongAccumulator longAccumulator = new LongAccumulator(Long::sum, 1);
+        longAccumulator.accumulate(2);
+        System.out.println(longAccumulator.get());
+
+    }
+
+    @Test
+    public void adder() {
+        LongAdder longAdder = new LongAdder();
+        longAdder.add(1);
+        longAdder.add(2);
+        longAdder.add(3);
+        System.out.println(longAdder.sumThenReset());
+        System.out.println(longAdder.longValue());
     }
 
     @Test

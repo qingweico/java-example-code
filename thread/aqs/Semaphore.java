@@ -11,7 +11,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @date 2021/10/17
  */
 public class Semaphore extends AbstractQueuedSynchronizer {
-    static CustomThreadPool pool = new CustomThreadPool();
+    static CustomThreadPool pool = new CustomThreadPool(5, 5);
 
     public Semaphore(int permits) {
         setState(permits);

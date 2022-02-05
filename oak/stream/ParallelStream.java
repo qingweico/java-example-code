@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * @author:qiming
- * @date: 2021/9/27
+ * @author zqw
+ * @date 2021/9/27
  */
 public class ParallelStream {
    public static void main(String[] args) throws ExecutionException, InterruptedException {

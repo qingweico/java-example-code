@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * the basic of the Callable
+ * Callable
  *
  * @author zqw
  * @date 2020/12/17

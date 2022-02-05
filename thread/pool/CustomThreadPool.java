@@ -1,5 +1,6 @@
 package thread.pool;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -11,25 +12,25 @@ import java.util.concurrent.*;
 public class CustomThreadPool {
 
     private final BlockingDeque<Runnable> workQueue;
-    private static final int DEFAULT_MAX_THREAD_SIZE = 10;
-    private static final int DEFAULT_DEQUE_SIZE = 10;
+    private static final int DEFAULT_POOL_SIZE = 10;
+    private static final int DEFAULT_QUEUE_SIZE = 10;
 
     private volatile boolean isRun = true;
 
-    public CustomThreadPool(int maxThreadSize, int dequeSize) {
+    public CustomThreadPool(int poolSize, int queueSize) {
 
-        List<WorkThread> workThreads = new ArrayList<>(maxThreadSize);
-        for (int i = 0; i < maxThreadSize; i++) {
+        List<WorkThread> workThreads = new ArrayList<>(poolSize);
+        for (int i = 0; i < poolSize; i++) {
             workThreads.add(new WorkThread());
         }
-        workQueue = new LinkedBlockingDeque<>(dequeSize);
+        workQueue = new LinkedBlockingDeque<>(queueSize);
         for (WorkThread workThread : workThreads) {
             workThread.start();
         }
     }
 
     public CustomThreadPool() {
-        this(DEFAULT_MAX_THREAD_SIZE, DEFAULT_DEQUE_SIZE);
+        this(DEFAULT_POOL_SIZE, DEFAULT_QUEUE_SIZE);
     }
 
     public void shutdown() {
@@ -40,16 +41,23 @@ public class CustomThreadPool {
         @Override
         public void run() {
             while (isRun || workQueue.size() > 0) {
-                Runnable run = workQueue.poll();
-                if (run != null) {
+                Runnable run;
+                try {
+                    run = workQueue.take();
                     run.run();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
     }
 
-    public boolean execute(Runnable command) {
-        return workQueue.offer(command);
+    public void execute(@Nonnull Runnable command) {
+        try {
+            workQueue.put(command);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
