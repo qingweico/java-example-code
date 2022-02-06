@@ -4,10 +4,21 @@ package design;
 /**
  * Decorator mode
  *
- * @author:qiming
- * @date: 2020/11/5
+ * @author zqw
+ * @date 2020/11/5
  */
+public class Decorator {
+    public static void main(String[] args) {
+        Reader reader = new FileReader();
+        BufferedReader br = new BufferedReader(reader);
+        br.close();
+    }
+}
+
 abstract class Reader {
+    /**
+     * {@link java.io.Reader#close()}
+     */
     public abstract void close();
 }
 
@@ -34,10 +45,4 @@ class BufferedReader extends Reader {
 
     }
 }
-public class Decorator {
-    public static void main(String[] args) {
-        Reader reader = new FileReader();
-        BufferedReader br = new BufferedReader(reader);
-        br.close();
-    }
-}
+

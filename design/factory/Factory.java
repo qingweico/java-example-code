@@ -2,10 +2,15 @@ package design.factory;
 
 /**
  * 工厂方法
- * @author:qiming
- * @date: 2021/12/22
+ *
+ * @author zqw
+ * @date 2021/12/22
  */
 public abstract class Factory {
+    /**
+     * Factory Method of Product
+     * @return Product
+     */
     abstract public Product factoryMethod();
 
     public void doSomething() {

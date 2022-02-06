@@ -1,11 +1,16 @@
 package oak;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 import java.time.*;
 import java.util.Base64;
+import java.util.Set;
+import java.util.function.BiFunction;
 
 /**
+ * The new feature after jdk8 and jdk8
+ *
  * @author zqw
  * @date 2022/10/22
  */
@@ -28,5 +33,21 @@ public class NewFeatureTest {
         System.out.println(encoderString);
         String decodeString = new String(decode.decode(encoderString));
         System.out.println(decodeString);
+    }
+
+    /**
+     * Collections.unmodifiableSet();
+     */
+    @Test
+    public void ofFactory() {
+        Set<Integer> set = Set.of(1, 2, 3);
+        System.out.println(set);
+    }
+
+    @Test
+    public void sumOfString() {
+        BiFunction<String, String, String> fn = (var x, var y) -> x + y;
+        String apply = fn.apply("lam", "bda");
+        System.out.println(apply);
     }
 }

@@ -1,13 +1,16 @@
 package design.singleton;
 
-import java.util.Arrays;
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 懒汉式DCL
  * lazy loading
- * @author:qiming
- * @date: 2021/2/3
+ *
+ * @author zqw
+ * @date 2021/2/3
  */
 public class DclSingleton {
     private static long id = 0;
@@ -21,10 +24,16 @@ public class DclSingleton {
         id++;
     }
 
-    // Ensure that instructions around student are not reordered
+    /**
+     * Ensure that instructions around student are not reordered.
+     */
     private static volatile DclSingleton instance = null;
 
-    // DCL(Double Check Lock)
+    /**
+     * DCL(Double Check Lock)
+     *
+     * @return the instance of DclSingleton
+     */
     public static DclSingleton getInstance() {
         if (instance == null) {
             synchronized (DclSingleton.class) {
@@ -32,34 +41,35 @@ public class DclSingleton {
                     instance = new DclSingleton();
                 }
             }
-
         }
         return instance;
     }
 
-    // JDK9
-    // Allowing local instructions of a ref to be reordered improves performance.
-    private static final AtomicReference<DclSingleton> ref = new AtomicReference<>();
+    /**
+     * JDK9
+     * Allowing local instructions of a ref to be reordered improves performance.
+     */
+    private static final AtomicReference<DclSingleton> REF = new AtomicReference<>();
 
     public static DclSingleton getRef() {
-        if (ref.getAcquire() == null) {
+        if (REF.getAcquire() == null) {
             synchronized (DclSingleton.class) {
-                if (ref.getAcquire() == null) {
-                    ref.setRelease(instance);
+                if (REF.getAcquire() == null) {
+                    REF.setRelease(instance);
                 }
             }
         }
-        return ref.getAcquire();
+        return REF.getAcquire();
     }
 
     public static void main(String[] args) {
-        Thread[] threads = new Thread[100];
-        for (int i = 0; i < threads.length; i++) {
-            threads[i] = new Thread(() -> {
+        CustomThreadPool pool = new CustomThreadPool();
+        for (int i = 0; i < Constants.TWENTY; i++) {
+            pool.execute(() -> {
                 System.out.println(DclSingleton.getInstance());
                 System.out.println(DclSingleton.getRef().hashCode());
             });
         }
-        Arrays.asList(threads).forEach(Thread::start);
+        pool.shutdown();
     }
 }

@@ -29,6 +29,10 @@ public class OperateStreamTest {
     public void optional() {
         Optional<Integer> x = Optional.empty();
         var y = x.map(i -> i * i);
+        // orElseThrow()
+        x.ifPresentOrElse(System.out::println, () -> {
+            System.out.println("no such element found");
+        });
         System.out.println(y);
     }
 

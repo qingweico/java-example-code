@@ -2,12 +2,20 @@ package design.factory;
 
 /**
  * 抽象工厂方法
- * @author:qiming
- * @date: 2021/12/22
+ * @author zqw
+ * @date 2021/12/22
  */
 public abstract class AbstractFactory {
+    /**
+     * The factory of Electronic Product
+     * @return ElectronicProduct
+     */
     abstract ElectronicProduct createElectronicProduct();
 
+    /**
+     *  The factory of Food Product
+     * @return FoodProduct
+     */
     abstract FoodProduct createFoodProduct();
 }
 

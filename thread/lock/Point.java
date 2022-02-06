@@ -29,6 +29,26 @@ class Point {
         return Math.sqrt(curX * curY + curY * curY);
     }
 
+    void moveIfAtOrigin(double newX, double newY) {
+        long stamp = sl.readLock();
+        try {
+            while (x == 0.0 && y == 0.0) {
+                long ws = sl.tryConvertToWriteLock(stamp);
+                if (ws != 0L) {
+                    stamp = ws;
+                    x = newX;
+                    y = newY;
+                    break;
+                } else {
+                    sl.unlockRead(stamp);
+                    stamp = sl.writeLock();
+                }
+            }
+        } finally {
+            sl.unlock(stamp);
+        }
+    }
+
     void located(double inputX, double inputY) {
         long stamp = sl.writeLock();
         try {
