@@ -35,13 +35,4 @@ public class ObjectPool<T, R> {
         }
 
     }
-
-    public static void main(String[] args) throws InterruptedException {
-        ObjectPool<Long, String> pool = new ObjectPool<>(10, 2L);
-        String value = pool.exec(t -> {
-            System.out.println(t);
-            return t.toString();
-        });
-        System.out.println(value);
-    }
 }

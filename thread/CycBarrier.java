@@ -10,10 +10,9 @@ import java.util.concurrent.ExecutorService;
 /**
  *
  * @author zqw
- * @date 2020/12/19
- * @see thread.aqs.CycBarrier
+ * @date 2020/12/19 {@link thread.aqs.CycBarrier}
  */
-public class CycBarrier {
+class CycBarrier {
     public static void main(String[] args) {
         final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
 

@@ -4,8 +4,8 @@ package util;
  * Tuple:
  * A single object in which a group of objects is packaged directly
  *
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
 public class TwoTuple<A, B> {
     public final A first;
@@ -16,6 +16,7 @@ public class TwoTuple<A, B> {
         second = b;
     }
 
+    @Override
     public String toString() {
         return "(" + first + ", " + second + ")";
     }

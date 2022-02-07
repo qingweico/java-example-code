@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  * @author zqw
  * @date 2021/9/26
  */
-public class AtomicMarkableReference {
+class AtomicMarkableReference {
 
     static final Integer INIT_NUM = Constants.THOUSAND;
     static final Integer UPDATE_NUM = Constants.HUNDRED;

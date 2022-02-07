@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2021/10/18
  */
-public class Exg {
+class Exg {
     static Exchanger<String> exchanger = new Exchanger<>();
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
 

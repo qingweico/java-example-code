@@ -2,6 +2,7 @@ package util;
 
 import org.apache.commons.lang3.time.FastDateFormat;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +15,7 @@ import java.util.Date;
 public class DateUtil {
 
     private static final String DEFAULT_FORMATTER = "yyyy-MM-dd HH:mm:ss";
-    private static SimpleDateFormat SDF;
+    private static final ThreadLocal<DateFormat> TL = ThreadLocal.withInitial(() -> new SimpleDateFormat(DEFAULT_FORMATTER));
     private static final DateTimeFormatter DEFAULT_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern(DEFAULT_FORMATTER);
 
@@ -28,6 +29,15 @@ public class DateUtil {
 
     public static String format(String pattern) {
         return FastDateFormat.getInstance(pattern).format(new Date());
+    }
+
+    public static String safeDateFormat() {
+        try {
+            DateFormat dateFormat = TL.get();
+            return dateFormat.format(new Date());
+        } finally {
+            TL.remove();
+        }
     }
 
 }

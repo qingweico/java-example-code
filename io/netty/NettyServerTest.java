@@ -156,7 +156,7 @@ public class NettyServerTest {
                                 @Override
                                 public void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
                                     System.out.println("server: ByteToMessageDecoder");
-                                    if (in.readableBytes() >= Constants.LONG_BYTE_SIZE) {
+                                    if (in.readableBytes() >= Constants.BYTE) {
                                         out.add(in.readLong());
                                     }
                                 }

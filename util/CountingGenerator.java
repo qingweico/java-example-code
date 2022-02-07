@@ -9,8 +9,10 @@ public class CountingGenerator {
     Boolean implements Generator<java.lang.Boolean> {
         private boolean value = false;
 
+        @Override
         public java.lang.Boolean next() {
-            value = !value; // Just flips back and forth
+            // Just flips back and forth
+            value = !value;
             return value;
         }
     }
@@ -19,6 +21,7 @@ public class CountingGenerator {
     Byte implements Generator<java.lang.Byte> {
         private byte value = 0;
 
+        @Override
         public java.lang.Byte next() {
             return value++;
         }
@@ -38,6 +41,7 @@ public class CountingGenerator {
     Character implements Generator<java.lang.Character> {
         int index = -1;
 
+        @Override
         public java.lang.Character next() {
             index = (index + 1) % chars.length;
             return chars[index];
@@ -56,6 +60,7 @@ public class CountingGenerator {
             this.length = length;
         }
 
+        @Override
         public java.lang.String next() {
             char[] buf = new char[length];
             for (int i = 0; i < length; i++) {
@@ -69,6 +74,7 @@ public class CountingGenerator {
     Short implements Generator<java.lang.Short> {
         private short value = 0;
 
+        @Override
         public java.lang.Short next() {
             return value++;
         }
@@ -78,6 +84,7 @@ public class CountingGenerator {
     Integer implements Generator<java.lang.Integer> {
         private int value = 0;
 
+        @Override
         public java.lang.Integer next() {
             return value++;
         }
@@ -87,6 +94,7 @@ public class CountingGenerator {
     Long implements Generator<java.lang.Long> {
         private long value = 0;
 
+        @Override
         public java.lang.Long next() {
             return value++;
         }
@@ -96,6 +104,7 @@ public class CountingGenerator {
     Float implements Generator<java.lang.Float> {
         private float value = 0;
 
+        @Override
         public java.lang.Float next() {
             float result = value;
             value += 1.0;
@@ -107,6 +116,7 @@ public class CountingGenerator {
     Double implements Generator<java.lang.Double> {
         private double value = 0.0;
 
+        @Override
         public java.lang.Double next() {
             double result = value;
             value += 1.0;

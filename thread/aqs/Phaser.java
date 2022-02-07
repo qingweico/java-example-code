@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date: 2021/10/17
  */
-public class Phaser {
+class Phaser {
     java.util.concurrent.Phaser phaser = new java.util.concurrent.Phaser();
 
     final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 5, 1);

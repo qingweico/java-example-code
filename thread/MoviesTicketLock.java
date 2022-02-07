@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zqw
  * @date 2020/1/03
  */
-public class MoviesTicketLock implements Runnable {
+class MoviesTicketLock implements Runnable {
     private int ticket = 100;
     private final Lock lock = new ReentrantLock();
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3, 3, 1);

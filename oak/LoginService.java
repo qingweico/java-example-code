@@ -30,7 +30,7 @@ class UserService {
     static {
         user = new User();
         user.setUsername("root");
-        user.setVIP(true);
+        user.setVip(true);
     }
 
     public static void login() {
@@ -77,7 +77,7 @@ class UserService {
 
             @Override
             public boolean isVIP(UserService userService) {
-                return userService.getUser().isVIP();
+                return userService.getUser().isVip();
             }
         };
 

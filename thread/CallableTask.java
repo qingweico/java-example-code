@@ -13,7 +13,7 @@ import java.util.concurrent.*;
  * @author zqw
  * @date 2020/12/17
  */
-public class CallableTask implements Callable<String> {
+class CallableTask implements Callable<String> {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 5, 2);

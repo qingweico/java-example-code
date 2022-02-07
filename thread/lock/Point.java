@@ -26,13 +26,13 @@ class Point {
                 sl.unlockRead(stamp);
             }
         }
-        return Math.sqrt(curX * curY + curY * curY);
+        return Double.parseDouble(String.format("%.2f", Math.sqrt(curX * curY + curY * curY)));
     }
 
     void moveIfAtOrigin(double newX, double newY) {
         long stamp = sl.readLock();
         try {
-            while (x == 0.0 && y == 0.0) {
+            while (x == 0 && y == 0) {
                 long ws = sl.tryConvertToWriteLock(stamp);
                 if (ws != 0L) {
                     stamp = ws;

@@ -15,7 +15,7 @@ import static util.Print.printnb;
  * @author zqw
  * @date 2021/1/30
  */
-public class LockCondition {
+class LockCondition {
 
     static ReentrantLock lock = new ReentrantLock();
 

@@ -12,7 +12,7 @@ public interface Constants {
     int TWO = 2;
     int THREE = 3;
     int FIVE = 5;
-    int LONG_BYTE_SIZE = 8;
+    int BYTE = 8;
     int TEN = 10;
     int TWENTY = 20;
     int KB = 1024;

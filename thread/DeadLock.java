@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zqw
  * @date 2021/10/17
  */
-public class DeadLock {
+class DeadLock {
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
 
     static class Friend {
@@ -25,8 +25,8 @@ public class DeadLock {
         }
 
         public void bow(Friend bow) {
+            lock.lock();
             try {
-                lock.lock();
                 System.out.format("%s: %s bow to me!\n", this.name, bow.getName());
                 // Deadlock! Didn't release the lock, you should firstly
                 // release the lock and then release the resource.
@@ -38,8 +38,8 @@ public class DeadLock {
         }
 
         public void release(Friend bow) {
+            lock.lock();
             try {
-                lock.lock();
                 System.out.format("%s: %s return me!\n", this.name, bow.getName());
             } finally {
                 lock.unlock();

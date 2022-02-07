@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author zqw
  * @date 2021/1/30
  */
-public class ThisEscape {
+class ThisEscape {
     private final int num = 1;
 
     public ThisEscape() {

@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * synchronized {@code see openjdk}
+ * synchronized {@code openjdk}
  * os_linux.cpp >>> os::PlatformEvent::park() >>> pthread_mutex_lock >>> pthread_mutex_unlock
  * <p>
  * ObjectMonitor: JVM C++ an object include: WaitSet, EntryList, OwnerThread, recursions

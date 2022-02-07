@@ -7,7 +7,7 @@ package thread;
  * @author zqw
  * @date 2021/6/25
  */
-public class CustomThread {
+class CustomThread {
 
     static {
         System.loadLibrary("CustomThreadNative");

@@ -1,8 +1,9 @@
 package thread;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * The reason bytecode instructions can be out of order is to improve efficiency.
@@ -13,9 +14,9 @@ import java.util.concurrent.Executors;
  * @author zqw
  * @date 2021/1/30
  */
-public class Disorder {
+class Disorder {
     private static int x = 0, y = 0, a = 0, b = 0;
-    static ExecutorService pool = Executors.newCachedThreadPool();
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
@@ -38,5 +39,6 @@ public class Disorder {
                 break;
             }
         }
+        pool.shutdown();
     }
 }

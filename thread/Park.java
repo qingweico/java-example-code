@@ -11,7 +11,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author qiming
  * @date 2021/9/8
  */
-public class Park {
+class Park {
    public static void main(String[] args) {
 
       CountDownLatch latch = new CountDownLatch(1);

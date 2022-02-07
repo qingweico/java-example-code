@@ -1,22 +1,22 @@
 package util;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * @author:qiming
- * @date: 2021/2/21
+ * @author zqw
+ * @date 2021/2/21
  */
 public class CountingMapData extends AbstractMap<Integer, String> {
-    private int size;
-    private static final String[] chars =
+    private final int size;
+    private static final String[] CHARS =
             "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
                     .split(" ");
 
     public CountingMapData(int size) {
-        if (size < 0) {
-            this.size = 0;
-        }
-        this.size = size;
+        this.size = Math.max(size, 0);
     }
 
     private static class Entry
@@ -27,27 +27,45 @@ public class CountingMapData extends AbstractMap<Integer, String> {
             this.index = index;
         }
 
+        @Override
         public boolean equals(Object o) {
-            return Integer.valueOf(index).equals(o);
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Entry entry = (Entry) o;
+            return index == entry.index;
         }
 
+        @Override
+        public String toString() {
+            return getKey() + "=" + getValue();
+        }
+
+        @Override
         public Integer getKey() {
             return index;
         }
 
+        @Override
         public String getValue() {
-            return chars[index % chars.length] + index / chars.length;
+            return CHARS[index % CHARS.length] + index / CHARS.length;
         }
 
+        @Override
         public String setValue(String value) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public int hashCode() {
             return Integer.valueOf(index).hashCode();
         }
     }
 
+    @Override
     public Set<Map.Entry<Integer, String>> entrySet() {
         // LinkedHashSet retains initialization order:
         Set<Map.Entry<Integer, String>> entries = new LinkedHashSet<>();

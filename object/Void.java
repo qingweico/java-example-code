@@ -6,11 +6,11 @@ package object;
  * @author zqw
  * @date 2021/1/2
  */
-public class VoidUsage {
+public class Void {
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 10;
 
-    public static Void rangeCheck(int n) {
+    public static java.lang.Void rangeCheck(int n) {
         if (n < MIN_RANGE || n > MAX_RANGE) {
             throw new IllegalArgumentException("n < " + MIN_RANGE + " || n > " + MAX_RANGE);
         }
@@ -22,7 +22,7 @@ public class VoidUsage {
     }
 
     @SuppressWarnings("unused")
-    public static int calculateAndCheck(int n, Void v) {
+    public static int calculateAndCheck(int n, java.lang.Void v) {
         return n + 10;
     }
 

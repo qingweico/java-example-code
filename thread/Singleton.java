@@ -13,7 +13,7 @@ import java.util.concurrent.*;
  * @date 2021/11/24
  */
 @SuppressWarnings("all")
-public class Singleton {
+class Singleton {
     private static Singleton singleton = null;
     private Integer x = 1;
 

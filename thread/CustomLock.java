@@ -1,9 +1,9 @@
 package thread;
 
 import sun.misc.Unsafe;
+import thread.cas.UnsafeSupport;
 import thread.pool.CustomThreadPool;
 
-import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2021/6/24
  */
-public class CustomLock {
+class CustomLock {
 
     volatile int status = 0;
 
@@ -24,12 +24,11 @@ public class CustomLock {
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
 
     static {
-        Field singletonInstanceField;
         try {
-            singletonInstanceField = Unsafe.class.getDeclaredField("theUnsafe");
-            singletonInstanceField.setAccessible(true);
-            unsafe = (Unsafe) singletonInstanceField.get(null);
-
+            unsafe = UnsafeSupport.reflectGetUnsafe();
+            if (unsafe == null) {
+                throw new RuntimeException("unsafe is null");
+            }
             stateOffset = unsafe.objectFieldOffset(
                     CustomLock.class.getDeclaredField("status"));
         } catch (Exception ex) {

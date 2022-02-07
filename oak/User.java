@@ -8,7 +8,7 @@ import com.google.common.base.MoreObjects;
  */
 public class User {
     private String username;
-    private boolean isVIP;
+    private boolean isVip;
 
     public String getUsername() {
         return username;
@@ -18,19 +18,19 @@ public class User {
         this.username = username;
     }
 
-    public boolean isVIP() {
-        return isVIP;
+    public boolean isVip() {
+        return isVip;
     }
 
-    public void setVIP(boolean VIP) {
-        isVIP = VIP;
+    public void setVip(boolean vip) {
+        isVip = vip;
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("username", username)
-                .add("isVIP", isVIP)
+                .add("isVIP", isVip)
                 .toString();
     }
 }

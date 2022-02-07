@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2020/12/18
  */
-public class ConcurrentMapAndSet {
+class ConcurrentMapAndSet {
     public static void main(String[] args) {
         final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
         // Use ConcurrentHashMap instead of HashMap can avoid throw ConcurrentModificationException.

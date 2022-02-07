@@ -10,10 +10,10 @@ import java.util.Locale;
 import java.util.Scanner;
 
 /**
- * read file and put in the ArrayList
+ * Read file and put in the ArrayList
  *
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class FileOperation {
     public static void readFile(String filename, ArrayList<String> words) {

@@ -6,15 +6,17 @@ import java.util.Arrays;
 import java.util.TreeSet;
 
 /**
- * Static functions for reading and writing text files as as single string,
+ * Static functions for reading and writing text files as single string,
  * and treating a file s as ArrayList.
  *
- * @author:qiming
- * @date: 2021/2/4
+ * @author zqw
+ * @date 2021/2/4
  */
 public class TextFile extends ArrayList<String> {
 
-    // Read a file as a single string
+    /**
+     * Read a file as a single string
+     */
     public static String read(String fileName) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -31,7 +33,9 @@ public class TextFile extends ArrayList<String> {
         return sb.toString();
     }
 
-    // Write a single file in one method call:
+    /**
+     * Write a single file in one method call
+     */
     public static void write(String fileName, String text) {
         try {
             try (PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile())) {
@@ -42,7 +46,9 @@ public class TextFile extends ArrayList<String> {
         }
     }
 
-    // Read a file, split by any regular expression
+    /**
+     * Read a file, split by any regular expression
+     */
     public TextFile(String fileName, String splitter) {
         super(Arrays.asList(read(fileName).split(splitter)));
         // Regular expression split() often leaves an empty String at the first position

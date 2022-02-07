@@ -1,8 +1,8 @@
 package util;
 
 /**
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
 public class ThreeTuple<A, B, C> extends TwoTuple<A, B> {
 

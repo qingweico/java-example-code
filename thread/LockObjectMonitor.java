@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zqw
  * @date 2021/6/27
  */
-public class LockObjectMonitor {
+class LockObjectMonitor {
 
     static ReentrantLock lock = new ReentrantLock();
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 5);

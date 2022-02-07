@@ -1,83 +1,64 @@
 package util;
-
-/******************************************************************************
- *  Compilation:  javac In.java
- *  Execution:    java In   (basic test --- see source for required files)
- *  Dependencies: none
+/*
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
- *  Reads in data of various types from standard input, files, and URLs.
+ *  This file is part of algs4.jar, which accompanies the textbook
  *
- ******************************************************************************/
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu
+ *
+ *
+ *  algs4.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  algs4.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ */
 
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.io.*;
 import java.net.Socket;
-// import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 
-/**
- * <i>Input</i>. This class provides methods for reading strings
- * and numbers from standard input, file input, URLs, and sockets.
- * <p>
- * The Locale used is: language = English, country = US. This is consistent
- * with the formatting conventions with Java floating-point literals,
- * command-line arguments (via {@link Double#parseDouble(String)})
- * and standard output.
- * <p>
- * For additional documentation, see
- * <a href="https://introcs.cs.princeton.edu/31datatype">Section 3.1</a> of
- * <i>Computer Science: An Interdisciplinary Approach</i>
- * by Robert Sedgewick and Kevin Wayne.
- * <p>
- * Like {@link Scanner}, reading a token also consumes preceding Java
- * whitespace, reading a full line consumes
- * the following end-of-line delimeter, while reading a character consumes
- * nothing extra.
- * <p>
- * Whitespace is defined in {@link Character#isWhitespace(char)}. Newlines
- * consist of \n, \r, \r\n, and Unicode hex code points 0x2028, 0x2029, 0x0085;
- * see <a href="http://www.docjar.com/html/api/java/util/Scanner.java.html">
- * Scanner.java</a> (NB: Java 6u23 and earlier uses only \r, \r, \r\n).
- *
- * @author David Pritchard
- * @author Robert Sedgewick
- * @author Kevin Wayne
- */
-
-/**
- * @author:qiming
- * @date: 2021/4/22
- */
 public final class In {
 
     ///// begin: section (1 of 2) of code duplicated from In to StdIn.
 
-    // assume Unicode UTF-8 encoding
+    /**
+     * assume Unicode UTF-8 encoding
+     */
     private static final String CHARSET_NAME = "UTF-8";
 
-    // assume language = English, country = US for consistency with System.out.
+    /**
+     * assume language = English, country = US for consistency with System.out.
+     */
     private static final Locale LOCALE = Locale.US;
 
-    // the default token separator; we maintain the invariant that this value
-    // is held by the scanner's delimiter between calls
+    /**
+     * the default token separator; we maintain the invariant that this value
+     * is held by the scanner's delimiter between calls
+     */
     private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\p{javaWhitespace}+");
 
-    // makes whitespace characters significant
+    /**
+     * makes whitespace characters significant
+     */
     private static final Pattern EMPTY_PATTERN = Pattern.compile("");
 
-    // used to read the entire input. source:
-    // http://weblogs.java.net/blog/pat/archive/2004/10/stupid_scanner_1.html
+    /**
+     * used to read the entire input. source:
+     * {@code http://weblogs.java.net/blog/pat/archive/2004/10/stupid_scanner_1.html}
+     */
     private static final Pattern EVERYTHING_PATTERN = Pattern.compile("\\A");
 
     //// end: section (1 of 2) of code duplicated from In to StdIn.
@@ -160,7 +141,7 @@ public final class In {
      * Initializes an input stream from a filename or web page name.
      *
      * @param name the filename or web page name
-     * @throws IllegalArgumentException if cannot open {@code name} as
+     * @throws IllegalArgumentException if you cannot open {@code name} as
      *                                  a file or URL
      * @throws IllegalArgumentException if {@code name} is {@code null}
      */
@@ -242,7 +223,7 @@ public final class In {
     /**
      * Returns true if input stream is empty (except possibly whitespace).
      * Use this to know whether the next call to {@link #readString()},
-     * {@link #readDouble()}, etc will succeed.
+     * {@link #readDouble()}, etc. will succeed.
      *
      * @return {@code true} if this input stream is empty (except possibly whitespace);
      * {@code false} otherwise
@@ -327,8 +308,9 @@ public final class In {
         }
 
         String result = scanner.useDelimiter(EVERYTHING_PATTERN).next();
-        // not that important to reset delimeter, since now scanner is empty
-        scanner.useDelimiter(WHITESPACE_PATTERN); // but let's do it anyway
+        // not that important to reset delimiter, since now scanner is empty,
+        // but let's do it anyway.
+        scanner.useDelimiter(WHITESPACE_PATTERN);
         return result;
     }
 
@@ -364,7 +346,7 @@ public final class In {
             throw new InputMismatchException("attempts to read an 'int' value from the input stream, "
                     + "but the next token is \"" + token + "\"");
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("attemps to read an 'int' value from the input stream, "
+            throw new NoSuchElementException("attempts to read an 'int' value from the input stream, "
                     + "but no more tokens are available");
         }
     }
@@ -385,7 +367,7 @@ public final class In {
             throw new InputMismatchException("attempts to read a 'double' value from the input stream, "
                     + "but the next token is \"" + token + "\"");
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("attemps to read a 'double' value from the input stream, "
+            throw new NoSuchElementException("attempts to read a 'double' value from the input stream, "
                     + "but no more tokens are available");
         }
     }
@@ -406,7 +388,7 @@ public final class In {
             throw new InputMismatchException("attempts to read a 'float' value from the input stream, "
                     + "but the next token is \"" + token + "\"");
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("attemps to read a 'float' value from the input stream, "
+            throw new NoSuchElementException("attempts to read a 'float' value from the input stream, "
                     + "but no more tokens are available");
         }
     }
@@ -427,7 +409,7 @@ public final class In {
             throw new InputMismatchException("attempts to read a 'long' value from the input stream, "
                     + "but the next token is \"" + token + "\"");
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("attemps to read a 'long' value from the input stream, "
+            throw new NoSuchElementException("attempts to read a 'long' value from the input stream, "
                     + "but no more tokens are available");
         }
     }
@@ -448,7 +430,7 @@ public final class In {
             throw new InputMismatchException("attempts to read a 'short' value from the input stream, "
                     + "but the next token is \"" + token + "\"");
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("attemps to read a 'short' value from the input stream, "
+            throw new NoSuchElementException("attempts to read a 'short' value from the input stream, "
                     + "but no more tokens are available");
         }
     }
@@ -471,7 +453,7 @@ public final class In {
             throw new InputMismatchException("attempts to read a 'byte' value from the input stream, "
                     + "but the next token is \"" + token + "\"");
         } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("attemps to read a 'byte' value from the input stream, "
+            throw new NoSuchElementException("attempts to read a 'byte' value from the input stream, "
                     + "but no more tokens are available");
         }
     }
@@ -521,11 +503,9 @@ public final class In {
         if (tokens.length == 0 || tokens[0].length() > 0) {
             return tokens;
         }
-        String[] decapitokens = new String[tokens.length - 1];
-        for (int i = 0; i < tokens.length - 1; i++) {
-            decapitokens[i] = tokens[i + 1];
-        }
-        return decapitokens;
+        String[] decapitatedTokens = new String[tokens.length - 1];
+        System.arraycopy(tokens, 1, decapitatedTokens, 0, tokens.length - 1);
+        return decapitatedTokens;
     }
 
     /**
@@ -535,7 +515,7 @@ public final class In {
      * @return all remaining lines in this input stream, as an array of strings
      */
     public String[] readAllLines() {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
         while (hasNextLine()) {
             lines.add(readLine());
         }
@@ -702,7 +682,7 @@ public final class In {
                 System.out.println(s);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println();
 
@@ -731,7 +711,7 @@ public final class In {
                 System.out.println(s);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println();
 
@@ -746,7 +726,7 @@ public final class In {
                 System.out.println(s);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println();
 
@@ -760,7 +740,7 @@ public final class In {
                 System.out.print(c);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println();
         System.out.println();
@@ -775,7 +755,7 @@ public final class In {
                 System.out.println(s);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println();
 
@@ -791,34 +771,8 @@ public final class In {
             }
             System.out.println();
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println();
-
     }
-
 }
-
-/******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/

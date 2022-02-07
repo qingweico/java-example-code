@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
- * the mutex based on AQS
+ * The mutex based on AQS
  *
  * @author zqw
  * @date 2021/10/17

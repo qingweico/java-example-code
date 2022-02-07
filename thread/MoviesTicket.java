@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2020/1/03
  */
-public class MoviesTicket implements Runnable {
+class MoviesTicket implements Runnable {
 
     private static int ticket = 20;
 

@@ -32,6 +32,7 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
         this.size = size;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public Coffee next() {
         try {

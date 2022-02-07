@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2020/12/18
  */
-public class ConcurrentModificationException {
+class ConcurrentModificationException {
     public static void main(String[] args) {
         final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
         // Using ArrayList will throw ConcurrentModificationException, because

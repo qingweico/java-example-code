@@ -17,7 +17,7 @@ import static util.Print.print;
  * @date 2020/12/19
  * @see thread.aqs.Semaphore
  */
-public class SemaphoreExample {
+class SemaphoreExample {
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 10);
 
     public static void main(String[] args) {

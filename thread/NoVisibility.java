@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2021/1/30
  */
-public class NoVisibility {
+class NoVisibility {
     private static boolean ready = false;
     private static int num;
 
