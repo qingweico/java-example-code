@@ -1,6 +1,7 @@
 package io.server;
 
 import com.github.javafaker.Faker;
+import util.Constants;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -20,8 +21,8 @@ public class TestWebServePressure {
         var pool = new ForkJoinPool();
         ArrayList<String> list = new ArrayList<>();
         var faker = new Faker();
-        try (var serverSocket = new ServerSocket(8080)) {
-            serverSocket.setSoTimeout(100000);
+        try (var serverSocket = new ServerSocket(Constants.QOMOLANGMA)) {
+            serverSocket.setSoTimeout(Constants.HUNDRED_THOUSAND);
             while (true) {
                 var clientSocket = serverSocket.accept();
                 pool.submit(() -> {
@@ -39,7 +40,7 @@ public class TestWebServePressure {
                         System.exit(-1);
                     } catch (IOException e) {
                         e.printStackTrace(System.out);
-                        System.out.println(list);
+                        System.out.println("list size: " + list.size());
                     } finally {
                         try {
                             clientSocket.close();

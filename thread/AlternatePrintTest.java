@@ -75,7 +75,12 @@ public class AlternatePrintTest {
             }
             terminated.countDown();
         });
-
+        try {
+            terminated.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        pool.shutdown();
     }
 
     @Test
@@ -118,6 +123,7 @@ public class AlternatePrintTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        pool.shutdown();
     }
 
     @Test
@@ -153,6 +159,7 @@ public class AlternatePrintTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        pool.shutdown();
     }
 
     private final CountDownLatch run = new CountDownLatch(1);
@@ -210,6 +217,7 @@ public class AlternatePrintTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        pool.shutdown();
     }
 
     static Thread t1 = null, t2 = null;
@@ -248,6 +256,7 @@ public class AlternatePrintTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        pool.shutdown();
     }
 
     @Test
@@ -300,6 +309,7 @@ public class AlternatePrintTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        pool.shutdown();
     }
 
     @Test
@@ -338,5 +348,6 @@ public class AlternatePrintTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        pool.shutdown();
     }
 }

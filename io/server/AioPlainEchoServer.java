@@ -1,5 +1,7 @@
 package io.server;
 
+import util.Constants;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -14,7 +16,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class AioPlainEchoServer {
 
-    public void serve(int port) throws IOException {
+    public static void serve(int port) throws IOException {
         System.out.println("Listening for connections on port: " + port);
         final AsynchronousServerSocketChannel serverChannel = AsynchronousServerSocketChannel.open();
         InetSocketAddress address = new InetSocketAddress(port);
@@ -24,7 +26,7 @@ public class AioPlainEchoServer {
             @Override
             public void completed(AsynchronousSocketChannel socketChannel, Object attachment) {
                 serverChannel.accept(null, this);
-                ByteBuffer byteBuffer = ByteBuffer.allocate(100);
+                ByteBuffer byteBuffer = ByteBuffer.allocate(Constants.KB);
                 socketChannel.read(byteBuffer, byteBuffer, new EchoCompletionHandler(socketChannel));
             }
 
@@ -86,5 +88,9 @@ public class AioPlainEchoServer {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        serve(Constants.QOMOLANGMA);
     }
 }

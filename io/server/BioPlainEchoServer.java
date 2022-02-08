@@ -1,10 +1,10 @@
 package io.server;
 
-import org.junit.Test;
 import thread.pool.CustomThreadPool;
 import util.Constants;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -40,18 +40,6 @@ public class BioPlainEchoServer {
                         }
                     } catch (IOException e) {
                         System.err.println(e.getMessage());
-//                    try (BufferedReader bufferReader = new BufferedReader(
-//                            new InputStreamReader(client.getInputStream()))) {
-//                        PrintStream pw = new PrintStream(System.out, true);
-//                        String context;
-//                        while ((context = bufferReader.readLine()) != null) {
-//                            pw.print(context);
-//                            pw.flush();
-//                        }
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-////                    }
                     }
                 });
             } catch (IOException e) {
@@ -60,22 +48,7 @@ public class BioPlainEchoServer {
             }
         }
     }
-
-
     public static void main(String[] args) throws IOException {
         serve();
     }
-    @Test
-    public void client() throws IOException {
-        Socket client = new Socket("127.0.0.1",8848);
-        OutputStream outputStream = client.getOutputStream();
-        String msg = "我是客户端";
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
-        BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
-        bufferedWriter.write(msg);
-        bufferedWriter.close();
-        outputStream.close();
-        client.close();
-    }
-
 }
