@@ -2,9 +2,7 @@ package object.proxy;
 
 import util.monad.Try;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -15,10 +13,17 @@ import java.util.stream.Collectors;
  */
 public interface Aspect {
 
+    /**
+     * before method
+     */
     void before();
 
+    /**
+     * after method
+     */
     void after();
 
+    @SuppressWarnings("unchecked")
     static <T> T getProxy(Class<T> cls, String... aspects) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         var aspectInstances = Arrays.stream(aspects).map(name -> Try.ofFailable(() -> {
             var cl = Class.forName(name);
@@ -30,18 +35,15 @@ public interface Aspect {
         return (T) Proxy.newProxyInstance(
                 cls.getClassLoader(),
                 cls.getInterfaces(),
-                new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        for (var aspect : aspectInstances) {
-                            aspect.get().before();
-                        }
-                        var result = method.invoke(inst);
-                        for (var aspect : aspectInstances) {
-                            aspect.get().after();
-                        }
-                        return result;
+                (proxy, method, args) -> {
+                    for (var aspect : aspectInstances) {
+                        aspect.get().before();
                     }
+                    var result = method.invoke(inst);
+                    for (var aspect : aspectInstances) {
+                        aspect.get().after();
+                    }
+                    return result;
                 });
     }
 }

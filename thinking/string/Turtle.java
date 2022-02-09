@@ -4,10 +4,10 @@ import java.io.PrintStream;
 import java.util.Formatter;
 
 /**
- * @author:qiming
- * @date: 2021/2/5
+ * @author zqw
+ * @date 2021/2/5
  */
-public class Turtle {
+class Turtle {
     private final String name;
     private final Formatter f;
 
@@ -15,7 +15,8 @@ public class Turtle {
         this.name = name;
         this.f = f;
     }
-    public void remove(int x ,int y) {
+
+    public void remove(int x, int y) {
         f.format("%s The Turtle is at (%d, %d)\n", name, x, y);
     }
 
@@ -28,7 +29,6 @@ public class Turtle {
         tommy.remove(3, 4);
         terry.remove(2, 5);
         tommy.remove(3, 3);
-        terry.remove(3 ,3);
-
+        terry.remove(3, 3);
     }
 }

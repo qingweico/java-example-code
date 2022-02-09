@@ -28,9 +28,6 @@ public class CglibProxy implements MethodInterceptor {
     @Override
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         Object obj;
-        if("pay".equals(method.getName())) {
-            System.out.println("pay...");
-        }
         obj = method.invoke(targetObject, args);
         return obj;
     }

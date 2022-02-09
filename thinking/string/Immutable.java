@@ -6,12 +6,11 @@ import static util.Print.printnb;
 /**
  * override: An operator is given a particular meaning when applied to
  * a particular class.
- * *
- * @author:qiming
- * @date: 2021/1/19
+ * The '+' and "+=" operators for Sting are the only two overloaded operators in Java.
+ * @author zqw
+ * @date 2021/1/19
  */
-// The '+' and "+=" operators for Sting are the only two overloaded operators in Java.
-public class Immutable {
+class Immutable {
     public static String upcase(String s){
         return s.toUpperCase();
     }

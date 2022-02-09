@@ -10,8 +10,10 @@ import java.lang.reflect.Proxy;
  */
 public class JdkProxy implements InvocationHandler {
 
-    // The object that needs proxy
+    /**The object that needs proxy*/
     private Object targetObject;
+
+    private final TimeUsageAspect tua = new TimeUsageAspect();
 
     public Object newProxy(Object targetObject) {
         this.targetObject = targetObject;
@@ -22,7 +24,9 @@ public class JdkProxy implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object obj;
+        tua.before();
         obj = method.invoke(targetObject, args);
+        tua.after();
         return obj;
     }
 }

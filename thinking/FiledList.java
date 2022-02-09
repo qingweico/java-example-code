@@ -4,20 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author:qiming
- * @date: 2020/10/11
+ * @author zqw
+ * @date 2020/10/11
  */
-class CountedInteger {
-    private static long count;
-    private final long id = count++;
 
-    public CountedInteger() {
-    }
-
-    public String toString() {
-        return Long.toString(id);
-    }
-}
 
 public class FiledList<T> {
     private final Class<T> type;
@@ -42,5 +32,18 @@ public class FiledList<T> {
         FiledList<CountedInteger> list = new FiledList<>(CountedInteger.class);
         System.out.println(list.create(15));
 
+    }
+}
+
+class CountedInteger {
+    private static long count;
+    private final long id = count++;
+
+    public CountedInteger() {
+    }
+
+    @Override
+    public String toString() {
+        return Long.toString(id);
     }
 }

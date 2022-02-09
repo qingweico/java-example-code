@@ -1,34 +1,11 @@
 package thinking;
 
 /**
- * @author:qiming
- * @date: 2020/10/23
- * <p>
  * this
+ *
+ * @author zqw
+ * @date 2020/10/23
  */
-class Person {
-    public void eat(Apple apple) {
-        Apple peeled = apple.getPeeled();
-        System.out.println("Yummy");
-    }
-
-    public static void main(String[] args) {
-        new Person().eat(new Apple());
-    }
-}
-
-class Peeler {
-    static Apple peel(Apple apple) {
-        return apple;
-    }
-}
-
-class Apple {
-    // this
-    Apple getPeeled() {
-        return Peeler.peel(this);
-    }
-}
 
 public class Leaf {
     int i = 0;
@@ -39,11 +16,33 @@ public class Leaf {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Leaf().increment().increment().increment().i);//3
+        System.out.println(new Leaf().increment().increment().increment().i);
+    }
+}
+
+class Person {
+    public void eat(Apple apple) {
+        Apple peeled = apple.getPeeled();
+        System.out.println("Yummy! " + peeled);
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
+    public static void main(String[] args) {
+        Person p = new Person();
+        Apple apple = new Apple();
+        p.eat(apple);
+        Person other = new Person();
+        other.eat(apple);
+    }
+}
+
+class Peeler {
+    static Apple peel(Apple apple) {
+        return apple;
+    }
+}
+
+class Apple {
+    Apple getPeeled() {
+        return Peeler.peel(this);
     }
 }

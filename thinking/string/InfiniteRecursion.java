@@ -1,13 +1,16 @@
 package thinking.string;
 
 /**
- * @author:qiming
+ * @author zqw
  * @date 2021/1/17
  */
-public class InfiniteRecursion {
+class InfiniteRecursion {
 
-    // Stack overflow: Infinite calls to the toString method.
-    // Using super.toString() instead of this.
+    /**
+     * Stack overflow: Infinite calls to the toString method.
+     * Using super.toString() instead of this.
+     */
+    @Override
     public String toString() {
         return "InfiniteRecursion address " + this + "\n";
     }

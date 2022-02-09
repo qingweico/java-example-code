@@ -9,28 +9,29 @@ import static util.Print.print;
  * object, if the contents have not been changed, a String method simply returns a
  * reference to the original object.
  *
- * @author:qiming
- * @date: 2021/2/5
+ * @author zqw
+ * @date 2021/2/5
  */
-public class OperateString {
+class OperateString {
     public static void main(String[] args) {
         String s = "you go first";
 
         // getChars
         char[] chars = new char[10];
-        s.getChars(0, 4, chars, 1);
+        // [)
+        s.getChars(0, 5, chars, 1);
         print(Arrays.toString(chars));
 
         // getBytes
         byte[] bv = s.getBytes();
         print(Arrays.toString(bv));
 
-        // Returns true if the String is exactly the same as the parameter
+        // Returns true if the String is exactly the same as the parameter.
         print(s.contentEquals("you go first"));
 
         // Returns equality of comparison areas.
         // Overloaded moderator adds the ability to ignore case.
-        String other = "here we are";
+        String other = "here you are";
         print(s.regionMatches(0, other, 5, 3));
 
 
@@ -39,8 +40,6 @@ public class OperateString {
 
 
         print(s.concat("!"));
-
-        print(String.valueOf(true).indexOf('t'));
 
         print(String.valueOf(new char[]{'b', 'a', 'c', 'k'}));
 

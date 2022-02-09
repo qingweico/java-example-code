@@ -1,10 +1,10 @@
 package thinking.string;
 
 /**
- * @author:qiming
- * @date: 2021/2/5
+ * @author zqw
+ * @date 2021/2/5
  */
-public class SimpleFormat {
+class SimpleFormat {
     public static void main(String[] args) {
         int x = 5;
         double y = 5.332542;

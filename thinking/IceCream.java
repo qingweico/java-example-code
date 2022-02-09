@@ -1,11 +1,13 @@
 package thinking;
 
+import util.Constants;
+
 import java.util.Arrays;
 import java.util.Random;
 
 /**
- * @author:qiming 
- * @date: 2020/10/23
+ * @author zqw
+ * @date 2020/10/23
  */
 public class IceCream {
     private static final Random RANDOM = new Random(47);
@@ -34,7 +36,7 @@ public class IceCream {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < new Random().nextInt(10); i++) {
+        for (int i = 0; i < new Random().nextInt(Constants.TEN); i++) {
             System.out.println(Arrays.deepToString(flavorSet(3)));
         }
     }
