@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 /**
  * The @Test tag
  *
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -22,7 +22,7 @@ public @interface Test {
          CONSTRUCTOR: The declaration of the constructor
          FIELD: Domain declarations (including instances of enum)
          LOCAL_VARIABLES: Local variable declaration
-         METHOD Method declaration
+         METHOD: Method declaration
          PACKAGE: Package declaration
          PARAMETER: Parameter declaration
          TYPE: Class, interface (including annotation types), or enum declaration

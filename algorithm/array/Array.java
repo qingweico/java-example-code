@@ -23,10 +23,10 @@ public class Array<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public Array(E[] A) {
-        data = (E[]) new Object[A.length];
-        System.arraycopy(A, 0, data, 0, A.length);
-        size = A.length;
+    public Array(E[] e) {
+        data = (E[]) new Object[e.length];
+        System.arraycopy(e, 0, data, 0, e.length);
+        size = e.length;
     }
 
     public int size() {

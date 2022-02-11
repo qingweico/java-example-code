@@ -1,8 +1,9 @@
 package thinking.concurrency.atom;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.exit;
@@ -12,16 +13,17 @@ import static util.Print.print;
 /**
  * Operations that may seem safe are not, when thread are present.
  *
- * @author:qiming
- * @date: 2021/1/19
+ * @author zqw
+ * @date 2021/1/19
  */
 public class SerialNumberChecker {
     private static final int SIZE = 10;
-    private static final CircularSet serials = new CircularSet(1000);
-    private static final ExecutorService exec = Executors.newCachedThreadPool();
+    static CircularSet serials = new CircularSet(1000);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 10);
 
     static class SerialChecker implements Runnable {
         @Override
+        @SuppressWarnings("InfiniteLoopStatement")
         public void run() {
             while (true) {
                 int serial = SerialNumberGenerator.nextSerialNumber();
@@ -37,7 +39,7 @@ public class SerialNumberChecker {
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < SIZE; i++) {
-            exec.execute(new SerialChecker());
+            pool.execute(new SerialChecker());
             // Stop after n second if there's an argument
             if (args.length > 0) {
                 TimeUnit.SECONDS.sleep(Integer.parseInt(args[0]));
@@ -48,7 +50,9 @@ public class SerialNumberChecker {
     }
 }
 
-// Reuses storage so we don't out of memory
+/**
+ * Reuses storage so we don't out of memory
+ */
 class CircularSet {
     private final int[] array;
     private final int len;

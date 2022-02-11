@@ -1,28 +1,32 @@
 package thinking.concurrency.atom;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static util.Print.*;
 
 /**
- * @author:qiming
- * @date: 2021/1/20
+ * @author zqw
+ * @date 2021/1/20
  */
-@SuppressWarnings("InfiniteLoopStatement")
-public class AtomicityIntegerTest implements Runnable{
+public class AtomicityIntegerTest implements Runnable {
 
     private final AtomicInteger i = new AtomicInteger(0);
+
     public int getValue() {
         return i.get();
     }
+
     private void evenIncrement() {
         i.addAndGet(2);
     }
+
     @Override
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
         while (true) {
             evenIncrement();
@@ -36,19 +40,21 @@ public class AtomicityIntegerTest implements Runnable{
                 err("Aborting");
                 exit(0);
             }
-            // Terminate after 5 seconds
-        },5000);
+            // Terminate after 2 seconds
+        }, 2000);
 
-        ExecutorService exec = Executors.newCachedThreadPool();
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(1, 1, 1);
         AtomicityIntegerTest ait = new AtomicityIntegerTest();
-        exec.execute(ait);
+        pool.execute(ait);
         while (true) {
             int val = ait.getValue();
-            if(val % 2 != 0){
+            if (val % 2 != 0) {
                 print(val);
                 exit(0);
+                break;
             }
         }
+        pool.shutdown();
     }
 
 }

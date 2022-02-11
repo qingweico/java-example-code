@@ -18,16 +18,11 @@ public class StringInternTest {
         // Using string constant or constant ref not use StringBuilder
         print(s == a + b);
     }
+
     @Test
-    public void test() {
-        String a = new String("abc") + new String("def");
-        String b = new String("abcdef");
-        print(a.intern() == a);
-    }
-    @Test
-    public void testInternal() {
+    public void testIntern() {
         // Using the string concatenation operator does not generate an object in the
-        // String constant pool, whereas using new String() will generate two objects,
+        // string constant pool, whereas using new String() will generate two objects,
         // one on the heap and one in the String constant pool.
         String s10 = new String("a") + new String("b");
         s10.intern();
@@ -35,6 +30,7 @@ public class StringInternTest {
         // true
         print(s10 == s12);
     }
+
     public static void main(String[] args) {
         String s = new String("a");
         String ss = s.intern();
@@ -64,7 +60,6 @@ public class StringInternTest {
         print(s5 == s4);
 
 
-
         String s6 = "ab";
         String s7 = new String("a") + new String("b");
         String s8 = s7.intern();
@@ -79,6 +74,11 @@ public class StringInternTest {
         String s11 = "ab";
         // false
         print(s9 == s11);
+
+        String a = new String("abc") + new String("def");
+        String b = "abcdef";
+        // true
+        print(a.intern() == b);
 
     }
 }

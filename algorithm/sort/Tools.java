@@ -5,8 +5,10 @@ import junit.framework.Assert;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author zqw
@@ -24,10 +26,10 @@ public class Tools {
             'v', 'w', 'x', 'y', 'z'
     };
 
-    static void swap(int[] A, int i, int j) {
-        int tmp = A[i];
-        A[i] = A[j];
-        A[j] = tmp;
+    static void swap(int[] ai, int i, int j) {
+        int tmp = ai[i];
+        ai[i] = ai[j];
+        ai[j] = tmp;
 
     }
 
@@ -38,7 +40,7 @@ public class Tools {
     }
 
     public static List<Integer> gen(int n) {
-        return gen(n, 10000);
+        return gen(n, 1000000);
     }
 
     public static List<Integer> gen(int n, int bound) {
@@ -50,17 +52,20 @@ public class Tools {
     }
 
     public static List<Integer> genOrder(int n) {
-        return genOrder(n, n);
+        return genOrder(n, false);
     }
 
-    public static List<Integer> genOrder(int n, int bound) {
+    public static List<Integer> genOrder(int n, boolean same) {
+        if (same) {
+            int rnd = new Random().nextInt(n);
+            return IntStream.iterate(rnd, x -> x)
+                    .limit(n)
+                    .boxed()
+                    .collect(Collectors.toList());
+        }
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            if (n != bound) {
-                list.add(bound);
-            } else {
-                list.add(i);
-            }
+            list.add(i);
         }
         return list;
     }
@@ -90,18 +95,18 @@ public class Tools {
         return list;
     }
 
-    public static void assertSorted(int[] A) {
-        assertSorted(Arrays.stream(A).boxed().collect(Collectors.toList()));
+    public static void assertSorted(int[] ai) {
+        assertSorted(Arrays.stream(ai).boxed().collect(Collectors.toList()));
     }
 
-    public static void assertSorted(List<Integer> A) {
-        assertSorted(A, false);
+    public static void assertSorted(List<Integer> ci) {
+        assertSorted(ci, false);
     }
 
-    public static void assertSorted(List<Integer> A, boolean isDesc) {
+    public static void assertSorted(List<Integer> ci, boolean isDesc) {
         if (!isDesc) {
             int min = Integer.MIN_VALUE;
-            for (var i : A) {
+            for (var i : ci) {
                 if (min > i) {
                     Assert.fail("Array not in sorted order!");
                 }
@@ -109,7 +114,7 @@ public class Tools {
             }
         } else {
             int max = Integer.MAX_VALUE;
-            for (var i : A) {
+            for (var i : ci) {
                 if (max < i) {
                     Assert.fail("Array not in sorted order!");
                 }

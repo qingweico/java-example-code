@@ -1,7 +1,8 @@
 package thinking.concurrency.cooperation;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
@@ -10,17 +11,17 @@ import static util.Print.printnb;
 /**
  * The producer-consumer approach to task cooperation
  *
- * @author:qiming
- * @date: 2021/4/11
+ * @author zqw
+ * @date 2021/4/11
  */
-public class Restaurant {
+class Restaurant {
    Meal meal;
-   ExecutorService exec = Executors.newCachedThreadPool();
+   ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 2);
    final WaitPerson waitPerson = new WaitPerson(this);
    final Chef chef = new Chef(this);
    public Restaurant() {
-      exec.execute(chef);
-      exec.execute(waitPerson);
+      pool.execute(chef);
+      pool.execute(waitPerson);
    }
 
    public static void main(String[] args) {
@@ -33,6 +34,7 @@ class Meal {
    public Meal(int orderNum) {
       this.orderNum = orderNum;
    }
+   @Override
    public String toString() {
       return "Meal: " + orderNum;
    }
@@ -84,7 +86,7 @@ class Chef implements Runnable {
             }
             if(++count == 10) {
                print("Out of food, closing");
-               restaurant.exec.shutdownNow();
+               restaurant.pool.shutdownNow();
             }
             printnb("Order up! ");
             synchronized (restaurant.waitPerson) {

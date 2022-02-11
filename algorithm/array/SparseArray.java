@@ -16,8 +16,8 @@ public class SparseArray {
          System.out.println();
       }
       int sum = 0;
-      for (int[] ints : array) {
-         for (int anInt : ints) {
+      for (int[] ai : array) {
+         for (int anInt : ai) {
             if (anInt != 0) {
                sum++;
             }

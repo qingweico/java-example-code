@@ -1,12 +1,12 @@
 package algorithm.sort;
 
 import org.junit.Test;
+import thread.pool.CustomThreadPool;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static util.Print.printf;
 
@@ -16,7 +16,7 @@ import static util.Print.printf;
  */
 public class SortTest {
 
-    ExecutorService exec = Executors.newFixedThreadPool(10);
+    ExecutorService exec = CustomThreadPool.newFixedThreadPool(5, 10, 5);
 
 
     @Test
@@ -120,6 +120,10 @@ public class SortTest {
         }
     }
     @Test
+    public void q() {
+        sortTest(DualQuiSort.class, 10000);
+    }
+    @Test
     public void heapSort() {
         CountDownLatch latch = new CountDownLatch(3);
         exec.execute(() -> {
@@ -154,13 +158,13 @@ public class SortTest {
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(unordered);
             } else if (rawInstance instanceof MutableSorter) {
-                var unordered = Tools.gen(n, 100000).stream().mapToInt(x -> x).toArray();
+                var unordered = Tools.gen(n).stream().mapToInt(x -> x).toArray();
                 var instance = (MutableSorter) rawInstance;
                 instance.sort(unordered);
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(unordered);
             } else {
-                int[] raw = Tools.gen(n, 100000).stream().mapToInt(x -> x).toArray();
+                int[] raw = Tools.gen(n).stream().mapToInt(x -> x).toArray();
                 Integer[] unordered = Arrays.stream(raw).boxed().toArray(Integer[]::new);
                 rawInstance.getClass().getMethod("sort",
                         Comparable[].class).invoke(rawInstance, (Object) unordered);

@@ -30,3 +30,4 @@ public class Void {
         System.out.println(getSum(100));
     }
 }
+

@@ -1,50 +1,53 @@
 package jvm.threadandlock;
 
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
 
 /**
+ * -XX:+UnlockDiagnosticVMOptions -XX:+PrintAssembly
+ *
  * @author zqw
  * @date 2021/3/31
  */
 public class SecurityTestingOfVector {
 
-    private static final Vector<Integer> vector = new Vector<>();
+    private static final Vector<Integer> V = new Vector<>();
 
 
     public static void main(String[] args) {
-        while (true) {
-            for(int i = 0;i < 10;i++) {
-                vector.add(i);
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(20, 20, 20);
+        int count = 10;
+        while (count-- > 0) {
+            for (int i = 0; i < Constants.TEN; i++) {
+                V.add(i);
             }
 
-            Thread removeThread = new Thread(() -> {
+            pool.execute(() -> {
 
                 // Synchronization must be added to secure vector access!
-                synchronized (vector) {
-                    for(int i = 0;i < vector.size();i++) {
-                        vector.remove(i);
+                synchronized (V) {
+                    for (int i = 0; i < V.size(); i++) {
+                        V.remove(i);
                     }
                 }
             });
 
-            Thread printThread = new Thread(() -> {
-                synchronized (vector) {
-                    for (Integer integer : vector) {
-                        System.out.println(integer);
+            pool.execute(() -> {
+                synchronized (V) {
+                    for (Integer integer : V) {
+                        System.out.print(integer + " ");
                     }
                 }
             });
 
-            removeThread.start();
-            printThread.start();
 
             // Do not spawn too many threads at the same time, as this will
             // cause the operating system to freeze.
-            while (Thread.activeCount() > 20) {
-            }
         }
-
-
+        pool.shutdown();
     }
 }

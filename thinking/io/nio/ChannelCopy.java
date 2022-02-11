@@ -12,9 +12,9 @@ import java.nio.channels.FileChannel;
  * @author zqw
  * @date 2021/1/8
  */
-public class ChannelCopy {
+class ChannelCopy {
     private static final int BSIZE = 1024;
-    private static final String path = "thinking/io/nio/";
+    static String path = "thinking/io/nio/";
 
     public static void copyFile(String[] args) throws IOException {
         FileChannel in = new FileInputStream(path + args[0]).getChannel();

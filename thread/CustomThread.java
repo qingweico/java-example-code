@@ -1,8 +1,14 @@
 package thread;
 
 /**
- * Thread.start() >>> see openjdk
- * thread.cpp >>> JavaThread* >>> os::create_thread
+ * {@code openjdk}
+ * Thread native method see {@code Thread.c}
+ * {@code jvm.cpp JavaThread(&thread_entry, sz)}
+ * {@code thread.cpp#JavaThread::JavaThread(ThreadFunction entry_point, size_t stack_sz)#os::create_thread}
+ * {@code os_linux.cpp#os::create_thread}
+ * {@see pthread.c}
+ * {@see thread_CustomThread.h}
+ * {@see thread_new.c}
  *
  * @author zqw
  * @date 2021/6/25

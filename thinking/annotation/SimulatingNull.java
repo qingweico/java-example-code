@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
  * The element either has a default value,
  * or the element's value is supplied when the annotation is used.
  *
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

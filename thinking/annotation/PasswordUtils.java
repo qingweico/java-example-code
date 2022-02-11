@@ -3,10 +3,9 @@ package thinking.annotation;
 import java.util.List;
 
 /**
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
-@SuppressWarnings("unused")
 public class PasswordUtils {
 
     @UseCase(id=47, description = "Password must contain at least one numeric")

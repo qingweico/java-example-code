@@ -9,9 +9,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * synchronized {@code openjdk}
- * os_linux.cpp >>> os::PlatformEvent::park() >>> pthread_mutex_lock >>> pthread_mutex_unlock
+ * synchronized is a mutex lock and is also a spin lock.
+ * {@code openjdk}
+ * spin lock:
+ * {@code interpreterRuntime.cpp#InterpreterRuntime::monitorenter; InterpreterRuntime::monitorexit}
+ * {@code synchronizer.cpp#ObjectSynchronizer::fast_enter; ObjectSynchronizer::slow_enter}
+ * {@code objectMonitor.cpp#ObjectMonitor::enter(TRAPS); ObjectMonitor::EnterI (TRAPS)#TrySpin}
+ * mutex_lock:
+ * {@code os_linux.cpp#os::PlatformEvent::park()#pthread_mutex_lock();
+ * os::PlatformEvent::unpark()#pthread_mutex_unlock;}
+ * {@see mutex_lock.c}
+ * {@see spin_lock.c}
  * <p>
+ * {@code park.hpp}
+ * ParkEvent are used for Java-level "monitor" synchronization.
+ * Parkers are used by JSR166-JUC park-unpark.
  * ObjectMonitor: JVM C++ an object include: WaitSet, EntryList, OwnerThread, recursions
  *
  * @author zqw

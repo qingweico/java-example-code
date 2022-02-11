@@ -8,15 +8,15 @@ import static util.Print.print;
 
 /**
  * A simple column example of file lock-up
+ * JDK1.4 introduces file locking, which allows synchronous access to a file that is the
+ * most shared resource, file locks are visible to other operating system processes because
+ * Java's file locks map directly to the local operating system's locking facility.
  *
- * @author:qiming
- * @date: 2021/2/4
+ * @author zqw
+ * @date 2021/2/4
  */
 
-// JDK1.4 introduces file locking, which allows synchronous access to a file that is the
-// most shared resource, file locks are visible to other operating system processes because
-// Java's file locks map directly to the local operating system's locking facility.
-public class FileLocking {
+class FileLocking {
     public static void main(String[] args) throws Exception {
         FileOutputStream fos = new FileOutputStream("file.txt");
         // By calling tryLock () or Lock() on the FileChannel, you can get the FileLock of

@@ -22,6 +22,8 @@ import static util.Print.print;
  * <p>
  * The volatile keyword is a lightweight synchronization mechanism provided
  * by the JVM, visible to the main memory object thread.
+ * Solved instruction reordering see {@code openjdk: bytecodeinterpreter.cpp;
+ * orderaccess_linux_x86.inline.hpp#OrderAccess::fence()}
  */
 @SuppressWarnings("unused")
 public class VolatileAndAtomicTest {

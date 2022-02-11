@@ -3,8 +3,8 @@ package thinking.annotation;
 import thinking.atunit.Test;
 
 /**
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
 public class Testable {
     public void execute() {

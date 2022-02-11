@@ -1,8 +1,8 @@
 package thinking.annotation.database;
 
 /**
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
 @DBTable(name = "MEMBER")
 public class Member {
@@ -28,6 +28,7 @@ public class Member {
         return lastName;
     }
 
+    @Override
     public String toString() {
         return handle;
     }

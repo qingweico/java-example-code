@@ -1,6 +1,8 @@
 package thinking.io.nio;
 
 
+import util.Constants;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,12 +17,12 @@ import java.nio.charset.StandardCharsets;
  * @author zqw
  * @date 2021/2/5
  */
-public class BufferToText {
-    private final static int BSIZE = 1024;
-    private static final String path = "thinking/io/nio/";
-    private static final String fileName = "data.txt";
+class BufferToText {
+    private final static int BSIZE = Constants.KB;
 
     public static void main(String[] args) throws IOException {
+        final String path = "thinking/io/nio/";
+        final String fileName = "data.txt";
         FileChannel fc = new FileOutputStream(path + fileName).getChannel();
         fc.write(ByteBuffer.wrap("some text".getBytes()));
         fc.close();

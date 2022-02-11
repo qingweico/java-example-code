@@ -1,7 +1,8 @@
 package thinking.concurrency.cooperation;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
@@ -10,17 +11,17 @@ import static util.Print.printnb;
 /**
  * Basic task cooperation
  *
- * @author:qiming
- * @date: 2021/4/11
+ * @author zqw
+ * @date 2021/4/11
  */
 public class WaxOMatic {
     public static void main(String[] args) throws InterruptedException {
         Car car = new Car();
-        ExecutorService exec = Executors.newCachedThreadPool();
-        exec.execute(new WaxOff(car));
-        exec.execute(new WaxOn(car));
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 2);
+        pool.execute(new WaxOff(car));
+        pool.execute(new WaxOn(car));
         TimeUnit.SECONDS.sleep(5);
-        exec.shutdownNow();
+        pool.shutdownNow();
     }
 }
 
@@ -28,12 +29,14 @@ class Car {
     private boolean waxOn = false;
 
     public synchronized void waxed() {
-        waxOn = true;    // Ready to buff
+        // Ready to buff
+        waxOn = true;
         notifyAll();
     }
 
     public synchronized void buffed() {
-        waxOn = false;    // Ready for another coat of wax
+        // Ready for another coat of wax
+        waxOn = false;
         notifyAll();
     }
 

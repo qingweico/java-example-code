@@ -23,6 +23,9 @@ public interface Aspect {
      */
     void after();
 
+    /**
+     * Generate a proxy object
+     */
     @SuppressWarnings("unchecked")
     static <T> T getProxy(Class<T> cls, String... aspects) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         var aspectInstances = Arrays.stream(aspects).map(name -> Try.ofFailable(() -> {
