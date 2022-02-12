@@ -3,12 +3,12 @@ package algorithm.map;
 import algorithm.tree.AVLTree;
 
 /**
- * @author:qiming
- * @date: 2021/11/1
+ * @author zqw
+ * @date 2021/11/1
  */
-public class AVLMap<K extends Comparable<K>, V> implements Map<K, V> {
+public class AvlMap<K extends Comparable<K>, V> implements Map<K, V> {
    private final AVLTree<K, V> avlTree;
-   public AVLMap() {
+   public AvlMap() {
       avlTree = new AVLTree<>();
    }
     @Override

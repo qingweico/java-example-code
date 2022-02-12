@@ -1,8 +1,8 @@
 package algorithm.map;
 
 /**
- * @author:qiming
- * @date: 2021/10/30
+ * @author zqw
+ * @date 2021/10/30
  */
 public interface Map<K, V> {
     void add(K k, V v);

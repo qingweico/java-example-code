@@ -2,33 +2,33 @@ package algorithm.map;
 
 import algorithm.sort.Tools;
 import org.junit.Test;
+import thread.pool.CustomThreadPool;
 import util.FileOperation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static util.Print.print;
 import static util.Print.printf;
 
 /**
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class MapTest {
-    ExecutorService exec = Executors.newFixedThreadPool(10);
+    ExecutorService exec = CustomThreadPool.newFixedThreadPool(5, 10, 5);
 
     @Test
     public void test() {
         CountDownLatch latch = new CountDownLatch(4);
         exec.execute(() -> {
-            mapTest(BSTMap.class);
+            mapTest(BstMap.class);
             latch.countDown();
         });
         exec.execute(() -> {
-            mapTest(AVLMap.class);
+            mapTest(AvlMap.class);
             latch.countDown();
         });
         exec.execute(() -> {
@@ -52,11 +52,11 @@ public class MapTest {
     public void testQuery() {
         CountDownLatch latch = new CountDownLatch(4);
         exec.execute(() -> {
-            mapTest(BSTMap.class, 1000000);
+            mapTest(BstMap.class, 1000000);
             latch.countDown();
         });
         exec.execute(() -> {
-            mapTest(AVLMap.class, 1000000);
+            mapTest(AvlMap.class, 1000000);
             latch.countDown();
         });
         exec.execute(() -> {
@@ -105,12 +105,12 @@ public class MapTest {
         }
     }
 
-    public void mapTest(Class<?> cls, int N) {
+    public void mapTest(Class<?> cls, int n) {
         try {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();
             @SuppressWarnings("unchecked") var inst = (Map<Integer, Integer>) rawInstance;
-            var data = Tools.gen(N, Integer.MAX_VALUE);
+            var data = Tools.gen(n, Integer.MAX_VALUE);
             var start = System.nanoTime();
             for (var i : data) {
                 inst.add(i, null);

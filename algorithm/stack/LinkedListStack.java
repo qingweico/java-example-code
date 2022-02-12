@@ -3,8 +3,8 @@ package algorithm.stack;
 import algorithm.list.LinkedList;
 
 /**
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class LinkedListStack<E> implements Stack<E> {
     private final LinkedList<E> linkedList;

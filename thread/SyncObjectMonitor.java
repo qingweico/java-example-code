@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * synchronized is a mutex lock and is also a spin lock.
  * {@code openjdk}
+ * Interpret monitorenter and monitorexi in Java bytecode:
+ * {@code bytecodeInterpreter.cpp; CASE(_monitorenter); CASE(_monitorexit)}
  * spin lock:
  * {@code interpreterRuntime.cpp#InterpreterRuntime::monitorenter; InterpreterRuntime::monitorexit}
  * {@code synchronizer.cpp#ObjectSynchronizer::fast_enter; ObjectSynchronizer::slow_enter}

@@ -5,9 +5,10 @@ import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 
 /**
- * {@code openjdk unsafe.cpp#UNSAFE_ENTRY(Unsafe_CompareAndSwapInt)}
- * {@code openjdk atomic_linux_x86.inline.hpp#Atomic::cmpxchg; LOCK_IF_MP(mp)}
- * {@code openjdk os.hpp#is_MP()}
+ * cmpxchg implement cas see {@code openjdk}
+ * {@code unsafe.cpp#UNSAFE_ENTRY(Unsafe_CompareAndSwapInt)}
+ * {@code atomic_linux_x86.inline.hpp#Atomic::cmpxchg; LOCK_IF_MP(mp)}
+ * {@code os.hpp#is_MP()}
  *
  * @author zqw
  * @date 2022/2/7

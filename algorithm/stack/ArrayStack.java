@@ -3,8 +3,8 @@ package algorithm.stack;
 import algorithm.array.Array;
 
 /**
- * @author:qiming
- * @date: 2021/10/30
+ * @author zqw
+ * @date 2021/10/30
  */
 public class ArrayStack<E> implements Stack<E> {
     private final Array<E> array;

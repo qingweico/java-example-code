@@ -4,7 +4,7 @@ package algorithm.array;
  * @author zqw
  * @date 2021/11/9
  */
-public class SparseArray {
+class SparseArray {
    public static void main(String[] args) {
       int[][] array = new int[11][11];
       array[2][1] = 4;

@@ -1,8 +1,8 @@
 package algorithm.map;
 
 /**
- * @author:qiming
- * @date: 2021/12/6
+ * @author zqw
+ * @date 2021/12/6
  */
 public class HashMap<K, V> {
     static class Node<K, V> {
@@ -21,6 +21,7 @@ public class HashMap<K, V> {
             this.value = value;
         }
 
+        @Override
         public final String toString() {
             return key + "=" + value;
         }

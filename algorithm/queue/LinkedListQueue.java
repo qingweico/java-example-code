@@ -1,8 +1,8 @@
 package algorithm.queue;
 
 /**
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class LinkedListQueue<E> implements Queue<E> {
     private class Node {

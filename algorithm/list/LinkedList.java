@@ -1,22 +1,18 @@
 package algorithm.list;
 
-import org.junit.Test;
-
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
-import static util.Print.print;
-
 /**
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class LinkedList<E> {
 
-    private final Node dummy;
+    final Node dummy;
     private int size;
 
-    private class Node {
+    class Node {
         E e;
         Node next;
 
@@ -198,7 +194,9 @@ public class LinkedList<E> {
     }
 
     public LinkedList<Integer>.Node reverseList(LinkedList<Integer>.Node head) {
-        if (head == null) return null;
+        if (head == null) {
+            return null;
+        }
         LinkedList<Integer>.Node cur = head;
         LinkedList<Integer>.Node p = null;
         while (cur != null) {
@@ -241,21 +239,5 @@ public class LinkedList<E> {
         q.next = curr;
         q.next.next = old;
         return head;
-    }
-
-    @Test
-    public void testRev() {
-        LinkedList<Integer> linkedList = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            linkedList.addLast(i);
-        }
-        print(linkedList);
-        linkedList.dummy.next = reverseList(linkedList.dummy.next);
-        print(linkedList);
-        linkedList.dummy.next = reverseListR(linkedList.dummy.next);
-        print(linkedList);
-        // TODO
-        reverseBetween(dummy.next, 2, 5);
-        print(linkedList);
     }
 }

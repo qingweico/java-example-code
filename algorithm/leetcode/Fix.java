@@ -3,10 +3,10 @@ package algorithm.leetcode;
 import java.util.*;
 
 /**
- * @author:qiming
- * @date: 2021/9/20
+ * @author zqw
+ * @date 2021/9/20
  */
-public class Fix {
+class Fix {
 
     public static int strStr(String haystack, String needle) {
         if ("".equals(needle)) {
@@ -107,7 +107,7 @@ public class Fix {
     }
 
     public static int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> hashMap = new HashMap<>();
+        Map<Integer, Integer> hashMap = new HashMap<>(nums.length);
         int[] res = new int[k];
         int maxCount = 0;
         for (int n : nums) {

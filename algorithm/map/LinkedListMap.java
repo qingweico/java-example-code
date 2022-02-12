@@ -3,8 +3,8 @@ package algorithm.map;
 import java.util.NoSuchElementException;
 
 /**
- * @author:qiming
- * @date: 2021/10/30
+ * @author zqw
+ * @date 2021/10/30
  */
 public class LinkedListMap<K, V> implements Map<K, V> {
 

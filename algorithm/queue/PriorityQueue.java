@@ -3,8 +3,8 @@ package algorithm.queue;
 import algorithm.heap.MaxHeap;
 
 /**
- * @author:qiming
- * @date: 2021/10/29
+ * @author zqw
+ * @date 2021/10/29
  */
 public class PriorityQueue<E extends Comparable<E>> implements Queue<E>{
 
