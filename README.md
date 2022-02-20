@@ -1,7 +1,9 @@
 # java-example-code
+
+![APM](https://img.shields.io/apm/l/vim-mode)
 ![](https://img.shields.io/static/v1?label=tools&message=JDK14&color=brightlight)
-![](https://img.shields.io/static/v1?label=version&message=1.1.2&color=green)
-![](https://img.shields.io/static/v1?label=linenumber&message=29323&color=orange)
+![WordPress Theme Last Updated](https://img.shields.io/wordpress/theme/last-updated/twentyseventeen)
+![](https://img.shields.io/static/v1?label=linenumber&message=33212&color=orange)
 
 - Thinking in Java
 - Effective Java
