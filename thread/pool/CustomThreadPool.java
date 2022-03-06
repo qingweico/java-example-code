@@ -69,4 +69,14 @@ public class CustomThreadPool {
                 CustomThreadFactory.guavaThreadFactory(),
                 new CustomRejectedExecutionHandler());
     }
+
+    public static ExecutorService newFixedThreadPool(int nThreads) {
+        return new ThreadPoolExecutor(nThreads,
+                nThreads,
+                60L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(nThreads),
+                CustomThreadFactory.guavaThreadFactory(),
+                new CustomRejectedExecutionHandler());
+    }
 }

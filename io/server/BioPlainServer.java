@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutorService;
  * @author zqw
  * @date 2021/10/18
  */
-public class BioPlainEchoServer {
+public class BioPlainServer {
 
     private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(2,
             3,

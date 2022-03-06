@@ -14,8 +14,9 @@ import java.util.Set;
 /**
  * @author zqw
  * @date 2021/10/18
+ * @see NioPlainServer
  */
-public class NioPlanEchoServer {
+public class NioSelectorServer {
     public static void serve(int port) throws IOException {
         ServerSocketChannel channel = ServerSocketChannel.open();
         ServerSocket socket = channel.socket();
@@ -24,6 +25,7 @@ public class NioPlanEchoServer {
         socket.bind(address);
         // Non-Block, in the mode of Blocking, the operation of regist is not allowed, or
         // throw IllegalBlockingModeException.
+        // BIO >> accept >> Non-Block
         channel.configureBlocking(false);
         Selector selector = Selector.open();
         channel.register(selector, SelectionKey.OP_ACCEPT);
@@ -45,17 +47,22 @@ public class NioPlanEchoServer {
                         ServerSocketChannel server = (ServerSocketChannel) key.channel();
                         SocketChannel client = server.accept();
                         System.out.println("Accepted connection from: " + client.getRemoteAddress());
+                        // BIO >> read >> Non-Block
                         client.configureBlocking(false);
                         client.register(selector, SelectionKey.OP_WRITE | SelectionKey.OP_READ,
                                 ByteBuffer.allocate(1000));
-
                     }
                     if (key.isReadable()) {
                         SocketChannel client = (SocketChannel) key.channel();
                         ByteBuffer output = (ByteBuffer) key.attachment();
                         int read = client.read(output);
-                        System.out.println("client " + client.getRemoteAddress() + " send: " +
-                                new String(output.array(), 0, read));
+                        if (read > 0) {
+                            System.out.println("client " + client.getRemoteAddress() + " send: " +
+                                    new String(output.array(), 0, read));
+                        } else if (read == -1) {
+                            // TODO
+                            System.out.println("client disconnection: " + client.getRemoteAddress());
+                        }
                     }
                     if (key.isWritable()) {
                         SocketChannel client = (SocketChannel) key.channel();
@@ -73,6 +80,7 @@ public class NioPlanEchoServer {
         }
 
     }
+
     public static void main(String[] args) throws IOException {
         serve(8080);
     }

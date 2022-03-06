@@ -7,6 +7,9 @@ package util;
  * @date 2022/1/28
  */
 public interface Constants {
+    /**
+     * 0 ~ 20
+     */
     int ZERO = 0;
     int ONE = 1;
     int TWO = 2;
@@ -15,9 +18,17 @@ public interface Constants {
     int BYTE = 8;
     int TEN = 10;
     int TWENTY = 20;
+
+
     int KB = 1024;
     int EOF = -1;
     int QOMOLANGMA = 8848;
+    int NUM_300 = 300;
+
+
+    /**
+     * ~
+     */
     int HUNDRED = 100;
     int THOUSAND = 1000;
     int TEN_THOUSAND = 10000;
@@ -25,6 +36,8 @@ public interface Constants {
     int MILLION = 1000000;
     int TEN_MILLION = 10000000;
     int HUNDRED_MILLION = 100000000;
+
+
     String LOOP_BACK = "127.0.0.1";
 
 }
