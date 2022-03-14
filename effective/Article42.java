@@ -10,19 +10,22 @@ import java.util.function.DoubleBinaryOperator;
 /**
  * Lambda优先于匿名类
  *
- * @author:qiming
- * @date: 2021/2/4
+ * @author zqw
+ * @date 2021/2/4
  */
+
 // An interface with an abstract method (or, almost always, a class that is not abstract)
 // is a function type whose instances are called function objects representing the
 // function or the action to be taken.
-public class Article42 {
+
+class Article42 {
     public static void main(String[] args) {
 
         List<String> words = Arrays.asList("token", "more", "not");
         // Anonymous class instance as a function object - obsolete!
         // Sort by the length of string
         Collections.sort(words, new Comparator<String>() {
+            @Override
             public int compare(String s1, String s2) {
                 return Integer.compare(s1.length(), s2.length());
             }
@@ -46,6 +49,9 @@ public class Article42 {
 // and those inside curly braces are called constant-specific class bodies.
 
 enum OperationOfUsingLambda {
+    /**
+     * plus
+     */
     PLUS("+", (x, y) -> {
 
         // TODO
@@ -53,8 +59,17 @@ enum OperationOfUsingLambda {
         // System.out.println(this);
         return x + y;
     }),
+    /**
+     * minus
+     */
     MINUS("-", (x, y) -> x - y),
+    /**
+     * times
+     */
     TIMES("*", (x, y) -> x * y),
+    /**
+     * divide
+     */
     DIVIDE("/", (x, y) -> x / y);
 
     public double apply(double a, double b) {

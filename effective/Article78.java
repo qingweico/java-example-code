@@ -7,17 +7,14 @@ import static util.Print.print;
 
 /**
  * 同步访问共享的可变数据
- * <p>
  * The synchronized keyword guarantees that only one thread
  * can execute a method, or a block of code, at any one time.
  *
- * @author:qiming
- * @date: 2021/1/28
+ * @author zqw
+ * @date 2021/1/28
  */
-public class Article78 {
+class Article78 {
 }
-
-// Broken!
 class NotStopThread {
     // Cooperative thread termination with a volatile field.
     // Or use the volatile keyword to modify stopRequested, Although the volatile
@@ -53,7 +50,7 @@ class NotStopThread {
         // The program will not terminate!
     }
 }
-// Properly synchronized cooperative thread terminate.
+/** Properly synchronized cooperative thread terminate.*/
 class StopThread {
     private static boolean stopRequested = false;
 
@@ -94,6 +91,7 @@ class GenerateSerialNumber {
     // between when the first thread reads the old value and when it writes back
     // the new value, the second thread and the first thread will see the same value,
     // which is a security failure.
+
     public static int generateSerialNumber() {
         return nextSerialNumber++;
     }
@@ -102,10 +100,5 @@ class GenerateSerialNumber {
 
     public static long generateSerialNum() {
         return nextSerialNum.getAndIncrement();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-
-
     }
 }

@@ -11,6 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 
 /**
+ * 0: 符号位
+ * 1 ~ 41: 时间戳
+ * 42 ~ 51: 机器id
+ * 52 ~ 63: 序列号
  * @author zqw
  * @date 2022/2/25
  */

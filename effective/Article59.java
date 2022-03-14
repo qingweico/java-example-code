@@ -8,46 +8,47 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 了解和使用类库
- *
+ * <p>
  * 优秀的第三方类库比如Google优秀的开源Guava类库
  * 从经济的角度分析表明: 类库代码受到的关注远远超过大多数普通程序员在同样功能上所能给予的投入
+ * 从java7开始, 就不应该再使用Random ThreadLocalRandom可以产生更高质量的随机数, 并且速度非常快
  *
- * @author:qiming
- * @date: 2020/11/23
+ * @author zqw
+ * @date 2020/11/23
  */
-// 从java7开始, 就不应该再使用Random ThreadLocalRandom可以产生更高质量的随机数，并且速度非常快
-class ThreadLocalRandomTest{
-    static ThreadLocalRandom threadLocalRandom =  ThreadLocalRandom.current();
+class ThreadLocalRandomTest {
+    static ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
 
     public static void main(String[] args) {
         System.out.println(threadLocalRandom.nextInt(100));
     }
 }
-public class Article59 {
-    // Common but deeply flawed
+class Article59 {
+    /** Common but deeply flawed*/
     static Random rnd = new Random();
 
-    static int random(int n){
+    static int random(int n) {
         return Math.abs(rnd.nextInt()) % n;
     }
 
     public static void main(String[] args) {
         int n = 2 * (Integer.MAX_VALUE / 3);
         int low = 0;
-        for(int i = 0;i < 1000000;i++){
-            if(random(n) < n / 2) {
+        for (int i = 0; i < 1000000; i++) {
+            if (random(n) < n / 2) {
                 low++;
             }
         }
-        // 接近666666 说明random方法产生的数字有三分之二落在了随机数取值的前半部分
+        // 接近666666, 说明random方法产生的数字有三分之二落在了随机数取值的前半部分
         System.out.println(low);
     }
 }
+
 // 在java9中InputStream中增加了transferTo方法
 // 打印出命令行指定一条URL(url需要加协议)的内容, Linux中curl命令作用大体如此
-class InputStreamOfTransferTo{
+class InputStreamOfTransferTo {
     public static void main(String[] args) throws IOException {
-        try(InputStream in = new URL(args[0]).openStream()){
+        try (InputStream in = new URL(args[0]).openStream()) {
             in.transferTo(System.out);
         }
     }

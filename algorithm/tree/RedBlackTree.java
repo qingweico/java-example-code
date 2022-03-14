@@ -3,10 +3,10 @@ package algorithm.tree;
 import java.util.NoSuchElementException;
 
 /**
- * @author:qiming
- * @date: 2021/11/1
+ * @author zqw
+ * @date 2021/11/1
  */
-public class RedBlackTree<K extends Comparable<K>, V> {
+public class RedBlackTree<K extends Comparable<K>, V> extends AbstractTree {
 
     private Node root;
     private int size;

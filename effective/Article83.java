@@ -3,22 +3,28 @@ package effective;
 
 /**
  * 慎用延迟初始化
+ * In most cases, normal initialization takes precedence over lazy initialization!
  *
- * @author:qiming
- * @date: 2021/3/24
+ * @author zqw
+ * @date 2021/3/24
  */
-// In most cases, normal initialization takes precedence over lazy initialization!
-public class Article83 {
-    // Normal initialization of an instance field
-    private final FieldType fieldType = computeFieldValue();
 
+class Article83 {
+    /**
+     * Normal initialization of an instance field
+     */
+    private final FieldType fieldType = computeFieldValue();
 
 
     private FieldType field;
 
-    // Lazy initialization of instance field - synchronized accessor
-    // If you use delay optimization to break the initialized loop,
-    // use the synchronous access method.
+    /**
+     * Lazy initialization of instance field - synchronized accessor
+     * If you use delay optimization to break the initialized loop,
+     * use the synchronous access method.
+     *
+     * @return FieldType
+     */
     private synchronized FieldType getField() {
         if (field == null) {
             field = computeFieldValue();
@@ -26,23 +32,24 @@ public class Article83 {
         return field;
     }
 
-    static class FieldType {}
+    static class FieldType {
+    }
 
     public static FieldType computeFieldValue() {
         return new FieldType();
     }
 
-    // Lazy initialization holder class idiom for static fields
+    /**Lazy initialization holder class idiom for static fields*/
     private static class FieldHolder {
-        static final FieldType field = computeFieldValue();
+        static final FieldType FIELD = computeFieldValue();
     }
 
     private static FieldType getField0() {
-        return FieldHolder.field;
+        return FieldHolder.FIELD;
     }
 
-    // Double-check idiom for lazy initialization of instance field.
-    static class DCL {
+    /**Double-check idiom for lazy initialization of instance field.*/
+    static class Dcl {
         private volatile FieldType field;
 
         private FieldType getField() {
@@ -63,8 +70,8 @@ public class Article83 {
         }
     }
 
-    // Single-check idiom - can cause repeated initialization
-    static class SCL {
+    /** Single-check idiom - can cause repeated initialization*/
+    static class Scl {
         private volatile FieldType field;
 
         private FieldType getField() {
@@ -75,6 +82,5 @@ public class Article83 {
             }
             return result;
         }
-
     }
 }

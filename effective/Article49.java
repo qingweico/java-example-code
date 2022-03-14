@@ -5,10 +5,10 @@ import java.math.BigInteger;
 /**
  * 检查参数的有效性
  *
- * @author:qiming
- * @date: 2021/4/3
+ * @author zqw
+ * @date 2021/4/3
  */
-public class Article49 {
+class Article49 {
     /**
      * Return a BigInteger whose value is (this mod m). This method
      * differs from the remainder method in that it always return a

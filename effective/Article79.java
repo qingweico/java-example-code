@@ -10,14 +10,15 @@ import java.util.concurrent.Executors;
 /**
  * 避免过度同步
  *
- * @author:qiming
- * @date: 2021/3/27
+ * @author zqw
+ * @date 2021/3/27
  */
-public class Article79 {
+class Article79 {
     public static void main(String[] args) {
-      // TODO
+        // TODO
     }
 }
+
 class ObservableSet<E> extends ForwardingSet<E> {
 
     public ObservableSet(Set<E> s) {
@@ -38,10 +39,12 @@ class ObservableSet<E> extends ForwardingSet<E> {
         }
     }
 
-    // Alien method moved outside of synchronized block - open calls.
+    /**
+     * Alien method moved outside synchronized block - open calls.
+     */
     private void notifyElementAdded(E element) {
         synchronized (observers) {
-            for(SetObserver<E> observer : observers) {
+            for (SetObserver<E> observer : observers) {
                 observer.added(this, element);
             }
         }
@@ -52,15 +55,15 @@ class ObservableSet<E> extends ForwardingSet<E> {
         synchronized (observers) {
             snapshot = new ArrayList<>(observers);
         }
-        for(SetObserver<E> observer : snapshot) {
+        for (SetObserver<E> observer : snapshot) {
             observer.added(this, element);
         }
     }
 
     @Override
     public boolean add(E e) {
-        boolean added =  super.add(e);
-        if(added) {
+        boolean added = super.add(e);
+        if (added) {
             notifyElementAdded0(e);
         }
         return added;
@@ -69,7 +72,7 @@ class ObservableSet<E> extends ForwardingSet<E> {
     @Override
     public boolean addAll(Collection<? extends E> c) {
         boolean result = false;
-        for(E element : c) {
+        for (E element : c) {
             // Calls notifyElementAdded.
             result |= add(element);
         }
@@ -85,7 +88,7 @@ class ObservableSet<E> extends ForwardingSet<E> {
             @Override
             public void added(ObservableSet<Integer> set, Integer element) {
                 System.out.println(element);
-                if(element == 23) {
+                if (element == 23) {
                     set.removeObserver(this);
                 }
             }
@@ -96,32 +99,35 @@ class ObservableSet<E> extends ForwardingSet<E> {
             @Override
             public void added(ObservableSet<Integer> set, Integer element) {
                 System.out.println(element);
-                if(element == 23) {
+                if (element == 23) {
                     ExecutorService exec = Executors.newSingleThreadExecutor();
                     try {
                         exec.submit(() -> set.removeObserver(this)).get();
                         // Multi-catch
-                    }catch (ExecutionException | InterruptedException ex) {
+                    } catch (ExecutionException | InterruptedException ex) {
                         throw new AssertionError(ex);
-                    }
-                    finally {
+                    } finally {
                         exec.shutdown();
                     }
                 }
             }
         });
 
-        for(int i = 0;i < 100;i++) {
+        for (int i = 0; i < 100; i++) {
             set.add(i);
         }
     }
 }
+
 @FunctionalInterface
 interface SetObserver<E> {
-    // Invoked when an element is added to the observable set.
+    /**
+     * Invoked when an element is added to the observable set.
+     */
     void added(ObservableSet<E> set, E element);
 
 }
+
 class SafeObservableSet<E> extends ForwardingSet<E> {
     private final List<SafeSetObserver<E>> observers = new CopyOnWriteArrayList<>();
 
@@ -132,9 +138,11 @@ class SafeObservableSet<E> extends ForwardingSet<E> {
     public void addObserver(SafeSetObserver<E> observer) {
         observers.add(observer);
     }
+
     public boolean removeObserver(SafeSetObserver<E> observer) {
         return observers.remove(observer);
     }
+
     private void notifyElementAdded(E element) {
         for (SafeSetObserver<E> observer : observers) {
             observer.added(this, element);
@@ -143,8 +151,8 @@ class SafeObservableSet<E> extends ForwardingSet<E> {
 
     @Override
     public boolean add(E e) {
-        boolean added =  super.add(e);
-        if(added) {
+        boolean added = super.add(e);
+        if (added) {
             notifyElementAdded(e);
         }
         return added;
@@ -153,16 +161,18 @@ class SafeObservableSet<E> extends ForwardingSet<E> {
     @Override
     public boolean addAll(Collection<? extends E> c) {
         boolean result = false;
-        for(E element : c) {
+        for (E element : c) {
             // Calls notifyElementAdded.
             result |= add(element);
         }
         return result;
     }
 }
+
 @FunctionalInterface
 interface SafeSetObserver<E> {
-    // Invoked when an element is added to the observable set.
+    /**
+     * Invoked when an element is added to the observable set.
+     */
     void added(SafeObservableSet<E> set, E element);
-
 }

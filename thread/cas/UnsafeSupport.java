@@ -29,11 +29,15 @@ public class UnsafeSupport {
         }
     }
 
+    /**
+     *
+     * @param interval the waiting interval;  unit: ms
+     */
     public static void shortWait(long interval) {
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
         long end;
         do {
-            end = System.nanoTime();
+            end = System.currentTimeMillis();
         } while (start + interval >= end);
     }
 }

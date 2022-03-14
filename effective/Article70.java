@@ -2,8 +2,8 @@ package effective;
 
 /**
  * 对可恢复的情况使用受检异常, 对编程错误使用运行时异常
- * @author:qiming
- * @date: 2021/11/13
+ * @author zqw
+ * @date 2021/11/13
  */
 public class Article70 {
 

@@ -34,7 +34,9 @@ public class OperateStreamTest {
     public void optional() {
         Optional<Integer> x = Optional.empty();
         var y = x.map(i -> i * i);
-        // orElseThrow()
+        // orElseThrow(); 如果没有值则抛出NoSuchElementException, 否则返回一个值
+        Optional<Integer> ret = Optional.of(1);
+        System.out.println(ret.orElseThrow());
         x.ifPresentOrElse(System.out::println, () -> System.out.println("no such element found"));
         System.out.println(y);
     }

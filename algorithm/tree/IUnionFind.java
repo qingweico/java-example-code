@@ -1,8 +1,8 @@
 package algorithm.tree;
 
 /**
- * @author:qiming
- * @date: 2021/11/15
+ * @author zqw
+ * @date 2021/11/15
  */
 public interface IUnionFind {
     void union(int p, int q);

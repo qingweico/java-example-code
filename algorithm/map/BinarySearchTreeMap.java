@@ -6,11 +6,11 @@ import java.util.NoSuchElementException;
  * @author zqw
  * @date 2021/10/31
  */
-public class BstMap<K extends Comparable<K>, V> implements Map<K, V> {
+public class BinarySearchTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
     private Node root;
     private int size;
 
-    public BstMap() {
+    public BinarySearchTreeMap() {
         root = null;
         size = 0;
     }

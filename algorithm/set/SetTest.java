@@ -16,7 +16,7 @@ import static util.Print.printf;
 public class SetTest {
     @Test
     public void test() {
-        setTest(BSTSet.class);
+        setTest(BinarySearchTreeSet.class);
         setTest(AVLSet.class);
         setTest(LinkedListSet.class);
     }

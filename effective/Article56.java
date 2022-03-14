@@ -5,9 +5,9 @@ package effective;
  *
  * documentation comment(JavaDoc)
  *
- * @author:qiming
- * @date: 2021/11/18
+ * @author zqw
+ * @date 2021/11/18
  */
-public class Article56 {
+class Article56 {
 
 }

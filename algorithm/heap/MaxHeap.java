@@ -3,8 +3,8 @@ package algorithm.heap;
 import algorithm.array.Array;
 
 /**
- * @author:qiming
- * @date: 2021/10/29
+ * @author zqw
+ * @date 2021/10/29
  */
 public class MaxHeap<E extends Comparable<E>> {
     private Array<E> data;
@@ -79,9 +79,9 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
-    public void heapify(E[] A) {
-        data = new Array<>(A);
-        for (int i = parent(A.length - 1); i >= 0; i--) {
+    public void heapify(E[] e) {
+        data = new Array<>(e);
+        for (int i = parent(e.length - 1); i >= 0; i--) {
             siftDown(i);
         }
     }

@@ -9,10 +9,10 @@ import java.util.stream.Stream;
 /**
  * 方法引用优先于Lambda
  *
- * @author:qiming
- * @date: 2021/2/20
+ * @author zqw
+ * @date 2021/2/20
  */
-public class Article43 {
+class Article43 {
     public static void main(String[] args) {
         Map<String, Integer> map = new HashMap<>();
         map.put("ke", 2);
@@ -32,7 +32,6 @@ public class Article43 {
         System.out.println(toMap);
 
 
-        // @see javaeight.MessageBuilder
         // Lambda is preferred if the method and Lambda are in the same class.
 
         // Static reference
@@ -53,7 +52,5 @@ public class Article43 {
 
         // Use method references whenever they are more concise and clear,
         // stick with Lambda if method references are not terse.
-
-
     }
 }

@@ -12,7 +12,9 @@ import static util.Print.*;
  */
 class CollectionClassifier {
 
-    // Using this method will print three times "Unknown Collection"
+    /**
+     * Using this method will print three times "Unknown Collection"
+     */
     public static String classify(Set<?> set) {
         return "Set";
     }
@@ -25,8 +27,10 @@ class CollectionClassifier {
         return "Unknown Collection";
     }
 
-    // Best modification method:
-    // It will print "Set List Unknown Collection".
+    /**
+     * Best modification method:
+     * It will print "Set List Unknown Collection".
+     */
     public static String classifyPlus(Collection<?> c) {
         return c instanceof Set ? "Set" :
                 c instanceof List ? "List" : "Unknown Collection";
@@ -36,7 +40,7 @@ class CollectionClassifier {
         Collection<?>[] collections = {
                 new HashSet<>(),
                 new ArrayList<>(),
-                new HashMap<String, String>().values()};
+                new HashMap<String, String>(0).values()};
         // Which overloaded method to call is a decision that is made at compile time.
         for (Collection<?> c : collections) {
             System.out.println(CollectionClassifier.classify(c));
@@ -61,6 +65,7 @@ class Wine {
  * 气泡葡萄酒
  */
 class SparklingWine extends Wine {
+    @Override
     String name() {
         return "sparkling wine";
     }
@@ -70,12 +75,13 @@ class SparklingWine extends Wine {
  * 香槟
  */
 class Champagne extends SparklingWine {
+    @Override
     String name() {
         return "champagne";
     }
 }
 
-public class Article52 {
+class Article52 {
     public static void main(String[] args) {
         List<Wine> wineList = List.of(
                 new Wine(),
@@ -103,7 +109,8 @@ class SetList {
 
         for (int i = 0; i < 3; i++) {
             set.remove(i);
-            list.remove((Integer) i); //boolean remove(Object o);
+            // boolean remove(Object o);
+            list.remove((Integer) i);
             //list.remove(i); 选择该重载方法 E remove(int index); 会改变集合中元素的顺序
         }
         System.out.println(set + " " + list);

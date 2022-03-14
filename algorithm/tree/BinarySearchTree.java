@@ -11,12 +11,12 @@ import static util.Print.print;
 import static util.Print.printnb;
 
 /**
- * @author:qiming
- * @date: 2021/10/28
+ * @author zqw
+ * @date 2021/10/28
  */
-public class BST<E extends Comparable<E>> {
+public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree{
 
-    private class Node {
+     class Node {
         E e;
         Node left;
         Node right;
@@ -213,7 +213,7 @@ public class BST<E extends Comparable<E>> {
      *
      * @param node 删除掉以 node 为根的二叉搜索树中最小的节点
      * @return 返回删除节点后新的二叉搜索树的根
-     * @see BST#deleteMax(Node)
+     * @see BinarySearchTree#deleteMax(Node)
      */
     private Node    deleteMin(Node node) {
         if (node.left == null) {
@@ -235,7 +235,7 @@ public class BST<E extends Comparable<E>> {
      *
      * @param node 删除掉以 node 为根的二叉搜索树中最大的节点
      * @return 返回删除节点后新的二叉搜索树的根
-     * @see BST#deleteMin(Node)
+     * @see BinarySearchTree#deleteMin(Node)
      */
     private Node deleteMax(Node node) {
         if (node.right == null) {
@@ -359,15 +359,15 @@ public class BST<E extends Comparable<E>> {
 
     @Test
     public void testBst() {
-        BST<Integer> bst = new BST<>();
+        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
         int count = 1000;
         for (int i = 0; i < count; i++) {
-            bst.add((int) (Math.random() * 1000));
+            binarySearchTree.add((int) (Math.random() * 1000));
         }
-        print(bst.size());
+        print(binarySearchTree.size());
         ArrayList<Integer> list = new ArrayList<>();
-        while (!bst.isEmpty()) {
-            list.add(bst.deleteMax());
+        while (!binarySearchTree.isEmpty()) {
+            list.add(binarySearchTree.deleteMax());
         }
         Tools.assertSorted(list, true);
         print(list);
@@ -376,16 +376,16 @@ public class BST<E extends Comparable<E>> {
     @Test
     public void testPrint() {
         int[] nums = {5, 6, 1, 8, 3, 0, 9};
-        BST<Integer> bst = new BST<>();
+        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
         for (var i : nums) {
-            bst.add(i);
+            binarySearchTree.add(i);
         }
-        bst.printTree();
-        bst.reverse();
-        bst.printTree();
-        bst.levelOrder();
+        binarySearchTree.printTree();
+        binarySearchTree.reverse();
+        binarySearchTree.printTree();
+        binarySearchTree.levelOrder();
         print();
-        bst.preOrderNr();
+        binarySearchTree.preOrderNr();
     }
 }
 

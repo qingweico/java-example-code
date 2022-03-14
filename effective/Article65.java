@@ -11,11 +11,12 @@ import static util.Print.print;
 /**
  * 接口优先于反射机制
  *
- * @author:qiming
- * @date: 2021/11/6
+ * @author zqw
+ * @date 2021/11/6
  */
-public class Article65 {
+class Article65 {
     public static void main(String[] args) {
+        // Program arguments: java.util.TreeSet xxx ...
         if(args[0] == null) {
             throw new IllegalArgumentException("args null!");
         }

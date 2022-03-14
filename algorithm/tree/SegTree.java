@@ -1,8 +1,8 @@
 package algorithm.tree;
 
 /**
- * @author:qiming
- * @date: 2021/11/1
+ * @author zqw
+ * @date 2021/11/1
  */
 public class SegTree<E> {
     public E[] tree;

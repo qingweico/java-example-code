@@ -1,13 +1,14 @@
 package collection;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
  * @author zqw
  * @date 2021/11/19
  */
-public class LruCache<K, V> {
+public class LruCache<K, V> implements Iterable<K> {
 
     class Node {
         K k;
@@ -51,6 +52,8 @@ public class LruCache<K, V> {
     private void remove(Node node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
+        node.next = null;
+        node.prev = null;
     }
 
     private void moveToHead(Node node) {
@@ -91,6 +94,27 @@ public class LruCache<K, V> {
             return node.v;
         }
     }
+
+    @Override
+    public Iterator<K> iterator() {
+
+        return new Iterator<>() {
+            private Node cur = head.next;
+
+            @Override
+            public boolean hasNext() {
+                return cur != tail;
+            }
+
+            @Override
+            public K next() {
+                Node node = cur;
+                cur = cur.next;
+                return node.k;
+            }
+        };
+    }
+
 
     public static void main(String[] args) {
 

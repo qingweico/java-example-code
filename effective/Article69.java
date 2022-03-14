@@ -8,11 +8,11 @@ import java.util.*;
 /**
  * 只针对异常的情况才使用异常
  *
- * @author:qiming
- * @date: 2021/2/6
+ * @author zqw
+ * @date 2021/2/6
  * @see exception.ExceptionPerformance
  */
-public class Article69 {
+class Article69 {
 
     public static void main(String[] args) {
         Student[] students = new Student[10];
@@ -29,15 +29,15 @@ public class Article69 {
         try {
             int i = 0;
             while (true) {
-                System.out.println(students[i++].get());
+                System.out.print(students[i++].get());
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-
+            /*ignore*/
         }
 
         // Normal
         for (Student student : students) {
-            System.out.println(student.get());
+            System.out.print(student.get());
         }
 
         // The exception-based schema is actually much slower than the standard schema.
@@ -62,7 +62,7 @@ public class Article69 {
                 System.out.println(student.get());
             }
         } catch (NoSuchElementException ex) {
-
+            /*ignore*/
         }
     }
 }

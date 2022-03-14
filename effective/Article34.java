@@ -11,22 +11,27 @@ import static java.util.stream.Collectors.toMap;
 /**
  * 用enum代替int常量
  *
- * @author:qiming
- * @date: 2020/10/23
+ * @author zqw
+ * @date 2020/10/23
  */
 // Java supports two special-purpose reference types,
 // One is a class, called an enumerated type,
 // One is interfaces(@interface annotation), called annotation types.
-public class Article34 {
-    // int enum pattern
-    // disadvantages: There is no type safety and no description at all.
+
+class Article34 {
+    /**
+     * int enum pattern
+     * disadvantages: There is no type safety and no description at all.
+     */
     public static final int APPLE_FUJI = 1;
     // Int enumeration is a compile-time constant. if the value associated with the
     // int enumeration constant changes, the client must compile, otherwise the
     // program will still run but its behavior will no longer be accurate.
 }
 
-// Enumeration in Java is essentially an int value
+/**
+ * Enumeration in Java is essentially an int value
+ */
 enum Planet {
     // 枚举常量
     /**
@@ -79,8 +84,10 @@ enum Planet {
      */
     private static final double G = 6.67300E-11;
 
-    // A constructor that takes data and stores it in the instance domain
-    // with a default modifier of private
+    /**
+     * A constructor that takes data and stores it in the instance domain
+     * with a default modifier of private.
+     */
     Planet(double mass, double radius) {
         this.mass = mass;
         this.radius = radius;
@@ -116,11 +123,18 @@ enum Planet {
 
 }
 
-// Enum type that switches on its own value - questionable
+/**
+ * Enum type that switches on its own value - questionable
+ */
 enum BaseOperations {
+    /**
+     * ~
+     */
     PLUS, MINUS, TIMES, DIVIDE;
 
-    // Do the arithmetic operation represented by this constant
+    /**
+     * Do the arithmetic operation represented by this constant
+     */
     public double apply(double x, double y) {
         switch (this) {
             case PLUS:
@@ -142,7 +156,9 @@ enum BaseOperations {
     }
 }
 
-// Enum type with constant-specific method implements
+/**
+ * Enum type with constant-specific method implements
+ */
 enum Operations {
     // There is a better way to associate different behaviors with each enumeration
     // constant: Declare an abstract apply method in an enumeration type and override
@@ -150,34 +166,45 @@ enum Operations {
     // of a constant-specific class, which is called a constant-specific method
     // implementation.
     PLUS {
+        @Override
         public double apply(double x, double y) {
             return x + y;
         }
     },
     MINUS {
+        @Override
         public double apply(double x, double y) {
             return x - y;
         }
     },
     TIMES {
+        @Override
         public double apply(double x, double y) {
             return x * y;
         }
     },
     DIVIDE {
+        @Override
         public double apply(double x, double y) {
             return x / y;
         }
     };
 
-    // An abstract method in an enumerated type must be overridden by a concrete
-    // method in all of its constants.
+    /**
+     * An abstract method in an enumerated type must be overridden by a concrete
+     * method in all of its constants.
+     */
     public abstract double apply(double x, double y);
 
 }
 
-// Enum type with constant-specific class bodies and data
+/**
+ * Enum type with constant-specific class bodies and data
+ */
 enum Operation {
+    /**
+     * ~
+     */
     PLUS("+") {
         @Override
         public double apply(double x, double y) {
@@ -225,11 +252,15 @@ enum Operation {
         System.out.println(fromString("+"));
     }
 
-    // Implementing a fromString method on an enum type
+    /**
+     * Implementing a fromString method on an enum type
+     */
     private static final Map<String, Operation> stringToEnum =
             Stream.of(values()).collect(toMap(Object::toString, e -> e));
 
-    // Returns Operation for string, if any
+    /**
+     * Returns Operation for string, if any
+     */
     public static Optional<Operation> fromString(String symbol) {
         return Optional.ofNullable(stringToEnum.get(symbol));
     }

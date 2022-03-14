@@ -6,13 +6,13 @@ import java.util.List;
 
 /**
  * 将局部变量的作用域最小化
+ * The most powerful way to minimize the scope of a local variable
+ * is to declare it where it is used the first time.
  *
- * @author:qiming
- * @date: 2020/10/25
+ * @author zqw
+ * @date 2020/10/25
  */
-// The most powerful way to minimize the scope of a local variable
-// is to declare it where it is used the first time.
-public class Article57 {
+class Article57 {
     public static void main(String[] args) {
         // A for loop is better than a while loop if the contents of the
         // loop variable are no longer needed after the loop terminates.
@@ -23,7 +23,7 @@ public class Article57 {
         c2.add(1);
         c2.add(2);
         // Preferred idiom for iterating over a collection or array.
-        for(Integer i : c) {
+        for (Integer i : c) {
             System.out.println(i);
         }
         Iterator<Integer> i = c.iterator();
@@ -31,7 +31,8 @@ public class Article57 {
             System.out.println(i.next());
         }
         Iterator<Integer> i2 = c2.iterator();
-        while (i.hasNext()) {                    //BUG!
+        // BUG!
+        while (i.hasNext()) {
             System.out.println(i2.next());
         }
         // it`s good way to use it

@@ -3,11 +3,11 @@ package algorithm.tree;
 import java.util.TreeMap;
 
 /**
- * @author:qiming
- * @date: 2021/11/14
+ * @author zqw
+ * @date 2021/11/14
  */
 public class Trie {
-    class Node {
+     static class Node {
         boolean ending;
         TreeMap<Character, Node> next;
 

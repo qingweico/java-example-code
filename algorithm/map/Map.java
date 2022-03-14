@@ -12,5 +12,4 @@ public interface Map<K, V> {
     void set(K k, V v);
     int size();
     boolean isEmpty();
-
 }

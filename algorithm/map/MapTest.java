@@ -24,7 +24,7 @@ public class MapTest {
     public void test() {
         CountDownLatch latch = new CountDownLatch(4);
         exec.execute(() -> {
-            mapTest(BstMap.class);
+            mapTest(BinarySearchTreeMap.class);
             latch.countDown();
         });
         exec.execute(() -> {
@@ -52,7 +52,7 @@ public class MapTest {
     public void testQuery() {
         CountDownLatch latch = new CountDownLatch(4);
         exec.execute(() -> {
-            mapTest(BstMap.class, 1000000);
+            mapTest(BinarySearchTreeMap.class, 1000000);
             latch.countDown();
         });
         exec.execute(() -> {

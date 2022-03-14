@@ -6,6 +6,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
   </component>
@@ -66,5 +67,30 @@
     <orderEntry type="library" name="Maven: org.objenesis:objenesis:2.2" level="project" />
     <orderEntry type="library" name="Maven: io.reactivex.rxjava2:rxjava:2.2.19" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.101tec:zkclient:0.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.zookeeper:zookeeper:3.4.8" level="project" />
+    <orderEntry type="library" name="Maven: jline:jline:0.9.94" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty:3.7.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.redisson:redisson:3.16.1" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver-dns:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-dns:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.66.Final" level="project" />
+    <orderEntry type="library" name="Maven: javax.cache:cache-api:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.4.4" level="project" />
+    <orderEntry type="library" name="Maven: io.reactivex.rxjava3:rxjava:3.0.12" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.marshalling:jboss-marshalling-river:2.0.11.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.marshalling:jboss-marshalling:2.0.11.Final" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.11.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jodd:jodd-bean:5.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.jodd:jodd-core:5.1.6" level="project" />
   </component>
 </module>

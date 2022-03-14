@@ -5,8 +5,8 @@ import java.util.*;
 /**
  * 基本类型优先于装箱基本类型
  *
- * @author:qiming
- * @date: 2020/11/23
+ * @author zqw
+ * @date 2020/11/23
  */
 
 /*基本类型和装箱基本类型的三个区别:
@@ -15,12 +15,12 @@ import java.util.*;
    3): 基本类型通常比装箱基本类型更节省时间和空间
  */
 
-public class Article61 {
+class Article61 {
 
     // Broken
     // static Comparator<Integer> naturalOrder = (i ,j) -> (i < j) ? -1 : (i == j ? 0 : 1);
 
-    // Solved
+    /** Solved*/
     static Comparator<Integer> naturalOrder = (iBoxed, jBoxed) -> {
         int i = iBoxed, j = jBoxed; // Auto-unboxing
         return i < j ? -1 : (i == j ? 0 : 1);
@@ -45,7 +45,7 @@ public class Article61 {
 }
 class Unbelievable{
 
-    // Solved: use int to instead of Integer.
+    /**Solved: use int to instead of Integer.*/
     static Integer i;
 
     public static void main(String[] args) {
