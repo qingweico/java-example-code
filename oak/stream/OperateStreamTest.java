@@ -3,10 +3,7 @@ package oak.stream;
 import org.testng.annotations.Test;
 import util.Print;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -55,8 +52,10 @@ public class OperateStreamTest {
 
     @Test
     public void generate() {
-        Stream.iterate(0, x -> x + 4).limit(5).forEach(Print::prints);
-        print();
+        Stream.iterate(0, x -> x + 4).limit(5).forEach(Print::print);
+        String payload = IntStream.rangeClosed(1, 10).mapToObj(__ -> "a")
+                .collect(Collectors.joining("")) + UUID.randomUUID();
+        print(payload);
         Stream.generate(Math::random).limit(5).forEach(Print::print);
         IntStream s = IntStream.iterate(0, x -> x + 4).limit(4);
         print(Arrays.toString(s.toArray()));

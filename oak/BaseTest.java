@@ -1,5 +1,6 @@
 package oak;
 
+import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -8,6 +9,7 @@ import java.util.Arrays;
  * @author zqw
  * @date 2022/2/3
  */
+@Slf4j
 public class BaseTest {
     @Test
     public void floatNumber() {
@@ -37,5 +39,11 @@ public class BaseTest {
         Integer[] a = new Integer[]{1, 8, 2, 0};
         Arrays.sort(a, (o1, o2) -> Integer.bitCount(o1) > Integer.bitCount(o2) ? o1 - o2 : o2 - o1);
         System.out.println(Arrays.toString(a));
+    }
+    @Test
+    public void out() {
+        byte aByte = (byte) 0b00100001;
+        System.out.println(aByte);
+        log.info("fdf'");
     }
 }

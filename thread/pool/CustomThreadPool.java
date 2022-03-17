@@ -1,5 +1,7 @@
 package thread.pool;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.concurrent.*;
  * @author zqw
  * @date 2021/9/29
  */
+@Slf4j
 public class CustomThreadPool {
 
     private final BlockingDeque<Runnable> workQueue;
@@ -78,5 +81,20 @@ public class CustomThreadPool {
                 new LinkedBlockingQueue<>(nThreads),
                 CustomThreadFactory.guavaThreadFactory(),
                 new CustomRejectedExecutionHandler());
+    }
+
+    public static void monitor(ThreadPoolExecutor executor) {
+        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            log.info("##############################");
+            log.info("queueSize: {}", executor.getQueue().size());
+            log.info("activeCountSize: {}", executor.getActiveCount());
+            log.info("completedTaskCount: {}", executor.getCompletedTaskCount());
+            log.info("taskCount: {}", executor.getTaskCount());
+            log.info("##############################");
+            if (executor.isTerminated()) {
+                scheduledExecutorService.shutdown();
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }
 }
