@@ -4,7 +4,7 @@ package thinking.io;
  * @author zqw
  * @date 2021/1/7
  */
-public class Banner {
+class Banner {
     public static void main(String[] args) {
         System.out.println(
                 "////////////////////////////////////////////////////////////////////\n" +

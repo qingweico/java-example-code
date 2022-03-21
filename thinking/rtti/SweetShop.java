@@ -7,12 +7,12 @@ package thinking.rtti;
  * even if the static keyword was not used before the constructor.
  *
  * A Java program is not fully loaded before it starts running, its parts are loaded
- * only when needed
+ * only when needed.
  *
- * @author:qiming
- * @date: 2021/1/16
+ * @author zqw
+ * @date 2021/1/16
  */
-public class SweetShop {
+class SweetShop {
     public static void main(String[] args) {
         System.out.println("inside main");
         new Candy();
@@ -22,13 +22,14 @@ public class SweetShop {
             // called for its side effect.
             // tips: In the string passed to forName(), you must use the fully
             // qualified class name (including the package name).
-            Class c = Class.forName("thinking.rtti.Gum");
+            Class<?> c = Class.forName("thinking.rtti.Gum");
 
             // Call the getClass method to get a Class reference, which represents
             // a Class reference to the actual type of the object.
+            System.out.println("c: " + c.getCanonicalName());
 
         } catch (ClassNotFoundException e) {
-            System.out.println("Could't find Gum");
+            System.out.println("Couldn't find Gum");
         }
         System.out.println("After Class.forName(\"Gum\")");
         new Cookie();

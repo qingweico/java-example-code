@@ -3,17 +3,17 @@ package thinking.io;
 import java.io.*;
 
 /**
- * @author:qiming
- * @date: 2021/2/3
+ * @author zqw
+ * @date 2021/2/3
  */
-public class FileOutputShortcut {
-    static String file = "src/thinking/io/FileOutputShortcut.out";
+class FileOutputShortcut {
+    static String file = "thinking/io/FileOutputShortcut.out";
 
     public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(
                             new StringReader(
                             BufferedInputFile
-                                    .read("src/thinking/io/FileOutputShortcut.java")
+                                    .read("thinking/io/FileOutputShortcut.java")
                 )
         );
         // JavaSE5 adds a helper constructor in the PrintWriter
@@ -27,7 +27,5 @@ public class FileOutputShortcut {
         }
         out.close();
         System.out.println(BufferedInputFile.read(file));
-
-
     }
 }

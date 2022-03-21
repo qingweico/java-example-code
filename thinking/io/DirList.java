@@ -7,14 +7,14 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
- * @author:qiming
- * @date: 2021/1/7
+ * @author zqw
+ * @date 2021/1/7
  */
 
-public class DirList {
+class DirList {
 
-    // Or use anonymous inner class
     public static FilenameFilter filter(String regex) {
+        // Or use anonymous inner class
         return new FilenameFilter() {
             private final Pattern pattern = Pattern.compile(regex);
 

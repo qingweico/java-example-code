@@ -3,17 +3,17 @@ package thinking.io;
 import java.io.*;
 
 /**
- * @author:qiming
- * @date: 2021/1/7
+ * @author zqw
+ * @date 2021/1/7
  */
-// System.out and System.err are all wrapped up as a PrintStream object,so it
+// System.out and System.err are all wrapped up as a PrintStream object, so it
 // can be used directly, But it must be wrapped before System.in can be read.
 
 public class StandardIo {
     /**
      * Echoes each line you type directly
      *
-     * @throws IOException IOException
+     * @throws IOException An {@code IOException} will be thrown
      */
     public static void echo() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -37,8 +37,8 @@ public class StandardIo {
     public static void redirectInput() throws IOException {
         PrintStream console = System.out;
 
-        BufferedInputStream in = new BufferedInputStream(new FileInputStream("src/thinking/io/StandardIo.java"));
-        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("src/thinking/io/out")));
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream("thinking/io/StandardIo.java"));
+        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream("thinking/io/out")));
 
         System.setIn(in);
         System.setOut(out);
@@ -49,6 +49,7 @@ public class StandardIo {
         while ((s = br.readLine()) != null) {
             System.out.println(s);
         }
+        transform();
         out.close();
         System.setOut(console);
     }

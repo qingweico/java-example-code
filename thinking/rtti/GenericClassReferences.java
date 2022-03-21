@@ -1,12 +1,12 @@
 package thinking.rtti;
 
 /**
- * @author:qiming
- * @date: 2021/4/11
+ * @author zqw
+ * @date 2021/4/11
  */
-public class GenericClassReferences {
+class GenericClassReferences {
    public static void main(String[] args) {
-      Class intClass = int.class;
+      Class<?> intClass = int.class;
 
       // Using generic syntax allows the compiler
       // to enforce additional type checking.
@@ -14,6 +14,8 @@ public class GenericClassReferences {
       // Same thing
       genericIntClass = Integer.class;
       intClass = double.class;
+      System.out.println("intClass: " + intClass.getCanonicalName() + "\n"
+              + "genericIntClass: " + genericIntClass.getCanonicalName());
 
       // Illegal!
       // genericIntClass = double.class;

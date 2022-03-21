@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * @author:qiming
- * @date: 2021/2/2
+ * @author zqw
+ * @date 2021/2/2
  */
-public class MemoryInput {
+class MemoryInput {
     public static void main(String[] args) throws IOException {
         StringReader in = new StringReader(
-                BufferedInputFile.read("src/thinking/io/MemoryInput.java")
+                BufferedInputFile.read("thinking/io/MemoryInput.java")
         );
         int c;
         // read() method does not discard newline characters

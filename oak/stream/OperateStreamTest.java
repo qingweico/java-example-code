@@ -36,6 +36,8 @@ public class OperateStreamTest {
         System.out.println(ret.orElseThrow());
         x.ifPresentOrElse(System.out::println, () -> System.out.println("no such element found"));
         System.out.println(y);
+        // 集合判空处理
+        // Optional.ofNullable(null).orElse(Collections.emptyList())
     }
 
     @Test

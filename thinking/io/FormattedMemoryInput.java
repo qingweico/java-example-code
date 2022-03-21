@@ -9,16 +9,16 @@ import static util.Print.*;
 
 
 /**
- * @author:qiming
- * @date: 2021/2/2
+ * @author zqw
+ * @date 2021/2/2
  */
-public class FormattedMemoryInput {
+class FormattedMemoryInput {
     public static void main(String[] args) throws IOException {
         try {
             DataInputStream in = new DataInputStream(
                     new ByteArrayInputStream(
                             BufferedInputFile
-                                    .read("src/thinking/io/FormattedMemoryInput.java")
+                                    .read("thinking/io/FormattedMemoryInput.java")
                                     .getBytes()
                     ));
 

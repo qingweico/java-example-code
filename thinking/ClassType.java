@@ -14,6 +14,7 @@ public class ClassType {
         Class<? super Integer> ics = integerClass.getSuperclass();
 
         // only produces object
+        // Number is abstract
         Object a = ics.getConstructor().newInstance();
         System.out.println(a);
 

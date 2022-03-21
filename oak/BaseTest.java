@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * @author zqw
@@ -44,6 +45,6 @@ public class BaseTest {
     public void out() {
         byte aByte = (byte) 0b00100001;
         System.out.println(aByte);
-        log.info("fdf'");
+        System.out.println(Objects.equals(null, null));
     }
 }

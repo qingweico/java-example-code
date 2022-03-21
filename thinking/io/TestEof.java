@@ -3,14 +3,14 @@ package thinking.io;
 import java.io.*;
 
 /**
- * @author:qiming
- * @date: 2021/2/3
+ * @author zqw
+ * @date 2021/2/3
  */
-public class TestEOF {
+class TestEof {
     public static void main(String[] args) throws IOException {
         DataInputStream in = new DataInputStream(
                              new BufferedInputStream(
-                             new FileInputStream("src/thinking/io/TestEOF.java")
+                             new FileInputStream("thinking/io/TestEOF.java")
                 ));
 
 

@@ -5,14 +5,14 @@ import java.io.*;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/2/4
+ * @author zqw
+ * @date 2021/2/4
  */
 public class StoringAndRecoveringData {
     public static void main(String[] args) throws IOException {
         DataOutputStream out = new DataOutputStream(
                 new BufferedOutputStream(
-                        new FileOutputStream("src/thinking/io/Data.txt")
+                        new FileOutputStream("thinking/io/Data.txt")
                 )
         );
         out.writeDouble(3.14159);
@@ -22,14 +22,12 @@ public class StoringAndRecoveringData {
         out.close();
         DataInputStream in = new DataInputStream(
                 new BufferedInputStream(
-                        new FileInputStream("src/thinking/io/Data.txt"))
+                        new FileInputStream("thinking/io/Data.txt"))
         );
         print(in.readDouble());
         // Only readUTF() will recover the Java-UTF String properly:
         print(in.readUTF());
         print(in.readDouble());
         print(in.readUTF());
-
-
     }
 }

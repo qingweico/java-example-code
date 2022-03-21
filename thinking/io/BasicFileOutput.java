@@ -3,10 +3,10 @@ package thinking.io;
 import java.io.*;
 
 /**
- * @author:qiming
- * @date: 2021/2/3
+ * @author zqw
+ * @date 2021/2/3
  */
-public class BasicFileOutput {
+class BasicFileOutput {
     static String file = "src/thinking/io/out";
 
     public static void main(String[] args) throws IOException {
@@ -32,6 +32,5 @@ public class BasicFileOutput {
         out.close();
         // Show the stored file:
         System.out.println(BufferedInputFile.read(file));
-
     }
 }

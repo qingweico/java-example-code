@@ -64,13 +64,18 @@ public class CustomThreadPool {
     }
 
     public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
-        return new ThreadPoolExecutor(corePoolSize,
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize,
                 maxPoolSize,
                 60L,
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(blockQueueSize),
                 CustomThreadFactory.guavaThreadFactory(),
                 new CustomRejectedExecutionHandler());
+        int coreThreads = executor.prestartAllCoreThreads();
+        log.info("{} coreThreads are all started", coreThreads);
+        log.info("{}", executor);
+        executor.allowCoreThreadTimeOut(true);
+        return executor;
     }
 
     public static ExecutorService newFixedThreadPool(int nThreads) {
@@ -86,12 +91,14 @@ public class CustomThreadPool {
     public static void monitor(ThreadPoolExecutor executor) {
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutorService.scheduleAtFixedRate(() -> {
-            log.info("##############################");
-            log.info("queueSize: {}", executor.getQueue().size());
-            log.info("activeCountSize: {}", executor.getActiveCount());
-            log.info("completedTaskCount: {}", executor.getCompletedTaskCount());
-            log.info("taskCount: {}", executor.getTaskCount());
-            log.info("##############################");
+            log.info("------------------------------");
+            log.info("Pool Size: {}", executor.getPoolSize());
+            log.info("Number of tasks in Queue: {}", executor.getQueue().size());
+            log.info("Active Threads: {}", executor.getActiveCount());
+            log.info("Number of tasks completed: {}", executor.getCompletedTaskCount());
+            log.info("Number of tasks total: {}", executor.getTaskCount());
+            log.info("Number of largest pool: {}", executor.getLargestPoolSize());
+            log.info("------------------------------");
             if (executor.isTerminated()) {
                 scheduledExecutorService.shutdown();
             }

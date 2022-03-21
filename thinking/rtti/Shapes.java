@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * RTTI Run-Time Type Identification: At runtime, identify the type of an object
+ * RTTI Run-Time Type Identification: At runtime, identify the type of object
  *
- * @author:qiming
- * @date: 2021/1/8
+ * @author zqw
+ * @date 2021/1/8
  */
-public class Shapes {
+class Shapes {
     public static void main(String[] args) {
 
         // Shape objects are transformed upward when they are put into an array of
