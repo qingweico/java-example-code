@@ -6,24 +6,27 @@ import java.util.*;
 import static util.Print.print;
 
 /**
- * @author:周庆伟
- * @date: 2021/2/24
+ * What will the weather be?
+ *
+ * @author zqw
+ * @date 2021/2/24
  */
-// What will the weather be?
 public class SpringDetector {
+    private final static int COUNT = 10;
+
     public static <T extends Groundhog>
     void detectSpring(Class<T> type) throws Exception {
-        Constructor<T> ghog = type.getConstructor(int.class);
-        Map<Groundhog, Prediction> map = new HashMap<>();
-        for(int i = 0; i < 10; i++) {
-            map.put(ghog.newInstance(i), new Prediction());
+        Constructor<T> cons = type.getConstructor(int.class);
+        Map<Groundhog, Prediction> map = new HashMap<>(COUNT);
+        for (int i = 0; i < COUNT; i++) {
+            map.put(cons.newInstance(i), new Prediction());
         }
         print("map = " + map);
-        Groundhog gh = ghog.newInstance(3);
+        Groundhog gh = cons.newInstance(3);
         print("Looking up prediction for " + gh);
-        if(map.containsKey(gh)) {
+        if (map.containsKey(gh)) {
             print(map.get(gh));
-        }else {
+        } else {
             print("Key not found: " + gh);
         }
     }

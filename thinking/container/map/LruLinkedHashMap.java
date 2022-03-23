@@ -7,12 +7,13 @@ import java.util.LinkedHashMap;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/2/24
+ *  What you can do with a LinkedHashMap?
+ *
+ * @author zqw
+ * @date 2021/2/24
  */
 
-// What you can do with a LinkedHashMap
-public class LinkedHMap {
+public class LruLinkedHashMap {
     public static void main(String[] args) {
         LinkedHashMap<Integer, String> linkedMap = new LinkedHashMap<>(
                 new CountingMapData(9));
@@ -33,6 +34,5 @@ public class LinkedHMap {
         print(linkedMap);
         linkedMap.get(0);
         print(linkedMap);
-
     }
 }

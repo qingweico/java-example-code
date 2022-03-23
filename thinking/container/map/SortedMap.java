@@ -2,19 +2,19 @@ package thinking.container.map;
 
 import util.CountingMapData;
 
-import java.util.ArrayDeque;
 import java.util.Iterator;
 import java.util.TreeMap;
 
 import static util.Print.print;
 
 /**
+ *  What you can do with a TreeMap?
+ *
  * SortedMap
- * @author:qiming
- * @date: 2021/2/23
+ * @author zqw
+ * @date 2021/2/23
  */
-// What you can do with a TreeMap
-public class SortedMap0 {
+class SortedMap {
     public static void main(String[] args) {
         TreeMap<Integer, String> sortedMap = new TreeMap<>(new CountingMapData(10));
         print(sortedMap);
@@ -45,8 +45,6 @@ public class SortedMap0 {
         print(sortedMap.headMap(high));
         // [low, map.size)
         print(sortedMap.tailMap(low));
-
-
     }
 }
 

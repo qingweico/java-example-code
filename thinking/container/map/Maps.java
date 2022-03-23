@@ -1,4 +1,5 @@
 package thinking.container.map;
+
 import util.CountingMapData;
 
 import java.util.*;
@@ -8,10 +9,14 @@ import static util.Print.*;
 
 /**
  * Things you can do with Maps
- * @author:qiming
+ *
+ * @author zqw
  * @date: 2021/2/21
  */
-public class Maps {
+class Maps {
+
+
+    static int initialCapacity = 10;
 
     public static void printKeys(Map<Integer, String> map) {
         printnb("Size = " + map.size() + ", ");
@@ -58,12 +63,13 @@ public class Maps {
 
 
     }
+
     public static void main(String[] args) {
-        test(new HashMap<>());
+        test(new HashMap<>(initialCapacity));
         test(new TreeMap<>());
         test(new LinkedHashMap<>());
         test(new IdentityHashMap<>());
-        test(new ConcurrentHashMap<>());
+        test(new ConcurrentHashMap<>(initialCapacity));
         test(new WeakHashMap<>());
     }
 }

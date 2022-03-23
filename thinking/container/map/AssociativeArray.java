@@ -5,8 +5,8 @@ import static util.Print.print;
 /**
  * Associates keys and values
  *
- * @author:qiming
- * @date: 2021/2/19
+ * @author zqw
+ * @date 2021/2/19
  */
 public class AssociativeArray<K, V> {
     private final Object[][] pairs;
@@ -33,6 +33,7 @@ public class AssociativeArray<K, V> {
         return null;
     }
 
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < index; i++) {
@@ -61,7 +62,5 @@ public class AssociativeArray<K, V> {
         }
         print(map);
         print(map.get(null));
-
-
     }
 }

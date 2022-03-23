@@ -2,10 +2,12 @@ package thinking.container;
 
 
 /**
- * @author:qiming
- * @date: 2021/1/17
+ * @author zqw
+ * @date 2021/1/17
  */
-public class QueueBehavior {
-    private static final int count = 10;
+class QueueBehavior {
+    // TODO 2022-03-23
+
+    private static final int COUNT = 10;
 
 }

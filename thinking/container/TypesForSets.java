@@ -5,8 +5,8 @@ import java.util.*;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/2/9
+ * @author zqw
+ * @date 2021/2/9
  */
 public class TypesForSets {
     static <T> void fill(Set<T> set, Class<T> type) {
@@ -32,7 +32,7 @@ public class TypesForSets {
         test(new HashSet<>(), HashType.class);
         test(new LinkedHashSet<>(), HashType.class);
         test(new TreeSet<>(), TreeType.class);
-        // Things doesn't work!
+        // Thing doesn't work!
         test(new HashSet<>(), SetType.class);
         test(new HashSet<>(), TreeType.class);
         test(new LinkedHashSet<>(), SetType.class);
@@ -73,6 +73,7 @@ class HashType extends SetType {
         super(i);
     }
 
+    @Override
     public int hashCode() {
         return i;
     }

@@ -9,18 +9,19 @@ import static util.Print.print;
 /**
  * A demonstration hashed Map
  *
- * @author:qiming
- * @date: 2021/4/3
+ * @author zqw
+ * @date 2021/4/3
  */
 public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
 
-    // Choose a prime number for the hash table size ,to achieve a uniform distribute:
+    /** Choose a prime number for the hash table size ,to achieve a uniform distribute:*/
     static final int SIZE = 997;
 
-    // You can't have a physical array of generics, but you can upcast to one:
+    /**You can't have a physical array of generics, but you can upcast to one:*/
     @SuppressWarnings("unchecked")
     LinkedList<MapEntry<K, V>>[] buckets = new LinkedList[SIZE];
 
+    @Override
     public V put(K key, V value) {
         V olderValue = null;
         int index = Math.abs(key.hashCode()) % SIZE;
@@ -47,6 +48,7 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
         return olderValue;
     }
 
+    @Override
     public V get(Object key) {
         int index = Math.abs(key.hashCode()) % SIZE;
         if (buckets[index] == null) {

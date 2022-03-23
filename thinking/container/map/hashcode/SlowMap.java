@@ -9,26 +9,29 @@ import static util.Print.print;
 /**
  * A Map implements with ArrayLists
  *
- * @author:qiming
- * @date: 2021/2/24
+ * @author zqw
+ * @date 2021/2/24
  */
 public class SlowMap<K, V> extends AbstractMap<K, V> {
     private final List<K> keys = new ArrayList<>();
     private final List<V> values = new ArrayList<>();
+
+    @Override
     public V put(K key, V value) {
         // The old value or null
         V oldValue = get(key);
-        if(!keys.contains(key)) {
+        if (!keys.contains(key)) {
             keys.add(key);
             values.add(value);
-        }
-        else {
+        } else {
             values.set(keys.indexOf(key), value);
         }
         return oldValue;
     }
+
+    @Override
     public V get(Object key) { // Key is type object, not K
-        if(!keys.contains(key)) {
+        if (!keys.contains(key)) {
             return null;
         }
         return values.get(keys.indexOf(key));
@@ -51,7 +54,5 @@ public class SlowMap<K, V> extends AbstractMap<K, V> {
         print(m);
         print(m.get("BULGARIA"));
         print(m.entrySet());
-
-
     }
 }
