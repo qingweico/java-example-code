@@ -3,8 +3,8 @@ package thinking.concurrency.sync;
 import annotation.NotThreadSafe;
 
 /**
- * @author:qiming
- * @date: 2021/1/29
+ * @author zqw
+ * @date 2021/1/29
  */
 @NotThreadSafe
 public class Pair {
@@ -51,5 +51,4 @@ public class Pair {
             throw new PairValueNotEqualException();
         }
     }
-
 }

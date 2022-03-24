@@ -1,33 +1,36 @@
 package thinking.concurrency.juc;
 
 
+import thread.pool.CustomThreadPool;
+
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
 
 /**
+ * CountDownLatch:
  * It is used to synchronize one or more tasks, forcing them to wait for the completion
  * of a set of operations performed by another task.
  *
- * @author:qiming
- * @date: 2021/2/1
+ * @author zqw
+ * @date 2021/2/1
  */
 
-public class CountDownLatchUsage {
-    static final int SIZE = 100;
+class Cdl {
+    static final int THREAD_COUNT = 100;
+    static final int WAITING_TASK_COUNT = 10;
 
     public static void main(String[] args) {
-        ExecutorService exec = Executors.newCachedThreadPool();
+        ExecutorService exec = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
         // All must share a single CountDownLatch object
-        CountDownLatch countDownLatch = new CountDownLatch(SIZE);
-        for (int i = 0; i < 10; i++) {
+        CountDownLatch countDownLatch = new CountDownLatch(THREAD_COUNT);
+        for (int i = 0; i < WAITING_TASK_COUNT; i++) {
             exec.execute(new WaitingTask(countDownLatch));
         }
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < THREAD_COUNT; i++) {
             exec.execute(new TaskPortion(countDownLatch));
         }
         print("Launched all tasks");
@@ -36,12 +39,14 @@ public class CountDownLatchUsage {
     }
 }
 
-// Performs some portion of a task:
+/**
+ * Performs some portion of a task
+ */
 class TaskPortion implements Runnable {
 
     private static int counter = 0;
     private final int id = counter++;
-    private static final Random random = new Random(47);
+    private static final Random R = new Random(47);
     private final CountDownLatch latch;
 
     TaskPortion(CountDownLatch latch) {
@@ -52,24 +57,28 @@ class TaskPortion implements Runnable {
     public void run() {
         try {
             doWork();
-            // Decrease this count
-            latch.countDown();
         } catch (InterruptedException ex) {
             // Acceptable way to exit
+        } finally {
+            // Decrease this count
+            latch.countDown();
         }
     }
 
     public void doWork() throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(random.nextInt(2000));
+        TimeUnit.MILLISECONDS.sleep(R.nextInt(2000));
         print(this + "completed");
     }
 
+    @Override
     public String toString() {
         return String.format("%1$-3d ", id);
     }
 }
 
-// Waiting on the CountDownLatch:
+/**
+ * Waiting on the CountDownLatch:
+ */
 class WaitingTask implements Runnable {
     private static int counter = 0;
     private final int id = counter++;
@@ -91,6 +100,7 @@ class WaitingTask implements Runnable {
         }
     }
 
+    @Override
     public String toString() {
         return String.format("WaitingTask %1$-3d ", id);
 

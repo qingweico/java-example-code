@@ -9,34 +9,23 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/1/18
  */
-public class ExecutionMode {
+class ExecutionMode {
     public static void main(String[] args) {
         print(System.getProperty("java.version"));
-
         print(countDepth());
-
         print(countDepth());
-
         print(countDepth());
-
         print(countDepth());
-
         print(countDepth());
-
         print(countDepth());
-
         print(countDepth());
     }
 
     static int countDepth() {
-
         try {
             return 1 + countDepth();
         } catch (StackOverflowError err) {
             return 0;
         }
-
     }
-
-
 }

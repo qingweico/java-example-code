@@ -17,7 +17,7 @@ import static util.Print.printnb;
 public class WaxOMatic {
     public static void main(String[] args) throws InterruptedException {
         Car car = new Car();
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 2);
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
         pool.execute(new WaxOff(car));
         pool.execute(new WaxOn(car));
         TimeUnit.SECONDS.sleep(5);

@@ -1,25 +1,33 @@
 package thinking.concurrency.optimize;
 
+import thread.pool.CustomThreadPool;
 import util.Generated;
 import util.RandomGenerator;
 
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 /**
  * Framework to test performance of concurrency containers.
  *
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
 public abstract class Tester<C> {
     static int testReps = 10;
     static int testCycles = 100;
     static int containerSize = 1000;
+
+    /**
+     * containerInitializer
+     * @return the value of the container return.
+     */
     abstract C containerInitializer();
+
+    /**
+     * startReaderAndWriters
+     */
     abstract void startReaderAndWriters();
     C testContainer;
     String testId;
@@ -29,7 +37,7 @@ public abstract class Tester<C> {
     volatile long readTime = 0;
     volatile long writeTime = 0;
     CountDownLatch endLatch;
-    static ExecutorService exec = Executors.newCachedThreadPool();
+    static ExecutorService exec = CustomThreadPool.newFixedThreadPool(100);
     Integer[] writeData;
     Tester(String testId, int nReaders, int nWriters) {
         this.testId = testId + " " + nReaders + "r " + nWriters + "w";
@@ -57,9 +65,17 @@ public abstract class Tester<C> {
         }
     }
     abstract class TestTask implements Runnable {
+        /**
+         * test
+         */
         abstract void test();
+
+        /**
+         * putResults
+         */
         abstract void putResults();
         long duration;
+        @Override
         public void run() {
             long startTime = System.nanoTime();
             test();
@@ -82,6 +98,4 @@ public abstract class Tester<C> {
         }
         System.out.printf("%-27s %14s %14s\n", "Type", "Read time", "Write time");
     }
-
-
 }

@@ -38,7 +38,7 @@ public class AtomicityTest implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService exec = CustomThreadPool.newFixedThreadPool(1, 1, 1);
+        ExecutorService exec = CustomThreadPool.newFixedThreadPool(1);
         AtomicityTest at = new AtomicityTest();
         exec.execute(at);
         TimeUnit.MICROSECONDS.sleep(100);

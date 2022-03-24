@@ -12,12 +12,14 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ExplicitCriticalSection {
     public static void main(String[] args) {
         PairManager pm1 = new PairManager1(),
-                    pm2 = new PairManager2();
+                pm2 = new PairManager2();
         CriticalSection.testApproaches(pm1, pm2);
     }
 }
 
-// Synchronized the entire method:
+/**
+ * Synchronized the entire method:
+ */
 class ExplicitPairManager1 extends PairManager {
     private final Lock lock = new ReentrantLock();
 
@@ -34,7 +36,9 @@ class ExplicitPairManager1 extends PairManager {
     }
 }
 
-// Use a critical section:
+/**
+ * Use a critical section:
+ */
 class ExplicitPairManager2 extends PairManager {
     private final Lock lock = new ReentrantLock();
 
@@ -50,6 +54,5 @@ class ExplicitPairManager2 extends PairManager {
             lock.unlock();
         }
         store(temp);
-
     }
 }

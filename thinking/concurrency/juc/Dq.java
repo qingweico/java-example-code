@@ -1,24 +1,32 @@
 package thinking.concurrency.juc;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.*;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.Delayed;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
 import static util.Print.printnb;
 
 /**
- * @author:qiming
- * @date: 2021/2/1
+ * DelayQueue
+ *
+ * @author zqw
+ * @date 2021/2/1
  */
-public class DelayQueueUsage {
+class Dq {
     public static void main(String[] args) {
         Random random = new Random(47);
-        ExecutorService exec = Executors.newCachedThreadPool();
+        int taskCount = 20;
+        ExecutorService exec = CustomThreadPool.newFixedThreadPool(3);
         DelayQueue<DelayedTask> queue = new DelayQueue<>();
         // Fill with tasks that have random delays
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < taskCount; i++) {
             queue.put(new DelayedTask(random.nextInt(5000)));
         }
         // Set the stopping point
@@ -29,7 +37,7 @@ public class DelayQueueUsage {
 
 class DelayedTask implements Runnable, Delayed {
     private static int counter = 0;
-    private static final int id = counter++;
+    private final int id = counter++;
     private final int delta;
     private final long trigger;
     protected static List<DelayedTask> sequence = new ArrayList<>();
@@ -58,6 +66,7 @@ class DelayedTask implements Runnable, Delayed {
         printnb(this + " ");
     }
 
+    @Override
     public String toString() {
         return String.format("[%1$-4d]", delta) + " Task " + id;
     }
@@ -74,6 +83,7 @@ class DelayedTask implements Runnable, Delayed {
             exec = e;
         }
 
+        @Override
         public void run() {
             for (DelayedTask dt : sequence) {
                 printnb(dt.summary() + " ");
@@ -87,9 +97,9 @@ class DelayedTask implements Runnable, Delayed {
 }
 
 class DelayedTaskConsumer implements Runnable {
-    private final DelayQueue<DelayedTask> q;
+    private final java.util.concurrent.DelayQueue<DelayedTask> q;
 
-    public DelayedTaskConsumer(DelayQueue<DelayedTask> q) {
+    public DelayedTaskConsumer(java.util.concurrent.DelayQueue<DelayedTask> q) {
         this.q = q;
     }
 

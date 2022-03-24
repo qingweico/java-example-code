@@ -16,7 +16,7 @@ import static util.Print.printnb;
  */
 class Restaurant {
    Meal meal;
-   ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 2);
+   ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
    final WaitPerson waitPerson = new WaitPerson(this);
    final Chef chef = new Chef(this);
    public Restaurant() {

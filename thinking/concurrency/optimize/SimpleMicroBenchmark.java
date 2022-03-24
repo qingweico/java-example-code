@@ -7,15 +7,17 @@ import static util.Print.printf;
 
 
 /**
- * @author:qiming
- * @date: 2021/2/3
+ * The dangers of microbenchmark
+ *
+ * @author zqw
+ * @date 2021/2/3
  */
 
-// The dangers of microbenchmark
 public class SimpleMicroBenchmark {
     static long test(Incrementable incr) {
         long start = System.nanoTime();
-        for (int i = 0; i < 100_0000L; i++) {
+        long count = 100_0000L;
+        for (int i = 0; i < count; i++) {
             incr.increment();
         }
         return System.nanoTime() - start;
@@ -34,6 +36,9 @@ public class SimpleMicroBenchmark {
 abstract class Incrementable {
     protected long counter = 0;
 
+    /**
+     * increment
+     */
     public abstract void increment();
 }
 

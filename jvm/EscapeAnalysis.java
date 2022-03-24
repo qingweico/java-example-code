@@ -1,5 +1,6 @@
 package jvm;
 
+import object.Student;
 import util.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -10,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2021/2/19
  */
-public class EscapeAnalysis {
+class EscapeAnalysis {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         for (int i = 0; i < Constants.HUNDRED_MILLION; i++) {
@@ -26,9 +27,6 @@ public class EscapeAnalysis {
     }
 
     public static void alloc() {
-        User user = new User();
-    }
-
-    static class User {
+        Student student = new Student();
     }
 }

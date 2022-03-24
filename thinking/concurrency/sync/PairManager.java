@@ -7,10 +7,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @author:qiming
- * @date: 2021/1/29
+ * Protected a Pair inside a thread-safe class
+ *
+ * @author zqw
+ * @date 2021/1/29
  */
-// Protected a Pair inside a thread-safe class
+
 public abstract class PairManager {
     AtomicInteger checkCounter = new AtomicInteger(0);
     protected Pair p = new Pair();
@@ -21,15 +23,21 @@ public abstract class PairManager {
         return new Pair(p.getX(), p.getY());
     }
 
-    // Assume this is a time consuming operation
+    /**
+     * Assume this is a time-consuming operation
+     */
     protected void store(Pair p) {
         storage.add(p);
         try {
             TimeUnit.MILLISECONDS.sleep(50);
         } catch (InterruptedException ignore) {
+            /*ignore*/
         }
     }
 
+    /**
+     * increment
+     */
     public abstract void increment();
 
 }

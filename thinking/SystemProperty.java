@@ -4,7 +4,7 @@ package thinking;
  * @author zqw
  * @date 2020/09/12
  */
-public class SystemProperty {
+class SystemProperty {
     public static void main(String[] args) {
         System.getProperties().list(System.out);
         System.out.println();

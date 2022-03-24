@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Daemon threads spawn daemon threads
  *
- * @author:qiming
- * @date: 2021/1/16
+ * @author zqw
+ * @date 2021/1/16
  */
 public class Daemons {
     public static void main(String[] args) throws Exception {

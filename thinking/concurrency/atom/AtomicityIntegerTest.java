@@ -13,7 +13,7 @@ import static util.Print.*;
  * @author zqw
  * @date 2021/1/20
  */
-public class AtomicityIntegerTest implements Runnable {
+class AtomicityIntegerTest implements Runnable {
 
     private final AtomicInteger i = new AtomicInteger(0);
 
@@ -37,13 +37,13 @@ public class AtomicityIntegerTest implements Runnable {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                err("Aborting");
+                print("Aborting");
                 exit(0);
             }
             // Terminate after 2 seconds
         }, 2000);
 
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(1, 1, 1);
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(1, true);
         AtomicityIntegerTest ait = new AtomicityIntegerTest();
         pool.execute(ait);
         while (true) {
@@ -56,5 +56,4 @@ public class AtomicityIntegerTest implements Runnable {
         }
         pool.shutdown();
     }
-
 }

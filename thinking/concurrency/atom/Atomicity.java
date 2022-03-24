@@ -9,6 +9,6 @@ package thinking.concurrency.atom;
  * @author zqw
  * @date 2021/1/19
  */
-public class Atomicity {
+class Atomicity {
 
 }

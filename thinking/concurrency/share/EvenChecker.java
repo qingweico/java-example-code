@@ -6,8 +6,8 @@ import java.util.concurrent.Executors;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  */
 public class EvenChecker implements Runnable {
     private final IntGenerator generator;

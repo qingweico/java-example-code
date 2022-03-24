@@ -13,12 +13,20 @@ import java.util.concurrent.ThreadFactory;
  */
 public class CustomThreadFactory {
     /**
+     * Set Daemon Thread
+     *
+     * @return {@link ThreadFactory}
+     */
+    public static ThreadFactory guavaThreadFactory(boolean daemon) {
+        return new ThreadFactoryBuilder().setNameFormat("pool-thread-%s").setDaemon(daemon).build();
+    }
+    /**
      * guava
      *
      * @return {@link ThreadFactory}
      */
     public static ThreadFactory guavaThreadFactory() {
-        return new ThreadFactoryBuilder().setNameFormat("pool-thread-%s").build();
+        return guavaThreadFactory(false);
     }
 
 

@@ -1,9 +1,10 @@
 package thinking.concurrency.optimize;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.Random;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
@@ -16,8 +17,8 @@ import static util.Print.printf;
  * Comparing the performance of explicit locks and
  * Atomic versus the synchronized keyword.
  *
- * @author:qiming
- * @date: 2021/2/3
+ * @author zqw
+ * @date 2021/2/3
  */
 public class SynchronizationComparisons {
     static BaseLine baseLine = new BaseLine();
@@ -64,10 +65,12 @@ public class SynchronizationComparisons {
 
 abstract class Accumulator {
     public static long cycles = 5_0000L;
-    // Number of Modifiers and Readers during each test:
+    /**
+     * Number of Modifiers and Readers during each test:
+     */
     private static final int N = 4;
-    public static ExecutorService exec = Executors.newFixedThreadPool(N * 2);
-    private static final CyclicBarrier barrier = new CyclicBarrier(N * 2 + 1);
+    public static ExecutorService exec = CustomThreadPool.newFixedThreadPool(N * 2);
+    private final CyclicBarrier barrier = new CyclicBarrier(N * 2 + 1);
     protected volatile int index = 0;
     protected volatile long value = 0;
     protected long duration = 0;
@@ -83,8 +86,16 @@ abstract class Accumulator {
         }
     }
 
+    /**
+     * accumulate
+     */
     public abstract void accumulate();
 
+    /**
+     * read
+     *
+     * @return the read value
+     */
     public abstract long read();
 
     private class Modifier implements Runnable {
@@ -218,7 +229,7 @@ class AtomicTest extends Accumulator {
 
     @Override
     public void accumulate() {
-        // Oops! Relying or more than one Atomic at a time doesn't work. But it still
+        // Oops! Relying on or more than one Atomic at a time doesn't work. But it still
         // gives us a performance indicator:
         int i = index.getAndIncrement();
         value.getAndAdd(preloaded[i]);

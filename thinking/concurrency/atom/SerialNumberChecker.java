@@ -17,9 +17,9 @@ import static util.Print.print;
  * @date 2021/1/19
  */
 public class SerialNumberChecker {
-    private static final int SIZE = 10;
+    private static final int SIZE = 100;
     static CircularSet serials = new CircularSet(1000);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 10);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(100,true);
 
     static class SerialChecker implements Runnable {
         @Override

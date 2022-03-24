@@ -1,24 +1,26 @@
 package thinking.concurrency.optimize;
 
 
-import java.util.*;
+import thread.pool.CustomThreadPool;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 
 import static util.Print.print;
 
 /**
  * ReadWriteLock can have multiple readers at the same time, as long as none of them
  * attempt to write.
- * If the write lock is already held by another task, no reader can access it until
- * the write lock is released.
+ * If write lock is already held by another task, no reader can access it until
+ * write lock is released.
  *
- * @author:qiming
- * @date: 2021/2/2
+ * @author zqw
+ * @date 2021/2/2
  */
 public class ReadWriteList<T> {
     private final ArrayList<T> lockedList;
@@ -60,9 +62,10 @@ public class ReadWriteList<T> {
 }
 
 class ReadWriteListTest {
-    ExecutorService exec = Executors.newCachedThreadPool();
     private static final int SIZE = 100;
-    private static final Random random = new Random(47);
+    private static final int THREAD_COUNT = 30;
+    ExecutorService exec = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
+    private static final Random R = new Random(47);
     private final ReadWriteList<Integer> list = new ReadWriteList<>(SIZE, 0);
 
     private class Writer implements Runnable {
@@ -70,8 +73,8 @@ class ReadWriteListTest {
         @Override
         public void run() {
             try {
-                for (int i = 0; i < 20; i++) {
-                    list.set(i, random.nextInt(100));
+                for (int i = 0; i < THREAD_COUNT; i++) {
+                    list.set(i, R.nextInt(100));
                     TimeUnit.MILLISECONDS.sleep(100);
                 }
             } catch (InterruptedException e) {
@@ -95,7 +98,7 @@ class ReadWriteListTest {
                     }
                 }
             } catch (InterruptedException e) {
-                // Acceptable way to way
+                /*ignore*/
             }
         }
     }

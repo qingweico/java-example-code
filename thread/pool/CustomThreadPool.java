@@ -63,7 +63,8 @@ public class CustomThreadPool {
         }
     }
 
-    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
+    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize,
+                                                     boolean preStartAllCore) {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize,
                 maxPoolSize,
                 60L,
@@ -71,21 +72,23 @@ public class CustomThreadPool {
                 new LinkedBlockingQueue<>(blockQueueSize),
                 CustomThreadFactory.guavaThreadFactory(),
                 new CustomRejectedExecutionHandler());
-        int coreThreads = executor.prestartAllCoreThreads();
-        log.info("{} coreThreads are all started", coreThreads);
-        log.info("{}", executor);
+        if (preStartAllCore) {
+            int coreThreads = executor.prestartAllCoreThreads();
+            log.info("{} Core Thread are all started", coreThreads);
+        }
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }
 
+    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
+        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false);
+    }
+
     public static ExecutorService newFixedThreadPool(int nThreads) {
-        return new ThreadPoolExecutor(nThreads,
-                nThreads,
-                60L,
-                TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<>(nThreads),
-                CustomThreadFactory.guavaThreadFactory(),
-                new CustomRejectedExecutionHandler());
+        return newFixedThreadPool(nThreads, nThreads, nThreads, false);
+    }
+    public static ExecutorService newFixedThreadPool(int nThreads, boolean preStartAllCore) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore);
     }
 
     public static void monitor(ThreadPoolExecutor executor) {

@@ -18,7 +18,7 @@ import static util.Print.print;
  */
 public class NotifyVsNotifyAll {
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService exec = CustomThreadPool.newFixedThreadPool(10, 10, 10);
+        ExecutorService exec = CustomThreadPool.newFixedThreadPool(10);
         for (int i = 0; i < Constants.FIVE; i++) {
             exec.execute(new Task());
         }
@@ -78,7 +78,7 @@ class Blocker {
 }
 
 class Task implements Runnable {
-    // A separated Blocker object
+    /**A separated Blocker object*/
     static Blocker blocker = new Blocker();
 
     @Override
@@ -88,7 +88,7 @@ class Task implements Runnable {
 }
 
 class Task2 implements Runnable {
-    // A separated Blocker object
+    /** A separated Blocker object*/
     static Blocker blocker = new Blocker();
 
     @Override
