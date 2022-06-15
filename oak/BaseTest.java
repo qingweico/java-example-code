@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
+ * 更多测试请参考微基准测试工具jmh
  * @author zqw
  * @date 2022/2/3
  */
@@ -45,6 +45,5 @@ public class BaseTest {
     public void out() {
         byte aByte = (byte) 0b00100001;
         System.out.println(aByte);
-        System.out.println(Objects.equals(null, null));
     }
 }

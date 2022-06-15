@@ -19,24 +19,25 @@ class Reload {
     }
 
     public static void main(String args) {
-        print("Override main " + args);
+        print("Override main: " + args);
     }
 
     public static void method(Object o) {
-        print("Object method");
+        print("Object method: " + o);
     }
 
     public static void method(String s) {
-        print("String method");
+        print("String method: " + s);
     }
 
     /**
      * However, when an overloaded method contains both Integer and String arguments, the compiler
      * fails, because both String and Integer are concrete types, and the compiler cannot make a choice,
      * so it needs to be seen as having made the choice(For example, cast using Integer).
-     * @param i {@code i}
+     *
+     * @param i {@code Integer}
      */
     public static void method(Integer i) {
-        print("Integer method");
+        print("Integer method: " + i);
     }
 }
