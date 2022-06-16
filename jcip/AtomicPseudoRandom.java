@@ -2,17 +2,13 @@ package jcip;
 
 import annotation.ThreadSafe;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The random number generator based on AtomicInteger
  *
- * @author:qiming
- * @date: 2021/3/30
+ * @author zqw
+ * @date 2021/3/30
  */
 @ThreadSafe
 public class AtomicPseudoRandom extends PseudoRandom {

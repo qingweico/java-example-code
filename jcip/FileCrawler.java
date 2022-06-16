@@ -6,11 +6,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * @author:qiming
- * @date: 2021/10/23
+ * @author zqw
+ * @date 2021/10/23
  */
 public class FileCrawler implements Runnable{
-   private final Integer CAPACITY = 1000;
+   private final static Integer CAPACITY = 1000;
    private final BlockingQueue<File> fileQueue;
    private final FileFilter fileFilter;
    private final File root;
