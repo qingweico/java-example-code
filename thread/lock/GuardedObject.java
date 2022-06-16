@@ -49,7 +49,6 @@ public class GuardedObject<T> {
         try {
             this.obj = obj;
             done.signalAll();
-
         } finally {
             lock.unlock();
         }
