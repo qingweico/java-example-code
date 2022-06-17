@@ -2,14 +2,15 @@ package oak;
 
 import com.google.common.base.MoreObjects;
 
+import java.io.Serializable;
+
 /**
  * @author zqw
  * @date 2021/2/23
  */
-public class User {
+public class User implements Serializable {
     private String username;
     private boolean isVip;
-
     public String getUsername() {
         return username;
     }
