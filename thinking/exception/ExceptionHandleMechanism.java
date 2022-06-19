@@ -1,4 +1,4 @@
-package exception;
+package thinking.exception;
 
 /**
  * @author:qiming

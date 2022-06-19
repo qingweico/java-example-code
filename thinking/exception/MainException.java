@@ -1,4 +1,4 @@
-package exception;
+package thinking.exception;
 
 import java.io.FileInputStream;
 import java.io.IOException;
