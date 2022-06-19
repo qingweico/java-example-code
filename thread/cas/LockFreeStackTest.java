@@ -22,7 +22,7 @@ public class LockFreeStackTest<T> {
     static int initialValue = Constants.ZERO;
     static AtomicInteger counter = new AtomicInteger(initialValue);
     static AtomicInteger casCount = new AtomicInteger(initialValue);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(100);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 100);
     public LockFreeStackTest() {
         head = new Node();
         this.headRef = new AtomicStampedReference<>(head, initialValue);
@@ -152,4 +152,5 @@ public class LockFreeStackTest<T> {
         System.out.format("counter = %d\n", counter.get());
         System.out.format("casCount = %d", casCount.get());
     }
+
 }

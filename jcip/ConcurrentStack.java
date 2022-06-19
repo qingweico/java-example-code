@@ -2,14 +2,13 @@ package jcip;
 
 import annotation.ThreadSafe;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Non-blocking stack
  *
- * @author:qiming
- * @date: 2021/3/30
+ * @author zqw
+ * @date 2021/3/30
  */
 @ThreadSafe
 public class ConcurrentStack<E> {
@@ -47,11 +46,5 @@ public class ConcurrentStack<E> {
         public Node(E e) {
             item = e;
         }
-
     }
-
-    public static void main(String[] args) {
-        AtomicInteger atomicInteger = new AtomicInteger(Float.floatToIntBits(34.4f));
-    }
-
 }

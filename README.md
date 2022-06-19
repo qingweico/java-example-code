@@ -10,3 +10,5 @@
 - algorithms 4th edition
 - Deep understanding of Java virtual machine
 - Java Concurrency in Practice
+- Java Core Technology Volume 2
+- The art of Java concurrent programming

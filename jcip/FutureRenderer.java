@@ -7,8 +7,8 @@ import java.util.concurrent.*;
 import static jcip.LaunderThrowable.launderThrowable;
 
 /**
- * @author:qiming
- * @date: 2021/4/7
+ * @author zqw
+ * @date 2021/4/7
  */
 public abstract class FutureRenderer {
     private final ExecutorService exec = Executors.newFixedThreadPool(10);
