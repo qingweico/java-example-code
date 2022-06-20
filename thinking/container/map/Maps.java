@@ -14,8 +14,6 @@ import static util.Print.*;
  * @date: 2021/2/21
  */
 class Maps {
-
-
     static int initialCapacity = 10;
 
     public static void printKeys(Map<Integer, String> map) {

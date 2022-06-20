@@ -1,5 +1,8 @@
 package thread.aqs;
 
+import oak.User;
+import util.RandomDataGenerator;
+
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.Semaphore;
@@ -33,6 +36,17 @@ public class ObjectPool<T, R> {
             pool.add(t);
             semaphore.release();
         }
+    }
 
+    public static void main(String[] args) throws InterruptedException {
+        User user = new User();
+        user.setUsername(RandomDataGenerator.randomName());
+        int size = 10;
+        ObjectPool<User, String> objectPool = new ObjectPool<>(size, user);
+        for (int i = 0; i < size; i++) {
+            // User type -> String
+            String userName = objectPool.exec(User::getUsername);
+            System.out.println(userName);
+        }
     }
 }

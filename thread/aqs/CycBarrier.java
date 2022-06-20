@@ -49,7 +49,6 @@ public class CycBarrier {
     }
 
     void run() {
-
         pool.execute(this::prepareProduct);
         pool.execute(this::prepareDeliverOrder);
         pool.shutdown();
