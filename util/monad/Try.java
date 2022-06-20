@@ -16,6 +16,7 @@ import java.util.function.Supplier;
  * And also seeing that Scala deals with throwable,
  * I made the decision to change it to use Throwable.
  *
+ * @author Jason Goodwin
  * @param <T>
  */
 

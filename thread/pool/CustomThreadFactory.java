@@ -18,7 +18,7 @@ public class CustomThreadFactory {
      * @return {@link ThreadFactory}
      */
     public static ThreadFactory guavaThreadFactory(boolean daemon) {
-        return new ThreadFactoryBuilder().setNameFormat("pool-thread-%s").setDaemon(daemon).build();
+        return new ThreadFactoryBuilder().setNameFormat("[guava]pool-thread-%s").setDaemon(daemon).build();
     }
     /**
      * guava
@@ -36,6 +36,6 @@ public class CustomThreadFactory {
      * @return the {@link BasicThreadFactory} implements {@link ThreadFactory}
      */
     public static BasicThreadFactory basicThreadFactory() {
-        return new BasicThreadFactory.Builder().namingPattern("pool-thread-%s").build();
+        return new BasicThreadFactory.Builder().namingPattern("[lang3]pool-thread-%s").build();
     }
 }

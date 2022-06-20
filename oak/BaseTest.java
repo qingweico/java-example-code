@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
+ * 更多测试请参考微基准测试工具jmh
  * @author zqw
  * @date 2022/2/3
  */
@@ -31,8 +31,6 @@ public class BaseTest {
         System.out.println(negativeInfinity);
         System.out.println(0x7F800001);
         System.out.println(0x7FFFFFFF);
-        // 返回IEEE754浮点'单一格式'位布局
-        System.out.println(Float.floatToIntBits(34.4f));
         System.out.println(Float.NEGATIVE_INFINITY);
         System.out.println(Float.POSITIVE_INFINITY);
     }
@@ -47,6 +45,5 @@ public class BaseTest {
     public void out() {
         byte aByte = (byte) 0b00100001;
         System.out.println(aByte);
-        System.out.println(Objects.equals("a", "b"));
     }
 }

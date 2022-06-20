@@ -2,6 +2,7 @@ package effective;
 
 import com.github.javafaker.Faker;
 import object.Student;
+import thinking.exception.ExceptionPerformance;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ import java.util.*;
  *
  * @author zqw
  * @date 2021/2/6
- * @see exception.ExceptionPerformance
+ * @see ExceptionPerformance
  */
 class Article69 {
 

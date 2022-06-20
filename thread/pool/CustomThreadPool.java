@@ -49,7 +49,7 @@ public class CustomThreadPool {
                     run = workQueue.take();
                     run.run();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("{}", e.getMessage());
                 }
             }
         }
@@ -59,7 +59,7 @@ public class CustomThreadPool {
         try {
             workQueue.put(command);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("{}", e.getMessage());
         }
     }
 

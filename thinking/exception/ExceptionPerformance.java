@@ -1,4 +1,4 @@
-package exception;
+package thinking.exception;
 
 /**
  * 测试异常模式和正常模式的性能

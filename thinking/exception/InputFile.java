@@ -1,4 +1,4 @@
-package exception;
+package thinking.exception;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

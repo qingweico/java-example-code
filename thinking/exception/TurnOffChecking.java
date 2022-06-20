@@ -1,4 +1,4 @@
-package exception;
+package thinking.exception;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

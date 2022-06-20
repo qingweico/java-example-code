@@ -1,4 +1,4 @@
-package exception;
+package thinking.exception;
 
 
 import static util.Print.print;
