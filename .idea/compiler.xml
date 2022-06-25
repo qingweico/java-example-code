@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="14">
-      <module name="java-example-code" target="14" />
+      <module name="thinking-in-spring" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>

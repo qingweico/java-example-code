@@ -22,7 +22,11 @@ public class ThreadSafeMap {
     // 总元素数量
     private static final int ITEM_COUNT = 1000;
 
-    // 用来获得一个指定元素数量模拟数据的ConcurrentHashMap
+    /**
+     * 用来获得一个指定元素数量模拟数据的ConcurrentHashMap
+     * @param count 元素个数
+     * @return {@code ConcurrentHashMap}
+     */
     private static ConcurrentHashMap<String, Long> getData(int count) {
         return LongStream.rangeClosed(1, count)
                 .boxed()

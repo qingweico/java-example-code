@@ -15,7 +15,7 @@ import static util.Print.*;
 public class Login {
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/sys?useSSL=false&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/sys?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     static final String USER = "root";
     static final String PASS = "990712";
 
@@ -88,9 +88,7 @@ public class Login {
                     print("欢迎下次光临呦........");
                     exit(0);
                 }
-                default -> {
-                    System.out.println("invalid choice");
-                }
+                default -> System.out.println("");
             }
         }
     }

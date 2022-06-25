@@ -2,12 +2,11 @@ package jcip;
 
 import annotation.ThreadSafe;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * @author:qiming
- * @date: 2021/10/23
+ * @author zqw
+ * @date 2021/10/23
  */
 @ThreadSafe
 public class LinkedQueue<E> {
@@ -40,7 +39,6 @@ public class LinkedQueue<E> {
                         return true;
                     }
                 }
-
             }
         }
     }
