@@ -81,7 +81,7 @@ public class NettyChatServer {
         }
 
         @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        public void channelActive(ChannelHandlerContext ctx) {
             System.out.printf("[%s] %s 上线了%n", DateUtil.format(),
                     ctx.channel().remoteAddress().toString().substring(1));
         }
