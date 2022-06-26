@@ -1,5 +1,7 @@
 package io;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -8,8 +10,8 @@ import static util.Print.*;
 /**
  * Use io stream
  *
- * @author:qiming
- * @date: 2020/04/23
+ * @author zqw
+ * @date 2020/04/23
  */
 interface UserDao {
     /**
@@ -29,8 +31,23 @@ interface UserDao {
     void userRegister(User user);
 }
 
+@Slf4j
 class UserDaoImpl implements UserDao {
-    private static final File userFile = new File("E://user.txt");
+    static File userFile = new File("C://Java/user.txt");
+
+    static {
+        if (!userFile.exists()) {
+            try {
+                if (!userFile.createNewFile()) {
+                    log.error("createNewFile error");
+                    exit(-1);
+                }
+            } catch (IOException e) {
+                log.error("createNewFile error, {}", e.getMessage());
+                exit(-1);
+            }
+        }
+    }
 
     @Override
     public boolean isLogin(String username, String password) {
@@ -47,13 +64,13 @@ class UserDaoImpl implements UserDao {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("[isLogin]io error");
         } finally {
             if (br != null) {
                 try {
                     br.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.error("close error");
                 }
             }
         }
@@ -62,12 +79,10 @@ class UserDaoImpl implements UserDao {
 
     @Override
     public void userRegister(User user) {
-        try (PrintWriter bw = new PrintWriter(new OutputStreamWriter(new FileOutputStream
-                (userFile, true)))) {
+        try (PrintWriter bw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(userFile, true)))) {
             bw.println(user.getUsername() + "-----" + user.getPassword());
-
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("[userRegister]io error");
         }
     }
 }
@@ -81,14 +96,14 @@ class GuessNumber {
         int number = (int) (Math.random() * 10) + 1;
         while (true) {
             Scanner sc = new Scanner(System.in);
-            print("Please enter the data you want to guess: ");
+            print("请输入您猜测的数字: ");
             int guessNumber = sc.nextInt();
             if (number > guessNumber) {
-                print("Guess the data " + guessNumber + " too small!");
+                print("不好意思, 你猜的 " + guessNumber + " 太小了!");
             } else if (number < guessNumber) {
-                print("Guess the data " + guessNumber + "too big!");
+                print("不好意思, 你猜的 " + guessNumber + " 太大了!");
             } else {
-                print("Congratulations on your guess!");
+                print("恭喜你猜中了! 本次游戏的答案是: " + number);
                 break;
             }
         }
@@ -120,11 +135,14 @@ class User {
     }
 }
 
+/**
+ * @author zqw
+ */
 public class LoginRegister {
 
     public static void checkPassword(String firstPassword, String secondPassword) {
         if (!firstPassword.equals(secondPassword)) {
-            print("Sorry! The passwords you entered are different, please try again!");
+            print("两次密码不一致, 请重新输入: ");
             Scanner sc = new Scanner(System.in);
             secondPassword = sc.nextLine();
             checkPassword(firstPassword, secondPassword);
@@ -135,47 +153,48 @@ public class LoginRegister {
     public static void main(String[] args) {
         while (true) {
             // Welcome Screen
-            print("******************** Welcome  *******************");
-            print("******************** 1 Login  *******************");
-            print("******************** 2 Regist *******************");
-            print("******************** 3 exit   *******************");
+            print("******************** 欢迎  *******************");
+            print("******************** 1 登陆  *******************");
+            print("******************** 2 注册 *******************");
+            print("******************** 3 退出   *******************");
             print("*************************************************");
             Scanner sc = new Scanner(System.in);
             String choiceString = sc.nextLine();
             UserDao ud = new UserDaoImpl();
             switch (choiceString) {
-                case "1" -> {
-                    print("---------------Login---------------");
-                    printnb("please enter user name: ");
+                case "1": {
+                    print("---------------登录---------------");
+                    printnb("请输入用户名: ");
                     String username = sc.nextLine();
-                    printnb("Please enter the password: ");
+                    printnb("请输入密码: ");
                     String password = sc.nextLine();
                     //调用功能
                     boolean flag = ud.isLogin(username, password);
                     if (flag) {
-                        print("login successfully!");
-                        print("Are you ready? Let's play the game~~~~~!");
+                        print("登录成功!");
+                        print("准备好了吗 要开始游戏了!");
                         String y;
                         do {
                             // Start the game
                             GuessNumber.start();
-                            print("Do you want to play? Dear! Please enter yes to continue, otherwise enter no");
+                            print("输入yes继续, no结束");
                             y = sc.nextLine();
                             if ("no".equals(y)) {
                                 break;
                             }
-                        } while (y.equals("yes"));
+                        } while ("yes".equals(y));
                     } else {
-                        print("The account information has not been queried, please register first, dear!");
+                        print("账户不存在或者密码错误, 请先注册或者再试试密码吧!");
                     }
+                    break;
                 }
-                case "2" -> {
-                    print("-------------Register------------");
-                    printnb("please enter user name: ");
+                case "2": {
+                    print("-------------注册------------");
+                    printnb("请输入用户名: ");
                     String registerName = sc.nextLine();
-                    printnb("Please enter the password: ");
+                    printnb("请输入密码: ");
                     String registerPassword = sc.nextLine();
-                    printnb("Please enter the password again: ");
+                    printnb("请再次输入密码: ");
                     String checkPassword = sc.nextLine();
                     checkPassword(registerPassword, checkPassword);
                     // Encapsulate data in objects
@@ -183,11 +202,15 @@ public class LoginRegister {
                     user.setUsername(registerName);
                     user.setPassword(registerPassword);
                     ud.userRegister(user);
-                    print("Registered successfully. Your username is: " + user.getUsername() + "Your password is: " + user.getPassword());
+                    print("注册成功! 您的用户名是: " + user.getUsername() + "密码是: " + user.getPassword());
+                    break;
                 }
-                default -> {
-                    print("Thank you for coming, welcome to come again next time！");
+                case "3": {
+                    print("欢迎下次光临呦!");
                     exit(0);
+                }
+                default: {
+                    break;
                 }
             }
         }

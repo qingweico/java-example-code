@@ -1,4 +1,4 @@
-package thinking;
+package thinking.oop;
 
 /**
  * @author zqw

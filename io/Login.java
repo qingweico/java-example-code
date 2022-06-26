@@ -1,5 +1,7 @@
 package io;
 
+import util.DatabaseHelper;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -13,11 +15,11 @@ import static util.Print.*;
  */
 
 public class Login {
+    static Connection connection;
 
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/sys?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    static final String USER = "root";
-    static final String PASS = "990712";
+    static {
+        connection = DatabaseHelper.getConnection();
+    }
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -37,39 +39,41 @@ public class Login {
             Scanner sc = new Scanner(System.in);
             String choiceString = sc.nextLine();
             switch (choiceString) {
-                case "1" -> {
+                case "1": {
                     print("-----------------登陆界面-----------------");
                     printnb("用户名: ");
                     String username = sc.nextLine();
                     printnb("密码: ");
                     String password = sc.nextLine();
-                    // 加载驱动
-                    Class.forName(JDBC_DRIVER);
-                    // 建立连接
-                    Connection coon = DriverManager.getConnection(DB_URL, USER, PASS);
+
+                    if (connection == null) {
+                        exit(-1);
+                    }
                     // 创建Statement
-                    String sql = "select  * from account where username = ? and password = ?";
-                    PreparedStatement statement = coon.prepareStatement(sql);
+                    String sql = "select * from account where username = ? and password = ?";
+                    PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setString(1, username);
                     statement.setString(2, password);
                     ResultSet rs = statement.executeQuery();
                     if (rs.next()) {
+                        print("登录成功!");
                         print("-----开始游戏(请输入1到10之间的数字)-----");
                         String yes;
                         do {
                             // 登陆成功开始游戏
                             GuessNumber.start();
-                            print("还要玩吗？ 亲, 继续请输入yes, 退出请输入no");
+                            print("还要玩吗? 继续请输入yes, 退出请输入no");
                             yes = sc.nextLine();
                             if ("no".equals(yes)) {
                                 break;
                             }
                         } while ("yes".equals(yes));
                     } else {
-                        print("对不起 你的账户不存在! 请先注册一个吧!");
+                        print("对不起 你的账户不存在或者密码错误! 请先注册一个或者再试试密码吧!");
                     }
+                    break;
                 }
-                case "2" -> {
+                case "2": {
                     print("-----------注册界面----------");
                     print("请输入您的账户昵称: ");
                     String registerName = sc.nextLine();
@@ -79,16 +83,21 @@ public class Login {
                     String checkPassword = sc.nextLine();
                     LoginRegister.checkPassword(registerPassword, checkPassword);
                     String sql = "insert into account(username, password) values ('" + registerName + "','" + registerPassword + "')";
-                    Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
-                    Statement state = con.createStatement();
+                    if (connection == null) {
+                        exit(-1);
+                    }
+                    Statement state = connection.createStatement();
                     state.executeUpdate(sql);
                     print("注册成功!" + "您的用户名是 " + registerName + ", 密码为 " + registerPassword);
+                    break;
                 }
-                case "3" -> {
+                case "3": {
                     print("欢迎下次光临呦........");
                     exit(0);
                 }
-                default -> System.out.println("");
+                default: {
+                    break;
+                }
             }
         }
     }

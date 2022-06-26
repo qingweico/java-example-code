@@ -16,10 +16,10 @@ import java.nio.channels.FileChannel;
  */
 public class GetChannel {
     private static final int BSIZE = 1024;
-    private static final String path = "thinking/io/nio/";
-    private static final String fileName = "data.txt";
 
     public static void main(String[] args) throws IOException {
+        String path = "thinking/io/nio/";
+        String fileName = "data.txt";
         // Write a file
         // Writable
         FileChannel fc = new FileOutputStream(path + fileName).getChannel();
@@ -44,5 +44,6 @@ public class GetChannel {
         while (buffer.hasRemaining()) {
             System.out.print((char) buffer.get());
         }
+        fc.close();
     }
 }

@@ -11,7 +11,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * synchronized is a mutex lock and is also a spin lock.
  * {@code openjdk}
- * Interpret monitorenter and monitorexi in Java bytecode:
+ * Java ordinary synchronized method: ACC_SYNCHRONIZE
+ * Java static synchronized method: ACC_SYNCHRONIZE; ACC_STATIC
+ * Synchronized code block: Interpret monitorenter and monitorexit in Java bytecode
  * {@code bytecodeInterpreter.cpp; CASE(_monitorenter); CASE(_monitorexit)}
  * spin lock:
  * {@code interpreterRuntime.cpp#InterpreterRuntime::monitorenter; InterpreterRuntime::monitorexit}
@@ -26,8 +28,9 @@ import java.util.concurrent.TimeUnit;
  * {@code park.hpp}
  * ParkEvent are used for Java-level "monitor" synchronization.
  * Parkers are used by JSR166-JUC park-unpark.
- * ObjectMonitor: JVM C++ an object include: WaitSet, EntryList, OwnerThread, recursions
- *
+ * ObjectMonitor: JVM C++ an object include: WaitSet, EntryList, OwnerThread, recursions etc.
+ * monitor: 管程; 监视器 在Hotspot中由ObjectMonitor实现 {@code ObjectMonitor.cpp} 每个对象都具有一个
+ * ObjectMonitor对象.
  * @author zqw
  * @date 2021/6/27
  */

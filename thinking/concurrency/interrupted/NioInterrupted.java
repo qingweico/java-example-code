@@ -1,14 +1,15 @@
 package thinking.concurrency.interrupted;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousCloseException;
 import java.nio.channels.ClosedByInterruptException;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -17,20 +18,22 @@ import static util.Print.print;
 /**
  * Blocked NIO channels automatically respond to interrupts
  *
- * @author:qiming
- * @date: 2021/2/7
+ * @author zqw
+ * @date 2021/2/7
  */
-public class NIOInterrupted {
+public class NioInterrupted {
     // Interrupting a blocked NIO channel
+
+    private static final String HOST = Constants.LOOP_BACK;
+    private static final Integer PORT = Constants.NUM_8080;
     public static void main(String[] args) throws IOException, InterruptedException {
-        ExecutorService exec = Executors.newCachedThreadPool();
-        ServerSocket server = new ServerSocket(8080);
-        InetSocketAddress isa = new InetSocketAddress("localhost", 8080);
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+        InetSocketAddress isa = new InetSocketAddress(HOST, PORT);
         SocketChannel sc1 = SocketChannel.open(isa);
         SocketChannel sc2 = SocketChannel.open(isa);
-        Future<?> f = exec.submit(new NIOBlocked(sc1));
-        exec.submit(new NIOBlocked(sc2));
-        exec.shutdown();
+        Future<?> f = pool.submit(new NioBlocked(sc1));
+        pool.submit(new NioBlocked(sc2));
+        pool.shutdown();
         TimeUnit.SECONDS.sleep(1);
         // Produce an interrupted via cancel:
         f.cancel(true);
@@ -43,10 +46,10 @@ public class NIOInterrupted {
 
 }
 
-class NIOBlocked implements Runnable {
+class NioBlocked implements Runnable {
     private final SocketChannel sc;
 
-    public NIOBlocked(SocketChannel sc) {
+    public NioBlocked(SocketChannel sc) {
         this.sc = sc;
     }
 

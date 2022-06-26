@@ -15,39 +15,40 @@ import java.util.concurrent.ExecutorService;
  */
 public class BioPlainServer {
 
-    private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(2,
-            3,
-            4);
+    private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(2, 3, 4);
     private static final int PORT = Constants.QOMOLANGMA;
 
     public static void serve() throws IOException {
-        ServerSocket server = new ServerSocket(PORT);
-        System.out.println("Listening for connection on port: " + server.getLocalPort());
-        while (true) {
-            // Block
-            try {
-                final Socket client = server.accept();
-                System.out.println("client " + client.getPort() + " connected...");
-                POOL.execute(() -> {
-                    InputStream in;
-                    try {
-                        in = client.getInputStream();
-                        byte[] bytes = new byte[Constants.KB];
-                        int read;
-                        while ((read = in.read(bytes)) != -1) {
-                            System.out.print("client " + client.getPort() + " send: ");
-                            System.out.println(new String(bytes, 0, read));
+        try (ServerSocket server = new ServerSocket(PORT)) {
+            System.out.println("Listening for connection on port: " + server.getLocalPort());
+            while (true) {
+                // Block
+                try {
+                    final Socket client = server.accept();
+                    System.out.println("client " + client.getPort() + " connected...");
+                    POOL.execute(() -> {
+                        InputStream in;
+                        try {
+                            in = client.getInputStream();
+                            byte[] bytes = new byte[Constants.KB];
+                            int read;
+                            while ((read = in.read(bytes)) != -1) {
+                                System.out.print("client " + client.getPort() + " send: ");
+                                System.out.println(new String(bytes, 0, read));
+                            }
+                        } catch (IOException e) {
+                            System.err.println(e.getMessage());
                         }
-                    } catch (IOException e) {
-                        System.err.println(e.getMessage());
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-                break;
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    break;
+                }
             }
         }
+
     }
+
     public static void main(String[] args) throws IOException {
         serve();
     }

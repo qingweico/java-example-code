@@ -6,11 +6,11 @@ package thinking.rtti;
  */
 class GenericClassReferences {
    public static void main(String[] args) {
-      Class<?> intClass = int.class;
+      Class<?> intClass;
 
       // Using generic syntax allows the compiler
       // to enforce additional type checking.
-      Class<Integer> genericIntClass = int.class;
+      Class<Integer> genericIntClass;
       // Same thing
       genericIntClass = Integer.class;
       intClass = double.class;

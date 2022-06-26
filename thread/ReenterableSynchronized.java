@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Reenterable synchronized:
+ * Reenter-able synchronized:
  * A task can acquire an object's lock multiple times.
  *
  * @author zqw

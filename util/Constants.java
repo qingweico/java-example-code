@@ -23,6 +23,7 @@ public interface Constants {
     int KB = 1024;
     int EOF = -1;
     int QOMOLANGMA = 8848;
+    int NUM_8080 = 8080;
     int NUM_300 = 300;
 
 
@@ -31,11 +32,11 @@ public interface Constants {
      */
     int HUNDRED = 100;
     int THOUSAND = 1000;
-    int TEN_THOUSAND = 10000;
-    int HUNDRED_THOUSAND = 100000;
-    int MILLION = 1000000;
+    int TEN_THOUSAND = 10_000;
+    int HUNDRED_THOUSAND = 100_000;
+    int MILLION = 1_000_000;
     int TEN_MILLION = 10000000;
-    int HUNDRED_MILLION = 100000000;
+    int HUNDRED_MILLION = 100_000_000;
 
 
     String LOOP_BACK = "127.0.0.1";

@@ -1,5 +1,7 @@
 package thinking.concurrency.interrupted;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,22 +12,24 @@ import java.util.concurrent.TimeUnit;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/31
+ * @author zqw
+ * @date 2021/1/31
  */
 public class OrnamentalGarden {
+
+    static Integer threadCount = 5;
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService exec = Executors.newCachedThreadPool();
-        for (int i = 0; i < 5; i++) {
-            exec.execute(new Entrance(i));
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
+        for (int i = 0; i < threadCount; i++) {
+            pool.execute(new Entrance(i));
         }
         // Run for a while, then stop and collect the data:
         TimeUnit.SECONDS.sleep(3);
         Entrance.cancel();
-        exec.shutdown();
+        pool.shutdown();
         // Wait for each task to finish, and return true if all tasks have finished
         // before the timeout is reached, otherwise return false.
-        if (!exec.awaitTermination(250, TimeUnit.MILLISECONDS)) {
+        if (!pool.awaitTermination(250, TimeUnit.MILLISECONDS)) {
             print("Some tasks were not terminated!");
         }
         print("Total: " + Entrance.getTotalCount());
@@ -38,6 +42,7 @@ class Count {
     private final Random random = new Random(47);
 
     // Remove the synchronized keyword to see counting fail
+
     public synchronized int increment() {
         int temp = count;
         // Yield half the time
@@ -54,15 +59,17 @@ class Count {
 
 class Entrance implements Runnable {
 
-    private static final Count count = new Count();
+    private static final Count COUNT = new Count();
 
-    private static final List<Entrance> entrances = new ArrayList<>();
+    private static final List<Entrance> ENTRANCES = new ArrayList<>();
 
     private int number = 0;
 
     // Doesn't need synchronization to read:
+
     private final int id;
     // Atomic operation on a volatile field:
+
     private static volatile boolean canceled = false;
 
     public static void cancel() {
@@ -72,7 +79,7 @@ class Entrance implements Runnable {
     public Entrance(int id) {
         this.id = id;
         // Keep this task in a list, Also prevents garbage collection of dead task:
-        entrances.add(this);
+        ENTRANCES.add(this);
     }
 
     @Override
@@ -81,7 +88,7 @@ class Entrance implements Runnable {
             synchronized (this) {
                 ++number;
             }
-            print(this + " Total: " + count.increment());
+            print(this + " Total: " + COUNT.increment());
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
@@ -100,12 +107,12 @@ class Entrance implements Runnable {
     }
 
     public static int getTotalCount() {
-        return count.value();
+        return COUNT.value();
     }
 
     public static int sumEntrance() {
         int sum = 0;
-        for (Entrance entrance : entrances) {
+        for (Entrance entrance : ENTRANCES) {
             sum += entrance.getValue();
         }
         return sum;

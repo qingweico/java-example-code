@@ -10,8 +10,6 @@
         <module name="java-example-code" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="14">
-      <module name="thinking-in-spring" target="14" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="14" />
   </component>
 </project>

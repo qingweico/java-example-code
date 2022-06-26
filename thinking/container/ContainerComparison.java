@@ -1,4 +1,4 @@
-package thinking;
+package thinking.container;
 
 import util.Constants;
 

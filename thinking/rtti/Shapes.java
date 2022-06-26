@@ -16,10 +16,7 @@ class Shapes {
         // List<Shape> types, but when they are transformed upward to a Shape object,
         // the specific type of the Shape object is lost. Arrays are simply objects
         // of Shape.
-        List<Shape> shapeList = Arrays.asList(
-                new Circle(),
-                new Square(),
-                new Triangle());
+        List<Shape> shapeList = Arrays.asList(new Circle(), new Square(), new Triangle());
 
         // When an element is pulled from an array, the container which actually holds everything
         // as an Object and automatically transforms the result into a Shape, this is the most
@@ -33,33 +30,38 @@ class Shapes {
         }
     }
 }
-abstract class Shape{
-    void draw(){
+
+abstract class Shape {
+    void draw() {
         System.out.println(this + ".draw()");
     }
 
     /**
      * toString
+     *
      * @return String
      */
     @Override
     abstract public String toString();
 }
-class Circle extends Shape{
+
+class Circle extends Shape {
 
     @Override
     public String toString() {
         return "Circle";
     }
 }
-class Square extends Shape{
+
+class Square extends Shape {
 
     @Override
     public String toString() {
         return "Square";
     }
 }
-class Triangle extends Shape{
+
+class Triangle extends Shape {
 
     @Override
     public String toString() {

@@ -13,12 +13,16 @@ import static util.Print.print;
 
 /**
  * Interrupting a blocked thread
- *
+ * {@link Thread#interrupt()} 仅仅将线程对象(正常状态)的中断标志设置为true,并不会停止该线程;
+ * 该线程需要不断检测标识位来判断是否来中断自身, 中断不活动的线程不会产生影响
+ * {@link Thread#interrupted()} 判断线程是否被中断并清除当前中断状态
+ * {@link Thread#isInterrupted()} 判断线程是否被中断 {@code 都使用了Thread类中volatile类型的标志位interrupted}
+ * @see SimpleInterrupt
  * @author zqw
  * @date 2021/1/31
  */
 public class Interrupting {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
 
     static void test(Runnable r) throws InterruptedException {
         Future<?> task = pool.submit(r);

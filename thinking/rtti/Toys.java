@@ -6,10 +6,9 @@ import java.lang.reflect.InvocationTargetException;
  * @author zqw
  * @date 2021/1/16
  */
-public class Toys {
+class Toys {
     static void printInfo(Class<?> cc) {
-        System.out.println("Class name: " + cc.getName() + "is interface ?" +
-                " [" + cc.isInterface() + "]");
+        System.out.println("Class name: " + cc.getName() + "is interface ?" + " [" + cc.isInterface() + "]");
         // The getSimpleName() method returns class name without a package name.
         System.out.println("Simple name: " + cc.getSimpleName());
         // The getCanonicalName() method returns the fully qualified class name.
@@ -59,10 +58,9 @@ interface Shoots {
 }
 
 class Toy {
-    public Toy() {
-    }
 
     public Toy(int i) {
+        System.out.println("Constructor [Toy]: " + i);
     }
 }
 

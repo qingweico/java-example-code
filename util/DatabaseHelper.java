@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+
 /**
  * @author zqw
  * @date 2022/6/25
@@ -22,7 +23,7 @@ public class DatabaseHelper {
     static String username;
     static String password;
 
-    public static Connection getConnection() {
+    static {
         properties = new Properties();
         FileInputStream fin;
         try {
@@ -36,12 +37,14 @@ public class DatabaseHelper {
         username = properties.getProperty("username");
         password = properties.getProperty("password");
 
+    }
+
+    public static Connection getConnection() {
         try {
             Class.forName(driveClassName);
         } catch (ClassNotFoundException e) {
             log.error("drive class not found");
         }
-
         try {
             return DriverManager.getConnection(dbUlr, username, password);
         } catch (SQLException e) {
