@@ -7,7 +7,7 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-public class ObjectInputStreamImpl extends ObjectInputStream {
+class ObjectInputStreamImpl extends ObjectInputStream {
 
     private static final Student student;
     static {

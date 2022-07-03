@@ -42,8 +42,18 @@ public class BaseTest {
         System.out.println(Arrays.toString(a));
     }
     @Test
-    public void out() {
+    public void outBinary() {
         byte aByte = (byte) 0b00100001;
         System.out.println(aByte);
+    }
+    @Test
+    public void bitOperation() {
+        // -1 的原码为1000 0000 0000 0000 0000 0000 0000 0001
+        // 补码为1111 1111 1111 1111 1111 1111 1111 1111
+        // 左移29为 1110 0000 0000 0000 0000 0000 0000 0000
+        // 结果为-2的31次方 + 2的30次方 + 2的29次方: -536870912
+        System.out.println(-1 << 29);
+        System.out.println(1 << 29);
+        System.out.println(2 << 29);
     }
 }

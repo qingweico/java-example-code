@@ -1,8 +1,12 @@
 package jvm;
 
 import org.openjdk.jol.info.ClassLayout;
-
+// TODO
 /**
+ * 打印编译的细节 {@code -XX:+PrintCompilation}
+ * 输出更多的编译细节 {@code -XX:UnlockDiagnosticVMOptions
+ * -XX:+LogCompilation -XX:Logfile=<your_file_path>[可选] or output hotspot_pid<pid>.log}
+ *
  * @author zqw
  * @date 2021/3/5
  */

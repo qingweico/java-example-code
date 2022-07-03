@@ -1,6 +1,5 @@
 package thread.lock;
 
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +33,8 @@ public class GuardedObject<T> {
         try {
             // MESA 管程推荐写法
             while (!p.test(obj)) {
-                done.await(timeout, TimeUnit.SECONDS);
+                boolean await = done.await(timeout, TimeUnit.SECONDS);
+                System.out.println("lock await: " + await);
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -53,5 +53,4 @@ public class GuardedObject<T> {
             lock.unlock();
         }
     }
-
 }

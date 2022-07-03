@@ -5,10 +5,13 @@ import static effective.PhysConstants.*;
 /**
  * 接口只用于定义类型
  *
- * @author:qiming
- * @date: 2021/2/21
+ * @author zqw
+ * @date 2021/2/21
  */
-public class Article22 {
+class Article22 {
+    public static void main(String[] args) {
+        System.out.println("接口只用于定义类型");
+    }
 
 }
 

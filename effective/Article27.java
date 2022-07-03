@@ -11,8 +11,8 @@ import java.util.Set;
  * >3 非受检参数化可变参数类型警告(unchecked parameterized vararg type warning)
  * >4 非受检转换警告(unchecked conversion warning)
  *
- * @author:qiming
- * @date: 2021/1/28
+ * @author zqw
+ * @date 2021/1/28
  */
 public class Article27 {
     /**

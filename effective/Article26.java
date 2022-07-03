@@ -8,20 +8,20 @@ import java.util.*;
  * <p>
  * 参数化的类型      List<String>
  * 实际类型参数      String
- * 泛型             List<E>
+ * 泛型            List<E>
  * 形式类型参数      E
  * 无限制通配符类型  List<?>
- *      上界通配符  <? extend Number>
- *      下界通配符  <? super Number>
+ * 上界通配符  <? extend Number>
+ * 下界通配符  <? super Number>
  * 原生态类型       List
  * 有限制类型参数   <E extends Number>
  * 递归类型限制     <T extends Comparable<T>>
- * 有限制通配符类型 List<E extends Number>
+ * 有限制通配符类型  List<E extends Number>
  * 泛型方法        static <E> List<E> asList(E[] a)
  * 令牌类型        String.class
  *
- * @author:qiming
- * @date: 2020/12/15
+ * @author zqw
+ * @date 2020/12/15
  */
 // Each generic defines a primitive type, that is, a generic name without any actual type arguments.
 // List<E> --> List
@@ -74,17 +74,15 @@ public class Article26 {
         // illegal!
         // Because the generic information is erased at run time.
         // o instance Set<String>
-        if(o instanceof Set) {      // Raw type
+        if (o instanceof Set) {      // Raw type
             // Replace primitive types with unrestricted wildcard types,
             // this is a checked transformation,
             // so it does not cause compile-time warnings.
-            Set<?> s = (Set<?>)o;   // Wildcard type
+            Set<?> s = (Set<?>) o;   // Wildcard type
 
             // Set s = (Set)o;
         }
     }
-
-
 
 
     // Generics have subtyping rules:
@@ -97,7 +95,6 @@ public class Article26 {
     // that can contain any object type(safe).
     // Set<?> is a wildcard type that represents a collection that can
     // contain only some unknown object type(safe).
-
 
 
 }

@@ -10,6 +10,8 @@ import util.Constants;
 import java.util.concurrent.ExecutorService;
 
 /**
+ * 基于 Redisson 的 Redis 分布式锁
+ * {@code 理解Paxos;Raft一致性算法}
  * @author zqw
  * @date 2022/3/13
  */

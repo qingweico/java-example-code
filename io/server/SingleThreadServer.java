@@ -13,10 +13,10 @@ import static util.Print.print;
  * @author zqw
  * @date 2019/12/10
  */
-public class Server extends Thread {
+public class SingleThreadServer extends Thread {
     private final ServerSocket serverSocket;
 
-    public Server(int port) throws IOException {
+    public SingleThreadServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         serverSocket.setSoTimeout(100000);
     }
@@ -45,7 +45,7 @@ public class Server extends Thread {
     public static void main(String[] args) {
         int port = Integer.parseInt("8080");
         try {
-            Thread t = new Server(port);
+            Thread t = new SingleThreadServer(port);
             t.start();
         } catch (IOException e) {
             e.printStackTrace();

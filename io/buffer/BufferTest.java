@@ -21,26 +21,26 @@ import java.util.concurrent.Future;
  * @author zqw
  * @date 2021/9/27
  */
-public class BufferExample {
+public class BufferTest {
 
-    final String fileName = "data.txt";
+    final String fileName = "data";
 
-    final String path = "io/";
-
+    static int neededNewline = 20;
     private final static ByteBuffer buffer = ByteBuffer.allocate(1024 * 8);
 
     @Test
     public void gen() throws IOException {
         Random r = new Random();
-
         var os = new BufferedOutputStream(new FileOutputStream(fileName));
-
         var t = System.currentTimeMillis();
         for (int i = 0; i < 1_000; i++) {
             for (int j = 0; j < 5; j++) {
                 os.write(97 + r.nextInt(5));
             }
             os.write(' ');
+            if (i != 0 && i % neededNewline == 0) {
+                os.write("\n".getBytes());
+            }
         }
         System.out.format("%dms", (System.currentTimeMillis() - t));
         os.close();
@@ -48,9 +48,7 @@ public class BufferExample {
 
     @Test
     public void read() throws IOException {
-
-        var is = new BufferedInputStream(new FileInputStream(path + fileName));
-
+        var is = new BufferedInputStream(new FileInputStream(fileName));
         int count = 50;
         var start = System.nanoTime();
         byte[] bytes = new byte[24];
@@ -68,33 +66,36 @@ public class BufferExample {
 
     @Test
     public void readNio() throws IOException {
-        var fileChannel = new FileInputStream(path + fileName).getChannel();
-        var start = System.nanoTime();
-        int readBytes;
-        while ((readBytes = fileChannel.read(buffer)) != -1) {
-            System.out.print(new String(buffer.array(), 0, readBytes));
-            buffer.flip();
-            buffer.clear();
+        try (FileInputStream fis = new FileInputStream(fileName)) {
+            var fileChannel = fis.getChannel();
+            var start = System.nanoTime();
+            int readBytes;
+            while ((readBytes = fileChannel.read(buffer)) != -1) {
+                System.out.print(new String(buffer.array(), 0, readBytes));
+                buffer.flip();
+                buffer.clear();
+            }
+            System.out.format("%fms", (System.nanoTime() - start) / 1000_000.0);
+            fileChannel.close();
         }
-        System.out.format("%fms", (System.nanoTime() - start) / 1000_000.0);
-        fileChannel.close();
     }
 
     @Test
     public void writeNio() throws IOException {
-        var fileChannel = new FileOutputStream(path + fileName, true).getChannel();
-        var start = System.nanoTime();
-        String s = "AsYouWish";
-        buffer.put(s.getBytes());
-        buffer.flip();
-        fileChannel.write(buffer);
-        System.out.format("%fms", (System.nanoTime() - start) / 1000_000.0);
+        try (FileOutputStream fos = new FileOutputStream(fileName, true)) {
+            var fileChannel = fos.getChannel();
+            var start = System.nanoTime();
+            String s = "AsYouWish";
+            buffer.put(s.getBytes());
+            buffer.flip();
+            fileChannel.write(buffer);
+            System.out.format("%fms", (System.nanoTime() - start) / 1000_000.0);
+        }
     }
 
     @Test
     public void readAsync() throws IOException, ExecutionException, InterruptedException {
-        var channel = AsynchronousFileChannel.open(Path.of(fileName),
-                StandardOpenOption.READ);
+        var channel = AsynchronousFileChannel.open(Path.of(fileName), StandardOpenOption.READ);
         var buffer = ByteBuffer.allocate(1024);
         Future<Integer> operation = channel.read(buffer, 0);
         var numReads = operation.get();
@@ -102,6 +103,7 @@ public class BufferExample {
         buffer.flip();
         var chars = new String(buffer.slice().array());
         System.out.println(chars);
+        channel.close();
 
     }
 
@@ -191,11 +193,12 @@ public class BufferExample {
         // 2052
         System.out.println(l);
     }
+
     @Test
     public void mappedByteBuffer() throws IOException {
-        RandomAccessFile randomAccessFile = new RandomAccessFile(path + fileName, "rw");
+        RandomAccessFile randomAccessFile = new RandomAccessFile(fileName, "rw");
         var fileChannel = randomAccessFile.getChannel();
-        MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0 , 2);
+        MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 2);
         mappedByteBuffer.put(0, (byte) 97);
         randomAccessFile.close();
     }

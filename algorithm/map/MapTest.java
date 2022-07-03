@@ -84,7 +84,7 @@ public class MapTest {
             @SuppressWarnings("unchecked") var inst = (Map<String, Integer>) rawInstance;
             var start = System.nanoTime();
             ArrayList<String> arrayList = new ArrayList<>();
-            FileOperation.readFile("algorithm/set/pride-and-prejudice.txt", arrayList);
+            FileOperation.readFileToArrayList("algorithm/set/pride-and-prejudice.txt", arrayList);
             String clsName = rawInstance.getClass().getSimpleName();
             print(clsName + " words: " + arrayList.size());
             for (String s : arrayList) {

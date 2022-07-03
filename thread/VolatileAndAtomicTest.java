@@ -15,6 +15,10 @@ import java.util.concurrent.atomic.LongAdder;
 import static util.Print.print;
 
 /**
+ * ---------------------volatile读写不会导致上下文切换------------------------
+ * volatile 主要是用来保证共享变量的可见性 以防止指令重排序 保证执行的有序性
+ * 通过生成class文件之后,反编译文件可以看到被volatile修饰的变量,在写入操作的时候会多一个Lock前缀这样的指令,当
+ * 操作系统执行时会由于这个指令,将当前处理器的数据写回到系统内存中,并通知其他处理器的缓存失效 (MESI)
  * @author zqw
  * @date 2020/10/28
  * <p>

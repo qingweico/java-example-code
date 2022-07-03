@@ -28,7 +28,7 @@ public class SetTest {
             @SuppressWarnings("unchecked") var inst = (Set<String>) rawInstance;
             var start = System.nanoTime();
             ArrayList<String> arrayList = new ArrayList<>();
-            FileOperation.readFile("algorithm/set/a-tale-of-two-cities.txt", arrayList);
+            FileOperation.readFileToArrayList("algorithm/set/a-tale-of-two-cities.txt", arrayList);
             print(arrayList.size());
             for (String s : arrayList) {
                 inst.add(s);

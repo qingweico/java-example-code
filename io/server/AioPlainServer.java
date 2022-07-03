@@ -11,6 +11,8 @@ import java.nio.channels.CompletionHandler;
 import java.util.concurrent.CountDownLatch;
 
 /**
+ * -------------------------------- 基于 AIO 线程模型 --------------------------------
+ *
  * @author zqw
  * @date 2021/10/18
  */
@@ -46,6 +48,7 @@ public class AioPlainServer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        serverChannel.close();
     }
 
     private static final class EchoCompletionHandler implements CompletionHandler<Integer, ByteBuffer> {

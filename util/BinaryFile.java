@@ -1,6 +1,8 @@
 package util;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 
 /**
@@ -9,12 +11,14 @@ import java.io.*;
  * @author zqw
  * @date 2021/2/4
  */
+@Slf4j
 public class BinaryFile {
 
     public static byte[] read(File bFile) throws IOException {
         try (BufferedInputStream bf = new BufferedInputStream(new FileInputStream(bFile))) {
             byte[] data = new byte[bf.available()];
-            bf.read(data);
+            int read = bf.read(data);
+            log.info("file size: {}", read);
             return data;
         }
     }

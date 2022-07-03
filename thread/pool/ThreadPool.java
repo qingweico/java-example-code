@@ -10,7 +10,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2020/12/19
  */
-public class ThreadPool {
+class ThreadPool {
     public static void main(String[] args) throws InterruptedException {
 
         // On the basis of three Executors tools, but it's not recommended

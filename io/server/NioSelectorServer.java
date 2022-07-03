@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
+ * -------------------------------- 基于 IO 多路复用 --------------------------------
  * @author zqw
  * @date 2021/10/18
  * @see NioPlainServer
@@ -23,7 +24,7 @@ public class NioSelectorServer {
         InetSocketAddress address = new InetSocketAddress(port);
 
         socket.bind(address);
-        // Non-Block, in the mode of Blocking, the operation of regist is not allowed, or
+        // Non-Block, in the mode of Blocking, the operation of registering is not allowed, or
         // throw IllegalBlockingModeException.
         // BIO >> accept >> Non-Block
         channel.configureBlocking(false);

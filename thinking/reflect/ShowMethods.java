@@ -13,12 +13,7 @@ class ShowMethods {
 
     public static void main(String[] args) {
         if (args.length < 1) {
-            String usage = """
-                    usage:\s
-                    ShowMethods qualified.class.name
-                    To show all methods in class or:\s
-                    ShowMethods qualified.class.name word
-                    To search for methods involving 'word'\s""";
+            String usage = "argus exception!";
             System.out.println(usage);
             System.exit(0);
         }

@@ -9,10 +9,10 @@ import java.util.function.UnaryOperator;
 /**
  * 优先考虑泛型方法
  *
- * @author:qiming
- * @date: 2021/11/17
+ * @author zqw
+ * @date 2021/11/17
  */
-public class Article30 {
+class Article30 {
 
     // Generic method
     public static <E> Set<E> union(Set<? extends E> s1, Set<? extends E> s2) {

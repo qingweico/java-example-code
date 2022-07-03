@@ -8,10 +8,10 @@ import static util.Print.print;
  * @author zqw
  * @date 2019/12/10
  */
-public class Client {
+class Client {
     public static void main(String[] args) {
         String serveName = "localhost";
-        int port = Integer.parseInt("8080");
+        int port = Integer.parseInt("8848");
         try {
             System.out.println("Connect to " + serveName + ":" + port);
             Socket client = new Socket(serveName, port);

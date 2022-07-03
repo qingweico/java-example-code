@@ -27,28 +27,28 @@ public class ZeroCopyTest {
 
     @Test
     public void ioServer() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(port);
-        serverSocket.setSoTimeout(60 * 1000);
-        int rcvBytes = 0;
-        while (true) {
-            try {
-                Socket socket = serverSocket.accept();
-                InputStream in = socket.getInputStream();
-                byte[] buffer = new byte[bufferSize];
-                while (true) {
-                    int read = in.read(buffer);
-                    if (read == eof) {
-                        break;
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            serverSocket.setSoTimeout(60 * 1000);
+            int rcvBytes = 0;
+            while (true) {
+                try {
+                    Socket socket = serverSocket.accept();
+                    InputStream in = socket.getInputStream();
+                    byte[] buffer = new byte[bufferSize];
+                    while (true) {
+                        int read = in.read(buffer);
+                        if (read == eof) {
+                            break;
+                        }
+                        rcvBytes += read;
                     }
-                    rcvBytes += read;
+                    System.out.printf("[rcvBytes: %s, from client %s]%n", rcvBytes, socket.getRemoteSocketAddress());
+                } catch (SocketTimeoutException e) {
+                    System.out.println("socket timeout");
+                    break;
                 }
-                System.out.printf("[rcvBytes: %s, from client %s]%n", rcvBytes, socket.getRemoteSocketAddress());
-            } catch (SocketTimeoutException e) {
-                System.out.println("socket timeout");
-                break;
             }
         }
-
     }
 
     @Test
@@ -74,8 +74,7 @@ public class ZeroCopyTest {
         os.close();
         fis.close();
         socket.close();
-        System.out.printf("[sendBytes: %s, time: %sms]%n", sendBytes,
-                (System.currentTimeMillis() - start));
+        System.out.printf("[sendBytes: %s, time: %sms]%n", sendBytes, (System.currentTimeMillis() - start));
     }
 
     @Test
@@ -98,7 +97,8 @@ public class ZeroCopyTest {
                 }
                 System.out.printf("[rcvBytes: %s, from client %s]%n", rcvBytes, socketChannel.getRemoteAddress());
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println(e.getMessage());
+                serverSocketChannel.close();
                 break;
             }
         }
@@ -107,20 +107,20 @@ public class ZeroCopyTest {
     @Test
     public void nioClient() throws IOException {
         SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress(host, port));
-        FileChannel fileChannel = new FileInputStream(fileName).getChannel();
-        long start = System.currentTimeMillis();
-        long send;
-        long sendBytes = 0;
-        long size = fileChannel.size();
-        // TODO
-        while (sendBytes < size) {
-            send = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
-            sendBytes += send;
+        try (FileInputStream fis = new FileInputStream(fileName)) {
+            FileChannel fileChannel = fis.getChannel();
+            long start = System.currentTimeMillis();
+            long send;
+            long sendBytes = 0;
+            long size = fileChannel.size();
+            // TODO
+            while (sendBytes < size) {
+                send = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
+                sendBytes += send;
+            }
+            System.out.printf("[sendBytes: %s, time: %sms]%n", sendBytes, (System.currentTimeMillis() - start));
+            fileChannel.close();
+            socketChannel.close();
         }
-
-        System.out.printf("[sendBytes: %s, time: %sms]%n", sendBytes,
-                (System.currentTimeMillis() - start));
-        fileChannel.close();
-        socketChannel.close();
     }
 }

@@ -6,8 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 列表优于数组
  *
- * @author:qiming
- * @date: 2021/3/5
+ * @author zqw
+ * @date 2021/3/5
  */
 public class Article28<E> {
     // First, Arrays are covariant, if Sub is a subtype of Super, then the type Sub[] is

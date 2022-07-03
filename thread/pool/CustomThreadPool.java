@@ -76,6 +76,7 @@ public class CustomThreadPool {
             int coreThreads = executor.prestartAllCoreThreads();
             log.info("{} Core Thread are all started", coreThreads);
         }
+        // 包括核心线程在内,没有任务分配的所有线程,在keepAliveTime时间后全部回收掉
         executor.allowCoreThreadTimeOut(true);
         return executor;
     }

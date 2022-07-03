@@ -10,12 +10,14 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
 /**
+ * -------------------------------- 基于 BIO 线程模型 --------------------------------
+ *
  * @author zqw
  * @date 2021/10/18
  */
 public class BioPlainServer {
 
-    private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(2, 3, 4);
+    private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(10);
     private static final int PORT = Constants.QOMOLANGMA;
 
     public static void serve() throws IOException {

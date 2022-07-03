@@ -8,12 +8,12 @@ import static util.Print.print;
 /**
  * 利用有限制通配符提升API灵活性
  *
- * @author:qiming
- * @date: 2021/11/17
+ * @author zqw
+ * @date 2021/11/17
  * @see Stack
  * @see Article30#max
  */
-public class Article31 {
+class Article31 {
 
 
     public static void main(String[] args) {
