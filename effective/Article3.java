@@ -11,7 +11,12 @@ import util.Generator;
  */
 class Article3 {
     public static void main(String[] args) {
-
+        Elvis elvis = Elvis.INSTANCE;
+        elvis.leaveTheBuilding();
+        Elvis0 elvis0 = Elvis0.getInstance();
+        elvis0.leaveTheBuilding();
+        Elvis2 elvis2 = Elvis2.INSTANCE;
+        elvis2.leaveTheBuilding();
     }
 }
 
@@ -25,6 +30,7 @@ class Elvis {
     }
 
     public void leaveTheBuilding() {
+        System.out.println(INSTANCE);
     }
 
 }
@@ -43,6 +49,7 @@ class Elvis0 {
     }
 
     public void leaveTheBuilding() {
+        System.out.println(INSTANCE);
     }
 }
 
@@ -58,11 +65,12 @@ enum Elvis2 implements Generator<Object> {
      */
     INSTANCE;
 
-    public void leaveTheBuilding() {
-    }
-
     @Override
     public Object next() {
         return null;
+    }
+
+    public void leaveTheBuilding() {
+        System.out.println(INSTANCE);
     }
 }

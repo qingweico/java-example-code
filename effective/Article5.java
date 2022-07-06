@@ -22,10 +22,14 @@ class Article5 {
  * Inappropriate use of static utility - inflexible & untestable
  */
 class SpellChecker {
-    private static final Lexicon DICTIONARY = null;
-
+    private static Lexicon dictionary;
+    private static ArrayList<String> suggestionLists;
+    static  {
+        dictionary = new Lexicon();
+        suggestionLists = new ArrayList<>();
+    }
     /**
-     *  Non-instantiable
+     * Non-instantiable
      */
     private SpellChecker() {
     }
@@ -36,6 +40,10 @@ class SpellChecker {
 
     public static List<String> suggestions(String typo) {
         return new ArrayList<>();
+    }
+
+    public static void main(String[] args) {
+        String word  = "speak";
     }
 
 }
@@ -65,6 +73,7 @@ class SpellCheckerUsingSingleton {
 }
 
 class Lexicon {
+    private static List<String> data = new ArrayList<>();
 }
 
 // Static utility classes and Singleton classes are not appropriate
@@ -91,9 +100,7 @@ class SpellCheckerUsingDi {
 
     @Override
     public String toString() {
-        return "SpellCheckerUsingDI{" +
-                "dictionary=" + dictionary +
-                '}';
+        return "SpellCheckerUsingDI{" + "dictionary=" + dictionary + '}';
     }
 }
 
