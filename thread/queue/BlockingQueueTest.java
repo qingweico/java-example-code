@@ -2,23 +2,29 @@ package thread.queue;
 
 import thread.pool.CustomThreadPool;
 import util.Constants;
+import util.RandomDataGenerator;
 
 import java.util.concurrent.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * LinkedBlockingQueue
- * LinkedBlockingDeque
- * PriorityBlockingQueue: Not follow FIFO, but according to priority.
- * LinkedBlockingQueue + SynchronousQueue => LinkedTransferQueue: lock-free
- * LinkedTransferQueue: it has a higher performance than LinkedBlockingQueue,
+ * ---------------------------- 基于阻塞队列的生产者消费者模型 ----------------------------
+ * 基于非阻塞队的请参考 {@link ProducerConsumerModel}
+ * {@link ArrayBlockingQueue}
+ * {@link LinkedBlockingQueue} 内部基于锁 {@link ReentrantLock} + 条件变量
+ * {@link LinkedBlockingDeque}
+ * {@link PriorityBlockingQueue}: Not follow FIFO and unbounded, but according to priority.
+ * {@code LinkedBlockingQueue} + {@code SynchronousQueue} => LinkedTransferQueue: lock-free
+ * {@link LinkedTransferQueue}: it has a higher performance than LinkedBlockingQueue,
  * and store more element than SynchronousQueue.
- * SynchronousQueue: only store an element, and it will block when try to add the second.
- * DelayQueue
- * {@link thinking.concurrency.juc.DelayQueueUsage}
- * {@link DelayQueueTest}
+ * {@link SynchronousQueue}: only store an element, and it will block when try to add the second.
+ * SynchronousQueue 在 {@since JDK6} 中利用 CAS 替换掉了原本基于锁的逻辑,同步开销比较小;它是
+ * {@link Executors#newCachedThreadPool()} 的默认队列;在队列元素较小的场景下,有着不错的性能表现
+ * 并发容器 {@link thread.concurrency.container.Queue}
  *
  * @author zqw
  * @date 2021/9/29
+ * @see DelayQueueTest {@link DelayQueue}
  */
 public class BlockingQueueTest {
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 10);
@@ -33,8 +39,10 @@ public class BlockingQueueTest {
         for (int i = 0; i < Constants.HUNDRED; i++) {
             pool.execute(() -> {
                 try {
-                    boolean offer = queue.offer((int) (Math.random() * 1000), 3, TimeUnit.SECONDS);
-                    System.out.println(offer);
+                    // Math.random()可能会返回0的数值(除零异常)且返回值是double,Random.nextInt(bound)从1开始到bound
+                    // offer(E) 非阻塞;添加失败返回false
+                    // add(E) 非阻塞;添加失败抛异常
+                    queue.put(RandomDataGenerator.randomInt(1000));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -48,7 +56,9 @@ public class BlockingQueueTest {
                 while (true) {
                     Integer x;
                     try {
-                        x = queue.poll(3, TimeUnit.SECONDS);
+                        // poll() 非阻塞;添加失败返回false
+                        // remove() 非阻塞;添加失败抛异常
+                        x = queue.take();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                         break;

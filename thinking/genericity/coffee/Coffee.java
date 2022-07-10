@@ -1,8 +1,8 @@
 package thinking.genericity.coffee;
 
 /**
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
 public class Coffee {
     private static long count = 0;
@@ -10,5 +10,4 @@ public class Coffee {
     public String toString() {
         return getClass().getSimpleName() + " " + id;
     }
-
 }

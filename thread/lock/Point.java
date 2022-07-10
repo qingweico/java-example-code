@@ -57,6 +57,5 @@ class Point {
         } finally {
             sl.unlockWrite(stamp);
         }
-
     }
 }

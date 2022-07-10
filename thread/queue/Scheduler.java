@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author zqw
  * @date 2021/9/30
  */
-public class Scheduler {
+class Scheduler {
 
     /**
      * fair ? Dual Queue : Dual Stack

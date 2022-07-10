@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
  * {@code unsafe.cpp#UNSAFE_ENTRY(Unsafe_CompareAndSwapInt)}
  * {@code atomic_linux_x86.inline.hpp#Atomic::cmpxchg; LOCK_IF_MP(mp)}
  * {@code os.hpp#is_MP()}
+ * 不使用反射拿到 {@link Unsafe}, 显示使用CAS, 请参考{@link java.lang.invoke.VarHandle}
  *
  * @author zqw
  * @date 2022/2/7

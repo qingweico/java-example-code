@@ -1,12 +1,13 @@
 package object;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author zqw
  * @date 2021/11/17
  */
-public class Student {
+public class Student implements Serializable {
     String name;
     Integer score;
 
@@ -49,8 +50,7 @@ public class Student {
             return false;
         }
         Student student = (Student) o;
-        return Objects.equals(score, student.score) &&
-                Objects.equals(name, student.name);
+        return Objects.equals(score, student.score) && Objects.equals(name, student.name);
     }
 
     @Override

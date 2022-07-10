@@ -19,5 +19,5 @@ class DirectBuffer {
         ByteBuffer.allocateDirect(Constants.KB * 1024 * 200);
     }
     // JVM 退出时打印内存使用情况
-    // -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
+    // -XX:+UnlockDiagnosticVMOptions(解锁诊断参数) -XX:+PrintNMTStatistics
 }

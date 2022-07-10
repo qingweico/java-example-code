@@ -7,12 +7,12 @@ import java.util.*;
 /**
  * Apply generics to anonymous inner classes
  *
- * @author:qiming
- * @date: 2021/4/10
+ * @author zqw
+ * @date 2021/4/10
  */
 
 // A very simple bank teller simulation
-public class BankTeller {
+class BankTeller {
     public static void serve(Teller t, Customer c) {
         System.out.println(t + " serve " + c);
     }
@@ -41,16 +41,11 @@ class Customer {
     }
 
     public String toString() {
-        return "Customer: " + id;
+        return "Customer: " + id();
     }
 
     public static Generator<Customer> generator() {
-        return new Generator<Customer>() {
-            @Override
-            public Customer next() {
-                return new Customer();
-            }
-        };
+        return Customer::new;
     }
 }
 

@@ -5,10 +5,12 @@ import thinking.genericity.Holder;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/20
+ * 通配符 ?
+ *
+ * @author zqw
+ * @date 2021/1/20
  */
-public class CaptureConversion {
+class CaptureConversion {
     static <T> void f1(Holder<T> holder) {
         T t = holder.get();
         print(t.getClass().getSimpleName());
@@ -19,8 +21,10 @@ public class CaptureConversion {
         f1(holder);
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public static void main(String[] args) {
-        Holder raw = new Holder<Integer>(1);
+        // 装箱 int -> Integer
+        Holder raw = new Holder<>(1);
         // Produces warning
         f1(raw);
         // No warning
@@ -33,8 +37,8 @@ public class CaptureConversion {
         // No Warning
         f2(rawBasic);
         // Upcast to Holder<?>, still figures it out
-        Holder<?> wildcard = new Holder<Double>(1.0);
+        // 装箱 double -> Double
+        Holder<?> wildcard = new Holder<>(1.0);
         f2(wildcard);
-
     }
 }

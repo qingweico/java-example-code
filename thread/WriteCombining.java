@@ -8,6 +8,7 @@ import util.Constants;
  * @author zqw
  * @date 2022/2/11
  */
+@SuppressWarnings("all")
 public class WriteCombining {
     private static final int ITERATIONS = Integer.MAX_VALUE;
     private static final int ITEMS = 1 << 24;

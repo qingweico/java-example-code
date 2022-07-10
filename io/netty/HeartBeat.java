@@ -24,18 +24,14 @@ public class HeartBeat {
 
         try {
             ServerBootstrap bootstrap = new ServerBootstrap().group(boosGroup, workerGroup);
-            bootstrap.channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel socketChannel) {
-                            ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast(new IdleStateHandler(1,
-                                    2,
-                                    3));
-                            pipeline.addLast(new HeartBeatEventHandler());
-                        }
-                    });
+            bootstrap.channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO)).childHandler(new ChannelInitializer<SocketChannel>() {
+                @Override
+                protected void initChannel(SocketChannel socketChannel) {
+                    ChannelPipeline pipeline = socketChannel.pipeline();
+                    pipeline.addLast(new IdleStateHandler(1, 2, 3));
+                    pipeline.addLast(new HeartBeatEventHandler());
+                }
+            });
             ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
@@ -53,10 +49,17 @@ public class HeartBeat {
                 IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
                 String eventType = null;
                 switch (idleStateEvent.state()) {
-                    case READER_IDLE -> eventType = "read idle";
-                    case WRITER_IDLE -> eventType = "write idle";
-                    case ALL_IDLE -> eventType = "read_write idle";
-                    default -> System.err.println("unknown event");
+                    case READER_IDLE:
+                        eventType = "read idle";
+                        break;
+                    case WRITER_IDLE:
+                        eventType = "write idle";
+                        break;
+                    case ALL_IDLE:
+                        eventType = "read_write idle";
+                        break;
+                    default:
+                        System.err.println("unknown event");
                 }
                 System.out.println(ctx.channel().remoteAddress() + ": " + eventType);
             }

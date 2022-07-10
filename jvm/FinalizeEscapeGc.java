@@ -7,12 +7,13 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/3/31
  */
-public class FinalizeEscapeGc {
+class FinalizeEscapeGc {
     public static FinalizeEscapeGc SAVE_HOOK = null;
 
     public void isAlive() {
         print("yes, i am still alive");
     }
+    @SuppressWarnings("deprecation")
     @Override
     protected void finalize() throws Throwable {
         super.finalize();

@@ -3,10 +3,10 @@ package thinking.genericity;
 import java.awt.*;
 
 /**
- * @author:qiming
- * @date: 2021/1/12
+ * @author zqw
+ * @date 2021/1/12
  */
-public class BasicBounds {
+class BasicBounds {
     public static void main(String[] args) {
         Solid<Bounded> solid = new Solid<>(new Bounded());
         solid.color();

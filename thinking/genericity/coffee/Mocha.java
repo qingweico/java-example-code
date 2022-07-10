@@ -1,8 +1,9 @@
 package thinking.genericity.coffee;
 
 /**
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
-public class Mocha extends Coffee{}
+// 穆哈咖啡
+class Mocha extends Coffee{}
 

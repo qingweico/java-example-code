@@ -1,9 +1,11 @@
 package thinking.genericity;
 
 
+import java.util.Objects;
+
 /**
- * @author:qiming
- * @date: 2021/1/12
+ * @author zqw
+ * @date 2021/1/12
  */
 public class Holder<T> {
     private T value;
@@ -24,6 +26,8 @@ public class Holder<T> {
     }
 
     public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Holder)) return false;
         return value.equals(o);
     }
 

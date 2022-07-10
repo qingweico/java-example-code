@@ -11,6 +11,10 @@ import java.util.concurrent.atomic.LongAdder;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * @author zqw
+ * @date 2022/7/4
+ */
 public class StatisticsKeyCounts {
     private static final int LOOP_COUNT = 10000000;
     private static final int THREAD_COUNT = 10;

@@ -1,14 +1,14 @@
 package thinking.concurrency;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/16
+ * @author zqw
+ * @date 201/1/16
  */
 public class DaemonFromFactory implements Runnable {
 

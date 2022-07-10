@@ -9,7 +9,7 @@ import java.lang.ref.Cleaner;
  * @author zqw
  * @date 2021/4/1
  */
-public class Article8 {
+class Article8 {
     public static void main(String[] args) {
         // They do increase the chance that a finalization or cleanup will be executed,
         // but they do not guarantee that a finalization or cleanup will be executed.
@@ -31,6 +31,7 @@ class Room implements AutoCloseable {
     private static class State implements Runnable {
         // Number of junk piles in this room.
         int numJunkPiles;
+
         State(int numJunkPiles) {
             this.numJunkPiles = numJunkPiles;
         }
@@ -52,24 +53,31 @@ class Room implements AutoCloseable {
         cleanable = CLEANER.register(this, state);
 
     }
+
     @Override
     public void close() throws Exception {
         cleanable.clean();
     }
 }
+
 class Adult {
     public static void main(String[] args) throws Exception {
-        try(Room room = new Room(7)) {
+        try (Room room = new Room(7)) {
             room.close();
             System.out.println("GoodBye");
         }
     }
 }
+
 class Teenager {
     public static void main(String[] args) {
-        new Room(99);
-        // "Cleaning room" will not be printed if there is no System.GC().
-        System.gc();
-        System.out.println("Peace out");
+        try (Room room = new Room(99)) {
+            room.close();
+            // "Cleaning room" will not be printed if there is no System.GC().
+            System.gc();
+            System.out.println("Peace out");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

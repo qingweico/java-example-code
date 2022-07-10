@@ -3,6 +3,7 @@ package effective;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
@@ -22,28 +23,47 @@ class Article5 {
  * Inappropriate use of static utility - inflexible & untestable
  */
 class SpellChecker {
-    private static Lexicon dictionary;
-    private static ArrayList<String> suggestionLists;
-    static  {
+    private static final Lexicon dictionary;
+    private static final ArrayList<String> suggestionLists;
+
+    static {
         dictionary = new Lexicon();
         suggestionLists = new ArrayList<>();
     }
+
     /**
      * Non-instantiable
      */
     private SpellChecker() {
     }
 
+    public static ArrayList<String> getSuggestionLists() {
+        return suggestionLists;
+    }
+
+    public static Lexicon getDictionary() {
+        return dictionary;
+    }
+
+
     public static boolean isValid(String word) {
         return word.trim().matches("([a-zA-Z]+)");
     }
 
-    public static List<String> suggestions(String typo) {
-        return new ArrayList<>();
+    public static void suggestions(String typo) {
+        suggestionLists.add(typo);
     }
 
     public static void main(String[] args) {
-        String word  = "speak";
+        Scanner scanner = new Scanner(System.in);
+        while (!scanner.hasNext("#")) {
+            String word = scanner.nextLine();
+            boolean valid = isValid(word);
+            if (!valid) {
+                SpellChecker.suggestions(word);
+            }
+        }
+        System.out.println(SpellChecker.getSuggestionLists());
     }
 
 }
@@ -51,6 +71,7 @@ class SpellChecker {
 /**
  * Inappropriate use of singleton - inflexible & untestable
  */
+@SuppressWarnings("unused")
 class SpellCheckerUsingSingleton {
     private final Lexicon dictionary = null;
 
@@ -73,7 +94,7 @@ class SpellCheckerUsingSingleton {
 }
 
 class Lexicon {
-    private static List<String> data = new ArrayList<>();
+
 }
 
 // Static utility classes and Singleton classes are not appropriate
@@ -83,6 +104,7 @@ class Lexicon {
 /**
  * Dependency injection providers flexibility and testability
  */
+@SuppressWarnings("unused")
 class SpellCheckerUsingDi {
     private final Lexicon dictionary;
 

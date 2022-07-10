@@ -27,6 +27,7 @@ class EscapeAnalysis {
     }
 
     public static void alloc() {
+        @SuppressWarnings("unused")
         Student student = new Student();
     }
 }

@@ -7,9 +7,14 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
+/**
+ * @author zqw
+ * @date 2022/6/29
+ */
 class ObjectInputStreamImpl extends ObjectInputStream {
 
-    private static final Student student;
+    static Student student;
+
     static {
         student = new Student();
         student.setName(UUID.randomUUID().toString());
@@ -20,7 +25,7 @@ class ObjectInputStreamImpl extends ObjectInputStream {
         super(in);
     }
 
-    protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+    protected Class<?> resolveClass(ObjectStreamClass desc) throws ClassNotFoundException, IOException {
         // 通过校验反序列化对象的名称来控制反序列化对象
         if (!desc.getName().equals(User.class.getName())) {
             throw new InvalidClassException("Unauthorized deserialization attempt", desc.getName());
@@ -37,7 +42,7 @@ class ObjectInputStreamImpl extends ObjectInputStream {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
-            // Java 序列化后的流会变大 影响系统的吞吐量
+            // Java 序列化后的流会变大;影响系统的吞吐量
             ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(student);
         } catch (IOException ex) {

@@ -1,7 +1,5 @@
 package geek.serialize;
 
-import java.util.ArrayList;
-
 /**
  * transient Object[] elementData;
  * ----------------------  关于elementData属性被transient关键字修饰  ----------------------
@@ -16,6 +14,6 @@ import java.util.ArrayList;
  */
 class ArrayListSerialize {
     public static void main(String[] args) {
-        System.out.println(new ArrayList<>());
+        // ...
     }
 }

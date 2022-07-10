@@ -9,20 +9,20 @@ package design.decorator;
  */
 public class Decorator {
     public static void main(String[] args) {
-        Reader reader = new FileReader();
+        AbstractReader reader = new FileReader();
         BufferedReader br = new BufferedReader(reader);
         br.close();
     }
 }
 
-abstract class Reader {
+abstract class AbstractReader {
     /**
      * {@link java.io.Reader#close()}
      */
     public abstract void close();
 }
 
-class FileReader extends Reader {
+class FileReader extends AbstractReader {
 
     @Override
     public void close() {
@@ -31,10 +31,10 @@ class FileReader extends Reader {
     }
 }
 
-class BufferedReader extends Reader {
-    Reader reader;
+class BufferedReader extends AbstractReader {
+    AbstractReader reader;
 
-    public BufferedReader(Reader reader) {
+    public BufferedReader(AbstractReader reader) {
         this.reader = reader;
     }
 

@@ -8,8 +8,8 @@ import java.util.Random;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
 // Generate different types of Coffee
 public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coffee> {
@@ -36,7 +36,7 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
     @SuppressWarnings("unchecked")
     public Coffee next() {
         try {
-            return (Coffee) types[rand.nextInt(types.length)].getConstructor().newInstance();
+            return (Coffee) types[rand.nextInt(types.length)].getDeclaredConstructor().newInstance();
             // Report programmer errors at run time
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -72,8 +72,7 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
             print(gen.next());
         }
         System.out.println();
-        // TODO
-        CoffeeGenerator coffeeGenerator = new CoffeeGenerator(5);
+        CoffeeGenerator<thinking.genericity.coffee.Coffee > coffeeGenerator = new CoffeeGenerator<>(5);
         coffeeGenerator.forEach(System.out::println);
     }
 

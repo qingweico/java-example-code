@@ -3,8 +3,8 @@ package jvm;
 import static util.Print.print;
 
 /**
- * java -Xint -version: Enable Explain Execution Mode
- * java -Xcomp -version: Enable compilation execution mode
+ * {@code java -Xint -version}: Enable Explain Execution Mode
+ * {@code java -Xcomp -version}: Enable compilation execution mode
  *
  * @author zqw
  * @date 2021/1/18

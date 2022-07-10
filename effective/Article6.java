@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
  * @author zqw
  * @date 2021/3/25
  */
+@SuppressWarnings("all")
 class Article6 {
     public static void main(String[] args) {
 
@@ -67,5 +68,7 @@ class RomanNumeral {
         set.remove(1);
         // {2=2, 3=3}
         System.out.println(map);
+        System.out.println(isRomanNumeral("XV"));
+        System.out.println(isRomanNumeral("III"));
     }
 }

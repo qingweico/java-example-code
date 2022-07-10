@@ -55,7 +55,7 @@
 			<artifactId>jmh-core</artifactId>
 			<version>1.33</version>
 		</dependency>
-		<!-- JSON工具 包括FastJson Jackson Gson -->
+		<!-- JSON工具 包括FastJson Jackson Gson等等 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -148,7 +148,7 @@
 			<artifactId>redisson</artifactId>
 			<version>3.16.8</version>
 		</dependency>
-		<!-- 协程 相关 -->
+		<!-- 协程相关 -->
 		<dependency>
 			<groupId>co.paralleluniverse</groupId>
 			<artifactId>quasar-core</artifactId>
@@ -158,6 +158,23 @@
 			<groupId>org.db4j</groupId>
 			<artifactId>kilim</artifactId>
 			<version>2.0.2</version>
+		</dependency>
+		<!-- JTA -->
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<!-- DOM4J -->
+		<dependency>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
 	<build>

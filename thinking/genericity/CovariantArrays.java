@@ -3,31 +3,37 @@ package thinking.genericity;
 import java.util.Arrays;
 
 /**
- * @author:qiming
- * @date: 2021/1/12
+ * @author zqw
+ * @date 2021/1/12
  */
-public class CovariantArrays {
+// Storing element of type 'thinking.genericity.Orange'
+// to array of 'thinking.genericity.Apple' elements will
+// produce 'ArrayStoreException'
+@SuppressWarnings("all")
+class CovariantArrays {
     public static void main(String[] args) {
         Fruit[] fruits = new Apple[10];
-        fruits[0] = new Apple();    //it's ok
-        fruits[1] = new Jonathan(); //it's ok
+        // it's ok
+        fruits[0] = new Apple();
+        // it's ok
+        fruits[1] = new Jonathan();
         try {
             // Compiler allows you to add Fruit.
+            // ArrayStoreException
             fruits[0] = new Fruit();
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
         try {
             // Compiler allows you to add Orange.
+            // ArrayStoreException
             fruits[0] = new Orange();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         // However, the array mechanism at runtime knows that it is dealing with an
         // Apple type and therefore throws an exception when a heterogeneous type
         // is placed on the array.
-
 
         System.out.println(Arrays.toString(fruits));
     }

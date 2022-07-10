@@ -6,7 +6,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/2/1
  */
-public class ClassInit {
+class ClassInit {
 
     private static int num = 1;
 

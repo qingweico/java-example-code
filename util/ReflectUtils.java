@@ -9,6 +9,11 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.*;
 import java.util.Date;
 
+/**
+ * ---------------------------------- 反射工具类 ----------------------------------
+ * 反射调用会带来不少的性能开销 原因有四个:
+ * 变长参数方法导致的Object数组,基本类型的拆箱和装箱,方法内联,以及本地方法调用
+ */
 @Slf4j
 public class ReflectUtils {
 

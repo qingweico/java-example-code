@@ -21,6 +21,8 @@ import java.util.stream.LongStream;
  * 因此有可能会导致某次读无法马上获取写入的数据
  * {@link Hashtable}
  * {@link HashMap}
+ * @author zqw
+ * @date 2022/7/4
  */
 @Slf4j
 public class ThreadSafeMap {
