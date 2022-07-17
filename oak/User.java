@@ -1,7 +1,6 @@
 package oak;
 
 import com.google.common.base.MoreObjects;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -15,17 +14,24 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Accessors(chain = true)
-@AllArgsConstructor
 public class User implements Serializable {
-    private Integer id;
+    private Long id;
     private String username;
     private boolean isVip;
 
-    public User(Integer id) {
+    private Integer instantiation = 10;
+
+    public User(Long id) {
         this.id = id;
     }
 
     public User() {
+    }
+
+    public User(Long id, String username, boolean isVip) {
+        this.id = id;
+        this.username = username;
+        this.isVip = isVip;
     }
 
     @Override
@@ -39,7 +45,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return id;
+        return (int) (id >>> 16);
     }
 
     @Override

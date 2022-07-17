@@ -18,7 +18,7 @@ public class BasicGenerator<T> implements Generator<T> {
     @Override
     public T next() {
         try {
-            // Assume type is a pubic class
+            // Assume type is a public class
             return type.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException(e);

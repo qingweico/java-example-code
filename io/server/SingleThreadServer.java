@@ -17,6 +17,7 @@ public class SingleThreadServer extends Thread {
     private final ServerSocket serverSocket;
 
     public SingleThreadServer(int port) throws IOException {
+        // 端口为0 则表示自动绑定一个空闲端口
         serverSocket = new ServerSocket(port);
         serverSocket.setSoTimeout(100000);
     }

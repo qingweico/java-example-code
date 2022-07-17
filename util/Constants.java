@@ -41,4 +41,11 @@ public interface Constants {
 
     String LOOP_BACK = "127.0.0.1";
 
+    // field type
+    String string = "String";
+    String bool = "boolean";
+    String integer = "integer";
+    String lon = "long";
+
+
 }

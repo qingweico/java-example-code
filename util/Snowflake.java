@@ -5,11 +5,11 @@ package util;
  * @date 2022/7/3
  */
 public class Snowflake {
-    public static final int NODE_SHIFT = 10;
-    public static final int SEQ_SHIFT = 12;
+    private static final int NODE_SHIFT = 10;
+    private static final int SEQ_SHIFT = 12;
 
-    public static final short MAX_NODE = 1024;
-    public static final short MAX_SEQUENCE = 4096;
+    private static final short MAX_NODE = 1024;
+    private static final short MAX_SEQUENCE = 4096;
 
     private short sequence;
     private long referenceTime;

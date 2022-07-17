@@ -13,7 +13,7 @@ import static util.Print.print;
  * @date 2021/2/24
  */
 
-public class LruLinkedHashMap {
+class LruLinkedHashMap {
     public static void main(String[] args) {
         LinkedHashMap<Integer, String> linkedMap = new LinkedHashMap<>(
                 new CountingMapData(9));

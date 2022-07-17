@@ -12,12 +12,13 @@ import java.util.concurrent.ExecutorService;
 /**
  * 基于 Redisson 的 Redis 分布式锁
  * {@code 理解Paxos;Raft一致性算法}
+ *
  * @author zqw
  * @date 2022/3/13
  */
-class RedissonLock {
-    static int inventory = 5;
-    static int THREAD_COUNT = Constants.TEN;
+public class RedissonLock {
+    static int inventory = 100;
+    static int THREAD_COUNT = Constants.HUNDRED;
     private static final String REDIS_SERVER = "redis://119.29.35.129:6379";
     private static final String REDIS_PASSWORD = "990712";
     private static final String REDIS_LOCK_KEY = "redis_lock";

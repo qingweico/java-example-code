@@ -20,8 +20,8 @@ import java.util.Set;
 public class LombokCallSuper {
     public static void main(String[] args) {
         String address = RandomDataGenerator.randomAddress();
-        SuperUser s1 = new SuperUser(1, "s1", false, address);
-        SuperUser s2 = new SuperUser(2, "s2", true, address);
+        SuperUser s1 = new SuperUser(1L, "s1", false, address);
+        SuperUser s2 = new SuperUser(2L, "s2", true, address);
         // true
         // @EqualsAndHashCode(callSuper = false) 默认为false; 不会调用父类的属性
         log.info("s1.equals(s2): {}", s1.equals(s2));
@@ -40,7 +40,7 @@ public class LombokCallSuper {
 class SuperUser extends User {
     private String address;
 
-    public SuperUser(Integer id, String name, boolean isVip, String address) {
+    public SuperUser(Long id, String name, boolean isVip, String address) {
         super(id, name, isVip);
         this.address = address;
     }

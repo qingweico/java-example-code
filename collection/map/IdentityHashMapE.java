@@ -2,6 +2,7 @@ package collection.map;
 
 import lombok.extern.slf4j.Slf4j;
 import oak.User;
+import util.ObjectFactory;
 import util.RandomDataGenerator;
 
 import java.util.IdentityHashMap;
@@ -14,10 +15,9 @@ import java.util.IdentityHashMap;
  * @date 2022/6/25
  */
 @Slf4j
-public class IdentityHashMapE {
+class IdentityHashMapE {
     public static void main(String[] args) {
-        User u1 = new User(1);
-        u1.setUsername(RandomDataGenerator.randomName());
+        User u1 = ObjectFactory.create(User.class, true);
         log.info("u1 hashCode: {}", u1.hashCode());
         log.info("u1 identityHashCode: {}", System.identityHashCode(u1));
         // Object::hashCode 和 System.identityHashCode() 不一致
@@ -28,13 +28,13 @@ public class IdentityHashMapE {
 
         // User Map
         IdentityHashMap<User, String> userMap = new IdentityHashMap<>();
-        User u2 = new User(1);
-        User u3 = new User(1);
+        User u2 = new User(1L);
+        User u3 = new User(1L);
         userMap.put(u2, "u2");
         userMap.put(u3, "u3");
         log.info("userMap size: {}", userMap.size());
         // null
-        log.info("userMap.get(new User(1)): {}", userMap.get(new User(1)));
+        log.info("userMap.get(new User(1)): {}", userMap.get(new User(1L)));
         // u2
         // IdentityHashMap 使用 == 比较key值是否相等 即key的Object::hashCode
         // 无论key是否重写了Object::hashCode 所以IdentityHashMap根据

@@ -9,6 +9,7 @@ import java.nio.IntBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.AsynchronousFileChannel;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -201,5 +202,17 @@ public class BufferTest {
         MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 2);
         mappedByteBuffer.put(0, (byte) 97);
         randomAccessFile.close();
+    }
+
+    @Test
+    public void fixed() {
+        // heap buffers
+        System.out.println(new String(Charset.defaultCharset().encode("Hello World").array()));
+    }
+
+    @Test
+    public void oom() {
+        // java.nio.Bits#reserverMemory 中 System.gc() 被显示地调用
+        // VM: -XX:+DisableExplicitGC 禁用显示 GC 比如 System.gc()
     }
 }

@@ -14,6 +14,6 @@ public class CollectionData<T> extends ArrayList<T> {
     }
 
     public static <T> CollectionData<T> list(Generator<T> gen, int quantity) {
-        return new CollectionData<T>(gen, quantity);
+        return new CollectionData<>(gen, quantity);
     }
 }

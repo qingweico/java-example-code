@@ -7,7 +7,8 @@ import java.util.concurrent.atomic.LongAdder;
 /**
  * {@since JDK1.8} Java 提供了一个新的原子类 {@link LongAdder}
  * LongAdder在高并发场景下会比 {@link AtomicInteger} 和 {@link AtomicLong} 性能更好
- * 代价就是消耗更多的内存空间
+ * 代价就是消耗更多的内存空间 利用了{@see java.util.concurrent.atomic.Striped64}内部
+ * 的复杂逻辑
  * -------------------------------------------------------
  * {@code LongAdder} 的原理就是降低操作共享变量的并发数,也就是将对单一变量的操作压力分散到多个变量上
  * 其内部由一个 base 变量和一个 cell[] 数组组成,当只有一个写线程,没有竞争的情况下,LongAdder会直接使用 base

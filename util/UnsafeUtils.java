@@ -1,4 +1,4 @@
-package org.confucius.commons.lang.misc;
+package util;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.reflect.FieldUtils;

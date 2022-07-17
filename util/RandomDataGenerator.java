@@ -45,7 +45,7 @@ public class RandomDataGenerator {
     }
 
     public static int randomInt() {
-        return R.nextInt();
+        return R.nextInt(100);
     }
 
     public static int randomInt(int bound) {
@@ -58,5 +58,9 @@ public class RandomDataGenerator {
 
     public static int safeRandomInt(int bound) {
         return TLR.nextInt(bound);
+    }
+
+    public static boolean tf() {
+        return R.nextBoolean();
     }
 }

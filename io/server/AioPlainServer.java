@@ -12,6 +12,8 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * -------------------------------- 基于 AIO 线程模型 --------------------------------
+ * Linux 上 AIO 的实现依赖于 {@code epoll} {@see sun.nio.ch.EPollSelectorImpl}
+ * Windows 上 NIO2 模式则是依赖于 {@code iocp} {@see sun.nio.ch.Iocp}
  *
  * @author zqw
  * @date 2021/10/18

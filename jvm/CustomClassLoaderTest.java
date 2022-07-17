@@ -116,6 +116,7 @@ public class CustomClassLoaderTest {
                 out.flush();
             } catch (SocketTimeoutException e) {
                 System.out.println("socket time out!");
+                serverSocket.close();
                 break;
             }
         }

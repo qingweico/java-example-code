@@ -10,6 +10,8 @@ import java.util.concurrent.ExecutorService;
  * <p>
  * principle: Bytecode instructions can be exchanged on the premise that
  * it does not affect the final consistency of the single thread.
+ * class文件中前后的字节码,并不意味着前者一定在后者之前执行;如果后者没有观测前者的运行结果,即后者
+ * 没有数据依赖于前者,那么它们可能会被重排序
  *
  * @author zqw
  * @date 2021/1/30

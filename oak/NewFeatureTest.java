@@ -46,6 +46,9 @@ public class NewFeatureTest {
      */
     @Test
     public void jdk9() throws FileNotFoundException {
+        // of静态工厂方法创建实例(因为相当一部分集合实例都是容量有限的,而且在生命周期中并不会修改)
+        // 使用特定参数长度而不是使用可变长参数 因为
+        // JVM 在处理变长参数的时候会有明显的额外开销
         Set<Integer> set = Set.of(1, 2, 3);
         System.out.println(set);
 
