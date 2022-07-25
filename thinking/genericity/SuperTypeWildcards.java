@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author:qiming
- * @date: 2021/1/12
+ * @author zqw
+ * @date 2021/1/12
  */
-public class SuperTypeWildcards {
+class SuperTypeWildcards {
     static void writeTo(List<? super Apple> apples) {
         apples.add(new Apple());
         apples.add(new Jonathan());

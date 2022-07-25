@@ -272,7 +272,7 @@ public class NettyServerTest {
 
     static class ProtoBufClientHandler extends ChannelInboundHandlerAdapter {
         @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        public void channelActive(ChannelHandlerContext ctx) {
             StudentObject.Student student = StudentObject.Student
                     .newBuilder()
                     .setName(new Faker().name().fullName())
@@ -312,7 +312,7 @@ public class NettyServerTest {
         }
 
         @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        public void channelActive(ChannelHandlerContext ctx) {
             System.out.println("ClientCodecHandler");
             ctx.channel().writeAndFlush(123456L);
         }
@@ -326,7 +326,7 @@ public class NettyServerTest {
 
     static class NettyClientHandler extends ChannelInboundHandlerAdapter {
         @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        public void channelActive(ChannelHandlerContext ctx) {
             ctx.writeAndFlush(Unpooled.copiedBuffer(UUID.randomUUID().toString(), CharsetUtil.UTF_8));
         }
 

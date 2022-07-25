@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author zqw
  * @date 2021/3/5
  */
-public class Article28<E> {
+class Article28<E> {
     // First, Arrays are covariant, if Sub is a subtype of Super, then the type Sub[] is
     // a subtype of Super[]; In contrast, generics are mutable, and for any two different
     // types, Type1 and Type2, List<Type1> neither List<Type2> subtype of, also not

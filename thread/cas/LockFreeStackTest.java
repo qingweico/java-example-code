@@ -151,6 +151,7 @@ public class LockFreeStackTest<T> {
 
         System.out.format("counter = %d\n", counter.get());
         System.out.format("casCount = %d", casCount.get());
+        pool.shutdown();
     }
 
 }

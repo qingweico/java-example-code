@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
- * url: https://github.com/jasongoodwin/better-java-monads/blob/master/src/main/java/com/jasongoodwin/monads/Try.java
+ * url: <a href="https://github.com/jasongoodwin/better-java-monads/blob/master/src/main/java/com/jasongoodwin/monads/Try.java">...</a>
  * Monadic Try type.
  * Represents a result type that could have succeeded with type T or failed with a Throwable.
  * Originally was Exception but due to seeing issues with e.g. play with checked Throwable,

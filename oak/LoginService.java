@@ -7,6 +7,8 @@ import java.util.Date;
 import static util.Print.print;
 
 /**
+ * --------------- Functional Interface ---------------
+ *
  * @author zqw
  * @date 2021/2/23
  */

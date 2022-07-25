@@ -1,4 +1,4 @@
-package tools;
+package tools.lombok;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package tools;
+package tools.attach;
 
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;

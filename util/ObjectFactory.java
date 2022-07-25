@@ -1,5 +1,6 @@
 package util;
 
+import annotation.Ignore;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Constructor;
@@ -45,6 +46,10 @@ public class ObjectFactory {
             if (!field.canAccess(instance)) {
                 field.setAccessible(true);
             }
+            // 忽略掉@Ignore注解标注的属性
+            if (field.getAnnotation(Ignore.class) != null) {
+                continue;
+            }
             try {
                 if (Constants.bool.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.tf());
@@ -57,6 +62,9 @@ public class ObjectFactory {
                 }
                 if (Constants.lon.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, SnowflakeIdWorker.nextId());
+                }
+                if (Constants.date.equalsIgnoreCase(field.getType().getSimpleName())) {
+                    field.set(instance, RandomDataGenerator.randomDate());
                 }
             } catch (IllegalAccessException e) {
                 log.error("populate {} exception!, {}", instance, e.getMessage());

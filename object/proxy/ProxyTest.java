@@ -1,6 +1,9 @@
 package object.proxy;
 
 import object.proxy.aop.ObjectFactory;
+import object.proxy.aspect.Aspect;
+import object.proxy.service.IOrder;
+import object.proxy.service.Order;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -11,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class ProxyTest {
     @Test
-    public void proxy() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void proxy() throws Exception {
         IOrder order = Aspect.getProxy(Order.class, "object.proxy.TimeUsageAspect");
         order.pay();
         order.show();

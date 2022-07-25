@@ -14,7 +14,7 @@ import java.util.Set;
  * @author zqw
  * @date 2021/1/28
  */
-public class Article27 {
+class Article27 {
     /**
      * The size of the ArrayList (the number of elements it contains).
      *
@@ -40,8 +40,9 @@ public class Article27 {
         }
 
         System.arraycopy(elementData, 0, a, 0, size);
-        if (a.length > size)
+        if (a.length > size) {
             a[size] = null;
+        }
         return a;
     }
 

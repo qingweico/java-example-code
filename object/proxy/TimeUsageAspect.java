@@ -1,5 +1,7 @@
 package object.proxy;
 
+import object.proxy.aspect.Aspect;
+
 /**
  * @author zqw
  * @date 2021/9/28

@@ -1,8 +1,7 @@
-package object.proxy;
+package object.proxy.aspect;
 
 import util.monad.Try;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -25,9 +24,15 @@ public interface Aspect {
 
     /**
      * Generate a proxy object
+     *
+     * @param cls     被代理对象类型
+     * @param aspects 代理对象全限定类名
+     * @param <T>     被代理对象Class类型
+     * @return T 代理对象
+     * @throws Exception Exception
      */
     @SuppressWarnings("unchecked")
-    static <T> T getProxy(Class<T> cls, String... aspects) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    static <T> T getProxy(Class<T> cls, String... aspects) throws Exception {
         var aspectInstances = Arrays.stream(aspects).map(name -> Try.ofFailable(() -> {
             var cl = Class.forName(name);
             return (Aspect) cl.getDeclaredConstructor().newInstance();

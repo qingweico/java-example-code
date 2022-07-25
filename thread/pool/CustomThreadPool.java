@@ -71,7 +71,40 @@ public class CustomThreadPool {
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(blockQueueSize),
                 CustomThreadFactory.guavaThreadFactory(),
-                new CustomRejectedExecutionHandler());
+                new CustomRejectedExecutionHandler()) {
+            long start = 0;
+            long ret = 0;
+            long maxExecutionTime = 0;
+            long minExecutionTime = -1;
+            double totalExecutionTime = 0.0;
+            int totalExecutionCount = 0;
+
+            @Override
+            protected void beforeExecute(Thread t, Runnable r) {
+                start = System.currentTimeMillis();
+            }
+
+            @Override
+            protected void afterExecute(Runnable r, Throwable t) {
+                ret = System.currentTimeMillis() - start;
+                totalExecutionTime += ret;
+                totalExecutionCount++;
+                if (minExecutionTime < ret) {
+                    minExecutionTime = ret;
+                }
+                if (ret > maxExecutionTime) {
+                    maxExecutionTime = ret;
+                }
+            }
+
+            @Override
+            protected void terminated() {
+                super.terminated();
+                log.info("线程池中任务的最大执行时间为: {}ms", maxExecutionTime);
+                log.info("线程池中任务的最小执行时间为: {}ms", minExecutionTime);
+                log.info("线程池中任务的平均执行时间为: {}ms", totalExecutionTime / totalExecutionCount);
+            }
+        };
         if (preStartAllCore) {
             int coreThreads = executor.prestartAllCoreThreads();
             log.info("{} Core Thread are all started", coreThreads);
@@ -88,19 +121,30 @@ public class CustomThreadPool {
     public static ExecutorService newFixedThreadPool(int nThreads) {
         return newFixedThreadPool(nThreads, nThreads, nThreads, false);
     }
+
     public static ExecutorService newFixedThreadPool(int nThreads, boolean preStartAllCore) {
         return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore);
     }
 
+    /**
+     * 线程池的监控
+     *
+     * @param executor {@link ThreadPoolExecutor}
+     */
     public static void monitor(ThreadPoolExecutor executor) {
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             log.info("------------------------------");
+            // 线程池的线程数量
             log.info("Pool Size: {}", executor.getPoolSize());
             log.info("Number of tasks in Queue: {}", executor.getQueue().size());
+            // 获取活动中的线程数
             log.info("Active Threads: {}", executor.getActiveCount());
+            // 线程池在运行过程中完成的任务数量
             log.info("Number of tasks completed: {}", executor.getCompletedTaskCount());
+            // 线程池需要执行的任务数量
             log.info("Number of tasks total: {}", executor.getTaskCount());
+            // 线程池里曾经创建过的最大线程数量;通过这个数量可以知道线程池是否曾经满过
             log.info("Number of largest pool: {}", executor.getLargestPoolSize());
             log.info("------------------------------");
             if (executor.isTerminated()) {

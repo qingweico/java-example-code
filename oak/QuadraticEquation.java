@@ -3,6 +3,8 @@ package oak;
 import java.util.Scanner;
 
 /**
+ * 二元一次方程组
+ *
  * @author zqw
  * @date 2022/5/7
  */
@@ -39,12 +41,12 @@ public class QuadraticEquation {
         quadraticEquation.a = scanner.nextDouble();
         quadraticEquation.b = scanner.nextDouble();
         quadraticEquation.c = scanner.nextDouble();
-        if(quadraticEquation.getDiscriminant() == 0) {
+        if (quadraticEquation.getDiscriminant() == 0) {
             System.out.println("The equation has one root " + quadraticEquation.getRoot1());
-        }else if(quadraticEquation.getRoot1() == 0) {
+        } else if (quadraticEquation.getRoot1() == 0) {
             System.out.println("The equation has no real roots");
-        }else {
-            System.out.println("The equation has two roots " + quadraticEquation.getRoot1() +  " and " + quadraticEquation.getRoot2());
+        } else {
+            System.out.println("The equation has two roots " + quadraticEquation.getRoot1() + " and " + quadraticEquation.getRoot2());
         }
         System.out.println("time: " + (System.currentTimeMillis() - startTime) + "ms");
     }

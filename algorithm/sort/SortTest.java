@@ -152,19 +152,19 @@ public class SortTest {
             var rawInstance = constructor.newInstance();
             var start = System.nanoTime();
             if (rawInstance instanceof IMutableSorter) {
-                var unordered = Tools.gen(n);
+                var unordered = Tools.genList(n);
                 var instance = (IMutableSorter) rawInstance;
                 unordered = instance.sort(unordered);
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(unordered);
             } else if (rawInstance instanceof MutableSorter) {
-                var unordered = Tools.gen(n).stream().mapToInt(x -> x).toArray();
+                var unordered = Tools.genList(n).stream().mapToInt(x -> x).toArray();
                 var instance = (MutableSorter) rawInstance;
                 instance.sort(unordered);
                 printf(rawInstance.getClass().getSimpleName() + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
                 Tools.assertSorted(unordered);
             } else {
-                int[] raw = Tools.gen(n).stream().mapToInt(x -> x).toArray();
+                int[] raw = Tools.genList(n).stream().mapToInt(x -> x).toArray();
                 Integer[] unordered = Arrays.stream(raw).boxed().toArray(Integer[]::new);
                 rawInstance.getClass().getMethod("sort",
                         Comparable[].class).invoke(rawInstance, (Object) unordered);

@@ -10,9 +10,12 @@ import java.io.*;
  * @author zqw
  * @date 2021/4/2
  */
+@SuppressWarnings("all")
 class Article9 {
 
     private static final int BUFFER_SIZE = Constants.KB;
+
+    private static final String PATH = "db.properties";
 
     /**
      * try-finally - No longer the best way to close resources!
@@ -53,14 +56,19 @@ class Article9 {
      * @param path       the resource path
      * @param defaultVal the default value when exception
      * @return The first line of file
-     * @throws IOException An {@code IOException} may be thrown
      */
-    static String firstLineOfFile(String path, String defaultVal) throws IOException {
+    static String firstLineOfFile(String path, String defaultVal) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             return br.readLine();
         } catch (IOException e) {
             return defaultVal;
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        System.out.println(firstLineOfFile(PATH));
+        copy(PATH, "copy_db.properties");
+        System.out.println(firstLineOfFile(PATH, "welcome!"));
     }
 
 

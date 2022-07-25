@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Date;
+
 /**
  * Global Constants
  *
@@ -46,6 +48,7 @@ public interface Constants {
     String bool = "boolean";
     String integer = "integer";
     String lon = "long";
+    String date = "Date";
 
 
 }

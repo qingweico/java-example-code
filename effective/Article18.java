@@ -5,8 +5,8 @@ import java.util.*;
 /**
  * 复合优先于继承
  *
- * @author:qiming
- * @date: 2021/3/3
+ * @author zqw
+ * @date 2021/3/3
  */
 public class Article18 {
 }

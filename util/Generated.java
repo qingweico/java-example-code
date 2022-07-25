@@ -1,5 +1,7 @@
 package util;
 
+import util.collection.CollectionData;
+
 /**
  * @author zqw
  * @date 2021/4/8

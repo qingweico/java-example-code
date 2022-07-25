@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EmptyStackException;
@@ -10,6 +12,7 @@ import java.util.EmptyStackException;
  * @author zqw
  * @date 2021/3/26
  */
+@Pass
 class Article7 {
     public static void main(String[] args) {
 
@@ -87,6 +90,8 @@ class Stack<E> {
         }
     }
 
+    // 频繁向外读取内容的 使用extends(生产者)
+    // 经常向里插入的 使用super(消费者)
     // PECS : producer-extends; consumer-super
 
     public boolean isEmpty() {

@@ -9,14 +9,15 @@ import java.lang.reflect.Field;
  * @date 2022/7/10
  */
 class AlterString {
-    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
-        String s = "a";
-        Field field = s.getClass().getDeclaredField("value");
-        // 因为 String 类中 value 字段是 private
+    public static void main(String[] args) throws Exception {
+        var str = new Object() {
+            // remove final
+            final String value = "a";
+        };
+        Field field = str.getClass().getDeclaredField("value");
         field.setAccessible(true);
-        // TODO JDK11 报错 final
-        field.set(s, "b".toCharArray());
+        field.set(str, "b");
         // b
-        System.out.println(s);
+        System.out.println(str.value);
     }
 }

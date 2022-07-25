@@ -1,7 +1,10 @@
 package util;
 
 import com.github.javafaker.Faker;
+import org.apache.commons.math3.random.RandomGenerator;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -52,6 +55,16 @@ public class RandomDataGenerator {
         return R.nextInt(bound);
     }
 
+
+    public static Date randomDate() {
+        Calendar calendar = Calendar.getInstance();
+        long currentTimeMillis = System.currentTimeMillis();
+        calendar.setTimeInMillis(currentTimeMillis);
+        // TODO 生成随机日期
+        calendar.getTime();
+        return new Date();
+    }
+
     public static int safeRandomInt() {
         return TLR.nextInt();
     }
@@ -62,5 +75,9 @@ public class RandomDataGenerator {
 
     public static boolean tf() {
         return R.nextBoolean();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(randomDate());
     }
 }

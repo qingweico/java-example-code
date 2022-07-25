@@ -6,7 +6,7 @@ package object;
  * @author zqw
  * @date 2021/1/2
  */
-public class Void {
+class Void {
     private static final int MIN_RANGE = 0;
     private static final int MAX_RANGE = 10;
 

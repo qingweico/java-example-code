@@ -1,7 +1,7 @@
 package thinking.exception;
 
 /**
- * 测试异常模式和正常模式的性能
+ * --------------- 测试异常模式和正常模式的性能 ---------------
  * @author zqw
  * @date 2021/10/17
  */
@@ -24,11 +24,11 @@ public class ExceptionPerformance {
    public static void main(String[] args) {
       var start = System.nanoTime();
       testException(null);
-      System.out.println("testException time: " + (System.nanoTime() - start));
+      System.out.println("testException time: " + (System.nanoTime() - start) + "ms");
 
 
       start = System.nanoTime();
       testIf(null);
-      System.out.println("testIf time: " + (System.nanoTime() - start));
+      System.out.println("testIf time: " + (System.nanoTime() - start) + "ms");
    }
 }

@@ -8,9 +8,10 @@ import static util.Print.err;
 import static util.Print.print;
 
 /**
+ * --------------- Four Method References ---------------
+ *
  * @author zqw
  * @date 2021/1/19
- * Four Method References
  */
 @FunctionalInterface
 interface Builder {
@@ -79,5 +80,4 @@ public class MessageBuilder {
             log();
         }
     }
-
 }

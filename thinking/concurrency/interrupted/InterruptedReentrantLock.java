@@ -7,10 +7,10 @@ import java.util.concurrent.locks.ReentrantLock;
 import static util.Print.print;
 
 /**
- * Interrupted ad task blocked with a ReentrantLock
+ * Interrupted a task blocked with a ReentrantLock
  *
- * @author:qiming
- * @date: 2021/4/11
+ * @author zwq
+ * @date 2021/4/11
  */
 public class InterruptedReentrantLock {
     public static void main(String[] args) throws InterruptedException {

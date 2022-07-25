@@ -24,7 +24,7 @@ public class QueueTest {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();
             @SuppressWarnings("unchecked") var inst = (Queue<Integer>) rawInstance;
-            int[] raw = Tools.gen(N, 1000000).stream().mapToInt(x -> x).toArray();
+            int[] raw = Tools.genList(N, 1000000).stream().mapToInt(x -> x).toArray();
             var start = System.nanoTime();
             for (var i : raw) {
                 inst.enqueue(i);

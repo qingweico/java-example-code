@@ -1,23 +1,30 @@
 package effective;
 
+import lombok.Data;
+
 /**
  * 要在公有类而非公有域中使用访问方法
  *
- * @author:qiming
- * @date: 2021/11/22
+ * @author zqw
+ * @date 2021/11/22
  * @see java.awt.Point
  * @see java.awt.Dimension
  */
 public class Article16 {
+    public static void main(String[] args) {
+
+    }
 }
 
 // Degenerate classes like this should not be public!
+@Data
 class Rectangle {
     public int w;
     public int h;
 }
 
 // Encapsulation of data by accessor methods and mutators
+@Data
 class Square {
     private int length;
 
@@ -36,6 +43,7 @@ class Square {
 }
 
 // Public class with exposed immutable fields - questionable
+@Data
 final class Time {
     private static final int HOUR_PRE_DAY = 24;
     private static final int MINUTES_PRE_HOUR = 60;
@@ -52,5 +60,12 @@ final class Time {
         }
         this.hour = hour;
         this.minute = minute;
+    }
+
+    public static void main(String[] args) {
+        Time time = new Time(12, 23);
+        // ?
+        // time.hour = 20;
+        System.out.println(time);
     }
 }

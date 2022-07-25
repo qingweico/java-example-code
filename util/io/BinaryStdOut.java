@@ -1,4 +1,6 @@
-package util;
+package util.io;
+
+import util.Constants;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;

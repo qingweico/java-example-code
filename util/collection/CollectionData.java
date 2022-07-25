@@ -1,4 +1,6 @@
-package util;
+package util.collection;
+
+import util.Generator;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,6 @@
 package oak;
 
+import annotation.Ignore;
 import com.google.common.base.MoreObjects;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,8 @@ public class User implements Serializable {
     private Long id;
     private String username;
     private boolean isVip;
-
-    private Integer instantiation = 10;
+    @Ignore
+    private transient Integer instantiation = 10;
 
     public User(Long id) {
         this.id = id;

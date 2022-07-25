@@ -5,13 +5,13 @@ import object.Student;
 /**
  * 覆盖equals时总要覆盖hashcode
  *
- * @author:qiming
- * @date: 2020/10/25
+ * @author zwq
+ * @date 2020/10/25
  * @see object.Student
  */
 
 
-public class Article11 {
+class Article11 {
 
     public static void main(String[] args) {
         Student s1 = new Student(22, "li");

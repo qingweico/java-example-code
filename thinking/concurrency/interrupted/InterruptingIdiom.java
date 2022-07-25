@@ -8,11 +8,11 @@ import static util.Print.print;
  * It is important to clean up resources properly
  * when a program exits the loop via an exception.
  *
- * @author:qiming
- * @date: 2021/2/7
+ * @author zqw
+ * @date 2021/2/7
  */
 // General idiom for interrupted a task
-public class InterruptingIdiom {
+class InterruptingIdiom {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(new Blocked());
         t.start();
@@ -35,7 +35,7 @@ class NeedsCleanup {
 }
 
 class Blocked implements Runnable {
-    private volatile double d = 0.0;
+    private double d = 0.0;
 
     @Override
     public void run() {

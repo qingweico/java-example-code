@@ -3,7 +3,7 @@ package collection.array;
 import algorithm.sort.Tools;
 import collection.Customer;
 import thinking.genericity.BasicGenerator;
-import util.CollectionData;
+import util.collection.CollectionData;
 import util.ObjectFactory;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 class Sort {
     public static void main(String[] args) {
-        List<Integer> list = Tools.gen(20, 100);
+        List<Integer> list = Tools.genList(20, 100);
         System.out.println(list);
         // 对于原始数据类型使用 Dual-pivot QuickSort
         int[] toArray = list.stream().mapToInt(x -> x).toArray();

@@ -1,18 +1,18 @@
 package object.proxy.aop;
 
 import object.proxy.annotation.Aspect;
+import object.proxy.aspect.IAspect;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.LinkedList;
 
 /**
- * @author:qiming
- * @date: 2021/10/22
+ * @author zqw
+ * @date 2021/10/22
  */
 public class ObjectFactory {
+    @SuppressWarnings("unchecked")
     public static <T> T newInstance(Class<T> cls) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         var annotations = cls.getAnnotations();
         LinkedList<IAspect> aspectList = new LinkedList<>();
@@ -28,14 +28,11 @@ public class ObjectFactory {
         return (T) Proxy.newProxyInstance(
                 cls.getClassLoader(),
                 cls.getInterfaces(),
-                new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        aspectList.forEach(aspect -> aspect.before());
-                        var result = method.invoke(inst);
-                        aspectList.forEach(aspect -> aspect.after());
-                        return result;
-                    }
+                (proxy, method, args) -> {
+                    aspectList.forEach(IAspect::before);
+                    var result = method.invoke(inst);
+                    aspectList.forEach(IAspect::after);
+                    return result;
                 });
     }
 }

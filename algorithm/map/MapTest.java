@@ -110,7 +110,7 @@ public class MapTest {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();
             @SuppressWarnings("unchecked") var inst = (Map<Integer, Integer>) rawInstance;
-            var data = Tools.gen(n, Integer.MAX_VALUE);
+            var data = Tools.genList(n, Integer.MAX_VALUE);
             var start = System.nanoTime();
             for (var i : data) {
                 inst.add(i, null);

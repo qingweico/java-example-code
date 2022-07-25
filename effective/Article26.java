@@ -26,8 +26,8 @@ import java.util.*;
 // Each generic defines a primitive type, that is, a generic name without any actual type arguments.
 // List<E> --> List
 // Primitive type exist to be compatible with code that predates generics.
-public class Article26 {
-    public static void main(String[] args) {
+class Article26 {
+     public static void main(String[] args) {
         List<String> string = new ArrayList<>();
         // Generics have rules for subtyping:
         // List<String> is a subtype of primitive type List,

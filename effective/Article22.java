@@ -15,7 +15,7 @@ class Article22 {
 
 }
 
-// Constant interface anti-pattern - do not use!
+// Constant interface antipattern - do not use!
 // This interface does not contain any methods, it contains only
 // static final fields, each of which exports a constant.
 interface PhysicalConstants {

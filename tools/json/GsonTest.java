@@ -1,16 +1,17 @@
-package tools;
+package tools.json;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import oak.User;
 import org.junit.Test;
 import thinking.genericity.BasicGenerator;
-import util.CollectionData;
+import util.collection.CollectionData;
 import util.ObjectFactory;
 
 import java.util.List;
 
 /**
+ * --------------- Gson ---------------
  * @author zqw
  * @date 2022/7/14
  */
@@ -36,10 +37,11 @@ public class GsonTest {
     }
 
     @Test
+    @SuppressWarnings("all")
     public void toList() {
         String json = "[{\"id\":6953337173878792192,\"username\":\"Wai Sipes\",\"isVip\":false},{\"id\":6953337174029787136,\"username\":\"Erich Prohaska\",\"isVip\":true},{\"id\":6953337174088507392,\"username\":\"Edward Sanford\",\"isVip\":true}]";
         Gson gson = new Gson();
-        // 将 Json 转换为 List(或者Map)
+        // 将 Json 转换为 List(带有泛型)(或者Map)
         List<User> users = gson.fromJson(json, new TypeToken<List<User>>() {
         }.getType());
         for (User u : users) {

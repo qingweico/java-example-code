@@ -3,8 +3,11 @@ package effective;
 /**
  * 考虑实现Comparable接口
  *
- * @author:qiming
- * @date: 2021/11/4
+ * @author zqw
+ * @date 2021/11/4
  */
-public class Article14 {
+class Article14 {
+    public static void main(String[] args) {
+
+    }
 }

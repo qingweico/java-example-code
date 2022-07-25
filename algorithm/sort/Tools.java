@@ -1,6 +1,7 @@
 package algorithm.sort;
 
 import junit.framework.Assert;
+import util.RandomDataGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,16 +40,28 @@ public class Tools {
         e[j] = tmp;
     }
 
-    public static List<Integer> gen(int n) {
-        return gen(n, 1000000);
+    public static List<Integer> genList(int n) {
+        return genList(n, 1000000);
     }
 
-    public static List<Integer> gen(int n, int bound) {
+    public static List<Integer> genList(int n, int bound) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             list.add((int) (Math.random() * bound));
         }
         return list;
+    }
+
+    public static int[] genArray(int n, int bound) {
+        int[] array = new int[n];
+        for (int i = 0; i < n;i++) {
+            // random -> [1, bound)
+            array[i] = RandomDataGenerator.randomInt(bound);
+        }
+        return array;
+    }
+    public static int[] genArray(int n) {
+       return genArray(n, 100);
     }
 
     public static List<Integer> genOrder(int n) {

@@ -2,9 +2,6 @@ package util.filter.test;
 
 import junit.framework.TestCase;
 import org.junit.Ignore;
-
-import java.util.Iterator;
-
 /**
  * Abstract {@link TestCase}
  *
@@ -25,9 +22,8 @@ public abstract class AbstractTestCase {
     }
 
     public void echo(Iterable<?> iterable) {
-        Iterator<?> iterator = iterable.iterator();
-        while (iterator.hasNext()) {
-            echo(iterator.next());
+        for (Object o : iterable) {
+            echo(o);
         }
     }
 }

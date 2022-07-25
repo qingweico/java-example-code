@@ -26,7 +26,7 @@ final class CaseInsensitiveString {
     private final String s;
 
     /**
-     * Solved! Remove code that attempts to inter-operate with String.
+     * Solved! Remove code that attempts to interoperate with String.
      * return o instanceof CaseInsensitiveString &&
      * s.equalsIgnoreCase(((CaseInsensitiveString) o).s);
      * Broken - violates symmetry

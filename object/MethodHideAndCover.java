@@ -11,7 +11,7 @@ import static util.Print.print;
  * @date 2020/12/12
  */
 
-public class MethodHideAndCover {
+class MethodHideAndCover {
     @SuppressWarnings("static-access")
     public static void main(String[] args) {
         // A child class does not override the static methods of its parent class,

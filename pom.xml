@@ -194,6 +194,12 @@
 			<artifactId>jaxen</artifactId>
 			<version>1.2.0</version>
 		</dependency>
+		<!-- Java-WebSocket -->
+		<dependency>
+			<groupId>org.java-websocket</groupId>
+			<artifactId>Java-WebSocket</artifactId>
+			<version>1.5.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

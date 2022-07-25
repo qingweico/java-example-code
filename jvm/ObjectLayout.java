@@ -1,7 +1,6 @@
 package jvm;
 
 import org.openjdk.jol.info.ClassLayout;
-// TODO
 /**
  * 打印编译的细节 {@code -XX:+PrintCompilation}
  * 输出更多的编译细节 {@code -XX:UnlockDiagnosticVMOptions
@@ -9,6 +8,7 @@ import org.openjdk.jol.info.ClassLayout;
  *
  * @author zqw
  * @date 2021/3/5
+ * @see EmptyObject
  */
 public class ObjectLayout {
     static final Object O = new Object();

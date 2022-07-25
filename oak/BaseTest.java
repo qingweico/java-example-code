@@ -1,15 +1,14 @@
 package oak;
 
-import junit.framework.Assert;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.SystemUtils;
 import org.testng.annotations.Test;
-import util.WindowsRegistry;
 
 import java.util.Arrays;
 
 /**
  * 更多测试请参考微基准测试工具jmh
+ * <a href="https://github.com/xkcoding/spring-boot-demo.git">...</a>
+ *
  * @author zqw
  * @date 2022/2/3
  */
@@ -44,11 +43,13 @@ public class BaseTest {
         Arrays.sort(a, (o1, o2) -> Integer.bitCount(o1) > Integer.bitCount(o2) ? o1 - o2 : o2 - o1);
         System.out.println(Arrays.toString(a));
     }
+
     @Test
     public void outBinary() {
         byte aByte = (byte) 0b00100001;
         System.out.println(aByte);
     }
+
     @Test
     public void bitOperation() {
         // -1 的原码为1000 0000 0000 0000 0000 0000 0000 0001
@@ -58,5 +59,30 @@ public class BaseTest {
         System.out.println(-1 << 29);
         System.out.println(1 << 29);
         System.out.println(2 << 29);
+    }
+
+    @Test
+    public void flag() {
+        flag:
+        for (int a = 0; a < 2; a++) {
+            for (int i = 0; i < 10; i++) {
+                if (i == 3) {
+                    continue flag;
+                }
+                System.out.print(a + ": " + i + "\t");
+            }
+        }
+    }
+
+    @Test
+    public void is() {
+        // 原始类型 该Class对象和参数类型一致时才返回true
+        // 对象类型 父接口或者父类都会返回true
+        // true
+        System.out.println(int.class.isAssignableFrom(int.class));
+        // true
+        // 判断参数类型是否是Class类型的相同类型或者子类型
+        System.out.println(Comparable.class.isAssignableFrom(Integer.class));
+        System.out.println(System.getProperty("java.class.path"));
     }
 }

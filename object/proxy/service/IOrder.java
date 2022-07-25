@@ -1,4 +1,4 @@
-package object.proxy;
+package object.proxy.service;
 
 /**
  * @author zqw

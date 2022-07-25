@@ -1,4 +1,4 @@
-package network;
+package util.net;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @date 2022/6/25
  */
 @Slf4j
-public class SimpleNetworkUtils {
+public class NetworkUtils {
     public static String getLocalMac(InetAddress ia) throws SocketException {
         byte[] macAddress = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
         log.info("Mac Array: [{}], Mac Byte Array Length: {}", Arrays.toString(macAddress), macAddress.length);

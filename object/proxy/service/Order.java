@@ -1,6 +1,6 @@
-package object.proxy;
+package object.proxy.service;
 
-import object.proxy.aop.TimeUsageAspect;
+import object.proxy.aspect.TimeUsageAspect;
 import object.proxy.annotation.Aspect;
 
 import java.util.concurrent.TimeUnit;

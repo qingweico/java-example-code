@@ -23,7 +23,7 @@ public class StackTest {
             var constructor = cls.getConstructor();
             var rawInstance = constructor.newInstance();
             @SuppressWarnings("unchecked") var inst = (Stack<Integer>) rawInstance;
-            int[] raw = Tools.gen(n, 1000000).stream().mapToInt(x -> x).toArray();
+            int[] raw = Tools.genList(n, 1000000).stream().mapToInt(x -> x).toArray();
             var start = System.nanoTime();
             for (var i : raw) {
                 inst.push(i);

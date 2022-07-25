@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.io.*;
-import java.util.Properties;;
+import java.util.Properties;
 
 /**
  * @author zqw

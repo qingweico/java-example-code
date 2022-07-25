@@ -113,9 +113,10 @@ class Base64 {
         byte[] alphaToInt = (alternate ? altBase64ToInt : base64ToInt);
         int sLen = s.length();
         int numGroups = sLen / 4;
-        if (4 * numGroups != sLen)
+        if (4 * numGroups != sLen) {
             throw new IllegalArgumentException(
                     "String length must be a multiple of four.");
+        }
         int missingBytesInLastGroup = 0;
         int numFullGroups = numGroups;
         if (sLen != 0) {

@@ -14,12 +14,14 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
 /**
+ * --------------- 零拷贝 ---------------
+ *
  * @author zqw
  * @date 2022/1/27
  */
 public class ZeroCopyTest {
 
-    private final String fileName = "";
+    private final String fileName = "C:\\picture\\pic.png";
     private final String host = Constants.LOOP_BACK;
     private final int port = Constants.QOMOLANGMA;
     private final int bufferSize = Constants.KB;
@@ -68,7 +70,7 @@ public class ZeroCopyTest {
                 sendBytes += read;
                 os.write(buffer);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("client io error: " + e.getMessage());
             }
         }
         os.close();
@@ -83,6 +85,7 @@ public class ZeroCopyTest {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.socket().bind(inetSocketAddress);
         ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("pic.png"));
         int rcvBytes = 0;
         while (true) {
             try {
@@ -93,6 +96,7 @@ public class ZeroCopyTest {
                         break;
                     }
                     rcvBytes += read;
+                    bos.write(buffer.array());
                     buffer.rewind();
                 }
                 System.out.printf("[rcvBytes: %s, from client %s]%n", rcvBytes, socketChannel.getRemoteAddress());
@@ -115,6 +119,8 @@ public class ZeroCopyTest {
             long size = fileChannel.size();
             // TODO
             while (sendBytes < size) {
+                // transferTo() 方法底层使用了零拷贝
+                // VM: jdk.nio.enableFastFileTransfer 解除在window下一次传输8M限制
                 send = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
                 sendBytes += send;
             }
