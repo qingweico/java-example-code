@@ -10,7 +10,7 @@ public final class Mathematics {
      */
     public static double calcPi() {
         double re = 0;
-        for (int i = 1; i < Constants.TEN_THOUSAND; i++) {
+        for (int i = 1; i < Constants.NUM_10000; i++) {
             re += ((i & 1) == 0 ? -1 : 1) * 1.0 / (2 * i - 1);
         }
         return re * 4;

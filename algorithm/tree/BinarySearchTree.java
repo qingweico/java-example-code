@@ -1,6 +1,7 @@
 package algorithm.tree;
 
 import algorithm.sort.Tools;
+import org.checkerframework.checker.units.qual.K;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,9 +15,9 @@ import static util.Print.printnb;
  * @author zqw
  * @date 2021/10/28
  */
-public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree{
+public class BinarySearchTree<E extends Comparable<E>> {
 
-     class Node {
+    class Node {
         E e;
         Node left;
         Node right;
@@ -210,12 +211,11 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree{
     }
 
     /**
-     *
      * @param node 删除掉以 node 为根的二叉搜索树中最小的节点
      * @return 返回删除节点后新的二叉搜索树的根
      * @see BinarySearchTree#deleteMax(Node)
      */
-    private Node    deleteMin(Node node) {
+    private Node deleteMin(Node node) {
         if (node.left == null) {
             Node rightNode = node.right;
             node.right = null;
@@ -231,8 +231,8 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree{
         root = deleteMax(root);
         return e;
     }
+
     /**
-     *
      * @param node 删除掉以 node 为根的二叉搜索树中最大的节点
      * @return 返回删除节点后新的二叉搜索树的根
      * @see BinarySearchTree#deleteMin(Node)

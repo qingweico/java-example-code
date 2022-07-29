@@ -33,7 +33,7 @@ class CPUCoreThreadPoolCount {
         @SuppressWarnings("unused")
         public void task() {
             double result = 0.0;
-            for (int i = 0; i < Constants.MILLION; i++) {
+            for (int i = 0; i < Constants.NUM_1000000; i++) {
                 result += 1.0 * i / pi * tlr.nextDouble(100);
             }
         }

@@ -1,6 +1,7 @@
 package io.buffer;
 
 import org.junit.Test;
+import util.Constants;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -27,15 +28,15 @@ public class BufferTest {
     final String fileName = "data";
 
     static int neededNewline = 20;
-    private final static ByteBuffer buffer = ByteBuffer.allocate(1024 * 8);
+    private final ByteBuffer buffer = ByteBuffer.allocate(1024 * 8);
 
     @Test
     public void gen() throws IOException {
         Random r = new Random();
         var os = new BufferedOutputStream(new FileOutputStream(fileName));
         var t = System.currentTimeMillis();
-        for (int i = 0; i < 1_000; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < Constants.NUM_1000; i++) {
+            for (int j = 0; j < Constants.FIVE; j++) {
                 os.write(97 + r.nextInt(5));
             }
             os.write(' ');
@@ -133,7 +134,7 @@ public class BufferTest {
     }
 
     @Test
-    public void IntBuffer() {
+    public void intBuffer() {
         IntBuffer intBuffer = IntBuffer.allocate(10);
         for (int i = 0; i < intBuffer.capacity(); i++) {
             intBuffer.put(i);

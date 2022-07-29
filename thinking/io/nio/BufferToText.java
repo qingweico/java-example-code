@@ -18,16 +18,16 @@ import java.nio.charset.StandardCharsets;
  * @date 2021/2/5
  */
 class BufferToText {
-    private final static int BSIZE = Constants.KB;
+    private final static int B_SIZE = Constants.KB;
 
     public static void main(String[] args) throws IOException {
         final String path = "thinking/io/nio/";
-        final String fileName = "data.txt";
+        final String fileName = "data";
         FileChannel fc = new FileOutputStream(path + fileName).getChannel();
         fc.write(ByteBuffer.wrap("some text".getBytes()));
         fc.close();
         fc = new FileInputStream(path + fileName).getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(BSIZE);
+        ByteBuffer buffer = ByteBuffer.allocate(B_SIZE);
         fc.read(buffer);
         buffer.flip();
 

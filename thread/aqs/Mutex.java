@@ -39,7 +39,7 @@ public class Mutex extends AbstractQueuedSynchronizer {
         for (int i = 0; i < Constants.TEN; i++) {
             pool.execute(() -> {
                 mutex.acquire(0);
-                for (int j = 0; j < Constants.THOUSAND; j++) {
+                for (int j = 0; j < Constants.NUM_1000; j++) {
                     shared++;
                 }
                 mutex.release(0);

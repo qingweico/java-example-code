@@ -40,7 +40,7 @@ public class FairAndUnfairLock {
         var start = System.currentTimeMillis();
         for (int i = 0; i < threadCount; i++) {
             pool.execute(() -> {
-                for (int j = 0; j < Constants.HUNDRED; j++) {
+                for (int j = 0; j < Constants.NUM_100; j++) {
                     sail();
                 }
                 latch.countDown();

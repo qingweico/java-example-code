@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Reflection Utility class, generic methods are defined from {@link FieldUtils} ,
- * {@link MethodUtils} , {@link ConstructorUtils}
+ * Reflection Utility class, generic methods are defined from {@link FieldUtils},
+ * {@link MethodUtils}, {@link ConstructorUtils}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @date 2022/7/10
@@ -26,7 +26,13 @@ import java.util.Map;
  * @see FieldUtils
  * @see ConstructorUtils
  */
-public abstract class ReflectionUtils {
+public class ReflectionUtils {
+
+    /**
+     * non-instantiability
+     */
+    private ReflectionUtils() {
+    }
 
     /**
      * Sun JDK 实现类: sun.reflect.Reflection全名称
@@ -63,13 +69,14 @@ public abstract class ReflectionUtils {
         Method method;
         boolean supported;
         int invocationFrame = 0;
+        int underJdk9 = 9;
         try {
             // Use sun.reflect.Reflection to calculate frame
             Class<?> type = Class.forName(SUN_REFLECT_REFLECTION_CLASS_NAME);
             method = type.getMethod(GET_CALLER_CLASS_METHOD_NAME, int.class);
             method.setAccessible(true);
-            // Adapt SUN JDK ,The value of invocation frame in JDK 6/7/8 may be different
-            for (int i = 0; i < 9; i++) {
+            // Adapt SUN JDK, The value of invocation frame in JDK 6/7/8 may be different
+            for (int i = 0; i < underJdk9; i++) {
                 Class<?> callerClass = (Class<?>) method.invoke(null, i);
                 if (TYPE.equals(callerClass)) {
                     invocationFrame = i;
@@ -110,14 +117,13 @@ public abstract class ReflectionUtils {
 
     /**
      * Get Caller class
-     *
+     * {@code jdk.internal.reflect.Reflection#getCallerClass();}
      * @return 获取调用该方法的Class name
      */
     @Nonnull
     public static String getCallerClassName() {
         return getCallerClassName(SUN_REFLECT_REFLECTION_INVOCATION_FRAME);
     }
-
     /**
      * Get Caller Class name
      *
@@ -148,7 +154,7 @@ public abstract class ReflectionUtils {
     }
 
     /**
-     * 通用实现方式，通过指定调用层次数值，获取调用类名
+     * 通用实现方式,通过指定调用层次数值,获取调用类名
      *
      * @param invocationFrame invocation frame
      * @return specified invocation frame 类
@@ -385,11 +391,11 @@ public abstract class ReflectionUtils {
                 if (fieldValue != null) {
                     Class<?> fieldValueType = fieldValue.getClass();
                     if (ClassUtils.isPrimitiveOrWrapper(fieldValueType)) {
-                        // nothing to do
+                        System.out.printf("fieldValueType: [%s] isPrimitiveOrWrapper%n", fieldValueType);
                     } else if (fieldValueType.isArray()) {
                         fieldValue = toList(fieldValue);
                     } else if ("java.lang".equals(fieldValueType.getPackage().getName())) {
-                        // nothing to do
+                        System.out.printf("fieldValueType [%s] class name start with java.lang%n", fieldValueType);
                     } else {
                         fieldValue = readFieldsAsMap(fieldValue);
                     }

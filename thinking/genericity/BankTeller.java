@@ -11,7 +11,8 @@ import java.util.*;
  * @date 2021/4/10
  */
 
-// A very simple bank teller simulation
+/* A very simple bank teller simulation*/
+
 class BankTeller {
     public static void serve(Teller t, Customer c) {
         System.out.println(t + " serve " + c);
@@ -40,6 +41,7 @@ class Customer {
     private Customer() {
     }
 
+    @Override
     public String toString() {
         return "Customer: " + id();
     }
@@ -56,6 +58,7 @@ class Teller {
     private Teller() {
     }
 
+    @Override
     public String toString() {
         return "Teller: " + id;
     }

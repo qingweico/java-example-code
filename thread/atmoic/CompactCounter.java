@@ -12,11 +12,11 @@ import java.util.concurrent.atomic.AtomicLongFieldUpdater;
  */
 class CompactCounter {
     private volatile long counter;
-    private static final AtomicLongFieldUpdater<CompactCounter> updater = AtomicLongFieldUpdater.newUpdater(CompactCounter.class, "counter");
+    private static final AtomicLongFieldUpdater<CompactCounter> UPDATER = AtomicLongFieldUpdater.newUpdater(CompactCounter.class, "counter");
 
     public synchronized void increase() {
-        long old = updater.get(this);
-        long newValue = updater.incrementAndGet(this);
+        long old = UPDATER.get(this);
+        long newValue = UPDATER.incrementAndGet(this);
         System.out.println(Thread.currentThread().getName() + ": update " + old + " ---> " + newValue);
     }
 

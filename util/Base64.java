@@ -160,13 +160,14 @@ class Base64 {
     /**
      * Translates the specified character, which is assumed to be in the "Base 64 Alphabet" into its equivalent 6-bit
      * positive integer.
-     *
-     * @throw IllegalArgumentException or ArrayOutOfBoundsException if c is not in the Base64 Alphabet.
+     * <p>
+     * {@code IllegalArgumentException or ArrayOutOfBoundsException} if c is not in the Base64 Alphabet.
      */
     private static int base64toInt(char c, byte[] alphaToInt) {
         int result = alphaToInt[c];
-        if (result < 0)
+        if (result < 0) {
             throw new IllegalArgumentException("Illegal character " + c);
+        }
         return result;
     }
 
@@ -175,7 +176,7 @@ class Base64 {
      * Table 1 of RFC 2045) into their 6-bit positive integer equivalents.  Characters that are not in the Base64
      * alphabet but fall within the bounds of the array are translated to -1.
      */
-    private static final byte base64ToInt[] = {
+    private static final byte[] base64ToInt = {
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
             -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54,
@@ -189,7 +190,7 @@ class Base64 {
      * This array is the analogue of base64ToInt, but for the nonstandard variant that avoids the use of uppercase
      * alphabetic characters.
      */
-    private static final byte altBase64ToInt[] = {
+    private static final byte[] altBase64ToInt = {
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1,
             2, 3, 4, 5, 6, 7, 8, -1, 62, 9, 10, 11, -1, 52, 53, 54, 55, 56, 57,
@@ -200,25 +201,28 @@ class Base64 {
             51, 22, 23, 24, 25
     };
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int numRuns = Integer.parseInt(args[0]);
         int numBytes = Integer.parseInt(args[1]);
         java.util.Random rnd = new java.util.Random();
         for (int i = 0; i < numRuns; i++) {
             for (int j = 0; j < numBytes; j++) {
                 byte[] arr = new byte[j];
-                for (int k = 0; k < j; k++)
+                for (int k = 0; k < j; k++) {
                     arr[k] = (byte) rnd.nextInt();
+                }
 
                 String s = byteArrayToBase64(arr);
                 byte[] b = base64ToByteArray(s);
-                if (!java.util.Arrays.equals(arr, b))
+                if (!java.util.Arrays.equals(arr, b)) {
                     System.out.println("Dismal failure!");
+                }
 
                 s = byteArrayToAltBase64(arr);
                 b = altBase64ToByteArray(s);
-                if (!java.util.Arrays.equals(arr, b))
+                if (!java.util.Arrays.equals(arr, b)) {
                     System.out.println("Alternate dismal failure!");
+                }
             }
         }
     }

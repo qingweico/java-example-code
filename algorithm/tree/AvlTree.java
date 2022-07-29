@@ -1,24 +1,24 @@
 package algorithm.tree;
 
+
 import java.util.NoSuchElementException;
 
 /**
  * @author zqw
  * @date 2021/11/1
  */
-public class AVLTree<K extends Comparable<K>, V> {
+public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
     private Node root;
     private int size;
 
-    public AVLTree() {
+    public AvlTree() {
         root = null;
         size = 0;
     }
-    
+
     public int size() {
         return size;
     }
-
 
     public boolean isEmpty() {
         return size == 0;
@@ -38,16 +38,54 @@ public class AVLTree<K extends Comparable<K>, V> {
             height = 1;
         }
     }
+    // ############################################# public api #############################################
 
-    private int getHeight(Node node) {
-        return node == null ? 0 : node.height;
+    public boolean isBalanced() {
+        return isBalanced(root);
     }
 
-    private int getBalanceFactor(Node node) {
-        if (node == null) {
-            return 0;
+    public void add(K k, V v) {
+        root = add(root, k, v);
+    }
+
+    public K min() {
+        if (size == 0) {
+            throw new IllegalStateException("AvlTree size = 0");
         }
-        return getHeight(node.left) - getHeight(node.right);
+        return min(root).key;
+    }
+
+    public V remove(K k) {
+        Node node = getNode(root, k);
+        if (node != null) {
+            root = remove(root, k);
+            return node.value;
+        } else {
+            throw new NoSuchElementException();
+        }
+
+    }
+
+    public boolean contains(K k) {
+        return getNode(root, k) != null;
+    }
+
+    public V get(K k) {
+        Node node = getNode(root, k);
+        return node == null ? null : node.value;
+    }
+
+    public void set(K k, V v) {
+        Node node = getNode(root, k);
+        if (node == null) {
+            throw new NoSuchElementException();
+        }
+        node.value = v;
+    }
+
+    public boolean isValidBST() {
+        K min = min();
+        return isValidBST(root, min);
     }
 
     /**
@@ -78,7 +116,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      *
      * @param unbalance unbalance node
      * @return new balance node
-     * @see AVLTree#leftRotate(Node)
+     * @see AvlTree#leftRotate(Node)
      */
     private Node rightRotate(Node unbalance) {
         Node l = unbalance.left;
@@ -89,6 +127,17 @@ public class AVLTree<K extends Comparable<K>, V> {
         unbalance.height = Math.max(getHeight(unbalance.left), getHeight(unbalance.right)) + 1;
         l.height = Math.max(getHeight(l.left), getHeight(l.right)) + 1;
         return l;
+    }
+
+    private int getHeight(Node node) {
+        return node == null ? 0 : node.height;
+    }
+
+    private int getBalanceFactor(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return getHeight(node.left) - getHeight(node.right);
     }
 
     /**
@@ -131,10 +180,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         return r;
     }
 
-    public boolean isBalanced() {
-        return isBalanced(root);
-    }
-
     private boolean isBalanced(Node node) {
         if (node == null) {
             return true;
@@ -146,8 +191,8 @@ public class AVLTree<K extends Comparable<K>, V> {
         return isBalanced(node.left) && isBalanced(node.right);
     }
 
-    public void add(K k, V v) {
-        root = add(root, k, v);
+    private void setHeight(Node node) {
+        node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
     }
 
     private Node add(Node node, K k, V v) {
@@ -198,29 +243,13 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
     }
 
-    public K min() {
-        if (size == 0) {
-            throw new IllegalStateException("AVLTree size = 0");
-        }
-        return min(root).key;
-    }
+    // ############################################# private #############################################
 
     private Node min(Node node) {
         if (node.left == null) {
             return node;
         }
         return min(node.left);
-    }
-
-    public V remove(K k) {
-        Node node = getNode(root, k);
-        if (node != null) {
-            root = remove(root, k);
-            return node.value;
-        } else {
-            throw new NoSuchElementException();
-        }
-
     }
 
     private Node remove(Node node, K k) {
@@ -276,32 +305,10 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
         // RL
         if (balanceFactor < 1 && getBalanceFactor((cur.right)) > 0) {
-            node.right = leftRotate(cur.right);
+            node.right = rightRotate(cur.right);
             return leftRotate(cur);
         }
         return cur;
-    }
-
-    public boolean contains(K k) {
-        return getNode(root, k) != null;
-    }
-
-    public V get(K k) {
-        Node node = getNode(root, k);
-        return node == null ? null : node.value;
-    }
-
-    public void set(K k, V v) {
-        Node node = getNode(root, k);
-        if (node == null) {
-            throw new NoSuchElementException();
-        }
-        node.value = v;
-    }
-
-    public boolean isValidBST() {
-        K min = min();
-        return isValidBST(root, min);
     }
 
     private boolean isValidBST(Node node, K min) {
@@ -315,5 +322,29 @@ public class AVLTree<K extends Comparable<K>, V> {
             }
         }
         return false;
+    }
+
+    private Node handleRotate(Node node, Node cur) {
+        setHeight(cur);
+        int balanceFactor = getBalanceFactor(cur);
+        // RR
+        if (balanceFactor > 1 && getBalanceFactor((cur.left)) >= 0) {
+            return rightRotate(cur);
+        }
+        // LL
+        if (balanceFactor < -1 && getBalanceFactor((cur.right)) <= 0) {
+            return leftRotate(cur);
+        }
+        // LR
+        if (balanceFactor > 1 && getBalanceFactor((cur.left)) < 0) {
+            node.left = leftRotate(cur.left);
+            return rightRotate(cur);
+        }
+        // RL
+        if (balanceFactor < -1 && getBalanceFactor((cur.right)) > 0) {
+            node.right = leftRotate(cur.right);
+            return leftRotate(cur);
+        }
+        return cur;
     }
 }

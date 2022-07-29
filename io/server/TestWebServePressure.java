@@ -22,7 +22,7 @@ public class TestWebServePressure {
         ArrayList<String> list = new ArrayList<>();
         var faker = new Faker();
         try (var serverSocket = new ServerSocket(Constants.QOMOLANGMA)) {
-            serverSocket.setSoTimeout(Constants.HUNDRED_THOUSAND);
+            serverSocket.setSoTimeout(Constants.NUM_100000);
             while (true) {
                 var clientSocket = serverSocket.accept();
                 pool.submit(() -> {

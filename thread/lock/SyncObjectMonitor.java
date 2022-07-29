@@ -6,6 +6,7 @@ import util.Constants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,9 +38,9 @@ import java.util.concurrent.TimeUnit;
 class SyncObjectMonitor {
     static List<Runnable> list = new ArrayList<>();
     static final Object O = new Object();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 10);
-
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 10, true);
     public static void main(String[] args) {
+        CustomThreadPool.monitor((ThreadPoolExecutor)pool);
         for (int i = 0; i < Constants.TEN; i++) {
             list.add(() -> {
                 // Don't get lock and enter EntryList

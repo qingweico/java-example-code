@@ -80,7 +80,7 @@ public class VolatileAndAtomicTest {
         // Create 20 threads, and each thread will do 1000 num increment operations.
         for (int i = 1; i <= Constants.TWENTY; i++) {
             pool.execute(() -> {
-                for (int j = 1; j <= Constants.THOUSAND; j++) {
+                for (int j = 1; j <= Constants.NUM_1000; j++) {
                     resource.addPlusPlus();
                 }
                 terminated.countDown();

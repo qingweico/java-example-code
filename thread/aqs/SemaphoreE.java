@@ -23,7 +23,7 @@ class SemaphoreE {
     public static void main(String[] args) {
 
         Semaphore semaphore = new Semaphore(5);
-        for (int i = 0; i < Constants.HUNDRED; i++) {
+        for (int i = 0; i < Constants.NUM_100; i++) {
             pool.execute(() -> {
                 try {
                     // Obtain permission

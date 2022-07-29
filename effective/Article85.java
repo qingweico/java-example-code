@@ -6,4 +6,7 @@ package effective;
  * @date 2021/11/12
  */
 class Article85 {
+    public static void main(String[] args) {
+
+    }
 }

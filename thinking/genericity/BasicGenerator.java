@@ -5,8 +5,8 @@ import util.Generator;
 /**
  * Automatically create a generator, give a class with a default(no-args) constructor
  *
- * @author:qiming
- * @date: 2021/4/10
+ * @author zqw
+ * @date 2021/4/10
  */
 public class BasicGenerator<T> implements Generator<T> {
     private final Class<T> type;

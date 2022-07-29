@@ -75,7 +75,7 @@ class Scheduler {
 
     public static void main(String[] args) {
         Scheduler scheduler = new Scheduler(10);
-        for (int i = 0; i < Constants.HUNDRED; i++) {
+        for (int i = 0; i < Constants.NUM_100; i++) {
             scheduler.transferSubmit(() -> {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);

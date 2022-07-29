@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,6 +29,8 @@ public class DatabaseHelper {
     static {
         properties = new Properties();
         FileInputStream fin;
+        // 设置 JDBC 日志流到控制台
+        DriverManager.setLogWriter(new PrintWriter(new PrintStream(System.out), true, Charset.defaultCharset()));
         try {
             fin = new FileInputStream("db.properties");
             properties.load(fin);

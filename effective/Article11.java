@@ -1,5 +1,6 @@
 package effective;
 
+import annotation.Pass;
 import object.Student;
 
 /**
@@ -10,7 +11,7 @@ import object.Student;
  * @see object.Student
  */
 
-
+@Pass
 class Article11 {
 
     public static void main(String[] args) {

@@ -23,6 +23,7 @@ public class LockFreeStackTest<T> {
     static AtomicInteger counter = new AtomicInteger(initialValue);
     static AtomicInteger casCount = new AtomicInteger(initialValue);
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 100);
+
     public LockFreeStackTest() {
         head = new Node();
         this.headRef = new AtomicStampedReference<>(head, initialValue);
@@ -121,7 +122,7 @@ public class LockFreeStackTest<T> {
         var stack = new LockFreeStackTest<Integer>();
         var pushLatch = new CountDownLatch(100);
         var popLatch = new CountDownLatch(100);
-        for (int i = 0; i < Constants.HUNDRED; i++) {
+        for (int i = 0; i < Constants.NUM_100; i++) {
             pool.execute(() -> {
                 for (int j = 0; j < Constants.TEN; j++) {
                     stack.push(j);
@@ -135,7 +136,7 @@ public class LockFreeStackTest<T> {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < Constants.HUNDRED; i++) {
+        for (int i = 0; i < Constants.NUM_100; i++) {
             pool.execute(() -> {
                 while (stack.pop() != null) {
                     counter.getAndIncrement();

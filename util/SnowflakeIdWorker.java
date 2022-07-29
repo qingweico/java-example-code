@@ -57,7 +57,7 @@ public class SnowflakeIdWorker {
         final ExecutorService pool = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
         for (int i = 0; i < THREAD_COUNT; i++) {
             pool.execute(() -> {
-                for (int j = 0; j < Constants.TEN_THOUSAND; j++) {
+                for (int j = 0; j < Constants.NUM_10000; j++) {
                     Long aLong = SnowflakeIdWorker.nextId();
                     map.put(aLong, aLong);
                 }

@@ -5,4 +5,7 @@ package coretech2.local;
  * @date 2022/6/17
  */
 public class SimpleJavaNativeMethod {
+    public static void main(String[] args) {
+
+    }
 }

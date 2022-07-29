@@ -3,7 +3,7 @@ package util.filter;
 import java.lang.reflect.Array;
 
 /**
- * {@link Filter} Operator enumeration , which contains {@link #AND}{@link #OR}{@link #XOR}
+ * {@link Filter} Operator enumeration, which contains {@link #AND}{@link #OR}{@link #XOR}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see Filter
@@ -21,9 +21,12 @@ public enum FilterOperator {
         @Override
         public final <T> boolean accept(T filteredObject, Filter<T>... filters) {
             int length = Array.getLength(filters);
-            if (length == 0) return true;
+            if (length == 0) {
+                return true;
+            }
             boolean success = true;
             for (Filter<T> filter : filters) {
+                // 必须全部接受
                 success &= filter.accept(filteredObject);
             }
             return success;
@@ -38,9 +41,12 @@ public enum FilterOperator {
         @Override
         public final <T> boolean accept(T filteredObject, Filter<T>... filters) {
             int length = Array.getLength(filters);
-            if (length == 0) return true;
+            if (length == 0) {
+                return true;
+            }
             boolean success = false;
             for (Filter<T> filter : filters) {
+                // 有一个就行
                 success |= filter.accept(filteredObject);
             }
             return success;
@@ -54,7 +60,9 @@ public enum FilterOperator {
         @Override
         public final <T> boolean accept(T filteredObject, Filter<T>... filters) {
             int length = Array.getLength(filters);
-            if (length == 0) return true;
+            if (length == 0) {
+                return true;
+            }
             boolean success = true;
             for (Filter<T> filter : filters) {
                 success ^= filter.accept(filteredObject);
@@ -69,7 +77,7 @@ public enum FilterOperator {
      * @param <T>            Filtered object type
      * @param filteredObject Filtered object
      * @param filters        multiple {@link Filter}
-     * @return If accepted,return <code>true</code>
+     * @return If accepted, return <code>true</code>
      */
     public abstract <T> boolean accept(T filteredObject, Filter<T>... filters);
 
@@ -79,15 +87,10 @@ public enum FilterOperator {
      * @param filters multiple filters
      * @return a combined {@link Filter}
      */
+    @SafeVarargs
     public final <T> Filter<T> createFilter(final Filter<T>... filters) {
         final FilterOperator self = this;
-        return new Filter<T>() {
-
-            @Override
-            public boolean accept(T filteredObject) {
-                return self.accept(filteredObject, filters);
-            }
-        };
+        return filteredObject -> self.accept(filteredObject, filters);
     }
 
 }

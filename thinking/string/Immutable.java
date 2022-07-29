@@ -11,13 +11,13 @@ import static util.Print.printnb;
  * @date 2021/1/19
  */
 class Immutable {
-    public static String upcase(String s){
+    public static String upCase(String s){
         return s.toUpperCase();
     }
 
     public static void main(String[] args) {
         String q = "hello";
-        String p = upcase(q);
+        String p = upCase(q);
         print(q);
         printnb(p);
     }

@@ -39,7 +39,7 @@ class ChannelCopy {
     }
 
     public static void main(String[] args) throws IOException {
-        String[] fileNames = {"ChannelCopy.java", "data.txt"};
+        String[] fileNames = {"ChannelCopy.java", "data"};
         copyFile(fileNames);
         usingTransferCopyFile(fileNames);
     }

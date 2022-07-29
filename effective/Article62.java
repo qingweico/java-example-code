@@ -10,6 +10,10 @@ package effective;
 class Article62 {
     // Inappropriate use of string aggregate type
     // String compoundKey = className + "#" + i.next;
+
+    public static void main(String[] args) {
+
+    }
 }
 
 /**

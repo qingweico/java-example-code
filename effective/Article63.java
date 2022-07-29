@@ -8,7 +8,7 @@ package effective;
  * @author zqw
  * @date 2021/3/26
  */
-public class Article63 {
+class Article63 {
     private final int numItems = 10;
 
     // Inappropriate use of string concatenation - Performs poorly!
@@ -33,6 +33,10 @@ public class Article63 {
             res.append(lineForItem(i));
         }
         return res.toString();
+    }
+
+    public static void main(String[] args) {
+
     }
 
     // Or using char array.

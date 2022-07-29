@@ -1,5 +1,7 @@
 package effective;
 
+import util.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,8 +25,8 @@ class Article5 {
  * Inappropriate use of static utility - inflexible & untestable
  */
 class SpellChecker {
-    private static final Lexicon dictionary;
-    private static final ArrayList<String> suggestionLists;
+    static Lexicon dictionary;
+    static ArrayList<String> suggestionLists;
 
     static {
         dictionary = new Lexicon();
@@ -56,7 +58,7 @@ class SpellChecker {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        while (!scanner.hasNext("#")) {
+        while (!scanner.hasNext(Constants.Symbol_Pound_Sign)) {
             String word = scanner.nextLine();
             boolean valid = isValid(word);
             if (!valid) {

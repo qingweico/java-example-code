@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2021/3/27
  */
 public class TestStringIntern {
-    private static final int MAX_COUNT = Constants.MILLION;
+    private static final int MAX_COUNT = Constants.NUM_1000000;
     private static final String[] ARR = new String[MAX_COUNT];
 
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class TestStringIntern {
         }
         System.out.println(System.currentTimeMillis() - start + "ms");
         try {
-            TimeUnit.SECONDS.sleep(Constants.TEN_THOUSAND);
+            TimeUnit.SECONDS.sleep(Constants.NUM_10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

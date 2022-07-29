@@ -8,10 +8,11 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/2/9
  */
-public class TypesForSets {
+class TypesForSets {
     static <T> void fill(Set<T> set, Class<T> type) {
         try {
-            for (int i = 0; i < 10; i++) {
+            int fill = 10;
+            for (int i = 0; i < fill; i++) {
                 set.add(type.getConstructor(int.class).newInstance(i));
             }
         } catch (Exception e) {

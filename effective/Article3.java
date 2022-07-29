@@ -1,6 +1,7 @@
 package effective;
 
 
+import annotation.Pass;
 import util.Generator;
 
 /**
@@ -9,6 +10,7 @@ import util.Generator;
  * @author zqw
  * @date 2021/3/19
  */
+@Pass
 class Article3 {
     public static void main(String[] args) {
         Elvis elvis = Elvis.INSTANCE;

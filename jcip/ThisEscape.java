@@ -1,14 +1,14 @@
 package jcip;
 
 /**
- * Implicitly causes the this reference to escape.
+ * Implicitly causes the `this reference` to escape.
  * <br>
  * Do not escape this in the constructor.
  *
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
-public class ThisEscape {
+class ThisEscape {
     public ThisEscape(EventSource source) {
         // Publish an object that has not yet been constructed.
         source.registerListener(
@@ -27,10 +27,19 @@ public class ThisEscape {
 
 
     interface EventSource {
+        /**
+         * 注册监听器
+         * @param e EventListener
+         */
         void registerListener(EventListener e);
     }
 
+    @FunctionalInterface
     interface EventListener {
+        /**
+         * 事件监听
+         * @param e Event
+         */
         void onEvent(Event e);
     }
 

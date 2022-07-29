@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 class EscapeAnalysis {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        for (int i = 0; i < Constants.HUNDRED_MILLION; i++) {
+        for (int i = 0; i < Constants.NUM_100000000; i++) {
             alloc();
         }
         System.out.println(System.currentTimeMillis() - start + "ms");

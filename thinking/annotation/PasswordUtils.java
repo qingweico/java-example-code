@@ -6,7 +6,7 @@ import java.util.List;
  * @author zqw
  * @date 2021/4/8
  */
-public class PasswordUtils {
+class PasswordUtils {
 
     @UseCase(id=47, description = "Password must contain at least one numeric")
     public boolean validatePassword(String password) {

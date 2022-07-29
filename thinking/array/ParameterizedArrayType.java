@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author zqw
  * @date 2020/10/6
  */
-public class ParameterizedArrayType {
+class ParameterizedArrayType {
     public static void main(String[] args) {
         Integer[] ai = {1, 2, 3, 4, 5};
         Double[] ad = {1.1, 2.2, 3.3, 4.4, 5.5};

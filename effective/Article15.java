@@ -16,15 +16,20 @@ class Article15 {
 
     // Arrays of non-zero length are always mutable
     // Potential security hole!
-    public static final Object[] VALUES = {};
 
+    public static final Object[] VALUES = {};
 
     private static final Object[] PRIVATE_VALUES = {};
 
-    public static final List<Object> unmodifiableVALUES = List.of(PRIVATE_VALUES);
+    public static final List<Object> UNMODIFIABLE_VALUES = List.of(PRIVATE_VALUES);
 
     public static Object[] values () {
         return PRIVATE_VALUES.clone();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(PRIVATE_VALUES);
+        System.out.println(UNMODIFIABLE_VALUES);
     }
 
 }

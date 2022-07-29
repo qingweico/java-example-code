@@ -13,5 +13,7 @@ package effective;
  * @date 2021/1/6
  */
 class Article51 {
+    public static void main(String[] args) {
 
+    }
 }

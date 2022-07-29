@@ -13,10 +13,12 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import util.ObjectFactory;
+import util.RandomDataGenerator;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * --------------- Jackson(Spring Boot 默认的JSON解析框架) ---------------
@@ -27,33 +29,55 @@ import java.util.Date;
 @Slf4j
 public class JacksonTest {
 
-    static final ObjectMapper mapper;
+    static final ObjectMapper MAPPER;
 
     static {
-        mapper = new ObjectMapper();
+        MAPPER = new ObjectMapper();
         // 在反序列化时忽略 json 中存在 但 Java 对象中不存在的属性
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         // 在序列化时日期格式默认为 yyyy-MM-dd'T' HH:mm:ss.SSSX
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         // 在序列化时自定义时间日期格式
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         // 在序列化时忽略值为 null 的属性
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         // 在序列化时忽略值为默认值的属性
-        mapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_DEFAULT);
+        MAPPER.setDefaultPropertyInclusion(JsonInclude.Include.NON_DEFAULT);
     }
 
+    /**
+     * 简单对象和Json之间的互相转换
+     */
     @Test
     public void toJson() throws JsonProcessingException {
-
         JacksonClass ins = ObjectFactory.create(JacksonClass.class, true);
-        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ins);
+        String json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(ins);
         log.info("序列化:");
         System.out.println(json);
         log.info("反序列化:");
-        ins = mapper.readValue(json, JacksonClass.class);
+        ins = MAPPER.readValue(json, JacksonClass.class);
         System.out.println(ins);
 
+
+    }
+
+    /**
+     * map <——> json <——> pojo
+     */
+    @Test
+    public void mapToPojo() throws JsonProcessingException {
+        HashMap<String, Object> map = new HashMap<>(3);
+        map.put("name", RandomDataGenerator.randomName());
+        map.put("date", new Date());
+        map.put("is_present", RandomDataGenerator.tf());
+        String json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(map);
+        log.info("序列化:");
+        System.out.println(json);
+        log.info("反序列化:");
+        JacksonClass ins = MAPPER.readValue(json, JacksonClass.class);
+        System.out.println(ins);
+        json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(ins);
+        System.out.println(json);
 
     }
 
@@ -69,10 +93,8 @@ public class JacksonTest {
         // 使该字段不参与序列化和反序列化
         @JsonIgnore
         private Integer sum;
-
         @Ignore
         private Integer defaultValue;
-
         @Ignore
         private String nullValue;
     }

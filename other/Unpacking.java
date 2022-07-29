@@ -1,13 +1,17 @@
 package other;
 
+import annotation.Pass;
+
 /**
  * --------------- 包装类型拆箱时带来的空指针问题 ---------------
  *
  * @author zqw
  * @date 2022/7/16
  */
+@Pass
+@SuppressWarnings("all")
 class Unpacking {
-    @SuppressWarnings("all")
+
     public static Integer parseInt(String s) {
         return s == null ? (Integer) null : Integer.parseInt(s);
     }

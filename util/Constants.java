@@ -32,23 +32,28 @@ public interface Constants {
     /**
      * ~
      */
-    int HUNDRED = 100;
-    int THOUSAND = 1000;
-    int TEN_THOUSAND = 10_000;
-    int HUNDRED_THOUSAND = 100_000;
-    int MILLION = 1_000_000;
-    int TEN_MILLION = 10000000;
-    int HUNDRED_MILLION = 100_000_000;
+    int NUM_100 = 100;
+    int NUM_1000 = 1000;
+    int NUM_10000 = 10_000;
+    int NUM_100000 = 100_000;
+    int NUM_1000000 = 1_000_000;
+    int NUM_10000000 = 10_000_000;
+    int NUM_100000000 = 100_000_000;
 
 
     String LOOP_BACK = "127.0.0.1";
 
-    // field type
-    String string = "String";
-    String bool = "boolean";
-    String integer = "integer";
-    String lon = "long";
-    String date = "Date";
+    // ############################# field type #############################
+
+    String STRING = "String";
+    String BOOL = "boolean";
+    String INTEGER = "integer";
+    String LONG = "long";
+    String DATE = "Date";
+
+    // 符号
+
+    String Symbol_Pound_Sign = "#";
 
 
 }

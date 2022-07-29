@@ -1,5 +1,6 @@
 package effective;
 
+import annotation.Pass;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import lombok.Setter;
  * @author zqw
  * @date 2021/10/27
  */
+@Pass
 @Setter
 @Getter
 class Article12 {
@@ -35,7 +37,9 @@ class Article12 {
      * @return String representation of this phone number
      */
     @Override
+
     public String toString() {
+        // %0nd 不够n位;0填充
         return String.format("%03d-%03d-%04d", areaCode, prefix, lineNum);
     }
 

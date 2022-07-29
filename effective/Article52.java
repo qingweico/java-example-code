@@ -10,6 +10,7 @@ import static util.Print.*;
  * 慎用重载
  * 始终可以给方法起不同的名称，而不使用重载机制
  */
+@SuppressWarnings("unused")
 class CollectionClassifier {
 
     /**

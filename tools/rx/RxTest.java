@@ -1,7 +1,7 @@
 package tools.rx;
 
 /**
- * --------------- RxJava ---------------
+ * --------------- RxJava(Reactive Extension for Java) ---------------
  *
  * @author zqw
  * @date 2022/7/16

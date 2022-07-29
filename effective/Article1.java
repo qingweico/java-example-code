@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.time.Instant;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ import java.util.Date;
  * 4> 返回的对象的类可以随着每次调用而发生变化, 取决于静态工厂方法的参数值
  * 5> 方法返回的对象所属的类, 在编写该静态工厂方法时可以不存在
  */
+@Pass
 class Article1 {
     /**
      * java8以后接口可以包含静态方法, 但是仍要求所有的静态成员必须是公有的

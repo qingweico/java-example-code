@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.awt.*;
 import java.util.Objects;
 import java.util.Set;
@@ -21,7 +23,8 @@ import static util.Print.print;
  * @author zqw
  * @date 2020/11/1
  */
-
+@Pass
+@SuppressWarnings("all")
 final class CaseInsensitiveString {
     private final String s;
 
@@ -147,7 +150,8 @@ class ColorPoint extends Point {
 
     }
 }
-
+@Pass
+@SuppressWarnings("all")
 class SmellPoint extends Point {
     public enum Smell {
         /**

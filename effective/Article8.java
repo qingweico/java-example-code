@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.lang.ref.Cleaner;
 
 /**
@@ -9,6 +11,7 @@ import java.lang.ref.Cleaner;
  * @author zqw
  * @date 2021/4/1
  */
+@Pass
 class Article8 {
     public static void main(String[] args) {
         // They do increase the chance that a finalization or cleanup will be executed,

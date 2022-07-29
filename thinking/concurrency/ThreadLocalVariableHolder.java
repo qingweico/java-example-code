@@ -1,5 +1,7 @@
 package thinking.concurrency;
 
+import thread.pool.CustomThreadPool;
+
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,36 +11,42 @@ import java.util.concurrent.TimeUnit;
  * Thread local storage: Automatically giving each thread its own storage.
  * Create different stores for different threads that use the same variable.
  *
- * @author:qiming
- * @date: 2021/1/31
+ * @author zqw
+ * @date 2021/1/31
  */
-public class ThreadLocalVariableHolder {
-    private static final ThreadLocal<Integer> value = new ThreadLocal<>() {
+class ThreadLocalVariableHolder {
+    private static final ThreadLocal<Integer> TL = new ThreadLocal<>() {
         private final Random random = new Random(47);
+
+        @Override
         protected synchronized Integer initialValue() {
             return random.nextInt(1000);
         }
     };
 
     public static void increment() {
-        value.set(value.get() + 1);
+        TL.set(TL.get() + 1);
     }
 
-    public static int get() {return value.get();}
+    public static int get() {
+        return TL.get();
+    }
 
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService exec = Executors.newCachedThreadPool();
-        for(int i = 0;i < 5;i++) {
-            exec.execute(new Accessor(i));
+        int threadCount = 5;
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
+        for (int i = 0; i < threadCount; i++) {
+            pool.execute(new Accessor(i));
         }
-        // Run for for while
+        // Run for a while
         TimeUnit.SECONDS.sleep(1);
 
         // All Accessor will quit
-        exec.shutdownNow();
+        pool.shutdownNow();
 
     }
 }
+
 class Accessor implements Runnable {
 
     private final int id;
@@ -56,6 +64,7 @@ class Accessor implements Runnable {
         }
     }
 
+    @Override
     public String toString() {
         return "#" + id + ": " + ThreadLocalVariableHolder.get();
     }

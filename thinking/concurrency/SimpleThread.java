@@ -3,10 +3,10 @@ package thinking.concurrency;
 /**
  * Direct Inheriting Thread
  *
- * @author:qiming
- * @date: 2021/1/17
+ * @author zqw
+ * @date 2021/1/17
  */
-public class SimpleThread extends Thread {
+class SimpleThread extends Thread {
     private int countDown = 5;
     private static int threadCount = 0;
 
@@ -16,10 +16,12 @@ public class SimpleThread extends Thread {
         start();
     }
 
+    @Override
     public String toString() {
         return "#" + getName() + "(" + countDown + "), ";
     }
 
+    @Override
     public void run() {
         while (true) {
             System.out.print(this);
@@ -47,6 +49,7 @@ class SelfManaged implements Runnable {
         t.start();
     }
 
+    @Override
     public String toString() {
         return Thread.currentThread().getName() + "(" + countDown + "), ";
     }

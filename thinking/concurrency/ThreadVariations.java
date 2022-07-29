@@ -8,10 +8,10 @@ import static util.Print.print;
 /**
  * create threads with inner class
  *
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  */
-public class ThreadVariations {
+class ThreadVariations {
     public static void main(String[] args) {
         new InnerThread("InnerThread");
         new InnerThread0("InnerThread0");
@@ -32,6 +32,7 @@ class InnerThread {
             start();
         }
 
+        @Override
         public void run() {
             try {
                 while (true) {
@@ -47,6 +48,7 @@ class InnerThread {
             }
         }
 
+        @Override
         public String toString() {
             return getName() + ": " + countDown;
 
@@ -54,7 +56,7 @@ class InnerThread {
     }
 
     public InnerThread(String name) {
-        Inner inner = new Inner(name);
+        new Inner(name);
     }
 }
 

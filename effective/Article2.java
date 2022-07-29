@@ -1,13 +1,14 @@
 package effective;
 
+import annotation.Pass;
 import com.google.common.base.MoreObjects;
 
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static effective.NyPizza.Size.SMALL;
-import static effective.Pizza.Topping.*;
+import static effective.NyBasePizza.Size.SMALL;
+import static effective.BasePizza.Topping.*;
 
 /**
  * 遇到多个构造器参数时要考虑使用构建器
@@ -15,6 +16,7 @@ import static effective.Pizza.Topping.*;
  * @author zqw
  * @date 2021/2/22
  */
+@Pass
 class Article2 {
     public static void main(String[] args) {
 
@@ -255,7 +257,7 @@ class NutritionFactsOfUsingBuilder {
 /**
  * Builder pattern for class hierarchies
  */
-abstract class Pizza {
+abstract class BasePizza {
     public enum Topping {
         /**
          * ~
@@ -269,7 +271,7 @@ abstract class Pizza {
 
     final Set<Topping> toppings;
 
-    abstract static class Builder<T extends Builder<T>> {
+    abstract static class BaseBuilder<T extends BaseBuilder<T>> {
         EnumSet<Topping> toppings = EnumSet.noneOf(Topping.class);
 
         public T addTopping(Topping topping) {
@@ -282,7 +284,7 @@ abstract class Pizza {
          *
          * @return {@code Pizza}
          */
-        public abstract Pizza build();
+        public abstract BasePizza build();
 
         /**
          * Subclasses must override this method to return "this".
@@ -292,12 +294,12 @@ abstract class Pizza {
         protected abstract T self();
     }
 
-    Pizza(Builder<?> builder) {
+    BasePizza(BaseBuilder<?> builder) {
         toppings = builder.toppings.clone();
     }
 }
 
-class NyPizza extends Pizza {
+class NyBasePizza extends BasePizza {
     public enum Size {
         /**
          * ~
@@ -309,25 +311,25 @@ class NyPizza extends Pizza {
 
     private final Size size;
 
-    public static class Builder extends Pizza.Builder<Builder> {
+    public static class BaseBuilder extends BasePizza.BaseBuilder<BaseBuilder> {
         private final Size size;
 
-        public Builder(Size size) {
+        public BaseBuilder(Size size) {
             this.size = Objects.requireNonNull(size);
         }
 
         @Override
-        public NyPizza build() {
-            return new NyPizza(this);
+        public NyBasePizza build() {
+            return new NyBasePizza(this);
         }
 
         @Override
-        protected Builder self() {
+        protected BaseBuilder self() {
             return this;
         }
     }
 
-    NyPizza(Builder builder) {
+    NyBasePizza(BaseBuilder builder) {
         super(builder);
         size = builder.size;
     }
@@ -341,13 +343,13 @@ class NyPizza extends Pizza {
     }
 }
 
-class Calzone extends Pizza {
+class Calzone extends BasePizza {
     private final boolean sauceInside;
 
-    public static class Builder extends Pizza.Builder<Builder> {
+    public static class BaseBuilder extends BasePizza.BaseBuilder<BaseBuilder> {
         private boolean sauceInside = false;
 
-        public Builder sauceInside() {
+        public BaseBuilder sauceInside() {
             sauceInside = true;
             return this;
         }
@@ -359,12 +361,12 @@ class Calzone extends Pizza {
         }
 
         @Override
-        protected Builder self() {
+        protected BaseBuilder self() {
             return this;
         }
     }
 
-    Calzone(Builder builder) {
+    Calzone(BaseBuilder builder) {
         super(builder);
         sauceInside = builder.sauceInside;
     }
@@ -378,9 +380,9 @@ class Calzone extends Pizza {
     }
 
     public static void main(String[] args) {
-        NyPizza pizza = new NyPizza.Builder(SMALL)
+        NyBasePizza pizza = new NyBasePizza.BaseBuilder(SMALL)
                 .addTopping(SAUSAGE).addTopping(ONION).build();
-        Calzone calzone = new Calzone.Builder()
+        Calzone calzone = new BaseBuilder()
                 .addTopping(HAM).sauceInside().build();
         System.out.println(pizza);
         System.out.println(calzone);

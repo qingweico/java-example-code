@@ -3,13 +3,11 @@ package jcip;
 import java.util.concurrent.*;
 
 /**
- * @author:qiming
- * @date: 2021/3/31
+ * @author zqw
+ * @date 2021/3/31
  */
-public class ThreadDeadlock {
-    ExecutorService exec = Executors.newSingleThreadExecutor();
-
-
+class ThreadDeadlock {
+    static ExecutorService exec = Executors.newSingleThreadExecutor();
     public static class LoadFileTask implements Callable<String> {
         private final String fileName;
 
@@ -17,13 +15,14 @@ public class ThreadDeadlock {
             this.fileName = fileName;
         }
 
+        @Override
         public String call() throws Exception {
             // Here's where we would actually read the file
             return fileName;
         }
     }
 
-    public class RenderPageTask implements Callable<String> {
+    public static class RenderPageTask implements Callable<String> {
 
         @Override
         public String call() throws ExecutionException, InterruptedException {
@@ -38,5 +37,11 @@ public class ThreadDeadlock {
             // Here's where we would actually render the page
             return "";
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Future<String> future = exec.submit(new RenderPageTask());
+        System.out.println(future.get());
+        exec.shutdown();
     }
 }

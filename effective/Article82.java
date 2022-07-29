@@ -1,5 +1,6 @@
 package effective;
 
+import annotation.Pass;
 import thread.pool.CustomThreadPool;
 
 import java.util.Collections;
@@ -12,6 +13,8 @@ import java.util.concurrent.ExecutorService;
  * @author zqw
  * @date 2021/3/24
  */
+@Pass
+@SuppressWarnings("all")
 class Article82<K, V> {
     public void getMapView() {
         // It is imperative that the user manually synchronized on the returned map when
@@ -23,7 +26,7 @@ class Article82<K, V> {
         // Synchronizing on m, not s!
         synchronized (m) {
             for (K key : s) {
-                // ...
+                System.out.printf("k: %s, v: %s%n", key, m.get(key));
             }
         }
     }

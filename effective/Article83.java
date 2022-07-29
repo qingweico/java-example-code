@@ -1,6 +1,8 @@
 package effective;
 
 
+import annotation.Pass;
+
 /**
  * 慎用延迟初始化
  * In most cases, normal initialization takes precedence over lazy initialization!
@@ -8,7 +10,8 @@ package effective;
  * @author zqw
  * @date 2021/3/24
  */
-
+@Pass
+@SuppressWarnings("unused")
 class Article83 {
     /**
      * Normal initialization of an instance field
@@ -31,7 +34,6 @@ class Article83 {
         }
         return field;
     }
-
     static class FieldType {
     }
 
@@ -44,11 +46,11 @@ class Article83 {
         static final FieldType FIELD = computeFieldValue();
     }
 
-    private static FieldType getField0() {
+    private static FieldType field() {
         return FieldHolder.FIELD;
     }
 
-    /**Double-check idiom for lazy initialization of instance field.*/
+    /**Double-check idiom for lazy initialization of instance field*/
     static class Dcl {
         private volatile FieldType field;
 

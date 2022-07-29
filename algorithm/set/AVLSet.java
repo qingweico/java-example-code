@@ -1,16 +1,16 @@
 package algorithm.set;
 
-import algorithm.tree.AVLTree;
+import algorithm.tree.AvlTree;
 
 /**
  * @author:qiming
  * @date: 2021/11/1
  */
 public class AVLSet<E extends Comparable<E>, V> implements Set<E> {
-    private final AVLTree<E, Object> avlTree;
+    private final AvlTree<E, Object> avlTree;
 
     public AVLSet() {
-        avlTree = new AVLTree<>();
+        avlTree = new AvlTree<>();
     }
 
     @Override

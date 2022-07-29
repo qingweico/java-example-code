@@ -24,4 +24,8 @@ class Article49 {
         }
         return new BigInteger("0");
     }
+
+    public static void main(String[] args) {
+
+    }
 }

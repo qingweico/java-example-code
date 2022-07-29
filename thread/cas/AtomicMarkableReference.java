@@ -13,8 +13,8 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  */
 class AtomicMarkableReference {
 
-    static final Integer INIT_NUM = Constants.THOUSAND;
-    static final Integer UPDATE_NUM = Constants.HUNDRED;
+    static final Integer INIT_NUM = Constants.NUM_1000;
+    static final Integer UPDATE_NUM = Constants.NUM_100;
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2,1);
     static AtomicStampedReference<Integer> atomicStampedReference = new AtomicStampedReference<>(INIT_NUM, 1);
 

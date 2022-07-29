@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
  */
 public class RedissonLock {
     static int inventory = 100;
-    static int THREAD_COUNT = Constants.HUNDRED;
+    static int THREAD_COUNT = Constants.NUM_100;
     private static final String REDIS_SERVER = "redis://119.29.35.129:6379";
     private static final String REDIS_PASSWORD = "990712";
     private static final String REDIS_LOCK_KEY = "redis_lock";

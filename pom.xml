@@ -102,6 +102,17 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.22</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.7.22</version>
+		</dependency>
+		<!-- ip2region -->
+		<dependency>
+			<groupId>org.lionsoul</groupId>
+			<artifactId>ip2region</artifactId>
+			<version>2.6.5</version>
+		</dependency>
 		<!-- RxJava-->
 		<dependency>
 			<groupId>io.reactivex.rxjava2</groupId>
@@ -171,6 +182,12 @@
 			<groupId>co.paralleluniverse</groupId>
 			<artifactId>quasar-core</artifactId>
 			<version>0.7.6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.db4j</groupId>

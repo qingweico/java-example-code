@@ -64,7 +64,7 @@ public class CustomThreadPool {
     }
 
     public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize,
-                                                     boolean preStartAllCore) {
+                                                     boolean preStartAllCore, boolean isEnableMonitor) {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize,
                 maxPoolSize,
                 60L,
@@ -73,36 +73,44 @@ public class CustomThreadPool {
                 CustomThreadFactory.guavaThreadFactory(),
                 new CustomRejectedExecutionHandler()) {
             long start = 0;
-            long ret = 0;
-            long maxExecutionTime = 0;
-            long minExecutionTime = -1;
+            long thisTimeCost = 0;
+            double maxExecutionTime = -1;
+            double minExecutionTime = Integer.MAX_VALUE;
             double totalExecutionTime = 0.0;
             int totalExecutionCount = 0;
 
             @Override
             protected void beforeExecute(Thread t, Runnable r) {
-                start = System.currentTimeMillis();
+                super.beforeExecute(t, r);
+                if (isEnableMonitor) {
+                    start = System.currentTimeMillis();
+                }
             }
 
             @Override
             protected void afterExecute(Runnable r, Throwable t) {
-                ret = System.currentTimeMillis() - start;
-                totalExecutionTime += ret;
-                totalExecutionCount++;
-                if (minExecutionTime < ret) {
-                    minExecutionTime = ret;
-                }
-                if (ret > maxExecutionTime) {
-                    maxExecutionTime = ret;
+                super.afterExecute(r, t);
+                if (isEnableMonitor) {
+                    thisTimeCost = System.currentTimeMillis() - start;
+                    totalExecutionTime += thisTimeCost;
+                    totalExecutionCount++;
+                    if (minExecutionTime > thisTimeCost) {
+                        minExecutionTime = thisTimeCost;
+                    }
+                    if (thisTimeCost > maxExecutionTime) {
+                        maxExecutionTime = thisTimeCost;
+                    }
                 }
             }
 
             @Override
             protected void terminated() {
                 super.terminated();
-                log.info("线程池中任务的最大执行时间为: {}ms", maxExecutionTime);
-                log.info("线程池中任务的最小执行时间为: {}ms", minExecutionTime);
-                log.info("线程池中任务的平均执行时间为: {}ms", totalExecutionTime / totalExecutionCount);
+                if (isEnableMonitor) {
+                    log.info("线程池中任务的最大执行时间为: {}ms", maxExecutionTime);
+                    log.info("线程池中任务的最小执行时间为: {}ms", minExecutionTime);
+                    log.info("线程池中任务的平均执行时间为: {}ms", totalExecutionTime / totalExecutionCount);
+                }
             }
         };
         if (preStartAllCore) {
@@ -114,16 +122,28 @@ public class CustomThreadPool {
         return executor;
     }
 
+    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize, boolean isEnableMonitor) {
+        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false, isEnableMonitor);
+    }
+
+    public static ExecutorService newFixedThreadPool(int nThreads, boolean isEnableMonitor) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, false, isEnableMonitor);
+    }
+
+    public static ExecutorService newFixedThreadPool(int nThreads, boolean preStartAllCore, boolean isEnableMonitor) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore, isEnableMonitor);
+    }
+
     public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
-        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false);
+        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false, false);
     }
 
     public static ExecutorService newFixedThreadPool(int nThreads) {
-        return newFixedThreadPool(nThreads, nThreads, nThreads, false);
+        return newFixedThreadPool(nThreads, nThreads, nThreads, false, false);
     }
 
-    public static ExecutorService newFixedThreadPool(int nThreads, boolean preStartAllCore) {
-        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore);
+    public static ExecutorService newFixedThreadPool(boolean preStartAllCore, int nThreads) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore, false);
     }
 
     /**

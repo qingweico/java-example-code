@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  * @author zqw
  * @date 2021/2/20
  */
-public class DirectMemory {
+class DirectMemory {
     private static final int BUFFER = Constants.KB * Constants.KB * Constants.TEN;
 
     public static void main(String[] args) throws IOException, IllegalAccessException {

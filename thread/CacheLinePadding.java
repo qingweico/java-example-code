@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
  * @date 2022/2/11
  */
 public class CacheLinePadding {
-    private static final int COUNT = Constants.TEN_MILLION;
+    private static final int COUNT = Constants.NUM_10000000;
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 2);
     static CountDownLatch latch = new CountDownLatch(2);
 

@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.lang.reflect.Constructor;
 
 /**
@@ -8,6 +10,7 @@ import java.lang.reflect.Constructor;
  * @author zqw
  * @date 2021/3/22
  */
+@Pass
 class Article4 {
     public static void main(String[] args) throws Exception {
         Class<?> cls = Class.forName("effective.UtilityClass");

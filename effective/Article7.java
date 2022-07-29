@@ -90,8 +90,8 @@ class Stack<E> {
         }
     }
 
-    // 频繁向外读取内容的 使用extends(生产者)
-    // 经常向里插入的 使用super(消费者)
+    // 频繁向外读取内容的 使用extends(生产者); 向外提供数据即为生产者
+    // 经常向里插入的 使用super(消费者); 吸收外界数据的即为消费者
     // PECS : producer-extends; consumer-super
 
     public boolean isEmpty() {

@@ -51,19 +51,19 @@ public class ObjectFactory {
                 continue;
             }
             try {
-                if (Constants.bool.equalsIgnoreCase(field.getType().getSimpleName())) {
+                if (Constants.BOOL.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.tf());
                 }
-                if (Constants.integer.equalsIgnoreCase(field.getType().getSimpleName())) {
+                if (Constants.INTEGER.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.randomInt());
                 }
-                if (Constants.string.equalsIgnoreCase(field.getType().getSimpleName())) {
+                if (Constants.STRING.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.randomName());
                 }
-                if (Constants.lon.equalsIgnoreCase(field.getType().getSimpleName())) {
+                if (Constants.LONG.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, SnowflakeIdWorker.nextId());
                 }
-                if (Constants.date.equalsIgnoreCase(field.getType().getSimpleName())) {
+                if (Constants.DATE.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.randomDate());
                 }
             } catch (IllegalAccessException e) {

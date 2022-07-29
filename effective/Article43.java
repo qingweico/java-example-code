@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.util.HashMap;
 import java.util.*;
 import java.util.function.Function;
@@ -12,9 +14,11 @@ import java.util.stream.Stream;
  * @author zqw
  * @date 2021/2/20
  */
+@Pass
+@SuppressWarnings("all")
 class Article43 {
     public static void main(String[] args) {
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>(2);
         map.put("ke", 2);
         // When JDK8 adding
         // If the specified key is not mapped, the method inserts the specified value, if

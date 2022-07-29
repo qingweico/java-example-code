@@ -1,5 +1,6 @@
 package oak;
 
+import cn.hutool.Hutool;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
@@ -81,8 +82,12 @@ public class BaseTest {
         // true
         System.out.println(int.class.isAssignableFrom(int.class));
         // true
-        // 判断参数类型是否是Class类型的相同类型或者子类型
+        // 判断参数类型是否是Class类型的相同类型或者子类型,子接口
         System.out.println(Comparable.class.isAssignableFrom(Integer.class));
         System.out.println(System.getProperty("java.class.path"));
+    }
+    @org.junit.Test
+    public void huTool() {
+        Hutool.printAllUtils();
     }
 }

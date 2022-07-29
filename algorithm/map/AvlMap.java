@@ -1,15 +1,15 @@
 package algorithm.map;
 
-import algorithm.tree.AVLTree;
+import algorithm.tree.AvlTree;
 
 /**
  * @author zqw
  * @date 2021/11/1
  */
 public class AvlMap<K extends Comparable<K>, V> implements Map<K, V> {
-   private final AVLTree<K, V> avlTree;
+   private final AvlTree<K, V> avlTree;
    public AvlMap() {
-      avlTree = new AVLTree<>();
+      avlTree = new AvlTree<>();
    }
     @Override
     public void add(K k, V v) {

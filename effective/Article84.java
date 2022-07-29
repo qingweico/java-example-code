@@ -1,5 +1,6 @@
 package effective;
 
+import annotation.Pass;
 import thread.pool.CustomThreadPool;
 
 import java.util.concurrent.ExecutorService;
@@ -11,20 +12,21 @@ import java.util.concurrent.locks.LockSupport;
  * @author zqw
  * @date 2021/11/12
  */
+@Pass
 class Article84 {
     public static void main(String[] args) {
-        SlowCountDownLatch scdl = new SlowCountDownLatch(10);
+        SlowCountDownLatch cdl = new SlowCountDownLatch(10);
 
         int threadCount = 10;
         ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
         for (int i = 0; i < threadCount; i++) {
             pool.execute(() -> {
                 System.out.println(Thread.currentThread().getName());
-                scdl.countDown();
+                cdl.countDown();
             });
         }
         pool.shutdown();
-        scdl.awaitUnPark();
+        cdl.awaitUnPark();
         System.out.println("I am last!");
     }
 }

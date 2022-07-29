@@ -19,7 +19,7 @@ class Alphabetical {
         s = s.toLowerCase();
         for (int i = 0; i < s.length() - 1; ++i) {
             // 是否为字母 a~z A~Z
-            if (!Character.isLetter(s.charAt(i)) || !(s.charAt(i) <= s.charAt(i + 1))) {
+            if (!Character.isLetter(s.charAt(i)) || (s.charAt(i) > s.charAt(i + 1))) {
                 return false;
             }
         }

@@ -36,7 +36,7 @@ public class BlockingQueueTest {
 
 
         // Producer
-        for (int i = 0; i < Constants.HUNDRED; i++) {
+        for (int i = 0; i < Constants.NUM_100; i++) {
             pool.execute(() -> {
                 try {
                     // Math.random()可能会返回0的数值(除零异常)且返回值是double,Random.nextInt(bound)从1开始到bound

@@ -14,6 +14,9 @@ import static util.Print.print;
  * @date 2021/1/28
  */
 class Article78 {
+    public static void main(String[] args) {
+
+    }
 }
 class NotStopThread {
     // Cooperative thread termination with a volatile field.

@@ -2,7 +2,6 @@ package algorithm.array;
 
 import algorithm.sort.Tools;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -17,7 +16,7 @@ import java.util.Arrays;
 
 public class ArrayLeftRotation {
 
-    /*
+    /**
      * Returns the result of left rotation of given array arr and integer n
      * @param arr : int[] given array
      * @param n : int given integer

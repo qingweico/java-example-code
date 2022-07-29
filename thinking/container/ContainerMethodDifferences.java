@@ -11,7 +11,7 @@ import java.util.*;
  * @author zqw
  * @date 2021/4/11
  */
-public class ContainerMethodDifferences {
+class ContainerMethodDifferences {
     static Set<String> methodSet(Class<?> type) {
         Set<String> result = new TreeSet<>();
         for (Method m : type.getMethods()) {

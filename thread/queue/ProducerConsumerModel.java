@@ -90,7 +90,7 @@ class ProducerConsumerModel {
 
     public static void main(String[] args) {
         var p = new ProducerConsumerModel();
-        for (int i = 0; i < Constants.HUNDRED; i++) {
+        for (int i = 0; i < Constants.NUM_100; i++) {
             pool.execute(() -> {
                 while (true) {
                     try {
