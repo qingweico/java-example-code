@@ -2,8 +2,8 @@ package jcip;
 
 /**
  * Pseudo random integer
- * @author:qiming
- * @date: 2021/3/30
+ * @author zqw
+ * @date 2021/3/30
  */
 public class PseudoRandom {
     int calculateNext(int prev) {

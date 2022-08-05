@@ -1,5 +1,7 @@
 package jcip;
 
+import annotation.Pass;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -7,10 +9,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * Timer will be used infrequently in JDK5.0 or later
  *
- * @author:qiming
- * @date: 2021/4/7
+ * @author zqw
+ * @date 2021/4/7
  */
-public class OutOfTime {
+@Pass
+@SuppressWarnings("all")
+class OutOfTime {
     public static void main(String[] args) throws InterruptedException {
         // Timer creates only one thread while executing all timed tasks.
         Timer timer = new Timer();

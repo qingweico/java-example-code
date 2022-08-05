@@ -6,8 +6,8 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * The random number generator based on ReentrantLock
  *
- * @author:qiming
- * @date: 2021/3/30
+ * @author zqw
+ * @date 2021/3/30
  */
 public class ReentrantLockPseudoRandom extends PseudoRandom {
     private final Lock lock = new ReentrantLock(false);

@@ -6,7 +6,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/2/8
  */
-public class HeapSize {
+class HeapSize {
     public static void main(String[] args) {
         long initialMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
         long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024;

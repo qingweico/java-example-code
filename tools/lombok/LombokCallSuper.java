@@ -6,9 +6,11 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import oak.User;
 import util.RandomDataGenerator;
+import util.SnowflakeIdWorker;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * {@link lombok.EqualsAndHashCode}
@@ -31,6 +33,18 @@ public class LombokCallSuper {
         // 1
         log.info("set size: {}, set: [{}]", set.size(), set);
 
+
+        String username = RandomDataGenerator.randomName();
+        User u1 = new User();
+        u1.setId(SnowflakeIdWorker.nextId());
+        u1.setUsername(username);
+        User u2 = new User();
+        u2.setId(SnowflakeIdWorker.nextId());
+        u2.setUsername(username);
+        System.out.printf("u1: %s%n", u1);
+        System.out.printf("u2: %s%n", u2);
+        // true
+        System.out.println(u1.equals(u2));
     }
 }
 

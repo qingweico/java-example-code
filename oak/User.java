@@ -2,6 +2,7 @@ package oak;
 
 import annotation.Ignore;
 import com.google.common.base.MoreObjects;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -16,8 +17,10 @@ import java.io.Serializable;
 @Setter
 @Accessors(chain = true)
 public class User implements Serializable {
+    @EqualsAndHashCode.Exclude
     private Long id;
     private String username;
+    @EqualsAndHashCode.Exclude
     private boolean isVip;
     @Ignore
     private transient Integer instantiation = 10;

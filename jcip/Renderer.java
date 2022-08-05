@@ -9,8 +9,8 @@ import static jcip.LaunderThrowable.launderThrowable;
  * ExecutorCompletionService implements CompletionService
  * QueueingFuture<V> extends FutureTask<V>
  *
- * @author:qiming
- * @date: 2021/4/7
+ * @author zqw
+ * @date 2021/4/7
  */
 public abstract class Renderer {
     private final ExecutorService executor;
