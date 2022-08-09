@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 /**
- * Break Parents Delegation Model
+ * Break Parents Delegation Model。
  *
  * @author zqw
  * @date 2021/10/21
@@ -20,6 +20,7 @@ public class CustomClassLoaderTest {
     static String className = "jvm.GenClass";
 
     private static byte[] genClass() throws CannotCompileException, IOException {
+        // javassist
         var classPool = ClassPool.getDefault();
         var ctClass = classPool.getOrNull(className);
         if (ctClass != null) {

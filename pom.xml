@@ -217,6 +217,12 @@
 			<artifactId>Java-WebSocket</artifactId>
 			<version>1.5.2</version>
 		</dependency>
+		<!-- disruptor[单机版高性能MQ] -->
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>3.4.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

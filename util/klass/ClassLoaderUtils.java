@@ -465,7 +465,9 @@ public abstract class ClassLoaderUtils {
          */
         public String resolve(String name) {
             String normalizedName = supported(name) ? normalize(name) : null;
-            if (normalizedName == null) return null;
+            if (normalizedName == null) {
+                return null;
+            }
 
             normalizedName = URLUtils.resolvePath(normalizedName);
 

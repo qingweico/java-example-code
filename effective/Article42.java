@@ -1,10 +1,9 @@
 package effective;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import annotation.Pass;
+
+import java.util.*;
 import java.util.function.DoubleBinaryOperator;
 
 /**
@@ -17,7 +16,8 @@ import java.util.function.DoubleBinaryOperator;
 // An interface with an abstract method (or, almost always, a class that is not abstract)
 // is a function type whose instances are called function objects representing the
 // function or the action to be taken.
-
+@Pass
+@SuppressWarnings("all")
 class Article42 {
     public static void main(String[] args) {
 
@@ -52,13 +52,7 @@ enum OperationOfUsingLambda {
     /**
      * plus
      */
-    PLUS("+", (x, y) -> {
-
-        // TODO
-        // Cannot be referenced from a static context:
-        // System.out.println(this);
-        return x + y;
-    }),
+    PLUS("+", Double::sum),
     /**
      * minus
      */
@@ -70,7 +64,16 @@ enum OperationOfUsingLambda {
     /**
      * divide
      */
-    DIVIDE("/", (x, y) -> x / y);
+    DIVIDE("/", (x, y) -> x / y),
+
+    /**
+     * [other] User Customized
+     */
+    MOD("%", (x, y) -> x % y) {
+        // Cannot be referenced from a static context: why?
+        // System.out.println(this);
+        // nothing to do here;
+    };
 
     public double apply(double a, double b) {
         return op.applyAsDouble(a, b);
@@ -82,13 +85,19 @@ enum OperationOfUsingLambda {
     OperationOfUsingLambda(String symbol, DoubleBinaryOperator operator) {
         this.symbol = symbol;
         op = operator;
+        System.out.printf("[%s]: exec constructor!%n", this);
     }
 
     @Override
     public String toString() {
-        return "Operation{" +
-                "symbol='" + symbol + '\'' +
-                '}';
+        return "[" + super.toString() + "]: " + symbol;
+    }
+
+    public static void main(String[] args) {
+        double apply = OperationOfUsingLambda.PLUS.apply(12, 32);
+        System.out.println(apply);
+        double mod = OperationOfUsingLambda.MOD.apply(2, 4);
+        System.out.println(mod);
     }
 
     // But Lambda is limited to function interfaces. If you want to create an instance

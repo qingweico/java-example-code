@@ -1,6 +1,8 @@
 package util;
 
 import java.io.PrintStream;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author zqw
@@ -69,5 +71,20 @@ public class Print {
     public static PrintStream
     printf(String format, Object... args) {
         return System.out.printf(format, args);
+    }
+
+    /**
+     * Print a Map
+     * @param map the map to print
+     */
+    public static void toPrint(Map<?, ?> map) {
+        if (map == null || map.size() == 0) {
+            System.err.println("map is null or size == 0");
+            return;
+        }
+        Set<? extends Map.Entry<?, ?>> entrySet = map.entrySet();
+        for (Map.Entry<?, ?> entry : entrySet) {
+            System.out.printf("[key: %s, value: %s]%n", entry.getKey(), entry.getValue());
+        }
     }
 }

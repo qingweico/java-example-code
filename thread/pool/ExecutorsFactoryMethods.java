@@ -17,6 +17,8 @@ import static util.Print.print;
  * 在 {@code Hotspot VM}的线程模型中Java线程被一对一映射为本地操作系统线程
  * 1: 上层 Java多线程程序通常把应用分解为若干任务 然后使用用户级的调度器将这些任务映射为固定数量的线程
  * 2: 在底层 操作系统内核将这些线程映射到硬件处理器上
+ * {@link ScheduledThreadPoolExecutor extends ThreadPoolExecutor} 主要用来在给定的延迟之后运行任务
+ * 或定期者执行任务
  *
  * 任务       任务       任务
  *  |          |         |
@@ -46,6 +48,26 @@ import static util.Print.print;
  *              |
  *              V
  *             CPU
+ *  ################################## Executors 框架的类与接口 ##################################
+ *  Runnable Future<V> Callable<V> Executor
+ *      ^      ^                       ^
+ *      |      |                       |
+ *      |      |                       |
+ *  RunnableFuture                   ExecutorService
+ *        ^                            ^        ^
+ *        |                            |        |
+ *        |                            |        |
+ *    FutureTask                       |        |
+ *                                     |        |
+ *                AbstractExecutorService      ScheduledExecutorService
+ *                             ^                          ^
+ *                             |                          |
+ *                             |                          |
+ *                      ThreadPoolExecutor                |
+ *                                      ^                 |
+ *                                      |                 |
+ *                                      |                 |
+ *                                     ScheduledThreadPoolExecutor
  */
 class ExecutorsFactoryMethods {
     public static void main(String[] args) throws InterruptedException {

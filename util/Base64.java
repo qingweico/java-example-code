@@ -124,8 +124,9 @@ class Base64 {
                 missingBytesInLastGroup++;
                 numFullGroups--;
             }
-            if (s.charAt(sLen - 2) == '=')
+            if (s.charAt(sLen - 2) == '=') {
                 missingBytesInLastGroup++;
+            }
         }
         byte[] result = new byte[3 * numGroups - missingBytesInLastGroup];
 

@@ -12,6 +12,8 @@ import java.util.concurrent.ExecutorService;
  * it does not affect the final consistency of the single thread.
  * class文件中前后的字节码,并不意味着前者一定在后者之前执行;如果后者没有观测前者的运行结果,即后者
  * 没有数据依赖于前者,那么它们可能会被重排序
+ * 线程的as-if-serial: 看上去是序列化(顺序)执行的,但是编译器或者CPU都会对其进行乱序执行;
+ * 单线程的重排序,必须保证最终一致性
  *
  * @author zqw
  * @date 2021/1/30

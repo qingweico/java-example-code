@@ -39,6 +39,7 @@ public interface Constants {
     int NUM_1000000 = 1_000_000;
     int NUM_10000000 = 10_000_000;
     int NUM_100000000 = 100_000_000;
+    int NUM_1000000000 = 1_000_000_000;
 
 
     String LOOP_BACK = "127.0.0.1";

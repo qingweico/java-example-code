@@ -1,5 +1,6 @@
 package geek.reflect;
 
+import annotation.Pass;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -11,6 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2022/8/5
  */
 @Slf4j
+@Pass
+@SuppressWarnings("all")
 public
 class ReflectionWithAnnotationAndGenericTest {
     private void age(int age) {
@@ -73,8 +76,14 @@ class ReflectionWithAnnotationAndGenericTest {
     @Test
     public void son() {
         Son son = new Son();
-        Arrays.stream(son.getClass().getDeclaredMethods()).filter(method -> "setValue".equals(method.getName()))
-                .forEach(method -> {
+        // resolving:
+        Arrays.stream(son.getClass().getDeclaredMethods()).filter(
+                // 由于[泛型类型擦除 T -> Object]编译器会在Son字节码中生成一个入参类型为Object的setValue桥接方法来保证
+                // Java 语言层面重写的一致性;
+                // 使用method.isBridge()过滤掉即可
+                method -> "setValue".equals(method.getName()) && !method.isBridge())
+                // 只希望匹配0个或者1个
+                .findFirst().ifPresent(method -> {
                     try {
                         method.invoke(son, "son");
                     } catch (Exception e) {
@@ -102,4 +111,8 @@ class ReflectionWithAnnotationAndGenericTest {
                 });
         System.out.println(child);
     }
+    // =============== 子类及子类的方法无法自动继承父类上以及父类方法上的注解 ===============
+
+    // 使用 @Inherited 注解只能实现类上的注解 但是仍然无法获取父类方法上的注解
+    // 使用 Spring AnnotatedElementUtils#findMergedAnnotation(AnnotatedElement element, Class<A> annotationType)
 }
