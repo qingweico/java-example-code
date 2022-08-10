@@ -51,17 +51,20 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
             return count > 0;
         }
 
+        @Override
         public Coffee next() {
             count--;
             return CoffeeGenerator.this.next();
         }
 
+        @Override
         public void remove() {
             // Not implemented
             throw new UnsupportedOperationException();
         }
     }
 
+    @Override
     public Iterator<Coffee> iterator() {
         return new CoffeeIterator();
     }

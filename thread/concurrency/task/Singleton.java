@@ -1,5 +1,7 @@
 package thread.concurrency.task;
 
+import util.Constants;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -35,7 +37,7 @@ class Singleton {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService exec = Executors.newCachedThreadPool();
         CyclicBarrier cyclicBarrier = new CyclicBarrier(500);
-        for (int i = 0; i < 1000_000; i++) {
+        for (int i = 0; i < Constants.NUM_1000000; i++) {
             cyclicBarrier.reset();
             List<Callable<Singleton>> list = new ArrayList<>();
             for (int j = 0; j < 500; j++) {

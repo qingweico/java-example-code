@@ -30,6 +30,7 @@ class CPUCoreThreadPoolCount {
     static class CPUType extends AbstractTask {
 
 
+        @Override
         @SuppressWarnings("unused")
         public void task() {
             double result = 0.0;

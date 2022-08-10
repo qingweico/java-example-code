@@ -16,6 +16,7 @@ public class RedPacketDecorator extends BaseComputeDecorator {
         super(compute);
     }
 
+    @Override
     public BigDecimal computePayMoney(OrderDetail orderDetail) {
         BigDecimal payTotalMoney = new BigDecimal(0);
         payTotalMoney = super.computePayMoney(orderDetail);

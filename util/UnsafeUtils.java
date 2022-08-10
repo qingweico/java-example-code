@@ -147,11 +147,13 @@ public abstract class UnsafeUtils {
      * @param index      索引值
      * @param baseOffset {@link Unsafe#arrayBaseOffset(Class)}
      * @param indexScale {@link Unsafe#arrayIndexScale(Class)}
-     * @return
+     * @return the array offset of array
      * @see java.util.concurrent.atomic.AtomicIntegerArray
      */
     protected static long arrayIndexOffset(int index, long baseOffset, long indexScale) {
-        if (index < 0) throw new IndexOutOfBoundsException("index " + index);
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("index " + index);
+        }
         return baseOffset + (long) index * indexScale;
     }
 

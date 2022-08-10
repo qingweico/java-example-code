@@ -3,31 +3,32 @@ package thinking.holding;
 import java.util.ArrayList;
 
 /**
- * @author:qiming
- * @date: 2021/1/17
+ * @author zqw
+ * @date 2021/1/17
  */
 public class ApplesAndOrangesWithoutGenerics {
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked, rawtypes")
     public static void main(String[] args) {
         ArrayList apples = new ArrayList();
-        for (int i = 0; i < 3; i++) {
+        int size = 3;
+        for (int i = 0; i < size; i++) {
             apples.add(new Apple());
             // Not prevented from adding an Orange to apples
             apples.add(new Orange());
         }
-        for (int i = 0; i < apples.size(); i++) {
+        for (Object apple : apples) {
             // Orange is detected only at run time
-            ((Apple) apples.get(i)).id();
+            ((Apple) apple).id();
         }
     }
 }
 
 class Apple {
-    private static long counter;
-    private static final long id = counter++;
+    private static long counter = 0;
+    private static final long ID = counter++;
 
     public long id() {
-        return id;
+        return ID;
     }
 }
 

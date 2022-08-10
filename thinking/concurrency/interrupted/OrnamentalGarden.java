@@ -102,6 +102,7 @@ class Entrance implements Runnable {
         return number;
     }
 
+    @Override
     public String toString() {
         return "Entrance " + id + ": " + getValue();
     }

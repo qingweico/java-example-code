@@ -1,5 +1,7 @@
 package thinking.genericity;
 
+import com.google.common.base.MoreObjects;
+
 import java.util.Arrays;
 
 /**
@@ -40,6 +42,10 @@ class CovariantArrays {
 }
 
 class Fruit {
+    @Override
+    public String toString() {
+        return "Fruit";
+    }
 }
 
 class Apple extends Fruit {

@@ -68,7 +68,7 @@ class CustomThread {
 // 1: javah thread.CustomThread   -----> thread_CustomThread.h
 
 // see thread_new.c
-// 2: gcc -fPIC -I /usr/local/jdk8/include/linux(Linux 下GNU C 编译器; Windows 参考)
+// 2: gcc -fPIC -I /usr/local/jdk8/include/linux(Linux下GNU C 编译动态链接库; Windows下 参考 coretech2.local.HelloNative)
 //        -shared -o libCustomThreadNative.so thread_new.c   -----> libCustomThreadNative.so
 
 

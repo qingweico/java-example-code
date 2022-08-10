@@ -1,5 +1,6 @@
 package thinking.concurrency.cooperation;
 
+import annotation.Pass;
 import thread.pool.CustomThreadPool;
 import util.Constants;
 
@@ -16,7 +17,9 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/4/11
  */
-public class NotifyVsNotifyAll {
+@Pass
+@SuppressWarnings("all")
+class NotifyVsNotifyAll {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService exec = CustomThreadPool.newFixedThreadPool(10);
         for (int i = 0; i < Constants.FIVE; i++) {

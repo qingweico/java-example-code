@@ -3,16 +3,18 @@ package thinking.exception;
 /**
  * Exception loss
  *
- * @author:qiming
- * @date: 2020/11/22
+ * @author zqw
+ * @date 2020/11/22
  */
 class VeryImportantException extends Exception {
+    @Override
     public String toString() {
         return "A very important exception!";
     }
 }
 
 class HoHumException extends Exception {
+    @Override
     public String toString() {
         return "A trivial exception";
     }

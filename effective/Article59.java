@@ -1,5 +1,7 @@
 package effective;
 
+import util.Constants;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -34,7 +36,7 @@ class Article59 {
     public static void main(String[] args) {
         int n = 2 * (Integer.MAX_VALUE / 3);
         int low = 0;
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < Constants.NUM_1000000; i++) {
             if (random(n) < n / 2) {
                 low++;
             }
@@ -46,8 +48,10 @@ class Article59 {
 
 // 在java9中InputStream中增加了transferTo方法
 // 打印出命令行指定一条URL(url需要加协议)的内容, Linux中curl命令作用大体如此
+
 class InputStreamOfTransferTo {
     public static void main(String[] args) throws IOException {
+        /* Programmer arguments: https://qingweico.cn*/
         try (InputStream in = new URL(args[0]).openStream()) {
             in.transferTo(System.out);
         }

@@ -10,6 +10,10 @@ class HelloNative {
     static {
         System.loadLibrary("HelloNative");
     }
+
+    public static void main(String[] args) {
+        greeting();
+    }
 }
 
-// Windows cl -I ${jdk_home}\include\win32 -LD HelloNative.c -FeHelloNative.dll
+// gcc -I ${jdk_home}\include\win32 -LD HelloNative.c -FeHelloNative.dll

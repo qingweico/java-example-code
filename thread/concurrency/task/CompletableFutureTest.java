@@ -2,7 +2,7 @@ package thread.concurrency.task;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
-import org.testng.annotations.Test;
+import org.junit.Test;
 import thread.pool.CustomThreadPool;
 
 import java.util.Arrays;
@@ -15,6 +15,7 @@ import java.util.function.Supplier;
  * <p>
  * {@link CompletableFuture}
  * {@link CompletionStage} 代表异步计算过程中的某一个阶段, 一个阶段完成后可能会触发另外一个阶段
+ * ------------------ runAsync 无返回值; supplyAsync 有返回值 ------------------
  * {@link CompletableFuture#runAsync(Runnable)}
  * {@link CompletableFuture#runAsync(Runnable, Executor)}
  * {@link CompletableFuture#supplyAsync(Supplier)}
@@ -38,9 +39,10 @@ public class CompletableFutureTest {
     }
 
     @Test
-    public void runAsyncWithThreadPool() {
+    public void runAsyncWithThreadPool() throws ExecutionException, InterruptedException {
         ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
-        CompletableFuture.runAsync(() -> System.out.println("thread: " + Thread.currentThread().getName()), pool);
+        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> System.out.println("thread: " + Thread.currentThread().getName()), pool);
+        System.out.println(cf.get());
     }
 
     @Test
@@ -131,5 +133,9 @@ public class CompletableFutureTest {
         });
         CompletableFuture<String> f2 = f0.applyToEither(f1, s -> s);
         System.out.println(f2.join());
+    }
+    @Test
+    public void allOf() {
+        CompletableFuture.allOf();
     }
 }

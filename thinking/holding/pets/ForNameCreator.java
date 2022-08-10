@@ -28,5 +28,6 @@ public class ForNameCreator extends PetCreator {
     }
   }
   static { loader(); }
+  @Override
   public List<Class<? extends Pet>> types() {return types;}
 } ///:~
