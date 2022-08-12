@@ -1,7 +1,6 @@
 package util;
 
 import com.github.javafaker.Faker;
-import org.apache.commons.math3.random.RandomGenerator;
 
 import java.util.Calendar;
 import java.util.Date;

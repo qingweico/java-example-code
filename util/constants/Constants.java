@@ -26,4 +26,9 @@ public interface Constants {
      * Equal : "="
      */
     String EQUAL = "=";
+
+    /**
+     * BACKSLASH: "\"
+     */
+    String BACKSLASH = "\\";
 }

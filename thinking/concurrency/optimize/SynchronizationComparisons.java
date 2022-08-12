@@ -28,17 +28,17 @@ public class SynchronizationComparisons {
 
     static void test() {
         print("============================");
-        printf("%-12s : %13d\n", "Cycles", Accumulator.cycles);
+        printf("%-12s : %13d\n", "Cycles", AbstractAccumulator.cycles);
         baseLine.timeTest();
         sync.timeTest();
         lock.timeTest();
         atom.timeTest();
-        Accumulator.report(sync, baseLine);
-        Accumulator.report(lock, baseLine);
-        Accumulator.report(atom, baseLine);
-        Accumulator.report(sync, baseLine);
-        Accumulator.report(sync, atom);
-        Accumulator.report(lock, atom);
+        AbstractAccumulator.report(sync, baseLine);
+        AbstractAccumulator.report(lock, baseLine);
+        AbstractAccumulator.report(atom, baseLine);
+        AbstractAccumulator.report(sync, baseLine);
+        AbstractAccumulator.report(sync, atom);
+        AbstractAccumulator.report(lock, atom);
     }
 
     public static void main(String[] args) {
@@ -57,13 +57,13 @@ public class SynchronizationComparisons {
         // Producer multiple data points:
         for (int i = 0; i < iterations; i++) {
             test();
-            Accumulator.cycles *= 2;
+            AbstractAccumulator.cycles *= 2;
         }
-        Accumulator.exec.shutdown();
+        AbstractAccumulator.exec.shutdown();
     }
 }
 
-abstract class Accumulator {
+abstract class AbstractAccumulator {
     public static long cycles = 5_0000L;
     /**
      * Number of Modifiers and Readers during each test:
@@ -143,14 +143,14 @@ abstract class Accumulator {
         printf("%-13s: %13d\n", id, duration);
     }
 
-    public static void report(Accumulator a1, Accumulator a2) {
+    public static void report(AbstractAccumulator a1, AbstractAccumulator a2) {
         printf("%-22s: %.2f\n", a1.id + "/" + a2.id,
                 (double) a1.duration / (double) a2.duration);
     }
 
 }
 
-class BaseLine extends Accumulator {
+class BaseLine extends AbstractAccumulator {
     {
         id = "BaseLine";
     }
@@ -169,7 +169,7 @@ class BaseLine extends Accumulator {
     }
 }
 
-class SynchronizedTest extends Accumulator {
+class SynchronizedTest extends AbstractAccumulator {
     {
         id = "synchronized";
     }
@@ -188,7 +188,7 @@ class SynchronizedTest extends Accumulator {
     }
 }
 
-class LockTest extends Accumulator {
+class LockTest extends AbstractAccumulator {
     {
         id = "Lock";
     }
@@ -219,7 +219,7 @@ class LockTest extends Accumulator {
     }
 }
 
-class AtomicTest extends Accumulator {
+class AtomicTest extends AbstractAccumulator {
     {
         id = "Atomic";
     }
