@@ -9,6 +9,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 /**
  * @author zqw
  * @date 2021/10/17
+ * @see Mutex
  */
 public class Semaphore extends AbstractQueuedSynchronizer {
     static CustomThreadPool pool = new CustomThreadPool(5, 5);
@@ -16,6 +17,8 @@ public class Semaphore extends AbstractQueuedSynchronizer {
     public Semaphore(int permits) {
         setState(permits);
     }
+
+    /*共享式获取同步状态 独占式->Mutex#tryAcquire*/
 
     @Override
     protected int tryAcquireShared(int arg) {
@@ -29,6 +32,7 @@ public class Semaphore extends AbstractQueuedSynchronizer {
         }
         return -1;
     }
+    /*共享式释放同步状态 独占式->Mutex#tryRelease*/
 
     @Override
     protected boolean tryReleaseShared(int arg) {

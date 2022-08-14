@@ -8,9 +8,18 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * ######################### Lock 接口 #########################
+ * Lock 相对于 synchronized 提供了
+ * 1: 非阻塞地获取锁 {@link Lock#tryLock()}
+ * 2: 中断地获取锁 {@link thinking.concurrency.interrupted.Interrupting}
+ * 3: 超时获取锁 {@link Lock#tryLock()}
+ * (对于tryLock() API 当前线程在超时时间内获取了锁;当前线程在超时时间内被中断;超时时间结束都会返回)
+ *
+ *
  * ReentrantLock WaitSet and EntryList
  *
  * @author zqw

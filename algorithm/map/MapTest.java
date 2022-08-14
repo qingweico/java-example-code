@@ -1,6 +1,6 @@
 package algorithm.map;
 
-import algorithm.sort.Tools;
+import util.Tools;
 import org.junit.Test;
 import thread.pool.CustomThreadPool;
 import util.FileOperation;

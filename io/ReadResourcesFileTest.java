@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import util.Print;
-import util.constants.Constants;
+import util.constants.Symbol;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -107,7 +107,7 @@ public class ReadResourcesFileTest {
         /*通过绝对路径获取*/
         String rootPath = System.getProperty("user.dir");
         log.info("rootPath: {}", rootPath);
-        String filePath = rootPath + Constants.BACKSLASH + fileName;
+        String filePath = rootPath + Symbol.BACKSLASH + fileName;
         getFileContent(filePath);
     }
 
@@ -119,7 +119,7 @@ public class ReadResourcesFileTest {
         System.out.println(dict.getAbsolutePath());
         String canonicalPath = dict.getCanonicalPath();
         System.out.println(canonicalPath);
-        String filePath = canonicalPath +  Constants.BACKSLASH + fileName;
+        String filePath = canonicalPath +  Symbol.BACKSLASH + fileName;
         getFileContent(filePath);
     }
     @Test
@@ -134,7 +134,7 @@ public class ReadResourcesFileTest {
         System.setProperty(key, value);
         String rootPath = System.getProperty(key);
         log.info("rootPath: {}", rootPath);
-        String filePath = rootPath +  Constants.BACKSLASH + fileName;
+        String filePath = rootPath +  Symbol.BACKSLASH + fileName;
         getFileContent(filePath);
     }
 

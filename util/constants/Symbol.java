@@ -1,11 +1,12 @@
 package util.constants;
 
 /**
- * {@link Constants}
+ * {@link Symbol}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  */
-public interface Constants {
+public interface Symbol {
+    // 符号
 
     /**
      * Dot : "."
@@ -31,4 +32,14 @@ public interface Constants {
      * BACKSLASH: "\"
      */
     String BACKSLASH = "\\";
+
+    /**
+     * FULL_STOP: "。"
+     */
+    String FULL_STOP = "。";
+
+    /**
+     * SEMICOLON: ";"
+     */
+    String SEMICOLON = ";";
 }

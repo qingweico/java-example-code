@@ -1,5 +1,9 @@
 package thinking.concurrency.interrupted;
 
+import thread.pool.CustomThreadPool;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
@@ -12,12 +16,13 @@ import static util.Print.print;
  * @date 2021/2/7
  */
 // General idiom for interrupted a task
+
 class InterruptingIdiom {
     public static void main(String[] args) throws InterruptedException {
-        Thread t = new Thread(new Blocked());
-        t.start();
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
+        Future<?> submit = pool.submit(new Blocked());
         TimeUnit.MILLISECONDS.sleep(1000);
-        t.interrupt();
+        submit.cancel(true);
     }
 }
 

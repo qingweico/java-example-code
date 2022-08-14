@@ -1,6 +1,6 @@
 package collection.array;
 
-import algorithm.sort.Tools;
+import util.Tools;
 import collection.Customer;
 import thinking.genericity.BasicGenerator;
 import util.collection.CollectionData;

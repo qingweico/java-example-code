@@ -6,7 +6,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 
 import org.apache.commons.lang3.StringUtils;
-import util.constants.Constants;
+import util.constants.Symbol;
 import util.constants.FileSuffixConstants;
 import util.constants.PathConstants;
 import util.filter.ClassFileJarEntryFilter;
@@ -246,10 +246,10 @@ public abstract class ClassUtils {
      * @return class name
      */
     public static String resolveClassName(String resourceName) {
-        String className = StringUtils.replace(resourceName, PathConstants.SLASH, Constants.DOT);
+        String className = StringUtils.replace(resourceName, PathConstants.SLASH, Symbol.DOT);
         className = StringUtils.substringBefore(className, FileSuffixConstants.CLASS);
-        while (StringUtils.startsWith(className, Constants.DOT)) {
-            className = StringUtils.substringAfter(className, Constants.DOT);
+        while (StringUtils.startsWith(className, Symbol.DOT)) {
+            className = StringUtils.substringAfter(className, Symbol.DOT);
         }
         return className;
     }

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2021/1/16
  */
-public class Daemons {
+class Daemons {
     public static void main(String[] args) throws Exception {
         Thread t = new Thread(new Daemon());
         t.setDaemon(true);

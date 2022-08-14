@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 
 /**
  * 基于 Redisson 的 Redis 分布式锁
- * {@code 理解Paxos;Raft一致性算法}
+ * {@code 理解Paxos;Redis 提供了Raft(Paxos 简化版本)一致性算法}
  *
  * @author zqw
  * @date 2022/3/13

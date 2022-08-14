@@ -1,6 +1,6 @@
 package algorithm.heap;
 
-import algorithm.sort.Tools;
+import util.Tools;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

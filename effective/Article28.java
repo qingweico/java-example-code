@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -9,16 +11,21 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author zqw
  * @date 2021/3/5
  */
+@Pass
+@SuppressWarnings("all")
 class Article28<E> {
     // First, Arrays are covariant, if Sub is a subtype of Super, then the type Sub[] is
     // a subtype of Super[]; In contrast, generics are mutable, and for any two different
     // types, Type1 and Type2, List<Type1> neither List<Type2> subtype of, also not
     // List<Type2> the type of super.
     // eg: Double[] is subtype of Number[].
-    private abstract static class N {
-        abstract Number[] n();
+
+    private static class Num {
+        Number[] n(){
+            return null;
+        }
     }
-    static class D extends N {
+    static class Dou extends Num {
 
         @Override
         Double[] n() {
@@ -49,6 +56,8 @@ class Article28<E> {
         // ol.add("I don't fit it");
     }
 }
+@Pass
+@SuppressWarnings("all")
 class ArrayGeneric {
     public static void main(String[] args) {
         // generic array creation
@@ -61,6 +70,7 @@ class ArrayGeneric {
 
 
         // legal
+
          List<?>[] lists = new List<?>[1];
     }
 }
@@ -75,6 +85,8 @@ class ArrayGeneric {
 
 
 // Chooser - a class badly in need of generic
+@Pass
+@SuppressWarnings("all")
 class Chooser {
     private final Object[] choiceArray;
     public Chooser(Collection choices) {
@@ -87,6 +99,8 @@ class Chooser {
 }
 
 // A first cut at making Chooser generic
+@Pass
+@SuppressWarnings("all")
 class ChooserUseGeneric<T> {
     private final T[] choiceArray;
     @SuppressWarnings("unchecked")
@@ -101,8 +115,10 @@ class ChooserUseGeneric<T> {
 
 }
 // List-based Chooser - typesafe
+
 class ChooserUseList <T>{
-    // To eliminate unchecked exceptions, you must choose to replace arrays with lists.
+    /*To eliminate unchecked exceptions, you must choose to replace arrays with lists.*/
+
     private final List<T> choiceList;
     public ChooserUseList(Collection<T> choices) {
         this.choiceList = new ArrayList<>(choices);
@@ -116,6 +132,4 @@ class ChooserUseList <T>{
         List<Integer> rs = Arrays.asList(1, 2 ,3);
         new ChooserUseList<>(rs).choose();
     }
-
-
 }

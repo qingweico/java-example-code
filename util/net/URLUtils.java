@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import util.constants.Constants;
+import util.constants.Symbol;
 import util.constants.PathConstants;
 import util.constants.ProtocolConstants;
 import util.constants.SeparatorConstants;
@@ -89,10 +89,10 @@ public abstract class URLUtils {
         String queryString = StringUtils.substringAfterLast(url, SeparatorConstants.QUERY_STRING);
         if (StringUtils.isNotBlank(queryString)) {
             Map<String, List<String>> parametersMap = Maps.newLinkedHashMap();
-            String[] queryParams = StringUtils.split(queryString, Constants.AND);
+            String[] queryParams = StringUtils.split(queryString, Symbol.AND);
             if (queryParams != null) {
                 for (String queryParam : queryParams) {
-                    String[] paramNameAndValue = StringUtils.split(queryParam, Constants.EQUAL);
+                    String[] paramNameAndValue = StringUtils.split(queryParam, Symbol.EQUAL);
                     if (paramNameAndValue.length > 0) {
                         String paramName = paramNameAndValue[0];
                         String paramValue = paramNameAndValue.length > 1 ? paramNameAndValue[1] : StringUtils.EMPTY;

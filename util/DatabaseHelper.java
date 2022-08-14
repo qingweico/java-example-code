@@ -25,6 +25,7 @@ public class DatabaseHelper {
     static String dbUlr;
     static String username;
     static String password;
+    static String db = "db.properties";
 
     static {
         properties = new Properties();
@@ -32,10 +33,10 @@ public class DatabaseHelper {
         // 设置 JDBC 日志流到控制台
         DriverManager.setLogWriter(new PrintWriter(new PrintStream(System.out), true, Charset.defaultCharset()));
         try {
-            fin = new FileInputStream("db.properties");
+            fin = new FileInputStream(db);
             properties.load(fin);
         } catch (IOException e) {
-            log.error("io error");
+            log.error("load {} error, {}", db, e.getMessage());
         }
         driveClassName = properties.getProperty("driver");
         dbUlr = properties.getProperty("url");
@@ -48,12 +49,12 @@ public class DatabaseHelper {
         try {
             Class.forName(driveClassName);
         } catch (ClassNotFoundException e) {
-            log.error("drive class not found");
+            log.error("drive class not found, {}", e.getMessage());
         }
         try {
             return DriverManager.getConnection(dbUlr, username, password);
         } catch (SQLException e) {
-            log.error("sql connection error");
+            log.error("get connection error, {}", e.getMessage());
         }
         return null;
     }

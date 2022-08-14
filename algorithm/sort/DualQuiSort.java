@@ -1,5 +1,7 @@
 package algorithm.sort;
 
+import util.Tools;
+
 import java.util.Random;
 
 /**

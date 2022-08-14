@@ -6,7 +6,7 @@ package thread.lock;
  * @author zqw
  * @date 2022/7/2
  */
-class StampedLockResolvingCasABA {
+class StampedLockResolvingCasAba {
     public static void main(String[] args) {
 
     }

@@ -1,13 +1,17 @@
 package thinking.concurrency.interrupted;
 
+import thread.pool.CustomThreadPool;
+
+import java.util.concurrent.ExecutorService;
+
 import static util.Print.print;
 
 /**
  * One thread can reacquire the same lock
- * @author:qiming
- * @date: 2021/2/7
+ * @author zqw
+ * @date 2021/2/7
  */
-public class MultiLock {
+class MultiLock {
     public synchronized void f1(int count) {
         if (count-- > 0) {
             print("f1() calling f2() with count " + count);
@@ -24,6 +28,8 @@ public class MultiLock {
 
     public static void main(String[] args) {
         final MultiLock multiLock = new MultiLock();
-        new Thread(() -> multiLock.f1(10)).start();
+        ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
+        pool.execute(() -> multiLock.f1(10));
+        pool.shutdown();
     }
 }

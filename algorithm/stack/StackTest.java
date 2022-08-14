@@ -1,6 +1,6 @@
 package algorithm.stack;
 
-import algorithm.sort.Tools;
+import util.Tools;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;

@@ -14,7 +14,8 @@ import java.util.concurrent.Future;
 
 /**
  * Word frequency statistics
- * @author qiming
+ *
+ * @author zqw
  * @date 2021/9/27
  */
 public class WordStatistics {
@@ -35,15 +36,16 @@ public class WordStatistics {
 
         @Override
         public Map<String, Integer> call() throws Exception {
-            var channel = new RandomAccessFile(filename, "rw").getChannel();
+            try (RandomAccessFile raf = new RandomAccessFile(filename, "rw")) {
+                var channel = raf.getChannel();
+                var mapBuf = channel.map(
+                        FileChannel.MapMode.READ_ONLY,
+                        start,
+                        end - start);
 
-            var mapBuf = channel.map(
-                    FileChannel.MapMode.READ_ONLY,
-                    start,
-                    end - start);
-
-            var str = StandardCharsets.US_ASCII.decode(mapBuf).toString();
-            return countByString(str);
+                var str = StandardCharsets.US_ASCII.decode(mapBuf).toString();
+                return countByString(str);
+            }
         }
     }
 
@@ -53,7 +55,7 @@ public class WordStatistics {
         var position = 0L;
         var tasks = new ArrayList<Future<Map<String, Integer>>>();
         var start = System.currentTimeMillis();
-        while(position < fileSize) {
+        while (position < fileSize) {
             var next = Math.min(position + chunkSize, fileSize);
             var task = new CountTask(filename, position, next);
             position = next;
@@ -63,9 +65,9 @@ public class WordStatistics {
         System.out.format("split to %d tasks\n", tasks.size());
 
         var total = new HashMap<String, Integer>();
-        for(var future : tasks) {
+        for (var future : tasks) {
             var map = future.get();
-            for(var entry : map.entrySet()) {
+            for (var entry : map.entrySet()) {
                 incKey(entry.getKey(), total, entry.getValue());
             }
         }
@@ -91,6 +93,7 @@ public class WordStatistics {
 
     /**
      * Single Thread
+     *
      * @throws IOException @throw IOException
      */
     @Test
@@ -116,7 +119,8 @@ public class WordStatistics {
 
     /**
      * ForkJoin
-     * @throws ExecutionException @throw ExecutionException
+     *
+     * @throws ExecutionException   @throw ExecutionException
      * @throws InterruptedException @throw InterruptedException
      */
     @Test

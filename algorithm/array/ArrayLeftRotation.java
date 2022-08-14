@@ -1,6 +1,6 @@
 package algorithm.array;
 
-import algorithm.sort.Tools;
+import util.Tools;
 
 import java.util.Arrays;
 

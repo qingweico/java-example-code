@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import util.constants.Constants;
+import util.constants.Symbol;
 import util.constants.FileSuffixConstants;
 import util.constants.PathConstants;
 import util.net.URLUtils;
@@ -438,7 +438,7 @@ public abstract class ClassLoaderUtils {
             @Override
             public String normalize(String name) {
                 String className = StringUtils.replace(name, FileSuffixConstants.CLASS, StringUtils.EMPTY);
-                return StringUtils.replace(className, Constants.DOT, PathConstants.SLASH) + FileSuffixConstants.CLASS;
+                return StringUtils.replace(className, Symbol.DOT, PathConstants.SLASH) + FileSuffixConstants.CLASS;
             }
 
 
@@ -451,7 +451,7 @@ public abstract class ClassLoaderUtils {
 
             @Override
             String normalize(String name) {
-                return StringUtils.replace(name, Constants.DOT, PathConstants.SLASH) + PathConstants.SLASH;
+                return StringUtils.replace(name, Symbol.DOT, PathConstants.SLASH) + PathConstants.SLASH;
             }
 
 

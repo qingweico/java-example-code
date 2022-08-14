@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 class ReenterableSynchronized {
     final Object lock = new Object();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
 
     public void f() {
         // countLock++

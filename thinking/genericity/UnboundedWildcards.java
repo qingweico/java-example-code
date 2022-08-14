@@ -8,10 +8,10 @@ import java.util.Map;
 /**
  * Unbounded wildcard <?>
  *
- * @author:qiming
- * @date: 2021/1/14
+ * @author zqw
+ * @date 2021/1/14
  */
-public class UnboundedWildcards {
+class UnboundedWildcards {
     static List list1;
     static List list2;
     static List<? extends Object> list3;
@@ -73,14 +73,14 @@ class UnboundedWildcard {
     }
 
     public static void main(String[] args) {
-        assign1(new HashMap());
-        assign2(new HashMap());
-        assign3(new HashMap());
+        assign1(new HashMap(0));
+        assign2(new HashMap(0));
+        assign3(new HashMap(0));
 
 
-        assign1(new HashMap<String, Integer>());
-        assign2(new HashMap<String, Integer>());
-        assign3(new HashMap<String, Integer>());
+        assign1(new HashMap<String, Integer>(0));
+        assign2(new HashMap<String, Integer>(0));
+        assign3(new HashMap<String, Integer>(0));
     }
 }
 
@@ -93,7 +93,7 @@ class Wildcards {
         holder.set(new Wildcards());
 
 
-        // Can't do this don't have any 'T'.
+        // Can't do this doesn't have any 'T'.
         // T t = holder.get();
 
     }
@@ -125,6 +125,7 @@ class Wildcards {
         // Error: set(capture of ? extend T) in Holder<capture of ? extend T>
         // cannot be applied to T.
         // holder.set(arg);
+
         return holder.get();
     }
 
@@ -146,7 +147,7 @@ class Wildcards {
 
         Holder<Long> qualified = new Holder<>();
         Holder<?> unbounded = new Holder<Long>();
-        Holder<? extends Long> bounded = new Holder<Long>();
+        Holder<? extends Long> bounded = new Holder<>();
 
         Long lng = 1L;
 

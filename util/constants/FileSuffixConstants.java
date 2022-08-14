@@ -10,20 +10,20 @@ public interface FileSuffixConstants {
     /**
      * Jar File suffix : ".jar"
      */
-    String JAR = Constants.DOT + ProtocolConstants.JAR;
+    String JAR = Symbol.DOT + ProtocolConstants.JAR;
 
     /**
      * War File suffix : ".jar"
      */
-    String WAR = Constants.DOT + ProtocolConstants.WAR;
+    String WAR = Symbol.DOT + ProtocolConstants.WAR;
 
     /**
      * Ear File suffix : ".jar"
      */
-    String EAR = Constants.DOT + ProtocolConstants.EAR;
+    String EAR = Symbol.DOT + ProtocolConstants.EAR;
 
     /**
      * Class File suffix : ".class"
      */
-    String CLASS = Constants.DOT + Constants.CLASS;
+    String CLASS = Symbol.DOT + Symbol.CLASS;
 }

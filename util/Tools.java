@@ -1,7 +1,6 @@
-package algorithm.sort;
+package util;
 
 import junit.framework.Assert;
-import util.RandomDataGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,14 +26,14 @@ public class Tools {
             'v', 'w', 'x', 'y', 'z'
     };
 
-    static void swap(int[] ai, int i, int j) {
+    public static void swap(int[] ai, int i, int j) {
         int tmp = ai[i];
         ai[i] = ai[j];
         ai[j] = tmp;
 
     }
 
-    static <E> void swap(E[] e, int i, int j) {
+    public static <E> void swap(E[] e, int i, int j) {
         E tmp = e[i];
         e[i] = e[j];
         e[j] = tmp;
@@ -87,12 +86,13 @@ public class Tools {
         return genString(n, lineWidth, false);
     }
 
-    public static List<String> genString(int n, int lineWidth, boolean fixedLength) {
+    public static List<String> genString(int n, int lineWidth, boolean isFixed) {
         List<String> list = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder(lineWidth);
         while (n > 0) {
             int bits;
-            if (fixedLength) {
+            // String 是否为固定长度
+            if (isFixed) {
                 bits = lineWidth;
             } else {
                 bits = (int) (Math.random() * lineWidth) + 1;
