@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author zqw
  * @date 2021/12/22
  */
-public class SimpleFactoryTest {
+public class SimpleBaseFactoryTest {
     public Product createProduct(int type) {
         Product product;
         if (type == Constants.ONE) {
@@ -43,7 +43,7 @@ public class SimpleFactoryTest {
     }
     @Test
     public void simpleFactory() {
-        SimpleFactoryTest simpleFactory = new SimpleFactoryTest();
+        SimpleBaseFactoryTest simpleFactory = new SimpleBaseFactoryTest();
         simpleFactory.createProduct(1);
     }
 

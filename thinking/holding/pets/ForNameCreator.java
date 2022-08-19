@@ -2,7 +2,7 @@
 package thinking.holding.pets;
 import java.util.*;
 
-public class ForNameCreator extends PetCreator {
+public class ForNameCreator extends AbstractPetCreator {
   private static List<Class<? extends Pet>> types =
     new ArrayList<Class<? extends Pet>>();
   // Types that you want to be randomly created:

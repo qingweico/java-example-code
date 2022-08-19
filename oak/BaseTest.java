@@ -1,20 +1,26 @@
 package oak;
 
 import cn.hutool.Hutool;
+import cn.hutool.core.collection.EnumerationIter;
+import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import util.Constants;
 
+import java.net.URL;
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * 更多测试请参考微基准测试工具jmh
- * <a href="https://github.com/xkcoding/spring-boot-demo.git">...</a>
  *
  * @author zqw
  * @date 2022/2/3
  */
 @Slf4j
-public class BaseTest {
+public final class BaseTest {
     @Test
     public void floatNumber() {
         float positive = 0.0F;
@@ -65,8 +71,8 @@ public class BaseTest {
     @Test
     public void flag() {
         flag:
-        for (int a = 0; a < 2; a++) {
-            for (int i = 0; i < 10; i++) {
+        for (int a = 0; a < Constants.TWO; a++) {
+            for (int i = 0; i < Constants.TEN; i++) {
                 if (i == 3) {
                     continue flag;
                 }
@@ -76,7 +82,7 @@ public class BaseTest {
     }
 
     @Test
-    public void is() {
+    public void isAssignableFrom() {
         // 原始类型 该Class对象和参数类型一致时才返回true
         // 对象类型 父接口或者父类都会返回true
         // true
@@ -86,8 +92,28 @@ public class BaseTest {
         System.out.println(Comparable.class.isAssignableFrom(Integer.class));
         System.out.println(System.getProperty("java.class.path"));
     }
-    @org.junit.Test
+    @Test
     public void huTool() {
         Hutool.printAllUtils();
+    }
+
+    @Test
+    public void classScan() {
+        Set<Class<?>> classes = ClassUtil.scanPackage("effective",
+                (clazz) -> (!clazz.isInterface()));
+        classes.forEach(System.out::println);
+    }
+    @Test
+    public void urlIter() {
+        EnumerationIter<URL> resourceIter = ResourceUtil.getResourceIter("effective");
+        while (resourceIter.hasNext()) {
+            URL url = resourceIter.next();
+            System.out.println(url.toString());
+        }
+        System.out.println(this.getClass().getClassLoader().getResource("effective"));
+    }
+    @Test
+    public void systemClassLoader() {
+        System.out.println(ClassLoader.getSystemClassLoader());
     }
 }

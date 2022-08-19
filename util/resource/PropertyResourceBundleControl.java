@@ -1,6 +1,5 @@
 package util.resource;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.io.IOException;
@@ -46,8 +45,8 @@ public class PropertyResourceBundleControl extends ResourceBundle.Control {
     }
 
     private static void addEncodingControlMap(ResourceBundle.Control control) {
-        PropertyResourceBundleControl control_ = (PropertyResourceBundleControl) control;
-        encodingControlMap.putIfAbsent(control_.getEncoding(), control_);
+        PropertyResourceBundleControl ctrl = (PropertyResourceBundleControl) control;
+        encodingControlMap.putIfAbsent(ctrl.getEncoding(), ctrl);
     }
 
     /**
@@ -81,6 +80,7 @@ public class PropertyResourceBundleControl extends ResourceBundle.Control {
         return control;
     }
 
+    @Override
     public final List<String> getFormats(String baseName) {
         if (baseName == null) {
             throw new NullPointerException();
@@ -89,47 +89,41 @@ public class PropertyResourceBundleControl extends ResourceBundle.Control {
     }
 
 
-    public ResourceBundle newBundle(String baseName, Locale locale, String format, final ClassLoader classLoader, final boolean reload) throws IllegalAccessException, InstantiationException, IOException {
+    @Override
+    public ResourceBundle newBundle(String baseName, Locale locale, String format, final ClassLoader classLoader, final boolean reload) throws IOException {
         String bundleName = super.toBundleName(baseName, locale);
         final String resourceName = super.toResourceName(bundleName, "properties");
-        InputStream stream = null;
-        Reader reader = null;
+        InputStream stream;
         ResourceBundle bundle = null;
         try {
-            stream = AccessController.doPrivileged(new PrivilegedExceptionAction<InputStream>() {
-                public InputStream run() throws IOException {
-                    InputStream is = null;
-                    if (reload) {
-                        URL url = classLoader.getResource(resourceName);
-                        if (url != null) {
-                            URLConnection connection = url.openConnection();
-                            if (connection != null) {
-                                // Disable caches to get fresh data for
-                                // reloading.
-                                connection.setUseCaches(false);
-                                is = connection.getInputStream();
-                            }
+            stream = AccessController.doPrivileged((PrivilegedExceptionAction<InputStream>) () -> {
+                InputStream is = null;
+                if (reload) {
+                    URL url = classLoader.getResource(resourceName);
+                    if (url != null) {
+                        URLConnection connection = url.openConnection();
+                        if (connection != null) {
+                            // Disable caches to get fresh data for
+                            // reloading.
+                            connection.setUseCaches(false);
+                            is = connection.getInputStream();
                         }
-                    } else {
-                        is = classLoader.getResourceAsStream(resourceName);
                     }
-                    return is;
+                } else {
+                    is = classLoader.getResourceAsStream(resourceName);
                 }
+                return is;
             });
         } catch (PrivilegedActionException e) {
             throw (IOException) e.getException();
         }
 
         if (stream != null) {
-            try {
-                reader = new InputStreamReader(stream, this.getEncoding());
-                bundle = new PropertyResourceBundle(reader);
-            } finally {
-                IOUtils.closeQuietly(stream);
-                IOUtils.closeQuietly(reader);
+
+            try ( Reader reader = new InputStreamReader(stream, this.getEncoding())){
+                 bundle = new PropertyResourceBundle(reader);
             }
         }
-
         return bundle;
     }
 
@@ -137,8 +131,6 @@ public class PropertyResourceBundleControl extends ResourceBundle.Control {
      * Sets the encoding of properties file.
      *
      * @return the encoding
-     * @version 1.0.0
-     * @since 1.0.0
      */
     public String getEncoding() {
         return encoding;

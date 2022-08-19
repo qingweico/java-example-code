@@ -8,10 +8,11 @@ import util.Tools;
  */
 public class SelectionSort implements MutableSorter {
 
-    public void sort(int[] A) {
-        for (int i = A.length - 1; i >= 0; i--) {
-            int j = maxIndex(A, i + 1);
-            Tools.swap(A, i, j);
+    @Override
+    public void sort(int[] e) {
+        for (int i = e.length - 1; i >= 0; i--) {
+            int j = maxIndex(e, i + 1);
+            Tools.swap(e, i, j);
         }
     }
 

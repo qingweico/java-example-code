@@ -403,7 +403,7 @@ public final class WindowsRegistry {
     private static String toJavaName(byte[] windowsNameArray) {
         String windowsName = byteArrayToString(windowsNameArray);
         // check if Alt64
-        if ((windowsName.length() > 1) && (windowsName.substring(0, 2).equals("/!"))) {
+        if ((windowsName.length() > 1) && ("/!".equals(windowsName.substring(0, 2)))) {
             return toJavaAlt64Name(windowsName);
         }
         StringBuilder javaName = new StringBuilder();

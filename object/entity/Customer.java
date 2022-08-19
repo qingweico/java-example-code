@@ -1,4 +1,4 @@
-package collection;
+package object.entity;
 
 import com.google.common.base.MoreObjects;
 import lombok.Data;

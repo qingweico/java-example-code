@@ -1,21 +1,23 @@
 package thinking.concurrency;
 
+import thread.pool.ThreadPoolBuilder;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/4/9
+ * @author zqw
+ * @date 2021/4/9
  * {ThrowsException}
  */
-public class NativeExceptionHandling {
+class NativeExceptionHandling {
 
    public static void main(String[] args) {
       try {
-         ExecutorService exec = Executors.newCachedThreadPool();
-         exec.execute(new ExceptionThread());
+         ExecutorService pool = ThreadPoolBuilder.custom().builder();
+         pool.execute(new ExceptionThread());
       }catch (RuntimeException ue){
          // This statement will NOT execute!
          print("Exception has been handled");

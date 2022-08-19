@@ -1,7 +1,7 @@
 package effective;
 
 import com.github.javafaker.Faker;
-import object.Student;
+import object.entity.Student;
 import thinking.exception.ExceptionPerformance;
 
 import java.util.*;

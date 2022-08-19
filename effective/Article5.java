@@ -1,6 +1,7 @@
 package effective;
 
 import util.Constants;
+import util.constants.Symbol;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ class SpellChecker {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        while (!scanner.hasNext(Constants.Symbol_Pound_Sign)) {
+        while (!scanner.hasNext(Symbol.POUND_SIGN)) {
             String word = scanner.nextLine();
             boolean valid = isValid(word);
             if (!valid) {

@@ -14,8 +14,8 @@ import java.io.*;
  * @date 2020/04/23
  */
 public class ByteStreamTest {
-    private final String src = "io/data.txt";
-    private final String dest = "io/dest.txt";
+    private final String src = "data";
+    private final String dest = "dest";
     private long startTime = 0L;
 
     @BeforeMethod

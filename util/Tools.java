@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * 一些简单的算法辅助工具类
+ *
  * @author zqw
  * @date 2021/10/16
  */

@@ -2,7 +2,7 @@ package frame.db.gen;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadPoolBuilder;
 import util.constants.Symbol;
 
 import java.io.*;
@@ -32,15 +32,14 @@ public class BookResourceLoader {
     /*《红楼梦》 〖清〗曹雪芹 高鹗 著 共120章节*/
 
     private final static Integer CHAPTER_NUMBER = 120;
-    private final static String PREFIX = "frame/db/";
-    private final static String PATH = "data/novel/";
+    private final static String PATH = "novel/";
 
     static {
-        File file = new File(PREFIX + PATH);
+        File file = new File(PATH);
         if (!file.exists()) {
             String rootPath = new File("").getAbsolutePath();
             log.info("################### 项目目录: {} ###################, ", rootPath);
-            log.info("路径: {} 不存在!", PREFIX + PATH);
+            log.info("路径: {} 不存在!", rootPath + PATH);
             log.info("################### 开始创建 ###################");
             boolean ret = file.mkdirs();
             log.info("创建{}", ret ? "成功" : "失败");
@@ -60,7 +59,7 @@ public class BookResourceLoader {
                         .version(HttpClient.Version.HTTP_2)
                         .build()
         );
-        var pool = CustomThreadPool.newFixedThreadPool(10, true, true);
+        var pool = ThreadPoolBuilder.custom().isEnableMonitor(true).preStartAllCore(true).builder();
         AtomicInteger counter = new AtomicInteger(0);
         var parallelTaskCount = 10;
         var joins = new Future[parallelTaskCount];
@@ -79,7 +78,7 @@ public class BookResourceLoader {
 
                         resource.setData(Chapter.fromBodyText(resp.body()));
                         // 保存数据到本地磁盘
-                        resource.save(PREFIX + PATH);
+                        resource.save(PATH);
                         System.out.format("finished %d/%d\n", counter.incrementAndGet(), CHAPTER_NUMBER);
                     } catch (HttpTimeoutException e) {
                         System.out.println("timeout retry.");
@@ -115,7 +114,7 @@ public class BookResourceLoader {
                     req,
                     HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
             resource.setData(Chapter.fromBodyText(resp.body()));
-            resource.save(PREFIX + PATH);
+            resource.save(PATH);
         }
     }
 
@@ -127,7 +126,7 @@ public class BookResourceLoader {
         }
         return HttpRequest
                 .newBuilder()
-                .timeout(Duration.ofMillis(2000))
+                .timeout(Duration.ofMillis(1000))
                 .uri(url)
                 .GET()
                 .build();
@@ -162,7 +161,7 @@ public class BookResourceLoader {
     public ArrayList<Sentence> sentences() throws IOException, ClassNotFoundException {
         var arr = new ArrayList<Sentence>();
         for (int i = 1; i <= CHAPTER_NUMBER; i++) {
-            var file = new File(String.format("%s%d.txt", PREFIX + PATH, i));
+            var file = new File(String.format("%s%d.txt", PATH, i));
             var fin = new ObjectInputStream(new FileInputStream(file));
             var chapter = (Chapter) fin.readObject();
             var sens = chapter.content.split(Symbol.FULL_STOP);

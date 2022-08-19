@@ -6,23 +6,24 @@ import static util.Print.print;
  * Override methods may throw only exceptions specified in their
  * base-class version, or exception derived from base-class exception.
  *
- * @author:qiming
- * @date: 2021/1/17
+ * @author zqw
+ * @date 2021/1/17
  */
-public class StormyInning extends Inning implements Storm {
+class StormyAbstractInning extends AbstractInning implements Storm {
 
-    // Ok to add new exceptions for constructors, but you must deal with the base constructor
-    // exception.
-    public StormyInning() throws RainedOut, BaseballException {
+    // Ok to add new exceptions for constructors, but you must deal with the base constructor exception.
+
+    public StormyAbstractInning() throws RainedOut, BaseballException {
     }
 
-    public StormyInning(String s) throws Foul, BaseballException {
+    public StormyAbstractInning(String s) throws Foul, BaseballException {
     }
 
     // Regular methods must conform to base class
 
-    // Compiler error
-    // void work() throws PopFoul{}
+    // 编译错误 因为父类中work并没有抛出异常
+    // @Override
+    // public void work() throws PopFoul{}
 
     // Interface cannot add exceptions to existing methods from the base class.
 
@@ -32,16 +33,20 @@ public class StormyInning extends Inning implements Storm {
 
 
     // If the method doesn't already exist in the base class, the exception is ok.
+
     @Override
     public void rainHard() throws RainedOut {
 
     }
 
     // Yon can choose to not throw any exceptions, even if the base version does.
+
+    @Override
     public void event() {
     }
 
     // Override methods can throw inherited exceptions.
+
     @Override
     public void atBat() throws PopFoul {
 
@@ -49,9 +54,8 @@ public class StormyInning extends Inning implements Storm {
 
     public static void main(String[] args) {
         try {
-            StormyInning si = new StormyInning();
+            StormyAbstractInning si = new StormyAbstractInning();
             si.atBat();
-
         } catch (PopFoul e) {
             print("Pop foul");
         } catch (RainedOut e) {
@@ -64,7 +68,7 @@ public class StormyInning extends Inning implements Storm {
 
         try {
             // What happen if you upcast?
-            Inning i = new StormyInning();
+            AbstractInning i = new StormyAbstractInning();
             i.atBat();
             // You must catch the exception from the base-class version of the method.
         } catch (Strike e) {
@@ -76,8 +80,6 @@ public class StormyInning extends Inning implements Storm {
         } catch (BaseballException e) {
             print("Generic baseball exception");
         }
-
-
     }
 }
 
@@ -91,8 +93,8 @@ class Foul extends BaseballException {
 class Strike extends BaseballException {
 }
 
-abstract class Inning {
-    public Inning() throws BaseballException {
+abstract class AbstractInning {
+    public AbstractInning() throws BaseballException {
     }
 
     public void event() throws BaseballException {
@@ -114,7 +116,16 @@ class PopFoul extends Foul {
 }
 
 interface Storm {
+    /**
+     * event
+     *
+     * @throws RainedOut RainedOut{@code RainedOutException}
+     */
     void event() throws RainedOut;
 
+    /**
+     * rainHard
+     * @throws RainedOut RainedOut RainedOut{@code RainedOutException}
+     */
     void rainHard() throws RainedOut;
 }

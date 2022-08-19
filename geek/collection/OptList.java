@@ -17,9 +17,9 @@ class OptList {
         Integer[] integers = {1, 2, 3};
         List<Integer> integerList = Arrays.asList(integers);
         log.info("list:{} size:{} class:{}", integerList, integerList.size(), integerList.get(0).getClass());
-        int[] ints = {1, 2, 3};
+        int[] intArray = {1, 2, 3};
         // 泛型参数T: 可以将int包装为Integer 但是无法将int数组装箱为Integer数组 最终将int[] 整体作为泛型参数传入
-        List<int[]> intList = Arrays.asList(ints);
+        List<int[]> intList = List.of(intArray);
         log.info("list:{} size:{} class:{}", intList, intList.size(), intList.get(0).getClass());
 
         // 1: 不可以使用 Arrays.asList() 转换基本类型数组
@@ -32,6 +32,6 @@ class OptList {
         System.out.println(list);
         // java.util.Arrays.ArrayList.ArrayList extends java.util.AbstractList#add
         // 子类没有覆盖父类中的add方法,会抛出UnsupportedException
-        list.add("!");
+        // list.add("!");
     }
 }

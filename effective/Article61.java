@@ -1,5 +1,7 @@
 package effective;
 
+import annotation.Pass;
+
 import java.util.*;
 
 /**
@@ -14,13 +16,14 @@ import java.util.*;
    2): 基本类型只有函数值, 而装箱基本类型则都有一个非函数值, 除了它对应的基本类型的所有函数值以外, 还有个null
    3): 基本类型通常比装箱基本类型更节省时间和空间
  */
-
+@Pass
+@SuppressWarnings("all")
 class Article61 {
 
     // Broken
     // static Comparator<Integer> naturalOrder = (i ,j) -> (i < j) ? -1 : (i == j ? 0 : 1);
 
-    /** Solved*/
+    /**Solved*/
     static Comparator<Integer> naturalOrder = (iBoxed, jBoxed) -> {
         int i = iBoxed, j = jBoxed; // Auto-unboxing
         return i < j ? -1 : (i == j ? 0 : 1);

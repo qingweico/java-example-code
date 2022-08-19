@@ -4,18 +4,22 @@ package thinking.inner.anonymity;
 /**
  * Calling base-class constructor
  *
- * @author:qiming
- * @date: 2021/1/31
+ * @author zqw
+ * @date 2021/1/31
  */
-public class Parcel8 {
+class Parcel8 {
     public Wrapping wrapping(int x) {
 
         // Base constructor call
-        return new Wrapping(x) { // pass constructor argument
+
+        // pass constructor argument
+        return new Wrapping(x) {
+            @Override
             public int value() {
                 return super.value() * 2;
             }
-        }; // Semicolon required
+            // Semicolon required
+        };
     }
 
     public static void main(String[] args) {

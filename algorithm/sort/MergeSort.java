@@ -8,9 +8,9 @@ import java.util.Arrays;
  */
 public class MergeSort implements MutableSorter {
     @Override
-    public void sort(int[] A) {
+    public void sort(int[] e) {
         // [)
-        mergeSort(A, 0, A.length);
+        mergeSort(e, 0, e.length);
     }
 
     private void mergeSort(int[] A, int l, int r) {

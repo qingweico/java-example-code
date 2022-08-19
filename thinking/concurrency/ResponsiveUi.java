@@ -1,21 +1,28 @@
 package thinking.concurrency;
 
 
+import annotation.Pass;
+
 import static util.Print.print;
 
 /**
  * User interface responsiveness
  *
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  * {RunByHand}
  */
-public class ResponsiveUI extends Thread{
+@Pass
+@SuppressWarnings("all")
+class ResponsiveUi extends Thread {
     private static volatile double d = 1;
-    public ResponsiveUI(){
+
+    public ResponsiveUi() {
         setDaemon(true);
         start();
     }
+
+    @Override
     public void run() {
         while (d > 0) {
             d = d + (Math.PI + Math.E) / d;
@@ -24,26 +31,29 @@ public class ResponsiveUI extends Thread{
 
     public static void main(String[] args) throws Exception {
 
-        // Must kill this process, because UnresponsiveUI will perform the operation
+        // Must kill this process, because UnresponsiveUi will perform the operation
         // in an infinite while loop.
-        //new UnresponsiveUI();
+        // new UnresponsiveUi();
 
-        new ResponsiveUI();
-        System.in.read();
+        new ResponsiveUi();
+        System.out.println(System.in.read());
 
         // Show progress
         print(d);
     }
 
 }
-class UnresponsiveUI {
+@Pass
+@SuppressWarnings("all")
+class UnresponsiveUi {
     private volatile double d = 1;
-    public UnresponsiveUI() throws Exception {
+
+    public UnresponsiveUi() throws Exception {
         while (d > 0) {
             d = d + (Math.PI + Math.E) / d;
         }
 
         // Never get here
-        System.in.read();
+        System.out.println(System.in.read());
     }
 }

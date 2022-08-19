@@ -1,5 +1,7 @@
 package io;
 
+import object.entity.StudentScore;
+
 import java.util.TreeSet;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -11,9 +13,9 @@ import java.util.*;
  * @author zqw
  * @date 2020/1/29
  */
-public class StudentScore {
+class WritingStudentScoreViaIo {
     public static void main(String[] args) throws IOException {
-        TreeSet<Student> set = new TreeSet<>((s1, s2) -> {
+        TreeSet<StudentScore> set = new TreeSet<>((s1, s2) -> {
             int num = s2.getSum() - s1.getSum();
             return num == 0 ? s1.getName().compareTo(s2.getName()) : num;
         });
@@ -32,7 +34,7 @@ public class StudentScore {
             int math = sc.nextInt();
             System.out.println("请输入第" + i + "个学生的英语成绩:");
             int english = sc.nextInt();
-            Student s = new Student();
+            StudentScore s = new StudentScore();
             s.setName(name);
             s.setChinese(chinese);
             s.setMath(math);
@@ -44,7 +46,7 @@ public class StudentScore {
         fw.write("姓名 语文成绩 数学成绩 英语成绩");
         fw.newLine();
         fw.flush();
-        for (Student s : set) {
+        for (StudentScore s : set) {
             String ss = s.getName() + " " + s.getChinese() + " " + s.getMath() + " " + s.getEnglish();
             fw.write(ss);
             fw.newLine();

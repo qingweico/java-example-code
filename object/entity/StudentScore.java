@@ -1,4 +1,4 @@
-package io;
+package object.entity;
 
 import java.util.Objects;
 
@@ -6,13 +6,13 @@ import java.util.Objects;
  * @author zqw
  * @date 2020/1/28
  */
-public class Student {
+public class StudentScore {
     private String name;
     private int chinese;
     private int math;
     private int english;
 
-    public Student() {
+    public StudentScore() {
         super();
     }
 
@@ -60,11 +60,11 @@ public class Student {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Student student = (Student) o;
-        return chinese == student.chinese &&
-                math == student.math &&
-                english == student.english &&
-                Objects.equals(name, student.name);
+        StudentScore studentScore = (StudentScore) o;
+        return chinese == studentScore.chinese &&
+                math == studentScore.math &&
+                english == studentScore.english &&
+                Objects.equals(name, studentScore.name);
     }
 
     @Override

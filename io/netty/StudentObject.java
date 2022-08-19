@@ -2,7 +2,7 @@
 // source: Student.proto
 
 package io.netty;
-
+@SuppressWarnings("all")
 public final class StudentObject {
   private StudentObject() {}
   public static void registerAllExtensions(

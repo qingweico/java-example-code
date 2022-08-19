@@ -11,6 +11,7 @@ import thinking.inner.Contents;
 public class Parcel7b {
     static class MyContents implements Contents {
         private int i = 11;
+        @Override
         public int value() {
             return i;
         }

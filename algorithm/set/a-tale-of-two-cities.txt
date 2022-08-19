@@ -5393,7 +5393,7 @@ sound English, and render them into sound English. Such masters were not
 at that time easily found; Princes that had been, and Kings that were
 to be, were not yet of the Teacher class, and no ruined nobility had
 dropped out of Tellson's ledgers, to turn cooks and carpenters. As a
-tutor, whose attainments made the student's way unusually pleasant and
+tutor, whose attainments made the studentScore's way unusually pleasant and
 profitable, and as an elegant translator who brought something to his
 work besides mere dictionary knowledge, young Mr. Darnay soon became
 known and encouraged. He was well acquainted, more-over, with the
@@ -13115,7 +13115,7 @@ English dress?”
 
 “You speak like a Frenchman.”
 
-“I am an old student here.”
+“I am an old studentScore here.”
 
 “Aha, a perfect Frenchman! Good night, Englishman.”
 

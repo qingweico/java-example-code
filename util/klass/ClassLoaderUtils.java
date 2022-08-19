@@ -30,9 +30,11 @@ import java.util.jar.JarFile;
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see ClassLoader
  */
-public abstract class ClassLoaderUtils {
+public class ClassLoaderUtils {
 
-    protected static final ClassLoadingMXBean classLoadingMXBean = ManagementFactory.getClassLoadingMXBean();
+    private ClassLoaderUtils(){}
+
+    protected static final ClassLoadingMXBean CLASSLOADING_MX_BEAN = ManagementFactory.getClassLoadingMXBean();
 
     private static final Method findLoadedClassMethod = initFindLoadedClassMethod();
 
@@ -66,7 +68,7 @@ public abstract class ClassLoaderUtils {
      * @return the number of currently loaded classes.
      */
     public static int getLoadedClassCount() {
-        return classLoadingMXBean.getLoadedClassCount();
+        return CLASSLOADING_MX_BEAN.getLoadedClassCount();
     }
 
     /**
@@ -75,7 +77,7 @@ public abstract class ClassLoaderUtils {
      * @return the total number of unloaded classes.
      */
     public static long getUnloadedClassCount() {
-        return classLoadingMXBean.getUnloadedClassCount();
+        return CLASSLOADING_MX_BEAN.getUnloadedClassCount();
     }
 
     /**
@@ -84,7 +86,7 @@ public abstract class ClassLoaderUtils {
      * @return <tt>true</tt> if the verbose output for the class loading system is enabled; <tt>false</tt> otherwise.
      */
     public static boolean isVerbose() {
-        return classLoadingMXBean.isVerbose();
+        return CLASSLOADING_MX_BEAN.isVerbose();
     }
 
     /**
@@ -99,7 +101,7 @@ public abstract class ClassLoaderUtils {
      * @throws SecurityException if a security manager exists and the caller does not have ManagementPermission("control").
      */
     public static void setVerbose(boolean value) {
-        classLoadingMXBean.setVerbose(value);
+        CLASSLOADING_MX_BEAN.setVerbose(value);
     }
 
     /**
@@ -108,7 +110,7 @@ public abstract class ClassLoaderUtils {
      * @return the total number of classes loaded.
      */
     public static long getTotalLoadedClassCount() {
-        return classLoadingMXBean.getTotalLoadedClassCount();
+        return CLASSLOADING_MX_BEAN.getTotalLoadedClassCount();
     }
 
     /**

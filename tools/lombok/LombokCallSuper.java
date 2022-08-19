@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import oak.User;
+import object.entity.User;
 import util.RandomDataGenerator;
 import util.SnowflakeIdWorker;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * {@link lombok.EqualsAndHashCode}

@@ -9,13 +9,14 @@ import static util.Print.print;
 /**
  * Interrupting a task blocked with a ReentrantLock
  *
- * @author:qiming
- * @date: 2021/2/7
+ * @author zqw
+ * @date 2021/2/7
  */
 
 // Tasks that block on a ReentrantLock task have the ability to be interrupted,
 // unlike those that block on synchronized methods or critical sections
-public class ReentrantLockInterrupted {
+
+class ReentrantLockInterrupted {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(new Blocked());
         t.start();
@@ -27,6 +28,7 @@ public class ReentrantLockInterrupted {
     }
 
 }
+
 class BlockedMutex {
     private final Lock lock = new ReentrantLock();
 
@@ -35,17 +37,19 @@ class BlockedMutex {
         // task blocked on a ReentrantLock.
         lock.lock();
     }
+
     public void f() {
         try {
             // This will never be available to be second task
             lock.lockInterruptibly();
             print("lock acquired in f()");
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             print("Interrupted from lock acquisition f()");
         }
     }
 }
-class Blocked implements  Runnable {
+
+class Blocked implements Runnable {
     BlockedMutex blockedMutex = new BlockedMutex();
 
     @Override

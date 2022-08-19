@@ -1,4 +1,4 @@
-package oak;
+package object.entity;
 
 import annotation.Ignore;
 import com.google.common.base.MoreObjects;
@@ -20,6 +20,7 @@ public class User implements Serializable {
     @EqualsAndHashCode.Exclude
     private Long id;
     private String username;
+    private String password;
     @EqualsAndHashCode.Exclude
     private boolean isVip;
     @Ignore

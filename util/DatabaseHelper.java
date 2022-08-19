@@ -1,6 +1,7 @@
 package util;
 
 import lombok.extern.slf4j.Slf4j;
+import thread.aqs.ObjectPool;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,12 +21,16 @@ import java.util.Properties;
 @Slf4j
 public class DatabaseHelper {
 
+    /*these field value can be revised before using*/
+
     static Properties properties;
     static String driveClassName;
     static String dbUlr;
     static String username;
     static String password;
     static String db = "db.properties";
+
+    private static final int DEFAULT_POOL_SIZE = 10;
 
     static {
         properties = new Properties();
@@ -42,7 +47,6 @@ public class DatabaseHelper {
         dbUlr = properties.getProperty("url");
         username = properties.getProperty("username");
         password = properties.getProperty("password");
-
     }
 
     public static Connection getConnection() {
@@ -57,5 +61,14 @@ public class DatabaseHelper {
             log.error("get connection error, {}", e.getMessage());
         }
         return null;
+    }
+
+    public static ObjectPool<Connection, Object> getPool() {
+        return getPool(DEFAULT_POOL_SIZE);
+    }
+
+    public static ObjectPool<Connection, Object> getPool(int poolSize) {
+        Connection connection = getConnection();
+        return new ObjectPool<>(poolSize, connection);
     }
 }

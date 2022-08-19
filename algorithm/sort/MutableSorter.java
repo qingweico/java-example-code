@@ -1,9 +1,14 @@
 package algorithm.sort;
 
 /**
- * @author:qiming
- * @date: 2021/10/16
+ * @author zqw
+ * @date 2021/10/16
  */
 public interface MutableSorter {
-   void sort(int[] A);
+    /**
+     * 可变排序接口
+     *
+     * @param e int[]
+     */
+    void sort(int[] e);
 }

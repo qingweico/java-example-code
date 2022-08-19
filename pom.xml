@@ -60,6 +60,11 @@
 			<artifactId>jmh-core</artifactId>
 			<version>1.33</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-generator-annprocess</artifactId>
+			<version>1.33</version>
+		</dependency>
 		<!-- JSON工具 包括FastJson Jackson Gson等等 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

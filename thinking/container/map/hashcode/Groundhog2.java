@@ -6,7 +6,7 @@ package thinking.container.map.hashcode;
  * @author zqw
  * @date 2021/2/24
  */
-public class Groundhog2 extends Groundhog{
+class Groundhog2 extends Groundhog{
     public Groundhog2(int n) {
         super(n);
     }

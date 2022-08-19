@@ -10,6 +10,7 @@ import java.lang.management.RuntimeMXBean;
 import java.net.URL;
 import java.security.CodeSource;
 import java.security.ProtectionDomain;
+import java.text.StringCharacterIterator;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -102,7 +103,8 @@ public abstract class ClassPathUtils {
     public static URL getRuntimeClassLocation(Class<?> type) {
         ClassLoader classLoader = type.getClassLoader();
         URL location = null;
-        if (classLoader != null) { // Non-Bootstrap
+        // Non-Bootstrap
+        if (classLoader != null) {
             try {
                 ProtectionDomain protectionDomain = type.getProtectionDomain();
                 CodeSource codeSource = protectionDomain.getCodeSource();

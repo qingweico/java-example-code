@@ -5,8 +5,8 @@ import static util.Print.print;
 /**
  * Understand join()
  *
- * @author:qiming
- * @date: 2021/1/29
+ * @author zqw
+ * @date 2021/1/29
  */
 public class Joining {
     public static void main(String[] args) throws InterruptedException {
@@ -29,6 +29,7 @@ class Sleeper extends Thread {
         start();
     }
 
+    @Override
     public void run() {
         try {
             sleep(duration);
@@ -50,6 +51,7 @@ class Joiner extends Thread {
         start();
     }
 
+    @Override
     public void run() {
         try {
             // Timeout parameter: default 0 millis

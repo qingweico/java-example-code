@@ -8,9 +8,9 @@ import util.Tools;
  */
 public class BubbleSort implements MutableSorter{
    @Override
-   public void sort(int[] ai) {
-      for(int i = ai.length - 1; i >= 0; i--) {
-         bubble(ai, i + 1);
+   public void sort(int[] e) {
+      for(int i = e.length - 1; i >= 0; i--) {
+         bubble(e, i + 1);
       }
    }
 

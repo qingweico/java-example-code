@@ -13,12 +13,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/1/19
  */
-@FunctionalInterface
-interface Builder {
-    void show();
-}
-
-public class MessageBuilder {
+class MessageBuilder {
     private static final String DEFAULT_LEVEL = "INFO";
     private static final String DEBUG_LEVEL = "DEBUG";
 
@@ -81,3 +76,11 @@ public class MessageBuilder {
         }
     }
 }
+@FunctionalInterface
+interface Builder {
+    /**
+     * show();
+     */
+    void show();
+}
+

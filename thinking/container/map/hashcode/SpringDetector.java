@@ -1,5 +1,7 @@
 package thinking.container.map.hashcode;
 
+import annotation.Pass;
+
 import java.lang.reflect.Constructor;
 import java.util.*;
 
@@ -11,7 +13,9 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/2/24
  */
-public class SpringDetector {
+@Pass
+@SuppressWarnings("all")
+class SpringDetector {
     private final static int COUNT = 10;
 
     public static <T extends Groundhog>

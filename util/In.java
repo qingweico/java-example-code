@@ -97,7 +97,7 @@ public final class In {
      * Initializes an input stream from a URL.
      *
      * @param url the URL
-     * @throws IllegalArgumentException if cannot open {@code url}
+     * @throws IllegalArgumentException if you cannot open {@code url}
      * @throws IllegalArgumentException if {@code url} is {@code null}
      */
     public In(URL url) {
@@ -180,7 +180,6 @@ public final class In {
             URLConnection site = url.openConnection();
 
             // in order to set User-Agent, replace above line with these two
-            // HttpURLConnection site = (HttpURLConnection) url.openConnection();
             // site.addRequestProperty("User-Agent", "Mozilla/4.76");
 
             InputStream is = site.getInputStream();

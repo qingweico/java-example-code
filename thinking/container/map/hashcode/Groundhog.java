@@ -6,7 +6,7 @@ package thinking.container.map.hashcode;
  * @author zqw
  * @date 2021/2/24
  */
-public class Groundhog {
+class Groundhog {
     protected int number;
 
     public Groundhog(int n) {

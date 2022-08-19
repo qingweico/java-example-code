@@ -58,6 +58,7 @@ public class TextFile extends ArrayList<String> {
     }
 
     // Normally read by lines:
+
     public TextFile(String fileName) {
         this(fileName, "\n");
     }

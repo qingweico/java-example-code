@@ -1,11 +1,15 @@
 package thinking.concurrency.share;
 
+import thread.pool.ThreadPoolBuilder;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static util.Print.print;
 
 /**
+ * 偶数校验
+ *
  * @author zqw
  * @date 2021/1/18
  */
@@ -31,16 +35,18 @@ public class EvenChecker implements Runnable {
     }
 
     // Test any type of IntGenerator
+
     public static void test(IntGenerator gp, int count) {
         print("Press Control-C to exit");
-        ExecutorService exec = Executors.newCachedThreadPool();
+        ExecutorService pool = ThreadPoolBuilder.custom().builder();
         for (int i = 0; i < count; i++) {
-            exec.execute(new EvenChecker(gp, i));
+            pool.execute(new EvenChecker(gp, i));
         }
-        exec.shutdown();
+        pool.shutdown();
     }
 
     // Default value for count
+
     public static void test(IntGenerator g) {
         test(g, 10);
     }

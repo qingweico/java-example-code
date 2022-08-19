@@ -1,10 +1,10 @@
 package thinking.concurrency.sync;
 
 /**
- * @author:qiming
- * @date: 2021/1/29
+ * @author zqw
+ * @date 2021/1/29
  */
-public class PairManipulator implements Runnable {
+class PairManipulator implements Runnable {
     private final PairManager pm;
 
     public PairManipulator(PairManager pm) {
@@ -19,6 +19,7 @@ public class PairManipulator implements Runnable {
         }
     }
 
+    @Override
     public String toString() {
         return "Pair: " + pm.getPair() + " checkCounter = " + pm.checkCounter.get();
     }
@@ -42,6 +43,7 @@ class PairCheck implements Runnable {
 }
 
 // Synchronized the entire method:
+
 class PairManager1 extends PairManager {
 
     @Override
@@ -53,6 +55,7 @@ class PairManager1 extends PairManager {
 }
 
 // Use a critical section:
+
 class PairManager2 extends PairManager {
 
     @Override

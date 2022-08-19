@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2022/7/16
  */
-public class DeadLockCheck {
+@SuppressWarnings("all")
+class DeadLockCheck {
     public static void main(String[] args) {
         ThreadMXBean mbean = ManagementFactory.getThreadMXBean();
         Runnable r = () -> {
@@ -24,10 +25,11 @@ public class DeadLockCheck {
                 for (ThreadInfo ti : threadInfos) {
                     System.out.println(ti.getThreadName());
                 }
-            }else {
+            } else {
                 System.out.println("not find dead lock threads");
             }
         };
+        // TODO 使用构建者模式 创建 ScheduledThreadPool
         ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(1);
 
         // delay 5 seconds, per 10 second do deadlock scan

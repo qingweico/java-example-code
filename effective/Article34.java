@@ -27,6 +27,10 @@ class Article34 {
     // Int enumeration is a compile-time constant. if the value associated with the
     // int enumeration constant changes, the client must compile, otherwise the
     // program will still run but its behavior will no longer be accurate.
+
+    public static void main(String[] args) {
+        System.out.println(APPLE_FUJI);
+    }
 }
 
 /**

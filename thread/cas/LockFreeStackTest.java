@@ -22,7 +22,7 @@ public class LockFreeStackTest<T> {
     static int initialValue = Constants.ZERO;
     static AtomicInteger counter = new AtomicInteger(initialValue);
     static AtomicInteger casCount = new AtomicInteger(initialValue);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 100);
+    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(100, true);
 
     public LockFreeStackTest() {
         head = new Node();

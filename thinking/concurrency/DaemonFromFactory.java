@@ -1,7 +1,8 @@
 package thinking.concurrency;
 
+import thread.pool.ThreadPoolBuilder;
+
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
@@ -10,7 +11,7 @@ import static util.Print.print;
  * @author zqw
  * @date 201/1/16
  */
-public class DaemonFromFactory implements Runnable {
+class DaemonFromFactory implements Runnable {
 
     @Override
     @SuppressWarnings("InfiniteLoopStatement")
@@ -26,9 +27,10 @@ public class DaemonFromFactory implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService exec = Executors.newCachedThreadPool(new DaemonThreadFactory());
-        for (int i = 0; i < 10; i++) {
-            exec.execute(new DaemonFromFactory());
+        int threadCount = 10;
+        ExecutorService pool = ThreadPoolBuilder.custom().threadFactory(new DaemonThreadFactory()).builder();
+        for (int i = 0; i < threadCount; i++) {
+            pool.execute(new DaemonFromFactory());
         }
         print("All daemon started");
         TimeUnit.MILLISECONDS.sleep(500);

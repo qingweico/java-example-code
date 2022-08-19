@@ -33,13 +33,13 @@ import java.util.jar.JarFile;
  *
  * @author <a href="mercyblitz@gmail.com">Mercy<a/>
  */
-public abstract class ClassUtils {
+public class ClassUtils {
 
-    private static final Map<String, Set<String>> classPathToClassNamesMap = initClassPathToClassNamesMap();
+    private static final Map<String, Set<String>> CLASS_PATH_TO_CLASS_NAMES_MAP = initClassPathToClassNamesMap();
 
-    private static final Map<String, String> classNameToClassPathsMap = initClassNameToClassPathsMap();
+    private static final Map<String, String> CLASSNAME_TO_CLASS_PATHS_MAP = initClassNameToClassPathsMap();
 
-    private static final Map<String, Set<String>> packageNameToClassNamesMap = initPackageNameToClassNamesMap();
+    private static final Map<String, Set<String>> PACKAGE_NAME_TO_CLASS_NAMES_MAP = initPackageNameToClassNamesMap();
 
     private ClassUtils() {
 
@@ -60,7 +60,7 @@ public abstract class ClassUtils {
     private static Map<String, String> initClassNameToClassPathsMap() {
         Map<String, String> classNameToClassPathsMap = Maps.newLinkedHashMap();
 
-        for (Map.Entry<String, Set<String>> entry : classPathToClassNamesMap.entrySet()) {
+        for (Map.Entry<String, Set<String>> entry : CLASS_PATH_TO_CLASS_NAMES_MAP.entrySet()) {
             String classPath = entry.getKey();
             Set<String> classNames = entry.getValue();
             for (String className : classNames) {
@@ -73,7 +73,7 @@ public abstract class ClassUtils {
 
     private static Map<String, Set<String>> initPackageNameToClassNamesMap() {
         Map<String, Set<String>> packageNameToClassNamesMap = Maps.newLinkedHashMap();
-        for (Map.Entry<String, String> entry : classNameToClassPathsMap.entrySet()) {
+        for (Map.Entry<String, String> entry : CLASSNAME_TO_CLASS_PATHS_MAP.entrySet()) {
             String className = entry.getKey();
             String packageName = resolvePackageName(className);
             Set<String> classNamesInPackage = packageNameToClassNamesMap.computeIfAbsent(packageName, k -> Sets.newLinkedHashSet());
@@ -90,14 +90,13 @@ public abstract class ClassUtils {
      */
     @Nonnull
     public static Set<String> getAllPackageNamesInClassPaths() {
-        return packageNameToClassNamesMap.keySet();
+        return PACKAGE_NAME_TO_CLASS_NAMES_MAP.keySet();
     }
 
     /**
      * Resolve package name under specified class name
      *
-     * @param className
-     *         class name
+     * @param className class name
      * @return package name
      */
     @Nullable
@@ -109,10 +108,8 @@ public abstract class ClassUtils {
     /**
      * Find all class names in class path
      *
-     * @param classPath
-     *         class path
-     * @param recursive
-     *         is recursive on sub directories
+     * @param classPath class path
+     * @param recursive is recursive on subdirectories
      * @return all class names in class path
      */
     @Nonnull
@@ -129,8 +126,7 @@ public abstract class ClassUtils {
     /**
      * Find class path under specified class name
      *
-     * @param type
-     *         class
+     * @param type class
      * @return class path
      */
     @Nullable
@@ -141,27 +137,24 @@ public abstract class ClassUtils {
     /**
      * Find class path under specified class name
      *
-     * @param className
-     *         class name
+     * @param className class name
      * @return class path
      */
     @Nullable
     public static String findClassPath(String className) {
-        return classNameToClassPathsMap.get(className);
+        return CLASSNAME_TO_CLASS_PATHS_MAP.get(className);
     }
 
     /**
      * Gets class name {@link Set} under specified class path
      *
-     * @param classPath
-     *         class path
-     * @param recursive
-     *         is recursive on subdirectories
+     * @param classPath class path
+     * @param recursive is recursive on subdirectories
      * @return non-null {@link Set}
      */
     @Nonnull
     public static Set<String> getClassNamesInClassPath(String classPath, boolean recursive) {
-        Set<String> classNames = classPathToClassNamesMap.get(classPath);
+        Set<String> classNames = CLASS_PATH_TO_CLASS_NAMES_MAP.get(classPath);
         if (CollectionUtils.isEmpty(classNames)) {
             classNames = findClassNamesInClassPath(classPath, recursive);
         }
@@ -171,8 +164,7 @@ public abstract class ClassUtils {
     /**
      * Gets class name {@link Set} under specified package
      *
-     * @param onePackage
-     *         one package
+     * @param onePackage one package
      * @return non-null {@link Set}
      */
     @Nonnull
@@ -183,13 +175,12 @@ public abstract class ClassUtils {
     /**
      * Gets class name {@link Set} under specified package name
      *
-     * @param packageName
-     *         package name
+     * @param packageName package name
      * @return non-null {@link Set}
      */
     @Nonnull
     public static Set<String> getClassNamesInPackage(String packageName) {
-        Set<String> classNames = packageNameToClassNamesMap.get(packageName);
+        Set<String> classNames = PACKAGE_NAME_TO_CLASS_NAMES_MAP.get(packageName);
         return classNames == null ? Collections.emptySet() : classNames;
     }
 
@@ -241,8 +232,7 @@ public abstract class ClassUtils {
     /**
      * Resolve resource name to class name
      *
-     * @param resourceName
-     *         resource name
+     * @param resourceName resource name
      * @return class name
      */
     public static String resolveClassName(String resourceName) {
@@ -262,7 +252,7 @@ public abstract class ClassUtils {
      */
     @Nonnull
     public static Map<String, Set<String>> getClassPathToClassNamesMap() {
-        return classPathToClassNamesMap;
+        return CLASS_PATH_TO_CLASS_NAMES_MAP;
     }
 
     /**
@@ -273,7 +263,7 @@ public abstract class ClassUtils {
     @Nonnull
     public static Set<String> getAllClassNamesInClassPaths() {
         Set<String> allClassNames = Sets.newLinkedHashSet();
-        for (Set<String> classNames : classPathToClassNamesMap.values()) {
+        for (Set<String> classNames : CLASS_PATH_TO_CLASS_NAMES_MAP.values()) {
             allClassNames.addAll(classNames);
         }
         return Collections.unmodifiableSet(allClassNames);
@@ -285,21 +275,19 @@ public abstract class ClassUtils {
      *
      * @param type
      * @return If , return <code>null</code>.
-     * @throws NullPointerException
-     *         If <code>type</code> is <code>null</code> , {@link NullPointerException} will be thrown.
+     * @throws NullPointerException If <code>type</code> is <code>null</code> , {@link NullPointerException} will be thrown.
      */
     public static URL getCodeSourceLocation(Class<?> type) throws NullPointerException {
 
         URL codeSourceLocation = null;
         ClassLoader classLoader = type.getClassLoader();
-
-        if (classLoader == null) { // Bootstrap ClassLoader or type is primitive or void
+        // Bootstrap ClassLoader or type is primitive or void
+        if (classLoader == null) {
             String path = findClassPath(type);
             if (StringUtils.isNotBlank(path)) {
                 try {
                     codeSourceLocation = new File(path).toURI().toURL();
                 } catch (MalformedURLException ignored) {
-                    codeSourceLocation = null;
                 }
             }
         } else {

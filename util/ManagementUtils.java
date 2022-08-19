@@ -15,7 +15,9 @@ import java.util.Arrays;
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @date 2022/7/10
  */
-public abstract class ManagementUtils {
+public final class ManagementUtils {
+    private ManagementUtils() {
+    }
 
     /**
      * {@link RuntimeMXBean}

@@ -19,10 +19,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * @date 2022/7/2
  */
 @Slf4j
-class CPUCoreThreadPoolCount {
+class CpuCoreThreadPoolCount {
 
-    static final double pi = Math.acos(-1.0);
-    static final ThreadLocalRandom tlr = ThreadLocalRandom.current();
+    static final double PI = Math.acos(-1.0);
+    static final ThreadLocalRandom TLR = ThreadLocalRandom.current();
     static int cpuCore = Runtime.getRuntime().availableProcessors();
     static int threadCount = cpuCore * 2;
     static CountDownLatch latch = new CountDownLatch(threadCount * 2);
@@ -35,7 +35,7 @@ class CPUCoreThreadPoolCount {
         public void task() {
             double result = 0.0;
             for (int i = 0; i < Constants.NUM_1000000; i++) {
-                result += 1.0 * i / pi * tlr.nextDouble(100);
+                result += 1.0 * i / PI * TLR.nextDouble(100);
             }
         }
 
@@ -80,6 +80,9 @@ class CPUCoreThreadPoolCount {
             this.startTime = System.currentTimeMillis();
         }
 
+        /**
+         * 抽象任务定义;实际功能由子类决定
+         */
         abstract protected void task();
 
         @Override

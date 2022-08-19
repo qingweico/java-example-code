@@ -1,11 +1,13 @@
 package thinking.concurrency.juc;
 
+import thread.pool.CustomThreadPool;
+import util.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -13,12 +15,12 @@ import static util.Print.print;
 import static util.Print.printnb;
 
 /**
- * @author:qiming
- * @date: 2021/2/2
+ * @author zqw
+ * @date 2021/2/2
  */
 public class PriorityBlockingQueueUsage {
     public static void main(String[] args) {
-        ExecutorService exec = Executors.newCachedThreadPool();
+        ExecutorService exec = CustomThreadPool.newFixedThreadPool(2, true);
         PriorityBlockingQueue<Runnable> queue = new PriorityBlockingQueue<>();
         exec.execute(new PrioritizedTaskProducer(queue, exec));
         exec.execute(new PrioritizedTaskConsumer(queue));
@@ -48,6 +50,7 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
         print(this);
     }
 
+    @Override
     public String toString() {
         return String.format("[%1$-3d]", priority) + " Task " + id;
     }
@@ -65,6 +68,7 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
             this.e = e;
         }
 
+        @Override
         public void run() {
             int count = 0;
             for (PrioritizedTask pt : sequence) {
@@ -100,17 +104,17 @@ class PrioritizedTaskProducer implements Runnable {
     public void run() {
         // Unbounded queue; never blocks
         // Fill it up fast with random priorities
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < Constants.TWENTY; i++) {
             queue.add(new PrioritizedTask(random.nextInt(10)));
             Thread.yield();
         }
         // Trickle in highest-priority jobs
         try {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < Constants.TEN; i++) {
                 TimeUnit.MILLISECONDS.sleep(250);
                 queue.add(new PrioritizedTask(10));
             }
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < Constants.TEN; i++) {
                 queue.add(new PrioritizedTask(i));
                 // A sentinel to stop all tasks
                 queue.add(new PrioritizedTask.EndSentinel(exec));

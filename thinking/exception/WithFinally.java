@@ -6,46 +6,46 @@ import static util.Print.print;
  * Finally
  *
  * What does finally do?
- * The finally clause is used when resources other
+ * The `finally clause` is used when resources other
  * than memory are restored to their initial state.
  *
- * @author:qiming
- * @date: 2021/1/17
+ * @author zqw
+ * @date 2021/1/17
  */
 public class WithFinally {
-    private static final Switch sw = new Switch();
+    private static final Switch SW = new Switch();
 
-    public static void f() throws OnOffException1, OnOffException2 {
+    public static void f() throws OnOff1Exception, OnOff2Exception {
     }
 
     public static void main(String[] args) {
         try {
-            sw.on();
+            SW.on();
             f();
-        } catch (OnOffException1 | OnOffException2 e) {
+        } catch (OnOff1Exception | OnOff2Exception e) {
             print("OnOffException1 or OnOffException2...");
         } finally {
             // Ensure that the sw.off() method is executed in any case.
-            sw.off();
+            SW.off();
         }
     }
 
 }
 
 class OnOffSwitch {
-    private static final Switch sw = new Switch();
+    private static final Switch SW = new Switch();
 
-    public static void f() throws OnOffException1, OnOffException2 {
+    public static void f() throws OnOff1Exception, OnOff2Exception {
     }
 
     public static void main(String[] args) {
         try {
-            sw.on();
+            SW.on();
             f();
-            sw.off();
-        } catch (OnOffException1 | OnOffException2 e) {
+            SW.off();
+        } catch (OnOff1Exception | OnOff2Exception e) {
             print("OnOffException1 or OnOffException2...");
-            sw.off();
+            SW.off();
         }
     }
 }
@@ -67,23 +67,25 @@ class Switch {
         System.out.println(this);
     }
 
+    @Override
     public String toString() {
         return state ? "on" : "off";
     }
 }
 
-class OnOffException1 extends Exception {
+class OnOff1Exception extends Exception {
 }
 
-class OnOffException2 extends Exception {
+class OnOff2Exception extends Exception {
 }
 
 class FourException extends Exception {
 }
 
 // Even in cases where the exception is not caught by the current exception handler,
-// the exception-handling mechanism executes the finally clause before jumping to a
+// the exception-handling mechanism executes the `finally clause` before jumping to a
 // higher level of exception handler.
+
 class AlwaysFinally {
     public static void main(String[] args) {
         print("Enter first try block");

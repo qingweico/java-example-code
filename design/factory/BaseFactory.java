@@ -6,7 +6,7 @@ package design.factory;
  * @author zqw
  * @date 2021/12/22
  */
-public abstract class Factory {
+public abstract class BaseFactory {
     /**
      * Factory Method of Product
      * @return Product
@@ -18,7 +18,7 @@ public abstract class Factory {
     }
 }
 
-class ComputerFactory extends Factory {
+class ComputerFactory extends BaseFactory {
 
     @Override
     public Product factoryMethod() {
@@ -30,7 +30,7 @@ class ComputerFactory extends Factory {
     }
 }
 
-class TelevisionFactory extends Factory {
+class TelevisionFactory extends BaseFactory {
 
     @Override
     public Product factoryMethod() {

@@ -2,7 +2,7 @@ package tools.json;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import oak.User;
+import object.entity.User;
 import org.junit.Test;
 import thinking.genericity.BasicGenerator;
 import util.collection.CollectionData;

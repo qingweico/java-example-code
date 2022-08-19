@@ -1,7 +1,7 @@
 package collection.array;
 
 import util.Tools;
-import collection.Customer;
+import object.entity.Customer;
 import thinking.genericity.BasicGenerator;
 import util.collection.CollectionData;
 import util.ObjectFactory;

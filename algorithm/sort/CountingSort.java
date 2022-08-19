@@ -1,7 +1,7 @@
 package algorithm.sort;
 
 import com.github.javafaker.Faker;
-import object.Student;
+import object.entity.Student;
 import org.junit.Test;
 
 import java.util.Locale;

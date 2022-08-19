@@ -2,7 +2,7 @@ package tools.json;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import oak.User;
+import object.entity.User;
 import org.junit.Test;
 import util.ObjectFactory;
 

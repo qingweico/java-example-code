@@ -1,7 +1,7 @@
 package geek.serialize;
 
-import oak.User;
-import object.Student;
+import object.entity.User;
+import object.entity.Student;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -25,6 +25,7 @@ class ObjectInputStreamImpl extends ObjectInputStream {
         super(in);
     }
 
+    @Override
     protected Class<?> resolveClass(ObjectStreamClass desc) throws ClassNotFoundException, IOException {
         // 通过校验反序列化对象的名称来控制反序列化对象
         if (!desc.getName().equals(User.class.getName())) {

@@ -1,9 +1,8 @@
 package collection.map;
 
 import lombok.extern.slf4j.Slf4j;
-import oak.User;
+import object.entity.User;
 import util.ObjectFactory;
-import util.RandomDataGenerator;
 
 import java.util.IdentityHashMap;
 

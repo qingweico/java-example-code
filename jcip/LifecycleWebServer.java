@@ -1,20 +1,23 @@
 package jcip;
 
+import thread.pool.ThreadPoolBuilder;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author:qiming
- * @date: 2021/4/6
+ * @author zqw
+ * @date 2021/4/6
  */
-public class LifecycleWebServer {
-    private final ExecutorService exec = Executors.newFixedThreadPool(10);
+@SuppressWarnings("all")
+// TODO
+class LifecycleWebServer {
+    private final ExecutorService exec = ThreadPoolBuilder.custom().builder();
 
     public void start() throws IOException {
         ServerSocket socket = new ServerSocket(80);

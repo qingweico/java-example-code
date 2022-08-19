@@ -6,7 +6,9 @@ import java.util.*;
  * @author zqw
  * @date 2021/4/9
  */
-public class New {
+public final class New {
+    private New() {
+    }
 
     public static <K, V> Map<K, V> map() {
         return map(1 << 4);

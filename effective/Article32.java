@@ -11,12 +11,13 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 谨慎并用泛型和可变参数
  *
- * @author:qiming
- * @date: 2021/11/16
+ * @author zqw
+ * @date 2021/11/16
  */
-public class Article32 {
+class Article32 {
 
     // Mixing generics and varargs can violate type safety!
+
     @SafeVarargs
     static void dangerous(List<String>... stringLists) {
         List<Integer> intList = List.of(42);
@@ -60,7 +61,7 @@ public class Article32 {
     }
 
     // Safe method with a generic varargs parameter
-    // @SafeVarargs: this is valid only in  static and final instance methods in JDK8!
+    // @SafeVarargs: this is valid only in static and final instance methods in JDK8!
     // otherwise, it is also legal in private instance method in JDK9.
     @SafeVarargs
     static <T> List<T> flatten(List<? extends T>... lists) {

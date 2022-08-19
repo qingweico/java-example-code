@@ -11,7 +11,8 @@ import java.io.File;
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  */
-public abstract class FileUtils {
+public class FileUtils {
+    private FileUtils(){}
 
     /**
      * Resolve Relative Path

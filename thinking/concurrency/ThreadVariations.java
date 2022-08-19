@@ -23,6 +23,7 @@ class ThreadVariations {
 }
 
 // Using a named inner class:
+
 class InnerThread {
     private int countDown = 5;
 
@@ -81,6 +82,7 @@ class InnerThread0 {
                 }
             }
 
+            @Override
             public String toString() {
                 return getName() + ": " + countDown;
 
@@ -91,6 +93,7 @@ class InnerThread0 {
 }
 
 // Using a named Runnable implementation:
+
 class InnerRunnable {
     private int countDown = 5;
     private Inner inner;
@@ -118,6 +121,7 @@ class InnerRunnable {
             }
         }
 
+        @Override
         public String toString() {
             return t.getName() + ": " + countDown;
         }
@@ -129,6 +133,7 @@ class InnerRunnable {
 }
 
 // Using an anonymous Runnable implementation:
+
 class InnerRunnable0 {
     private int countDown = 5;
     private Thread t;
@@ -150,6 +155,7 @@ class InnerRunnable0 {
                 }
             }
 
+            @Override
             public String toString() {
                 return Thread.currentThread().getName() + ": " + countDown;
             }
@@ -159,6 +165,7 @@ class InnerRunnable0 {
 }
 
 // A separated method to run some code as a task:
+
 class ThreadMethod {
     private int countDown = 5;
     private Thread t;
@@ -171,6 +178,7 @@ class ThreadMethod {
     public void runTask() {
         if (t == null) {
             t = new Thread(name) {
+                @Override
                 public void run() {
                     try {
                         while (true) {
@@ -185,6 +193,7 @@ class ThreadMethod {
                     }
                 }
 
+                @Override
                 public String toString() {
                     return getName() + ": " + countDown;
                 }

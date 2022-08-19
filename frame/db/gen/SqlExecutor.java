@@ -34,7 +34,7 @@ public class SqlExecutor {
     }
 
     private void createTable() throws IOException {
-        var file = new File("./data/sql/post.sql");
+        var file = new File("sql/post.sql");
         try (FileInputStream fis = new FileInputStream(file)) {
             var content = new String(fis.readAllBytes(), StandardCharsets.UTF_8);
             Arrays.stream(
@@ -131,6 +131,7 @@ public class SqlExecutor {
                         e.printStackTrace();
                     }
                 });
+        tlc.remove();
     }
 
     public static void main(String[] args) throws Exception {

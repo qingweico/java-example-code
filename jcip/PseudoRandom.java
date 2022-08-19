@@ -5,7 +5,7 @@ package jcip;
  * @author zqw
  * @date 2021/3/30
  */
-public class PseudoRandom {
+class PseudoRandom {
     int calculateNext(int prev) {
         prev ^= prev << 6;
         prev ^= prev >>> 21;

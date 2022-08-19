@@ -1,14 +1,14 @@
 package effective;
 
 import annotation.Pass;
-import object.Student;
+import object.entity.Student;
 
 /**
  * 覆盖equals时总要覆盖hashcode
  *
  * @author zwq
  * @date 2020/10/25
- * @see object.Student
+ * @see Student
  */
 
 @Pass

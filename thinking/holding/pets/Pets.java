@@ -4,7 +4,7 @@ package thinking.holding.pets;
 import java.util.*;
 
 public class Pets {
-  public static final PetCreator creator =
+  public static final AbstractPetCreator creator =
     new LiteralPetCreator();
   public static Pet randomPet() {
     return creator.randomPet();

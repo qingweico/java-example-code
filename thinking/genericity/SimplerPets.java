@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author:qiming
- * @date: 2021/4/9
+ * @author zqw
+ * @date 2021/4/9
  */
-public class SimplerPets {
+class SimplerPets {
     public static void main(String[] args) {
         Map<Person, List<? extends Pet>> petPeople = New.map();
+        System.out.println(petPeople);
     }
 }

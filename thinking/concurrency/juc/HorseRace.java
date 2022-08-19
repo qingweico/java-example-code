@@ -100,6 +100,7 @@ class Horse implements Runnable {
         }
     }
 
+    @Override
     public String toString() {
         return "Horse " + id + " ";
     }

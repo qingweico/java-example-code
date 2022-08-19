@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
+ * 自定义线程池参数
+ *
  * @author zqw
  * @date 2021/9/29
  */
@@ -63,88 +65,35 @@ public class CustomThreadPool {
         }
     }
 
+    /*自定义线程池参数start*/
+
     public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize,
                                                      boolean preStartAllCore, boolean isEnableMonitor) {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize,
+        ThreadPoolExecutor executor = new ThreadPoolExecutorImpl(corePoolSize,
                 maxPoolSize,
                 60L,
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(blockQueueSize),
-                CustomThreadFactory.guavaThreadFactory(),
-                new CustomRejectedExecutionHandler()) {
-            long start = 0;
-            long thisTimeCost = 0;
-            double maxExecutionTime = -1;
-            double minExecutionTime = Integer.MAX_VALUE;
-            double totalExecutionTime = 0.0;
-            int totalExecutionCount = 0;
-
-            @Override
-            protected void beforeExecute(Thread t, Runnable r) {
-                super.beforeExecute(t, r);
-                if (isEnableMonitor) {
-                    start = System.currentTimeMillis();
-                }
-            }
-
-            @Override
-            protected void afterExecute(Runnable r, Throwable t) {
-                super.afterExecute(r, t);
-                if (isEnableMonitor) {
-                    thisTimeCost = System.currentTimeMillis() - start;
-                    totalExecutionTime += thisTimeCost;
-                    totalExecutionCount++;
-                    if (minExecutionTime > thisTimeCost) {
-                        minExecutionTime = thisTimeCost;
-                    }
-                    if (thisTimeCost > maxExecutionTime) {
-                        maxExecutionTime = thisTimeCost;
-                    }
-                }
-            }
-
-            @Override
-            protected void terminated() {
-                super.terminated();
-                if (isEnableMonitor) {
-                    monitor(this);
-                    log.info("线程池中任务的最大执行时间为: {}ms", maxExecutionTime);
-                    log.info("线程池中任务的最小执行时间为: {}ms", minExecutionTime);
-                    log.info("线程池中任务的平均执行时间为: {}ms", totalExecutionTime / totalExecutionCount);
-                }
-            }
-        };
+                isEnableMonitor);
         if (preStartAllCore) {
             int coreThreads = executor.prestartAllCoreThreads();
             log.info("{} Core Thread are all started", coreThreads);
         }
+        if (isEnableMonitor) {
+            log.info("Thread Pool Monitor has enable");
+        }
         // 包括核心线程在内,没有任务分配的所有线程,在keepAliveTime时间后全部回收掉
         executor.allowCoreThreadTimeOut(true);
+        executor.setRejectedExecutionHandler(new CustomRejectedExecutionHandler());
+        executor.setThreadFactory(CustomThreadFactory.guavaThreadFactory());
         return executor;
     }
 
-    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize, boolean isEnableMonitor) {
-        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false, isEnableMonitor);
-    }
-
-    public static ExecutorService newFixedThreadPool(int nThreads, boolean isEnableMonitor) {
-        return newFixedThreadPool(nThreads, nThreads, nThreads, false, isEnableMonitor);
-    }
-
-    public static ExecutorService newFixedThreadPool(int nThreads, boolean preStartAllCore, boolean isEnableMonitor) {
-        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore, isEnableMonitor);
-    }
-
-    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
-        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false, false);
-    }
-
-    public static ExecutorService newFixedThreadPool(int nThreads) {
-        return newFixedThreadPool(nThreads, nThreads, nThreads, false, false);
-    }
-
-    public static ExecutorService newFixedThreadPool(boolean preStartAllCore, int nThreads) {
-        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore, false);
+    public static void buildThreadFactory(ExecutorService executorService, ThreadFactory threadFactory) {
+        if (executorService instanceof ThreadPoolExecutor) {
+            ThreadPoolExecutor tpe = (ThreadPoolExecutor) executorService;
+            tpe.setThreadFactory(threadFactory);
+        }
     }
 
     /**
@@ -168,9 +117,39 @@ public class CustomThreadPool {
             // 线程池里曾经创建过的最大线程数量;通过这个数量可以知道线程池是否曾经满过
             log.info("Number of largest pool: {}", executor.getLargestPoolSize());
             log.info("------------------------------");
+            // 需要 pool 执行 shutdown 或者 shutdownNow 操作触发
             if (executor.isTerminated()) {
                 scheduledExecutorService.shutdown();
             }
         }, 0, 1, TimeUnit.SECONDS);
+    }
+    /*自定义线程池参数end*/
+
+
+    // ---------------------------- 参数太多 推荐使用构建器模式 {@link ThreadPoolBuilder} ----------------------------
+    // ---------------------------- !! Not Recommended ----------------------------
+
+    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize, boolean isEnableMonitor) {
+        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false, isEnableMonitor);
+    }
+
+    public static ExecutorService newFixedThreadPool(int nThreads, boolean isEnableMonitor) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, false, isEnableMonitor);
+    }
+
+    public static ExecutorService newFixedThreadPool(int nThreads, boolean preStartAllCore, boolean isEnableMonitor) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore, isEnableMonitor);
+    }
+
+    public static ExecutorService newFixedThreadPool(int corePoolSize, int maxPoolSize, int blockQueueSize) {
+        return newFixedThreadPool(corePoolSize, maxPoolSize, blockQueueSize, false, false);
+    }
+
+    public static ExecutorService newFixedThreadPool(int nThreads) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, false, false);
+    }
+
+    public static ExecutorService newFixedThreadPool(boolean preStartAllCore, int nThreads) {
+        return newFixedThreadPool(nThreads, nThreads, nThreads, preStartAllCore, false);
     }
 }

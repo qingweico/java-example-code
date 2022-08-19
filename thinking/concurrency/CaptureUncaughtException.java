@@ -1,18 +1,23 @@
 package thinking.concurrency;
 
+import thread.pool.CustomThreadPool;
+
+import javax.annotation.Nonnull;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 import static util.Print.print;
 
 /**
- * @author:qiming 
- * @date: 2021/1/18
+ * 线程池中捕获异常; 实现 {@link Thread.UncaughtExceptionHandler}
+ *
+ * @author zqw
+ * @date 2021/1/18
  */
 public class CaptureUncaughtException {
     public static void main(String[] args) {
-        ExecutorService exec = Executors.newCachedThreadPool(new HandleThreadFactory());
+        ExecutorService exec = CustomThreadPool.newFixedThreadPool(1);
+        CustomThreadPool.buildThreadFactory(exec, new HandleThreadFactory());
         exec.execute(new ExceptionThreadCaught());
         exec.shutdown();
     }
@@ -42,7 +47,7 @@ class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
 class HandleThreadFactory implements ThreadFactory {
 
     @Override
-    public Thread newThread(Runnable r) {
+    public Thread newThread(@Nonnull Runnable r) {
         print(this + " creating new Thread");
         Thread t = new Thread(r);
         print("created " + t);

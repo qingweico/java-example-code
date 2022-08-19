@@ -1,6 +1,8 @@
 package io;
 
 import lombok.extern.slf4j.Slf4j;
+import object.entity.User;
+import util.RandomDataGenerator;
 
 import java.io.*;
 import java.util.Scanner;
@@ -93,7 +95,7 @@ class GuessNumber {
 
     public static void start() {
         // Generate random numbers
-        int number = (int) (Math.random() * 10) + 1;
+        int number = RandomDataGenerator.randomInt(10);
         while (true) {
             Scanner sc = new Scanner(System.in);
             print("请输入您猜测的数字: ");
@@ -107,31 +109,6 @@ class GuessNumber {
                 break;
             }
         }
-    }
-}
-
-class User {
-    private String username;
-    private String password;
-
-    public User() {
-        super();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
 

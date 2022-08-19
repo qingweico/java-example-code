@@ -1,13 +1,15 @@
 package util;
 
 import lombok.extern.slf4j.Slf4j;
+import object.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import util.constants.Symbol;
 
 import java.lang.reflect.*;
 import java.util.Date;
+
+import static junit.framework.Assert.assertEquals;
 
 /**
  * ---------------------------------- 反射工具类 ----------------------------------
@@ -27,8 +29,15 @@ public class ReflectUtils {
         return getGenericClass(cls, 0);
     }
 
+    public static void main(String[] args) {
+        User user = new User();
+        user.setId(1L);
+        System.out.println(invokeGetter(user, "id"));
+    }
+
     public static Class<?> getGenericClass(Class<?> cls, int i) {
         try {
+            // 返回类或者接口所实现的所有接口类型
             Type[] types = cls.getGenericInterfaces();
             if (types.length > 0) {
                 ParameterizedType parameterizedType = ((ParameterizedType) cls.getGenericInterfaces()[0]);
@@ -41,7 +50,7 @@ public class ReflectUtils {
                     return (Class<?>) ((GenericArrayType) genericClass).getGenericComponentType();
                 } else if (genericClass instanceof TypeVariable) {
                     // 处理泛型擦拭对象
-                    return (Class<?>) getClass(((TypeVariable) genericClass).getBounds()[0], 0);
+                    return getClass(((TypeVariable<?>) genericClass).getBounds()[0], 0);
                 } else {
                     return (Class<?>) genericClass;
                 }
@@ -58,21 +67,21 @@ public class ReflectUtils {
             return (Class<?>) ((ParameterizedType) type).getRawType();
         } else if (type instanceof TypeVariable) {
             // 处理泛型擦拭对象
-            return getClass(((TypeVariable) type).getBounds()[0], 0);
+            return getClass(((TypeVariable<?>) type).getBounds()[0], 0);
         } else {
-            // class本身也是type，强制转型
+            // class本身也是type,强制转型
             return (Class<?>) type;
         }
     }
 
 
     /**
-     * 调用Getter方法.
-     * 支持多级，如：对象名.对象名.方法
+     * 调用Getter方法
+     * 支持多级,如:对象名.对象名.方法
      */
     public static Object invokeGetter(Object obj, String propertyName) {
         Object object = obj;
-        for (String name : StringUtils.split(propertyName, ".")) {
+        for (String name : StringUtils.split(propertyName, Symbol.DOT)) {
             String getterMethodName = GETTER_PREFIX + StringUtils.capitalize(name);
             object = invokeMethod(object, getterMethodName, new Class[]{}, new Object[]{});
         }
@@ -81,7 +90,7 @@ public class ReflectUtils {
 
     /**
      * 调用Setter方法, 仅匹配方法名。
-     * 支持多级，如：对象名.对象名.方法
+     * 支持多级,如:对象名.对象名.方法
      */
     public static void invokeSetter(Object obj, String propertyName, Object value) {
         Object object = obj;
@@ -135,8 +144,8 @@ public class ReflectUtils {
 
     /**
      * 直接调用对象方法, 无视private/protected修饰符.
-     * 用于一次性调用的情况，否则应使用getAccessibleMethod()函数获得Method后反复调用.
-     * 同时匹配方法名+参数类型，
+     * 用于一次性调用的情况,否则应使用getAccessibleMethod()函数获得Method后反复调用.
+     * 同时匹配方法名+参数类型,
      */
     public static Object invokeMethod(final Object obj, final String methodName, final Class<?>[] parameterTypes, final Object[] args) {
         Method method = getAccessibleMethod(obj, methodName, parameterTypes);
@@ -152,9 +161,9 @@ public class ReflectUtils {
     }
 
     /**
-     * 直接调用对象方法, 无视private/protected修饰符，
-     * 用于一次性调用的情况，否则应使用getAccessibleMethodByName()函数获得Method后反复调用.
-     * 只匹配函数名，如果有多个同名函数调用第一个。
+     * 直接调用对象方法, 无视private/protected修饰符,
+     * 用于一次性调用的情况,否则应使用getAccessibleMethodByName()函数获得Method后反复调用.
+     * 只匹配函数名,如果有多个同名函数调用第一个。
      */
     public static Object invokeMethodByName(final Object obj, final String methodName, final Object[] args) {
         Method method = getAccessibleMethodByName(obj, methodName);
@@ -238,35 +247,37 @@ public class ReflectUtils {
     }
 
     /**
-     * 改变private/protected的方法为public，尽量不调用实际改动的语句，避免JDK的SecurityManager抱怨。
+     * 改变private/protected的方法为public,尽量不调用实际改动的语句,避免JDK的SecurityManager抱怨
      */
     public static void makeAccessible(Method method) {
-        if ((!Modifier.isPublic(method.getModifiers()) || !Modifier.isPublic(method.getDeclaringClass().getModifiers())) && !method.isAccessible()) {
+        if ((!Modifier.isPublic(method.getModifiers())
+                || !Modifier.isPublic(method.getDeclaringClass().getModifiers()))
+                && !method.canAccess(null)) {
             method.setAccessible(true);
         }
     }
 
     /**
-     * 改变private/protected的成员变量为public，尽量不调用实际改动的语句，避免JDK的SecurityManager抱怨。
+     * 改变private/protected的成员变量为public,尽量不调用实际改动的语句,避免JDK的SecurityManager抱怨
      */
     public static void makeAccessible(Field field) {
-        if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers()) || Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
+        if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers()) || Modifier.isFinal(field.getModifiers())) && !field.canAccess(null)) {
             field.setAccessible(true);
         }
     }
 
     /**
      * 通过反射, 获得Class定义中声明的泛型参数的类型, 注意泛型必须定义在父类处
-     * 如无法找到, 返回Object.class.
+     * 如无法找到, 返回Object.class
      * eg.
      * public UserDao extends HibernateDao<User>
      *
      * @param clazz The class to introspect
-     * @return the first generic declaration, or Object.class if cannot be determined
+     * @return the first generic declaration, or `Object.class`, if you cannot be determined
      */
-    @SuppressWarnings("unchecked")
-    public static <T> Class<T> getClassGenricType(final Class clazz) {
-        return getClassGenricType(clazz, 0);
+
+    public static <T> Class<T> getClassGenericType(final Class<T> clazz) {
+        return getClassGenericType(clazz, 0);
     }
 
     /**
@@ -279,32 +290,28 @@ public class ReflectUtils {
      * @param index the Index of the generic ddeclaration,start from 0.
      * @return the index generic declaration, or Object.class if cannot be determined
      */
-    public static Class getClassGenricType(final Class clazz, final int index) {
-
+    @SuppressWarnings("unchecked")
+    public static <T> Class<T> getClassGenericType(final Class<T> clazz, final int index) {
         Type genType = clazz.getGenericSuperclass();
-
         if (!(genType instanceof ParameterizedType)) {
             log.warn(clazz.getSimpleName() + "'s superclass not ParameterizedType");
-            return Object.class;
+            return (Class<T>) Object.class;
         }
-
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-
         if (index >= params.length || index < 0) {
             log.warn("Index: " + index + ", Size of " + clazz.getSimpleName() + "'s Parameterized Type: " + params.length);
-            return Object.class;
+            return (Class<T>) Object.class;
         }
         if (!(params[index] instanceof Class)) {
             log.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
-            return Object.class;
+            return (Class<T>) Object.class;
         }
-
-        return (Class) params[index];
+        return (Class<T>) params[index];
     }
 
     public static Class<?> getUserClass(Object instance) {
         Validate.notNull(instance, "Instance must not be null");
-        Class clazz = instance.getClass();
+        Class<?> clazz = instance.getClass();
         if (clazz != null && clazz.getName().contains(CGLIB_CLASS_SEPARATOR)) {
             Class<?> superClass = clazz.getSuperclass();
             if (superClass != null && !Object.class.equals(superClass)) {
@@ -334,16 +341,16 @@ public class ReflectUtils {
      *
      * @param clazz     数据类型
      * @param fieldName 属性名
-     * @return 如果为日期类型返回true，否则返回false
+     * @return 如果为日期类型返回true, 否则返回false
      */
     public static <T> boolean isDateType(Class<T> clazz, String fieldName) {
         boolean flag = false;
         try {
             Field field = clazz.getDeclaredField(fieldName);
-            Object typeObj = field.getType().newInstance();
+            Object typeObj = field.getType().getConstructor().newInstance();
             flag = typeObj instanceof Date;
         } catch (Exception e) {
-            // 把异常吞掉直接返回false
+            // swallow exceptions
         }
         return flag;
     }
@@ -357,7 +364,7 @@ public class ReflectUtils {
      */
     public static <T> Object parseValueWithType(String value, Class<?> type) {
         Object result = null;
-        try { // 根据属性的类型将内容转换成对应的类型
+        try {
             if (Boolean.TYPE == type) {
                 result = Boolean.parseBoolean(value);
             } else if (Byte.TYPE == type) {

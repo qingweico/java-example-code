@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2021/3/30
  */
 @ThreadSafe
-public class AtomicPseudoRandom extends PseudoRandom {
+class AtomicPseudoRandom extends PseudoRandom {
 
     private final AtomicInteger seed;
 

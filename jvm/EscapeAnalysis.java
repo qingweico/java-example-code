@@ -1,6 +1,6 @@
 package jvm;
 
-import object.Student;
+import object.entity.Student;
 import util.Constants;
 
 import java.util.concurrent.TimeUnit;

@@ -8,8 +8,8 @@ public class InsertSort implements MutableSorter {
 
     // Has a better performance than InsSort.sort()
     @Override
-    public void sort(int[] A) {
-        sort(A, 0, A.length);
+    public void sort(int[] e) {
+        sort(e, 0, e.length);
     }
 
     public static void sort(int[] A, int l, int r) {

@@ -28,7 +28,7 @@ public interface Constants {
 
 
     /**
-     * ~
+     * Num
      */
     int NUM_100 = 100;
     int NUM_1000 = 1000;
@@ -44,15 +44,10 @@ public interface Constants {
 
     // ############################# field type #############################
 
-    String STRING = "String";
+    String STRING = "string";
     String BOOL = "boolean";
     String INTEGER = "integer";
     String LONG = "long";
-    String DATE = "Date";
-
-    // 符号
-
-    String Symbol_Pound_Sign = "#";
-
-
+    String DATE = "date";
+    String DOUBLE = "double";
 }

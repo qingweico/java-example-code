@@ -1,26 +1,24 @@
 package thinking.concurrency;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import thread.pool.ThreadPoolBuilder;
 
-import static util.Print.print;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Catch exceptions
  *
- * @author:qiming
- * @date: 2021/1/18
- * {ThrowsException}
+ * @author zqw
+ * @date 2021/1/18
  */
-public class ExceptionThread implements Runnable{
+class ExceptionThread implements Runnable{
     @Override
     public void run() {
         throw new RuntimeException();
     }
 
     public static void main(String[] args) {
-        ExecutorService exec = Executors.newCachedThreadPool();
-        exec.execute(new ExceptionThread());
-        exec.shutdown();
+        ExecutorService pool = ThreadPoolBuilder.custom().builder();
+        pool.execute(new ExceptionThread());
+        pool.shutdown();
     }
 }

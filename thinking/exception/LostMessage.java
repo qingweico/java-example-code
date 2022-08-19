@@ -1,26 +1,14 @@
 package thinking.exception;
 
+import annotation.Pass;
+
 /**
  * Exception loss
  *
  * @author zqw
  * @date 2020/11/22
  */
-class VeryImportantException extends Exception {
-    @Override
-    public String toString() {
-        return "A very important exception!";
-    }
-}
-
-class HoHumException extends Exception {
-    @Override
-    public String toString() {
-        return "A trivial exception";
-    }
-}
-
-public class LostMessage {
+class LostMessage {
     void f() throws VeryImportantException {
         throw new VeryImportantException();
     }
@@ -45,6 +33,8 @@ public class LostMessage {
 }
 
 // This is an easier way to lose exceptions.
+@Pass
+@SuppressWarnings("all")
 class ExceptionsSilencer {
     public static void main(String[] args) {
         try {
@@ -52,5 +42,18 @@ class ExceptionsSilencer {
         } finally {
             return;
         }
+    }
+}
+class VeryImportantException extends Exception {
+    @Override
+    public String toString() {
+        return "A very important exception!";
+    }
+}
+
+class HoHumException extends Exception {
+    @Override
+    public String toString() {
+        return "A trivial exception";
     }
 }

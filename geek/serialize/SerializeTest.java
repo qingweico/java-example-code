@@ -1,8 +1,8 @@
 package geek.serialize;
 
 import lombok.extern.slf4j.Slf4j;
-import oak.User;
-import object.Student;
+import object.entity.User;
+import object.entity.Student;
 import org.testng.annotations.Test;
 import util.RandomDataGenerator;
 
@@ -23,7 +23,7 @@ public class SerializeTest {
         try {
             FileInputStream fis = new FileInputStream(path + studentFileName);
             ois = new ObjectInputStreamImpl(fis);
-            // Exception: Unauthorized deserialization attempt; object.Student
+            // Exception: Unauthorized deserialization attempt; object.entity.Student
             User user = (User) ois.readObject();
             log.info("user: [{}]", user);
         } catch (IOException ex) {

@@ -1,5 +1,7 @@
 package collection;
 
+import object.entity.Customer;
+
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;

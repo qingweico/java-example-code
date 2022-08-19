@@ -1,6 +1,6 @@
 package geek.jvm;
 
-import collection.Customer;
+import object.entity.Customer;
 import jvm.OverrideAndOverload;
 
 /**

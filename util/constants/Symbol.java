@@ -42,4 +42,8 @@ public interface Symbol {
      * SEMICOLON: ";"
      */
     String SEMICOLON = ";";
+    /**
+     * POUND_SIGN: "#"; `#`有很多种读法
+     */
+    String POUND_SIGN = "#";
 }

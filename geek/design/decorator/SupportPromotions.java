@@ -32,6 +32,7 @@ public class SupportPromotions implements Cloneable {
      */
     private UserRedPacket userRedPacket;
 
+    @Override
     public SupportPromotions clone() {
         SupportPromotions supportPromotions = null;
         try {
