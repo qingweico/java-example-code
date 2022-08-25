@@ -5,8 +5,8 @@ import static util.Print.print;
 /**
  * Catch exception hierarchies
  *
- * @author:qiming
- * @date: 2021/1/19
+ * @author zqw
+ * @date 2021/1/19
  */
 public class ExceptionMatching {
 
@@ -17,16 +17,16 @@ public class ExceptionMatching {
         }catch (Sneeze e){
             print("Caught sneeze");
             // catch (Annoyance e) catches Annoyance and all the exceptions derived from it.
-        }catch (Annoyance e){
+        }catch (AnnoyanceException e){
             print("Caught Annoyance");
         }
 
         try {
             throw new Sneeze();
-        }catch (Annoyance e){
+        }catch (AnnoyanceException e){
             print("Caught Annoyance");
         }
     }
 }
-class Annoyance extends Exception {}
-class Sneeze extends Annoyance {}
+class AnnoyanceException extends Exception {}
+class Sneeze extends AnnoyanceException {}

@@ -14,7 +14,7 @@ import static util.Print.printnb;
  * @author zqw
  * @date 2021/4/11
  */
-public class WaxOMatic {
+class WaxOMatic {
     public static void main(String[] args) throws InterruptedException {
         Car car = new Car();
         ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);

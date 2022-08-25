@@ -13,7 +13,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/4/3
  */
-public class CountedString {
+class CountedString {
     private static final List<String> CREATED = new ArrayList<>();
     private final String s;
     private int id = 0;

@@ -10,8 +10,8 @@ import static util.Print.print;
 /**
  * Using CyclicBarriers
  *
- * @author:qiming
- * @date: 2021/2/1
+ * @author zqw
+ * @date 2021/2/1
  */
 public class HorseRace {
     static final int FINISH_LINE = 75;

@@ -6,7 +6,7 @@ import object.entity.Student;
 /**
  * 覆盖equals时总要覆盖hashcode
  *
- * @author zwq
+ * @author zqw
  * @date 2020/10/25
  * @see Student
  */

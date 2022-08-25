@@ -9,7 +9,7 @@ import annotation.ThreadSafe;
  * @date 2021/3/30
  */
 @ThreadSafe
-public class SimulatedCAS {
+public class SimulatedCas {
     @GuardedBy("this")
     private int value;
 

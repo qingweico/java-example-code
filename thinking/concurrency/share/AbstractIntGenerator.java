@@ -1,13 +1,18 @@
 package thinking.concurrency.share;
 
 /**
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  */
-public abstract class IntGenerator {
+public abstract class AbstractIntGenerator {
 
     private volatile boolean canceled = false;
 
+    /**
+     * next
+     *
+     * @return int
+     */
     public abstract int next();
 
     public void cancel() {

@@ -6,7 +6,7 @@ package design.factory;
  * @author zqw
  * @date 2021/12/22
  */
-public abstract class BaseFactory {
+abstract class BaseFactory {
     /**
      * Factory Method of Product
      * @return Product

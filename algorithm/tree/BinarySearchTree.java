@@ -302,22 +302,22 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     private void printTree(Node root) {
         int h = depth(root);
-        int W = 2 * (int) Math.pow(2, h);
+        int w = 2 * (int) Math.pow(2, h);
         var lines = new StringBuilder[h * 2];
         for (int i = 0; i < h * 2; i++) {
-            lines[i] = new StringBuilder(String.format("%" + W + "s", ""));
+            lines[i] = new StringBuilder(String.format("%" + w + "s", ""));
         }
 
-        printNode(lines, W, root, 0, 0);
+        printNode(lines, w, root, 0, 0);
         for (var line : lines) {
             print(line.toString());
         }
 
     }
 
-    private void printNode(StringBuilder[] lines, int W, Node node, int h, int base) {
+    private void printNode(StringBuilder[] lines, int w, Node node, int h, int base) {
         var nums = Math.pow(2, h);
-        var pos = base + (int) (W / (nums * 2));
+        var pos = base + (int) (w / (nums * 2));
 
         var str = node.e.toString();
         for (int i = 0; i < str.length(); i++) {
@@ -326,12 +326,12 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
         if (node.left != null) {
             lines[h * 2 + 1].setCharAt(pos - 1, '/');
-            printNode(lines, W, node.left, h + 1, base);
+            printNode(lines, w, node.left, h + 1, base);
         }
 
         if (node.right != null) {
             lines[h * 2 + 1].setCharAt(pos + str.length() + 1, '\\');
-            printNode(lines, W, node.right, h + 1, pos);
+            printNode(lines, w, node.right, h + 1, pos);
         }
     }
 

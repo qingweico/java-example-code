@@ -43,6 +43,7 @@ class Article31 {
 
     // you can replace a type parameter with a wildcard
     // if it appears only once in the method declaration.
+
     public static void swap(int i, int j, List<?> list) {
         // can't compile
         // list.set(i, list.set(j, list.get(i)));

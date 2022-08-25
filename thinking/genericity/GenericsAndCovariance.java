@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author:qiming
- * @date: 2021/1/12
+ * @author zqw
+ * @date 2021/1/12
  */
 public class GenericsAndCovariance {
     public static void main(String[] args) {
@@ -18,6 +18,7 @@ public class GenericsAndCovariance {
         // list.add(new Object());
 
         // Legal but uninteresting
+
         list.add(null);
         // We know that it returns Fruit at least.
         Fruit f = list.get(0);

@@ -3,8 +3,8 @@ package algorithm.sort;
 import java.util.Arrays;
 
 /**
- * @author:qiming
- * @date: 2021/10/16
+ * @author zqw
+ * @date 2021/10/16
  */
 public class MergeSort implements MutableSorter {
     @Override
@@ -13,32 +13,32 @@ public class MergeSort implements MutableSorter {
         mergeSort(e, 0, e.length);
     }
 
-    private void mergeSort(int[] A, int l, int r) {
+    private void mergeSort(int[] e, int l, int r) {
         if (r - l <= 1) {
             return;
         }
         int mid = l + ((r - l) >> 1);
-        mergeSort(A, l, mid);
-        mergeSort(A, mid, r);
-        if (A[mid - 1] > A[mid]) {
-            merge(A, l, mid, r);
+        mergeSort(e, l, mid);
+        mergeSort(e, mid, r);
+        if (e[mid - 1] > e[mid]) {
+            merge(e, l, mid, r);
 
         }
 
     }
 
-    private void merge(int[] A, int l, int mid, int r) {
+    private void merge(int[] e, int l, int mid, int r) {
         // [)
-        int[] B = Arrays.copyOfRange(A, l, mid + 1);
-        int[] C = Arrays.copyOfRange(A, mid, r + 1);
-        B[B.length - 1] = C[C.length - 1] = Integer.MAX_VALUE;
+        int[] bArray = Arrays.copyOfRange(e, l, mid + 1);
+        int[] cArray = Arrays.copyOfRange(e, mid, r + 1);
+        bArray[bArray.length - 1] = cArray[cArray.length - 1] = Integer.MAX_VALUE;
 
         int b = 0, c = 0;
         for (int k = l; k < r; k++) {
-            if (B[b] > C[c]) {
-                A[k] = C[c++];
+            if (bArray[b] > cArray[c]) {
+                e[k] = cArray[c++];
             } else {
-                A[k] = B[b++];
+                e[k] = bArray[b++];
             }
         }
     }

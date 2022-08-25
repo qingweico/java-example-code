@@ -84,9 +84,9 @@ public class SimpleClassScanner {
         try {
             Set<String> classNames = Sets.newLinkedHashSet();
             // Find in class loader
-            Set<URL> resourceURLs = ClassLoaderUtils.getResources(classLoader, ClassLoaderUtils.ResourceType.PACKAGE, packageName);
+            Set<URL> resourceUrls = ClassLoaderUtils.getResources(classLoader, ClassLoaderUtils.ResourceType.PACKAGE, packageName);
 
-            if (resourceURLs.isEmpty()) {
+            if (resourceUrls.isEmpty()) {
                 //Find in class path
                 List<String> classNamesInPackage = Lists.newArrayList(ClassUtils.getClassNamesInPackage(packageName));
 
@@ -96,22 +96,22 @@ public class SimpleClassScanner {
                         System.err.println("class path is null!");
                         return new HashSet<>();
                     }
-                    URL resourceURL = new File(classPath).toURI().toURL();
-                    resourceURLs = Sets.newHashSet(resourceURL);
+                    URL resourceUrl = new File(classPath).toURI().toURL();
+                    resourceUrls = Sets.newHashSet(resourceUrl);
                 }
             }
 
-            for (URL resourceURL : resourceURLs) {
-                URL classPathURL = resolveClassPathURL(resourceURL, packageResourceName);
-                String classPath = classPathURL.getFile();
+            for (URL resourceUrl : resourceUrls) {
+                URL classPathUrl = resolveClassPathUrl(resourceUrl, packageResourceName);
+                String classPath = classPathUrl.getFile();
                 Set<String> classNamesInClassPath = ClassUtils.findClassNamesInClassPath(classPath, true);
                 classNames.addAll(filterClassNames(classNamesInClassPath, packageName, recursive));
             }
 
             for (String className : classNames) {
-                Class<?> class_ = requiredLoad ? ClassLoaderUtils.loadClass(classLoader, className) : ClassLoaderUtils.findLoadedClass(classLoader, className);
-                if (class_ != null) {
-                    classesSet.add(class_);
+                Class<?> cls = requiredLoad ? ClassLoaderUtils.loadClass(classLoader, className) : ClassLoaderUtils.findLoadedClass(classLoader, className);
+                if (cls != null) {
+                    classesSet.add(cls);
                 }
             }
 
@@ -127,8 +127,8 @@ public class SimpleClassScanner {
     }
 
 
-    private URL resolveClassPathURL(URL resourceURL, String packageResourceName) {
-        String resource = resourceURL.toExternalForm();
+    private URL resolveClassPathUrl(URL resourceUrl, String packageResourceName) {
+        String resource = resourceUrl.toExternalForm();
         String classPath = StringUtils.substringBefore(resource, packageResourceName);
         URL classPathURL;
         try {

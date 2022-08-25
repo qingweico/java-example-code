@@ -7,8 +7,8 @@ import java.util.List;
  * mutable parameter and generic method
  *
  * mutable generic parameters: T ...args
- * @author:qiming
- * @date: 2021/4/9
+ * @author zqw
+ * @date 2021/4/9
  */
 public class GenericVarargs {
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author:qiming
- * @date: 2021/1/12
+ * @author zqw
+ * @date 2021/1/12
  */
 public class GenericWriting {
     static <T> void writeExact(List<T> list, T item) {

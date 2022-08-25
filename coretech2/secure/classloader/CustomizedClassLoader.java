@@ -25,7 +25,7 @@ class ClassLoaderFrame extends JFrame {
     public ClassLoaderFrame() {
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setLayout(new GridBagLayout());
-        add(new JLabel("Class"), new GBC(0, 0).setAnchor(GBC.WEST));
+        add(new JLabel("Class"), new Gbc(0, 0).setAnchor(Gbc.WEST));
         // TODO
     }
 

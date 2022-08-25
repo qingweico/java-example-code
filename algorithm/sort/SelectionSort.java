@@ -3,8 +3,8 @@ package algorithm.sort;
 import util.Tools;
 
 /**
- * @author:qiming
- * @date: 2021/10/16
+ * @author zqw
+ * @date 2021/10/16
  */
 public class SelectionSort implements MutableSorter {
 
@@ -16,13 +16,13 @@ public class SelectionSort implements MutableSorter {
         }
     }
 
-    private static int maxIndex(int[] A, int r) {
+    private static int maxIndex(int[] e, int r) {
         int max = Integer.MIN_VALUE;
         // stable
         int maxIndex = r - 1;
         for (int k = maxIndex; k >= 0; k--) {
-            if (max < A[k]) {
-                max = A[k];
+            if (max < e[k]) {
+                max = e[k];
                 maxIndex = k;
             }
         }

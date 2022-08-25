@@ -7,8 +7,8 @@ package thinking.exception;
  * be programmatically ignored, the handling of other types of exceptions is enforced by
  * the compiler.
  *
- * @author:qiming
- * @date: 2021/1/8
+ * @author zqw
+ * @date 2021/1/8
  */
 public class UncheckedException {
     static void f() {

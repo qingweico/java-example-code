@@ -6,8 +6,8 @@ import thinking.inner.Destination;
  * An anonymous inner class that preforms initialization.
  * A briefer version of Parcel5.java.
  *
- * @author:qiming
- * @date: 2021/1/31
+ * @author zqw
+ * @date 2021/1/31
  */
 public class Parcel9 {
 

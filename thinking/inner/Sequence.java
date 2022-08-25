@@ -1,8 +1,8 @@
 package thinking.inner;
 
 /**
- * @author:qiming
- * @date: 2021/1/29
+ * @author zqw
+ * @date 2021/1/29
  */
 public class Sequence {
     private final Object[] items;

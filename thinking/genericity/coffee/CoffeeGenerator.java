@@ -12,6 +12,7 @@ import static util.Print.print;
  * @date 2021/3/23
  */
 // Generate different types of Coffee
+
 public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coffee> {
     private final Class<?>[] types = {
             Latte.class,
@@ -20,12 +21,13 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
             Americano.class,
             Breve.class
     };
-    private static final Random rand = new Random(47);
+    private static final Random R = new Random(47);
 
     public CoffeeGenerator() {
     }
 
     // For iteration
+
     private int size = 0;
 
     public CoffeeGenerator(int size) {
@@ -36,7 +38,7 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
     @SuppressWarnings("unchecked")
     public Coffee next() {
         try {
-            return (Coffee) types[rand.nextInt(types.length)].getDeclaredConstructor().newInstance();
+            return (Coffee) types[R.nextInt(types.length)].getDeclaredConstructor().newInstance();
             // Report programmer errors at run time
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -70,15 +72,14 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
     }
 
     public static void main(String[] args) {
+        int size = 5;
         CoffeeGenerator<Object> gen = new CoffeeGenerator<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < size; i++) {
             print(gen.next());
         }
         System.out.println();
-        CoffeeGenerator<thinking.genericity.coffee.Coffee > coffeeGenerator = new CoffeeGenerator<>(5);
+        CoffeeGenerator<thinking.genericity.coffee.Coffee> coffeeGenerator = new CoffeeGenerator<>(size);
         coffeeGenerator.forEach(System.out::println);
     }
-
-
 }
 

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * <a href="https://www.baeldung.com/java-phaser">java-phaser</a>
  *
  * @author zqw
- * @date: 2021/10/17
+ * @date 2021/10/17
  */
 class PhaserE {
     Phaser phaser = new Phaser();

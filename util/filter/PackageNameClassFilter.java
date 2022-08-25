@@ -23,8 +23,8 @@ public class PackageNameClassFilter implements ClassFilter {
 
     @Override
     public boolean accept(Class<?> filteredObject) {
-        Package package_ = filteredObject.getPackage();
-        String packageName = package_.getName();
+        Package pkg = filteredObject.getPackage();
+        String packageName = pkg.getName();
         boolean accepted = packageName.equals(this.packageName);
         if (!accepted && includedSubPackages) {
             accepted = packageName.startsWith(subPackageNamePrefix);

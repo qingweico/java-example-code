@@ -5,8 +5,8 @@ import static util.Print.print;
 /**
  * Use finally in return
  *
- * @author:qiming
- * @date: 2021/1/17
+ * @author zqw
+ * @date 2021/1/17
  */
 public class MultipleReturns {
     public static void f(int i){

@@ -3,8 +3,8 @@ package algorithm.set;
 import algorithm.list.LinkedList;
 
 /**
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class LinkedListSet<E> implements Set<E> {
 

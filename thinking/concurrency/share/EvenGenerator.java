@@ -1,11 +1,11 @@
 package thinking.concurrency.share;
 
 /**
- * @author:qiming
- * @date: 2021/1/19
+ * @author zqw
+ * @date 2021/1/19
  */
 //When threads collide
-public class EvenGenerator extends IntGenerator{
+public class EvenGenerator extends AbstractIntGenerator {
 
     private int currentEvenValue = 0;
     @Override

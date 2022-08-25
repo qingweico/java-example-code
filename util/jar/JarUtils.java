@@ -8,7 +8,7 @@ import util.constants.FileSuffixConstants;
 import util.constants.ProtocolConstants;
 import util.constants.SeparatorConstants;
 import util.filter.JarEntryFilter;
-import util.net.URLUtils;
+import util.net.UrlUtils;
 
 import javax.annotation.Nonnull;
 import java.io.*;
@@ -31,36 +31,32 @@ public class JarUtils {
     /**
      * Create a {@link JarFile} from specified {@link URL} of {@link JarFile}
      *
-     * @param jarURL
-     *         {@link URL} of {@link JarFile} or {@link JarEntry}
+     * @param jarUrl {@link URL} of {@link JarFile} or {@link JarEntry}
      * @return JarFile
-     * @throws IOException
-     *         If {@link JarFile jar file} is invalid, see {@link JarFile#JarFile(String)}
+     * @throws IOException If {@link JarFile jar file} is invalid, see {@link JarFile#JarFile(String)}
      */
-    public static JarFile toJarFile(URL jarURL) throws IOException {
+    public static JarFile toJarFile(URL jarUrl) throws IOException {
         JarFile jarFile;
-        final String jarAbsolutePath = resolveJarAbsolutePath(jarURL);
+        final String jarAbsolutePath = resolveJarAbsolutePath(jarUrl);
         jarFile = new JarFile(jarAbsolutePath);
         return jarFile;
     }
 
     /**
-     * Assert <code>jarURL</code> argument is valid , only supported protocols:
+     * Assert <code>jarUrl</code> argument is valid , only supported protocols:
      * {@link ProtocolConstants#JAR jar} and
      * {@link ProtocolConstants#FILE file}
      *
-     * @param jarURL
-     *         {@link URL} of {@link JarFile} or {@link JarEntry}
-     * @throws NullPointerException
-     *         If <code>jarURL</code> is <code>null</code>
-     * @throws IllegalArgumentException
-     *         If {@link URL#getProtocol()} is not {@link ProtocolConstants#JAR jar} or {@link ProtocolConstants#FILE
-     *         file}
+     * @param jarUrl {@link URL} of {@link JarFile} or {@link JarEntry}
+     * @throws NullPointerException     If <code>jarUrl</code> is <code>null</code>
+     * @throws IllegalArgumentException If {@link URL#getProtocol()} is not {@link ProtocolConstants#JAR jar} or {@link ProtocolConstants#FILE
+     *                                  file}
      */
-    protected static void assertJarURLProtocol(URL jarURL) throws NullPointerException, IllegalArgumentException {
-        final String protocol = jarURL.getProtocol(); //NPE check
+    protected static void assertJarUrlProtocol(URL jarUrl) throws NullPointerException, IllegalArgumentException {
+        // NPE check
+        final String protocol = jarUrl.getProtocol();
         if (!ProtocolConstants.JAR.equals(protocol) && !ProtocolConstants.FILE.equals(protocol)) {
-            String message = String.format("jarURL Protocol[%s] is unsupported ,except %s and %s ", protocol, ProtocolConstants.JAR, ProtocolConstants.FILE);
+            String message = String.format("jarUrl Protocol[%s] is unsupported ,except %s and %s ", protocol, ProtocolConstants.JAR, ProtocolConstants.FILE);
             throw new IllegalArgumentException(message);
         }
     }
@@ -68,49 +64,41 @@ public class JarUtils {
     /**
      * Resolve Relative path from Jar URL
      *
-     * @param jarURL
-     *         {@link URL} of {@link JarFile} or {@link JarEntry}
+     * @param jarUrl {@link URL} of {@link JarFile} or {@link JarEntry}
      * @return Non-null
-     * @throws NullPointerException
-     *         see {@link #assertJarURLProtocol(URL)}
-     * @throws IllegalArgumentException
-     *         see {@link #assertJarURLProtocol(URL)}
+     * @throws NullPointerException     see {@link #assertJarUrlProtocol(URL)}
+     * @throws IllegalArgumentException see {@link #assertJarUrlProtocol(URL)}
      */
     @Nonnull
-    public static String resolveRelativePath(URL jarURL) throws NullPointerException, IllegalArgumentException {
-        assertJarURLProtocol(jarURL);
-        String form = jarURL.toExternalForm();
+    public static String resolveRelativePath(URL jarUrl) throws NullPointerException, IllegalArgumentException {
+        assertJarUrlProtocol(jarUrl);
+        String form = jarUrl.toExternalForm();
         String relativePath = StringUtils.substringAfter(form, SeparatorConstants.ARCHIVE_ENTITY);
-        relativePath = URLUtils.resolvePath(relativePath);
-        return URLUtils.decode(relativePath);
+        relativePath = UrlUtils.resolvePath(relativePath);
+        return UrlUtils.decode(relativePath);
     }
 
     /**
      * Resolve absolute path from the {@link URL} of {@link JarEntry}
      *
-     * @param jarURL
-     *         {@link URL} of {@link JarFile} or {@link JarEntry}
+     * @param jarUrl {@link URL} of {@link JarFile} or {@link JarEntry}
      * @return If {@link URL#getProtocol()} equals <code>jar</code> or <code>file</code> , resolves absolute path, or
      * return <code>null</code>
-     * @throws NullPointerException
-     *         see {@link #assertJarURLProtocol(URL)}
-     * @throws IllegalArgumentException
-     *         see {@link #assertJarURLProtocol(URL)}
+     * @throws NullPointerException     see {@link #assertJarUrlProtocol(URL)}
+     * @throws IllegalArgumentException see {@link #assertJarUrlProtocol(URL)}
      */
     @Nonnull
-    public static String resolveJarAbsolutePath(URL jarURL) throws NullPointerException, IllegalArgumentException {
-        assertJarURLProtocol(jarURL);
-        File archiveFile = URLUtils.resolveArchiveFile(jarURL, FileSuffixConstants.JAR);
+    public static String resolveJarAbsolutePath(URL jarUrl) throws NullPointerException, IllegalArgumentException {
+        assertJarUrlProtocol(jarUrl);
+        File archiveFile = UrlUtils.resolveArchiveFile(jarUrl, FileSuffixConstants.JAR);
         return archiveFile == null ? "" : archiveFile.getAbsolutePath();
     }
 
     /**
      * Filter {@link JarEntry} list from {@link JarFile}
      *
-     * @param jarFile
-     *         {@link JarFile}
-     * @param jarEntryFilter
-     *         {@link JarEntryFilter}
+     * @param jarFile        {@link JarFile}
+     * @param jarEntryFilter {@link JarEntryFilter}
      * @return Read-only List
      */
     @Nonnull
@@ -136,27 +124,22 @@ public class JarUtils {
     /**
      * Find {@link JarEntry} from specified <code>url</code>
      *
-     * @param jarURL
-     *         jar resource url
+     * @param jarUrl jar resource url
      * @return If found , return {@link JarEntry}
      */
-    public static JarEntry findJarEntry(URL jarURL) throws IOException {
-        JarFile jarFile = JarUtils.toJarFile(jarURL);
-        final String relativePath = JarUtils.resolveRelativePath(jarURL);
-        JarEntry jarEntry = jarFile.getJarEntry(relativePath);
-        return jarEntry;
+    public static JarEntry findJarEntry(URL jarUrl) throws IOException {
+        JarFile jarFile = JarUtils.toJarFile(jarUrl);
+        final String relativePath = JarUtils.resolveRelativePath(jarUrl);
+        return jarFile.getJarEntry(relativePath);
     }
 
 
     /**
      * Extract the source {@link JarFile} to target directory
      *
-     * @param jarSourceFile
-     *         the source {@link JarFile}
-     * @param targetDirectory
-     *         target directory
-     * @throws IOException
-     *         When the source jar file is an invalid {@link JarFile}
+     * @param jarSourceFile   the source {@link JarFile}
+     * @param targetDirectory target directory
+     * @throws IOException When the source jar file is an invalid {@link JarFile}
      */
     public static void extract(File jarSourceFile, File targetDirectory) throws IOException {
         extract(jarSourceFile, targetDirectory, null);
@@ -165,14 +148,10 @@ public class JarUtils {
     /**
      * Extract the source {@link JarFile} to target directory with specified {@link JarEntryFilter}
      *
-     * @param jarSourceFile
-     *         the source {@link JarFile}
-     * @param targetDirectory
-     *         target directory
-     * @param jarEntryFilter
-     *         {@link JarEntryFilter}
-     * @throws IOException
-     *         When the source jar file is an invalid {@link JarFile}
+     * @param jarSourceFile   the source {@link JarFile}
+     * @param targetDirectory target directory
+     * @param jarEntryFilter  {@link JarEntryFilter}
+     * @throws IOException When the source jar file is an invalid {@link JarFile}
      */
     public static void extract(File jarSourceFile, File targetDirectory, JarEntryFilter jarEntryFilter) throws IOException {
 
@@ -184,14 +163,10 @@ public class JarUtils {
     /**
      * Extract the source {@link JarFile} to target directory with specified {@link JarEntryFilter}
      *
-     * @param jarFile
-     *         the source {@link JarFile}
-     * @param targetDirectory
-     *         target directory
-     * @param jarEntryFilter
-     *         {@link JarEntryFilter}
-     * @throws IOException
-     *         When the source jar file is an invalid {@link JarFile}
+     * @param jarFile         the source {@link JarFile}
+     * @param targetDirectory target directory
+     * @param jarEntryFilter  {@link JarEntryFilter}
+     * @throws IOException When the source jar file is an invalid {@link JarFile}
      */
     public static void extract(JarFile jarFile, File targetDirectory, JarEntryFilter jarEntryFilter) throws IOException {
         List<JarEntry> jarEntriesList = filter(jarFile, jarEntryFilter);
@@ -201,18 +176,14 @@ public class JarUtils {
     /**
      * Extract the source {@link JarFile} to target directory with specified {@link JarEntryFilter}
      *
-     * @param jarResourceURL
-     *         The resource URL of {@link JarFile} or {@link JarEntry}
-     * @param targetDirectory
-     *         target directory
-     * @param jarEntryFilter
-     *         {@link JarEntryFilter}
-     * @throws IOException
-     *         When the source jar file is an invalid {@link JarFile}
+     * @param jarResourceUrl  The resource URL of {@link JarFile} or {@link JarEntry}
+     * @param targetDirectory target directory
+     * @param jarEntryFilter  {@link JarEntryFilter}
+     * @throws IOException When the source jar file is an invalid {@link JarFile}
      */
-    public static void extract(URL jarResourceURL, File targetDirectory, JarEntryFilter jarEntryFilter) throws IOException {
-        final JarFile jarFile = JarUtils.toJarFile(jarResourceURL);
-        final String relativePath = JarUtils.resolveRelativePath(jarResourceURL);
+    public static void extract(URL jarResourceUrl, File targetDirectory, JarEntryFilter jarEntryFilter) throws IOException {
+        final JarFile jarFile = JarUtils.toJarFile(jarResourceUrl);
+        final String relativePath = JarUtils.resolveRelativePath(jarResourceUrl);
         final JarEntry jarEntry = jarFile.getJarEntry(relativePath);
         final boolean isDirectory = jarEntry.isDirectory();
         List<JarEntry> jarEntriesList = filter(jarFile, new JarEntryFilter() {
@@ -241,21 +212,16 @@ public class JarUtils {
                 if (jarEntry.isDirectory()) {
                     targetFile.mkdirs();
                 } else {
-                    InputStream inputStream = null;
-                    OutputStream outputStream = null;
-                    try {
-                        inputStream = jarFile.getInputStream(jarEntry);
+                    try (InputStream inputStream = jarFile.getInputStream(jarEntry);) {
                         if (inputStream != null) {
                             File parentFile = targetFile.getParentFile();
                             if (!parentFile.exists()) {
                                 parentFile.mkdirs();
                             }
-                            outputStream = new FileOutputStream(targetFile);
-                            IOUtils.copy(inputStream, outputStream);
+                            try (OutputStream outputStream = new FileOutputStream(targetFile)) {
+                                IOUtils.copy(inputStream, outputStream);
+                            }
                         }
-                    } finally {
-                        IOUtils.closeQuietly(outputStream);
-                        IOUtils.closeQuietly(inputStream);
                     }
                 }
             }

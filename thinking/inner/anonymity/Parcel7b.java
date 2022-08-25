@@ -5,8 +5,8 @@ import thinking.inner.Contents;
 /**
  * Expanded version of Parcel7.java
  *
- * @author:qiming
- * @date: 2021/1/31
+ * @author zqw
+ * @date 2021/1/31
  */
 public class Parcel7b {
     static class MyContents implements Contents {

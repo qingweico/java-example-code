@@ -104,7 +104,6 @@ public class CustomThreadPool {
     public static void monitor(ThreadPoolExecutor executor) {
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutorService.scheduleAtFixedRate(() -> {
-            log.info("------------------------------");
             // 线程池的线程数量
             log.info("Pool Size: {}", executor.getPoolSize());
             log.info("Number of tasks in Queue: {}", executor.getQueue().size());
@@ -116,7 +115,6 @@ public class CustomThreadPool {
             log.info("Number of tasks total: {}", executor.getTaskCount());
             // 线程池里曾经创建过的最大线程数量;通过这个数量可以知道线程池是否曾经满过
             log.info("Number of largest pool: {}", executor.getLargestPoolSize());
-            log.info("------------------------------");
             // 需要 pool 执行 shutdown 或者 shutdownNow 操作触发
             if (executor.isTerminated()) {
                 scheduledExecutorService.shutdown();

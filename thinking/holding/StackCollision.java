@@ -4,8 +4,8 @@ import static util.Print.print;
 import static util.Print.printnb;
 
 /**
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  */
 public class StackCollision {
     public static void main(String[] args) {

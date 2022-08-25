@@ -3,8 +3,8 @@ package thinking.genericity;
 import java.awt.*;
 
 /**
- * @author:qiming
- * @date: 2021/1/12
+ * @author zqw
+ * @date 2021/1/12
  */
 public class InheritBounds {
     public static void main(String[] args) {

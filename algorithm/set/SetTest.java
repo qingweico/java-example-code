@@ -10,14 +10,14 @@ import static util.Print.print;
 import static util.Print.printf;
 
 /**
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class SetTest {
     @Test
     public void test() {
         setTest(BinarySearchTreeSet.class);
-        setTest(AVLSet.class);
+        setTest(AvlSet.class);
         setTest(LinkedListSet.class);
     }
 

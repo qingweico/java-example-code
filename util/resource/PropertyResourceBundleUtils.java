@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see PropertyResourceBundle
  */
-public abstract class PropertyResourceBundleUtils {
+public class PropertyResourceBundleUtils {
 
     private PropertyResourceBundleUtils() {
     }

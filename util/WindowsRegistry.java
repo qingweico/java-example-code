@@ -136,35 +136,35 @@ public final class WindowsRegistry {
     /**
      * Java wrapper for Windows registry API RegOpenKey()
      */
-    static int[] WindowsRegOpenKey(int hKey, byte[] subKey, int securityMask) {
+    static int[] windowsRegOpenKey(int hKey, byte[] subKey, int securityMask) {
         return invokeMethod(WindowsRegOpenKey, hKey, subKey, securityMask);
     }
 
     /**
      * Java wrapper for Windows registry API RegCloseKey()
      */
-    static Integer WindowsRegCloseKey(int hKey) {
+    static Integer windowsRegCloseKey(int hKey) {
         return invokeMethod(WindowsRegCloseKey, hKey);
     }
 
     /**
      * Java wrapper for Windows registry API RegCreateKeyEx()
      */
-    static int[] WindowsRegCreateKeyEx(int hKey, byte[] subKey) {
+    static int[] windowsRegCreateKeyEx(int hKey, byte[] subKey) {
         return invokeMethod(WindowsRegCreateKeyEx, hKey, subKey);
     }
 
     /**
      * Java wrapper for Windows registry API RegDeleteKey()
      */
-    static Integer WindowsRegDeleteKey(int hKey, byte[] subKey) {
+    static Integer windowsRegDeleteKey(int hKey, byte[] subKey) {
         return invokeMethod(WindowsRegDeleteKey, hKey, subKey);
     }
 
     /**
      * Java wrapper for Windows registry API RegFlushKey()
      */
-    static Integer WindowsRegFlushKey(int hKey) {
+    static Integer windowsRegFlushKey(int hKey) {
         return invokeMethod(WindowsRegFlushKey, hKey);
     }
 
@@ -172,28 +172,28 @@ public final class WindowsRegistry {
     /**
      * Java wrapper for Windows registry API RegQueryValueEx()
      */
-    static byte[] WindowsRegQueryValueEx(int hKey, byte[] valueName) {
+    static byte[] windowsRegQueryValueEx(int hKey, byte[] valueName) {
         return invokeMethod(WindowsRegQueryValueEx, hKey, valueName);
     }
 
     /**
      * Java wrapper for Windows registry API RegSetValueEx()
      */
-    static Integer WindowsRegSetValueEx(int hKey, byte[] valueName, byte[] value) {
+    static Integer windowsRegSetValueEx(int hKey, byte[] valueName, byte[] value) {
         return invokeMethod(WindowsRegSetValueEx, hKey, valueName, value);
     }
 
     /**
      * Java wrapper for Windows registry API RegDeleteValue()
      */
-    static Integer WindowsRegDeleteValue(int hKey, byte[] valueName) {
+    static Integer windowsRegDeleteValue(int hKey, byte[] valueName) {
         return invokeMethod(WindowsRegDeleteValue, hKey, valueName);
     }
 
     /**
      * Java wrapper for Windows registry API RegQueryInfoKey()
      */
-    static int[] WindowsRegQueryInfoKey(int hKey) {
+    static int[] windowsRegQueryInfoKey(int hKey) {
         return invokeMethod(WindowsRegQueryInfoKey, hKey);
     }
 
@@ -201,15 +201,15 @@ public final class WindowsRegistry {
     /**
      * Retries RegOpenKey() MAX_ATTEMPTS times before giving up.
      */
-    private static int[] WindowsRegOpenKey1(int hKey, byte[] subKey, int securityMask) {
-        int[] result = WindowsRegOpenKey(hKey, subKey, securityMask);
+    private static int[] windowsRegOpenKey1(int hKey, byte[] subKey, int securityMask) {
+        int[] result = windowsRegOpenKey(hKey, subKey, securityMask);
         if (result[ERROR_CODE] == ERROR_SUCCESS) {
             return result;
         } else if (result[ERROR_CODE] == ERROR_FILE_NOT_FOUND) {
             // Try recreation
-            int handle = WindowsRegCreateKeyEx(hKey, subKey)[NATIVE_HANDLE];
-            WindowsRegCloseKey(handle);
-            return WindowsRegOpenKey(hKey, subKey, securityMask);
+            int handle = windowsRegCreateKeyEx(hKey, subKey)[NATIVE_HANDLE];
+            windowsRegCloseKey(handle);
+            return windowsRegOpenKey(hKey, subKey, securityMask);
         } else if (result[ERROR_CODE] != ERROR_ACCESS_DENIED) {
             long sleepTime = INIT_SLEEP_TIME;
             for (int i = 0; i < MAX_ATTEMPTS; i++) {
@@ -219,7 +219,7 @@ public final class WindowsRegistry {
                     return result;
                 }
                 sleepTime *= 2;
-                result = WindowsRegOpenKey(hKey, subKey, securityMask);
+                result = windowsRegOpenKey(hKey, subKey, securityMask);
                 if (result[ERROR_CODE] == ERROR_SUCCESS) {
                     return result;
                 }
@@ -231,8 +231,8 @@ public final class WindowsRegistry {
     /**
      * Retries RegCreateKeyEx() MAX_ATTEMPTS times before giving up.
      */
-    private static int[] WindowsRegCreateKeyEx1(int hKey, byte[] subKey) {
-        int[] result = WindowsRegCreateKeyEx(hKey, subKey);
+    private static int[] windowsRegCreateKeyEx1(int hKey, byte[] subKey) {
+        int[] result = windowsRegCreateKeyEx(hKey, subKey);
         if (result[ERROR_CODE] == ERROR_SUCCESS) {
             return result;
         } else {
@@ -244,7 +244,7 @@ public final class WindowsRegistry {
                     return result;
                 }
                 sleepTime *= 2;
-                result = WindowsRegCreateKeyEx(hKey, subKey);
+                result = windowsRegCreateKeyEx(hKey, subKey);
                 if (result[ERROR_CODE] == ERROR_SUCCESS) {
                     return result;
                 }
@@ -256,8 +256,8 @@ public final class WindowsRegistry {
     /**
      * Retries RegFlushKey() MAX_ATTEMPTS times before giving up.
      */
-    private static int WindowsRegFlushKey1(int hKey) {
-        int result = WindowsRegFlushKey(hKey);
+    private static int windowsRegFlushKey1(int hKey) {
+        int result = windowsRegFlushKey(hKey);
         if (result == ERROR_SUCCESS) {
             return result;
         } else {
@@ -269,7 +269,7 @@ public final class WindowsRegistry {
                     return result;
                 }
                 sleepTime *= 2;
-                result = WindowsRegFlushKey(hKey);
+                result = windowsRegFlushKey(hKey);
                 if (result == ERROR_SUCCESS) {
                     return result;
                 }
@@ -282,8 +282,8 @@ public final class WindowsRegistry {
     /**
      * Retries RegSetValueEx() MAX_ATTEMPTS times before giving up.
      */
-    private static int WindowsRegSetValueEx1(int hKey, byte[] valueName, byte[] value) {
-        int result = WindowsRegSetValueEx(hKey, valueName, value);
+    private static int windowsRegSetValueEx1(int hKey, byte[] valueName, byte[] value) {
+        int result = windowsRegSetValueEx(hKey, valueName, value);
         if (result == ERROR_SUCCESS) {
             return result;
         } else {
@@ -295,7 +295,7 @@ public final class WindowsRegistry {
                     return result;
                 }
                 sleepTime *= 2;
-                result = WindowsRegSetValueEx(hKey, valueName, value);
+                result = windowsRegSetValueEx(hKey, valueName, value);
                 if (result == ERROR_SUCCESS) {
                     return result;
                 }
@@ -307,8 +307,8 @@ public final class WindowsRegistry {
     /**
      * Retries RegQueryInfoKey() MAX_ATTEMPTS times before giving up.
      */
-    private static int[] WindowsRegQueryInfoKey1(int hKey) {
-        int[] result = WindowsRegQueryInfoKey(hKey);
+    private static int[] windowsRegQueryInfoKey1(int hKey) {
+        int[] result = windowsRegQueryInfoKey(hKey);
         if (result[ERROR_CODE] == ERROR_SUCCESS) {
             return result;
         } else {
@@ -320,7 +320,7 @@ public final class WindowsRegistry {
                     return result;
                 }
                 sleepTime *= 2;
-                result = WindowsRegQueryInfoKey(hKey);
+                result = windowsRegQueryInfoKey(hKey);
                 if (result[ERROR_CODE] == ERROR_SUCCESS) {
                     return result;
                 }
@@ -643,9 +643,9 @@ public final class WindowsRegistry {
         /*  Check if key's relativePath is short enough be opened at once
             otherwise use a relativePath-splitting procedure */
         if (windowsAbsolutePath.length <= MAX_WINDOWS_PATH_LENGTH + 1) {
-            int[] result = WindowsRegOpenKey1(rootNativeHandle(), windowsAbsolutePath, mask1);
+            int[] result = windowsRegOpenKey1(rootNativeHandle(), windowsAbsolutePath, mask1);
             if (result[ERROR_CODE] == ERROR_ACCESS_DENIED && mask2 != mask1) {
-                result = WindowsRegOpenKey1(rootNativeHandle(), windowsAbsolutePath, mask2);
+                result = windowsRegOpenKey1(rootNativeHandle(), windowsAbsolutePath, mask2);
             }
 
             if (result[ERROR_CODE] != ERROR_SUCCESS) {
@@ -673,9 +673,9 @@ public final class WindowsRegistry {
     private int openKey(int nativeHandle, byte[] windowsRelativePath, int mask1, int mask2) {
         /* If the relativePath is short enough open at once. Otherwise split the relativePath */
         if (windowsRelativePath.length <= MAX_WINDOWS_PATH_LENGTH + 1) {
-            int[] result = WindowsRegOpenKey1(nativeHandle, windowsRelativePath, mask1);
+            int[] result = windowsRegOpenKey1(nativeHandle, windowsRelativePath, mask1);
             if (result[ERROR_CODE] == ERROR_ACCESS_DENIED && mask2 != mask1) {
-                result = WindowsRegOpenKey1(nativeHandle, windowsRelativePath, mask2);
+                result = windowsRegOpenKey1(nativeHandle, windowsRelativePath, mask2);
             }
 
             if (result[ERROR_CODE] != ERROR_SUCCESS) {
@@ -713,7 +713,7 @@ public final class WindowsRegistry {
      * @param nativeHandle key's Windows registry handle.
      */
     private void closeKey(int nativeHandle) {
-        int result = WindowsRegCloseKey(nativeHandle);
+        int result = windowsRegCloseKey(nativeHandle);
         if (result != ERROR_SUCCESS) {
         }
     }
@@ -731,7 +731,7 @@ public final class WindowsRegistry {
             isBackingStoreAvailable = false;
             return;
         }
-        int result = WindowsRegSetValueEx1(nativeHandle, stringToByteArray(name), stringToByteArray(value));
+        int result = windowsRegSetValueEx1(nativeHandle, stringToByteArray(name), stringToByteArray(value));
         if (result != ERROR_SUCCESS) {
             isBackingStoreAvailable = false;
         }
@@ -751,7 +751,7 @@ public final class WindowsRegistry {
         if (nativeHandle == NULL_NATIVE_HANDLE) {
             return null;
         }
-        Object resultObject = WindowsRegQueryValueEx(nativeHandle, stringToByteArray(name));
+        Object resultObject = windowsRegQueryValueEx(nativeHandle, stringToByteArray(name));
         if (resultObject == null) {
             closeKey(nativeHandle);
             return null;
@@ -771,7 +771,7 @@ public final class WindowsRegistry {
         if (nativeHandle == NULL_NATIVE_HANDLE) {
             return;
         }
-        int result = WindowsRegDeleteValue(nativeHandle, stringToByteArray(name));
+        int result = windowsRegDeleteValue(nativeHandle, stringToByteArray(name));
         if (result != ERROR_SUCCESS && result != ERROR_FILE_NOT_FOUND) {
             isBackingStoreAvailable = false;
         }
@@ -788,7 +788,7 @@ public final class WindowsRegistry {
         if (nativeHandle == NULL_NATIVE_HANDLE) {
             return;
         }
-        int result = WindowsRegFlushKey(nativeHandle);
+        int result = windowsRegFlushKey(nativeHandle);
         if (result != ERROR_SUCCESS && result != ERROR_FILE_NOT_FOUND) {
             isBackingStoreAvailable = false;
         }

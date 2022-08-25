@@ -3,13 +3,13 @@ package algorithm.set;
 import algorithm.tree.AvlTree;
 
 /**
- * @author:qiming
- * @date: 2021/11/1
+ * @author zqw
+ * @date 2021/11/1
  */
-public class AVLSet<E extends Comparable<E>, V> implements Set<E> {
+public class AvlSet<E extends Comparable<E>> implements Set<E> {
     private final AvlTree<E, Object> avlTree;
 
-    public AVLSet() {
+    public AvlSet() {
         avlTree = new AvlTree<>();
     }
 

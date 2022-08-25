@@ -27,7 +27,7 @@ class CpuCoreThreadPoolCount {
     static int threadCount = cpuCore * 2;
     static CountDownLatch latch = new CountDownLatch(threadCount * 2);
 
-    static class CPUType extends AbstractTask {
+    static class CpuType extends AbstractTask {
 
 
         @Override
@@ -39,14 +39,14 @@ class CpuCoreThreadPoolCount {
             }
         }
 
-        CPUType(List<Long> runTimeList, List<Long> wholeTimeList) {
+        CpuType(List<Long> runTimeList, List<Long> wholeTimeList) {
             super(runTimeList, wholeTimeList);
         }
     }
 
-    static class IOType extends AbstractTask {
+    static class IoType extends AbstractTask {
 
-        IOType(List<Long> runTimeList, List<Long> wholeTimeList) {
+        IoType(List<Long> runTimeList, List<Long> wholeTimeList) {
             super(runTimeList, wholeTimeList);
         }
 
@@ -92,7 +92,7 @@ class CpuCoreThreadPoolCount {
             long end = System.currentTimeMillis();
             // 程序整体执行的时间 包含在队列中等待的时间
             long wholeTime = end - startTime;
-            //  程序真正运行的时间
+            // 程序真正运行的时间
             long runTime = end - start;
             wholeTimeList.add(wholeTime);
             runTimeList.add(runTime);
@@ -106,13 +106,13 @@ class CpuCoreThreadPoolCount {
         ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
         List<Long> crtl = Collections.synchronizedList(new ArrayList<>());
         List<Long> cwtl = Collections.synchronizedList(new ArrayList<>());
-        AbstractTask cpuType = new CPUType(crtl, cwtl);
+        AbstractTask cpuType = new CpuType(crtl, cwtl);
         for (int i = 0; i < threadCount; i++) {
             pool.execute(cpuType);
         }
         List<Long> irtl = Collections.synchronizedList(new ArrayList<>());
         List<Long> iwtl = Collections.synchronizedList(new ArrayList<>());
-        AbstractTask ioType = new IOType(irtl, iwtl);
+        AbstractTask ioType = new IoType(irtl, iwtl);
         for (int i = 0; i < threadCount; i++) {
             pool.execute(ioType);
         }

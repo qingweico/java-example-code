@@ -7,10 +7,10 @@ import java.net.Socket;
 /**
  * Sequential web server
  *
- * @author:qiming
- * @date: 2021/4/6
+ * @author zqw
+ * @date 2021/4/6
  */
-public class SingleThreadWebWServer {
+class SingleThreadWebServer {
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
         ServerSocket socket = new ServerSocket(80);

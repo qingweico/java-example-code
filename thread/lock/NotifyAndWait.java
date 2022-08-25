@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 
 /**
- * @author zwq
+ * @author zqw
  * @date 2020/10/23
  * <p>
  * Print ABCDEF 123456 alternately

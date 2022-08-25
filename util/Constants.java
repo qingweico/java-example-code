@@ -50,4 +50,9 @@ public interface Constants {
     String LONG = "long";
     String DATE = "date";
     String DOUBLE = "double";
+
+
+    /*other*/
+    String MS = "ms";
+
 }

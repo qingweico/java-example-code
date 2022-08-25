@@ -83,9 +83,9 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
         node.value = v;
     }
 
-    public boolean isValidBST() {
+    public boolean isValidBst() {
         K min = min();
-        return isValidBST(root, min);
+        return isValidBst(root, min);
     }
 
     /**
@@ -311,14 +311,14 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
         return cur;
     }
 
-    private boolean isValidBST(Node node, K min) {
+    private boolean isValidBst(Node node, K min) {
         if (node == null) {
             return true;
         }
-        if (isValidBST(node.left, min)) {
+        if (isValidBst(node.left, min)) {
             if (min.compareTo(node.key) <= 0) {
                 min = node.key;
-                return isValidBST(node.right, min);
+                return isValidBst(node.right, min);
             }
         }
         return false;

@@ -1,6 +1,7 @@
 package util;
 
 import com.google.common.collect.Maps;
+import object.entity.User;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import sun.misc.Unsafe;
 import util.ReflectionUtils;
@@ -15,13 +16,14 @@ import static util.ReflectionUtils.assertFieldMatchType;
 
 
 /**
- * {@link sun.misc.Unsafe} Utility class <p/> <b> Take case to  use those utility methods in order to the stability fo
- * JVM </b>
+ * {@link sun.misc.Unsafe} Utility class <p/> <b> Take case to  use those
+ * utility methods in order to the stability of JVM </b>
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @date 2022/7/10
  */
-public abstract class UnsafeUtils {
+public final class UnsafeUtils {
+     private UnsafeUtils(){}
 
     final static Unsafe unsafe;
     /**
@@ -135,7 +137,7 @@ public abstract class UnsafeUtils {
             CHAR_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(char[].class);
             OBJECT_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(Object[].class);
         } catch (Exception e) {
-            throw new UnsupportedOperationException("Current JVM does not support  sun.misc.Unsafe");
+            throw new UnsupportedOperationException("Current JVM does not support sun.misc.Unsafe");
         }
     }
 
@@ -148,9 +150,9 @@ public abstract class UnsafeUtils {
      * @return the array offset of array
      * @see java.util.concurrent.atomic.AtomicIntegerArray
      */
-    protected static long arrayIndexOffset(int index, long baseOffset, long indexScale) {
+    private static long arrayIndexOffset(int index, long baseOffset, long indexScale) {
         if (index < 0) {
-            throw new IndexOutOfBoundsException("index " + index);
+            throw new IndexOutOfBoundsException("index = " + index);
         }
         return baseOffset + (long) index * indexScale;
     }
@@ -162,7 +164,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long longArrayIndexOffset(int index) {
+    private static long longArrayIndexOffset(int index) {
         return arrayIndexOffset(index, LONG_ARRAY_BASE_OFFSET, LONG_ARRAY_INDEX_SCALE);
     }
 
@@ -172,7 +174,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long intArrayIndexOffset(int index) {
+    private static long intArrayIndexOffset(int index) {
         return arrayIndexOffset(index, INT_ARRAY_BASE_OFFSET, INT_ARRAY_INDEX_SCALE);
     }
 
@@ -182,7 +184,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long shortArrayIndexOffset(int index) {
+    private static long shortArrayIndexOffset(int index) {
         return arrayIndexOffset(index, SHORT_ARRAY_BASE_OFFSET, SHORT_ARRAY_INDEX_SCALE);
     }
 
@@ -192,7 +194,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long byteArrayIndexOffset(int index) {
+    private static long byteArrayIndexOffset(int index) {
         return arrayIndexOffset(index, BYTE_ARRAY_BASE_OFFSET, BYTE_ARRAY_INDEX_SCALE);
     }
 
@@ -202,7 +204,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long booleanArrayIndexOffset(int index) {
+    private static long booleanArrayIndexOffset(int index) {
         return arrayIndexOffset(index, BOOLEAN_ARRAY_BASE_OFFSET, BOOLEAN_ARRAY_INDEX_SCALE);
     }
 
@@ -212,7 +214,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long doubleArrayIndexOffset(int index) {
+    private static long doubleArrayIndexOffset(int index) {
         return arrayIndexOffset(index, DOUBLE_ARRAY_BASE_OFFSET, DOUBLE_ARRAY_INDEX_SCALE);
     }
 
@@ -222,7 +224,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long floatArrayIndexOffset(int index) {
+    private static long floatArrayIndexOffset(int index) {
         return arrayIndexOffset(index, FLOAT_ARRAY_BASE_OFFSET, FLOAT_ARRAY_INDEX_SCALE);
     }
 
@@ -232,7 +234,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long charArrayIndexOffset(int index) {
+    private static long charArrayIndexOffset(int index) {
         return arrayIndexOffset(index, CHAR_ARRAY_BASE_OFFSET, CHAR_ARRAY_INDEX_SCALE);
     }
 
@@ -242,7 +244,7 @@ public abstract class UnsafeUtils {
      * @param index 数组索引
      * @return 相对offset
      */
-    protected static long objectArrayIndexOffset(int index) {
+    private static long objectArrayIndexOffset(int index) {
         return arrayIndexOffset(index, OBJECT_ARRAY_BASE_OFFSET, OBJECT_ARRAY_INDEX_SCALE);
     }
 
@@ -254,9 +256,8 @@ public abstract class UnsafeUtils {
      * @param fieldName 字段名称
      * @return Offset缓存Key
      */
-    protected static String createOffsetCacheKey(Class<?> type, String fieldName) {
-        StringBuilder keyBuilder = new StringBuilder(type.getName()).append("#").append(fieldName);
-        return keyBuilder.toString();
+    private static String createOffsetCacheKey(Class<?> type, String fieldName) {
+        return type.getName() + "#" + fieldName;
     }
 
     /**
@@ -266,7 +267,7 @@ public abstract class UnsafeUtils {
      * @param fieldName 字段名称
      * @return Offset
      */
-    protected static Long getOffsetFromCache(Class<?> type, String fieldName) {
+    private static Long getOffsetFromCache(Class<?> type, String fieldName) {
         String key = createOffsetCacheKey(type, fieldName);
         return offsetCache.get(key);
     }
@@ -278,7 +279,7 @@ public abstract class UnsafeUtils {
      * @param fieldName 字段名称
      * @param offset    offset
      */
-    protected static void putOffsetFromCache(Class<?> type, String fieldName, long offset) {
+    private static void putOffsetFromCache(Class<?> type, String fieldName, long offset) {
         String key = createOffsetCacheKey(type, fieldName);
         offsetCache.putIfAbsent(key, offset);
     }

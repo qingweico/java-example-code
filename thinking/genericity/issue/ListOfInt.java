@@ -6,8 +6,8 @@ import java.util.List;
 /**
  * Autoboxing compensates for the inability to use primitive in generics.
  *
- * @author:qiming
- * @date: 2021/1/20
+ * @author zqw
+ * @date 2021/1/20
  */
 class ListOfInt {
     public static void main(String[] args) {

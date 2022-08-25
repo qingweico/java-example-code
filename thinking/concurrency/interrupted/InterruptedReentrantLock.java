@@ -9,10 +9,10 @@ import static util.Print.print;
 /**
  * Interrupted a task blocked with a ReentrantLock
  *
- * @author zwq
+ * @author zqw
  * @date 2021/4/11
  */
-public class InterruptedReentrantLock {
+class InterruptedReentrantLock {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(new Blocked0());
         t.start();
@@ -33,6 +33,9 @@ class BlockMutex {
     }
 
     public void f() {
+        // lock 获得锁最好放在try语句的第一行 不要放在try语句中 就算放在try语句中也应该放在
+        // try语句下面的第一行 这么做都是防止发生异常后 避免锁被无故释放
+        // lock 释放锁写在 finally 语句块中
         try {
             // This will never be available to a second task
             lock.lockInterruptibly();

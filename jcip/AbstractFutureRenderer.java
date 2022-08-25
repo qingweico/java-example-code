@@ -1,5 +1,7 @@
 package jcip;
 
+import thread.pool.ThreadPoolBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -10,8 +12,8 @@ import static jcip.LaunderThrowable.launderThrowable;
  * @author zqw
  * @date 2021/4/7
  */
-public abstract class FutureRenderer {
-    private final ExecutorService exec = Executors.newFixedThreadPool(10);
+abstract class AbstractFutureRenderer {
+    private final ExecutorService exec = ThreadPoolBuilder.custom().builder();
     void renderPage(CharSequence source) {
         final List<ImageInfo> imageInfos = scanForImageInfo(source);
         Callable<List<ImageData>> task =
@@ -45,13 +47,30 @@ public abstract class FutureRenderer {
     }
 
     interface ImageInfo {
+        /**
+         * !downloadImage
+         * @return  ///
+         */
         ImageData downloadImage();
     }
 
+    /**
+     * renderText
+     * @param s ///
+     */
     abstract void renderText(CharSequence s);
 
+    /**
+     * scanForImageInfo
+     * @param s CharSequence
+     * @return ImageInfo List
+     */
     abstract List<ImageInfo> scanForImageInfo(CharSequence s);
 
+    /**
+     * renderImage
+     * @param i ImageData
+     */
     abstract void renderImage(ImageData i);
 
 }

@@ -12,10 +12,10 @@ import static jcip.LaunderThrowable.launderThrowable;
  * @author zqw
  * @date 2021/4/7
  */
-public abstract class Renderer {
+abstract class AbstractRenderer {
     private final ExecutorService executor;
 
-    Renderer(ExecutorService executor) {
+    AbstractRenderer(ExecutorService executor) {
         this.executor = executor;
     }
 
@@ -24,12 +24,7 @@ public abstract class Renderer {
         CompletionService<ImageData> completionService =
                 new ExecutorCompletionService<>(executor);
         for (final ImageInfo imageInfo : info) {
-            completionService.submit(new Callable<>() {
-                @Override
-                public ImageData call() {
-                    return imageInfo.downloadImage();
-                }
-            });
+            completionService.submit(imageInfo::downloadImage);
         }
 
         renderText(source);

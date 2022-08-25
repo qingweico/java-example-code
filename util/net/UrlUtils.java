@@ -29,7 +29,9 @@ import java.util.jar.JarFile;
  * @see URLEncoder
  * @see URLDecoder
  */
-public abstract class URLUtils {
+public final class UrlUtils {
+    private UrlUtils() {
+    }
 
 
     /**
@@ -40,13 +42,13 @@ public abstract class URLUtils {
     /**
      * Resolve Relative path from Archive File URL
      *
-     * @param archiveFileURL Archive File URL
+     * @param archiveFileUrl Archive File URL
      * @return Relative path in archive
-     * @throws NullPointerException <code>archiveFileURL</code> is <code>null</code>
+     * @throws NullPointerException <code>archiveFileUrl</code> is <code>null</code>
      */
-    public static String resolveRelativePath(URL archiveFileURL) throws NullPointerException {
+    public static String resolveRelativePath(URL archiveFileUrl) throws NullPointerException {
         // NPE check
-        String path = archiveFileURL.getPath();
+        String path = archiveFileUrl.getPath();
         if (path.contains(SeparatorConstants.ARCHIVE_ENTITY)) {
             String relativePath = StringUtils.substringAfterLast(path, SeparatorConstants.ARCHIVE_ENTITY);
             return decode(relativePath);
@@ -57,20 +59,20 @@ public abstract class URLUtils {
     /**
      * Resolve archive file
      *
-     * @param archiveFileURL           archive file  URL
+     * @param archiveFileUrl           archive file  URL
      * @param archiveFileExtensionName archive file extension name
      * @return Resolve archive file If exists
      * @throws NullPointerException An {@code NullPointerException} may be thrown.
      */
-    public static File resolveArchiveFile(URL archiveFileURL, String archiveFileExtensionName) throws NullPointerException {
-        String archiveFilePath = archiveFileURL.getPath();
+    public static File resolveArchiveFile(URL archiveFileUrl, String archiveFileExtensionName) throws NullPointerException {
+        String archiveFilePath = archiveFileUrl.getPath();
         String prefix = ":/";
         boolean hasJarEntryPath = archiveFilePath.contains(SeparatorConstants.ARCHIVE_ENTITY);
         String suffix = hasJarEntryPath ? SeparatorConstants.ARCHIVE_ENTITY : archiveFileExtensionName;
         String jarPath = StringUtils.substringBetween(archiveFilePath, prefix, suffix);
         File archiveFile = null;
         if (StringUtils.isNotBlank(jarPath)) {
-            jarPath = PathConstants.SLASH + URLUtils.decode(jarPath);
+            jarPath = PathConstants.SLASH + UrlUtils.decode(jarPath);
             archiveFile = new File(jarPath);
             archiveFile = archiveFile.exists() ? archiveFile : null;
         }
@@ -209,7 +211,7 @@ public abstract class URLUtils {
      * @param url URL
      * @return if directory, return <code>true</code>
      */
-    public static boolean isDirectoryURL(URL url) {
+    public static boolean isDirectoryUrl(URL url) {
         boolean isDirectory = false;
         if (url != null) {
             String protocol = url.getProtocol();
@@ -230,7 +232,7 @@ public abstract class URLUtils {
                     isDirectory = classPathFile.isDirectory();
                 }
             } catch (Exception e) {
-                isDirectory = false;
+                // ignore
             }
         }
         return isDirectory;
@@ -242,7 +244,7 @@ public abstract class URLUtils {
      * @param url URL
      * @return If jar , return <code>true</code>
      */
-    public static boolean isJarURL(URL url) {
+    public static boolean isJarUrl(URL url) {
         String protocol = url.getProtocol();
         boolean flag = false;
         if (ProtocolConstants.FILE.equals(protocol)) {
@@ -265,7 +267,7 @@ public abstract class URLUtils {
      * @param paths multiple paths
      * @return URI
      */
-    public static String buildURI(String... paths) {
+    public static String buildUri(String... paths) {
         int length = ArrayUtils.getLength(paths);
         if (length < 1) {
             return PathConstants.SLASH;

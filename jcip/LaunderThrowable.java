@@ -1,10 +1,10 @@
 package jcip;
 
 /**
- * @author:qiming
- * @date: 2021/4/7
+ * @author zqw
+ * @date 2021/4/7
  */
-public class LaunderThrowable {
+class LaunderThrowable {
 
     /**
      * Coerce an unchecked Throwable to a RuntimeException

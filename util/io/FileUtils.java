@@ -2,7 +2,7 @@ package util.io;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
-import util.net.URLUtils;
+import util.net.UrlUtils;
 
 import java.io.File;
 
@@ -29,6 +29,6 @@ public class FileUtils {
         if (!targetFilePath.contains(parentDirectoryPath)) {
             return null;
         }
-        return URLUtils.resolvePath(StringUtils.replace(targetFilePath, parentDirectoryPath, SystemUtils.FILE_SEPARATOR));
+        return UrlUtils.resolvePath(StringUtils.replace(targetFilePath, parentDirectoryPath, SystemUtils.FILE_SEPARATOR));
     }
 }

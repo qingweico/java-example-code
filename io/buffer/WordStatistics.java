@@ -64,7 +64,7 @@ public class WordStatistics {
         }
         System.out.format("split to %d tasks\n", tasks.size());
 
-        var total = new HashMap<String, Integer>();
+        var total = new HashMap<String, Integer>(16);
         for (var future : tasks) {
             var map = future.get();
             for (var entry : map.entrySet()) {
@@ -78,7 +78,7 @@ public class WordStatistics {
 
     public static Map<String, Integer> countByString(String str) {
 
-        var map = new HashMap<String, Integer>();
+        var map = new HashMap<String, Integer>(16);
         StringTokenizer tokenizer = new StringTokenizer(str);
         while (tokenizer.hasMoreTokens()) {
             var word = tokenizer.nextToken();
@@ -101,7 +101,7 @@ public class WordStatistics {
         var is = new BufferedInputStream(new FileInputStream("word"));
         var len = 0;
         var start = System.currentTimeMillis();
-        var total = new HashMap<String, Integer>();
+        var total = new HashMap<String, Integer>(16);
         var buffer = new byte[1024 * 4];
         while ((len = is.read(buffer)) != -1) {
             var bytes = Arrays.copyOfRange(buffer, 0, len);

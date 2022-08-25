@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
  * @author zqw
  * @date 2021/4/8
  */
-public abstract class Tester<C> {
+abstract class Tester<C> {
     static int testReps = 10;
     static int testCycles = 100;
     static int containerSize = 1000;

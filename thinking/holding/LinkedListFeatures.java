@@ -10,8 +10,8 @@ import java.util.LinkedList;
 import static util.Print.print;
 
 /**
- * @author:qiming
- * @date: 2021/1/18
+ * @author zqw
+ * @date 2021/1/18
  */
 public class LinkedListFeatures {
     public static void main(String[] args) {

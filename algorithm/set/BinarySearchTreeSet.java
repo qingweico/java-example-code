@@ -3,8 +3,8 @@ package algorithm.set;
 import algorithm.tree.BinarySearchTree;
 
 /**
- * @author:qiming
- * @date: 2021/10/31
+ * @author zqw
+ * @date 2021/10/31
  */
 public class BinarySearchTreeSet<E extends Comparable<E>> implements Set<E> {
     private final BinarySearchTree<E> binarySearchTree;

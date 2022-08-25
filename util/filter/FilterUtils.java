@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author <a href="mercyblitz@gmail.com">Mercy<a/>
  */
-public abstract class FilterUtils {
+public class FilterUtils {
 
     private FilterUtils() {
     }

@@ -3,18 +3,19 @@ package algorithm.sort;
 import algorithm.heap.MaxHeap;
 
 /**
- * @author:qiming
- * @date: 2021/10/29
+ * 堆排序
+ * @author zqw
+ * @date 2021/10/29
  */
 public class HeapSort<E extends Comparable<E>> {
-    public void sort(E[] A) {
+    public void sort(E[] e) {
         MaxHeap<E> maxHeap = new MaxHeap<>();
-        // nlogn
-        for (var i : A) {
+        // n * logn
+        for (var i : e) {
             maxHeap.add(i);
         }
-        for (int i = A.length - 1; i >= 0; i--) {
-            A[i] = maxHeap.extractMax();
+        for (int i = e.length - 1; i >= 0; i--) {
+            e[i] = maxHeap.extractMax();
         }
     }
 }

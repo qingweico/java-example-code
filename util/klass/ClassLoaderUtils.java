@@ -11,7 +11,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import util.constants.Symbol;
 import util.constants.FileSuffixConstants;
 import util.constants.PathConstants;
-import util.net.URLUtils;
+import util.net.UrlUtils;
 
 
 import javax.annotation.Nonnull;
@@ -36,7 +36,7 @@ public class ClassLoaderUtils {
 
     protected static final ClassLoadingMXBean CLASSLOADING_MX_BEAN = ManagementFactory.getClassLoadingMXBean();
 
-    private static final Method findLoadedClassMethod = initFindLoadedClassMethod();
+    private static final Method FIND_LOADED_CLASS_METHOD = initFindLoadedClassMethod();
 
 
     /**
@@ -123,9 +123,9 @@ public class ClassLoaderUtils {
     public static Set<Class<?>> findLoadedClasses(ClassLoader classLoader, Set<String> classNames) {
         Set<Class<?>> loadedClasses = Sets.newLinkedHashSet();
         for (String className : classNames) {
-            Class<?> class_ = findLoadedClass(classLoader, className);
-            if (class_ != null) {
-                loadedClasses.add(class_);
+            Class<?> cls = findLoadedClass(classLoader, className);
+            if (cls != null) {
+                loadedClasses.add(cls);
             }
         }
         return Collections.unmodifiableSet(loadedClasses);
@@ -165,7 +165,7 @@ public class ClassLoaderUtils {
         Set<ClassLoader> classLoaders = getInheritableClassLoaders(classLoader);
         try {
             for (ClassLoader loader : classLoaders) {
-                loadedClass = (Class<?>) findLoadedClassMethod.invoke(loader, className);
+                loadedClass = (Class<?>) FIND_LOADED_CLASS_METHOD.invoke(loader, className);
                 if (loadedClass != null) {
                     break;
                 }
@@ -219,14 +219,14 @@ public class ClassLoaderUtils {
      * @throws IOException NullPointerException || IOException
      */
     public static Set<URL> getResources(ClassLoader classLoader, String resourceName) throws NullPointerException, IOException {
-        Set<URL> resourceURLs = Collections.emptySet();
+        Set<URL> resourceUrls = Collections.emptySet();
         for (ResourceType resourceType : ResourceType.values()) {
-            resourceURLs = getResources(classLoader, resourceType, resourceName);
-            if (CollectionUtils.isNotEmpty(resourceURLs)) {
+            resourceUrls = getResources(classLoader, resourceType, resourceName);
+            if (CollectionUtils.isNotEmpty(resourceUrls)) {
                 break;
             }
         }
-        return resourceURLs;
+        return resourceUrls;
     }
 
     /**
@@ -239,14 +239,14 @@ public class ClassLoaderUtils {
      * @throws NullPointerException If any argument is <code>null</code>
      */
     public static URL getResource(ClassLoader classLoader, String resourceName) throws NullPointerException {
-        URL resourceURL = null;
+        URL resourceUrl = null;
         for (ResourceType resourceType : ResourceType.values()) {
-            resourceURL = getResource(classLoader, resourceType, resourceName);
-            if (resourceURL != null) {
+            resourceUrl = getResource(classLoader, resourceType, resourceName);
+            if (resourceUrl != null) {
                 break;
             }
         }
-        return resourceURL;
+        return resourceUrl;
     }
 
     /**
@@ -471,7 +471,7 @@ public class ClassLoaderUtils {
                 return null;
             }
 
-            normalizedName = URLUtils.resolvePath(normalizedName);
+            normalizedName = UrlUtils.resolvePath(normalizedName);
 
             // 除去开头的"/"
             while (normalizedName.startsWith("/")) {

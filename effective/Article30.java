@@ -15,6 +15,7 @@ import java.util.function.UnaryOperator;
 class Article30 {
 
     // Generic method
+
     public static <E> Set<E> union(Set<? extends E> s1, Set<? extends E> s2) {
         Set<E> result = new HashSet<>(s1);
         result.addAll(s2);
@@ -24,6 +25,7 @@ class Article30 {
     // Generic singleton factory pattern
     // @see java.util.Collections#reverseOrder
     // @see java.util.Collections#enptySet
+
     private static final UnaryOperator<Object> IDENTITY_FN = x -> x;
 
     @SuppressWarnings("unchecked")
@@ -49,6 +51,7 @@ class Article30 {
     // Using a recursive type bound to express mutual comparability,
     // return max value in a collection - use recursive type bound
     // All Comparable and Comparator are consumers.
+
     public static <E extends Comparable<? super E>> E max(Collection<? extends E> c) {
         if (c.isEmpty()) {
             throw new IllegalArgumentException("Empty Collection");

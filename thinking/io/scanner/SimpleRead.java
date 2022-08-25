@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 /**
- * @author:qiming
- * @date: 2021/1/15
+ * @author zqw
+ * @date 2021/1/15
  */
 public class SimpleRead {
 

@@ -5,33 +5,33 @@ import java.util.Arrays;
 /**
  * LSD: Least Significant Digit
  *
- * @author:qiming
- * @date: 2021/11/17
+ * @author zqw
+ * @date 2021/11/17
  */
 public class LsdSort {
 
-    public void sort(String[] A) {
-        int R = 256;
-        int w = A[0].length();
-        int n = A.length;
-        int[] cnt = new int[R];
-        int[] index = new int[R + 1];
+    public void sort(String[] e) {
+        int max = 256;
+        int w = e[0].length();
+        int n = e.length;
+        int[] cnt = new int[max];
+        int[] index = new int[max + 1];
         String[] help = new String[n];
 
         for (int r = w - 1; r >= 0; r--) {
             Arrays.fill(cnt, 0);
-            for (String s : A) {
+            for (String s : e) {
                 cnt[s.charAt(r)]++;
             }
 
-            for (int i = 0; i < R; i++) {
+            for (int i = 0; i < max; i++) {
                 index[i + 1] = index[i] + cnt[i];
             }
 
-            for (String s : A) {
+            for (String s : e) {
                 help[index[s.charAt(r)]++] = s;
             }
-            System.arraycopy(help, 0, A, 0, n);
+            System.arraycopy(help, 0, e, 0, n);
         }
     }
 }

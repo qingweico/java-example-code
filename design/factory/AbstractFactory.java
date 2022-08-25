@@ -10,25 +10,25 @@ public abstract class AbstractFactory {
      * The factory of Electronic Product
      * @return ElectronicProduct
      */
-    abstract ElectronicProduct createElectronicProduct();
+    abstract AbstractElectronicProduct createElectronicProduct();
 
     /**
      *  The factory of Food Product
      * @return FoodProduct
      */
-    abstract FoodProduct createFoodProduct();
+    abstract AbstractFoodProduct createFoodProduct();
 }
 
 
 class ConcreteFactory extends AbstractFactory {
 
     @Override
-    ElectronicProduct createElectronicProduct() {
+    AbstractElectronicProduct createElectronicProduct() {
         return new Computer();
     }
 
     @Override
-    FoodProduct createFoodProduct() {
+    AbstractFoodProduct createFoodProduct() {
         return new Rice();
     }
 }
@@ -36,12 +36,12 @@ class ConcreteFactory extends AbstractFactory {
 class OtherFactory extends AbstractFactory {
 
     @Override
-    ElectronicProduct createElectronicProduct() {
+    AbstractElectronicProduct createElectronicProduct() {
         return new Television();
     }
 
     @Override
-    FoodProduct createFoodProduct() {
+    AbstractFoodProduct createFoodProduct() {
         return new Vegetable();
     }
 }

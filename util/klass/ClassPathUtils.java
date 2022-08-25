@@ -1,6 +1,7 @@
 package util.klass;
 
 import com.google.common.collect.Sets;
+import object.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
@@ -10,7 +11,6 @@ import java.lang.management.RuntimeMXBean;
 import java.net.URL;
 import java.security.CodeSource;
 import java.security.ProtectionDomain;
-import java.text.StringCharacterIterator;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -20,25 +20,26 @@ import java.util.Set;
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  */
-public abstract class ClassPathUtils {
+public class ClassPathUtils {
+    private ClassPathUtils() {}
 
-    protected static final RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+    protected static final RuntimeMXBean RUNTIME_MX_BEAN = ManagementFactory.getRuntimeMXBean();
 
-    private static final Set<String> bootstrapClassPaths = initBootstrapClassPaths();
+    private static final Set<String> BOOTSTRAP_CLASS_PATHS = initBootstrapClassPaths();
 
-    private static final Set<String> classPaths = initClassPaths();
+    private static final Set<String> CLASS_PATHS = initClassPaths();
 
 
     private static Set<String> initBootstrapClassPaths() {
         Set<String> bootstrapClassPaths = Collections.emptySet();
-        if (runtimeMXBean.isBootClassPathSupported()) {
-            bootstrapClassPaths = resolveClassPaths(runtimeMXBean.getBootClassPath());
+        if (RUNTIME_MX_BEAN.isBootClassPathSupported()) {
+            bootstrapClassPaths = resolveClassPaths(RUNTIME_MX_BEAN.getBootClassPath());
         }
         return bootstrapClassPaths;
     }
 
     private static Set<String> initClassPaths() {
-        return resolveClassPaths(runtimeMXBean.getClassPath());
+        return resolveClassPaths(RUNTIME_MX_BEAN.getClassPath());
     }
 
     private static Set<String> resolveClassPaths(String classPath) {
@@ -56,17 +57,17 @@ public abstract class ClassPathUtils {
      **/
     @Nonnull
     public static Set<String> getBootstrapClassPaths() {
-        return bootstrapClassPaths;
+        return BOOTSTRAP_CLASS_PATHS;
     }
 
     /**
-     * Get {@link #classPaths}
+     * Get {@link #CLASS_PATHS}
      *
      * @return Class Paths {@link Set}
      **/
     @Nonnull
     public static Set<String> getClassPaths() {
-        return classPaths;
+        return CLASS_PATHS;
     }
 
     /**

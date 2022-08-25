@@ -1,6 +1,9 @@
 package thinking.concurrency;
 
 
+import thread.pool.ThreadPoolBuilder;
+
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -11,12 +14,11 @@ import java.util.concurrent.TimeUnit;
  */
 class Daemons {
     public static void main(String[] args) throws Exception {
-        Thread t = new Thread(new Daemon());
-        t.setDaemon(true);
-        t.start();
-        System.out.println("d.isDaemon() = " + t.isDaemon() + ". ");
+        ExecutorService single = ThreadPoolBuilder.single(true);
+        single.execute(new Daemon());
         // Allow the daemon threads to finish their startup process.
         TimeUnit.SECONDS.sleep(2);
+        single.shutdown();
     }
 
 }
@@ -52,13 +54,13 @@ class DaemonSpawn implements Runnable {
 
 class DaemonDontRunFinally {
     public static void main(String[] args) {
-        Thread t = new Thread(new ADaemon());
-        // t.setDaemon(true);
-        t.start();
+        ExecutorService single = ThreadPoolBuilder.single(false);
+        single.execute(new DaemonThread());
+        single.shutdown();
     }
 }
 
-class ADaemon implements Runnable {
+class DaemonThread implements Runnable {
 
     @Override
     public void run() {

@@ -4,8 +4,8 @@ import annotation.GuardedBy;
 import annotation.ThreadSafe;
 
 /**
- * @author:qiming
- * @date: 2021/3/28
+ * @author zqw
+ * @date 2021/3/28
  */
 @ThreadSafe
 public class SynchronizedInteger {

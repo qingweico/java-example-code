@@ -8,8 +8,8 @@ import util.TwoTuple;
 import static util.Tuple.tuple;
 
 /**
- * @author:qiming
- * @date: 2021/4/10
+ * @author zqw
+ * @date 2021/4/10
  */
 public class TupleTest2 {
     static TwoTuple<String, Integer> f() {

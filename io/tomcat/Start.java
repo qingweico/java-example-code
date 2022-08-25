@@ -63,7 +63,6 @@ public class Start {
         ServerSocket server;
         try {
             server = new ServerSocket(port);
-            server.setSoTimeout(1000 * 60);
             log.info("\n\t----------------------------------------------------------\n\t" +
                     "Local: \t\thttp://localhost:" + port + "/\n\t" +
                     "----------------------------------------------------------");
@@ -71,7 +70,7 @@ public class Start {
                 Socket client;
                 try {
                     client = server.accept();
-                    // TODO 使用线程池
+                    // 使用线程池
                     dispatch(new Request(client.getInputStream()), new Response(client.getOutputStream()));
                 } catch (Exception e) {
                     log.error(e.getMessage());

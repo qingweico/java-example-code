@@ -3,8 +3,8 @@ package thinking.inner;
 /**
  * Creating an inner class directly using the .new syntax
  *
- * @author:qiming
- * @date: 2021/1/30
+ * @author zqw
+ * @date 2021/1/30
  */
 public class DotNew {
     public int i = 0;

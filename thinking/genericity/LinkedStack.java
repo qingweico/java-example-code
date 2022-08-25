@@ -3,8 +3,8 @@ package thinking.genericity;
 /**
  * A stack implemented with an internal linked structure.
  *
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
 public class LinkedStack<T> {
 

@@ -32,7 +32,7 @@ public class SimpleJarEntryScanner {
     }
 
     /**
-     * @param jarURL    {@link URL} of {@link JarFile} or {@link JarEntry}
+     * @param jarUrl    {@link URL} of {@link JarFile} or {@link JarEntry}
      * @param recursive recursive
      * @return Read-only {@link Set}
      * @throws NullPointerException     If argument <code>null</code>
@@ -41,12 +41,12 @@ public class SimpleJarEntryScanner {
      * @since 1.0.0
      */
     @Nonnull
-    public Set<JarEntry> scan(URL jarURL, final boolean recursive) throws NullPointerException, IllegalArgumentException, IOException {
-        return scan(jarURL, recursive, null);
+    public Set<JarEntry> scan(URL jarUrl, final boolean recursive) throws NullPointerException, IllegalArgumentException, IOException {
+        return scan(jarUrl, recursive, null);
     }
 
     /**
-     * @param jarURL         {@link URL} of {@link JarFile} or {@link JarEntry}
+     * @param jarUrl         {@link URL} of {@link JarFile} or {@link JarEntry}
      * @param recursive      recursive
      * @param jarEntryFilter {@link JarEntryFilter}
      * @return Read-only {@link Set}
@@ -57,9 +57,9 @@ public class SimpleJarEntryScanner {
      * @since 1.0.0
      */
     @Nonnull
-    public Set<JarEntry> scan(URL jarURL, final boolean recursive, JarEntryFilter jarEntryFilter) throws NullPointerException, IllegalArgumentException, IOException {
-        String relativePath = JarUtils.resolveRelativePath(jarURL);
-        JarFile jarFile = JarUtils.toJarFile(jarURL);
+    public Set<JarEntry> scan(URL jarUrl, final boolean recursive, JarEntryFilter jarEntryFilter) throws NullPointerException, IllegalArgumentException, IOException {
+        String relativePath = JarUtils.resolveRelativePath(jarUrl);
+        JarFile jarFile = JarUtils.toJarFile(jarUrl);
         return scan(jarFile, relativePath, recursive, jarEntryFilter);
     }
 

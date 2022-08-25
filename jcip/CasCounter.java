@@ -10,9 +10,9 @@ import annotation.ThreadSafe;
  */
 @ThreadSafe
 class CasCounter {
-    private final SimulatedCAS value;
+    private final SimulatedCas value;
 
-    public CasCounter(SimulatedCAS simulatedCas) {
+    public CasCounter(SimulatedCas simulatedCas) {
         value = simulatedCas;
     }
 

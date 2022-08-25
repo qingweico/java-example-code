@@ -1,24 +1,27 @@
 package thinking.concurrency;
 
+import thread.pool.ThreadPoolBuilder;
+
 import java.util.ArrayList;
 import java.util.concurrent.*;
 
 /**
- * @author:qiming
- * @date: 2021/1/15
+ * @author zqw
+ * @date 2021/1/15
  */
 // Runnable is a stand-alone task that performs work, but it does not return any value.
 
-public class CallableUsage {
+class CallableUsage {
     public static void main(String[] args) {
-        ExecutorService exec = Executors.newCachedThreadPool();
+        int threadCount = 10;
+        ExecutorService exec = ThreadPoolBuilder.custom().builder();
         ArrayList<Future<String>> results = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < threadCount; i++) {
 
             // The submit method returns the Future object, which is parameterized with the
             // specific type of Callable return result.
 
-            results.add(exec.submit(new TaskWithTResult(i)));
+            results.add(exec.submit(new TaskWithResult(i)));
         }
         for (Future<String> fs : results) {
             try {
@@ -36,10 +39,11 @@ public class CallableUsage {
     }
 }
 // Its type parameter represents the value returned from the method call.
-class TaskWithTResult implements Callable<String> {
+
+class TaskWithResult implements Callable<String> {
     private final int id;
 
-    public TaskWithTResult(int id) {
+    public TaskWithResult(int id) {
         this.id = id;
     }
 

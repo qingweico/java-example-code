@@ -17,7 +17,7 @@ import static util.Print.print;
  */
 public class CriticalSection {
     /**Test two different approaches:*/
-    static void testApproaches(PairManager p1, PairManager p2) {
+    static void testApproaches(AbstractPairManager p1, AbstractPairManager p2) {
         ExecutorService exec = CustomThreadPool.newFixedThreadPool(10);
         PairManipulator pm1 = new PairManipulator(p1),
                 pm2 = new PairManipulator(p2);
@@ -37,7 +37,7 @@ public class CriticalSection {
     }
 
     public static void main(String[] args) {
-        PairManager pm1 = new PairManager1(),
+        AbstractPairManager pm1 = new PairManager1(),
                     pm2 = new PairManager2();
         testApproaches(pm1, pm2);
     }

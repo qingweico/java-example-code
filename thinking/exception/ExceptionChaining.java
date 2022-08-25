@@ -6,8 +6,8 @@ package thinking.exception;
  * When one exception is caught and another exception is thrown, and the information about
  * the original exception is expected to be preserved, this is called the exception chain.
  *
- * @author:qiming
- * @date: 2021/1/8
+ * @author zqw
+ * @date 2021/1/8
  */
 public class ExceptionChaining {
     public static void main(String[] args) {

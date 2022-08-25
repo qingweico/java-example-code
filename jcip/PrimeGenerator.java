@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author:qiming
- * @date: 2021/4/7
+ * @author zqw
+ * @date 2021/4/7
  */
 @ThreadSafe
 public class PrimeGenerator implements Runnable{

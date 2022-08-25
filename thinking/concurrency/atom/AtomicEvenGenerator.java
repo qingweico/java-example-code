@@ -1,7 +1,7 @@
 package thinking.concurrency.atom;
 
 import thinking.concurrency.share.EvenChecker;
-import thinking.concurrency.share.IntGenerator;
+import thinking.concurrency.share.AbstractIntGenerator;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author zqw
  * @date 2021/1/20
  */
-class AtomicEvenGenerator extends IntGenerator {
+class AtomicEvenGenerator extends AbstractIntGenerator {
     private final AtomicInteger ai = new AtomicInteger(0);
     @Override
     public int next() {

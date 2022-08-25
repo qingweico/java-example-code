@@ -8,8 +8,8 @@ import static util.Print.print;
 /**
  * Converts checked exceptions to unchecked exceptions
  *
- * @author:qiming
- * @date: 2021/2/7
+ * @author zqw
+ * @date 2021/2/7
  */
 // Throwing an exception from main() is convenient, but this is not a generic approach,
 // you can do this by wrapping the checked exception inside a RuntimeException, just

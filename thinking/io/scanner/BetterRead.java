@@ -3,8 +3,8 @@ package thinking.io.scanner;
 import java.util.Scanner;
 
 /**
- * @author:qiming
- * @date: 2021/1/15
+ * @author zqw
+ * @date 2021/1/15
  */
 public class BetterRead {
     public static void main(String[] args) {

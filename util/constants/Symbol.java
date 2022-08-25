@@ -46,4 +46,13 @@ public interface Symbol {
      * POUND_SIGN: "#"; `#`有很多种读法
      */
     String POUND_SIGN = "#";
+    /**
+     * COLON: ":"
+     */
+    String COLON = ":";
+
+    /**
+     * WHITE_SPACE: " "
+     */
+    String WHITE_SPACE = " ";
 }

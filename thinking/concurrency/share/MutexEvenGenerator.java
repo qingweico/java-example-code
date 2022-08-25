@@ -10,10 +10,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * Preventing thread collisions with mutexes
  * {RunByHand}
  *
- * @author:qiming
- * @date: 2021/1/19
+ * @author zqw
+ * @date 2021/1/19
  */
-public class MutexEvenGenerator extends IntGenerator {
+public class MutexEvenGenerator extends AbstractIntGenerator {
     private int currentEvenValue = 0;
     private final Lock lock = new ReentrantLock();
 

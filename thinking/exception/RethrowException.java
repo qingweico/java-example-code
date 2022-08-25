@@ -4,8 +4,8 @@ package thinking.exception;
  * throw e
  * fillInStackTrace
  *
- * @author:qiming
- * @date: 2021/1/6
+ * @author zqw
+ * @date 2021/1/6
  */
 // Rethrowing an exception throws the exception to the exception handler in the previous
 // environment, and subsequent catch clauses of the same try block are ignored, in addition,

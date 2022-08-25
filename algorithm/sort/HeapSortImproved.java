@@ -3,8 +3,8 @@ package algorithm.sort;
 import algorithm.heap.MaxHeap;
 
 /**
- * @author:qiming
- * @date: 2021/10/29
+ * @author zqw
+ * @date 2021/10/29
  */
 public class HeapSortImproved<E extends Comparable<E>> {
     public void sort(E[] A) {

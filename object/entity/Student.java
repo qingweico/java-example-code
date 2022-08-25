@@ -30,7 +30,7 @@ public class Student implements Serializable {
     }
 
     public String get() {
-        return this.name + ": " + this.score + "\n";
+        return this.name + ": " + this.score;
     }
 
     public String getName() {

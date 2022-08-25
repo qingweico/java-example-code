@@ -3,8 +3,8 @@ package jcip;
 /**
  * Use the factory method to prevent this reference from escaping during construction.
  *
- * @author:qiming
- * @date: 2021/4/8
+ * @author zqw
+ * @date 2021/4/8
  */
 public class SafeListener {
     private final EventListener listener;

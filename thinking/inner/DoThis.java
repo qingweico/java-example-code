@@ -6,8 +6,8 @@ import static util.Print.print;
 /**
  * Qualifying access to the outer-class object
  *
- * @author:qiming
- * @date: 2021/1/30
+ * @author zqw
+ * @date 2021/1/30
  */
 public class DoThis {
 

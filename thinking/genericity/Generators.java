@@ -10,8 +10,8 @@ import java.util.Collection;
 /**
  * Generic methods for Generator
  *
- * @author:qiming
- * @date: 2021/4/9
+ * @author zqw
+ * @date 2021/4/9
  */
 public class Generators {
    public static <T>Collection<T> fill(Collection<T> coll, Generator<T> gen, int n) {

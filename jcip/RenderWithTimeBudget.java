@@ -5,8 +5,8 @@ import java.util.concurrent.*;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 /**
- * @author:qiming
- * @date: 2021/4/7
+ * @author zqw
+ * @date 2021/4/7
  */
 public class RenderWithTimeBudget {
     private static final Ad DEFAULT_AD = new Ad();

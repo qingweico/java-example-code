@@ -11,10 +11,10 @@ import java.util.Locale;
  * n: 数据规模
  * r: 数据范围
  * 稳定的排序
- * @author:qiming
- * @date: 2021/11/3
+ * @author zqw
+ * @date 2021/11/3
  */
-public class CountingSort {
+public class CountingSortTest {
 
     private static final int COUNT = 10;
     private static final int BOUND = 750;

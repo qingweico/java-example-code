@@ -1,5 +1,7 @@
 package util;
 
+import util.constants.Symbol;
+
 import java.io.PrintStream;
 import java.util.Map;
 import java.util.Set;
@@ -75,6 +77,7 @@ public class Print {
 
     /**
      * Print a Map
+     *
      * @param map the map to print
      */
     public static void toPrint(Map<?, ?> map) {
@@ -86,5 +89,14 @@ public class Print {
         for (Map.Entry<?, ?> entry : entrySet) {
             System.out.printf("[key: %s, value: %s]%n", entry.getKey(), entry.getValue());
         }
+    }
+
+    /**
+     * Print Gracefully  k : v
+     * @param arg k
+     * @param value v
+     */
+    public static void grace(String arg, Object value) {
+        System.out.printf("%s %s %s%n", arg, Symbol.COLON, value);
     }
 }

@@ -6,8 +6,8 @@ import java.util.Random;
 import static util.Print.prints;
 
 /**
- * @author:qiming
- * @date: 2021/3/23
+ * @author zqw
+ * @date 2021/3/23
  */
 public class RandomList<T> {
     private final ArrayList<T> storage = new ArrayList<>();

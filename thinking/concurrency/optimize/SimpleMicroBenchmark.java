@@ -13,8 +13,8 @@ import static util.Print.printf;
  * @date 2021/2/3
  */
 
-public class SimpleMicroBenchmark {
-    static long test(Incrementable incr) {
+class SimpleMicroBenchmark {
+    static long test(AbstractIncrementable incr) {
         long start = System.nanoTime();
         long count = 100_0000L;
         for (int i = 0; i < count; i++) {
@@ -33,7 +33,7 @@ public class SimpleMicroBenchmark {
     }
 }
 
-abstract class Incrementable {
+abstract class AbstractIncrementable {
     protected long counter = 0;
 
     /**
@@ -42,7 +42,7 @@ abstract class Incrementable {
     public abstract void increment();
 }
 
-class SynchronizingTest extends Incrementable {
+class SynchronizingTest extends AbstractIncrementable {
 
     @Override
     public synchronized void increment() {
@@ -50,7 +50,7 @@ class SynchronizingTest extends Incrementable {
     }
 }
 
-class LockingTest extends Incrementable {
+class LockingTest extends AbstractIncrementable {
     private final Lock lock = new ReentrantLock();
 
     @Override

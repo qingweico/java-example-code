@@ -4,8 +4,8 @@ package thinking.holding;
 import java.util.*;
 
 /**
- * @author:qiming
- * @date: 2021/3/21
+ * @author zqw
+ * @date 2021/3/21
  */
 public class AddingGroups {
     public static void main(String[] args) {

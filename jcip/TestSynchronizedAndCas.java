@@ -1,50 +1,64 @@
 package jcip;
 
 
+import thread.pool.ThreadPoolBuilder;
+import util.Constants;
+import util.Print;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+
 /**
- * @author:qiming
- * @date: 2021/3/30
+ * 使用 synchronized 和 cas 并发累加计数测试
+ *
+ * @author zqw
+ * @date 2021/3/30
  */
-public class TestSynchronizedAndCas {
-    private static final int MAX_THREAD_COUNT = 30;
-    public static void main(String[] args) {
+class TestSynchronizedAndCas {
+    private static final int THREAD_COUNT = 30;
+    static ExecutorService pool = ThreadPoolBuilder.custom(THREAD_COUNT).isEnableMonitor(true).builder();
+    static long acc = 10000;
 
-        long start = System.currentTimeMillis();
-        SimulatedCAS simulatedCAS = new SimulatedCAS();
-        CasCounter casCounter = new CasCounter(simulatedCAS);
-
-        for(int i = 0;i < MAX_THREAD_COUNT;i++) {
-            new Thread(() -> {
-                for(int j = 0;j < 10000;j++) {
-                    casCounter.increment();
-                }
-            }).start();
+    private static void exec(Object o, CountDownLatch latch) {
+        if (o instanceof CasCounter) {
+            CasCounter casCounter = (CasCounter) o;
+            for (int i = 0; i < THREAD_COUNT; i++) {
+                pool.execute(() -> {
+                    for (int j = 0; j < acc; j++) {
+                        casCounter.increment();
+                    }
+                    latch.countDown();
+                });
+            }
+        } else if (o instanceof SynchronizedInteger) {
+            SynchronizedInteger integer = (SynchronizedInteger) o;
+            for (int i = 0; i < THREAD_COUNT; i++) {
+                pool.execute(() -> {
+                    for (int j = 0; j < acc; j++) {
+                        integer.increment();
+                    }
+                    latch.countDown();
+                });
+            }
         }
-
-        while (Thread.activeCount() > 2) {
-            Thread.yield();
-        }
-
-        System.out.println(casCounter.getValue());
-        System.out.println(System.currentTimeMillis() - start + "ms");
-
-        start = System.currentTimeMillis();
-        SynchronizedInteger integer = new SynchronizedInteger();
-
-        for(int i = 0;i < MAX_THREAD_COUNT;i++) {
-            new Thread(() -> {
-                for(int j = 0;j < 10000;j++) {
-                    integer.increment();
-                }
-            }).start();
-        }
-
-        while (Thread.activeCount() > 2) {
-            Thread.yield();
-        }
-
-        System.out.println(integer.get());
-        System.out.println(System.currentTimeMillis() - start + "ms");
     }
 
+    public static void main(String[] args) throws InterruptedException {
+        CountDownLatch cas = new CountDownLatch(THREAD_COUNT);
+        CountDownLatch syn = new CountDownLatch(THREAD_COUNT);
+        long start = System.currentTimeMillis();
+        SimulatedCas simulatedCas = new SimulatedCas();
+        CasCounter casCounter = new CasCounter(simulatedCas);
+        exec(casCounter, cas);
+        cas.await();
+        Print.grace("casCounter", casCounter.getValue());
+        Print.grace("cas", (System.currentTimeMillis() - start) + Constants.MS);
+        start = System.currentTimeMillis();
+        SynchronizedInteger integer = new SynchronizedInteger();
+        exec(integer, syn);
+        syn.await();
+        Print.grace("synCounter", casCounter.getValue());
+        Print.grace("syn", (System.currentTimeMillis() - start) + Constants.MS);
+        pool.shutdown();
+    }
 }

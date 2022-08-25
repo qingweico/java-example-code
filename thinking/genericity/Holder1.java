@@ -1,8 +1,8 @@
 package thinking.genericity;
 
 /**
- * @author:qiming
- * @date: 2021/4/9
+ * @author zqw
+ * @date 2021/4/9
  */
 public class Holder1 {
    private Automobile automobile;

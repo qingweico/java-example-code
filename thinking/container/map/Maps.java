@@ -11,7 +11,7 @@ import static util.Print.*;
  * Things you can do with Maps
  *
  * @author zqw
- * @date: 2021/2/21
+ * @date 2021/2/21
  */
 class Maps {
     static int initialCapacity = 10;

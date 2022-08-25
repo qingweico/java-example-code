@@ -16,38 +16,55 @@ import static util.Print.print;
  */
 @FunctionalInterface
 public interface LoginService {
+    /**
+     * login
+     *
+     * @param userService ///
+     */
     void login(UserService userService);
 
-    default boolean isVIP(UserService userService) {
+    /**
+     * user is vip
+     *
+     * @param userService ///
+     * @return user is vip
+     */
+    default boolean isVip(UserService userService) {
         return false;
     }
 
     // You can define methods in Object
+
+    /**
+     * reload toString()
+     *
+     * @return reloaded toString() ///
+     */
     @Override
     String toString();
 
 }
 
 class UserService {
-    private static final User user;
+    private static final User USER;
 
     static {
-        user = new User();
-        user.setUsername("root");
-        user.setVip(true);
+        USER = new User();
+        USER.setUsername("root");
+        USER.setVip(true);
     }
 
     public static void login() {
         System.out.println("[UserService::login]");
     }
 
-    public static void isVIP() {
+    public static void isVip() {
         System.out.println("[UserService::isVIP]");
     }
 
 
     public User getUser() {
-        return user;
+        return USER;
     }
 
 
@@ -62,9 +79,9 @@ class UserService {
             }
 
             @Override
-            public boolean isVIP(UserService userService) {
-                UserService.isVIP();
-                return LoginService.super.isVIP(userService);
+            public boolean isVip(UserService userService) {
+                UserService.isVip();
+                return LoginService.super.isVip(userService);
             }
         };
         UserService userService = new UserService();
@@ -80,7 +97,7 @@ class UserService {
             }
 
             @Override
-            public boolean isVIP(UserService userService) {
+            public boolean isVip(UserService userService) {
                 return userService.getUser().isVip();
             }
         };

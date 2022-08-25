@@ -1,5 +1,7 @@
 package thread;
 
+import util.constants.Symbol;
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
@@ -13,11 +15,11 @@ import java.lang.management.ThreadMXBean;
 class GetThreadCount {
     public static void main(String[] args) {
         System.out.println("============= MXBean =============");
-        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
-        long[] threadIds = threadMXBean.getAllThreadIds();
-        ThreadInfo[] threadInfos = threadMXBean.getThreadInfo(threadIds);
+        ThreadMXBean threadMxBean = ManagementFactory.getThreadMXBean();
+        long[] threadIds = threadMxBean.getAllThreadIds();
+        ThreadInfo[] threadInfos = threadMxBean.getThreadInfo(threadIds);
         for (ThreadInfo threadInfo : threadInfos) {
-            System.out.println(threadInfo.getThreadId() + ": " + threadInfo.getThreadName());
+            System.out.println(threadInfo.getThreadId() + Symbol.COLON + Symbol.WHITE_SPACE + threadInfo.getThreadName());
         }
         System.out.println("============= ThreadGroup =============");
         ThreadGroup group = Thread.currentThread().getThreadGroup();

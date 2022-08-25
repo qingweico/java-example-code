@@ -3,8 +3,8 @@ package thinking.genericity;
 import util.Generator;
 
 /**
- * @author:qiming
- * @date: 2021/4/9
+ * @author zqw
+ * @date 2021/4/9
  */
 // Generate a Fibonacci sequence
 public class Fibonacci implements Generator<Integer> {

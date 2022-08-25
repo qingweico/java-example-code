@@ -205,8 +205,8 @@ public class ClassUtils {
 
         SimpleJarEntryScanner simpleJarEntryScanner = SimpleJarEntryScanner.INSTANCE;
         try {
-            JarFile jarFile_ = new JarFile(jarFile);
-            Set<JarEntry> jarEntries = simpleJarEntryScanner.scan(jarFile_, recursive, ClassFileJarEntryFilter.INSTANCE);
+            JarFile jf = new JarFile(jarFile);
+            Set<JarEntry> jarEntries = simpleJarEntryScanner.scan(jf, recursive, ClassFileJarEntryFilter.INSTANCE);
 
             for (JarEntry jarEntry : jarEntries) {
                 String jarEntryName = jarEntry.getName();

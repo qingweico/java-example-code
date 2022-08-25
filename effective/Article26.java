@@ -26,6 +26,7 @@ import java.util.*;
 // Each generic defines a primitive type, that is, a generic name without any actual type arguments.
 // List<E> --> List
 // Primitive type exist to be compatible with code that predates generics.
+
 class Article26 {
      public static void main(String[] args) {
         List<String> string = new ArrayList<>();
@@ -45,6 +46,7 @@ class Article26 {
     }
 
     // Use of raw type for unknown element type - don't do this!
+
     static int numElementsInCommon(Set s1, Set s2) {
         int result = 0;
         for (Object o1 : s1) {
@@ -70,15 +72,20 @@ class Article26 {
 
 
     // Legitimate use of raw type - instanceof operator
+
     public static void rawType(Object o) {
         // illegal!
         // Because the generic information is erased at run time.
         // o instance Set<String>
-        if (o instanceof Set) {      // Raw type
+
+        // Raw type
+        if (o instanceof Set) {
             // Replace primitive types with unrestricted wildcard types,
             // this is a checked transformation,
             // so it does not cause compile-time warnings.
-            Set<?> s = (Set<?>) o;   // Wildcard type
+
+            // Wildcard type
+            Set<?> s = (Set<?>) o;
 
             // Set s = (Set)o;
         }

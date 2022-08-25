@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2021/1/29
  */
 
-public abstract class PairManager {
+abstract class AbstractPairManager {
     AtomicInteger checkCounter = new AtomicInteger(0);
     protected Pair p = new Pair();
     private final List<Pair> storage = Collections.synchronizedList(new ArrayList<>());

@@ -7,8 +7,8 @@ import java.util.ArrayList;
 /**
  * Combining generic types to make complex generic types
  *
- * @author:qiming
- * @date: 2021/4/11
+ * @author zqw
+ * @date 2021/4/11
  */
 public class TupleList<A, B, C, D> extends ArrayList<FourTuple<A, B, C, D>> {
     public static void main(String[] args) {

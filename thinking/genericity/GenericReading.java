@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author:qiming
- * @date: 2021/1/14
+ * @author zqw
+ * @date 2021/1/14
  */
 public class GenericReading {
     static <T> T readExact(List<T> list) {

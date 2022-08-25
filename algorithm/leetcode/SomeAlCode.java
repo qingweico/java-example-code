@@ -77,7 +77,7 @@ class SomeAlCode {
         }
     }
 
-    public static int[] topKFrequent(int[] nums, int k) {
+    public static int[] topK(int[] nums, int k) {
         Map<Integer, Integer> hashMap = new HashMap<>(nums.length);
         int[] res = new int[k];
         int maxCount = 0;

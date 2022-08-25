@@ -21,6 +21,17 @@ public class ThreadPoolBuilder {
         return new Builder(blockQueueSize);
     }
 
+    /*single*/
+
+    public static ExecutorService single(boolean daemon) {
+        return custom(1).corePoolSize(1)
+                .maxPoolSize(1)
+                .keepAliveTime(1)
+                .allowCoreThreadTimeOut(true)
+                .threadFactory(CustomThreadFactory.guavaThreadFactory(daemon))
+                .builder();
+    }
+
     public static class Builder {
         /*default core pool size*/
         private int corePoolSize = 10;
@@ -33,7 +44,7 @@ public class ThreadPoolBuilder {
         private boolean preStartAllCore = false;
         private boolean isEnableMonitor = false;
         private boolean allowCoreThreadTimeOut = false;
-        private TimeUnit unit = TimeUnit.SECONDS;
+        private TimeUnit unit = TimeUnit.MILLISECONDS;
         private BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(blockQueueSize);
         private ThreadFactory threadFactory = CustomThreadFactory.basicThreadFactory();
 
@@ -107,12 +118,12 @@ public class ThreadPoolBuilder {
             }
             if (this.isEnableMonitor) {
                 log.info("Thread Pool Monitor has enable");
+                log.info("Core Pool Size: {}", corePoolSize);
+                log.info("Max Pool Size: {}", maxPoolSize);
+                log.info("Block Queue Size: {}", blockQueueSize);
             }
             executor.setThreadFactory(this.threadFactory);
             executor.setRejectedExecutionHandler(new CustomRejectedExecutionHandler());
-            log.info("Core Pool Size: {}", corePoolSize);
-            log.info("Max Pool Size: {}", maxPoolSize);
-            log.info("Block Queue Size: {}", blockQueueSize);
             return executor;
         }
     }

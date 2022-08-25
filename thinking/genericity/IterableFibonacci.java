@@ -6,8 +6,8 @@ import java.util.Iterator;
  * Adapt the Fibonacci class to make it Iterator.
  * create a adapter
  *
- * @author:qiming
- * @date: 2021/4/9
+ * @author zqw
+ * @date 2021/4/9
  */
 public class IterableFibonacci extends Fibonacci implements Iterable<Integer> {
     private int n;

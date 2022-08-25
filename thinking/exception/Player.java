@@ -9,8 +9,8 @@ import java.util.logging.Logger;
  *            unchecked exception: The exception inherited from RuntimeException and This
  *            exception is an error and will be caught automatically.
  *
- * @author:qiming
- * @date: 2020/10/13
+ * @author zqw
+ * @date 2020/10/13
  */
 
 public class Player {

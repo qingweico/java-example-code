@@ -8,8 +8,8 @@ import java.math.BigInteger;
 /**
  * A stateless Servlet
  *
- * @author:qiming
- * @date: 2021/4/7
+ * @author zqw
+ * @date 2021/4/7
  */
 @ThreadSafe
 public class StatelessFactorizer extends GenericServlet implements Servlet {

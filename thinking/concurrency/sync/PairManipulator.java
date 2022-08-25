@@ -5,9 +5,9 @@ package thinking.concurrency.sync;
  * @date 2021/1/29
  */
 class PairManipulator implements Runnable {
-    private final PairManager pm;
+    private final AbstractPairManager pm;
 
-    public PairManipulator(PairManager pm) {
+    public PairManipulator(AbstractPairManager pm) {
         this.pm = pm;
     }
 
@@ -26,9 +26,9 @@ class PairManipulator implements Runnable {
 }
 
 class PairCheck implements Runnable {
-    private final PairManager pm;
+    private final AbstractPairManager pm;
 
-    public PairCheck(PairManager pm) {
+    public PairCheck(AbstractPairManager pm) {
         this.pm = pm;
     }
 
@@ -44,7 +44,7 @@ class PairCheck implements Runnable {
 
 // Synchronized the entire method:
 
-class PairManager1 extends PairManager {
+class PairManager1 extends AbstractPairManager {
 
     @Override
     public synchronized void increment() {
@@ -56,7 +56,7 @@ class PairManager1 extends PairManager {
 
 // Use a critical section:
 
-class PairManager2 extends PairManager {
+class PairManager2 extends AbstractPairManager {
 
     @Override
     public void increment() {

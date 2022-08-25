@@ -1,8 +1,8 @@
 package algorithm.queue;
 
 /**
- * @author:qiming
- * @date: 2021/10/29
+ * @author zqw
+ * @date 2021/10/29
  */
 public interface Queue<E> {
     int size();
