@@ -1,5 +1,6 @@
 package thread;
 
+import annotation.Pass;
 import util.Constants;
 
 /**
@@ -8,8 +9,9 @@ import util.Constants;
  * @author zqw
  * @date 2022/2/11
  */
+@Pass
 @SuppressWarnings("all")
-public class WriteCombining {
+class WriteCombining {
     private static final int ITERATIONS = Integer.MAX_VALUE;
     private static final int ITEMS = 1 << 24;
     private static final int MASK = ITEMS - 1;

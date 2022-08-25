@@ -15,23 +15,31 @@ class Article22 {
 
 }
 
-// Constant interface antipattern - do not use!
+// Constant interface anti-pattern - do not use!
 // This interface does not contain any methods, it contains only
 // static final fields, each of which exports a constant.
+
 interface PhysicalConstants {
 
-    // Avogadro's number (1/mol)
+    /**
+     *  Avogadro's number (1/mol)
+     */
     static final double AVOGADRO_NUMBER = 6.022_140_857e23;
 
-    // Boltzmann constant (J/K)
+    /**
+     * Boltzmann constant (J/K)
+     */
     static final double BOLTZMANN_CONSTANT = 1.308_648_52e-23;
 
-    // Mass of electron (kg)
+    /**
+     * Mass of electron (kg)
+     */
     static final double ELECTRON_MASS = 9.109_383_56e-31;
 }
 
 // Classes that use these constants implement this interface to avoid decorating
 // the constant name with the class name.
+
 class PhysicalConstantsImpl implements PhysicalConstants {
     public static void main(String[] args) {
         System.out.println(AVOGADRO_NUMBER);
@@ -50,6 +58,7 @@ class PhysicalConstantsImpl implements PhysicalConstants {
 // java.io.ObjectStreamConstants;
 
 // Constant utility class
+
 class PhysConstants {
     private PhysConstants() {
     } // Prevents instantiation
@@ -61,6 +70,7 @@ class PhysConstants {
 }
 
 // Use of static import to avoid qualifying constants.
+
 class Test {
     double atoms(double mols) {
         return AVOGADRO_NUMBER * mols;

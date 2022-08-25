@@ -1,4 +1,6 @@
-package oak.process;
+package util.process;
+
+import util.constants.Symbol;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,12 +15,13 @@ import java.util.concurrent.TimeoutException;
  */
 public class ProcessExecutor {
 
-    private static final long waitForTimeInSecond = Long.getLong("process.executor.wait.for", 1);
+    private static final long WAIT_FOR_TIME_IN_SECOND = Long.getLong("process.executor.wait.for", 1);
     private final String command;
     private final String arguments;
     private final Runtime runtime = Runtime.getRuntime();
     private final ProcessManager processManager = ProcessManager.INSTANCE;
     private boolean finished;
+
 
     /**
      * Constructor
@@ -30,7 +33,7 @@ public class ProcessExecutor {
         StringBuilder argumentsBuilder = new StringBuilder();
         if (arguments != null) {
             for (String argument : arguments) {
-                argumentsBuilder.append(" ").append(argument);
+                argumentsBuilder.append(Symbol.WHITE_SPACE).append(argument);
             }
         }
         this.arguments = argumentsBuilder.toString();
@@ -67,7 +70,6 @@ public class ProcessExecutor {
         long endTime = -1L;
         InputStream processInputStream = process.getInputStream();
         InputStream processErrorInputStream = process.getErrorStream();
-        // OutputStream processOutputStream = process.getOutputStream();
         int exitValue;
         while (!finished) {
             long costTime = endTime - startTime;
@@ -93,7 +95,7 @@ public class ProcessExecutor {
             } catch (IllegalThreadStateException e) {
                 // Process is not finished yet;
                 // Sleep a little to save on CPU cycles
-                waitFor(waitForTimeInSecond);
+                waitFor(WAIT_FOR_TIME_IN_SECOND);
                 endTime = System.currentTimeMillis();
             } finally {
                 processManager.removeUnfinishedProcess(process, arguments);
@@ -106,7 +108,7 @@ public class ProcessExecutor {
      *
      * @param seconds specified seconds
      */
-    private void waitFor(long seconds) {
+    public void waitFor(long seconds) {
         try {
             Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
@@ -121,5 +123,10 @@ public class ProcessExecutor {
      */
     public boolean isFinished() {
         return finished;
+    }
+
+    public static void main(String[] args) throws IOException {
+        ProcessExecutor executor = new ProcessExecutor("java -XX:+PrintCommandLineFlags", "-version");
+        executor.execute(System.out);
     }
 }

@@ -1,5 +1,6 @@
 package algorithm.tree;
 
+import util.RandomDataGenerator;
 import util.Tools;
 import org.junit.Test;
 
@@ -359,9 +360,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
     @Test
     public void testBst() {
         BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
-        int count = 1000;
-        for (int i = 0; i < count; i++) {
-            binarySearchTree.add((int) (Math.random() * 1000));
+        int size = 1000;
+        int exclusive = 1000;
+        for (int i = 0; i < size; i++) {
+            binarySearchTree.add(RandomDataGenerator.randomInt(exclusive));
         }
         print(binarySearchTree.size());
         ArrayList<Integer> list = new ArrayList<>();

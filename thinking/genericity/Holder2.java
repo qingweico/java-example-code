@@ -12,9 +12,13 @@ public class Holder2 {
    public static void main(String[] args) {
       Holder2 h2 = new Holder2(new Automobile());
       Automobile a = (Automobile)h2.get();
+      System.out.println(a.getClass().getTypeName());
       h2.set("Not an Automobile");
       String s = (String)h2.get();
-      h2.set(1); // Auto-boxes to Integer
+      System.out.println(s.getClass().getTypeName());
+      // Auto-boxes to Integer
+      h2.set(1);
       Integer x = (Integer)h2.get();
+      System.out.println(x.getClass().getTypeName());
    }
 }

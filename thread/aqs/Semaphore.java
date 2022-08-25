@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
+ * The Semaphore based on AQS
  * @author zqw
  * @date 2021/10/17
  * @see Mutex

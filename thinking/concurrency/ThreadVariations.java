@@ -62,6 +62,7 @@ class InnerThread {
 }
 
 // Using an anonymous inner class
+
 class InnerThread0 {
     private int countDown = 5;
 
@@ -96,7 +97,6 @@ class InnerThread0 {
 
 class InnerRunnable {
     private int countDown = 5;
-    private Inner inner;
 
     private class Inner implements Runnable {
         Thread t;
@@ -128,7 +128,7 @@ class InnerRunnable {
     }
 
     public InnerRunnable(String name) {
-        inner = new Inner(name);
+        new Inner(name);
     }
 }
 
@@ -169,7 +169,7 @@ class InnerRunnable0 {
 class ThreadMethod {
     private int countDown = 5;
     private Thread t;
-    private String name;
+    private final String name;
 
     public ThreadMethod(String name) {
         this.name = name;

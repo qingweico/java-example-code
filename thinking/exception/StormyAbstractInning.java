@@ -100,6 +100,11 @@ abstract class AbstractInning {
     public void event() throws BaseballException {
     }
 
+    /**
+     * /// atBat
+     * @throws Foul //
+     * @throws Strike //
+     */
     public abstract void atBat() throws Foul, Strike;
 
     public void work() {

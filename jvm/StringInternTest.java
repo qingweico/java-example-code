@@ -5,6 +5,8 @@ import org.junit.Test;
 import static util.Print.print;
 
 /**
+ * String::intern 方法测试
+ *
  * @author zqw
  * @date 2021/3/27
  */

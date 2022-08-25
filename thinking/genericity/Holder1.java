@@ -5,7 +5,7 @@ package thinking.genericity;
  * @date 2021/4/9
  */
 public class Holder1 {
-   private Automobile automobile;
+   private final Automobile automobile;
    public Holder1(Automobile a) {
       automobile = a;
    }

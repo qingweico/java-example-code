@@ -8,7 +8,7 @@ import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 
 /**
- * --------------- Phaser ---------------
+ * --------------------------------- Phaser ---------------------------------
  * {@link Phaser} 功能与 {@link CountDownLatch} 很接近,但是它允许线程动态注册到
  * {@code Phase}上面,而 {@code CountDownLatch} 不能动态设置
  * {@code Phase} 设计的初衷是实现多个线程类似步骤、阶段场景的协调,线程注册等待屏障条件触发

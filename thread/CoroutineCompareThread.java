@@ -6,5 +6,5 @@ package thread;
  * @author zqw
  * @date 2022/7/3
  */
-public class CoroutineCompareThread {
+class CoroutineCompareThread {
 }

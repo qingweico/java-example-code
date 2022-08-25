@@ -1,10 +1,14 @@
 package thinking.concurrency.share;
 
 /**
+ * 偶数生成
+ *
  * @author zqw
  * @date 2021/1/19
  */
+
 //When threads collide
+
 public class EvenGenerator extends AbstractIntGenerator {
 
     private int currentEvenValue = 0;

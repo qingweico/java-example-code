@@ -17,6 +17,7 @@ public class Article16 {
 }
 
 // Degenerate classes like this should not be public!
+
 @Data
 class Rectangle {
     public int w;
@@ -24,6 +25,8 @@ class Rectangle {
 }
 
 // Encapsulation of data by accessor methods and mutators
+
+
 @Data
 class Square {
     private int length;
@@ -43,6 +46,7 @@ class Square {
 }
 
 // Public class with exposed immutable fields - questionable
+
 @Data
 final class Time {
     private static final int HOUR_PRE_DAY = 24;

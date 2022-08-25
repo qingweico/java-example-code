@@ -1,11 +1,13 @@
 package jvm;
 
 /**
+ * 对象占用空间的大小
+ *
  * @author zqw
  * @date 2021/10/20
  * @see ObjectLayout
  */
-public class EmptyObject {
+class EmptyObject {
     @SuppressWarnings("unused")
     public static void main(String[] args) {
         // VM　options: -javaagent:lib\InstrumentationAgent.jar

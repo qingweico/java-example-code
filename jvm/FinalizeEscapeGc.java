@@ -3,6 +3,7 @@ package jvm;
 import static util.Print.print;
 
 /**
+ * finally method
  * Objects can save themselves when they are GC.
  * @author zqw
  * @date 2021/3/31

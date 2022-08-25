@@ -114,10 +114,14 @@ public class ClassUtils {
      */
     @Nonnull
     public static Set<String> findClassNamesInClassPath(String classPath, boolean recursive) {
-        File classesFileHolder = new File(classPath); // JarFile or Directory
-        if (classesFileHolder.isDirectory()) { //Directory
+        // JarFile or Directory
+        File classesFileHolder = new File(classPath);
+        // Directory
+        if (classesFileHolder.isDirectory()) {
             return findClassNamesInDirectory(classesFileHolder, recursive);
-        } else if (classesFileHolder.isFile() && classPath.endsWith(FileSuffixConstants.JAR)) { //JarFile
+        }
+        // JarFile
+        else if (classesFileHolder.isFile() && classPath.endsWith(FileSuffixConstants.JAR)) {
             return findClassNamesInJarFile(classesFileHolder, recursive);
         }
         return Collections.emptySet();

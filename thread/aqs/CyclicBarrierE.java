@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutorService;
  * @author zqw
  * @date 2021/10/17
  */
-public class CyclicBarrierE {
+class CyclicBarrierE {
     CyclicBarrier barrier;
     final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
     int page = 0;

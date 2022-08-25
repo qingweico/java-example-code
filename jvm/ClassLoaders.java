@@ -11,7 +11,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/1/6
  */
-public class ClassLoaders {
+class ClassLoaders {
     public static void main(String[] args) {
 
         // Gets the system class loader

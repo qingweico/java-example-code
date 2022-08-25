@@ -1,7 +1,8 @@
 package jvm;
 
-
 /**
+ * 标记垃圾之引用计数法(Java 实际使用GC Root)
+ *
  * @author zqw
  * @date 2021/3/28
  */

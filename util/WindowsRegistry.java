@@ -332,13 +332,13 @@ public final class WindowsRegistry {
     /**
      * Java wrapper for Windows registry API RegEnumKeyEx()
      */
-    private static native byte[] WindowsRegEnumKeyEx(int hKey, int subKeyIndex, int maxKeyLength);
+    private static native byte[] windowsRegEnumKeyEx(int hKey, int subKeyIndex, int maxKeyLength);
 
     /**
      * Retries RegEnumKeyEx() MAX_ATTEMPTS times before giving up.
      */
-    private static byte[] WindowsRegEnumKeyEx1(int hKey, int subKeyIndex, int maxKeyLength) {
-        byte[] result = WindowsRegEnumKeyEx(hKey, subKeyIndex, maxKeyLength);
+    private static byte[] windowsRegEnumKeyEx1(int hKey, int subKeyIndex, int maxKeyLength) {
+        byte[] result = windowsRegEnumKeyEx(hKey, subKeyIndex, maxKeyLength);
         if (result != null) {
             return result;
         } else {
@@ -350,7 +350,7 @@ public final class WindowsRegistry {
                     return null;
                 }
                 sleepTime *= 2;
-                result = WindowsRegEnumKeyEx(hKey, subKeyIndex, maxKeyLength);
+                result = windowsRegEnumKeyEx(hKey, subKeyIndex, maxKeyLength);
                 if (result != null) {
                     return result;
                 }
@@ -359,39 +359,39 @@ public final class WindowsRegistry {
         return null;
     }
 
-//    /**
-//     * Java wrapper for Windows registry API RegEnumValue()
-//     */
-//    private static native byte[] WindowsRegEnumValue(int hKey, int valueIndex,
-//                                                     int maxValueNameLength);
-//
-//    /**
-//     * Retries RegEnumValueEx() MAX_ATTEMPTS times before giving up.
-//     */
-//    private static byte[] WindowsRegEnumValue1(int hKey, int valueIndex,
-//                                               int maxValueNameLength) {
-//        byte[] result = WindowsRegEnumValue(hKey, valueIndex,
-//                maxValueNameLength);
-//        if (result != null) {
-//            return result;
-//        } else {
-//            long sleepTime = INIT_SLEEP_TIME;
-//            for (int i = 0; i < MAX_ATTEMPTS; i++) {
-//                try {
-//                    Thread.sleep(sleepTime);
-//                } catch (InterruptedException e) {
-//                    return result;
-//                }
-//                sleepTime *= 2;
-//                result = WindowsRegEnumValue(hKey, valueIndex,
-//                        maxValueNameLength);
-//                if (result != null) {
-//                    return result;
-//                }
-//            }
-//        }
-//        return result;
-//    }
+    /**
+     * Java wrapper for Windows registry API RegEnumValue()
+     */
+    private static native byte[] windowsRegEnumValue(int hKey, int valueIndex,
+                                                     int maxValueNameLength);
+
+    /**
+     * Retries RegEnumValueEx() MAX_ATTEMPTS times before giving up.
+     */
+    private static byte[] windowsRegEnumValue1(int hKey, int valueIndex,
+                                               int maxValueNameLength) {
+        byte[] result = windowsRegEnumValue(hKey, valueIndex,
+                maxValueNameLength);
+        if (result != null) {
+            return result;
+        } else {
+            long sleepTime = INIT_SLEEP_TIME;
+            for (int i = 0; i < MAX_ATTEMPTS; i++) {
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    return result;
+                }
+                sleepTime *= 2;
+                result = windowsRegEnumValue(hKey, valueIndex,
+                        maxValueNameLength);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
 
     /**
      * Converts value's or node's name from its byte array representation to java string. Two encodings, simple and
@@ -469,7 +469,7 @@ public final class WindowsRegistry {
             } else if (ch == '/') {
                 windowsName.append('\\');
             } else if ((ch >= 'A') && (ch <= 'Z')) {
-                windowsName.append("/" + ch);
+                windowsName.append("/").append(ch);
             } else {
                 windowsName.append(ch);
             }
@@ -546,9 +546,7 @@ public final class WindowsRegistry {
                 StringBuilder hex4 = new StringBuilder(hex);
                 hex4.reverse();
                 int len = 4 - hex4.length();
-                for (int j = 0; j < len; j++) {
-                    hex4.append('0');
-                }
+                hex4.append("0".repeat(Math.max(0, len)));
                 for (int j = 0; j < 4; j++) {
                     windowsName.append(hex4.charAt(3 - j));
                 }
@@ -616,17 +614,17 @@ public final class WindowsRegistry {
             resolvedPath = StringUtils.substringAfter(resolvedPath, PathConstants.BACK_SLASH);
         }
         byte[] relativePathHandle = stringToByteArray(resolvedPath);
-        ByteArrayOutputStream bstream = new ByteArrayOutputStream();
-        bstream.write(relativePathHandle, 0, relativePathHandle.length - 1);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        baos.write(relativePathHandle, 0, relativePathHandle.length - 1);
         StringTokenizer tokenizer = new StringTokenizer("/", "/");
         while (tokenizer.hasMoreTokens()) {
-            bstream.write((byte) '\\');
+            baos.write((byte) '\\');
             String nextName = tokenizer.nextToken();
             byte[] windowsNextName = toWindowsName(nextName);
-            bstream.write(windowsNextName, 0, windowsNextName.length - 1);
+            baos.write(windowsNextName, 0, windowsNextName.length - 1);
         }
-        bstream.write(0);
-        return bstream.toByteArray();
+        baos.write(0);
+        return baos.toByteArray();
     }
 
     /**
@@ -715,6 +713,7 @@ public final class WindowsRegistry {
     private void closeKey(int nativeHandle) {
         int result = windowsRegCloseKey(nativeHandle);
         if (result != ERROR_SUCCESS) {
+
         }
     }
 

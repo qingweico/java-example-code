@@ -52,7 +52,7 @@ public interface Constants {
     String DOUBLE = "double";
 
 
-    /*other*/
+    /**other*/
     String MS = "ms";
 
 }

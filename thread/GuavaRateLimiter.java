@@ -7,12 +7,14 @@ import util.Constants;
 import java.util.concurrent.ExecutorService;
 
 /**
+ * Guava 限流器[令牌桶算法]
+ * 漏桶算法
+ *
  * @author zqw
  * @date 2022/2/7
  */
 @SuppressWarnings("all")
-public class GuavaRateLimiter {
-
+class GuavaRateLimiter {
     public static void main(String[] args) {
         // 限流器: 2个请求/秒
         RateLimiter limiter = RateLimiter.create(2.0);
@@ -20,15 +22,15 @@ public class GuavaRateLimiter {
             long prev = System.nanoTime();
         };
         ExecutorService pool = CustomThreadPool.newFixedThreadPool(10);
-        for (int i = 0; i < Constants.TEN; i++) {
+        for (int i = 0; i < Constants.NUM_100; i++) {
             limiter.acquire();
             pool.execute(() -> {
                 long cur = System.nanoTime();
-                System.out.println((cur - ref.prev) / 1000_000 + "ms");
+                // 基本都接近500ms
+                System.out.println((cur - ref.prev) / 1_000_000 + "ms");
                 ref.prev = cur;
             });
         }
         pool.shutdown();
-
     }
 }

@@ -6,9 +6,11 @@ package thinking.genericity;
  * @author zqw
  * @date 2021/4/9
  */
+
 // Whether you have a generic method or not is independent of
 // whether the class you are in has a generic method.
-public class GenericMethod {
+
+class GenericMethod {
    public <T> void f(T x) {
       System.out.println(x.getClass().getName());
    }

@@ -333,8 +333,9 @@ public final class StdIn {
       }
 
       String result = scanner.useDelimiter(EVERYTHING_PATTERN).next();
-      // not that important to reset delimeter, since now scanner is empty
-      scanner.useDelimiter(WHITESPACE_PATTERN); // but let's do it anyway
+      // not that important to reset delimiter, since now scanner is empty
+      // but let's do it anyway
+      scanner.useDelimiter(WHITESPACE_PATTERN);
       return result;
    }
 

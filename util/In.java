@@ -667,7 +667,7 @@ public final class In {
             in = new In(urlName);
             System.out.println(in.readAll());
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         System.out.println();
 

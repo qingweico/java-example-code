@@ -4,6 +4,8 @@ package thread.atmoic;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 线程间数据的不可见性
+ *
  * @author zqw
  * @date 2021/1/30
  */
@@ -15,6 +17,7 @@ class NoVisibility {
         @Override
         public void run() {
             while (!ready) {
+                // remove!! The program will be not ending!
                 Thread.yield();
             }
             System.out.println(num);

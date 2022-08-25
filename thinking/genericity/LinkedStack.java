@@ -29,6 +29,7 @@ public class LinkedStack<T> {
 
     // End Sentinel
     // head insert
+
     private Node top = new Node();
 
     public void push(T item) {

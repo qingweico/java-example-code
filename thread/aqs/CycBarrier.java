@@ -2,13 +2,13 @@ package thread.aqs;
 
 import thread.pool.CustomThreadPool;
 import util.Constants;
+import util.Print;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 
 /**
- *
  * @author zqw
  * @date 2020/12/19 {@link CyclicBarrierE}
  */
@@ -22,8 +22,8 @@ class CycBarrier {
             int finalI = i;
             pool.execute(() -> {
                 int count = 10;
-                while(count-- > 0) {
-                    System.out.println(Thread.currentThread().getName() + ": " + finalI);
+                while (count-- > 0) {
+                    Print.grace(Thread.currentThread().getName(), finalI);
                     try {
                         // A thread on the method calling await will block.
                         cyclicBarrier.await();

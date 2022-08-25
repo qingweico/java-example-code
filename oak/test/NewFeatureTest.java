@@ -1,4 +1,4 @@
-package oak;
+package oak.test;
 
 
 import org.testng.annotations.Test;

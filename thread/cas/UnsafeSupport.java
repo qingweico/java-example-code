@@ -1,6 +1,7 @@
 package thread.cas;
 
 import sun.misc.Unsafe;
+import util.process.ProcessExecutor;
 
 import java.lang.reflect.Field;
 
@@ -33,6 +34,7 @@ public class UnsafeSupport {
     /**
      *
      * @param interval the waiting interval;  unit: ms
+     * {@link ProcessExecutor#waitFor(long)}
      */
     public static void shortWait(long interval) {
         long start = System.currentTimeMillis();

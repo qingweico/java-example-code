@@ -30,6 +30,7 @@ class Article32 {
     }
 
     // UNSAFE -- Exposes a reference to its generic parameter array!
+
     @NotSafeType
     static <T> T[] toArray(T... args) {
         return args;
@@ -63,6 +64,7 @@ class Article32 {
     // Safe method with a generic varargs parameter
     // @SafeVarargs: this is valid only in static and final instance methods in JDK8!
     // otherwise, it is also legal in private instance method in JDK9.
+
     @SafeVarargs
     static <T> List<T> flatten(List<? extends T>... lists) {
         List<T> result = new ArrayList<>();
@@ -73,6 +75,7 @@ class Article32 {
     }
 
     // List as a typesafe alternative to a generic varargs parameter
+
     @SafeType
     static <T> List<T> flatten(List<List<? extends T>> lists) {
         List<T> result = new ArrayList<>();

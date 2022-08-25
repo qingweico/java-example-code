@@ -121,6 +121,7 @@ class SuperWildCard {
         // However, you cannot get a reference to an Integer, you can only accept it using Object.
         // It can't be compiled
         // Integer x = list.getFirst();
+
         // good
         Object o = linkedList.getFirst();
 

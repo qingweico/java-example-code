@@ -2,6 +2,7 @@ package thread.aqs;
 
 import thread.pool.CustomThreadPool;
 import util.Constants;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
@@ -35,7 +36,7 @@ class SemaphoreE {
                 } finally {
                     // Release
                     semaphore.release();
-                    print(Thread.currentThread().getName() + " pass!");
+                    Print.grace(Thread.currentThread().getName(), "pass!");
                 }
             });
         }

@@ -2,6 +2,7 @@ package thread.aqs;
 
 import thread.pool.CustomThreadPool;
 import util.Constants;
+import util.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -91,6 +92,6 @@ public class Mutex extends AbstractQueuedSynchronizer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("shared: " + shared);
+        Print.grace("shared", shared);
     }
 }

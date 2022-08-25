@@ -38,13 +38,13 @@ class MonetaryCalculation {
 
         // Good
         // The following program is a copy of the previous one,using BigDecimal instead of a double
-        final BigDecimal TEN_CENTS = new BigDecimal(".10");
+        final BigDecimal tenCents = new BigDecimal(".10");
 
         itemsBought = 0;
         // It uses the String constructor for BigDecimal instead of the double constructor.
         // This is necessary to avoid introducing incorrect values into the calculation.
         BigDecimal decimalFunds = new BigDecimal("1.00");
-        for (BigDecimal price = TEN_CENTS; decimalFunds.compareTo(price) >= 0; price = price.add(TEN_CENTS)) {
+        for (BigDecimal price = tenCents; decimalFunds.compareTo(price) >= 0; price = price.add(tenCents)) {
             decimalFunds = decimalFunds.subtract(price);
             itemsBought++;
         }

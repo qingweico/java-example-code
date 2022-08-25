@@ -1,5 +1,6 @@
 package effective;
 
+
 import java.util.*;
 
 /**
@@ -8,10 +9,14 @@ import java.util.*;
  * @author zqw
  * @date 2021/3/3
  */
-public class Article18 {
+class Article18 {
+    public static void main(String[] args) {
+
+    }
 }
 
 // Broken! - Inappropriate use of inheritance!
+
 class InstrumentedHashSet<E> extends HashSet<E> {
     private int addCount = 0;
 
@@ -50,6 +55,7 @@ class InstrumentedHashSet<E> extends HashSet<E> {
 
 
 // Wrapper class - uses composition in place of inheritance
+
 class InstrumentedHashSetUseComposition<E> extends ForwardingSet<E> {
     private int addCount = 0;
 
@@ -81,7 +87,8 @@ class InstrumentedHashSetUseComposition<E> extends ForwardingSet<E> {
     }
 }
 
-// Reusable forwarding class
+/*Reusable forwarding class*/
+
 class ForwardingSet<E> implements Set<E> {
 
     private final Set<E> s;

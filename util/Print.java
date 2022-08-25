@@ -3,6 +3,8 @@ package util;
 import util.constants.Symbol;
 
 import java.io.PrintStream;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -91,12 +93,19 @@ public class Print {
         }
     }
 
+    public static void toPrint(Collection<?> c) {
+        for (Object o : c) {
+            System.out.println(o);
+        }
+    }
+
     /**
      * Print Gracefully  k : v
-     * @param arg k
+     *
+     * @param arg   k
      * @param value v
      */
-    public static void grace(String arg, Object value) {
+    public static void grace(Object arg, Object value) {
         System.out.printf("%s %s %s%n", arg, Symbol.COLON, value);
     }
 }

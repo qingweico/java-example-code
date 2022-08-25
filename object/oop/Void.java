@@ -1,4 +1,4 @@
-package object;
+package object.oop;
 
 /**
  * Void: The void's wrapper class

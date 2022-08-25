@@ -1,6 +1,7 @@
 package thinking.genericity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,24 +11,21 @@ import java.util.List;
  * @author zqw
  * @date 2021/4/9
  */
-public class GenericVarargs {
+class GenericVarargs {
 
    // Arrays.asList();
    // Heap Pollution is possible when a mutable generic
    // parameter points to a non-generic parameter!
+
    @SafeVarargs
    @SuppressWarnings("varargs")
    public static <T> List<T> markList(T ...args) {
-      List<T> result = new ArrayList<>();
-      for(T item : args) {
-         result.add(item);
-      }
-      return result;
+      return new ArrayList<>(Arrays.asList(args));
    }
 
    public static void main(String[] args) {
       // Bad!
-      List ls = markList("A",2);
+      List<Object> ls = markList("A",2);
       System.out.println(ls);
       List<String> l = markList("A");
       System.out.println(l);

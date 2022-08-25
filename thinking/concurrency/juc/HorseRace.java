@@ -13,7 +13,7 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/2/1
  */
-public class HorseRace {
+class HorseRace {
     static final int FINISH_LINE = 75;
     private final List<Horse> horses = new ArrayList<>();
     private final ExecutorService exec = Executors.newCachedThreadPool();
@@ -88,7 +88,8 @@ class Horse implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 synchronized (this) {
-                    strides += random.nextInt(10); //Producer 0 1 or 2
+                    // Producer 0 1 or 2
+                    strides += random.nextInt(3);
                 }
                 barrier.await();
             }

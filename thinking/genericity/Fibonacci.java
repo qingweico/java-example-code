@@ -6,7 +6,9 @@ import util.Generator;
  * @author zqw
  * @date 2021/4/9
  */
-// Generate a Fibonacci sequence
+
+/*Generate a Fibonacci sequence*/
+
 public class Fibonacci implements Generator<Integer> {
 
    private int count = 0;

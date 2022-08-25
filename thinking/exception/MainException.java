@@ -7,9 +7,10 @@ import java.io.IOException;
  * @author zqw
  * @date 2021/2/7
  */
-public class MainException {
+class MainException {
 
     // Pass all exception to the console:
+
     public static void main(String[] args) throws IOException {
         // Open the file
         FileInputStream is =

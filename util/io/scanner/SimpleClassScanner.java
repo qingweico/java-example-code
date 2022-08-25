@@ -130,13 +130,13 @@ public class SimpleClassScanner {
     private URL resolveClassPathUrl(URL resourceUrl, String packageResourceName) {
         String resource = resourceUrl.toExternalForm();
         String classPath = StringUtils.substringBefore(resource, packageResourceName);
-        URL classPathURL;
+        URL classPathUrl;
         try {
-            classPathURL = new URL(classPath);
+            classPathUrl = new URL(classPath);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        return classPathURL;
+        return classPathUrl;
     }
 
 

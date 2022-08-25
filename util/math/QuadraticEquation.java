@@ -1,4 +1,4 @@
-package oak;
+package util.math;
 
 import java.util.Scanner;
 

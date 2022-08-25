@@ -1,5 +1,6 @@
 package algorithm.heap;
 
+import util.RandomDataGenerator;
 import util.Tools;
 import org.testng.annotations.Test;
 
@@ -13,9 +14,10 @@ public class HeapTest {
     @Test
     public void testHeap() {
         MaxHeap<Integer> maxHeap = new MaxHeap<>();
-        int count = 100_000;
-        for (int i = 0; i < count; i++) {
-            maxHeap.add((int) (Math.random() * 1000000));
+        int size = 100_000;
+        int exclusive = 100_0000;
+        for (int i = 0; i < size; i++) {
+            maxHeap.add(RandomDataGenerator.randomInt(exclusive));
         }
         System.out.println(maxHeap.size());
         ArrayList<Integer> list = new ArrayList<>();

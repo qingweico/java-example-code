@@ -3,6 +3,7 @@ package jvm;
 import static util.Print.print;
 
 /**
+ * Java 虚拟机运行时内存空间大小
  * @author zqw
  * @date 2021/2/8
  */

@@ -31,6 +31,7 @@ class Article27 {
 
     // ArrayList#toArray(T[] a)
     // Adding local variable to reduce scope of @SuppressWarnings
+
     public <T> T[] toArray(T[] a) {
         if (a.length < size) {
             // This cast is correct because the array we're creating

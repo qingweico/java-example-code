@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 import static util.Print.print;
 
 /**
+ * Java 虚拟机类加载机制
+ *
  * The JVM ensures that classes are loaded into memory
  * only once in a multithreading environment.
  *
