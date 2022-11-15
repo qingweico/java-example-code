@@ -9,8 +9,8 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import java.util.concurrent.TimeUnit;
 
 /**
- * JMH 官网地址 http://openjdk.java.net/projects/code-tools/jmh/
- * 官网案例 http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/
+ * JMH 官网地址 <a href="http://openjdk.java.net/projects/code-tools/jmh/"></a>
+ * 官网案例 <a href="http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/"></a>
  *
  * @author zqw
  * @date 2022/8/18

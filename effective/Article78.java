@@ -1,5 +1,6 @@
 package effective;
 
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -18,6 +19,7 @@ class Article78 {
 
     }
 }
+
 class NotStopThread {
     // Cooperative thread termination with a volatile field.
     // Or use the volatile keyword to modify stopRequested, Although the volatile
@@ -39,7 +41,7 @@ class NotStopThread {
         });
         // The virtual machine makes improvements to the code, which are called hoisting,
         // but it is a liveness failure!
-        if(!stopRequested) {
+        if (!stopRequested) {
             while (true) {
                 i++;
             }
@@ -53,7 +55,10 @@ class NotStopThread {
         // The program will not terminate!
     }
 }
-/** Properly synchronized cooperative thread terminate.*/
+
+/**
+ * Properly synchronized cooperative thread terminate.
+ */
 class StopThread {
     private static boolean stopRequested = false;
 
@@ -84,7 +89,7 @@ class StopThread {
 }
 
 class GenerateSerialNumber {
-    private static volatile int nextSerialNumber = 0;
+    private static volatile int NEXT_SERIAL_NUMBER = 0;
 
     // Broken! required to be synchronized!
     // because the problem is that the increment operator ++ is not atomic,
@@ -96,12 +101,16 @@ class GenerateSerialNumber {
     // which is a security failure.
 
     public static int generateSerialNumber() {
-        return nextSerialNumber++;
+        return NEXT_SERIAL_NUMBER++;
     }
 
-    private static final AtomicLong nextSerialNum = new AtomicLong();
+    private static final AtomicLong AL = new AtomicLong();
 
     public static long generateSerialNum() {
-        return nextSerialNum.getAndIncrement();
+        return AL.getAndIncrement();
+    }
+
+    public static void main(String[] args) {
+
     }
 }

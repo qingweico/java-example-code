@@ -38,6 +38,7 @@ class Resource<T> {
     public void save(String path) throws IOException {
         var file = new File(path + this.id + ".txt");
         try (var objectOutStream = new ObjectOutputStream(new FileOutputStream(file))) {
+            System.out.println(data);
             objectOutStream.writeObject(this.data);
             objectOutStream.flush();
         }

@@ -15,6 +15,6 @@ import java.lang.annotation.Target;
  * @date 2022/7/20
  */
 @Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.SOURCE)
 public @interface Pass {
 }

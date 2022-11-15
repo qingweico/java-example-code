@@ -13,7 +13,7 @@ import java.util.Properties;
  */
 public class RedisClient {
 
-    private static final JedisPool jedisPool;
+    private static final JedisPool JEDIS_POOL;
 
     static {
         try {
@@ -21,6 +21,7 @@ public class RedisClient {
             Properties properties = new Properties();
             properties.load(is);
             String host = properties.getProperty("host");
+            Integer database = Integer.parseInt(properties.getProperty("database"));
             Integer timeout = Integer.parseInt(properties.getProperty("timeout"));
             String password = properties.getProperty("password");
             Integer port = Integer.parseInt(properties.getProperty("port"));
@@ -29,13 +30,13 @@ public class RedisClient {
             jedisPoolConfig.setMaxIdle(Integer.parseInt(properties.getProperty("max_idle")));
             jedisPoolConfig.setMaxWaitMillis(Integer.parseInt(properties.getProperty("max_wait")));
             jedisPoolConfig.setTestOnBorrow(Boolean.getBoolean(properties.getProperty("test_on_borrow")));
-            jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout, password);
+            JEDIS_POOL = new JedisPool(jedisPoolConfig, host, port, timeout, password, database);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public synchronized static Jedis getJedis() {
-        return jedisPool.getResource();
+        return JEDIS_POOL.getResource();
     }
 }

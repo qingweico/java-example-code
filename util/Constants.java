@@ -42,7 +42,7 @@ public interface Constants {
 
     String LOOP_BACK = "127.0.0.1";
 
-    // ############################# field type #############################
+    ///////////////  field type
 
     String STRING = "string";
     String BOOL = "boolean";
@@ -52,7 +52,11 @@ public interface Constants {
     String DOUBLE = "double";
 
 
-    /**other*/
+    /**
+     * other
+     */
     String MS = "ms";
+    /*http 请求 200 状态*/
+    Integer RESP_OK = 200;
 
 }

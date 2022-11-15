@@ -8,7 +8,7 @@ package util;
  * @see java.util.prefs.Preferences
  * @since 1.4
  */
-class Base64 {
+final class Base64 {
     /**
      * Translates the specified byte array into a Base64 string as per Preferences.put(byte[]).
      */
@@ -103,7 +103,7 @@ class Base64 {
      * Translates the specified "alternate representation" Base64 string into a byte array.
      *
      * @throws IllegalArgumentException or ArrayOutOfBoundsException if <tt>s</tt> is not a valid alternate
-     * representation Base64 string.
+     *                                  representation Base64 string.
      */
     static byte[] altBase64ToByteArray(String s) {
         return base64ToByteArray(s, true);
@@ -153,8 +153,8 @@ class Base64 {
                 result[outCursor++] = (byte) ((ch1 << 4) | (ch2 >> 2));
             }
         }
-        // assert inCursor == s.length()-missingBytesInLastGroup;
-        // assert outCursor == result.length;
+        assert inCursor == s.length() - missingBytesInLastGroup;
+        assert outCursor == result.length;
         return result;
     }
 

@@ -1,5 +1,7 @@
 package algorithm.sort;
 
+import annotation.Immutable;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,6 +9,7 @@ import java.util.stream.Collectors;
  * @author zqw
  * @date 2021/10/16
  */
+@Immutable
 public class QuickSort implements IMutableSorter{
    @Override
    public List<Integer> sort(List<Integer> ci) {

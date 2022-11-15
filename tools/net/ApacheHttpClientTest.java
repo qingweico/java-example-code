@@ -93,7 +93,7 @@ public class ApacheHttpClientTest {
     }
 
     /**
-     * 实用 Java.net.URLConnection
+     * 使用 Java.net.URLConnection
      *
      * @param url         发送请求的 URL
      * @param param       请求参数, 请求参数应该是 name1=value1&name2=value2 的形式
@@ -132,7 +132,7 @@ public class ApacheHttpClientTest {
 
     @Test
     public void sendGet() {
-        sendGet("https://whois.pconline.com.cn/ipJson.jsp", "json=true", Charset.defaultCharset().toString());
+        sendGet("https://whois.pconline.com.cn/ipJson.jsp", "json=true", Charset.forName("gbk").toString());
     }
 
     @Test

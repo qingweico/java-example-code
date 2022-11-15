@@ -1,5 +1,8 @@
 package object.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import util.constants.Symbol;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -30,7 +33,7 @@ public class Student implements Serializable {
     }
 
     public String get() {
-        return this.name + ": " + this.score;
+        return this.name + Symbol.COLON + this.score;
     }
 
     public String getName() {
@@ -56,5 +59,13 @@ public class Student implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(score, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

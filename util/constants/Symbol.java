@@ -55,4 +55,12 @@ public interface Symbol {
      * WHITE_SPACE: " "
      */
     String WHITE_SPACE = " ";
+    /**
+     * QUESTION: "?"
+     */
+    String QUESTION = "?";
+    /**
+     * COMMA: ","
+     */
+    String COMMA = ",";
 }

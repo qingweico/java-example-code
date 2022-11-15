@@ -108,7 +108,7 @@ public class ProcessExecutor {
      *
      * @param seconds specified seconds
      */
-    public void waitFor(long seconds) {
+    public static void waitFor(long seconds) {
         try {
             Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {

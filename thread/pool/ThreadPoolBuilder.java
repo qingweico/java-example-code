@@ -26,7 +26,7 @@ public class ThreadPoolBuilder {
     public static ExecutorService single(boolean daemon) {
         return custom(1).corePoolSize(1)
                 .maxPoolSize(1)
-                .keepAliveTime(1)
+                .keepAliveTime(60L)
                 .allowCoreThreadTimeOut(true)
                 .threadFactory(CustomThreadFactory.guavaThreadFactory(daemon))
                 .builder();

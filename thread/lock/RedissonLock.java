@@ -1,5 +1,6 @@
 package thread.lock;
 
+import frame.redis.DistributedLock;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -12,6 +13,11 @@ import java.util.concurrent.ExecutorService;
 /**
  * 基于 Redisson 的 Redis 分布式锁
  * {@code 理解Paxos;Redis 提供了Raft(Paxos 简化版本)一致性算法}
+ * 基于 redis setnx 和 lua 实现 {@link DistributedLock}
+ * Redisson 分布式锁原理
+ * 可重入: 利用 hash 结构记录线程 id 和重入次数
+ * 可重试: 利用信号量和发布订阅功能实现等待,唤醒,获取锁失败的重试机制
+ * 超时续约: 利用 watchDag 隔一段时间,重置超时时间
  *
  * @author zqw
  * @date 2022/3/13

@@ -2,9 +2,11 @@ package coretech2.network;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 
 /**
+ *
+ * InetAddress 测试
+ *
  * @author zqw
  * @date 2022/8/6
  */
@@ -27,8 +29,6 @@ class InetAddressTest {
         }
         System.out.println("##### localhost #####");
         System.out.println(InetAddress.getLocalHost());
-
-
-
+        System.out.println(InetAddress.getLocalHost().getHostAddress());
     }
 }

@@ -2,6 +2,7 @@ package thread.coroutines;
 
 import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.SuspendExecution;
+import util.Print;
 
 /**
  * Quasar 基于 Java instrument 技术
@@ -15,7 +16,7 @@ class SimpleCoroutines {
         Fiber<Void> fiber = new Fiber<>() {
             @Override
             protected Void run() throws SuspendExecution, InterruptedException {
-                System.out.println(Thread.currentThread().getName() + ": " + "run");
+                Print.grace(Thread.currentThread().getName(), "run");
                 return null;
             }
         };

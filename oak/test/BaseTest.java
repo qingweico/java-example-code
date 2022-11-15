@@ -4,15 +4,17 @@ import cn.hutool.Hutool;
 import cn.hutool.core.collection.EnumerationIter;
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.util.StrUtil;
-import jdk.internal.reflect.Reflection;
 import lombok.extern.slf4j.Slf4j;
+import object.entity.User;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 import util.Constants;
+import util.ObjectFactory;
 
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 更多测试请参考微基准测试工具jmh
@@ -93,6 +95,7 @@ public final class BaseTest {
         System.out.println(Comparable.class.isAssignableFrom(Integer.class));
         System.out.println(System.getProperty("java.class.path"));
     }
+
     @Test
     public void huTool() {
         Hutool.printAllUtils();
@@ -104,6 +107,7 @@ public final class BaseTest {
                 (clazz) -> (!clazz.isInterface()));
         classes.forEach(System.out::println);
     }
+
     @Test
     public void urlIter() {
         EnumerationIter<URL> resourceIter = ResourceUtil.getResourceIter("effective");
@@ -113,8 +117,27 @@ public final class BaseTest {
         }
         System.out.println(this.getClass().getClassLoader().getResource("effective"));
     }
+
     @Test
     public void systemClassLoader() {
         System.out.println(ClassLoader.getSystemClassLoader());
+    }
+
+    @Test
+    public void timeUnit() {
+        // 600s 将给定参数 转换为 unit 相对应的单位的秒数
+        System.out.println(TimeUnit.MINUTES.toSeconds(10));
+    }
+
+    @Test
+    public void toStr() {
+        User user = ObjectFactory.create(User.class, true);
+        String res = ToStringBuilder.reflectionToString(user);
+        System.out.println(res);
+    }
+
+    @Test
+    public void guavaCache() {
+        // GuavaCache 是一套非常完善的本地缓存机制(JVM缓存)
     }
 }

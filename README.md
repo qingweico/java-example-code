@@ -3,7 +3,7 @@
 ![APM](https://img.shields.io/apm/l/vim-mode)
 ![](https://img.shields.io/static/v1?label=tools&message=JDK14&color=brightlight)
 ![WordPress Theme Last Updated](https://img.shields.io/wordpress/theme/last-updated/twentyseventeen)
-![](https://img.shields.io/static/v1?label=linenumber&message=33212&color=orange)
+![](https://img.shields.io/static/v1?label=linenumber&message=49069&color=orange)
 
 - Thinking in Java
 - Effective Java

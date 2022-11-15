@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * The field or method to which this annotation is applied can only be accessed
  * when holding a particular lock, which may be a built-in (synchronization) lock,
  * or may be an explicit java.util.concurrent.Lock.
- *
+ * <p>
  * The argument determines which lock guards the annotated field or method:
  * <ul>
  * <li>

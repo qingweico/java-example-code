@@ -1,12 +1,11 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadPoolBuilder;
 import util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,15 +31,19 @@ import java.util.concurrent.TimeUnit;
  * ObjectMonitor: JVM C++ an object include: WaitSet, EntryList, OwnerThread, recursions etc.
  * monitor: 管程; 监视器 在Hotspot中由ObjectMonitor实现 {@code ObjectMonitor.cpp} 每个对象都具有一个
  * ObjectMonitor对象.
+ *
  * @author zqw
  * @date 2021/6/27
  */
 class SyncObjectMonitor {
     static List<Runnable> list = new ArrayList<>();
     static final Object O = new Object();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 10, true);
+    static ExecutorService pool = ThreadPoolBuilder.custom()
+            .preStartAllCore(true)
+            .isEnableMonitor(true)
+            .builder();
+
     public static void main(String[] args) {
-        CustomThreadPool.monitor((ThreadPoolExecutor)pool);
         for (int i = 0; i < Constants.TEN; i++) {
             list.add(() -> {
                 // Don't get lock and enter EntryList

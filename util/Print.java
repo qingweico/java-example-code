@@ -3,10 +3,7 @@ package util;
 import util.constants.Symbol;
 
 import java.io.PrintStream;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author zqw
@@ -89,7 +86,8 @@ public class Print {
         }
         Set<? extends Map.Entry<?, ?>> entrySet = map.entrySet();
         for (Map.Entry<?, ?> entry : entrySet) {
-            System.out.printf("[key: %s, value: %s]%n", entry.getKey(), entry.getValue());
+            System.out.printf("[key %s %s%s value %s %s]%n",
+                    Symbol.COLON, entry.getKey(), Symbol.COMMA, Symbol.COLON, entry.getValue());
         }
     }
 
@@ -107,5 +105,14 @@ public class Print {
      */
     public static void grace(Object arg, Object value) {
         System.out.printf("%s %s %s%n", arg, Symbol.COLON, value);
+    }
+
+    /**
+     * 打印数组中的元素
+     *
+     * @param e 数组 e
+     */
+    public static <T> void printArray(T[] e) {
+        System.out.println(Arrays.toString(e));
     }
 }

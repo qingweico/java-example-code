@@ -1,4 +1,5 @@
 package annotation;
+
 import java.lang.annotation.*;
 
 /*
@@ -10,7 +11,6 @@ import java.lang.annotation.*;
  * Any republication or derived work distributed in source code form
  * must include this copyright and license notice.
  */
-
 
 
 /**
@@ -28,6 +28,7 @@ import java.lang.annotation.*;
  * <p>
  * Immutable objects are inherently thread-safe; they may be passed between threads or
  * published without synchronization.
+ *
  * @author Brian Goetz
  * @author Tim Peierls
  */

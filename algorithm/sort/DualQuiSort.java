@@ -5,6 +5,7 @@ import util.Tools;
 import java.util.Random;
 
 /**
+ * 双路快排
  * @author zqw
  * @date 2021/10/27
  */
