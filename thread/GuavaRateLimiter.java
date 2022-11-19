@@ -2,7 +2,7 @@ package thread;
 
 import com.google.common.util.concurrent.RateLimiter;
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
 

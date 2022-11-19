@@ -17,7 +17,7 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
-import util.Constants;
+import util.constants.Constants;
 import util.DateUtil;
 
 import java.util.List;
@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2022/1/28
  */
 public class NettyServerTest {
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
     private static final String HOST = Constants.LOOP_BACK;
 
     @Test

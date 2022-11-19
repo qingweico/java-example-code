@@ -1,6 +1,6 @@
 package jvm;
 
-import util.Constants;
+import util.constants.Constants;
 import util.Tools;
 
 import java.util.concurrent.TimeUnit;

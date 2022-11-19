@@ -1,7 +1,7 @@
 package thinking.concurrency.sync;
 
 import thread.pool.ThreadPoolBuilder;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
 

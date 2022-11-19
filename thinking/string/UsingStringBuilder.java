@@ -1,6 +1,6 @@
 package thinking.string;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.Random;
 

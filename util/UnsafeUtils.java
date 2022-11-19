@@ -1,10 +1,8 @@
 package util;
 
 import com.google.common.collect.Maps;
-import object.entity.User;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import sun.misc.Unsafe;
-import util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.security.AccessController;

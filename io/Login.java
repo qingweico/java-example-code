@@ -14,7 +14,7 @@ import static util.Print.*;
  * @date 2020/03/12
  */
 
-public class Login {
+class Login {
     static Connection connection;
 
     static {

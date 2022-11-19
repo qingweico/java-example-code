@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import util.constants.PathConstants;
+import util.encoding.Base64;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

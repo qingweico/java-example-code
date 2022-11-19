@@ -2,7 +2,7 @@ package thread.queue;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.DelayQueue;

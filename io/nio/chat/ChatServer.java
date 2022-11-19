@@ -1,6 +1,6 @@
 package io.nio.chat;
 
-import util.Constants;
+import util.constants.Constants;
 import util.DateUtil;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.Set;
  * @date 2022/1/26
  */
 public class ChatServer {
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
 

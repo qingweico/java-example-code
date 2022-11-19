@@ -1,6 +1,6 @@
 package util.math;
 
-import util.Constants;
+import util.constants.Constants;
 
 /**
  * @author zqw

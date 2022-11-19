@@ -1,7 +1,7 @@
 package thread.queue;
 
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 import util.RandomDataGenerator;
 
 import java.util.concurrent.*;

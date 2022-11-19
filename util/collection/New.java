@@ -1,4 +1,4 @@
-package util;
+package util.collection;
 
 import java.util.*;
 

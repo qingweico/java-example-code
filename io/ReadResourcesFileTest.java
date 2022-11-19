@@ -137,5 +137,4 @@ public class ReadResourcesFileTest {
         String filePath = rootPath +  Symbol.BACKSLASH + fileName;
         getFileContent(filePath);
     }
-
 }

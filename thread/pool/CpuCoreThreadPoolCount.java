@@ -1,7 +1,7 @@
 package thread.pool;
 
 import lombok.extern.slf4j.Slf4j;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.*;
 import java.util.ArrayList;

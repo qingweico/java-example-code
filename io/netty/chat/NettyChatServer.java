@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.concurrent.GlobalEventExecutor;
-import util.Constants;
+import util.constants.Constants;
 import util.DateUtil;
 
 /**
@@ -18,7 +18,7 @@ import util.DateUtil;
  * @date 2022/1/29
  */
 public class NettyChatServer {
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
 
     public void start() {
         EventLoopGroup boosGroup = new NioEventLoopGroup(1);

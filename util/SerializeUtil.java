@@ -1,5 +1,7 @@
 package util;
 
+import object.entity.User;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class SerializeUtil {
      * 序列化
      *
      * @param object 序列化对象
-     * @return 字节数组
+     * @return 序列化后的字节数组
      */
     public static byte[] serialize(Object object) {
         if (object == null) {
@@ -43,7 +45,7 @@ public class SerializeUtil {
      * 反序列化
      *
      * @param bytes 字节数组
-     * @return 对象
+     * @return 反序列化后得到的对象
      */
     public static Object deserialize(byte[] bytes) {
         if (bytes == null) {
@@ -68,7 +70,7 @@ public class SerializeUtil {
      * 序列化 list 集合
      *
      * @param list list 集合
-     * @return 字节数组
+     * @return 序列化后的字节数组
      */
     public static byte[] serializeList(List<?> list) {
 
@@ -97,8 +99,8 @@ public class SerializeUtil {
     /**
      * 反序列化 list 集合
      *
-     * @param  bytes 字节数组
-     * @return //
+     * @param bytes 字节数组
+     * @return List<T>
      */
     public static <T> List<T> deserializeList(byte[] bytes, Class<T> t) {
         if (bytes == null) {
@@ -112,6 +114,7 @@ public class SerializeUtil {
             bais = new ByteArrayInputStream(bytes);
             ois = new ObjectInputStream(bais);
             while (bais.available() > 0) {
+                @SuppressWarnings("unchecked")
                 T obj = (T) ois.readObject();
                 if (obj == null) {
                     break;
@@ -140,5 +143,24 @@ public class SerializeUtil {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        // Object
+        System.out.println("Object---------------------------");
+        User user = ObjectFactory.create(User.class, true);
+        byte[] bytes = serialize(user);
+        System.out.println(deserialize(bytes));
+
+        System.out.println("List---------------------------");
+        // List
+        List<User> list = new ArrayList<>();
+        int size = 5;
+        for (int i = 0; i < size; i++) {
+            list.add(ObjectFactory.create(User.class, true));
+        }
+        bytes = serializeList(list);
+        List<User> users = deserializeList(bytes, User.class);
+        users.forEach(System.out::println);
     }
 }

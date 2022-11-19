@@ -1,6 +1,4 @@
-package util;
-
-import util.io.BinaryStdOut;
+package util.io;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

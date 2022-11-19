@@ -17,7 +17,7 @@ import java.util.Set;
  * @date 2021/10/18
  * @see NioPlainServer
  */
-public class NioSelectorServer {
+class NioSelectorServer {
     public static void serve(int port) throws IOException {
         ServerSocketChannel channel = ServerSocketChannel.open();
         ServerSocket socket = channel.socket();

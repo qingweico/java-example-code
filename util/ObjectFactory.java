@@ -2,6 +2,7 @@ package util;
 
 import annotation.Ignore;
 import lombok.extern.slf4j.Slf4j;
+import util.constants.Constants;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -65,6 +66,9 @@ public class ObjectFactory {
                 }
                 if (Constants.DATE.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.randomDate());
+                }
+                if (Constants.DOUBLE.equalsIgnoreCase(field.getType().getSimpleName())) {
+                    field.set(instance, RandomDataGenerator.randomDouble());
                 }
             } catch (IllegalAccessException e) {
                 log.error("populate {} exception!, {}", instance, e.getMessage());

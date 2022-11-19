@@ -9,12 +9,11 @@ import util.constants.Symbol;
 import java.lang.reflect.*;
 import java.util.Date;
 
-import static junit.framework.Assert.assertEquals;
-
 /**
  * ---------------------------------- 反射工具类 ----------------------------------
  * 反射调用会带来不少的性能开销 原因有四个:
  * 变长参数方法导致的Object数组,基本类型的拆箱和装箱,方法内联,以及本地方法调用
+ * @author zqw
  */
 @Slf4j
 public class ReflectUtils {
@@ -287,8 +286,8 @@ public class ReflectUtils {
      * 如public UserDao extends HibernateDao<User,Long>
      *
      * @param clazz clazz The class to introspect
-     * @param index the Index of the generic ddeclaration,start from 0.
-     * @return the index generic declaration, or Object.class if cannot be determined
+     * @param index the Index of the generic declaration,start from 0.
+     * @return the index generic declaration, or `Object.class` if you cannot be determined
      */
     @SuppressWarnings("unchecked")
     public static <T> Class<T> getClassGenericType(final Class<T> clazz, final int index) {

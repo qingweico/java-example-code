@@ -1,6 +1,6 @@
 package collection.map;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

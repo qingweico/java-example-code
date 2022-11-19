@@ -2,7 +2,7 @@ package thinking.concurrency.cooperation;
 
 import annotation.Pass;
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.Timer;
 import java.util.TimerTask;

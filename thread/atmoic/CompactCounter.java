@@ -1,7 +1,7 @@
 package thread.atmoic;
 
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 import util.Print;
 
 import java.util.concurrent.ExecutorService;

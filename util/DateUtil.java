@@ -31,7 +31,15 @@ public class DateUtil {
         return FastDateFormat.getInstance(pattern).format(new Date());
     }
 
-    public static String safeDateFormat() {
+    public static String format(Date date) {
+        return FastDateFormat.getInstance(DEFAULT_FORMATTER).format(date);
+    }
+
+    public static String format(Date date, String pattern) {
+        return FastDateFormat.getInstance(pattern).format(date);
+    }
+
+    public static String tlFormat() {
         try {
             DateFormat dateFormat = TL.get();
             return dateFormat.format(new Date());
@@ -40,4 +48,8 @@ public class DateUtil {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println(parse("1999-01-01 00:00:00"));
+        System.out.println(tlFormat());
+    }
 }

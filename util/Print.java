@@ -1,5 +1,6 @@
 package util;
 
+import util.constants.Constants;
 import util.constants.Symbol;
 
 import java.io.PrintStream;
@@ -72,6 +73,10 @@ public class Print {
     public static PrintStream
     printf(String format, Object... args) {
         return System.out.printf(format, args);
+    }
+
+    public static void time(long time) {
+        printf("%s %s %d %s", "time", Symbol.COLON, time, Constants.MS);
     }
 
     /**

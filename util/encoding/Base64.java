@@ -1,4 +1,4 @@
-package util;
+package util.encoding;
 
 /**
  * Static methods for translating Base64 encoded strings to byte arrays and vice-versa.
@@ -8,7 +8,7 @@ package util;
  * @see java.util.prefs.Preferences
  * @since 1.4
  */
-final class Base64 {
+final public class Base64 {
     /**
      * Translates the specified byte array into a Base64 string as per Preferences.put(byte[]).
      */
@@ -21,7 +21,7 @@ final class Base64 {
      * uses an alphabet that does not contain the uppercase alphabetic characters, which makes it suitable for use in
      * situations where case-folding occurs.
      */
-    static String byteArrayToAltBase64(byte[] a) {
+    public static String byteArrayToAltBase64(byte[] a) {
         return byteArrayToBase64(a, true);
     }
 
@@ -60,8 +60,9 @@ final class Base64 {
                 result.append('=');
             }
         }
-        // assert inCursor == a.length;
-        // assert result.length() == resultLen;
+
+        // assert inCursor == a.length;result.length() == resultLen;
+
         return result.toString();
     }
 
@@ -105,7 +106,7 @@ final class Base64 {
      * @throws IllegalArgumentException or ArrayOutOfBoundsException if <tt>s</tt> is not a valid alternate
      *                                  representation Base64 string.
      */
-    static byte[] altBase64ToByteArray(String s) {
+    public static byte[] altBase64ToByteArray(String s) {
         return base64ToByteArray(s, true);
     }
 

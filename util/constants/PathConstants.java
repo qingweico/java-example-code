@@ -3,7 +3,7 @@ package util.constants;
 /**
  * Path Constants Definition
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public interface PathConstants {
 

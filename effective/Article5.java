@@ -1,6 +1,5 @@
 package effective;
 
-import util.Constants;
 import util.constants.Symbol;
 
 import java.util.ArrayList;

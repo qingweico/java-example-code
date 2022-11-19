@@ -1,7 +1,7 @@
 package thinking.concurrency.optimize;
 
 import thread.pool.CustomThreadPool;
-import util.Generated;
+import util.collection.Generated;
 import util.RandomGenerator;
 
 import java.util.concurrent.CountDownLatch;

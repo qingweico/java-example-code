@@ -2,7 +2,7 @@ package jcip;
 
 
 import thread.pool.ThreadPoolBuilder;
-import util.Constants;
+import util.constants.Constants;
 import util.Print;
 
 import java.util.concurrent.CountDownLatch;

@@ -11,7 +11,7 @@ import static util.Print.print;
 class Client {
     public static void main(String[] args) {
         String serveName = "localhost";
-        int port = Integer.parseInt("8848");
+        int port = Integer.parseInt("8080");
         try {
             System.out.println("Connect to " + serveName + ":" + port);
             Socket client = new Socket(serveName, port);

@@ -15,6 +15,7 @@ import java.util.*;
  */
 class WritingStudentScoreViaIo {
     public static void main(String[] args) throws IOException {
+        String filename = "data";
         TreeSet<StudentScore> set = new TreeSet<>((s1, s2) -> {
             int num = s2.getSum() - s1.getSum();
             return num == 0 ? s1.getName().compareTo(s2.getName()) : num;
@@ -24,7 +25,6 @@ class WritingStudentScoreViaIo {
         System.out.print("请输入您要录入的学生个数:");
         int number = input.nextInt();
         for (int i = 1; i <= number; i++) {
-            @SuppressWarnings("resource")
             Scanner sc = new Scanner(System.in);
             System.out.println("请输入第" + i + "个学生姓名:");
             String name = sc.nextLine();
@@ -42,7 +42,7 @@ class WritingStudentScoreViaIo {
             set.add(s);
         }
         System.out.println("--------------录入学生结束----------------");
-        BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("E:\\student.txt")));
+        BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename)));
         fw.write("姓名 语文成绩 数学成绩 英语成绩");
         fw.newLine();
         fw.flush();

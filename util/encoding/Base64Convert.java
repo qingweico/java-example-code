@@ -1,4 +1,4 @@
-package util;
+package util.encoding;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -49,9 +49,6 @@ public class Base64Convert {
         return strBase64;
     }
 
-
-
-
     /**
      * 将 base64 转为字节数组
      *
@@ -59,7 +56,7 @@ public class Base64Convert {
      * @return 节数组
      */
     public static byte[] base64ToByte(String strBase64) {
-        // 解码, 然后将字节转换为文件
+        // 解码,然后将字节转换为文件
         return BASE64.decode(strBase64);
     }
 }

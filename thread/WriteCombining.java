@@ -1,7 +1,7 @@
 package thread;
 
 import annotation.Pass;
-import util.Constants;
+import util.constants.Constants;
 
 /**
  * 4-byte buffer inside the CPU

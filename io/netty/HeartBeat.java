@@ -9,14 +9,14 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
-import util.Constants;
+import util.constants.Constants;
 
 /**
  * @author zqw
  * @date 2022/1/30
  */
 public class HeartBeat {
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
 
     public void listen() {
         EventLoopGroup boosGroup = new NioEventLoopGroup(Constants.ONE);

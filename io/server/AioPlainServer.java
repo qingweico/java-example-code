@@ -1,6 +1,6 @@
 package io.server;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -18,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
  * @author zqw
  * @date 2021/10/18
  */
-public class AioPlainServer {
+class AioPlainServer {
 
     public static void serve(int port) throws IOException {
         System.out.println("Listening for connections on port: " + port);
@@ -96,6 +96,6 @@ public class AioPlainServer {
     }
 
     public static void main(String[] args) throws IOException {
-        serve(Constants.QOMOLANGMA);
+        serve(Constants.NUM_8848);
     }
 }

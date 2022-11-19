@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
-import util.Constants;
+import util.constants.Constants;
 import util.DateUtil;
 
 import java.net.URI;
@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
  * @date 2022/1/28
  */
 public class HttpServerTest {
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
     private static final String FAVICON = "/favicon.ico";
 
     @Test

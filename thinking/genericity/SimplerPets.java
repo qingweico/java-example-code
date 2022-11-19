@@ -2,7 +2,7 @@ package thinking.genericity;
 
 import thinking.holding.pets.Person;
 import thinking.holding.pets.Pet;
-import util.New;
+import util.collection.New;
 
 import java.util.List;
 import java.util.Map;

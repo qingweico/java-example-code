@@ -3,7 +3,7 @@ package thread.cas;
 import org.junit.Test;
 import thinking.genericity.LinkedStack;
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

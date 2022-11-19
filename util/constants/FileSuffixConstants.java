@@ -3,7 +3,7 @@ package util.constants;
 /**
  * File Suffix Constants
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public interface FileSuffixConstants {
 
@@ -26,4 +26,6 @@ public interface FileSuffixConstants {
      * Class File suffix : ".class"
      */
     String CLASS = Symbol.DOT + Symbol.CLASS;
+
+    String TXT = Symbol.DOT + "txt";
 }

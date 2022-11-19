@@ -1,7 +1,7 @@
 package io.buffer;
 
 import org.junit.Test;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.*;
 import java.nio.ByteBuffer;

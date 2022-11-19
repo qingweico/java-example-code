@@ -1,7 +1,7 @@
 package jvm;
 
 import sun.misc.Unsafe;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

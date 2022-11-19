@@ -2,7 +2,7 @@ package jvm;
 
 import javassist.*;
 import org.junit.Test;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -59,7 +59,7 @@ public class CustomClassLoaderTest {
         byte[] bytes;
 
         private void connect() throws IOException {
-            try (var socket = new Socket(Constants.LOOP_BACK, Constants.QOMOLANGMA)) {
+            try (var socket = new Socket(Constants.LOOP_BACK, Constants.NUM_8848)) {
                 bytes = socket.getInputStream().readAllBytes();
             }
         }
@@ -106,7 +106,7 @@ public class CustomClassLoaderTest {
 
     @Test
     public void serve() throws IOException, CannotCompileException {
-        var serverSocket = new ServerSocket(Constants.QOMOLANGMA);
+        var serverSocket = new ServerSocket(Constants.NUM_8848);
         serverSocket.setSoTimeout(10000);
         var bytes = genClass();
         while (true) {

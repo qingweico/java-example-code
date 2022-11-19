@@ -7,7 +7,7 @@ import java.io.Reader;
  * @author zqw
  * @date 2020/03/06
  */
-public class LineNumReader {
+class LineNumReader {
     private Reader r;
     private int lineNumber;
 

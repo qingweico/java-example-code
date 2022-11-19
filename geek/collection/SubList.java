@@ -1,6 +1,6 @@
 package geek.collection;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

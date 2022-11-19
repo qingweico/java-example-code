@@ -5,7 +5,7 @@ import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 import thread.pool.CustomThreadFactory;
-import util.Constants;
+import util.constants.Constants;
 
 import java.nio.ByteBuffer;
 

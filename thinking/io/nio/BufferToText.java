@@ -1,7 +1,7 @@
 package thinking.io.nio;
 
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

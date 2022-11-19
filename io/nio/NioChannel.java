@@ -1,4 +1,6 @@
-package io;
+package io.nio;
+
+import util.Print;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,7 +14,7 @@ import java.nio.channels.FileChannel;
  * @author zqw
  * @date 2020/03/23
  */
-public class Nio {
+class NioChannel {
     public static void fastCopy(String src, String dist) throws IOException {
         // Get the input section stream of the source file
         FileInputStream fin = new FileInputStream(src);
@@ -45,6 +47,7 @@ public class Nio {
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();
         fastCopy(args[0], args[1]);
-        System.out.println("The time spent in this read and write is " + (System.currentTimeMillis() - startTime) + "ms");
+        long cost = System.currentTimeMillis() - startTime;
+        Print.time(cost);
     }
 }

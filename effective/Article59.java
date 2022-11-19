@@ -1,6 +1,6 @@
 package effective;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;

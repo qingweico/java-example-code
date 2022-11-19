@@ -16,7 +16,7 @@ import java.util.function.Supplier;
  * @author zqw
  */
 @Slf4j
-public class RowGen {
+class RowGen {
     Faker faker = new Faker(Locale.CHINA);
 
     static ArrayList<BookResourceLoader.Sentence> sentences = null;

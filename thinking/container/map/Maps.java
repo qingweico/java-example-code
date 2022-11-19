@@ -1,6 +1,6 @@
 package thinking.container.map;
 
-import util.CountingMapData;
+import thinking.util.CountingMapData;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,7 +1,7 @@
 package thread.aqs;
 
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 import util.Print;
 
 import java.util.concurrent.BrokenBarrierException;

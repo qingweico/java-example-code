@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
  * @author zqw
  * @date 2020/02/05
  */
-public class Url {
+class Url {
     public static void main(String[] args) throws IOException {
         URL url = new URL("https://www.taobao.com");
 

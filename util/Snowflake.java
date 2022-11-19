@@ -7,7 +7,6 @@ package util;
 public class Snowflake {
     private static final int NODE_SHIFT = 10;
     private static final int SEQ_SHIFT = 12;
-
     private static final short MAX_NODE = 1024;
     private static final short MAX_SEQUENCE = 4096;
 

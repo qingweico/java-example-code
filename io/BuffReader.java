@@ -8,16 +8,16 @@ import java.io.Reader;
  * @author zqw
  * @date 2020/03/05
  */
-public class BuffReader {
+class BuffReader {
     private final Reader r;
-    private final LineNumReader lineNumReader = new LineNumReader();
+    private final LineNumReader lnr = new LineNumReader();
 
     public BuffReader(Reader r) {
         this.r = r;
     }
 
     public String readLine() throws IOException {
-       return lineNumReader.getString(r);
+       return lnr.getString(r);
     }
 
     @Override

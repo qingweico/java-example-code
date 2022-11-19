@@ -1,7 +1,7 @@
 package io.server;
 
 import com.github.javafaker.Faker;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -16,12 +16,12 @@ import static util.Print.print;
  * @author zqw
  * @date 2021/10/20
  */
-public class TestWebServePressure {
+class TestWebServePressure {
     public static void main(String[] args) throws IOException {
         var pool = new ForkJoinPool();
         ArrayList<String> list = new ArrayList<>();
         var faker = new Faker();
-        try (var serverSocket = new ServerSocket(Constants.QOMOLANGMA)) {
+        try (var serverSocket = new ServerSocket(Constants.NUM_8848)) {
             serverSocket.setSoTimeout(Constants.NUM_100000);
             while (true) {
                 var clientSocket = serverSocket.accept();

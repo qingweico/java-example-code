@@ -1,6 +1,7 @@
-package util;
+package util.io;
 
 import lombok.extern.slf4j.Slf4j;
+import util.constants.Constants;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
@@ -67,6 +68,13 @@ public class FileOperation {
         }
     }
 
+    /**
+     * 返回字符串中第一个字母的索引
+     *
+     * @param s 字符串
+     * @param start 起始位置
+     * @return "13llo, 0" => 2
+     */
     private static int firstCharacterIndex(String s, int start) {
 
         for (int i = start; i < s.length(); i++) {
@@ -76,6 +84,7 @@ public class FileOperation {
         }
         return s.length();
     }
+
 
     public static void copyFileByStream(File source, File dest) {
         try (InputStream is = new FileInputStream(source); OutputStream os = new FileOutputStream(dest)) {

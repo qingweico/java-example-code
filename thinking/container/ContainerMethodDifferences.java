@@ -1,6 +1,6 @@
 package thinking.container;
 
-import util.Sets;
+import util.collection.SetUtils;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -40,7 +40,7 @@ class ContainerMethodDifferences {
     difference(Class<?> superset, Class<?> subset) {
         System.out.print(superset.getSimpleName() +
                 " extends " + subset.getSimpleName() + ", adds: ");
-        Set<String> comp = Sets.difference(
+        Set<String> comp = SetUtils.difference(
                 methodSet(superset), methodSet(subset));
         // Don't show 'Object' methods
         comp.removeAll(object);

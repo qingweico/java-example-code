@@ -1,7 +1,7 @@
 package io.server;
 
 import lombok.extern.slf4j.Slf4j;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * --------------------------------------- 基于非阻塞IO线程模型 ---------------------------------------
+ * {@since jdk1.4 引入了nio [new io or non-blocking io]}
  * 基于阻塞IO线程模型(线程池) {@link BioPlainServer} 单线程 {@link SingleThreadServer}
  * 基于IO多路复用线程模型 {@link NioSelectorServer}
  * 基于AIO线程模型 {@link AioPlainServer}
@@ -30,12 +31,12 @@ import java.util.List;
  * @date 2022/2/25
  */
 @Slf4j
-public class NioPlainServer {
+class NioPlainServer {
 
     public static void main(String[] args) throws IOException {
         List<SocketChannel> channelList = new ArrayList<>();
         ServerSocketChannel channel = ServerSocketChannel.open();
-        channel.socket().bind(new InetSocketAddress(Constants.LOOP_BACK, Constants.QOMOLANGMA));
+        channel.socket().bind(new InetSocketAddress(Constants.LOOP_BACK, Constants.NUM_8848));
         channel.configureBlocking(false);
         log.info("server start: {}", channel.getLocalAddress());
         while (true) {
@@ -47,6 +48,7 @@ public class NioPlainServer {
                     channelList.add(socketChannel);
                 }
                 Iterator<SocketChannel> iterator = channelList.iterator();
+                // 存在的问题: 当连接的客户端中只有很少一部分存在读写数据时, 每次都要从客户端链表中从头遍历
                 while (iterator.hasNext()) {
                     SocketChannel sc = iterator.next();
                     ByteBuffer buffer = ByteBuffer.allocate(Constants.KB);

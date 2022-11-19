@@ -2,7 +2,7 @@ package algorithm.list;
 
 
 import org.testng.annotations.Test;
-import util.Constants;
+import util.constants.Constants;
 
 import static util.Print.print;
 

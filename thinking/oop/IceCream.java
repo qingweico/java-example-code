@@ -1,6 +1,6 @@
 package thinking.oop;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.Arrays;
 import java.util.Random;

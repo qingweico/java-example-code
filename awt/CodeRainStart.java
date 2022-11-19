@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class CodeRainStart {
     public static void main(String[] args) throws IOException {
-        List<String> lines = IOUtils.readLines(new FileReader("awt/codeRain.txt"));
+        List<String> lines = IOUtils.readLines(new FileReader("awt/code-rain.txt"));
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) (screenSize.getWidth() * 0.85);

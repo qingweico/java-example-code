@@ -1,6 +1,6 @@
 package thread.concurrency.task;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.HashSet;

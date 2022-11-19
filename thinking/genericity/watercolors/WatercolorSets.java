@@ -5,7 +5,7 @@ import java.util.Set;
 
 import static thinking.genericity.watercolors.Watercolors.*;
 import static util.Print.print;
-import static util.Sets.*;
+import static util.collection.SetUtils.*;
 
 /**
  * @author zqw

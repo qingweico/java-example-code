@@ -2,7 +2,7 @@ package thread;
 
 import thread.pool.CustomThreadPool;
 import thread.queue.disruptor.DisruptorStarter;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

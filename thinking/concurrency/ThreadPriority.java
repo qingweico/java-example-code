@@ -2,7 +2,7 @@ package thinking.concurrency;
 
 import jsr166e.extra.AtomicDouble;
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
 

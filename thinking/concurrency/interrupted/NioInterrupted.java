@@ -1,7 +1,7 @@
 package thinking.concurrency.interrupted;
 
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

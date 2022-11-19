@@ -10,7 +10,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
-import util.Constants;
+import util.constants.Constants;
 import util.DateUtil;
 
 /**
@@ -18,7 +18,7 @@ import util.DateUtil;
  * @date 2022/1/30
  */
 public class WebSocketServer {
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
 
     public void serve() {
         EventLoopGroup boosGroup = new NioEventLoopGroup();

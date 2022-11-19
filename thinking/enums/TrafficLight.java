@@ -1,6 +1,6 @@
 package thinking.enums;
 
-import util.Constants;
+import util.constants.Constants;
 
 /**
  * @author zqw

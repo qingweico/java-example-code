@@ -3,7 +3,7 @@ package util.constants;
 /**
  * Protocol Constants Definition
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public interface ProtocolConstants {
 

@@ -1,4 +1,6 @@
-package util;
+package thinking.util;
+
+import util.Generator;
 
 /**
  * @author zqw
@@ -27,7 +29,7 @@ public class CountingGenerator {
         }
     }
 
-    static char[] chars = {
+    public static char[] chars = {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
             'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
             'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
@@ -51,7 +53,7 @@ public class CountingGenerator {
     public static class
     String implements Generator<java.lang.String> {
         private int length = 7;
-        Generator<java.lang.Character> cg = new Character();
+        public Generator<java.lang.Character> cg = new Character();
 
         public String() {
         }

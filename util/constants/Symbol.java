@@ -3,7 +3,7 @@ package util.constants;
 /**
  * {@link Symbol}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public interface Symbol {
     // 符号
@@ -63,4 +63,8 @@ public interface Symbol {
      * COMMA: ","
      */
     String COMMA = ",";
+    /**
+     * SLASH: "/"
+     */
+    String SLASH = "/";
 }

@@ -11,14 +11,14 @@ import java.io.OutputStreamWriter;
  * @author zqw
  * @date 2020/04/27
  */
-public class StringSort {
+class StringSort {
     public static void main(String[] args) throws IOException {
+        String fileName = "data";
         // Sort the strings and write the sorted strings to the file
         BufferedWriter fw = new BufferedWriter(
                 new OutputStreamWriter(
-                        new FileOutputStream("io/data.txt", true)));
+                        new FileOutputStream(fileName, true)));
         Scanner sc = new Scanner(System.in);
-        System.out.println("please input strings: ");
         String s = sc.nextLine();
         char[] ch = s.toCharArray();
         Arrays.sort(ch);
@@ -27,10 +27,10 @@ public class StringSort {
         fw.newLine();
         sc.close();
         fw.close();
-        BufferedReader fo = new BufferedReader(new FileReader("io/data.txt"));
-        String ss;
-        while ((ss = fo.readLine()) != null) {
-            System.out.println(ss);
+        BufferedReader fo = new BufferedReader(new FileReader(fileName));
+        String line;
+        while ((line = fo.readLine()) != null) {
+            System.out.println(line);
         }
         fo.close();
     }

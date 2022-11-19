@@ -2,7 +2,9 @@ package util;
 
 import com.github.javafaker.Faker;
 
-import java.util.Calendar;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -54,22 +56,18 @@ public class RandomDataGenerator {
         return R.nextInt(bound);
     }
 
+    public static double randomDouble() {
+        return TLR.nextDouble();
+    }
+
 
     public static Date randomDate() {
-        Calendar calendar = Calendar.getInstance();
-        long currentTimeMillis = System.currentTimeMillis();
-        calendar.setTimeInMillis(currentTimeMillis);
-        // TODO 生成随机日期
-        calendar.getTime();
-        return new Date();
-    }
-
-    public static int safeRandomInt() {
-        return TLR.nextInt();
-    }
-
-    public static int safeRandomInt(int bound) {
-        return TLR.nextInt(bound);
+        int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
+        int maxDay = (int) LocalDate.of(2022, 12, 31).toEpochDay();
+        long randomDay = minDay + randomInt(maxDay - minDay);
+        ZoneId zone = ZoneId.systemDefault();
+        Instant instant = LocalDate.ofEpochDay(randomDay).atStartOfDay().atZone(zone).toInstant();
+        return Date.from(instant);
     }
 
     public static boolean tf() {

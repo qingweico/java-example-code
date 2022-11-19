@@ -1,7 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadPoolBuilder;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

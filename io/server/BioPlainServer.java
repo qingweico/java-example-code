@@ -1,7 +1,7 @@
 package io.server;
 
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,10 +15,15 @@ import java.util.concurrent.ExecutorService;
  * @author zqw
  * @date 2021/10/18
  */
-public class BioPlainServer {
+class BioPlainServer {
+
+
+    // 使用线程池的缺点: 限制了客户端的并发数, 且由于服务端等待客户端读写数据时是阻塞的
+    // 当客户端读写数据不是很频繁时, 会造成大量线程资源浪费
+
 
     private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(10);
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
 
     public static void serve() throws IOException {
         try (ServerSocket server = new ServerSocket(PORT)) {

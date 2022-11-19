@@ -1,6 +1,6 @@
 package thinking.container.map.hashcode;
 
-import util.Countries;
+import thinking.util.Countries;
 
 import java.util.*;
 

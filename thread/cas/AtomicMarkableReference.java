@@ -1,7 +1,7 @@
 package thread.cas;
 
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;

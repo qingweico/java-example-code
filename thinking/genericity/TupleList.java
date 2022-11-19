@@ -1,6 +1,6 @@
 package thinking.genericity;
 
-import util.FourTuple;
+import thinking.util.FourTuple;
 
 import java.util.ArrayList;
 

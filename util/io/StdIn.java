@@ -1,4 +1,4 @@
-package util;
+package util.io;
 /*
  *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
@@ -23,6 +23,8 @@ package util;
  *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
  */
 
+import util.constants.Constants;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
@@ -30,7 +32,10 @@ import java.net.URLConnection;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public final class In {
+/**
+ * @author zqw
+ */
+public final class StdIn {
 
     ///// begin: section (1 of 2) of code duplicated from In to StdIn.
 
@@ -68,7 +73,7 @@ public final class In {
     /**
      * Initializes an input stream from standard input.
      */
-    public In() {
+    public StdIn() {
         scanner = new Scanner(new BufferedInputStream(System.in), CHARSET_NAME);
         scanner.useLocale(LOCALE);
     }
@@ -80,7 +85,7 @@ public final class In {
      * @throws IllegalArgumentException if cannot open {@code socket}
      * @throws IllegalArgumentException if {@code socket} is {@code null}
      */
-    public In(Socket socket) {
+    public StdIn(Socket socket) {
         if (socket == null) {
             throw new IllegalArgumentException("socket argument is null");
         }
@@ -100,7 +105,7 @@ public final class In {
      * @throws IllegalArgumentException if you cannot open {@code url}
      * @throws IllegalArgumentException if {@code url} is {@code null}
      */
-    public In(URL url) {
+    public StdIn(URL url) {
         if (url == null) {
             throw new IllegalArgumentException("url argument is null");
         }
@@ -121,7 +126,7 @@ public final class In {
      * @throws IllegalArgumentException if you cannot open {@code file}
      * @throws IllegalArgumentException if {@code file} is {@code null}
      */
-    public In(File file) {
+    public StdIn(File file) {
         if (file == null) {
             throw new IllegalArgumentException("file argument is null");
         }
@@ -145,7 +150,7 @@ public final class In {
      *                                  a file or URL
      * @throws IllegalArgumentException if {@code name} is {@code null}
      */
-    public In(String name) {
+    public StdIn(String name) {
         if (name == null) {
             throw new IllegalArgumentException("argument is null");
         }
@@ -180,7 +185,7 @@ public final class In {
             URLConnection site = url.openConnection();
 
             // in order to set User-Agent, replace above line with these two
-            // site.addRequestProperty("User-Agent", "Mozilla/4.76");
+            site.addRequestProperty("User-Agent", "Mozilla/4.76");
 
             InputStream is = site.getInputStream();
             scanner = new Scanner(new BufferedInputStream(is), CHARSET_NAME);
@@ -200,7 +205,7 @@ public final class In {
      * @param scanner the scanner
      * @throws IllegalArgumentException if {@code scanner} is {@code null}
      */
-    public In(Scanner scanner) {
+    public StdIn(Scanner scanner) {
         if (scanner == null) {
             throw new IllegalArgumentException("scanner argument is null");
         }
@@ -438,7 +443,7 @@ public final class In {
      * Reads the next token from this input stream, parses it as a {@code byte},
      * and returns the {@code byte}.
      * <p>
-     * To read binary data, use {@link BinaryIn}.
+     * To read binary data, use {@link}.
      *
      * @return the next {@code byte} in this input stream
      * @throws NoSuchElementException if the input stream is empty
@@ -469,16 +474,16 @@ public final class In {
     public boolean readBoolean() {
         try {
             String token = readString();
-            if ("true".equalsIgnoreCase(token)) {
+            if (Boolean.TRUE.toString().equalsIgnoreCase(token)) {
                 return true;
             }
-            if ("false".equalsIgnoreCase(token)) {
+            if (Boolean.FALSE.toString().equalsIgnoreCase(token)) {
                 return false;
             }
-            if ("1".equals(token)) {
+            if (String.valueOf(Constants.ONE).equals(token)) {
                 return true;
             }
-            if ("0".equals(token)) {
+            if (String.valueOf(Constants.ZERO).equals(token)) {
                 return false;
             }
             throw new InputMismatchException("attempts to read a 'boolean' value from the input stream, "
@@ -530,11 +535,11 @@ public final class In {
      */
     public int[] readAllInts() {
         String[] fields = readAllStrings();
-        int[] vals = new int[fields.length];
+        int[] values = new int[fields.length];
         for (int i = 0; i < fields.length; i++) {
-            vals[i] = Integer.parseInt(fields[i]);
+            values[i] = Integer.parseInt(fields[i]);
         }
-        return vals;
+        return values;
     }
 
     /**
@@ -545,11 +550,11 @@ public final class In {
      */
     public long[] readAllLongs() {
         String[] fields = readAllStrings();
-        long[] vals = new long[fields.length];
+        long[] values = new long[fields.length];
         for (int i = 0; i < fields.length; i++) {
-            vals[i] = Long.parseLong(fields[i]);
+            values[i] = Long.parseLong(fields[i]);
         }
-        return vals;
+        return values;
     }
 
     /**
@@ -560,11 +565,11 @@ public final class In {
      */
     public double[] readAllDoubles() {
         String[] fields = readAllStrings();
-        double[] vals = new double[fields.length];
+        double[] values = new double[fields.length];
         for (int i = 0; i < fields.length; i++) {
-            vals[i] = Double.parseDouble(fields[i]);
+            values[i] = Double.parseDouble(fields[i]);
         }
-        return vals;
+        return values;
     }
 
     ///// end: section (2 of 2) of code duplicated from In to StdIn */
@@ -586,7 +591,7 @@ public final class In {
      */
     @Deprecated
     public static int[] readInts(String filename) {
-        return new In(filename).readAllInts();
+        return new StdIn(filename).readAllInts();
     }
 
     /**
@@ -599,7 +604,7 @@ public final class In {
      */
     @Deprecated
     public static double[] readDoubles(String filename) {
-        return new In(filename).readAllDoubles();
+        return new StdIn(filename).readAllDoubles();
     }
 
     /**
@@ -612,7 +617,7 @@ public final class In {
      */
     @Deprecated
     public static String[] readStrings(String filename) {
-        return new In(filename).readAllStrings();
+        return new StdIn(filename).readAllStrings();
     }
 
     /**
@@ -624,7 +629,7 @@ public final class In {
      */
     @Deprecated
     public static int[] readInts() {
-        return new In().readAllInts();
+        return new StdIn().readAllInts();
     }
 
     /**
@@ -636,7 +641,7 @@ public final class In {
      */
     @Deprecated
     public static double[] readDoubles() {
-        return new In().readAllDoubles();
+        return new StdIn().readAllDoubles();
     }
 
     /**
@@ -648,7 +653,12 @@ public final class In {
      */
     @Deprecated
     public static String[] readStrings() {
-        return new In().readAllStrings();
+        return new StdIn().readAllStrings();
+    }
+
+
+    public static void division() {
+        System.out.println("---------------------------------------------------------------------------");
     }
 
     /**
@@ -657,14 +667,15 @@ public final class In {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        In in;
+        StdIn in;
+        String filename = "data";
         String urlName = "https://introcs.cs.princeton.edu/java/stdlib/InTest.txt";
 
         // read from a URL
         System.out.println("readAll() from URL " + urlName);
-        System.out.println("---------------------------------------------------------------------------");
+        division();
         try {
-            in = new In(urlName);
+            in = new StdIn(urlName);
             System.out.println(in.readAll());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -673,67 +684,32 @@ public final class In {
 
         // read one line at a time from URL
         System.out.println("readLine() from URL " + urlName);
-        System.out.println("---------------------------------------------------------------------------");
-        try {
-            in = new In(urlName);
-            while (!in.isEmpty()) {
-                String s = in.readLine();
-                System.out.println(s);
-            }
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        System.out.println();
+        readLineOnce(urlName);
 
         // read one string at a time from URL
         System.out.println("readString() from URL " + urlName);
-        System.out.println("---------------------------------------------------------------------------");
+        division();
         try {
-            in = new In(urlName);
+            in = new StdIn(urlName);
             while (!in.isEmpty()) {
                 String s = in.readString();
                 System.out.println(s);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
-        System.out.println();
-
-
-        // read one line at a time from file in current directory
-        System.out.println("readLine() from current directory");
-        System.out.println("---------------------------------------------------------------------------");
-        try {
-            in = new In("./InTest.txt");
-            while (!in.isEmpty()) {
-                String s = in.readLine();
-                System.out.println(s);
-            }
-        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         System.out.println();
 
 
-        // read one line at a time from file using relative path
+        // read one line at a time from file using path
         System.out.println("readLine() from relative path");
-        System.out.println("---------------------------------------------------------------------------");
-        try {
-            in = new In("../stdlib/InTest.txt");
-            while (!in.isEmpty()) {
-                String s = in.readLine();
-                System.out.println(s);
-            }
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        System.out.println();
+        readLineOnce(filename);
 
         // read one char at a time
         System.out.println("readChar() from file");
-        System.out.println("---------------------------------------------------------------------------");
+        division();
         try {
-            in = new In("InTest.txt");
+            in = new StdIn(filename);
             while (!in.isEmpty()) {
                 char c = in.readChar();
                 System.out.print(c);
@@ -742,36 +718,48 @@ public final class In {
             e.printStackTrace();
         }
         System.out.println();
-        System.out.println();
 
-        // read one line at a time from absolute OS X / Linux path
-        System.out.println("readLine() from absolute OS X / Linux path");
-        System.out.println("---------------------------------------------------------------------------");
-        try {
-            in = new In("/n/fs/introcs/www/java/stdlib/InTest.txt");
-            while (!in.isEmpty()) {
-                String s = in.readLine();
-                System.out.println(s);
-            }
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        System.out.println();
+        // read one line at a time from absolute OS X / Linux path / Windows path
+        System.out.println("readLine() from absolute OS X / Linux path / Windows path");
+        readLineOnce(filename);
 
 
-        // read one line at a time from absolute Windows path
-        System.out.println("readLine() from absolute Windows path");
-        System.out.println("---------------------------------------------------------------------------");
-        try {
-            in = new In("G:\\www\\introcs\\stdlib\\InTest.txt");
-            while (!in.isEmpty()) {
-                String s = in.readLine();
-                System.out.println(s);
-            }
-            System.out.println();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
+        in = new StdIn();
         System.out.println();
+        StdOut.print("Type a string: ");
+        String s = in.readString();
+        StdOut.println("Your string was: " + s);
+        StdOut.println();
+
+        StdOut.print("Type an int: ");
+        int a = in.readInt();
+        StdOut.println("Your int was: " + a);
+        StdOut.println();
+
+        StdOut.print("Type a boolean: ");
+        boolean b = in.readBoolean();
+        StdOut.println("Your boolean was: " + b);
+        StdOut.println();
+
+        StdOut.print("Type a double: ");
+        double c = in.readDouble();
+        StdOut.println("Your double was: " + c);
+        StdOut.println();
+
     }
+
+    private static void readLineOnce(String filename) {
+        StdIn in;
+        division();
+        try {
+            in = new StdIn(filename);
+            while (!in.isEmpty()) {
+                String s = in.readLine();
+                System.out.println(s);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

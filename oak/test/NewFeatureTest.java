@@ -1,8 +1,12 @@
 package oak.test;
 
 
+import object.entity.User;
 import org.testng.annotations.Test;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.*;
 import java.time.*;
 import java.util.*;
@@ -94,6 +98,20 @@ public class NewFeatureTest {
         System.out.println("jdk11  ".stripTrailing());
         System.out.println(" jdk11".stripLeading());
         // java + javac 命令合一
+
+        // nested
+        System.out.println(User.class.getNestHost());
+        System.out.println(Arrays.toString(User.class.getNestMembers()));
     }
     // jdk12: switch使用lambda; instanceof类型强转(obj instanceof String str);
+
+    @Test
+    @Deprecated
+    public void scriptEngine() throws ScriptException {
+        var jsStr = "[1,2,3].map(function(x){return x + 1;}).join('-');";
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        ScriptEngine nashorn = scriptEngineManager.getEngineByName("nashorn");
+        Object result = nashorn.eval(jsStr);
+        System.out.println(result);
+    }
 }

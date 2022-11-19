@@ -14,7 +14,7 @@ import java.util.Arrays;
  * given integer n unit to the left.
  */
 
-public class ArrayLeftRotation {
+class ArrayLeftRotation {
 
     /**
      * Returns the result of left rotation of given array arr and integer n

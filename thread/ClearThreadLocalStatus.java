@@ -2,7 +2,7 @@ package thread;
 
 import lombok.extern.slf4j.Slf4j;
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.ThreadLocalRandom;
 

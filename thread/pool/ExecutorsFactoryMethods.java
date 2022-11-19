@@ -1,6 +1,6 @@
 package thread.pool;
 
-import util.Constants;
+import util.constants.Constants;
 
 import java.util.concurrent.*;
 

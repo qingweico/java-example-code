@@ -1,5 +1,7 @@
 package util;
 
+import thinking.util.CountingGenerator;
+
 import java.util.Random;
 
 /**

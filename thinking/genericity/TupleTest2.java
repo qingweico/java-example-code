@@ -1,11 +1,11 @@
 package thinking.genericity;
 
-import util.FiveTuple;
-import util.FourTuple;
-import util.ThreeTuple;
-import util.TwoTuple;
+import thinking.util.FiveTuple;
+import thinking.util.FourTuple;
+import thinking.util.ThreeTuple;
+import thinking.util.TwoTuple;
 
-import static util.Tuple.tuple;
+import static thinking.util.Tuple.tuple;
 
 /**
  * @author zqw

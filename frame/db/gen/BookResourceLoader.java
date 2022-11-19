@@ -1,7 +1,10 @@
 package frame.db.gen;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import thread.pool.ThreadPoolBuilder;
+import util.io.TextFile;
+import util.constants.FileSuffixConstants;
 import util.constants.Symbol;
 
 import java.io.*;
@@ -11,7 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpTimeoutException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.*;
@@ -20,13 +23,13 @@ import java.util.stream.IntStream;
 
 /**
  * 从 <a href="http://www.purepen.com/hlm"></> 加载 书籍章节资源
- * (http://www.purepen.com/hlm/%03d.htm, x) 超时, 更换源
+ * 若(<a href="http://www.purepen.com/hlm/%03d.htm">...</a>, x) 超时, 更换源
  * 从 <a href="https://www.guichuideng.cc">鬼吹灯加载资源</>
  *
  * @author zqw
  */
 @Slf4j
-public class BookResourceLoader {
+class BookResourceLoader {
 
 
     /*《红楼梦》 〖清〗曹雪芹 高鹗 著 共120章节*/
@@ -37,15 +40,17 @@ public class BookResourceLoader {
     /*[第54章] https://www.guichuideng.cc/huangpizifen/259.html*/
 
     private final static Integer CHAPTER_NUMBER = 1;
-    private final static String PATH = "/novel/";
+    private final static String SAVED_NOVEL_PATH = "novel";
 
     static {
-        File file = new File(PATH);
-        if (!file.exists() && file.mkdirs()) {}
+        File file = new File(SAVED_NOVEL_PATH);
+        if (!file.exists() && file.mkdirs()) {
+            log.info("mkdir {}", file.getAbsolutePath());
+        }
     }
 
     @SuppressWarnings("rawtypes")
-    public void parallelLoad() throws URISyntaxException, IOException, InterruptedException, ExecutionException {
+    public void parallelLoad() throws InterruptedException, ExecutionException {
 
         LinkedBlockingQueue<Resource<Chapter>> queue = IntStream.range(1, CHAPTER_NUMBER + 1)
                 .mapToObj(this::getChapterResource)
@@ -72,10 +77,10 @@ public class BookResourceLoader {
                         var req = createRequest(resource);
                         var resp = client.get().send(
                                 req,
-                                HttpResponse.BodyHandlers.ofString(Charset.forName("gbk")));
+                                HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
                         resource.setData(Chapter.fromBodyText(resp.body()));
                         // 保存数据到本地磁盘
-                        resource.save(PATH);
+                        resource.save(SAVED_NOVEL_PATH);
                         System.out.format("finished %d/%d\n", counter.incrementAndGet(), CHAPTER_NUMBER);
                         TimeUnit.SECONDS.sleep(1);
                     } catch (HttpTimeoutException e) {
@@ -109,9 +114,9 @@ public class BookResourceLoader {
             var req = createRequest(resource);
             var resp = client.send(
                     req,
-                    HttpResponse.BodyHandlers.ofString(Charset.forName("gbk")));
+                    HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
             resource.setData(Chapter.fromBodyText(resp.body()));
-            resource.save(PATH);
+            resource.save(SAVED_NOVEL_PATH);
         }
     }
 
@@ -132,21 +137,14 @@ public class BookResourceLoader {
 
     private Resource<Chapter> getChapterResource(int x) {
         return new Resource<>(
-                String.format("https://www.guichuideng.cc/huangpizifen/%d.html", x + 179), x);
+                String.format("https://www.guichuideng.cc/huangpizifen/%d.html",
+                        x + 179), x);
     }
 
+    @Data
     public static class Sentence {
         String text;
         int chapterId;
-
-
-        public String getText() {
-            return text;
-        }
-
-        public int getChapterId() {
-            return chapterId;
-        }
 
         @Override
         public String toString() {
@@ -161,10 +159,9 @@ public class BookResourceLoader {
     public ArrayList<Sentence> sentences() throws IOException, ClassNotFoundException {
         var arr = new ArrayList<Sentence>();
         for (int i = 1; i <= CHAPTER_NUMBER; i++) {
-            var file = new File(String.format("%s%d.txt", PATH, i));
-            var fin = new ObjectInputStream(new FileInputStream(file));
-            var chapter = (Chapter) fin.readObject();
-            var sens = chapter.content.split(Symbol.FULL_STOP);
+            String filename = String.format("%s%s%d%s", SAVED_NOVEL_PATH, Symbol.SLASH, i, FileSuffixConstants.TXT);
+            String content = TextFile.read(filename);
+            var sens = content.split(Symbol.FULL_STOP);
 
             for (String sen : sens) {
                 var sentence = new Sentence();
@@ -176,4 +173,9 @@ public class BookResourceLoader {
         return arr;
     }
 
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException, IOException, ClassNotFoundException {
+        BookResourceLoader loader = new BookResourceLoader();
+        loader.parallelLoad();
+    }
 }

@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
  * @author zqw
  * @date 2021/9/27
  */
-public class WordStatistics {
+public class WordStatisticsTest {
 
     final ForkJoinPool pool = ForkJoinPool.commonPool();
 
@@ -125,7 +125,7 @@ public class WordStatistics {
      */
     @Test
     public void count() throws ExecutionException, InterruptedException {
-        var count = new WordStatistics();
+        var count = new WordStatisticsTest();
         count.run("word", 1024 * 1024);
 
     }

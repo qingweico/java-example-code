@@ -1,7 +1,7 @@
 package io.nio;
 
 import org.junit.Test;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -23,7 +23,7 @@ public class ZeroCopyTest {
 
     private final String fileName = "C:\\picture\\pic.png";
     private final String host = Constants.LOOP_BACK;
-    private final int port = Constants.QOMOLANGMA;
+    private final int port = Constants.NUM_8848;
     private final int bufferSize = Constants.KB;
     private final int eof = Constants.EOF;
 

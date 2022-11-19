@@ -1,6 +1,6 @@
-package util;
+package util.collection;
 
-import util.collection.CollectionData;
+import util.Generator;
 
 /**
  * @author zqw

@@ -1,7 +1,7 @@
 package coretech2.stream;
 
 import cn.hutool.core.date.StopWatch;
-import collection.RandomStringGenerator;
+import collection.iter.RandomStringGenerator;
 import org.junit.Test;
 import util.Print;
 import util.Tools;

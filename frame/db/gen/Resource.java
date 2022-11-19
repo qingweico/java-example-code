@@ -2,11 +2,11 @@ package frame.db.gen;
 
 
 import lombok.Data;
+import util.constants.FileSuffixConstants;
+import util.constants.Symbol;
+import util.io.TextFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
@@ -36,11 +36,7 @@ class Resource<T> {
 
 
     public void save(String path) throws IOException {
-        var file = new File(path + this.id + ".txt");
-        try (var objectOutStream = new ObjectOutputStream(new FileOutputStream(file))) {
-            System.out.println(data);
-            objectOutStream.writeObject(this.data);
-            objectOutStream.flush();
-        }
+        String fileName = path + Symbol.SLASH + this.id + FileSuffixConstants.TXT;
+        TextFile.write(fileName, this.data.toString());
     }
 }

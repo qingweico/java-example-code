@@ -3,7 +3,7 @@ package io;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import util.Constants;
+import util.constants.Constants;
 
 import java.io.*;
 
@@ -15,7 +15,7 @@ import java.io.*;
  */
 public class ByteStreamTest {
     private final String src = "data";
-    private final String dest = "dest";
+    private final String target = "target";
     private long startTime = 0L;
 
     @BeforeMethod
@@ -31,22 +31,22 @@ public class ByteStreamTest {
 
     @Test
     public void readByte() throws IOException {
-        readByte(src, dest);
+        readByte(src, target);
     }
 
     @Test
     public void readByteArray() throws IOException {
-        readByteArray(src, dest);
+        readByteArray(src, target);
     }
 
     @Test
     public void readBufferByte() throws IOException {
-        readBufferByte(src, dest);
+        readBufferByte(src, target);
     }
 
     @Test
     public void readBufferByteArray() throws IOException {
-        readBufferByteArray(src, dest);
+        readBufferByteArray(src, target);
     }
 
 

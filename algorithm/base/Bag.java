@@ -1,7 +1,7 @@
 package algorithm.base;
 
-import util.StdIn;
-import util.StdOut;
+import util.io.StdIn;
+import util.io.StdOut;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -117,8 +117,9 @@ public class Bag<Item> implements Iterable<Item> {
      */
     public static void main(String[] args) {
         Bag<String> bag = new Bag<>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
+        StdIn in = new StdIn();
+        while (!in.isEmpty()) {
+            String item = in.readString();
             bag.add(item);
         }
 

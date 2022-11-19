@@ -3,7 +3,8 @@ package io;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import util.Constants;
+import util.Print;
+import util.constants.Constants;
 
 import java.io.*;
 
@@ -15,7 +16,7 @@ import java.io.*;
  */
 public class CharacterStreamTest {
     private final String src = "data";
-    private final String dest = "dest";
+    private final String target = "destination";
     private long startTime = 0L;
 
     @BeforeMethod
@@ -26,62 +27,68 @@ public class CharacterStreamTest {
     @AfterMethod
     public void end() {
         long endTime = System.currentTimeMillis();
-        System.out.println("time: " + (endTime - startTime) + "ms");
+        long cost = endTime - startTime;
+        Print.time(cost);
     }
 
     @Test
     public void readChar() throws IOException {
-        readChar(src, dest);
+        readChar(src, target);
     }
 
     @Test
     public void readCharArray() throws IOException {
-        readCharArray(src, dest);
+        readCharArray(src, target);
     }
 
     @Test
     public void readCharByBuffer() throws IOException {
-        readCharByBuffer(src, dest);
+        readCharByBuffer(src, target);
     }
 
     @Test
     public void readCharArrayByBuffer() throws IOException {
-        readCharArrayByBuffer(src, dest);
+        readCharArrayByBuffer(src, target);
     }
 
     @Test
     public void readCharByFileReader() throws IOException {
-        readCharByFileReader(src, dest);
+        readCharByFileReader(src, target);
     }
 
     @Test
     public void readCharArrayByFileReader() throws IOException {
-        readCharArrayByFileReader(src, dest);
+        readCharArrayByFileReader(src, target);
     }
 
     @Test
     public void readStringByBuffer() throws IOException {
-        readStringByBuffer(src, dest);
+        readStringByBuffer(src, target);
     }
 
     @Test
     public void byteStreamToCharacterStream() throws IOException {
-        byteStreamToCharacterStream(src, dest);
+        byteStreamToCharacterStream(src, target);
     }
 
     @Test
-    public void printStream() throws IOException {
-        printStream(src);
+    public void printStreamToConsole() throws IOException {
+        printStreamToConsole(src);
     }
 
     @Test
     public void printStreamToFile() throws IOException {
-        printStreamToFile(src, dest);
+        printStreamToFile(src, target);
     }
 
     @Test
-    public void printWriter() throws IOException {
-        printWriter(src);
+    public void printWriterToConsole() throws IOException {
+        printWriterToConsole(src);
+    }
+
+    @Test
+    public void printWriterToFile() throws IOException {
+        printWriterToFile(src, target);
     }
 
 
@@ -90,9 +97,9 @@ public class CharacterStreamTest {
      *
      * @throws IOException An {@code IOException} will be thrown If an I/O error occurs
      */
-    public static void readChar(String src, String dest) throws IOException {
+    public static void readChar(String src, String target) throws IOException {
         InputStreamReader fo = new InputStreamReader(new FileInputStream(src));
-        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream(dest));
+        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream(target));
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -106,9 +113,9 @@ public class CharacterStreamTest {
      *
      * @throws IOException An {@code IOException} will be thrown If an I/O error occurs
      */
-    public static void readCharArray(String src, String dest) throws IOException {
+    public static void readCharArray(String src, String target) throws IOException {
         InputStreamReader fo = new InputStreamReader(new FileInputStream(src));
-        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream(dest));
+        OutputStreamWriter fs = new OutputStreamWriter(new FileOutputStream(target));
         char[] ch = new char[Constants.KB];
         int len;
         while ((len = fo.read(ch)) != -1) {
@@ -123,9 +130,9 @@ public class CharacterStreamTest {
      *
      * @throws IOException An {@code IOException} will be thrown If an I/O error occurs
      */
-    public static void readCharByBuffer(String src, String dest) throws IOException {
+    public static void readCharByBuffer(String src, String target) throws IOException {
         BufferedReader fo = new BufferedReader(new FileReader(src));
-        BufferedWriter fs = new BufferedWriter(new FileWriter(dest));
+        BufferedWriter fs = new BufferedWriter(new FileWriter(target));
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -139,9 +146,9 @@ public class CharacterStreamTest {
      *
      * @throws IOException An {@code IOException} will be thrown If an I/O error occurs
      */
-    public static void readCharArrayByBuffer(String src, String dest) throws IOException {
+    public static void readCharArrayByBuffer(String src, String target) throws IOException {
         BufferedReader fo = new BufferedReader(new FileReader(src));
-        BufferedWriter fs = new BufferedWriter(new FileWriter(dest));
+        BufferedWriter fs = new BufferedWriter(new FileWriter(target));
         char[] ch = new char[Constants.KB];
         int len;
         while ((len = fo.read(ch)) != -1) {
@@ -156,9 +163,9 @@ public class CharacterStreamTest {
      *
      * @throws IOException An {@code IOException} will be thrown If an I/O error occurs
      */
-    public static void readCharByFileReader(String src, String dest) throws IOException {
+    public static void readCharByFileReader(String src, String target) throws IOException {
         FileReader fo = new FileReader(src);
-        FileWriter fs = new FileWriter(dest);
+        FileWriter fs = new FileWriter(target);
         int len;
         while ((len = fo.read()) != -1) {
             fs.write(len);
@@ -172,9 +179,9 @@ public class CharacterStreamTest {
      *
      * @throws IOException An {@code IOException} will be thrown If an I/O error occurs
      */
-    public static void readCharArrayByFileReader(String src, String dest) throws IOException {
+    public static void readCharArrayByFileReader(String src, String target) throws IOException {
         FileReader fo = new FileReader(src);
-        FileWriter fs = new FileWriter(dest);
+        FileWriter fs = new FileWriter(target);
         char[] ch = new char[Constants.KB];
         int len;
         while ((len = fo.read(ch)) != -1) {
@@ -189,9 +196,9 @@ public class CharacterStreamTest {
      *
      * @throws IOException An {@code IOException} will be thrown If an I/O error occurs
      */
-    public static void readStringByBuffer(String src, String dest) throws IOException {
+    public static void readStringByBuffer(String src, String target) throws IOException {
         BufferedReader fo = new BufferedReader(new FileReader(src));
-        BufferedWriter fs = new BufferedWriter(new FileWriter(dest));
+        BufferedWriter fs = new BufferedWriter(new FileWriter(target));
         String s;
         while ((s = fo.readLine()) != null) {
             fs.write(s);
@@ -201,24 +208,26 @@ public class CharacterStreamTest {
         fo.close();
     }
 
-    public static void byteStreamToCharacterStream(String src, String dest) throws IOException {
+    public static void byteStreamToCharacterStream(String src, String target) throws IOException {
         InputStreamReader isr = new InputStreamReader(new FileInputStream(src));
         BufferedReader br = new BufferedReader(isr);
 
-        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(dest));
+        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(target));
         BufferedWriter bw = new BufferedWriter(osw);
         String read;
         while ((read = br.readLine()) != null) {
             bw.write(read);
+            bw.newLine();
             bw.flush();
         }
         bw.close();
         br.close();
     }
 
-    public static void printStream(String src) throws IOException {
+    public static void printStreamToConsole(String src) throws IOException {
         InputStreamReader isr = new InputStreamReader(new FileInputStream(src));
         BufferedReader br = new BufferedReader(isr);
+
         PrintStream ps = new PrintStream(System.out);
         String read;
         while ((read = br.readLine()) != null) {
@@ -228,10 +237,11 @@ public class CharacterStreamTest {
         br.close();
     }
 
-    public static void printStreamToFile(String src, String dest) throws IOException {
+    public static void printStreamToFile(String src, String target) throws IOException {
         InputStreamReader isr = new InputStreamReader(new FileInputStream(src));
         BufferedReader br = new BufferedReader(isr);
-        FileOutputStream fos = new FileOutputStream(dest);
+
+        FileOutputStream fos = new FileOutputStream(target);
         PrintStream ps = new PrintStream(fos);
         String read;
         while ((read = br.readLine()) != null) {
@@ -241,10 +251,24 @@ public class CharacterStreamTest {
         br.close();
     }
 
-    public static void printWriter(String src) throws IOException {
+    public static void printWriterToConsole(String src) throws IOException {
         InputStreamReader isr = new InputStreamReader(new FileInputStream(src));
         BufferedReader br = new BufferedReader(isr);
+
         PrintWriter pw = new PrintWriter(System.out);
+        String read;
+        while ((read = br.readLine()) != null) {
+            pw.println(read);
+        }
+        pw.close();
+        br.close();
+    }
+
+    public static void printWriterToFile(String src, String target) throws IOException {
+        InputStreamReader isr = new InputStreamReader(new FileInputStream(src));
+        BufferedReader br = new BufferedReader(isr);
+
+        PrintWriter pw = new PrintWriter(target);
         String read;
         while ((read = br.readLine()) != null) {
             pw.println(read);

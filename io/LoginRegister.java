@@ -115,7 +115,7 @@ class GuessNumber {
 /**
  * @author zqw
  */
-public class LoginRegister {
+class LoginRegister {
 
     public static void checkPassword(String firstPassword, String secondPassword) {
         if (!firstPassword.equals(secondPassword)) {

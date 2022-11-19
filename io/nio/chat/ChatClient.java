@@ -1,7 +1,7 @@
 package io.nio.chat;
 
 import thread.pool.CustomThreadPool;
-import util.Constants;
+import util.constants.Constants;
 import util.DateUtil;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class ChatClient {
     private static final String HOST = Constants.LOOP_BACK;
-    private static final int PORT = Constants.QOMOLANGMA;
+    private static final int PORT = Constants.NUM_8848;
     private Selector selector;
     private SocketChannel socketChannel;
     private String username;

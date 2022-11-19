@@ -1,4 +1,4 @@
-package util;
+package util.collection;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +9,7 @@ import java.util.Set;
  * @author zqw
  * @date 2021/4/10
  */
-public class Sets {
+public class SetUtils {
     /**
      * And set
      */
