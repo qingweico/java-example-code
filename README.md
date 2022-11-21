@@ -1,14 +1,28 @@
 # java-example-code
 
-![APM](https://img.shields.io/apm/l/vim-mode)
-![](https://img.shields.io/static/v1?label=tools&message=JDK14&color=brightlight)
-![WordPress Theme Last Updated](https://img.shields.io/wordpress/theme/last-updated/twentyseventeen)
-![](https://img.shields.io/static/v1?label=linenumber&message=49069&color=orange)
+![](https://img.shields.io/static/v1?label=base&message=JDK11&color=brightlight)
+![](https://img.shields.io/static/v1?label=代码行数&message=48734&color=orange)
 
+### 书籍包括
 - Thinking in Java
 - Effective Java
-- algorithms 4th edition
-- Deep understanding of Java virtual machine
+- Algorithms 4th edition
+- Deep Understanding of Java Virtual Machine
 - Java Concurrency in Practice
 - Java Core Technology Volume 2
 - The art of Java concurrent programming
+
+### 极客时间若干专栏以及慕课网专栏
+- [Liuyubobobo算法与数据结构](https://class.imooc.com/sc/105/learn)
+- [笑傲Java面试](https://coding.imooc.com/learn/list/490.html)
+- ...
+
+### 项目整体结构
+![](https://cdn.qingweico.cn/Snipaste_2022-11-22_05-20-39.png)
+
+### 代码风格
+![](https://cdn.qingweico.cn/Snipaste_2022-10-22_20-52-57.png)
+
+![](https://cdn.qingweico.cn/Snipaste_2022-11-22_05-17-46.png)
+
+### 项目持续更新...
