@@ -3,11 +3,14 @@ package algorithm.tree;
 import java.util.TreeMap;
 
 /**
+ * //////////////////// 字典树[TreeMap实现] ////////////////////
+ *
  * @author zqw
  * @date 2021/11/14
+ * @see TrieTree
  */
 public class Trie {
-     static class Node {
+    static class Node {
         boolean ending;
         TreeMap<Character, Node> next;
 
@@ -58,5 +61,12 @@ public class Trie {
             cur = cur.next.get(c);
         }
         return prefix || cur.ending;
+    }
+
+    public static void main(String[] args) {
+        Trie trie = new Trie();
+        trie.add("Java");
+        boolean present = trie.contains("Ja", true);
+        System.out.println(present);
     }
 }

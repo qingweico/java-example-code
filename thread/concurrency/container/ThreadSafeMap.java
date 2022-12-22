@@ -16,7 +16,7 @@ import java.util.stream.LongStream;
  * 但是并不能代替Hashtable,ConcurrentMap是弱一致性的
  * {@link ConcurrentMap#get(Object)}  {@link ConcurrentMap#size()} 等方法没有用到锁,
  * 因此有可能会导致某次读无法马上获取写入的数据
- * 由于 {@link java.util.TreeMap} 要实现高效的线程安全是非常困难的 所以没有 {@code ConcurrentTreeMap}
+ * 由于 {@link java.util.TreeMap} 要实现高效的线程安全是非常困难的,所以没有 {@code ConcurrentTreeMap}
  * {@link Hashtable}
  * {@link ConcurrentSkipListMap}
  * {@link ConcurrentHashMap}
@@ -26,9 +26,9 @@ import java.util.stream.LongStream;
  */
 @Slf4j
 public class ThreadSafeMap {
-    // 线程个数
+    /**线程个数**/
     private static final int THREAD_COUNT = 10;
-    // 总元素数量
+    /**总元素数量**/
     private static final int ITEM_COUNT = 1000;
 
     /**
@@ -38,7 +38,9 @@ public class ThreadSafeMap {
      * @return {@code ConcurrentHashMap}
      */
     private static ConcurrentHashMap<String, Long> getData(int count) {
-        return LongStream.rangeClosed(1, count).boxed().collect(Collectors.toConcurrentMap(i -> UUID.randomUUID().toString(), Function.identity(), (o1, o2) -> o1, ConcurrentHashMap::new));
+        return LongStream.rangeClosed(1, count).boxed().collect(Collectors
+                .toConcurrentMap(i -> UUID.randomUUID().toString(),
+                Function.identity(), (o1, o2) -> o1, ConcurrentHashMap::new));
     }
 
     public static void main(String[] args) throws InterruptedException {

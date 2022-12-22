@@ -1,5 +1,6 @@
 package thread;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import thread.pool.CustomThreadPool;
 import util.constants.Constants;
@@ -7,6 +8,10 @@ import util.constants.Constants;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * ThreadLocal适用于变量在线程间隔离,而在方法和类间共享的场景,利用独占资源的方式来解决线程安全问题
+ * @see ThreadLocal
+ * @see InheritableThreadLocal
+ * @see TransmittableThreadLocal
  * @author zqw
  * @date 2022/06/21
  */

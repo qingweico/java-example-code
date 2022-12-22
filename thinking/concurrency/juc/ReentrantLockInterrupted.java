@@ -46,6 +46,9 @@ class BlockedMutex {
         } catch (InterruptedException e) {
             print("Interrupted from lock acquisition f()");
         }
+        finally {
+            lock.unlock();
+        }
     }
 }
 

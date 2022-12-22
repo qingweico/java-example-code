@@ -1,4 +1,4 @@
-package other;
+package misc;
 
 import java.math.BigDecimal;
 
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @date 2022/6/17
  * 当构造器使用double或者float则会丢失精度, String或者int型时则不会
  */
-public class Q1BigDecimal {
+class BigDecimalExample {
     public static void main(String[] args) {
         BigDecimal bigDecimal = new BigDecimal(88);
         System.out.println(bigDecimal);

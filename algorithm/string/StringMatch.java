@@ -50,7 +50,9 @@ class StringMatch {
         }
         return -1;
     }
-    // LeetCode 1147 1392
+
+    // lc 1147 1392
+
     public static int lengthOfLongestSubstring(String s) {
         // 记录字符上一次出现的位置
         int[] last = new int[128];

@@ -1,16 +1,22 @@
 package util.io;
 
+import io.FileList;
 import lombok.extern.slf4j.Slf4j;
 import util.constants.Constants;
+import util.constants.Symbol;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author zqw
@@ -71,7 +77,7 @@ public class FileOperation {
     /**
      * 返回字符串中第一个字母的索引
      *
-     * @param s 字符串
+     * @param s     字符串
      * @param start 起始位置
      * @return "13llo, 0" => 2
      */
@@ -86,8 +92,8 @@ public class FileOperation {
     }
 
 
-    public static void copyFileByStream(File source, File dest) {
-        try (InputStream is = new FileInputStream(source); OutputStream os = new FileOutputStream(dest)) {
+    public static void copyFileByStream(File source, File target) {
+        try (InputStream is = new FileInputStream(source); OutputStream os = new FileOutputStream(target)) {
             byte[] buffer = new byte[Constants.KB];
             int length;
             while ((length = is.read(buffer)) > 0) {
@@ -98,8 +104,8 @@ public class FileOperation {
         }
     }
 
-    public static void copyFileByChannel(File source, File dest) {
-        try (FileInputStream fis = new FileInputStream(source); FileOutputStream fos = new FileOutputStream(dest)) {
+    public static void copyFileByChannel(File source, File target) {
+        try (FileInputStream fis = new FileInputStream(source); FileOutputStream fos = new FileOutputStream(target)) {
             FileChannel sourceChannel = fis.getChannel();
             FileChannel targetChannel = fos.getChannel();
             for (long count = sourceChannel.size(); count > 0; ) {
@@ -120,13 +126,125 @@ public class FileOperation {
      * {@code Linux Mac} {@see UnixFileSystemProvider -> UnixCopyFileSystem#transfer() ->  UnixCopyFile.c}
      *
      * @param source {@link  Path}
-     * @param dest   {@link Path}
+     * @param target {@link Path}
      */
-    public static void fileCopy(Path source, Path dest) {
+    public static void fileCopy(Path source, Path target) {
         try {
-            Files.copy(source, dest);
+            Files.copy(source, target);
         } catch (IOException e) {
             log.error("io error");
         }
+    }
+
+    /**
+     * 使用 Files 工具类快速读取文件
+     *
+     * @param fileName [路径]文件名称
+     * @return 文本字符流
+     * 快速写入文件{@link Files#writeString(Path, CharSequence, OpenOption...)}
+     */
+    public static String fastReadFile(String fileName, boolean isClassPath) {
+        String result;
+        // 读取ClassPath路径
+        if (isClassPath) {
+            URL url = FileOperation.class.getClassLoader().getResource(fileName);
+            if (url == null) {
+                log.error("[classpath] : {} not found!", fileName);
+                return Symbol.EMPTY;
+            }
+            try {
+                byte[] bytes = Files.readAllBytes(Paths.get(url.toURI()));
+                // TODO: 无论使用readString or readAllBytes 读取字节码文件时都会乱码, 文本文件则正常
+                result = new String(bytes, 0, bytes.length);
+            } catch (IOException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            // 读取项目根目录路径
+            try {
+                result = Files.readString(Paths.get(fileName));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 快速遍历文件夹并打印出其中所有的文件, {@link  FileList} 使用递归
+     *
+     * @param directory 文件夹名称
+     */
+    public static void fileList(String directory) {
+        try (Stream<Path> pathStream = Files.walk(Paths.get(directory))) {
+            pathStream.filter(Files::isRegularFile).forEach(System.out::println);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 按行读取文本文件,并以 {@code delimiter} 连接成一行String
+     *
+     * @param file      [路径]文件名称
+     * @param delimiter 分割符
+     * @return the collected string of a line
+     */
+    public static String readAsAline(String file, String delimiter) {
+        String collected;
+        try (Stream<String> lines = Files.lines(Paths.get(file))) {
+            // joining : 在每个元素之间使用的分隔符
+            // eg: 1\n2\n3 + "-" => 1-2-3; not use prefix and suffix
+            collected = lines.collect(Collectors.joining(delimiter));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return collected;
+    }
+
+    public static String fastReadFile(String fileName) {
+        return fastReadFile(fileName, false);
+    }
+
+    public static String readAsAline(String file) {
+        return readAsAline(file, Symbol.EMPTY);
+    }
+
+    public static void filterFileByTarget(String directory, String fileSuffix, String target) {
+        try {
+            Files.walkFileTree(Paths.get(directory), new FileVisitor<>() {
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    if (file.toString().endsWith(fileSuffix)) {
+                        String context = Files.readString(file);
+                        if (context.contains(target)) {
+                            System.out.println(file);
+                        }
+
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) {
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
+                    return FileVisitResult.CONTINUE;
+                }
+
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

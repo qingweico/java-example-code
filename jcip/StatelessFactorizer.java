@@ -14,8 +14,9 @@ import java.math.BigInteger;
 @ThreadSafe
 public class StatelessFactorizer extends GenericServlet implements Servlet {
 
-    // It does not contain any fields, nor does it contain any references to fields in other classes.
-    // So stateless objects are thread-safe!
+    // It does not contain any fields, nor does it contain any references to fields in other classes,
+    // so stateless objects are thread-safe!
+
     @Override
     public void service(ServletRequest req, ServletResponse resp) {
         BigInteger i = extractFromRequest(req);

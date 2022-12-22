@@ -67,4 +67,8 @@ public interface Symbol {
      * SLASH: "/"
      */
     String SLASH = "/";
+    /**
+     * EMPTY: ""
+     */
+    String EMPTY = "";
 }

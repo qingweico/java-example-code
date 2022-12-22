@@ -76,7 +76,6 @@ public class NetworkUtils {
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
             }
-            log.info("rev - {}", resultString);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

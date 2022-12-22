@@ -1,4 +1,4 @@
-package other;
+package misc;
 
 import annotation.Pass;
 

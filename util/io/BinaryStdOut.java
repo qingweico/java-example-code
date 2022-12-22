@@ -40,11 +40,11 @@ public final class BinaryStdOut {
      */
     private static boolean isInitialized;
 
-    /*don't instantiate*/
+    /**don't instantiate*/
     private BinaryStdOut() {
     }
 
-    /*initialize BinaryStdOut*/
+    /**initialize BinaryStdOut*/
     private static void initialize() {
         out = new BufferedOutputStream(System.out);
         buffer = 0;

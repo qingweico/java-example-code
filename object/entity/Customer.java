@@ -4,10 +4,10 @@ import com.google.common.base.MoreObjects;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import util.ObjectFactory;
+import util.Print;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author zqw
@@ -67,9 +67,18 @@ public class Customer implements Comparable<Object> {
 
     public static void main(String[] args) {
         TreeSet<Customer> customers = new TreeSet<>();
-        customers.add(ObjectFactory.create(Customer.class,true));
         customers.add(ObjectFactory.create(Customer.class, true));
-        customers.add(ObjectFactory.create(Customer.class,true));
-        System.out.println(customers);
+        customers.add(ObjectFactory.create(Customer.class, true));
+        customers.add(ObjectFactory.create(Customer.class, true));
+        Print.toPrint(customers);
+
+        // 构建比较器: 按多个字段排序 默认升序, reversed() 降序
+        Comparator<Customer> comparator = Comparator.comparing(Customer::getAge).thenComparing(Customer::getName).reversed();
+        List<Customer> list = new ArrayList<>(Arrays.asList(
+                ObjectFactory.create(Customer.class, true),
+                ObjectFactory.create(Customer.class, true))
+        );
+        list.sort(comparator);
+        Print.toPrint(list);
     }
 }
