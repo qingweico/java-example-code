@@ -71,4 +71,9 @@ public interface Symbol {
      * EMPTY: ""
      */
     String EMPTY = "";
+
+    /**
+     * WHIFFLETREE: "-"
+     */
+    String WHIFFLETREE = "-";
 }

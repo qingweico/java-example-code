@@ -12,9 +12,8 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
+import java.nio.file.spi.FileSystemProvider;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -121,7 +120,7 @@ public class FileOperation {
     /**
      * NIO 和操作系统底层密切相关, 每个平台都有自己实现的文件系统逻辑
      * <p>
-     * {@link java.nio.file.spi.FileSystemProvider}
+     * {@link FileSystemProvider}
      * {@code Windows} {@see sun.nio.fs.WindowsFileSystemProvider}
      * {@code Linux Mac} {@see UnixFileSystemProvider -> UnixCopyFileSystem#transfer() ->  UnixCopyFile.c}
      *
@@ -245,6 +244,5 @@ public class FileOperation {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

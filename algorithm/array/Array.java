@@ -117,7 +117,8 @@ public class Array<E> {
         }
 
         size--;
-        if (size <= capacity() >> 2 && capacity() >> 1 != 0) {
+        int shift = 2;
+        if (size <= capacity() >> shift && capacity() >> 1 != 0) {
             resize(capacity >> 1);
         }
         // loiter object != memory leak

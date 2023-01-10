@@ -17,7 +17,7 @@ class TestReentrantLockAndAtomic {
         long start = System.currentTimeMillis();
         CountDownLatch allowPass = new CountDownLatch(20);
         int threadCount = 10;
-        ExecutorService pool = ThreadPoolBuilder.custom().builder();
+        ExecutorService pool = ThreadPoolBuilder.builder().build();
         for (int i = 0; i < threadCount; i++) {
             pool.execute(() -> {
                 for (int j = 0; j < Constants.NUM_1000; j++) {

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @SuppressWarnings("all")
 // TODO
 class LifecycleWebServer {
-    private final ExecutorService exec = ThreadPoolBuilder.custom().builder();
+    private final ExecutorService exec = ThreadPoolBuilder.builder().build();
 
     public void start() throws IOException {
         ServerSocket socket = new ServerSocket(80);

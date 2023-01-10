@@ -90,11 +90,11 @@ public class DistributedLock {
 
     public static void main(String[] args) throws InterruptedException {
         int client = 100;
-        ExecutorService pool = ThreadPoolBuilder.custom()
+        ExecutorService pool = ThreadPoolBuilder.builder()
                 .corePoolSize(100)
                 .maxPoolSize(100)
                 .preStartAllCore(true)
-                .builder();
+                .build();
         for (int i = 0; i < client; i++) {
             pool.execute(() -> {
                 final long id = Thread.currentThread().getId();

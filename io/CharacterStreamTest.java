@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import util.Print;
 import util.constants.Constants;
+import util.constants.Symbol;
 
 import java.io.*;
 
@@ -28,7 +29,7 @@ public class CharacterStreamTest {
     public void end() {
         long endTime = System.currentTimeMillis();
         long cost = endTime - startTime;
-        Print.time(cost);
+        Print.time(Symbol.EMPTY, cost);
     }
 
     @Test

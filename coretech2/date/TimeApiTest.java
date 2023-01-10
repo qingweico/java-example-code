@@ -19,7 +19,7 @@ public class TimeApiTest {
         timeCost();
     }
 
-    public static void timeCost() throws InterruptedException {
+    public static void timeCost() {
         // 从最佳的可用系统时钟中获取当前的时间
         Instant start = Instant.now();
         // something else

@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import static util.Print.print;
-import static util.Print.printnb;
+import static util.Print.*;
 
 /**
  * @author zqw
@@ -124,7 +123,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         stack.add(node);
         while (!stack.isEmpty()) {
             Node cur = stack.pop();
-            printnb(cur.e + " ");
+            prints(cur.e);
             if (cur.right != null) {
                 stack.push(cur.right);
             }
@@ -143,7 +142,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         queue.add(node);
         while (!queue.isEmpty()) {
             Node cur = queue.remove();
-            printnb(cur.e + " ");
+            prints(cur.e);
             if (cur.left != null) {
                 queue.add(cur.left);
             }
@@ -317,8 +316,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
     }
 
     private void printNode(StringBuilder[] lines, int w, Node node, int h, int base) {
-        var nums = Math.pow(2, h);
-        var pos = base + (int) (w / (nums * 2));
+        var number = Math.pow(2, h);
+        var pos = base + (int) (w / (number * 2));
 
         var str = node.e.toString();
         for (int i = 0; i < str.length(); i++) {
@@ -376,10 +375,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     @Test
     public void testPrint() {
-        int[] nums = {5, 6, 1, 8, 3, 0, 9};
+        int[] num = {5, 6, 1, 8, 3, 0, 9};
         BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
-        for (var i : nums) {
-            binarySearchTree.add(i);
+        for (var item : num) {
+            binarySearchTree.add(item);
         }
         binarySearchTree.printTree();
         binarySearchTree.reverse();

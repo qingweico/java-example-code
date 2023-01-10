@@ -3,7 +3,6 @@ package thinking.concurrency;
 import thread.pool.ThreadPoolBuilder;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static util.Print.print;
 
@@ -16,7 +15,7 @@ class NativeExceptionHandling {
 
    public static void main(String[] args) {
       try {
-         ExecutorService pool = ThreadPoolBuilder.custom().builder();
+         ExecutorService pool = ThreadPoolBuilder.builder().build();
          pool.execute(new ExceptionThread());
       }catch (RuntimeException ue){
          // This statement will NOT execute!

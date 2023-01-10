@@ -32,24 +32,13 @@ public class Event<T> {
 
     static class Transforms {
         static EventData transform(Integer id) {
-            EventData ed;
-            switch (id) {
-                case 0:
-                    ed = new EventData(id, "Start");
-                    break;
-                case 1:
-                    ed = new EventData(id, "Running");
-                    break;
-                case 2:
-                    ed = new EventData(id, "Done");
-                    break;
-                case 3:
-                    ed = new EventData(id, "Fail");
-                    break;
-                default:
-                    ed = new EventData(id, "Error");
-            }
-            return ed;
+            return switch (id) {
+                case 0 -> new EventData(id, "Start");
+                case 1 -> new EventData(id, "Running");
+                case 2 -> new EventData(id, "Done");
+                case 3 -> new EventData(id, "Fail");
+                default -> new EventData(id, "Error");
+            };
         }
     }
 
@@ -76,7 +65,6 @@ public class Event<T> {
 
     public static void main(String[] args) {
         Stream<Event<Integer>> s = Stream.of(new Event<>(0), new Event<>(1), new Event<>(2));
-
         s.map(event -> event.map(Transforms::transform)).forEach((e) -> System.out.println(e.data));
 
     }

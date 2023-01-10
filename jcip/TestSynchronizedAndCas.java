@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutorService;
  */
 class TestSynchronizedAndCas {
     private static final int THREAD_COUNT = 30;
-    static ExecutorService pool = ThreadPoolBuilder.custom(THREAD_COUNT).isEnableMonitor(true).builder();
+    static ExecutorService pool = ThreadPoolBuilder.builder(THREAD_COUNT).isEnableMonitor(true).build();
     static long acc = 10000;
 
     private static void exec(Object o, CountDownLatch latch) {

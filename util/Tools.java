@@ -2,10 +2,7 @@ package util;
 
 import junit.framework.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -53,16 +50,25 @@ public class Tools {
         return list;
     }
 
-    public static int[] genArray(int n, int bound) {
+    public static int[] genIntArray(int n, int bound) {
         int[] array = new int[n];
-        for (int i = 0; i < n;i++) {
+        for (int i = 0; i < n; i++) {
             // random -> [1, bound)
             array[i] = RandomDataGenerator.randomInt(bound);
         }
         return array;
     }
-    public static int[] genArray(int n) {
-       return genArray(n, 100);
+
+    public static float[] genFloatArray(int n, int bound) {
+        float[] array = new float[n];
+        for (int i = 0; i < n; i++) {
+            array[i] = RandomDataGenerator.randomFloat(bound);
+        }
+        return array;
+    }
+
+    public static int[] genIntArray(int n) {
+        return genIntArray(n, 100);
     }
 
     public static List<Integer> genOrder(int n) {

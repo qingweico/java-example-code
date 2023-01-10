@@ -28,7 +28,7 @@ class DaemonFromFactory implements Runnable {
 
     public static void main(String[] args) throws InterruptedException {
         int threadCount = 10;
-        ExecutorService pool = ThreadPoolBuilder.custom().threadFactory(new DaemonThreadFactory()).builder();
+        ExecutorService pool = ThreadPoolBuilder.builder().threadFactory(new DaemonThreadFactory()).build();
         for (int i = 0; i < threadCount; i++) {
             pool.execute(new DaemonFromFactory());
         }

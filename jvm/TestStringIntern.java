@@ -18,7 +18,7 @@ class TestStringIntern {
     private static final String[] A = new String[MAX_COUNT];
 
     public static void main(String[] args) {
-        int[] data = Tools.genArray(10);
+        int[] data = Tools.genIntArray(10);
         long start = System.currentTimeMillis();
         for (int i = 0; i < MAX_COUNT; i++) {
             // remove intern(); try again!

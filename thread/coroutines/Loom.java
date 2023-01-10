@@ -2,7 +2,7 @@ package thread.coroutines;
 
 /**
  * JDK19 VirtualThread
- * {@see Executors.newVirtualThreadPerTaskExecutor()}
+ * {@see Executors#newVirtualThreadPerTaskExecutor()}
  *
  * @author zqw
  * @date 2022/9/22

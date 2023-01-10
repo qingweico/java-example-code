@@ -28,4 +28,10 @@ record Circle(double radius) {
     public double area() {
         return radius * radius * Math.acos(-1.0);
     }
+
+    public static void main(String[] args) {
+        var circle = new Circle(2.18);
+        System.out.println(circle.radius());
+        System.out.println(circle.area());
+    }
 }

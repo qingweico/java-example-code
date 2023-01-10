@@ -1,7 +1,6 @@
 package thread.coroutines;
 
 import co.paralleluniverse.fibers.Fiber;
-import co.paralleluniverse.fibers.SuspendExecution;
 import util.Print;
 
 /**
@@ -15,7 +14,7 @@ class SimpleCoroutines {
     public static void main(String[] args) {
         Fiber<Void> fiber = new Fiber<>() {
             @Override
-            protected Void run() throws SuspendExecution, InterruptedException {
+            protected Void run() {
                 Print.grace(Thread.currentThread().getName(), "run");
                 return null;
             }

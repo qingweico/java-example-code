@@ -13,23 +13,25 @@ import java.util.concurrent.*;
 @Slf4j
 public class ThreadPoolBuilder {
 
-    public static Builder custom() {
+    public static Builder builder() {
         return new Builder();
     }
 
-    public static Builder custom(int blockQueueSize) {
+    public static Builder builder(int blockQueueSize) {
         return new Builder(blockQueueSize);
     }
 
     /*single*/
 
     public static ExecutorService single(boolean daemon) {
-        return custom(1).corePoolSize(1)
+        return builder(1)
+                .corePoolSize(1)
                 .maxPoolSize(1)
-                .keepAliveTime(60L)
+                .keepAliveTime(1)
+                .timeUnit(TimeUnit.SECONDS)
                 .allowCoreThreadTimeOut(true)
                 .threadFactory(CustomThreadFactory.guavaThreadFactory(daemon))
-                .builder();
+                .build();
     }
 
     public static class Builder {
@@ -105,7 +107,7 @@ public class ThreadPoolBuilder {
             return this;
         }
 
-        public ExecutorService builder() {
+        public ExecutorService build() {
             ThreadPoolExecutor executor = new ThreadPoolExecutorImpl(this.corePoolSize,
                     this.maxPoolSize, this.keepAliveTime, this.unit, this.workQueue, this.isEnableMonitor);
             if (this.allowCoreThreadTimeOut) {

@@ -16,7 +16,7 @@ import static util.Print.print;
 class SyncObject {
     public static void main(String[] args) {
         final DualSync ds = new DualSync();
-        ExecutorService pool = ThreadPoolBuilder.custom().builder();
+        ExecutorService pool = ThreadPoolBuilder.builder().build();
         pool.execute(ds::f);
         pool.shutdown();
         ds.g();

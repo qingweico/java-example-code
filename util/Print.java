@@ -42,7 +42,7 @@ public class Print {
      * @param o The {@code String} to be printed
      */
     public static void prints(Object o) {
-        System.out.print(o + " ");
+        System.out.print(o + Symbol.WHITE_SPACE);
     }
 
     /**
@@ -77,10 +77,11 @@ public class Print {
 
     /**
      * Formatting and printing the cost time
+     *
      * @param time long time
      */
-    public static void time(long time) {
-        printf("%s %s %d %s", "time", Symbol.COLON, time, Constants.MS);
+    public static void time(String title, long time) {
+        printf("%s time %s %d %s%n", title, Symbol.COLON, time, Constants.MS);
     }
 
     /**
@@ -102,6 +103,7 @@ public class Print {
 
     /**
      * To print collection
+     *
      * @param c ? extends Collection<?>
      */
     public static void toPrint(Collection<?> c) {

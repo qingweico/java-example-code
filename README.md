@@ -1,6 +1,6 @@
 # java-example-code
 
-![](https://img.shields.io/static/v1?label=base&message=JDK11&color=brightlight)
+![](https://img.shields.io/static/v1?label=base&message=JDK17&color=brightlight)
 ![](https://img.shields.io/static/v1?label=代码行数&message=48734&color=orange)
 
 ### 书籍包括

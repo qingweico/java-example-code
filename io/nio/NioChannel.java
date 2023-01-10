@@ -48,6 +48,6 @@ class NioChannel {
         long startTime = System.currentTimeMillis();
         fastCopy(args[0], args[1]);
         long cost = System.currentTimeMillis() - startTime;
-        Print.time(cost);
+        Print.time("nio", cost);
     }
 }

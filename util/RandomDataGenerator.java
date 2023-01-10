@@ -60,6 +60,10 @@ public class RandomDataGenerator {
         return TLR.nextDouble();
     }
 
+    public static float randomFloat(int bound) {
+        return TLR.nextFloat() * bound;
+    }
+
 
     public static Date randomDate() {
         int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();

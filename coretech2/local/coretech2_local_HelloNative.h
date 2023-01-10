@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     coretech2_local_HelloNative
+ * Method:    instance
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_coretech2_local_HelloNative_instance
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     coretech2_local_HelloNative
  * Method:    greeting
  * Signature: ()V
  */

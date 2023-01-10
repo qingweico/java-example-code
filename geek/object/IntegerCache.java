@@ -15,6 +15,7 @@ import java.util.Map;
  * 语法糖: Java平台会自动进行一些转化,保证不同的写法在运行时等价,它们发生在编译阶段,也就是生成的字节码是一致的
  * packing {@link Integer#valueOf(int)}
  * unpacking {@link Integer#intValue()}
+ * 使用基本类型能够在执行效率以及内存使用两方面提升软件性能
  *
  * @author zqw
  * @date 2022/7/2

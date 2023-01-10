@@ -62,7 +62,7 @@ class BookResourceLoader {
                         .version(HttpClient.Version.HTTP_2)
                         .build()
         );
-        var pool = ThreadPoolBuilder.custom().isEnableMonitor(true).preStartAllCore(true).builder();
+        var pool = ThreadPoolBuilder.builder().isEnableMonitor(true).preStartAllCore(true).build();
         AtomicInteger counter = new AtomicInteger(0);
         var parallelTaskCount = 10;
         var joins = new Future[parallelTaskCount];

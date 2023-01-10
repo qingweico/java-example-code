@@ -2,6 +2,7 @@ package oak.stream;
 
 import org.testng.annotations.Test;
 import util.Print;
+import util.constants.Symbol;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -54,11 +55,14 @@ public class OperateStreamTest {
 
     @Test
     public void generate() {
-        Stream.iterate(0, x -> x + 4).limit(5).forEach(Print::print);
-        String payload = IntStream.rangeClosed(1, 10).mapToObj(__ -> "a")
-                .collect(Collectors.joining("")) + UUID.randomUUID();
+        Stream.iterate(0, x -> x + 4).limit(5).forEach(Print::prints);
+        Print.print();
+        // __ 占位符
+        String payload = IntStream.rangeClosed(1, 10).mapToObj(String::valueOf)
+                .collect(Collectors.joining(Symbol.WHIFFLETREE)) + UUID.randomUUID();
         print(payload);
-        Stream.generate(Math::random).limit(5).forEach(Print::print);
+        Stream.generate(Math::random).limit(5).forEach(Print::prints);
+        Print.print();
         IntStream s = IntStream.iterate(0, x -> x + 4).limit(4);
         print(Arrays.toString(s.toArray()));
     }
@@ -81,7 +85,7 @@ public class OperateStreamTest {
         container.parallelStream().forEachOrdered(Print::prints);
 
         System.out.println(Arrays.toString(container.stream().map((x) -> x + 1).toArray(Integer[]::new)));
-        long count = container.stream().map((x) -> x + 1).collect(Collectors.toList())
+        long count = container.stream().map((x) -> x + 1).toList()
                 .stream().max(Integer::compareTo)
                 .stream().min(Integer::compareTo)
                 .stream().count();

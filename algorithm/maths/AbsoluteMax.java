@@ -37,7 +37,7 @@ public class AbsoluteMax {
     }
 
     public static void main(String[] args) {
-        int[] a = Tools.genArray(10);
+        int[] a = Tools.genIntArray(10);
         System.out.println(Arrays.toString(a));
         System.out.println(getMaxValue(a));
     }

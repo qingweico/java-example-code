@@ -17,7 +17,7 @@ class ExceptionThread implements Runnable{
     }
 
     public static void main(String[] args) {
-        ExecutorService pool = ThreadPoolBuilder.custom().builder();
+        ExecutorService pool = ThreadPoolBuilder.builder().build();
         pool.execute(new ExceptionThread());
         pool.shutdown();
     }

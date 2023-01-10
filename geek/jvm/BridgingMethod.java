@@ -10,7 +10,7 @@ import jvm.OverrideAndOverload;
  * @date 2022/8/01
  * {@link OverrideAndOverload}
  */
-public class BridgingMethod {
+class BridgingMethod {
     public static void main(String[] args) {
     }
 }
@@ -18,6 +18,7 @@ public class BridgingMethod {
 class Merchant<T extends Customer> {
     /*父类的方法描述符:[Customer double]*/
 
+    @SuppressWarnings("unused")
     public double actionPrice(T customer) {
         return 0.0d;
     }

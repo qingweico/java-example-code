@@ -45,9 +45,11 @@ public interface Constants {
     String STRING = "string";
     String BOOL = "boolean";
     String INTEGER = "integer";
+    String INT = "int";
     String LONG = "long";
     String DATE = "date";
     String DOUBLE = "double";
+    String FLOAT = "float";
 
 
     /////////////// unit

@@ -3,7 +3,6 @@ package thinking.concurrency;
 import thread.pool.ThreadPoolBuilder;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 设置线程异常处理器
@@ -16,7 +15,7 @@ class SettingDefaultHandle {
         Thread.setDefaultUncaughtExceptionHandler(
                 new MyUncaughtExceptionHandler()
         );
-        ExecutorService pool = ThreadPoolBuilder.custom().builder();
+        ExecutorService pool = ThreadPoolBuilder.builder().build();
         pool.execute(new ExceptionThread());
         pool.shutdown();
 

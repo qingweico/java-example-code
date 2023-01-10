@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 class CallableUsage {
     public static void main(String[] args) {
         int threadCount = 10;
-        ExecutorService exec = ThreadPoolBuilder.custom().builder();
+        ExecutorService exec = ThreadPoolBuilder.builder().build();
         ArrayList<Future<String>> results = new ArrayList<>();
         for (int i = 0; i < threadCount; i++) {
 

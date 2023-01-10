@@ -8,11 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
+import util.Print;
 import util.constants.Constants;
 import util.ObjectFactory;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -74,12 +76,12 @@ public final class BaseTest {
     @Test
     public void flag() {
         flag:
-        for (int a = 0; a < Constants.TWO; a++) {
-            for (int i = 0; i < Constants.TEN; i++) {
-                if (i == 3) {
+        for (int i = 0; i < Constants.TWO; i++) {
+            for (int j = 0; j < Constants.TEN; j++) {
+                if (j == 3) {
                     continue flag;
                 }
-                System.out.print(a + ": " + i + "\t");
+                Print.grace(i, j);
             }
         }
     }

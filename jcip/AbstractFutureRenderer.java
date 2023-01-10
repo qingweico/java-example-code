@@ -13,7 +13,7 @@ import static jcip.LaunderThrowable.launderThrowable;
  * @date 2021/4/7
  */
 abstract class AbstractFutureRenderer {
-    private final ExecutorService exec = ThreadPoolBuilder.custom().builder();
+    private final ExecutorService exec = ThreadPoolBuilder.builder().build();
     void renderPage(CharSequence source) {
         final List<ImageInfo> imageInfos = scanForImageInfo(source);
         Callable<List<ImageData>> task =

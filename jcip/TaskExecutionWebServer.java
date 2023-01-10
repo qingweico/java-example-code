@@ -17,7 +17,7 @@ class TaskExecutionWebServer {
     private static final int N_THREADS = 100;
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-       final Executor pool = ThreadPoolBuilder.custom().maxPoolSize(N_THREADS).builder();
+       final Executor pool = ThreadPoolBuilder.builder().maxPoolSize(N_THREADS).build();
         ServerSocket socket = new ServerSocket(80);
         while (true) {
             final Socket connection = socket.accept();

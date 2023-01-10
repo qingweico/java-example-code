@@ -38,10 +38,10 @@ import java.util.concurrent.TimeUnit;
 class SyncObjectMonitor {
     static List<Runnable> list = new ArrayList<>();
     static final Object O = new Object();
-    static ExecutorService pool = ThreadPoolBuilder.custom()
+    static ExecutorService pool = ThreadPoolBuilder.builder()
             .preStartAllCore(true)
             .isEnableMonitor(true)
-            .builder();
+            .build();
 
     public static void main(String[] args) {
         for (int i = 0; i < Constants.TEN; i++) {

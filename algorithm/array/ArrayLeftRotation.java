@@ -34,7 +34,7 @@ class ArrayLeftRotation {
     }
 
     public static void main(String[] args) {
-        int[] arr = Tools.genArray(10,10);
+        int[] arr = Tools.genIntArray(10,10);
         System.out.println(Arrays.toString(arr));
         int[] result = rotateLeft(arr, 3);
         System.out.println(Arrays.toString(result));

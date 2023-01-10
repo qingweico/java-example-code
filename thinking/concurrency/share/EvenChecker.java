@@ -37,7 +37,7 @@ public class EvenChecker implements Runnable {
 
     public static void test(AbstractIntGenerator gp, int count) {
         print("Press Control-C to exit");
-        ExecutorService pool = ThreadPoolBuilder.custom().builder();
+        ExecutorService pool = ThreadPoolBuilder.builder().build();
         for (int i = 0; i < count; i++) {
             pool.execute(new EvenChecker(gp, i));
         }
