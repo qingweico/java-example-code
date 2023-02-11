@@ -22,7 +22,7 @@ import java.util.Set;
 
 @SupportedAnnotationTypes("geek.jvm.CheckGetter")
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
-public class CheckGetterProcessor extends AbstractProcessor {
+class CheckGetterProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {

@@ -17,7 +17,7 @@ package jvm;
  * @author zqw
  * @date 2022/7/2
  */
-public class Graal {
+class Graal {
     public static void main(String[] args) {
         System.out.println("Graal VM");
     }

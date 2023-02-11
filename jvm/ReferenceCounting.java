@@ -1,12 +1,16 @@
 package jvm;
 
+import annotation.Pass;
+
 /**
  * 标记垃圾之引用计数法(Java 实际使用GC Root)
  *
  * @author zqw
  * @date 2021/3/28
  */
-public class ReferenceCounting {
+@SuppressWarnings("all")
+@Pass
+class ReferenceCounting {
 
     Object reference = null;
 

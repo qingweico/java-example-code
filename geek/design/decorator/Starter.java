@@ -13,7 +13,7 @@ import java.util.Map;
  * @author zqw
  * @date 2022/7/9
  */
-public class Starter {
+class Starter {
     static Map<PromotionType, SupportPromotions> supportPromotionsList = new HashMap<>(8);
 
     public static void main(String[] args) throws InterruptedException, IOException {

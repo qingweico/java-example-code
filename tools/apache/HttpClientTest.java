@@ -1,4 +1,4 @@
-package tools.net;
+package tools.apache;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.config.RequestConfig;
@@ -20,7 +20,7 @@ import java.util.HashMap;
  * @date 2022/7/17
  */
 @Slf4j
-public class ApacheHttpClientTest {
+public class HttpClientTest {
     @Test
     public void simpleRequest() throws IOException {
         // 设置超时

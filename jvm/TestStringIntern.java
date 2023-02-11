@@ -1,5 +1,7 @@
 package jvm;
 
+import annotation.Pass;
+import util.Print;
 import util.constants.Constants;
 import util.Tools;
 
@@ -11,6 +13,8 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2021/3/27
  */
+@SuppressWarnings("all")
+@Pass
 class TestStringIntern {
     // VM: -Xmx15m -Xms15m
 
@@ -24,7 +28,7 @@ class TestStringIntern {
             // remove intern(); try again!
             A[i] = new String(String.valueOf(data[i % data.length]));
         }
-        System.out.println(System.currentTimeMillis() - start + "ms");
+        Print.time("", System.currentTimeMillis() - start);
         try {
             TimeUnit.SECONDS.sleep(Constants.NUM_10000);
         } catch (InterruptedException e) {

@@ -9,14 +9,14 @@ import static util.Print.print;
 
 /**
  * Java 虚拟机类加载机制
- *
+ * <p>
  * The JVM ensures that classes are loaded into memory
  * only once in a multithreading environment.
  *
  * @author zqw
  * @date 2021/2/1
  */
-public class Loading {
+class Loading {
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3,
             4, 1);
 

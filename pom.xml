@@ -44,6 +44,11 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.13</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
 		<!-- ///////////////////// 测试相关 //////////////////// -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -182,11 +187,6 @@
 			<version>2.6.2</version>
 		</dependency>
 		<!--Volley - An HTTP library that makes networking for Android apps easier and, most importantly, faster.-->
-		<dependency>
-			<groupId>com.android.volley</groupId>
-			<artifactId>volley</artifactId>
-			<version>1.2.1</version>
-		</dependency>
 		<!--OkHttp - Square’s meticulous HTTP client for Java and Kotlin.-->
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>

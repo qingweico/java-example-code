@@ -20,6 +20,7 @@ public class User implements Serializable {
     @EqualsAndHashCode.Exclude
     private Long id;
     private String username;
+    @Ignore
     private String password;
     @EqualsAndHashCode.Exclude
     private boolean isVip;

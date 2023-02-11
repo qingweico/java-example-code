@@ -72,7 +72,7 @@ public class OperateStreamTest {
         // map and reduce
         Optional<Integer> reduce = container.stream().map(x -> x * 2).filter(x -> x > 10).reduce(Math::min);
         reduce.ifPresent(System.out::println);
-        container.stream().unordered().peek((e) -> System.out.print("peek: " + e)).forEach(System.out::println);
+        container.stream().unordered().peek((e) -> Print.grace("peek", e)).forEach(System.out::println);
     }
 
     @Test
@@ -97,14 +97,14 @@ public class OperateStreamTest {
     public void unShortCircuiting() {
         boolean existNegative = container.stream().anyMatch((x) -> x < 0);
         boolean allPositive = container.stream().allMatch((x) -> x > 0);
-        System.out.println("existNegative: " + existNegative);
-        System.out.println("allPositive: " + allPositive);
+        Print.grace("existNegative", existNegative);
+        Print.grace("allPositive", allPositive);
         Optional<Integer> first = container.stream().findFirst();
         first.ifPresent(System.out::println);
         Optional<Integer> any = container.stream().findAny();
         any.ifPresent(System.out::println);
         boolean allNegative = container.stream().noneMatch((x) -> x >= 0);
-        System.out.println("allNegative: " + allNegative);
+        Print.grace("allNegative", allNegative);
     }
 
     @Test

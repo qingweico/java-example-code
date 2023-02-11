@@ -1,8 +1,10 @@
 package util;
 
+import org.jetbrains.annotations.NotNull;
 import util.constants.Constants;
 import util.constants.Symbol;
 
+import javax.annotation.Nonnull;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -70,8 +72,7 @@ public class Print {
      * @param args   Arguments referenced by the format specifiers in the format string.
      * @return This output stream
      */
-    public static PrintStream
-    printf(String format, Object... args) {
+    public static PrintStream printf(String format, Object... args) {
         return System.out.printf(format, args);
     }
 
@@ -96,8 +97,7 @@ public class Print {
         }
         Set<? extends Map.Entry<?, ?>> entrySet = map.entrySet();
         for (Map.Entry<?, ?> entry : entrySet) {
-            System.out.printf("[key %s %s%s value %s %s]%n",
-                    Symbol.COLON, entry.getKey(), Symbol.COMMA, Symbol.COLON, entry.getValue());
+            System.out.printf("[key %s %s%s value %s %s]%n", Symbol.COLON, entry.getKey(), Symbol.COMMA, Symbol.COLON, entry.getValue());
         }
     }
 
@@ -129,5 +129,18 @@ public class Print {
      */
     public static <T> void printArray(T[] e) {
         System.out.println(Arrays.toString(e));
+    }
+
+    /**
+     * System Logger {@since JDK9} {@link java.lang.System.Logger} 默认实现 {@link java.util.logging.Logger}
+     * JUL {@link java.util.logging} {@since JDK1.4}
+     *
+     * 打印日志
+     * @param name the name of the logger
+     * @param logLevel 日志级别
+     * @param message 打印信息
+     */
+    public static void log(@Nonnull String name, System.Logger.Level logLevel, String message) {
+        System.getLogger(name).log(logLevel, message);
     }
 }

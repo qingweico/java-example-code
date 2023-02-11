@@ -6,26 +6,27 @@ import java.util.logging.Logger;
 
 /**
  * Exception: checked exception: An exception that is forced to be checked at compile time.
- *            unchecked exception: The exception inherited from RuntimeException and This
- *            exception is an error and will be caught automatically.
+ * unchecked exception: The exception inherited from RuntimeException and This
+ * exception is an error and will be caught automatically.
  *
  * @author zqw
  * @date 2020/10/13
  */
 
-public class Player {
+class Player {
     /**
      * java.util.logger
      */
     private static final Logger logger = Logger.getLogger("NoThisSoundException");
     private static final int MAX_RANGE = 10;
+
     public void play(int index) {
         if (index > MAX_RANGE) {
             try {
                 throw new NoThisSoundException("The currently playing song does not exist!");
             } catch (NoThisSoundException e) {
 
-                // This method will prints the sequence of method calls from the method call
+                // This method will print the sequence of method calls from the method call
                 // until the exception is thrown, by default, the information is output to the
                 // standard error stream, that is to say e.printStackTrace() is equal to
                 // e.printStackTrace(System.err), so suppose you want to send an error to
@@ -48,7 +49,7 @@ public class Player {
                 // Throwable was created and thrown), instead, the last element in the array and the
                 // bottom of the stack is the first method call in the call sequence.
                 StackTraceElement[] stackTrace = e.getStackTrace();
-                for(StackTraceElement stackTraceElement : stackTrace){
+                for (StackTraceElement stackTraceElement : stackTrace) {
                     System.out.println(stackTraceElement);
                 }
 
@@ -63,11 +64,6 @@ public class Player {
 }
 
 class NoThisSoundException extends Exception {
-    public NoThisSoundException() {
-        super();
-    }
-
-
     public NoThisSoundException(String message) {
         super(message);
     }

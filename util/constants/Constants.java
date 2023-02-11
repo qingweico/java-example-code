@@ -21,6 +21,7 @@ public interface Constants {
     /////////////// num
 
     int NUM_100 = 100;
+    int NUM_200 = 200;
     int NUM_300 = 300;
     int NUM_1000 = 1000;
 
@@ -50,6 +51,7 @@ public interface Constants {
     String DATE = "date";
     String DOUBLE = "double";
     String FLOAT = "float";
+    String LIST = "List";
 
 
     /////////////// unit

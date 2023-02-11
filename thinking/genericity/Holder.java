@@ -1,5 +1,7 @@
 package thinking.genericity;
 
+import java.util.Objects;
+
 /**
  * @author zqw
  * @date 2021/1/12
@@ -31,6 +33,11 @@ public class Holder<T> {
             return false;
         }
         return value.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     public static void main(String[] args) {

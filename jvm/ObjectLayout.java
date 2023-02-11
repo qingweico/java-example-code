@@ -12,7 +12,7 @@ import org.openjdk.jol.info.ClassLayout;
  * @date 2021/3/5
  * @see EmptyObject
  */
-public class ObjectLayout {
+class ObjectLayout {
     static final Object O = new Object();
 
     public static void main(String[] args) {

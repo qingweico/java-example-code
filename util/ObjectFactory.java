@@ -70,6 +70,9 @@ public class ObjectFactory {
                 if (Constants.DOUBLE.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.randomDouble());
                 }
+                if(Constants.LIST.equalsIgnoreCase(field.getType().getSimpleName())) {
+                    // TODO List
+                }
             } catch (IllegalAccessException e) {
                 log.error("populate {} exception!, {}", instance, e.getMessage());
             }

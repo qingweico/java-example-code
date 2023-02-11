@@ -29,20 +29,7 @@ class NpeHandler {
     }
 }
 
-sealed interface Returned<T> {
 
-    record ReturnValue<T>(T rv) implements Returned<T> {
-    }
-
-    record Undefined(String tip) implements Returned<String> {
-        @Override
-        public String toString() {
-            return tip;
-        }
-    }
-
-    record ErrorCode(int code) implements Returned<Integer> {}
-}
 
 final class Message {
     private final String msg;

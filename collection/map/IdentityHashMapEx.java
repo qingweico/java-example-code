@@ -1,5 +1,6 @@
 package collection.map;
 
+import annotation.Pass;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import util.ObjectFactory;
@@ -14,7 +15,9 @@ import java.util.IdentityHashMap;
  * @date 2022/6/25
  */
 @Slf4j
-class IdentityHashMapE {
+@SuppressWarnings("all")
+@Pass
+class IdentityHashMapEx {
     public static void main(String[] args) {
         User u1 = ObjectFactory.create(User.class, true);
         log.info("u1 hashCode: {}", u1.hashCode());
