@@ -9,8 +9,7 @@ import java.io.InputStreamReader;
  * @date 2021/1/7
  */
 
-
-public class ProcessController {
+class ProcessController {
     final static String CLOSE = "CMD /C";
 
     public static void command(String command) {

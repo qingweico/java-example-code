@@ -18,8 +18,8 @@ class CustomizedClassLoader {
     }
 }
 class ClassLoaderFrame extends JFrame {
-    private JTextField keyField = new JTextField("3", 4);
-    private JTextField nameField = new JTextField("Calculator", 30);
+    private final JTextField keyField = new JTextField("3", 4);
+    private final JTextField nameField = new JTextField("Calculator", 30);
     private static final int DEFAULT_WIDTH = 300;
     private static final int DEFAULT_HEIGHT = 200;
     public ClassLoaderFrame() {

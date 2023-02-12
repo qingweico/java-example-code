@@ -6,7 +6,7 @@ package thinking.io.nio;
  * @author zqw
  * @date 2021/2/17
  */
-public class LockingMappedFiles {
+class LockingMappedFiles {
     public static void main(String[] args) {
         // TODO
     }
