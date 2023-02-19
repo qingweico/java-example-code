@@ -4,7 +4,7 @@ package io.tomcat;
  * @author zqw
  * @date 2022/7/5
  */
-public enum HttpRequestType {
+enum HttpRequestType {
     /**
      * GET
      */

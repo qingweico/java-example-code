@@ -1,9 +1,7 @@
 package tools.bean;
 
 
-import junit.framework.Assert;
 import object.entity.User;
-import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.beans.BeanCopier;
 import util.ObjectFactory;

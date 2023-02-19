@@ -23,7 +23,7 @@ class BioPlainServer {
 
 
     private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(10);
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
 
     public static void serve() throws IOException {
         try (ServerSocket server = new ServerSocket(PORT)) {

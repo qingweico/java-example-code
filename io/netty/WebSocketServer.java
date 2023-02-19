@@ -18,7 +18,7 @@ import util.DateUtil;
  * @date 2022/1/30
  */
 public class WebSocketServer {
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
 
     public void serve() {
         EventLoopGroup boosGroup = new NioEventLoopGroup();

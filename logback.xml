@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<!-- Console 输出设置 -->
+	<!-- 文件 日志输出目录 -->
+	<!--<property name="LOG_HOME" value="logs/"/>-->
+	<!-- Console 日志输出设置 -->
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<!--格式化输出:%d表示日期,%thread表示线程名,%-5level:级别从左显示5个字符宽度%msg:日志消息,%n是换行符-->
-			<pattern>%white(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %cyan(%-5level) %yellow(%logger{36}) %magenta(-) %white(%msg%n)
+			<pattern>%white(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %red([%class:%line]) %cyan(%-5level) %yellow(%logger{36}) %magenta(-) %white(%msg%n)
 			</pattern>
 			<charset>utf8</charset>
 		</encoder>
 	</appender>
+	<!-- 文件 日志输出设置 -->
+	<!--	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+	<!--		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+	<!--			&lt;!&ndash; rollover daily &ndash;&gt;-->
+	<!--			<fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}.txt</fileNamePattern>-->
+	<!--			&lt;!&ndash; each file should be at most 10MB, keep 31 days worth of history, but at most 10GB &ndash;&gt;-->
+	<!--			<maxFileSize>10MB</maxFileSize>-->
+	<!--			<maxHistory>31</maxHistory>-->
+	<!--			<totalSizeCap>10GB</totalSizeCap>-->
+	<!--		</rollingPolicy>-->
+	<!--		<layout class="ch.qos.logback.classic.PatternLayout">-->
+	<!--			<encoder>-->
+	<!--				<pattern>-->
+	<!--					%white(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %red([%class:%line]) %cyan(%-5level)-->
+	<!--					%yellow(%logger{36}) %magenta(-) %white(%msg%n)-->
+	<!--				</pattern>-->
+	<!--				<charset>utf8</charset>-->
+	<!--			</encoder>-->
+
+	<!--		</layout>-->
+	<!--	</appender>-->
+
+	<!-- 自定义一个日志appender -->
+	<!--	<appender name="DEFAULT_STYLE" class="ch.qos.logback.core.ConsoleAppender">-->
+	<!--		<layout class="ch.qos.logback.classic.PatternLayout">-->
+	<!--			<encoder>-->
+	<!--				<pattern>-->
+	<!--					%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%class:%line] %-5level %logger{36} - %msg%n-->
+	<!--				</pattern>-->
+	<!--				<charset>utf8</charset>-->
+	<!--			</encoder>-->
+	<!--		</layout>-->
+
+	<!--	</appender>-->
+
+	<!-- additivity表示是否在控制台打印该日志 -->
+	<!--	<logger name="DEFAULT_STYLE" level="INFO" additivity="true">-->
+	<!--		<appender-ref ref="DEFAULT_STYLE"/>-->
+	<!--	</logger>-->
+
+
+	<!--	&lt;!&ndash; 设置包打印的日志级别  &ndash;&gt;-->
+	<!--	<logger name="io" level="WARN"/>-->
+
 	<root level="info">
 		<appender-ref ref="CONSOLE"/>
 	</root>

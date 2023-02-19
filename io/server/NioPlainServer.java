@@ -36,7 +36,7 @@ class NioPlainServer {
     public static void main(String[] args) throws IOException {
         List<SocketChannel> channelList = new ArrayList<>();
         ServerSocketChannel channel = ServerSocketChannel.open();
-        channel.socket().bind(new InetSocketAddress(Constants.LOOP_BACK, Constants.NUM_8848));
+        channel.socket().bind(new InetSocketAddress(Constants.LOOP_BACK, Constants.DEFAULT_COMMON_PORT));
         channel.configureBlocking(false);
         log.info("server start: {}", channel.getLocalAddress());
         while (true) {

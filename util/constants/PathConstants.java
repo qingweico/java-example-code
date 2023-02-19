@@ -20,4 +20,13 @@ public interface PathConstants {
      */
     String BACK_SLASH = "\\";
 
+    /**
+     * 数据库配置文件路径
+     */
+    String DB_CONFIG_FILE_PATH = "db.properties";
+
+    /**
+     * Redis配置文件路径
+     */
+    String REDIS_CONFIG_FILE_PATH = "redis.properties";
 }

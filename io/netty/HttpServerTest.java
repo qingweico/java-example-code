@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
  * @date 2022/1/28
  */
 public class HttpServerTest {
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
     private static final String FAVICON = "/favicon.ico";
 
     @Test

@@ -1,10 +1,9 @@
 package thread.lock;
 
 import frame.redis.DistributedLock;
-import org.redisson.Redisson;
+import frame.redis.RedissonConfig;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.redisson.config.Config;
 import thread.pool.CustomThreadPool;
 import util.constants.Constants;
 
@@ -25,15 +24,12 @@ import java.util.concurrent.ExecutorService;
 public class RedissonLock {
     static int inventory = 100;
     static int THREAD_COUNT = Constants.NUM_100;
-    private static final String REDIS_SERVER = "redis://119.29.35.129:6379";
-    private static final String REDIS_PASSWORD = "990712";
     private static final String REDIS_LOCK_KEY = "redis_lock";
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
 
     public static void main(String[] args) {
-        Config config = new Config();
-        config.useSingleServer().setAddress(REDIS_SERVER).setPassword(REDIS_PASSWORD);
-        final RedissonClient client = Redisson.create(config);
+        RedissonConfig config = new RedissonConfig();
+        final RedissonClient client = config.redisson();
         final RLock lock = client.getLock(REDIS_LOCK_KEY);
         for (int i = 0; i < THREAD_COUNT; i++) {
             pool.execute(() -> {

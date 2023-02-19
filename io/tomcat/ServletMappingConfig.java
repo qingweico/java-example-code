@@ -7,7 +7,7 @@ import java.util.Map;
  * @author zqw
  * @date 2022/7/5
  */
-public class ServletMappingConfig {
+ class ServletMappingConfig {
     private final Map<String, String> servletMaps = new HashMap<>(8);
 
     public void addServlet(String servletUrl, String servletClass) {

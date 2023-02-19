@@ -16,7 +16,7 @@ import java.util.Scanner;
  * @date 2022/1/29
  */
 public class NettyChatClient {
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
     private static final String HOST = Constants.LOOP_BACK;
 
     public void start() {

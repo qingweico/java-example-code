@@ -21,9 +21,9 @@ import java.nio.channels.SocketChannel;
  */
 public class ZeroCopyTest {
 
-    private final String fileName = "C:\\picture\\pic.png";
+    private final String fileName = "";
     private final String host = Constants.LOOP_BACK;
-    private final int port = Constants.NUM_8848;
+    private final int port = Constants.DEFAULT_COMMON_PORT;
     private final int bufferSize = Constants.KB;
     private final int eof = Constants.EOF;
 

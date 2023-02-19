@@ -7,7 +7,7 @@ import lombok.Getter;
  * @date 2022/7/5
  */
 @Getter
-public class ServletMapping {
+class ServletMapping {
     public ServletMapping(String servletName, String url, String clazz) {
         this.servletName = servletName;
         this.url = url;

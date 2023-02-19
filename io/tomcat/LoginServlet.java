@@ -7,7 +7,7 @@ import java.io.IOException;
  * @date 2022/7/5
  */
 @SuppressWarnings("unused")
-public class LoginServlet extends Servlet {
+class LoginServlet extends Servlet {
     @Override
     public void doGet(Request request, Response response) {
         try {

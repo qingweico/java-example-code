@@ -1,7 +1,7 @@
 package util.constants;
 
 /**
- * {@link Symbol}
+ * 全局符号
  *
  * @author zqw
  */
@@ -55,10 +55,6 @@ public interface Symbol {
      * WHITE_SPACE: " "
      */
     String WHITE_SPACE = " ";
-    /**
-     * QUESTION: "?"
-     */
-    String QUESTION = "?";
     /**
      * COMMA: ","
      */

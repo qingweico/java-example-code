@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class ChatClient {
     private static final String HOST = Constants.LOOP_BACK;
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
     private Selector selector;
     private SocketChannel socketChannel;
     private String username;

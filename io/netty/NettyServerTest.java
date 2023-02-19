@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2022/1/28
  */
 public class NettyServerTest {
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
     private static final String HOST = Constants.LOOP_BACK;
 
     @Test

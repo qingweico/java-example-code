@@ -21,13 +21,8 @@ public interface Constants {
     /////////////// num
 
     int NUM_100 = 100;
-    int NUM_200 = 200;
     int NUM_300 = 300;
     int NUM_1000 = 1000;
-
-    int NUM_8080 = 8080;
-
-    int NUM_8848 = 8848;
     int NUM_10000 = 10_000;
     int NUM_100000 = 100_000;
     int NUM_1000000 = 1_000_000;
@@ -40,21 +35,21 @@ public interface Constants {
     int KB = 1024;
     int EOF = -1;
     String LOOP_BACK = "127.0.0.1";
+    int DEFAULT_COMMON_PORT = 8848;
 
     ///////////////  field type
 
     String STRING = "string";
     String BOOL = "boolean";
     String INTEGER = "integer";
-    String INT = "int";
     String LONG = "long";
     String DATE = "date";
     String DOUBLE = "double";
-    String FLOAT = "float";
     String LIST = "List";
 
 
     /////////////// unit
 
     String MS = "ms";
+    String REDIS = "redis";
 }

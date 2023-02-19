@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2022/7/5
  */
 @Slf4j
-public class Start {
+class Start {
     private final int port;
     private ServletMappingConfig servletConfig;
 

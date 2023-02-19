@@ -16,7 +16,7 @@ import util.constants.Constants;
  * @date 2022/1/30
  */
 public class HeartBeat {
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
 
     public void listen() {
         EventLoopGroup boosGroup = new NioEventLoopGroup(Constants.ONE);

@@ -1,7 +1,9 @@
 package util;
 
 import lombok.extern.slf4j.Slf4j;
+import object.enums.DbConProperty;
 import thread.aqs.ObjectPool;
+import util.constants.PathConstants;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,17 +25,16 @@ public class DatabaseHelper {
 
     /*these field value can be revised before using*/
 
-    static Properties properties;
     static String driveClassName;
     static String dbUlr;
     static String username;
     static String password;
-    static String db = "db.properties";
+    static String db = PathConstants.DB_CONFIG_FILE_PATH;
 
     private static final int DEFAULT_POOL_SIZE = 10;
 
     static {
-        properties = new Properties();
+        Properties properties = loadDbConfig();
         FileInputStream fin;
         // 设置 JDBC 日志流到控制台
         DriverManager.setLogWriter(new PrintWriter(new PrintStream(System.out), true, Charset.defaultCharset()));
@@ -43,10 +44,24 @@ public class DatabaseHelper {
         } catch (IOException e) {
             log.error("load {} error, {}", db, e.getMessage());
         }
-        driveClassName = properties.getProperty("driver");
-        dbUlr = properties.getProperty("url");
-        username = properties.getProperty("username");
-        password = properties.getProperty("password");
+        driveClassName = properties.getProperty(DbConProperty.DRIVE_CLASS_NAME.getProperty());
+        dbUlr = properties.getProperty(DbConProperty.JDBC_URL.getProperty());
+        username = properties.getProperty(DbConProperty.USERNAME.getProperty());
+        password = properties.getProperty(DbConProperty.PASSWORD.getProperty());
+    }
+
+    public static Properties loadDbConfig() {
+        Properties properties = new Properties();
+        FileInputStream fin;
+        // 设置 JDBC 日志流到控制台
+        DriverManager.setLogWriter(new PrintWriter(new PrintStream(System.out), true, Charset.defaultCharset()));
+        try {
+            fin = new FileInputStream(db);
+            properties.load(fin);
+        } catch (IOException e) {
+            log.error("load {} error, {}", db, e.getMessage());
+        }
+        return properties;
     }
 
     public static Connection getConnection() {

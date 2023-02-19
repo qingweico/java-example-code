@@ -15,7 +15,7 @@ import java.util.Set;
  * @date 2022/1/26
  */
 public class ChatServer {
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
 

@@ -18,7 +18,7 @@ import util.DateUtil;
  * @date 2022/1/29
  */
 public class NettyChatServer {
-    private static final int PORT = Constants.NUM_8848;
+    private static final int PORT = Constants.DEFAULT_COMMON_PORT;
 
     public void start() {
         EventLoopGroup boosGroup = new NioEventLoopGroup(1);

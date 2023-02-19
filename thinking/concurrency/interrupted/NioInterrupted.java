@@ -25,7 +25,7 @@ public class NioInterrupted {
     // Interrupting a blocked NIO channel
 
     private static final String HOST = Constants.LOOP_BACK;
-    private static final Integer PORT = Constants.NUM_8080;
+    private static final Integer PORT = Constants.DEFAULT_COMMON_PORT;
     public static void main(String[] args) throws IOException, InterruptedException {
         ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
         InetSocketAddress isa = new InetSocketAddress(HOST, PORT);

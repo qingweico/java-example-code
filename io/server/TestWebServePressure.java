@@ -21,7 +21,7 @@ class TestWebServePressure {
         var pool = new ForkJoinPool();
         ArrayList<String> list = new ArrayList<>();
         var faker = new Faker();
-        try (var serverSocket = new ServerSocket(Constants.NUM_8848)) {
+        try (var serverSocket = new ServerSocket(Constants.DEFAULT_COMMON_PORT)) {
             serverSocket.setSoTimeout(Constants.NUM_100000);
             while (true) {
                 var clientSocket = serverSocket.accept();

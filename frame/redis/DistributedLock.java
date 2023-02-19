@@ -80,7 +80,7 @@ public class DistributedLock {
      */
     public static boolean releaseDistributedLock(String lockKey, String requestId) {
         try (Jedis redis = RedisClient.getJedis()) {
-            /// lua 脚本
+            // lua 脚本
             // key 类型参数放在 KEYS 数组中,其他参数会放在 ARGV 数组中; lua中数组的下标是从1开始的
             String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
             Object result = redis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));
@@ -90,11 +90,7 @@ public class DistributedLock {
 
     public static void main(String[] args) throws InterruptedException {
         int client = 100;
-        ExecutorService pool = ThreadPoolBuilder.builder()
-                .corePoolSize(100)
-                .maxPoolSize(100)
-                .preStartAllCore(true)
-                .build();
+        ExecutorService pool = ThreadPoolBuilder.builder().corePoolSize(100).maxPoolSize(100).preStartAllCore(true).build();
         for (int i = 0; i < client; i++) {
             pool.execute(() -> {
                 final long id = Thread.currentThread().getId();
@@ -110,7 +106,9 @@ public class DistributedLock {
                     }
                 } finally {
                     // 释放锁
-                    releaseDistributedLock(LOCK_KEY, requestId);
+                    if (!releaseDistributedLock(LOCK_KEY, requestId)) {
+                        Print.printf("release lock fail!, {}", requestId);
+                    }
                 }
             });
         }

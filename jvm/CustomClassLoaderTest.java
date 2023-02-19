@@ -59,7 +59,7 @@ public class CustomClassLoaderTest {
         byte[] bytes;
 
         private void connect() throws IOException {
-            try (var socket = new Socket(Constants.LOOP_BACK, Constants.NUM_8848)) {
+            try (var socket = new Socket(Constants.LOOP_BACK, Constants.DEFAULT_COMMON_PORT)) {
                 bytes = socket.getInputStream().readAllBytes();
             }
         }
@@ -106,7 +106,7 @@ public class CustomClassLoaderTest {
 
     @Test
     public void serve() throws IOException, CannotCompileException {
-        var serverSocket = new ServerSocket(Constants.NUM_8848);
+        var serverSocket = new ServerSocket(Constants.DEFAULT_COMMON_PORT);
         serverSocket.setSoTimeout(10000);
         var bytes = genClass();
         while (true) {

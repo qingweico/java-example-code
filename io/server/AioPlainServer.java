@@ -96,6 +96,6 @@ class AioPlainServer {
     }
 
     public static void main(String[] args) throws IOException {
-        serve(Constants.NUM_8848);
+        serve(Constants.DEFAULT_COMMON_PORT);
     }
 }

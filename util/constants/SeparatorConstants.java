@@ -7,7 +7,6 @@ import org.apache.commons.lang3.SystemUtils;
  * <p/>
  * Some separators can be referenced from {@link SystemUtils}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see SystemUtils#FILE_SEPARATOR
  */
 public interface SeparatorConstants {
