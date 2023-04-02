@@ -3,13 +3,16 @@ package oak.base;
 import java.util.Scanner;
 
 /**
+ * 进制转换
  * @author zqw
  * @date 2021/2/10
  */
-class Binary {
+class BinaryConvert {
     public static void main(String[] args) {
         toBinary(10);
         toDecimal();
+        System.out.println(decToBin(10));
+        System.out.println(binToDec("10010"));
     }
 
     public static void toBinary(int num) {
@@ -35,8 +38,12 @@ class Binary {
         System.out.println(num);
     }
 
-    public static String api(int num) {
+    public static String decToBin(int num) {
         // 十进制转换为二进制 API
         return Integer.toBinaryString(num);
+    }
+    public static String binToDec(String value) {
+        // 二进制转换为十进制 API
+        return Integer.valueOf(value, 2).toString();
     }
 }

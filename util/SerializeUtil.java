@@ -102,12 +102,12 @@ public class SerializeUtil {
      * @param bytes 字节数组
      * @return List<T>
      */
-    public static <T> List<T> deserializeList(byte[] bytes, Class<T> t) {
+    public static <T> List<T> deserializeList(byte[] bytes) {
         if (bytes == null) {
             return null;
         }
 
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         ByteArrayInputStream bais = null;
         ObjectInputStream ois = null;
         try {
@@ -160,7 +160,7 @@ public class SerializeUtil {
             list.add(ObjectFactory.create(User.class, true));
         }
         bytes = serializeList(list);
-        List<User> users = deserializeList(bytes, User.class);
+        List<User> users = deserializeList(bytes);
         users.forEach(System.out::println);
     }
 }
