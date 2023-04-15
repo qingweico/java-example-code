@@ -17,6 +17,8 @@ import java.util.Properties;
 
 
 /**
+ * 数据库连接工具
+ *
  * @author zqw
  * @date 2022/6/25
  */

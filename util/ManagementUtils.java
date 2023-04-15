@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * Management Utility class
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @date 2022/7/10
  */
 public final class ManagementUtils {
@@ -100,7 +100,7 @@ public final class ManagementUtils {
             // no guarantee
             String name = RUNTIME_MX_BEAN.getName();
             String processIdValue = StringUtils.substringBefore(name, "@");
-            if (NumberUtils.isNumber(processIdValue)) {
+            if (NumberUtils.isCreatable(processIdValue)) {
                 processId = Integer.parseInt(processIdValue);
             }
         }

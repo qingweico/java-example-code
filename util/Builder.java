@@ -9,6 +9,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
+ * 对象建造者模式
+ *
  * @author zqw
  * @date 2023/1/1
  */

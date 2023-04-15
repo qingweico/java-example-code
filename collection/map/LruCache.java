@@ -9,6 +9,7 @@ import java.util.stream.StreamSupport;
 
 /**
  * LRU: Least Recently Used
+ * [淘汰算法 : 会选择淘汰最近最少使用的元素]
  *
  * @author zqw
  * @date 2021/9/27
