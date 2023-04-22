@@ -137,4 +137,21 @@ public class OperateStreamTest {
                 .collect(Collectors.toSet());
         System.out.println(set);
     }
+
+    @Test
+    public void statistics() {
+        // 平均值
+        Double avlVal = container.stream().collect(Collectors.averagingInt(e -> e));
+        print(avlVal);
+        // 数据统计信息
+        IntSummaryStatistics intSummaryStatistics = container.stream().collect(Collectors.summarizingInt(e -> e));
+        print(intSummaryStatistics);
+    }
+
+    @Test
+    public void group() {
+        // 分组
+        Map<Short, List<Integer>> listMap = container.stream().collect(Collectors.groupingBy(Integer::shortValue));
+        Print.toPrint(listMap);
+    }
 }

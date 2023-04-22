@@ -16,8 +16,7 @@ public class DateUtil {
 
     private static final String DEFAULT_FORMATTER = "yyyy-MM-dd HH:mm:ss";
     private static final ThreadLocal<DateFormat> TL = ThreadLocal.withInitial(() -> new SimpleDateFormat(DEFAULT_FORMATTER));
-    private static final DateTimeFormatter DEFAULT_DATE_TIME_FORMATTER =
-            DateTimeFormatter.ofPattern(DEFAULT_FORMATTER);
+    private static final DateTimeFormatter DEFAULT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_FORMATTER);
 
     public static LocalDateTime parse(String dateStr) {
         return LocalDateTime.parse(dateStr, DEFAULT_DATE_TIME_FORMATTER);
@@ -46,6 +45,14 @@ public class DateUtil {
         } finally {
             TL.remove();
         }
+    }
+
+    public static long nowTt() {
+        return System.currentTimeMillis();
+    }
+
+    public static String now() {
+        return format(new Date());
     }
 
     public static void main(String[] args) {

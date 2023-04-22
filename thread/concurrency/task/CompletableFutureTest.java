@@ -3,9 +3,12 @@ package thread.concurrency.task;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
+import thread.ThreadUtils;
+import thread.cas.UnsafeSupport;
 import thread.pool.CustomThreadPool;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.Supplier;
 
@@ -19,9 +22,9 @@ import java.util.function.Supplier;
  * {@link CompletableFuture#runAsync(Runnable)}
  * {@link CompletableFuture#runAsync(Runnable, Executor)}
  * {@link CompletableFuture#supplyAsync(Supplier)}
- * {@link CompletableFuture#runAsync(Runnable, Executor)}
- * 若没有指定线程池, 则使用默认的ForkJoinPool.commonPool()
- * xxxAsync与不带Async后缀的方法的区别是所使用的线程池会不同
+ * {@link CompletableFuture#supplyAsync(Supplier, Executor)}
+ * 若没有指定线程池, 则使用默认的ForkJoinPool.commonPool()[CommonPool的大小是CPU核数-1]
+ * xxxAsync与不带Async后缀的方法的区别是同步与与异步的区别(如果注册时被依赖的操作已经完成,则直接由当前线程完成;如果注册时被依赖的操作还未完成,则由回调线程完成)
  * @author zqw
  * @date 2022/2/5
  */
@@ -47,7 +50,7 @@ public class CompletableFutureTest {
 
     @Test
     public void serial() {
-        // handle() 和 thenApply() 不同点在于后者遇到异常会停止计算 而前者会继续计算 可以根据异常参数处理
+        // handle() 和 thenApply() 不同点在于后者遇到异常会停止计算, 而前者会继续计算, 可以根据异常参数处理
         CompletableFuture<char[]> f0 = CompletableFuture.supplyAsync(() -> {
             System.out.println("thread: " + Thread.currentThread().getName());
             return "supplyAsync";
@@ -135,7 +138,30 @@ public class CompletableFutureTest {
         System.out.println(f2.join());
     }
     @Test
+    public void anyOf() {
+        // anyOf 任意一个任务执行成功就会返回 [INPUT : CompletableFuture数组]
+        CompletableFuture<String> c1 = CompletableFuture.supplyAsync(() -> {
+            UnsafeSupport.shortWait(10);
+            return "c1";
+        });
+        CompletableFuture<String> c2 = CompletableFuture.supplyAsync(() -> {
+            UnsafeSupport.shortWait(20);
+            return "c2";
+        });
+        CompletableFuture<String> c3 = CompletableFuture.supplyAsync(() -> {
+            UnsafeSupport.shortWait(30);
+            return "c3";
+        });
+        // 使用join拿到结果
+        CompletableFuture.anyOf(c1, c2, c3).whenComplete((v, e) -> System.out.println(v));
+    }
+    @Test
     public void allOf() {
-        CompletableFuture.allOf();
+        // allOf 所有任务都执行成功才能继续执行 但是返回值并没有提供所有异步结果 [INPUT : CompletableFuture数组]
+        CompletableFuture<String> c1 = CompletableFuture.supplyAsync(ThreadUtils::getThreadName);
+        CompletableFuture<String> c2 = CompletableFuture.supplyAsync(ThreadUtils::getThreadName);
+        // 可以使用join拿到所有结果,再放到数组中
+        List<CompletableFuture<String>> result = Arrays.asList(c1, c2);
+        CompletableFuture.allOf(result.toArray(new CompletableFuture[0])).whenComplete((r, e) -> result.stream().map(CompletableFuture::join).toList().forEach(System.out::println));
     }
 }
