@@ -15,6 +15,9 @@ import java.nio.channels.SocketChannel;
 
 /**
  * --------------- 零拷贝 ---------------
+ * 普通拷贝 : 磁盘 --> 内核缓冲区 --->[CPU] --> 用户空间缓冲区 --> [用户调用write] --> 内核的Socket Buffer --> 网卡缓冲区 --> 目标服务器
+ * 零拷贝 : 通过 DMA 技术 把文件内容复制到内核空间的Reader Buffer, 然后把包含数据位置和长度信息的文件描述符加载到Socket Buffer里面
+ * DMA 引擎可以直接把数据从内核空间传递到网卡设配(零拷贝只是减少了不必要的拷贝次数并不是不需要数据拷贝)
  *
  * @author zqw
  * @date 2022/1/27
@@ -119,7 +122,7 @@ public class ZeroCopyTest {
             long size = fileChannel.size();
             // TODO
             while (sendBytes < size) {
-                // transferTo() 方法底层使用了零拷贝
+                // transferTo() 方法底层使用了零拷贝(sendfile()方法)
                 // VM: jdk.nio.enableFastFileTransfer 解除在window下一次传输8M限制
                 send = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
                 sendBytes += send;

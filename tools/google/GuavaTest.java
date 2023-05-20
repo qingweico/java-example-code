@@ -10,6 +10,8 @@ import org.springframework.util.MultiValueMap;
 import util.Print;
 import util.RandomDataGenerator;
 import util.Tools;
+import util.constants.Constants;
+import util.constants.Symbol;
 
 import java.util.*;
 
@@ -72,7 +74,7 @@ public class GuavaTest {
     @Test
     public void filterMap() {
         // Map 过滤
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>(3);
         map.put("T1", 10);
         map.put("T2", 20);
         map.put("T3", 21);
@@ -89,7 +91,7 @@ public class GuavaTest {
         String str = joiner.skipNulls().join("Hello", null, "World");
         System.out.println(str);
         // 键值对 连接
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(3);
         map.put("K1", "V1");
         map.put("K2", "V2");
         str = Joiner.on(",").withKeyValueSeparator(" : ").join(map);
@@ -100,12 +102,12 @@ public class GuavaTest {
     public void splitter() {
         String str = "Hello,World";
         // 按字符分割
-        for (String s : Splitter.on(",").split(str)) {
+        for (String s : Splitter.on(Symbol.DOT).split(str)) {
             Print.prints(s);
         }
         Print.print();
         // 按固定长度分割
-        for (String d : Splitter.fixedLength(2).split(str)) {
+        for (String d : Splitter.fixedLength(Constants.TWO).split(str)) {
             Print.prints(d);
         }
     }
