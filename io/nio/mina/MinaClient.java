@@ -33,9 +33,8 @@ class MinaClient {
         ConnectFuture future = connector.connect(new InetSocketAddress(HOST, PORT));
         future.awaitUninterruptibly();
         session = future.getSession();
-        HashMap<String, String> sy = new HashMap<>();
+        HashMap<String, String> sy = new HashMap<>(12);
         // some data;
         session.write(sy);
     }
-
 }

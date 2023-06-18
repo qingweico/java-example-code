@@ -25,7 +25,7 @@ import java.util.concurrent.locks.StampedLock;
 class RwLock {
     static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10);
-    static String fileName = "data";
+    static String fileName = Constants.DEFAULT_FILE_PATH_MAME;
 
     public static void main(String[] args) throws IOException {
         // Read locks, also known as shared locks, can be held by multiple threads simultaneously.

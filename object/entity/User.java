@@ -6,7 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -16,7 +18,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class User implements Serializable {
+@Slf4j
+public class User implements Serializable, Cloneable {
+    @Serial
+    @Ignore
+    private static final long serialVersionUID = 1L;
     @EqualsAndHashCode.Exclude
     private Long id;
     private String username;
@@ -38,6 +44,7 @@ public class User implements Serializable {
         this.id = id;
         this.username = username;
         this.isVip = isVip;
+        log.info("User Constructor...");
     }
 
     @Override
@@ -57,5 +64,14 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).add("id", id).add("username", username).add("isVip", isVip).toString();
+    }
+
+    @Override
+    public User clone() {
+        try {
+            return (User) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

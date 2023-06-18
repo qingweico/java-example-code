@@ -3,6 +3,7 @@ package tools.apache;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.junit.Test;
+import util.constants.Constants;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +18,7 @@ public class CompressTest {
 
     @Test
     public void compress() {
-        String willCompressFile = "data";
+        String willCompressFile = Constants.DEFAULT_FILE_PATH_MAME;
         String afterCompressFile = "data.zip";
 
 

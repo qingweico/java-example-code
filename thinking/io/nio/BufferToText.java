@@ -22,7 +22,7 @@ class BufferToText {
 
     public static void main(String[] args) throws IOException {
         final String path = "thinking/io/nio/";
-        final String fileName = "data";
+        final String fileName = Constants.DEFAULT_FILE_PATH_MAME;
         FileChannel fc = new FileOutputStream(path + fileName).getChannel();
         fc.write(ByteBuffer.wrap("some text".getBytes()));
         fc.close();

@@ -1,16 +1,13 @@
 package algorithm.tree;
 
-import util.RandomDataGenerator;
-import util.Tools;
-import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
 import static util.Print.*;
 
 /**
+ * 二叉搜索树
+ *
  * @author zqw
  * @date 2021/10/28
  */
@@ -354,38 +351,6 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     private String generateDepthString(int depth) {
         return "--".repeat(Math.max(0, depth));
-    }
-
-    @Test
-    public void testBst() {
-        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
-        int size = 1000;
-        int exclusive = 1000;
-        for (int i = 0; i < size; i++) {
-            binarySearchTree.add(RandomDataGenerator.randomInt(exclusive));
-        }
-        print(binarySearchTree.size());
-        ArrayList<Integer> list = new ArrayList<>();
-        while (!binarySearchTree.isEmpty()) {
-            list.add(binarySearchTree.deleteMax());
-        }
-        Tools.assertSorted(list, true);
-        print(list);
-    }
-
-    @Test
-    public void testPrint() {
-        int[] num = {5, 6, 1, 8, 3, 0, 9};
-        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
-        for (var item : num) {
-            binarySearchTree.add(item);
-        }
-        binarySearchTree.printTree();
-        binarySearchTree.reverse();
-        binarySearchTree.printTree();
-        binarySearchTree.levelOrder();
-        print();
-        binarySearchTree.preOrderNr();
     }
 }
 

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.SystemUtils;
  * <p/>
  * Some separators can be referenced from {@link SystemUtils}
  *
+ * @author zqw
  * @see SystemUtils#FILE_SEPARATOR
  */
 public interface SeparatorConstants {

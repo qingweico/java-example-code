@@ -44,9 +44,7 @@ public class ObjectFactory {
     public static <T> void populate(T instance, Class<T> type) {
         Field[] fields = type.getDeclaredFields();
         for (Field field : fields) {
-            if (!field.canAccess(instance)) {
-                field.setAccessible(true);
-            }
+            ReflectUtils.makeAccessible(instance, field);
             // 忽略掉@Ignore注解标注的属性
             if (field.getAnnotation(Ignore.class) != null) {
                 continue;

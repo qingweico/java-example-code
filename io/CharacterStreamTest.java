@@ -16,7 +16,7 @@ import java.io.*;
  * @date 2020/03/27
  */
 public class CharacterStreamTest {
-    private final String src = "data";
+    private final String src = Constants.DEFAULT_FILE_PATH_MAME;
     private final String target = "destination";
     private long startTime = 0L;
 

@@ -52,4 +52,7 @@ public interface Constants {
 
     String MS = "ms";
     String REDIS = "redis";
+
+    String DEFAULT_FILE_PATH_MAME = "data.txt";
+    String DEFAULT_FILE_OUTPUT_PATH_MAME = "out.txt";
 }

@@ -1,6 +1,7 @@
 package io;
 
 import object.entity.StudentScore;
+import util.constants.Constants;
 
 import java.util.TreeSet;
 import java.io.BufferedWriter;
@@ -15,7 +16,7 @@ import java.util.*;
  */
 class WritingStudentScoreViaIo {
     public static void main(String[] args) throws IOException {
-        String filename = "data";
+        String filename = Constants.DEFAULT_FILE_PATH_MAME;
         TreeSet<StudentScore> set = new TreeSet<>((s1, s2) -> {
             int num = s2.getSum() - s1.getSum();
             return num == 0 ? s1.getName().compareTo(s2.getName()) : num;

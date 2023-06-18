@@ -1,6 +1,7 @@
 package util;
 
 import object.entity.User;
+import util.constants.Constants;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.List;
  */
 public class SerializeUtil {
 
+    private static final String DEFAULT_FILE_NAME = Constants.DEFAULT_FILE_PATH_MAME;
+
     /**
      * 序列化
      *
@@ -25,20 +28,56 @@ public class SerializeUtil {
             return null;
         }
         ObjectOutputStream oos = null;
-        ByteArrayOutputStream baos = null;
+        ByteArrayOutputStream byteArrayOutput = null;
         byte[] bytes = null;
         try {
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
+            byteArrayOutput = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(byteArrayOutput);
             oos.writeObject(object);
-            bytes = baos.toByteArray();
+            bytes = byteArrayOutput.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close(oos);
-            close(baos);
+            close(byteArrayOutput);
         }
         return bytes;
+    }
+
+    public static void serializeToFile(Object object) {
+        serializeToFile(object, DEFAULT_FILE_NAME);
+    }
+
+    /**
+     * 序列化数据到文件中
+     * @param path The file path of serialized data
+     */
+    public static void serializeToFile(Object object, String path) {
+        try {
+            FileOutputStream fos = new FileOutputStream(path);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(object);
+        }catch (IOException e) {
+            // xxx
+        }
+
+    }
+    /**
+     * 从文件中反序列化中对象
+     * @param path The file path of being serialized data
+     */
+    public static Object deserialize(String path) {
+        try {
+            FileInputStream fis = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            return ois.readObject();
+        }catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static Object deserialize() {
+        return deserialize(DEFAULT_FILE_NAME);
     }
 
     /**
@@ -51,16 +90,16 @@ public class SerializeUtil {
         if (bytes == null) {
             return null;
         }
-        ByteArrayInputStream bais = null;
+        ByteArrayInputStream byteArrayInput = null;
         ObjectInputStream ois = null;
         try {
-            bais = new ByteArrayInputStream(bytes);
-            ois = new ObjectInputStream(bais);
+            byteArrayInput = new ByteArrayInputStream(bytes);
+            ois = new ObjectInputStream(byteArrayInput);
             return ois.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            close(bais);
+            close(byteArrayInput);
             close(ois);
         }
         return null;
@@ -78,20 +117,20 @@ public class SerializeUtil {
             return null;
         }
         ObjectOutputStream oos = null;
-        ByteArrayOutputStream baos = null;
+        ByteArrayOutputStream byteArrayOutput = null;
         byte[] bytes = null;
         try {
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
+            byteArrayOutput = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(byteArrayOutput);
             for (Object obj : list) {
                 oos.writeObject(obj);
             }
-            bytes = baos.toByteArray();
+            bytes = byteArrayOutput.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close(oos);
-            close(baos);
+            close(byteArrayOutput);
         }
         return bytes;
     }
@@ -108,12 +147,12 @@ public class SerializeUtil {
         }
 
         List<T> list = new ArrayList<>();
-        ByteArrayInputStream bais = null;
+        ByteArrayInputStream byteArrayInput = null;
         ObjectInputStream ois = null;
         try {
-            bais = new ByteArrayInputStream(bytes);
-            ois = new ObjectInputStream(bais);
-            while (bais.available() > 0) {
+            byteArrayInput = new ByteArrayInputStream(bytes);
+            ois = new ObjectInputStream(byteArrayInput);
+            while (byteArrayInput.available() > 0) {
                 @SuppressWarnings("unchecked")
                 T obj = (T) ois.readObject();
                 if (obj == null) {
@@ -124,7 +163,7 @@ public class SerializeUtil {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            close(bais);
+            close(byteArrayInput);
             close(ois);
         }
         return list;

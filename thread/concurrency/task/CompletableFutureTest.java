@@ -5,8 +5,11 @@ import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import thread.ThreadUtils;
 import thread.cas.UnsafeSupport;
-import thread.pool.CustomThreadPool;
+import thread.pool.CustomThreadFactory;
+import thread.pool.ThreadPoolBuilder;
+import util.Print;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
@@ -31,9 +34,11 @@ import java.util.function.Supplier;
 @Slf4j
 public class CompletableFutureTest {
 
+    private final static ExecutorService POOL = ThreadPoolBuilder.builder().threadFactory(CustomThreadFactory.basicThreadFactory()).build();
+
     @Test
     public void runAsync() {
-        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> System.out.println("thread: " + Thread.currentThread().getName()));
+        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> Print.grace("thread", Thread.currentThread().getName()));
         try {
             System.out.println(cf.get());
         } catch (ExecutionException | InterruptedException ex) {
@@ -43,8 +48,7 @@ public class CompletableFutureTest {
 
     @Test
     public void runAsyncWithThreadPool() throws ExecutionException, InterruptedException {
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
-        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> System.out.println("thread: " + Thread.currentThread().getName()), pool);
+        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> Print.grace("thread", Thread.currentThread().getName()), POOL);
         System.out.println(cf.get());
     }
 
@@ -163,5 +167,41 @@ public class CompletableFutureTest {
         // 可以使用join拿到所有结果,再放到数组中
         List<CompletableFuture<String>> result = Arrays.asList(c1, c2);
         CompletableFuture.allOf(result.toArray(new CompletableFuture[0])).whenComplete((r, e) -> result.stream().map(CompletableFuture::join).toList().forEach(System.out::println));
+    }
+    @Test
+    public void allOfTest() throws IOException {
+        CompletableFuture<Boolean> sendSms = CompletableFuture.supplyAsync(() -> {
+            sendSms();
+            return true;
+        }, POOL);
+        CompletableFuture<Boolean> sendEmail = CompletableFuture.supplyAsync(() -> {
+            sendEmail();
+            return true;
+        }, POOL);
+        CompletableFuture<Void> future = CompletableFuture.allOf(sendSms, sendEmail);
+        // thenRun 和 thenRunAsync 的区别 前者会继续使用上一个任务的线程池 后者会使用新的线程池(如果传入线程池的话 否则使用ForkJoinPool)
+        future.thenRunAsync(() -> {
+            try {
+                if(sendSms.get() && sendEmail.get()) {
+                    callback();
+                }
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        log.info("request over...");
+        // Simple block and nothing to do...
+        System.out.println(System.in.read());
+    }
+    private void sendSms() {
+        UnsafeSupport.shortWait(2000);
+        log.info("endSms success...");
+    }
+    private void sendEmail() {
+        UnsafeSupport.shortWait(3000);
+        log.info("sendEmail success...");
+    }
+    private void callback() {
+        log.info("callback success...");
     }
 }

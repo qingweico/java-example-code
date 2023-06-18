@@ -668,7 +668,7 @@ public final class StdIn {
      */
     public static void main(String[] args) {
         StdIn in;
-        String filename = "data";
+        String filename = Constants.DEFAULT_FILE_PATH_MAME;
         String urlName = "https://introcs.cs.princeton.edu/java/stdlib/InTest.txt";
 
         // read from a URL

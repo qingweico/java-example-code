@@ -5,6 +5,7 @@ import collection.iter.RandomStringGenerator;
 import org.junit.Test;
 import util.Print;
 import util.Tools;
+import util.constants.Constants;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -112,7 +113,7 @@ public class Iterator2StreamTest {
         Stream<String> symbolStream = new Scanner(contents).tokens();
         symbolStream.forEach(Print::prints);
         System.out.println();
-        Path path = Paths.get("data");
+        Path path = Paths.get(Constants.DEFAULT_FILE_PATH_MAME);
         // Paths::lines 会返回一个包含了文件中所有行的 Stream;{@link FileIoResolvingTest#releaseFileHandle}
         try (Stream<String> lines = Files.lines(path)) {
             lines.forEach(Print::print);

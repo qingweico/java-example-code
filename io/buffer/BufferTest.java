@@ -25,7 +25,7 @@ import java.util.concurrent.Future;
  */
 public class BufferTest {
 
-    final String fileName = "data";
+    final String fileName = Constants.DEFAULT_FILE_PATH_MAME;
 
     static int neededNewline = 20;
     private final ByteBuffer buffer = ByteBuffer.allocate(1024 * 8);

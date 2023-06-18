@@ -1,8 +1,9 @@
-//: typeinfo/pets/Pets.java
-// Facade to produce a default PetCreator.
 package thinking.holding.pets;
 import java.util.*;
 
+/**
+ * @author zqw
+ */
 public class Pets {
   public static final AbstractPetCreator creator =
     new LiteralPetCreator();
@@ -15,4 +16,4 @@ public class Pets {
   public static ArrayList<Pet> arrayList(int size) {
     return creator.arrayList(size);
   }
-} ///:~
+}

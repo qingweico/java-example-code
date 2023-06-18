@@ -10,11 +10,12 @@ import static util.Print.printnb;
 
 /**
  * Basic task cooperation
+ * WaxOMatic
  *
  * @author zqw
  * @date 2021/4/11
  */
-class WaxOMatic {
+class WaxMatic {
     public static void main(String[] args) throws InterruptedException {
         Car car = new Car();
         ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);

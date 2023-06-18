@@ -1,5 +1,7 @@
 package thinking.io.nio;
 
+import util.constants.Constants;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,7 +41,7 @@ class ChannelCopy {
     }
 
     public static void main(String[] args) throws IOException {
-        String[] fileNames = {"ChannelCopy.java", "data"};
+        String[] fileNames = {"ChannelCopy.java", Constants.DEFAULT_FILE_PATH_MAME};
         copyFile(fileNames);
         usingTransferCopyFile(fileNames);
     }

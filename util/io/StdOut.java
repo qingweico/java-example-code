@@ -11,16 +11,16 @@ import java.util.Locale;
  */
 public final class StdOut {
 
-    // force Unicode UTF-8 encoding; otherwise it's system dependent
+    /**force Unicode UTF-8 encoding; otherwise it's system dependent*/
     private static final String CHARSET_NAME = "UTF-8";
 
-    // assume language = English, country = US for consistency with StdIn
+    /** assume language = English, country = US for consistency with StdIn */
     private static final Locale LOCALE = Locale.US;
 
-    // send output here
+    /** send output here */
     private static PrintWriter out;
 
-    // this is called before invoking any methods
+    /* this is called before invoking any methods */
 
     static {
         try {
@@ -30,7 +30,7 @@ public final class StdOut {
         }
     }
 
-    // don't instantiate
+    /** don't instantiate */
     private StdOut() {
     }
 

@@ -249,9 +249,10 @@ public class ReflectUtils {
      * 改变private/protected的方法为public,尽量不调用实际改动的语句,避免JDK的SecurityManager抱怨
      */
     public static void makeAccessible(Method method) {
-        if ((!Modifier.isPublic(method.getModifiers())
-                || !Modifier.isPublic(method.getDeclaringClass().getModifiers()))
-                && !method.canAccess(null)) {
+        boolean notPubMet = !Modifier.isPublic(method.getModifiers());
+        boolean notPubClass = !Modifier.isPublic(method.getDeclaringClass().getModifiers());
+        boolean cannotAccess = !method.canAccess(null) || notPubMet || notPubClass;
+        if(cannotAccess) {
             method.setAccessible(true);
         }
     }
@@ -259,10 +260,17 @@ public class ReflectUtils {
     /**
      * 改变private/protected的成员变量为public,尽量不调用实际改动的语句,避免JDK的SecurityManager抱怨
      */
-    public static void makeAccessible(Field field) {
-        if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers()) || Modifier.isFinal(field.getModifiers())) && !field.canAccess(null)) {
+    public static void makeAccessible(Object ins, Field field) {
+        boolean notPubField = !Modifier.isPublic(field.getModifiers());
+        boolean notPubClass = !Modifier.isPublic(field.getDeclaringClass().getModifiers());
+        boolean isFinal = Modifier.isFinal(field.getModifiers());
+        boolean cannotAccess = !field.canAccess(ins) && (notPubField || notPubClass || isFinal);
+        if (cannotAccess) {
             field.setAccessible(true);
         }
+    }
+    public static void makeAccessible(Field field) {
+        makeAccessible(null, field);
     }
 
     /**

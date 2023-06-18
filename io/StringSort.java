@@ -1,5 +1,7 @@
 package io;
 
+import util.constants.Constants;
+
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,7 +15,7 @@ import java.io.OutputStreamWriter;
  */
 class StringSort {
     public static void main(String[] args) throws IOException {
-        String fileName = "data";
+        String fileName = Constants.DEFAULT_FILE_PATH_MAME;
         // Sort the strings and write the sorted strings to the file
         BufferedWriter fw = new BufferedWriter(
                 new OutputStreamWriter(

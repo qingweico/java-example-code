@@ -53,7 +53,7 @@ class CpuCoreThreadPoolCount {
 
         @Override
         public void task() {
-            File sourceFile = new File("data");
+            File sourceFile = new File(Constants.DEFAULT_FILE_PATH_MAME);
             try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(sourceFile))) {
                 byte[] buf = new byte[Constants.KB];
                 for (; ; ) {

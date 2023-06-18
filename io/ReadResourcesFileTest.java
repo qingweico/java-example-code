@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import util.Print;
+import util.constants.Constants;
 import util.constants.Symbol;
 
 import java.io.*;
@@ -22,7 +23,7 @@ import java.util.Objects;
  */
 @Slf4j
 public class ReadResourcesFileTest {
-    String fileName = "data";
+    String fileName = Constants.DEFAULT_FILE_PATH_MAME;
 
     public static void getFileContent(Object fileInPath) {
         BufferedReader br;

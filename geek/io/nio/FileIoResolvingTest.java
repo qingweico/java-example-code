@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
+import util.constants.Constants;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,7 +27,7 @@ import java.util.stream.Stream;
  */
 @Slf4j
 public class FileIoResolvingTest {
-    String fileName = "data";
+    String fileName = Constants.DEFAULT_FILE_PATH_MAME;
     /*文件读写需要确保字符编码一致*/
 
     @Test

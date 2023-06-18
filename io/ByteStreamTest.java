@@ -14,7 +14,7 @@ import java.io.*;
  * @date 2020/04/23
  */
 public class ByteStreamTest {
-    private final String src = "data";
+    private final String src = Constants.DEFAULT_FILE_PATH_MAME;
     private final String target = "target";
     private long startTime = 0L;
 

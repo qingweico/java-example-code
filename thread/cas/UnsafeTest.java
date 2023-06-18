@@ -53,7 +53,7 @@ public class UnsafeTest {
 
 
     @Test
-    public void testUnsafe() throws NoSuchFieldException {
+    public void testUnsafe() {
         // 返回系统指针的大小 32机器为4; 64位机器为8
         print(U.addressSize());
         // 内存页的大小 此值为2的幂次方

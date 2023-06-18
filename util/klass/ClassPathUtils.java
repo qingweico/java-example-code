@@ -1,7 +1,6 @@
 package util.klass;
 
 import com.google.common.collect.Sets;
-import object.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
@@ -18,7 +17,7 @@ import java.util.Set;
 /**
  * {@link ClassPathUtils}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public class ClassPathUtils {
     private ClassPathUtils() {}
