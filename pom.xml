@@ -351,9 +351,28 @@
 				<configuration>
 					<source>17</source>
 					<target>17</target>
-					<compilerArgs>--enable-preview</compilerArgs>
+					<encoding>UTF-8</encoding>
+					<compilerArgs>
+						<arg>--enable-preview</arg>
+						<arg>--add-modules</arg>
+						<arg>jdk.incubator.foreign</arg>
+						<arg>--add-modules</arg>
+						<arg>jdk.incubator.vector</arg>
+						<arg>--add-exports</arg>
+						<arg>jdk.attach/sun.tools.attach=ALL-UNNAMED</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 		</plugins>
+		<sourceDirectory>/</sourceDirectory>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>resources</directory>
+				<includes>
+					<include>*.*</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 </project>
