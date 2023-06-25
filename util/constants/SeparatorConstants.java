@@ -2,13 +2,15 @@ package util.constants;
 
 import org.apache.commons.lang3.SystemUtils;
 
+import java.io.File;
+
 /**
  * Separator Constants
  * <p/>
  * Some separators can be referenced from {@link SystemUtils}
  *
  * @author zqw
- * @see SystemUtils#FILE_SEPARATOR
+ * @see File#pathSeparator
  */
 public interface SeparatorConstants {
 

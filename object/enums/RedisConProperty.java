@@ -12,8 +12,42 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum RedisConProperty {
-    DATABASE("database"), HOST("host"), PORT("port"), PASSWORD("password"),TIMEOUT("timeout"),
-    MAX_TOTAL("max_total"), TEST_ON_BORROW("test_on_borrow"), MAX_WAIT("max_wait"),MAX_IDLE("max_idle");
+    /**
+     * database
+     */
+    DATABASE("database"),
+    /**
+     * host
+     */
+    HOST("host"),
+    /**
+     * max_idle
+     */
+    MAX_IDLE("max_idle"),
+    /**
+     * max_total
+     */
+    MAX_TOTAL("max_total"),
+    /**
+     * max_wait
+     */
+    MAX_WAIT("max_wait"),
+    /**
+     * password
+     */
+    PASSWORD("password"),
+    /**
+     * port
+     */
+    PORT("port"),
+    /**
+     * test_on_borrow
+     */
+    TEST_ON_BORROW("test_on_borrow"),
+    /**
+     * timeout
+     */
+    TIMEOUT("timeout");
 
     private final String property;
 }

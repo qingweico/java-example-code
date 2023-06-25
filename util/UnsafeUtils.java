@@ -23,7 +23,7 @@ import static util.ReflectionUtils.assertFieldMatchType;
 public final class UnsafeUtils {
      private UnsafeUtils(){}
 
-    final static Unsafe unsafe;
+    final static Unsafe U;
     /**
      * <code>long</code>数组base index
      */
@@ -99,7 +99,7 @@ public final class UnsafeUtils {
     /**
      * Offset Cache, 其Key为
      */
-    private final static ConcurrentMap<String, Long> offsetCache = Maps.newConcurrentMap();
+    private final static ConcurrentMap<String, Long> OFFSET_CACHE = Maps.newConcurrentMap();
 
     static {
         try {
@@ -109,31 +109,31 @@ public final class UnsafeUtils {
                 return (Unsafe) theUnsafe.get(null);
             };
 
-            unsafe = AccessController.doPrivileged(action);
+            U = AccessController.doPrivileged(action);
 
-            if (unsafe == null) {
+            if (U == null) {
                 throw new NullPointerException();
             }
 
-            LONG_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(long[].class);
-            INT_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(int[].class);
-            SHORT_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(short[].class);
-            BYTE_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(byte[].class);
-            BOOLEAN_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(boolean[].class);
-            DOUBLE_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(double[].class);
-            FLOAT_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(float[].class);
-            CHAR_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(char[].class);
-            OBJECT_ARRAY_BASE_OFFSET = unsafe.arrayBaseOffset(Object[].class);
+            LONG_ARRAY_BASE_OFFSET = U.arrayBaseOffset(long[].class);
+            INT_ARRAY_BASE_OFFSET = U.arrayBaseOffset(int[].class);
+            SHORT_ARRAY_BASE_OFFSET = U.arrayBaseOffset(short[].class);
+            BYTE_ARRAY_BASE_OFFSET = U.arrayBaseOffset(byte[].class);
+            BOOLEAN_ARRAY_BASE_OFFSET = U.arrayBaseOffset(boolean[].class);
+            DOUBLE_ARRAY_BASE_OFFSET = U.arrayBaseOffset(double[].class);
+            FLOAT_ARRAY_BASE_OFFSET = U.arrayBaseOffset(float[].class);
+            CHAR_ARRAY_BASE_OFFSET = U.arrayBaseOffset(char[].class);
+            OBJECT_ARRAY_BASE_OFFSET = U.arrayBaseOffset(Object[].class);
 
-            LONG_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(long[].class);
-            INT_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(int[].class);
-            SHORT_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(short[].class);
-            BYTE_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(byte[].class);
-            BOOLEAN_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(boolean[].class);
-            DOUBLE_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(double[].class);
-            FLOAT_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(float[].class);
-            CHAR_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(char[].class);
-            OBJECT_ARRAY_INDEX_SCALE = unsafe.arrayIndexScale(Object[].class);
+            LONG_ARRAY_INDEX_SCALE = U.arrayIndexScale(long[].class);
+            INT_ARRAY_INDEX_SCALE = U.arrayIndexScale(int[].class);
+            SHORT_ARRAY_INDEX_SCALE = U.arrayIndexScale(short[].class);
+            BYTE_ARRAY_INDEX_SCALE = U.arrayIndexScale(byte[].class);
+            BOOLEAN_ARRAY_INDEX_SCALE = U.arrayIndexScale(boolean[].class);
+            DOUBLE_ARRAY_INDEX_SCALE = U.arrayIndexScale(double[].class);
+            FLOAT_ARRAY_INDEX_SCALE = U.arrayIndexScale(float[].class);
+            CHAR_ARRAY_INDEX_SCALE = U.arrayIndexScale(char[].class);
+            OBJECT_ARRAY_INDEX_SCALE = U.arrayIndexScale(Object[].class);
         } catch (Exception e) {
             throw new UnsupportedOperationException("Current JVM does not support sun.misc.Unsafe");
         }
@@ -267,7 +267,7 @@ public final class UnsafeUtils {
      */
     private static Long getOffsetFromCache(Class<?> type, String fieldName) {
         String key = createOffsetCacheKey(type, fieldName);
-        return offsetCache.get(key);
+        return OFFSET_CACHE.get(key);
     }
 
     /**
@@ -279,7 +279,7 @@ public final class UnsafeUtils {
      */
     private static void putOffsetFromCache(Class<?> type, String fieldName, long offset) {
         String key = createOffsetCacheKey(type, fieldName);
-        offsetCache.putIfAbsent(key, offset);
+        OFFSET_CACHE.putIfAbsent(key, offset);
     }
 
 
@@ -294,7 +294,7 @@ public final class UnsafeUtils {
     public static long getLongFromArrayVolatile(Object object, String fieldName, int index) throws IllegalArgumentException, ArrayIndexOutOfBoundsException, IllegalAccessException {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         long offset = longArrayIndexOffset(index);
-        return unsafe.getLongVolatile(array, offset);
+        return U.getLongVolatile(array, offset);
     }
 
     /**
@@ -309,7 +309,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = intArrayIndexOffset(index);
-        return unsafe.getIntVolatile(array, offset);
+        return U.getIntVolatile(array, offset);
     }
 
     /**
@@ -324,7 +324,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = shortArrayIndexOffset(index);
-        return unsafe.getShortVolatile(array, offset);
+        return U.getShortVolatile(array, offset);
     }
 
     /**
@@ -339,7 +339,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = byteArrayIndexOffset(index);
-        return unsafe.getByteVolatile(array, offset);
+        return U.getByteVolatile(array, offset);
     }
 
     /**
@@ -354,7 +354,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = booleanArrayIndexOffset(index);
-        return unsafe.getBooleanVolatile(array, offset);
+        return U.getBooleanVolatile(array, offset);
     }
 
     /**
@@ -369,7 +369,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = doubleArrayIndexOffset(index);
-        return unsafe.getDoubleVolatile(array, offset);
+        return U.getDoubleVolatile(array, offset);
     }
 
     /**
@@ -384,7 +384,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = floatArrayIndexOffset(index);
-        return unsafe.getFloatVolatile(array, offset);
+        return U.getFloatVolatile(array, offset);
     }
 
     /**
@@ -401,7 +401,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = charArrayIndexOffset(index);
-        return unsafe.getCharVolatile(array, offset);
+        return U.getCharVolatile(array, offset);
     }
 
     /**
@@ -418,7 +418,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = objectArrayIndexOffset(index);
-        return unsafe.getObjectVolatile(array, offset);
+        return U.getObjectVolatile(array, offset);
     }
 
 
@@ -432,7 +432,7 @@ public final class UnsafeUtils {
     public static void putDouble(Object object, String fieldName, double value) {
         assertFieldMatchType(object, fieldName, double.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putDouble(object, offset, value);
+        U.putDouble(object, offset, value);
     }
 
     /**
@@ -445,7 +445,7 @@ public final class UnsafeUtils {
     public static void putFloat(Object object, String fieldName, float value) {
         assertFieldMatchType(object, fieldName, float.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putFloat(object, offset, value);
+        U.putFloat(object, offset, value);
     }
 
     /**
@@ -458,7 +458,7 @@ public final class UnsafeUtils {
     public static void putShort(Object object, String fieldName, short value) {
         assertFieldMatchType(object, fieldName, short.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putShort(object, offset, value);
+        U.putShort(object, offset, value);
     }
 
     /**
@@ -471,7 +471,7 @@ public final class UnsafeUtils {
     public static void putByte(Object object, String fieldName, byte value) {
         assertFieldMatchType(object, fieldName, byte.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putByte(object, offset, value);
+        U.putByte(object, offset, value);
     }
 
     /**
@@ -484,7 +484,7 @@ public final class UnsafeUtils {
     public static void putBoolean(Object object, String fieldName, boolean value) {
         assertFieldMatchType(object, fieldName, boolean.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putBoolean(object, offset, value);
+        U.putBoolean(object, offset, value);
     }
 
     /**
@@ -497,7 +497,7 @@ public final class UnsafeUtils {
     public static void putChar(Object object, String fieldName, char value) {
         assertFieldMatchType(object, fieldName, char.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putChar(object, offset, value);
+        U.putChar(object, offset, value);
     }
 
     /**
@@ -510,7 +510,7 @@ public final class UnsafeUtils {
     public static void putObject(Object object, String fieldName, Object value) {
         assertFieldMatchType(object, fieldName, Object.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putObject(object, offset, value);
+        U.putObject(object, offset, value);
     }
 
     /**
@@ -523,7 +523,7 @@ public final class UnsafeUtils {
     public static void putLong(Object object, String fieldName, long value) {
         assertFieldMatchType(object, fieldName, long.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putLong(object, offset, value);
+        U.putLong(object, offset, value);
     }
 
 
@@ -537,7 +537,7 @@ public final class UnsafeUtils {
     public static void putInt(Object object, String fieldName, int value) {
         assertFieldMatchType(object, fieldName, int.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putInt(object, offset, value);
+        U.putInt(object, offset, value);
     }
 
     /**
@@ -550,7 +550,7 @@ public final class UnsafeUtils {
     public static void putOrderedInt(Object object, String fieldName, int value) {
         assertFieldMatchType(object, fieldName, int.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putOrderedInt(object, offset, value);
+        U.putOrderedInt(object, offset, value);
     }
 
     /**
@@ -563,7 +563,7 @@ public final class UnsafeUtils {
     public static void putOrderedLong(Object object, String fieldName, long value) {
         assertFieldMatchType(object, fieldName, long.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putOrderedLong(object, offset, value);
+        U.putOrderedLong(object, offset, value);
     }
 
     /**
@@ -576,7 +576,7 @@ public final class UnsafeUtils {
     public static void putOrderedObject(Object object, String fieldName, Object value) {
         assertFieldMatchType(object, fieldName, Object.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putOrderedObject(object, offset, value);
+        U.putOrderedObject(object, offset, value);
     }
 
     /**
@@ -589,7 +589,7 @@ public final class UnsafeUtils {
     public static void putDoubleVolatile(Object object, String fieldName, double value) {
         assertFieldMatchType(object, fieldName, double.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putDoubleVolatile(object, offset, value);
+        U.putDoubleVolatile(object, offset, value);
     }
 
     /**
@@ -602,7 +602,7 @@ public final class UnsafeUtils {
     public static void putFloatVolatile(Object object, String fieldName, float value) {
         assertFieldMatchType(object, fieldName, float.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putFloatVolatile(object, offset, value);
+        U.putFloatVolatile(object, offset, value);
     }
 
     /**
@@ -615,7 +615,7 @@ public final class UnsafeUtils {
     public static void putShortVolatile(Object object, String fieldName, short value) {
         assertFieldMatchType(object, fieldName, short.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putShortVolatile(object, offset, value);
+        U.putShortVolatile(object, offset, value);
     }
 
     /**
@@ -628,7 +628,7 @@ public final class UnsafeUtils {
     public static void putByteVolatile(Object object, String fieldName, byte value) {
         assertFieldMatchType(object, fieldName, byte.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putByteVolatile(object, offset, value);
+        U.putByteVolatile(object, offset, value);
     }
 
     /**
@@ -641,7 +641,7 @@ public final class UnsafeUtils {
     public static void putBooleanVolatile(Object object, String fieldName, boolean value) {
         assertFieldMatchType(object, fieldName, boolean.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putBooleanVolatile(object, offset, value);
+        U.putBooleanVolatile(object, offset, value);
     }
 
     /**
@@ -654,7 +654,7 @@ public final class UnsafeUtils {
     public static void putCharVolatile(Object object, String fieldName, char value) {
         assertFieldMatchType(object, fieldName, char.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putCharVolatile(object, offset, value);
+        U.putCharVolatile(object, offset, value);
     }
 
     /**
@@ -667,7 +667,7 @@ public final class UnsafeUtils {
     public static void putObjectVolatile(Object object, String fieldName, Object value) {
         assertFieldMatchType(object, fieldName, Object.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putObjectVolatile(object, offset, value);
+        U.putObjectVolatile(object, offset, value);
     }
 
     /**
@@ -680,7 +680,7 @@ public final class UnsafeUtils {
     public static void putLongVolatile(Object object, String fieldName, long value) {
         assertFieldMatchType(object, fieldName, long.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putLongVolatile(object, offset, value);
+        U.putLongVolatile(object, offset, value);
     }
 
     /**
@@ -693,7 +693,7 @@ public final class UnsafeUtils {
     public static void putIntVolatile(Object object, String fieldName, int value) {
         assertFieldMatchType(object, fieldName, int.class);
         long offset = getObjectFieldOffset(object, fieldName);
-        unsafe.putIntVolatile(object, offset, value);
+        U.putIntVolatile(object, offset, value);
     }
 
 
@@ -711,7 +711,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         ReflectionUtils.assertArrayIndex(array, index);
         long offset = longArrayIndexOffset(index);
-        unsafe.putLongVolatile(array, offset, value);
+        U.putLongVolatile(array, offset, value);
     }
 
     /**
@@ -728,7 +728,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = longArrayIndexOffset(index);
-        unsafe.putOrderedLong(array, offset, value);
+        U.putOrderedLong(array, offset, value);
     }
 
     /**
@@ -745,7 +745,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = intArrayIndexOffset(index);
-        unsafe.putIntVolatile(array, offset, value);
+        U.putIntVolatile(array, offset, value);
     }
 
     /**
@@ -762,7 +762,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = intArrayIndexOffset(index);
-        unsafe.putOrderedInt(array, offset, value);
+        U.putOrderedInt(array, offset, value);
     }
 
     /**
@@ -779,7 +779,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = shortArrayIndexOffset(index);
-        unsafe.putShortVolatile(array, offset, value);
+        U.putShortVolatile(array, offset, value);
     }
 
     /**
@@ -796,7 +796,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = byteArrayIndexOffset(index);
-        unsafe.putByteVolatile(array, offset, value);
+        U.putByteVolatile(array, offset, value);
     }
 
     /**
@@ -813,7 +813,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = booleanArrayIndexOffset(index);
-        unsafe.putBooleanVolatile(array, offset, value);
+        U.putBooleanVolatile(array, offset, value);
     }
 
     /**
@@ -830,7 +830,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = doubleArrayIndexOffset(index);
-        unsafe.putDoubleVolatile(array, offset, value);
+        U.putDoubleVolatile(array, offset, value);
     }
 
     /**
@@ -847,7 +847,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = floatArrayIndexOffset(index);
-        unsafe.putFloatVolatile(array, offset, value);
+        U.putFloatVolatile(array, offset, value);
     }
 
     /**
@@ -864,7 +864,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = charArrayIndexOffset(index);
-        unsafe.putCharVolatile(array, offset, value);
+        U.putCharVolatile(array, offset, value);
     }
 
     /**
@@ -881,7 +881,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = objectArrayIndexOffset(index);
-        unsafe.putObjectVolatile(array, offset, value);
+        U.putObjectVolatile(array, offset, value);
     }
 
 
@@ -899,7 +899,7 @@ public final class UnsafeUtils {
         Object array = FieldUtils.readDeclaredField(object, fieldName, true);
         assertArrayIndex(array, index);
         long offset = objectArrayIndexOffset(index);
-        unsafe.putOrderedObject(array, offset, value);
+        U.putOrderedObject(array, offset, value);
     }
 
     /**
@@ -911,7 +911,7 @@ public final class UnsafeUtils {
      */
     public static Object getObject(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getObject(object, offset);
+        return U.getObject(object, offset);
     }
 
     /**
@@ -923,7 +923,7 @@ public final class UnsafeUtils {
      */
     public static long getLong(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getLong(object, offset);
+        return U.getLong(object, offset);
     }
 
     /**
@@ -935,7 +935,7 @@ public final class UnsafeUtils {
      */
     public static double getDouble(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getDouble(object, offset);
+        return U.getDouble(object, offset);
     }
 
     /**
@@ -947,7 +947,7 @@ public final class UnsafeUtils {
      */
     public static float getFloat(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getFloat(object, offset);
+        return U.getFloat(object, offset);
     }
 
     /**
@@ -959,7 +959,7 @@ public final class UnsafeUtils {
      */
     public static short getShort(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getShort(object, offset);
+        return U.getShort(object, offset);
     }
 
     /**
@@ -971,7 +971,7 @@ public final class UnsafeUtils {
      */
     public static byte getByte(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getByte(object, offset);
+        return U.getByte(object, offset);
     }
 
     /**
@@ -983,7 +983,7 @@ public final class UnsafeUtils {
      */
     public static boolean getBoolean(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getBoolean(object, offset);
+        return U.getBoolean(object, offset);
     }
 
     /**
@@ -995,7 +995,7 @@ public final class UnsafeUtils {
      */
     public static char getChar(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getChar(object, offset);
+        return U.getChar(object, offset);
     }
 
     /**
@@ -1007,7 +1007,7 @@ public final class UnsafeUtils {
      */
     public static int getInt(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getInt(object, offset);
+        return U.getInt(object, offset);
     }
 
     /**
@@ -1019,7 +1019,7 @@ public final class UnsafeUtils {
      */
     public static Object getObjectVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getObjectVolatile(object, offset);
+        return U.getObjectVolatile(object, offset);
     }
 
     /**
@@ -1031,7 +1031,7 @@ public final class UnsafeUtils {
      */
     public static long getLongVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getLongVolatile(object, offset);
+        return U.getLongVolatile(object, offset);
     }
 
     /**
@@ -1043,7 +1043,7 @@ public final class UnsafeUtils {
      */
     public static double getDoubleVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getDoubleVolatile(object, offset);
+        return U.getDoubleVolatile(object, offset);
     }
 
     /**
@@ -1055,7 +1055,7 @@ public final class UnsafeUtils {
      */
     public static float getFloatVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getFloatVolatile(object, offset);
+        return U.getFloatVolatile(object, offset);
     }
 
     /**
@@ -1067,7 +1067,7 @@ public final class UnsafeUtils {
      */
     public static short getShortVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getShortVolatile(object, offset);
+        return U.getShortVolatile(object, offset);
     }
 
     /**
@@ -1079,7 +1079,7 @@ public final class UnsafeUtils {
      */
     public static byte getByteVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getByteVolatile(object, offset);
+        return U.getByteVolatile(object, offset);
     }
 
     /**
@@ -1091,7 +1091,7 @@ public final class UnsafeUtils {
      */
     public static boolean getBooleanVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getBooleanVolatile(object, offset);
+        return U.getBooleanVolatile(object, offset);
     }
 
     /**
@@ -1103,7 +1103,7 @@ public final class UnsafeUtils {
      */
     public static char getCharVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getCharVolatile(object, offset);
+        return U.getCharVolatile(object, offset);
     }
 
     /**
@@ -1115,7 +1115,7 @@ public final class UnsafeUtils {
      */
     public static int getIntVolatile(Object object, String fieldName) {
         long offset = getObjectFieldOffset(object, fieldName);
-        return unsafe.getIntVolatile(object, offset);
+        return U.getIntVolatile(object, offset);
     }
 
     /**
@@ -1134,7 +1134,7 @@ public final class UnsafeUtils {
             return offsetFromCache;
         }
         Field field = FieldUtils.getField(type, fieldName, true);
-        long offset = unsafe.objectFieldOffset(field);
+        long offset = U.objectFieldOffset(field);
         putOffsetFromCache(type, fieldName, offset);
         return offset;
     }
@@ -1148,6 +1148,6 @@ public final class UnsafeUtils {
      */
     public static long getStaticFieldOffset(Class<?> type, String fieldName) {
         Field field = FieldUtils.getField(type, fieldName, true);
-        return unsafe.staticFieldOffset(field);
+        return U.staticFieldOffset(field);
     }
 }

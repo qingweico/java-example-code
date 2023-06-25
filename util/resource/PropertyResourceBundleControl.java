@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class PropertyResourceBundleControl extends ResourceBundle.Control {
 
-    private static final ConcurrentMap<String, ResourceBundle.Control> encodingControlMap = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, ResourceBundle.Control> ENCODING_CONTROL_MAP = new ConcurrentHashMap<>();
 
     static {
         addEncodingControlMap(newControl(SystemUtils.FILE_ENCODING));
@@ -46,7 +46,7 @@ public class PropertyResourceBundleControl extends ResourceBundle.Control {
 
     private static void addEncodingControlMap(ResourceBundle.Control control) {
         PropertyResourceBundleControl ctrl = (PropertyResourceBundleControl) control;
-        encodingControlMap.putIfAbsent(ctrl.getEncoding(), ctrl);
+        ENCODING_CONTROL_MAP.putIfAbsent(ctrl.getEncoding(), ctrl);
     }
 
     /**
@@ -56,7 +56,7 @@ public class PropertyResourceBundleControl extends ResourceBundle.Control {
      * @return an existed instance of {@link PropertyResourceBundleControl}.
      */
     private static ResourceBundle.Control getControl(final String encoding) {
-        return encodingControlMap.get(encoding);
+        return ENCODING_CONTROL_MAP.get(encoding);
     }
 
     /**
@@ -75,7 +75,7 @@ public class PropertyResourceBundleControl extends ResourceBundle.Control {
         ResourceBundle.Control control = existedControl;
         if (existedControl == null) {
             control = new PropertyResourceBundleControl(encoding);
-            encodingControlMap.put(encoding, control);
+            ENCODING_CONTROL_MAP.put(encoding, control);
         }
         return control;
     }

@@ -259,13 +259,13 @@ enum Operation {
     /**
      * Implementing a fromString method on an enum type
      */
-    private static final Map<String, Operation> stringToEnum =
+    private static final Map<String, Operation> STRING_TO_ENUM =
             Stream.of(values()).collect(toMap(Object::toString, e -> e));
 
     /**
      * Returns Operation for string, if any
      */
     public static Optional<Operation> fromString(String symbol) {
-        return Optional.ofNullable(stringToEnum.get(symbol));
+        return Optional.ofNullable(STRING_TO_ENUM.get(symbol));
     }
 }

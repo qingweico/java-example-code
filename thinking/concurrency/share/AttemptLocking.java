@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static util.Print.print;
-;
 
 /**
  * Locks in the concurrent library allow you to give up on trying to acquire a lock.

@@ -46,12 +46,29 @@ abstract class AbstractRenderer {
     }
 
     interface ImageInfo {
+        /**
+         * downloadImage
+         * @return ImageData
+         */
         ImageData downloadImage();
     }
 
+    /**
+     * renderText
+     * @param s CharSequence
+     */
     abstract void renderText(CharSequence s);
 
+    /**
+     * scanForImageInfo
+     * @param s CharSequence
+     * @return List<ImageInfo>
+     */
     abstract List<ImageInfo> scanForImageInfo(CharSequence s);
 
+    /**
+     * renderImage
+     * @param i ImageData
+     */
     abstract void renderImage(ImageData i);
 }

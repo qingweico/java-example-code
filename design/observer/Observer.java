@@ -1,9 +1,11 @@
 package design.observer;
 
+import java.util.concurrent.Flow;
+
 /**
  * @author zqw
  * @date 2022/3/2
- * @see java.util.Observer
+ * java.util.Observer deprecated {@link Flow}
  * @see java.util.EventListener
  * @see javax.servlet.http.HttpSessionBindingListener
  */

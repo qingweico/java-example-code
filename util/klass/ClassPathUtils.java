@@ -1,10 +1,11 @@
 package util.klass;
 
 import com.google.common.collect.Sets;
+import object.entity.User;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 
 import javax.annotation.Nonnull;
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.URL;
@@ -43,7 +44,8 @@ public class ClassPathUtils {
 
     private static Set<String> resolveClassPaths(String classPath) {
         Set<String> classPaths = Sets.newLinkedHashSet();
-        String[] classPathsArray = StringUtils.split(classPath, SystemUtils.PATH_SEPARATOR);
+        // Deprecated : SystemUtils.PATH_SEPARATOR
+        String[] classPathsArray = StringUtils.split(classPath,  File.pathSeparator);
         classPaths.addAll(Arrays.asList(classPathsArray));
         return Collections.unmodifiableSet(classPaths);
     }
@@ -118,5 +120,10 @@ public class ClassPathUtils {
             location = ClassLoaderUtils.getClassResource(ClassLoader.getSystemClassLoader(), type.getName());
         }
         return location;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getRuntimeClassLocation("object.entity.User"));
+        System.out.println(getRuntimeClassLocation(User.class));
     }
 }

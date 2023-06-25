@@ -1,6 +1,7 @@
 package algorithm.tree;
 
 /**
+ * Disjoint-Set
  * @author zqw
  * @date 2021/11/15
  */

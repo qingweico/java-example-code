@@ -5,15 +5,15 @@ import java.util.*;
  * @author zqw
  */
 public class Pets {
-  public static final AbstractPetCreator creator =
+  public static final AbstractPetCreator CREATOR =
     new LiteralPetCreator();
   public static Pet randomPet() {
-    return creator.randomPet();
+    return CREATOR.randomPet();
   }
   public static Pet[] createArray(int size) {
-    return creator.createArray(size);
+    return CREATOR.createArray(size);
   }
   public static ArrayList<Pet> arrayList(int size) {
-    return creator.arrayList(size);
+    return CREATOR.arrayList(size);
   }
 }

@@ -13,7 +13,22 @@ import lombok.Getter;
 @Getter
 public enum DbConProperty {
 
-    DRIVE_CLASS_NAME("driver"), JDBC_URL("url"), USERNAME("username"), PASSWORD("password");
+    /**
+     * drive_class_name
+     */
+    DRIVE_CLASS_NAME("driver"),
+    /**
+     * jdbc_url
+     */
+    JDBC_URL("url"),
+    /**
+     * username
+     */
+    USERNAME("username"),
+    /**
+     * password
+     */
+    PASSWORD("password");
 
     private final String property;
 }

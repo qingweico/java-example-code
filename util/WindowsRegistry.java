@@ -1,6 +1,7 @@
 package util;
 
 import junit.framework.Assert;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import util.constants.PathConstants;
@@ -18,6 +19,7 @@ import java.util.prefs.Preferences;
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>y
  */
+@Slf4j
 public final class WindowsRegistry {
 
     /**
@@ -46,11 +48,11 @@ public final class WindowsRegistry {
      * included.
      */
     private static final int MAX_WINDOWS_PATH_LENGTH = 256;
-    /*  Windows error codes. */
+    /**  Windows error codes. */
     private static final int ERROR_SUCCESS = 0;
     private static final int ERROR_FILE_NOT_FOUND = 2;
     private static final int ERROR_ACCESS_DENIED = 5;
-    /* Constants used to interpret returns of native functions    */
+    /** Constants used to interpret returns of native functions    */
     private static final int NATIVE_HANDLE = 0;
     private static final int ERROR_CODE = 1;
     private static final int SUBKEYS_NUMBER = 0;
@@ -61,7 +63,7 @@ public final class WindowsRegistry {
     private static final int REG_CREATED_NEW_KEY = 1;
     private static final int REG_OPENED_EXISTING_KEY = 2;
     private static final int NULL_NATIVE_HANDLE = 0;
-    /* Windows security masks */
+    /** Windows security masks */
     private static final int DELETE = 0x10000;
     private static final int KEY_QUERY_VALUE = 1;
     private static final int KEY_SET_VALUE = 2;
@@ -70,16 +72,16 @@ public final class WindowsRegistry {
     private static final int KEY_READ = 0x20019;
     private static final int KEY_WRITE = 0x20006;
     private static final int KEY_ALL_ACCESS = 0xf003f;
-    private static Method WindowsRegOpenKey = null;
-    private static Method WindowsRegCloseKey = null;
-    private static Method WindowsRegCreateKeyEx = null;
-    private static Method WindowsRegDeleteKey = null;
-    private static Method WindowsRegFlushKey = null;
-    private static Method WindowsRegQueryValueEx = null;
-    private static Method WindowsRegSetValueEx = null;
-    private static Method WindowsRegDeleteValue = null;
-    private static Method WindowsRegQueryInfoKey = null;
-    private static final Class<?> windowsPreferencesType;
+    private static final Method WINDOWS_REG_OPEN_KEY;
+    private static final Method WINDOWS_REG_CLOSE_KEY;
+    private static final Method WINDOWS_REG_CREATE_KEY_EX;
+    private static final Method WINDOWS_REG_DELETE_KEY;
+    private static final Method WINDOWS_REG_FLUSH_KEY;
+    private static final Method WINDOWS_REG_QUERY_VALUE_EX;
+    private static final Method WINDOWS_REG_SET_VALUE_EX;
+    private static final Method WINDOWS_REG_DELETE_VALUE;
+    private static final Method WINDOWS_REG_QUERY_INFO_KEY;
+    private static final Class<?> WINDOWS_PREFERENCES_TYPE;
     /**
      * Initial time between registry access attempts, in ms. The time is doubled after each failing attempt (except the
      * first).
@@ -93,16 +95,16 @@ public final class WindowsRegistry {
     static {
         String className = "java.util.prefs.WindowsPreferences";
         try {
-            windowsPreferencesType = Class.forName(className);
-            WindowsRegOpenKey = findMethod("WindowsRegOpenKey", long.class, byte[].class, int.class);
-            WindowsRegCloseKey = findMethod("WindowsRegCloseKey", long.class);
-            WindowsRegCreateKeyEx = findMethod("WindowsRegCreateKeyEx", long.class, byte[].class);
-            WindowsRegDeleteKey = findMethod("WindowsRegDeleteKey", long.class, byte[].class);
-            WindowsRegFlushKey = findMethod("WindowsRegFlushKey", long.class);
-            WindowsRegQueryValueEx = findMethod("WindowsRegQueryValueEx", long.class, byte[].class);
-            WindowsRegSetValueEx = findMethod("WindowsRegSetValueEx", long.class, byte[].class, byte[].class);
-            WindowsRegDeleteValue = findMethod("WindowsRegDeleteValue", long.class, byte[].class);
-            WindowsRegQueryInfoKey = findMethod("WindowsRegQueryInfoKey", long.class);
+            WINDOWS_PREFERENCES_TYPE = Class.forName(className);
+            WINDOWS_REG_OPEN_KEY = findMethod("WindowsRegOpenKey", long.class, byte[].class, int.class);
+            WINDOWS_REG_CLOSE_KEY = findMethod("WindowsRegCloseKey", long.class);
+            WINDOWS_REG_CREATE_KEY_EX = findMethod("WindowsRegCreateKeyEx", long.class, byte[].class);
+            WINDOWS_REG_DELETE_KEY = findMethod("WindowsRegDeleteKey", long.class, byte[].class);
+            WINDOWS_REG_FLUSH_KEY = findMethod("WindowsRegFlushKey", long.class);
+            WINDOWS_REG_QUERY_VALUE_EX = findMethod("WindowsRegQueryValueEx", long.class, byte[].class);
+            WINDOWS_REG_SET_VALUE_EX = findMethod("WindowsRegSetValueEx", long.class, byte[].class, byte[].class);
+            WINDOWS_REG_DELETE_VALUE = findMethod("WindowsRegDeleteValue", long.class, byte[].class);
+            WINDOWS_REG_QUERY_INFO_KEY = findMethod("WindowsRegQueryInfoKey", long.class);
         } catch (Throwable e) {
             String message = String.format("Current JVM: %s", SystemUtils.JAVA_SPECIFICATION_VERSION);
             throw new InstantiationError(message);
@@ -120,7 +122,7 @@ public final class WindowsRegistry {
     }
 
     private static Method findMethod(String name, Class<?>... parameterTypes) throws Exception {
-        Method method = windowsPreferencesType.getDeclaredMethod(name, parameterTypes);
+        Method method = WINDOWS_PREFERENCES_TYPE.getDeclaredMethod(name, parameterTypes);
         method.setAccessible(true);
         return method;
     }
@@ -138,35 +140,35 @@ public final class WindowsRegistry {
      * Java wrapper for Windows registry API RegOpenKey()
      */
     static int[] windowsRegOpenKey(int hKey, byte[] subKey, int securityMask) {
-        return invokeMethod(WindowsRegOpenKey, hKey, subKey, securityMask);
+        return invokeMethod(WINDOWS_REG_OPEN_KEY, hKey, subKey, securityMask);
     }
 
     /**
      * Java wrapper for Windows registry API RegCloseKey()
      */
     static Integer windowsRegCloseKey(int hKey) {
-        return invokeMethod(WindowsRegCloseKey, hKey);
+        return invokeMethod(WINDOWS_REG_CLOSE_KEY, hKey);
     }
 
     /**
      * Java wrapper for Windows registry API RegCreateKeyEx()
      */
     static int[] windowsRegCreateKeyEx(int hKey, byte[] subKey) {
-        return invokeMethod(WindowsRegCreateKeyEx, hKey, subKey);
+        return invokeMethod(WINDOWS_REG_CREATE_KEY_EX, hKey, subKey);
     }
 
     /**
      * Java wrapper for Windows registry API RegDeleteKey()
      */
     static Integer windowsRegDeleteKey(int hKey, byte[] subKey) {
-        return invokeMethod(WindowsRegDeleteKey, hKey, subKey);
+        return invokeMethod(WINDOWS_REG_DELETE_KEY, hKey, subKey);
     }
 
     /**
      * Java wrapper for Windows registry API RegFlushKey()
      */
     static Integer windowsRegFlushKey(int hKey) {
-        return invokeMethod(WindowsRegFlushKey, hKey);
+        return invokeMethod(WINDOWS_REG_FLUSH_KEY, hKey);
     }
 
 
@@ -174,28 +176,28 @@ public final class WindowsRegistry {
      * Java wrapper for Windows registry API RegQueryValueEx()
      */
     static byte[] windowsRegQueryValueEx(int hKey, byte[] valueName) {
-        return invokeMethod(WindowsRegQueryValueEx, hKey, valueName);
+        return invokeMethod(WINDOWS_REG_QUERY_VALUE_EX, hKey, valueName);
     }
 
     /**
      * Java wrapper for Windows registry API RegSetValueEx()
      */
     static Integer windowsRegSetValueEx(int hKey, byte[] valueName, byte[] value) {
-        return invokeMethod(WindowsRegSetValueEx, hKey, valueName, value);
+        return invokeMethod(WINDOWS_REG_SET_VALUE_EX, hKey, valueName, value);
     }
 
     /**
      * Java wrapper for Windows registry API RegDeleteValue()
      */
     static Integer windowsRegDeleteValue(int hKey, byte[] valueName) {
-        return invokeMethod(WindowsRegDeleteValue, hKey, valueName);
+        return invokeMethod(WINDOWS_REG_DELETE_VALUE, hKey, valueName);
     }
 
     /**
      * Java wrapper for Windows registry API RegQueryInfoKey()
      */
     static int[] windowsRegQueryInfoKey(int hKey) {
-        return invokeMethod(WindowsRegQueryInfoKey, hKey);
+        return invokeMethod(WINDOWS_REG_QUERY_INFO_KEY, hKey);
     }
 
 
@@ -714,7 +716,7 @@ public final class WindowsRegistry {
     private void closeKey(int nativeHandle) {
         int result = windowsRegCloseKey(nativeHandle);
         if (result != ERROR_SUCCESS) {
-
+            log.error("closeKey fail : {}", nativeHandle);
         }
     }
 

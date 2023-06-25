@@ -29,6 +29,6 @@ public class FileUtils {
         if (!targetFilePath.contains(parentDirectoryPath)) {
             return null;
         }
-        return UrlUtils.resolvePath(StringUtils.replace(targetFilePath, parentDirectoryPath, SystemUtils.FILE_SEPARATOR));
+        return UrlUtils.resolvePath(StringUtils.replace(targetFilePath, parentDirectoryPath, File.pathSeparator));
     }
 }

@@ -16,6 +16,10 @@ class BasicBounds {
 }
 
 interface HasColor {
+    /**
+     * Get the color
+     * @return Color
+     */
     Color getColor();
 }
 

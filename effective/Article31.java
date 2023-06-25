@@ -45,7 +45,7 @@ class Article31 {
     // if it appears only once in the method declaration.
 
     public static void swap(int i, int j, List<?> list) {
-        // can't compile
+        /*can't compile*/
         // list.set(i, list.set(j, list.get(i)));
 
         swapHelper(list, i, j);
