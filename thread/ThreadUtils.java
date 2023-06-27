@@ -23,7 +23,7 @@ public final class ThreadUtils {
     public static void gracePrint(String attach) {
         StringJoiner result = new StringJoiner("\t|\t");
         result
-                .add(String.valueOf(DateUtil.nowTt()))
+                .add(String.valueOf(DateUtil.format()))
                 .add(String.valueOf(getThreadName()))
                 .add(String.valueOf(getThreadId()))
                 .add(attach);

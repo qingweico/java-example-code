@@ -4,7 +4,7 @@ import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
-import thread.pool.CustomThreadFactory;
+import thread.pool.CustomizableThreadFactory;
 import util.constants.Constants;
 
 import java.nio.ByteBuffer;
@@ -18,7 +18,7 @@ public class DisruptorStarter {
         int bufferSize = Constants.KB;
         LongEventFactory factory = new LongEventFactory();
         Disruptor<LongEvent> disruptor = new Disruptor<>(factory,
-                bufferSize, CustomThreadFactory.basicThreadFactory(),
+                bufferSize, CustomizableThreadFactory.basicThreadFactory(),
                 /*ProducerType.single和ProducerType.MULTI 一个生产者用single 多个用multi*/
                 /*生产和消费的策略请看com.lmax.disruptor.WaitStrategy*/
                 ProducerType.SINGLE, new YieldingWaitStrategy());
