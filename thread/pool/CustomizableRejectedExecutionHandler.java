@@ -1,5 +1,7 @@
 package thread.pool;
 
+import lombok.extern.slf4j.Slf4j;
+import thread.ThreadUtils;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -16,19 +18,25 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 丢弃队列最前面的任务,然后重新提交被拒绝的任务{@link ThreadPoolExecutor.DiscardOldestPolicy}
  * 丢弃任务,但是不抛异常{@link ThreadPoolExecutor.DiscardPolicy}
  */
-public class CustomRejectedExecutionHandler implements RejectedExecutionHandler {
+@Slf4j
+public class CustomizableRejectedExecutionHandler implements RejectedExecutionHandler {
 
     @Override
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+        // main thread execute
+        if (!executor.isShutdown()) {
+            r.run();
+        }
         // just tip
-        System.out.println("task rejected!");
+        log.info("Thread Pool Rejected Task, Main Thread Execute...");
+
     }
 
     public static void main(String[] args) {
-        ExecutorService executorService = CustomThreadPool.newFixedThreadPool(2, 2, 5);
+        ExecutorService executorService = CustomThreadPool.newFixedThreadPool(2, 4, 5);
         for (int i = 0; i < Constants.TEN; i++) {
             int finalI = i;
-            executorService.execute(() -> System.out.println(Thread.currentThread().getName() + ": " + finalI));
+            executorService.execute(() -> ThreadUtils.gracePrint(String.valueOf(finalI)));
         }
         executorService.shutdown();
 

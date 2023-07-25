@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import thread.ThreadUtils;
 import thread.cas.UnsafeSupport;
-import thread.pool.CustomThreadFactory;
+import thread.pool.CustomizableThreadFactory;
 import thread.pool.ThreadPoolBuilder;
 import util.Print;
 
@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 @Slf4j
 public class CompletableFutureTest {
 
-    private final static ExecutorService POOL = ThreadPoolBuilder.builder().threadFactory(CustomThreadFactory.basicThreadFactory()).build();
+    private final static ExecutorService POOL = ThreadPoolBuilder.builder().threadFactory(CustomizableThreadFactory.basicThreadFactory()).build();
 
     @Test
     public void runAsync() {

@@ -58,5 +58,6 @@ public class DateUtil {
     public static void main(String[] args) {
         System.out.println(parse("1999-01-01 00:00:00"));
         System.out.println(tlFormat());
+        System.out.println(nowTt());
     }
 }

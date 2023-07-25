@@ -23,6 +23,9 @@ public class ThreadPoolBuilder {
 
     /*single*/
 
+    public static ExecutorService single() {
+        return single(false);
+    }
     public static ExecutorService single(boolean daemon) {
         return builder(1)
                 .corePoolSize(1)
@@ -30,7 +33,7 @@ public class ThreadPoolBuilder {
                 .keepAliveTime(1)
                 .timeUnit(TimeUnit.SECONDS)
                 .allowCoreThreadTimeOut(true)
-                .threadFactory(CustomThreadFactory.guavaThreadFactory(daemon))
+                .threadFactory(CustomizableThreadFactory.guavaThreadFactory(daemon))
                 .build();
     }
 
@@ -48,7 +51,7 @@ public class ThreadPoolBuilder {
         private boolean allowCoreThreadTimeOut = false;
         private TimeUnit unit = TimeUnit.MILLISECONDS;
         private BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(blockQueueSize);
-        private ThreadFactory threadFactory = CustomThreadFactory.basicThreadFactory();
+        private ThreadFactory threadFactory = CustomizableThreadFactory.basicThreadFactory();
 
         public Builder() {
         }
@@ -125,7 +128,7 @@ public class ThreadPoolBuilder {
                 log.info("Block Queue Size: {}", blockQueueSize);
             }
             executor.setThreadFactory(this.threadFactory);
-            executor.setRejectedExecutionHandler(new CustomRejectedExecutionHandler());
+            executor.setRejectedExecutionHandler(new CustomizableRejectedExecutionHandler());
             return executor;
         }
     }

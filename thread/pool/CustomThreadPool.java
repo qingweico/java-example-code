@@ -84,8 +84,8 @@ public class CustomThreadPool {
         }
         // 包括核心线程在内,没有任务分配的所有线程,在keepAliveTime时间后全部回收掉
         executor.allowCoreThreadTimeOut(true);
-        executor.setRejectedExecutionHandler(new CustomRejectedExecutionHandler());
-        executor.setThreadFactory(CustomThreadFactory.guavaThreadFactory());
+        executor.setRejectedExecutionHandler(new CustomizableRejectedExecutionHandler());
+        executor.setThreadFactory(CustomizableThreadFactory.guavaThreadFactory());
         return executor;
     }
 
