@@ -1,8 +1,6 @@
 package tools.lombok;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import util.RandomDataGenerator;
@@ -12,7 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * @since jdk6 JSR 269 Pluggable Annotation Processing API
+ * Lombok 实现了该规范, 对源代码的抽象语法树分析并修改生成字节码文件
  * {@link lombok.EqualsAndHashCode}
+ * {@link RequiredArgsConstructor 生成包含final和@NonNull注解的成员变量的构造器}
+ * {@link lombok.extern.java.Log}
+ * {@link SneakyThrows 对受检异常进行捕捉并抛出}
+ *
  *
  * @author zqw
  * @date 2022/6/25

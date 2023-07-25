@@ -6,6 +6,7 @@ import util.constants.Constants;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 /**
  * --------------- 对象创建和属性填充工厂 ---------------
@@ -44,6 +45,9 @@ public class ObjectFactory {
     public static <T> void populate(T instance, Class<T> type) {
         Field[] fields = type.getDeclaredFields();
         for (Field field : fields) {
+            if(Modifier.isStatic(field.getModifiers())) {
+                continue;
+            }
             ReflectUtils.makeAccessible(instance, field);
             // 忽略掉@Ignore注解标注的属性
             if (field.getAnnotation(Ignore.class) != null) {
@@ -67,9 +71,6 @@ public class ObjectFactory {
                 }
                 if (Constants.DOUBLE.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.randomDouble());
-                }
-                if(Constants.LIST.equalsIgnoreCase(field.getType().getSimpleName())) {
-                    // TODO List
                 }
             } catch (IllegalAccessException e) {
                 log.error("populate {} exception!, {}", instance, e.getMessage());

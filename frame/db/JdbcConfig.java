@@ -8,6 +8,7 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import util.DatabaseHelper;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * @see JdbcTemplate
+ * @see NamedParameterJdbcTemplate
  * @author zqw
  * @date 2023/2/18
  */
