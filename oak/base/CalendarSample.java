@@ -8,7 +8,7 @@ import java.util.Date;
  * @author zqw
  * @date 2021/2/10
  */
-class CalendarEx {
+class CalendarSample {
     public static void main(String[] args) {
         Calendar s = Calendar.getInstance();
         System.out.println(s.get(Calendar.YEAR));

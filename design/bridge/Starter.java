@@ -6,4 +6,7 @@ package design.bridge;
  * @date 2023/2/18
  */
 class Starter {
+    public static void main(String[] args) {
+
+    }
 }

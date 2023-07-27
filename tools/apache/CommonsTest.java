@@ -101,7 +101,6 @@ public class CommonsTest {
     }
 
     @Test
-    @SuppressWarnings("deprecation")
     public void strOpe() {
         // 合并两个数组
         String[] s1 = new String[] { "1", "2", "3" };

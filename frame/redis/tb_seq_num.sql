@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `tb_seq_num`;
 CREATE TABLE `tb_seq_num`
 (
     `MARK`    varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '唯一标记',
