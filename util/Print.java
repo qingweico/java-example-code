@@ -84,7 +84,9 @@ public class Print {
      * @param time long time
      */
     public static void time(String title, long time) {
-        printf("%s time %s %d %s%n", title, Symbol.COLON, time, Constants.MS);
+       try(PrintStream printStream = printf("%s time %s %d %s%n", title, Symbol.COLON, time, Constants.MS)) {
+           printStream.flush();
+       }
     }
 
     /**
@@ -129,8 +131,23 @@ public class Print {
      *
      * @param e 数组 e
      */
+    public static <T> void printArray(T[] e, boolean isNewLine) {
+        if(isNewLine) {
+            for(T t : e){
+                print(t);
+            }
+        }else {
+            print(Arrays.toString(e));
+        }
+    }
+
+    /**
+     * 打印数组中的元素 (不换行)
+     *
+     * @param e 数组 e
+     */
     public static <T> void printArray(T[] e) {
-        System.out.println(Arrays.toString(e));
+        printArray(e, false);
     }
 
     /**

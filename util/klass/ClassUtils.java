@@ -31,7 +31,7 @@ import java.util.jar.JarFile;
 /**
  * {@link Class} utility class
  *
- * @author <a href="mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public class ClassUtils {
 

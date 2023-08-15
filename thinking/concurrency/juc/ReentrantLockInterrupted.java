@@ -38,9 +38,11 @@ class BlockedMutex {
         lock.lock();
     }
 
+    @SuppressWarnings("all")
     public void f() {
         try {
             // This will never be available to be second task
+            // https://github.com/alibaba/p3c/issues/653
             lock.lockInterruptibly();
             print("lock acquired in f()");
         } catch (InterruptedException e) {

@@ -11,7 +11,7 @@ import java.io.InputStream;
  */
 public class Base64Convert {
 
-    private static final org.apache.commons.codec.binary.Base64 BASE64 = new Base64();
+    private static final Base64 BASE64 = new Base64();
 
 
     /**
@@ -19,7 +19,7 @@ public class Base64Convert {
      *
      * @param in InputStream
      * @return String
-     * @throws IOException ///
+     * @throws IOException throws {@link IOException}
      */
     public static String ioToBase64(InputStream in) throws IOException {
         String strBase64;
@@ -42,7 +42,7 @@ public class Base64Convert {
      * @param bytes byte 数组
      * @return String
      */
-    public static String byteToBase64(byte[] bytes)  {
+    public static String byteToBase64(byte[] bytes) {
         String strBase64;
         // 将字节流数组转换为字符串
         strBase64 = BASE64.encodeToString(bytes);

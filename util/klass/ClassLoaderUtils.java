@@ -27,7 +27,7 @@ import java.util.jar.JarFile;
 /**
  * {@link ClassLoader} Utility
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see ClassLoader
  */
 public class ClassLoaderUtils {
@@ -205,7 +205,7 @@ public class ClassLoaderUtils {
     public static Set<URL> getResources(ClassLoader classLoader, ResourceType resourceType, String resourceName) throws NullPointerException, IOException {
         String normalizedResourceName = resourceType.resolve(resourceName);
         Enumeration<URL> resources = classLoader.getResources(normalizedResourceName);
-        return resources != null && resources.hasMoreElements() ? Sets.newLinkedHashSet(EnumerationUtils.toList(resources)) : Collections.emptySet();
+        return resources != null && resources.hasMoreElements() ? Sets.<URL>newLinkedHashSet(EnumerationUtils.toList(resources)) : Collections.emptySet();
     }
 
     /**
@@ -419,6 +419,9 @@ public class ClassLoaderUtils {
      */
     public enum ResourceType {
 
+        /**
+         * DEFAULT
+         */
         DEFAULT {
             @Override
             boolean supported(String name) {
@@ -431,7 +434,11 @@ public class ClassLoaderUtils {
             }
 
 
-        }, CLASS {
+        },
+        /**
+         * CLASS
+         */
+        CLASS {
             @Override
             boolean supported(String name) {
                 return StringUtils.endsWith(name, FileSuffixConstants.CLASS);
@@ -444,7 +451,11 @@ public class ClassLoaderUtils {
             }
 
 
-        }, PACKAGE {
+        },
+        /**
+         * PACKAGE
+         */
+        PACKAGE {
             @Override
             boolean supported(String name) {
                 //TODO: use regexp to match more precise

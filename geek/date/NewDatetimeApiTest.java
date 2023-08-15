@@ -15,10 +15,7 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -59,7 +56,6 @@ public final class NewDatetimeApiTest {
 
     @Test
     public void calendar() {
-
         Calendar calendar = Calendar.getInstance();
         // 初始化时年参数直接使用当前年即可
         calendar.set(2019, 11, 31, 11, 12, 13);
@@ -176,7 +172,7 @@ public final class NewDatetimeApiTest {
 
         // [JDK SimpleDateFormatter 文档] : https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
         // 小写 y 是年,而大写 Y 是 week year,也就是所在的周属于哪一年
-        // 一年第一周的判断方式是 : 从 getFirstDayOfWeek() 开始,完整的 7 天,并且包含那一年至少 getMinimalDaysInFirstWeek() 天 
+        // 一年第一周的判断方式是 : 从 getFirstDayOfWeek() 开始,完整的 7 天,并且包含那一年至少 getMinimalDaysInFirstWeek() 天
         // [这个计算方式和区域相关]
 
         // tips : 针对年份的日期格式化,应该一律使用 y 而非 Y
@@ -368,12 +364,62 @@ public final class NewDatetimeApiTest {
         // LocalDatetime -> Date; 使用 atZone 方法把 LocalDateTime 转换为 ZonedDateTime, 然后才能获得 UTC 时间戳
 
         Date in = new Date();
+        // toInstant 的作用 :  旧的时间 Date API 与 新的时间 API 之间的转换桥梁
+        // 将 Date 对象转换为 JDK8 新日期 API 的中的 Instant 对象(即JDK引入的一个新对象, 表示精确到纳秒的时间戳)
+
         LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
         Date out = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
         System.out.println(out);
+
+        System.out.println(TimeZone.getDefault().getID());
+        System.out.println(TimeZone.getDefault().toZoneId());
+        System.out.println(ZoneId.systemDefault());
     }
-    
+
     /* 对于 Date 是一个时间戳,是 UTC 时间,没有时区概念,但是调用 toString 方法会输出带有时区的信息
        是因为toString方法中normalize方法会获取当前的默认时区*/
 
+
+    /*Date 和 LocalDateTime 关于时间的加减运算*/
+
+    @Test
+    public void arithmeticTime() {
+        // Date
+        Date d = Date.from(Instant.now());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(d);
+        // ----------------- 添加操作 -----------------
+        // 设置年
+        calendar.add(Calendar.YEAR, 1);
+        // 设置月
+        calendar.add(Calendar.MONTH, 1);
+        // 设置日
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        // 设置星期
+        calendar.add(Calendar.DAY_OF_WEEK, 1);
+        // 本年中已过去多少天
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        // 二十四小时制的小时
+        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        // 十二小时制的小时
+        calendar.add(Calendar.HOUR, 1);
+        // 分钟
+        calendar.add(Calendar.MINUTE, 1);
+        // 秒
+        calendar.add(Calendar.SECOND, 1);
+        // 毫秒
+        calendar.add(Calendar.MILLISECOND, 1);
+        d = calendar.getTime();
+        System.out.println(d);
+
+
+        // LocalDateTime
+        LocalDateTime dateTime = LocalDateTime.parse("2023-08-10 12:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime dateThirtyDayAgo = dateTime.minusDays(31);
+        dateThirtyDayAgo = dateThirtyDayAgo.withHour(12)
+                .withMinute(12)
+                .withSecond(12);
+        String formatted = dateThirtyDayAgo.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        System.out.println(formatted);
+    }
 }

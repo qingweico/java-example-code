@@ -12,6 +12,7 @@ import util.jar.JarUtils;
 
 import javax.annotation.Nonnull;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -24,7 +25,7 @@ import java.util.jar.JarFile;
 /**
  * {@link URL} Utility class
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw fix : 20230814
  * @see URL
  * @see URLEncoder
  * @see URLDecoder
@@ -39,12 +40,17 @@ public final class UrlUtils {
      */
     private static final String DEFAULT_ENCODING = "UTF-8";
 
+    public static void main(String[] args) throws MalformedURLException {
+        System.out.println(resolveRelativePath(new URL("https://qingweico.cn/2021/11/12/2021-10-28/")));
+    }
+
     /**
      * Resolve Relative path from Archive File URL
      *
      * @param archiveFileUrl Archive File URL
      * @return Relative path in archive
      * @throws NullPointerException <code>archiveFileUrl</code> is <code>null</code>
+     * TODO : 存档实体分隔符 ->  !/  这个是什么
      */
     public static String resolveRelativePath(URL archiveFileUrl) throws NullPointerException {
         // NPE check

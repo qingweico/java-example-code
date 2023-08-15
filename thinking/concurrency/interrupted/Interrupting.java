@@ -134,8 +134,10 @@ class LockBlocked implements Runnable {
     ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
     Lock lock = new ReentrantLock();
 
+    @SuppressWarnings("all")
     public void f() {
         try {
+            // https://github.com/alibaba/p3c/issues/653
             lock.lockInterruptibly();
             // Never releases lock
             while (true) {

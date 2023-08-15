@@ -204,4 +204,7 @@ public class CompletableFutureTest {
     private void callback() {
         log.info("callback success...");
     }
+
+    // https://blog.csdn.net/sermonlizhi/article/details/123356877
+    // https://mp.weixin.qq.com/s/ODjEpzFNozQJBDYQVtGlPA
 }

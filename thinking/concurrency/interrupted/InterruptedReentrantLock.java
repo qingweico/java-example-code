@@ -32,12 +32,14 @@ class BlockMutex {
         lock.lock();
     }
 
+    @SuppressWarnings("all")
     public void f() {
         // lock 获得锁最好放在try语句的第一行 不要放在try语句中 就算放在try语句中也应该放在
         // try语句下面的第一行 这么做都是防止发生异常后 避免锁被无故释放
         // lock 释放锁写在 finally 语句块中
         try {
             // This will never be available to a second task
+            // https://github.com/alibaba/p3c/issues/653
             lock.lockInterruptibly();
         } catch (InterruptedException e) {
             print("Interrupted from lock acquisition in f()");
