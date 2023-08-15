@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * {@link Process} Manager
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @date 2022/7/11
  */
 public class ProcessManager {

@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 /**
  * {@link PropertyResourceBundle} Utility class
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see PropertyResourceBundle
  */
 public class PropertyResourceBundleUtils {

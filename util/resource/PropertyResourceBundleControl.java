@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentMap;
  * {@link PropertyResourceBundle} {@link ResourceBundle.Control} Implementation which supports encoding {@link
  * Properties} files
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see PropertyResourceBundle
  * @see ResourceBundle.Control
  */

@@ -137,9 +137,4 @@ public final class BaseTest {
         String res = ToStringBuilder.reflectionToString(user);
         System.out.println(res);
     }
-
-    @Test
-    public void guavaCache() {
-        // GuavaCache 是一套非常完善的本地缓存机制(JVM缓存)
-    }
 }

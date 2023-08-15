@@ -485,7 +485,7 @@ public class ClassLoaderUtils {
             normalizedName = UrlUtils.resolvePath(normalizedName);
 
             // 除去开头的"/"
-            while (normalizedName.startsWith("/")) {
+            while (normalizedName.startsWith(PathConstants.SLASH)) {
                 normalizedName = normalizedName.substring(1);
             }
 

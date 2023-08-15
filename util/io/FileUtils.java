@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * {@link File} Utility
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public class FileUtils {
     private FileUtils(){}

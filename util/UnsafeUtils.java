@@ -17,7 +17,7 @@ import static util.ReflectionUtils.assertFieldMatchType;
  * {@link sun.misc.Unsafe} Utility class <p/> <b> Take case to  use those
  * utility methods in order to the stability of JVM </b>
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @date 2022/7/10
  */
 public final class UnsafeUtils {

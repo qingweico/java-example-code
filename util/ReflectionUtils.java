@@ -16,7 +16,7 @@ import java.util.Map;
  * Reflection Utility class, generic methods are defined from {@link FieldUtils},
  * {@link MethodUtils}, {@link ConstructorUtils}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * @author zqw
  * @date 2022/7/10
  * @see Method
  * @see Field

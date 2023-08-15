@@ -10,7 +10,7 @@ import java.util.ServiceLoader;
 /**
  * {@link ServiceLoader} Utility
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see ServiceLoader
  */
 public abstract class ServiceLoaderUtils {
@@ -73,7 +73,7 @@ public abstract class ServiceLoaderUtils {
      * @param <T>
      *         service interface type
      * @param serviceInterfaceType //
-     * @return 如果存在的话，{@link #loadServicesList(ClassLoader, Class) 加载service interface type 的实现对象列表} 中的第一个.
+     * @return 如果存在的话, {@link #loadServicesList(ClassLoader, Class) 加载service interface type 的实现对象列表} 中的第一个.
      * @throws IllegalArgumentException
      *         如果指没有定义<code>serviceInterfaceType</code> 的实现类在配置文件/META-INF/services/<code>serviceInterfaceType</code>
      *         中的话,将会抛出 IllegalArgumentException
@@ -84,16 +84,16 @@ public abstract class ServiceLoaderUtils {
     }
 
     /**
-     * 如果存在的话，加载service interface type 的实现对象列表中的最后一个。
+     * 如果存在的话, 加载service interface type 的实现对象列表中的最后一个。
      * <p/>
      * <p/>
-     * 设计目的： 利用{@link ClassLoader}的层次性，一旦较高层次（这里最高层次ClassLoader为Bootstrap ClassLoader）双亲的ClassLoader中加载了配置文件/META-INF/services/
-     * <code>serviceInterfaceType</code>中的最后一个实现类的话，低层次的ClassLoader将无法覆盖前定义。
+     * 设计目的： 利用{@link ClassLoader}的层次性, 一旦较高层次（这里最高层次ClassLoader为Bootstrap ClassLoader）双亲的ClassLoader中加载了配置文件/META-INF/services/
+     * <code>serviceInterfaceType</code>中的最后一个实现类的话, 低层次的ClassLoader将无法覆盖前定义。
      *
      * @param <T>
      *         service interface type
      * @param serviceInterfaceType //
-     * @return 如果存在的话，加载service interface type 的实现对象列表中的最后一个。
+     * @return 如果存在的话, 加载service interface type 的实现对象列表中的最后一个。
      * @throws IllegalArgumentException
      *         see {@link #loadServicesList(ClassLoader, Class)}
      */
