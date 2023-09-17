@@ -4,13 +4,17 @@ import org.junit.Test;
 import util.Print;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.http.HttpClient;
 import java.util.Scanner;
 
 /**
  * @author zqw
  * @date 2022/8/7
+ * @see HttpURLConnection @since JDK1.1
+ * @see HttpClient @since JDK11 替换了仅有阻塞模式的 {@link HttpURLConnection}
  */
 public class UrlConnectionTest {
     @Test

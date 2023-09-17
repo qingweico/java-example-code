@@ -9,7 +9,7 @@ import java.io.IOException;
  *
  * @param <T>
  *         the type of execution callback
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see VirtualMachine
  */
 public interface VirtualMachineCallback<V extends VirtualMachine, T> {

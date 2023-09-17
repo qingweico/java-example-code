@@ -5,7 +5,7 @@ package util.filter;
  *
  * @param <T>
  *         the type of Filtered object
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public interface Filter<T> {
 

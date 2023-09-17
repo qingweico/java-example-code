@@ -1,7 +1,7 @@
 package algorithm.set;
 
 import org.junit.Test;
-import util.io.FileOperation;
+import util.io.FileUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class SetTest {
             @SuppressWarnings("unchecked") var inst = (Set<String>) rawInstance;
             var start = System.nanoTime();
             ArrayList<String> arrayList = new ArrayList<>();
-            FileOperation.readFileToArrayList("algorithm/set/a-tale-of-two-cities.txt", arrayList);
+            FileUtils.readFileToArrayList("algorithm/set/a-tale-of-two-cities.txt", arrayList);
             print(arrayList.size());
             for (String s : arrayList) {
                 inst.add(s);

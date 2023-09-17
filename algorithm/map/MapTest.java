@@ -3,7 +3,7 @@ package algorithm.map;
 import util.Tools;
 import org.junit.Test;
 import thread.pool.CustomThreadPool;
-import util.io.FileOperation;
+import util.io.FileUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class MapTest {
             @SuppressWarnings("unchecked") var inst = (Map<String, Integer>) rawInstance;
             var start = System.nanoTime();
             ArrayList<String> arrayList = new ArrayList<>();
-            FileOperation.readFileToArrayList("algorithm/set/pride-and-prejudice.txt", arrayList);
+            FileUtils.readFileToArrayList("algorithm/set/pride-and-prejudice.txt", arrayList);
             String clsName = rawInstance.getClass().getSimpleName();
             print(clsName + " words: " + arrayList.size());
             for (String s : arrayList) {

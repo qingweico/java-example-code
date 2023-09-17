@@ -5,7 +5,7 @@ import util.ManagementUtils;
 /**
  * Local {@link VirtualMachineTemplate}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see LocalVirtualMachineTemplate
  */
 public class LocalVirtualMachineTemplate extends VirtualMachineTemplate {

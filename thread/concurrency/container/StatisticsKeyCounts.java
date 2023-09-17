@@ -2,6 +2,7 @@ package thread.concurrency.container;
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.jboss.netty.util.internal.ConcurrentHashMap;
+import util.Print;
 
 import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
@@ -21,6 +22,13 @@ public class StatisticsKeyCounts {
     private static final int ITEM_COUNT = 10;
     public static void main(String[] args) throws InterruptedException {
         StopWatch sw = new StopWatch();
+        sw.start();
+        StatisticsKeyCounts inst = new StatisticsKeyCounts();
+        Map<String, Long> map = inst.statisticsKeyCounts();
+        Print.toPrint(map);
+        sw.stop();
+        System.out.println(sw.getTime(TimeUnit.MILLISECONDS));
+
 
     }
 
@@ -28,7 +36,7 @@ public class StatisticsKeyCounts {
         ConcurrentHashMap<String, LongAdder> freq = new ConcurrentHashMap<>(ITEM_COUNT);
         ForkJoinPool fjp = new ForkJoinPool(THREAD_COUNT);
         fjp.execute(() -> IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach(i -> {
-            String key = "item: " + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
+            String key = "Key" + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
             freq.computeIfAbsent(key, k -> new LongAdder()).increment();
         }));
         fjp.shutdown();

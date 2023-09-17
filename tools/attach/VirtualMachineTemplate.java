@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * {@link VirtualMachine} Template Class
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see VirtualMachine
  */
 public class VirtualMachineTemplate {

@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 /**
  * {@link Filter} Operator enumeration, which contains {@link #AND}{@link #OR}{@link #XOR}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * @author zqw
  * @see Filter
  * @see #AND
  * @see #OR

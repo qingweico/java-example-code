@@ -9,8 +9,6 @@ import com.sun.tools.attach.spi.AttachProvider;
 import junit.framework.Assert;
 import org.junit.Test;
 import sun.tools.attach.HotSpotVirtualMachine;
-import tools.attach.HotSpotVirtualMachineCallback;
-import tools.attach.LocalVirtualMachineTemplate;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +16,7 @@ import java.util.List;
 /**
  * {@link LocalVirtualMachineTemplate} Test
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  * @see LocalVirtualMachineTemplate
  */
 public class LocalVirtualMachineTemplateTest {

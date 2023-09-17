@@ -1,11 +1,8 @@
 
-package util.filter.test;
+package util.filter;
 
 import junit.framework.Assert;
 import org.junit.Test;
-import util.filter.Filter;
-import util.filter.FilterOperator;
-import util.filter.FilterUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +10,9 @@ import java.util.List;
 /**
  * {@link FilterUtils} Test Case
  *
- * @author <a href="mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
-public class FilterUtilsTest extends AbstractTestCase {
+public class FilterUtilsTest {
 
     @Test
     public void testFilter() {

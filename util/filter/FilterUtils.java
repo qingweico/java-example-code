@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * {@link Filter} utility class
  *
- * @author <a href="mercyblitz@gmail.com">Mercy<a/>
+ * @author zqw
  */
 public class FilterUtils {
 
@@ -46,6 +46,7 @@ public class FilterUtils {
      *         The filtered object type
      * @return List<E>
      */
+    @SafeVarargs
     @Nonnull
     public static <E> List<E> filter(Iterable<E> iterable, FilterOperator filterOperator, Filter<E> ...filters) {
         List<E> list = Lists.newArrayList(iterable);
