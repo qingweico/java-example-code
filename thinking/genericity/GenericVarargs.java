@@ -1,13 +1,17 @@
 package thinking.genericity;
 
+import util.Print;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * mutable parameter and generic method
- *
+ * <p>
  * mutable generic parameters: T ...args
+ * 可变参数与泛型 - 可能出现堆污染(泛型限制类型失效)
  * @author zqw
  * @date 2021/4/9
  */
@@ -33,6 +37,29 @@ class GenericVarargs {
       System.out.println(ls);
       ls = markList("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""));
       System.out.println(ls);
+      heapPollution();
+   }
 
+   private static void heapPollution() {
+      List<String>[] el = alterEl(Arrays.asList("A", "B", "C"), Arrays.asList("1", "2", "3"));
+      if(el != null) {
+         for(List<String> e : el) {
+            for(String str : e) {
+               Print.prints(str);
+            }
+         }
+      }
+   }
+
+   /*@SafeVarargs @since JDK9 可以加在private方法上*/
+
+
+   @SafeVarargs
+   private static List<String>[] alterEl(List<String>... lists) {
+      if(Array.getLength(lists) == 0) {
+         return null;
+      }
+      ((Object[]) lists)[0] = Arrays.asList(1, 2, 3);
+      return lists;
    }
 }
