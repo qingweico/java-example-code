@@ -1,6 +1,8 @@
 package thinking.genericity;
 
 import util.Generator;
+import util.Print;
+import util.constants.Constants;
 
 /**
  * @author zqw
@@ -18,7 +20,7 @@ public class Fibonacci implements Generator<Integer> {
    }
 
    private int fib(int n) {
-      if(n < 2) {
+      if(n < Constants.TWO) {
           return 1;
       }
       return fib(n - 2) + fib(n - 1);
@@ -26,8 +28,9 @@ public class Fibonacci implements Generator<Integer> {
 
    public static void main(String[] args) {
       Fibonacci gen = new Fibonacci();
-      for(int i = 0;i < 10;i++) {
-         System.out.print(gen.next() + " ");
+      int loopCount = 10;
+      for(int i = 0;i < loopCount;i++) {
+         Print.prints(gen.next());
       }
    }
 }

@@ -59,7 +59,8 @@ class Blocked implements Runnable {
                     try {
                         Print.println("Calculating");
                         // A time-consuming, non-blocking operation:
-                        for (int i = 0; i < 250_0000; i++) {
+                        double loopCount = 250_0000d;
+                        for (int i = 0; i < loopCount; i++) {
                             d += (Math.PI + Math.E) / d;
                         }
                         Print.println("Finished time-consuming operation");

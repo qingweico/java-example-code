@@ -47,7 +47,8 @@ public class GuavaTest {
         // Spring
         MultiValueMap<String, String> mvm = new LinkedMultiValueMap<>();
         List<String> adds = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        int loops = 4;
+        for (int i = 0; i < loops; i++) {
             adds.add(RandomDataGenerator.randomAddress(true));
         }
         mvm.put("Address", adds);

@@ -1,6 +1,8 @@
 package oak.stream;
 
+import object.entity.User;
 import org.testng.annotations.Test;
+import util.ObjectFactory;
 import util.Print;
 import util.constants.Symbol;
 
@@ -159,8 +161,10 @@ public class OperateStreamTest {
      * Stream 中 map 和 peek 的区别
      */
     @Test
-    public void mapAndPeakDiff() {
-        System.out.println(container.stream().map(e -> e + 1).collect(Collectors.toList()));
-        System.out.println(container.stream().peek(System.out::println).collect(Collectors.toList()));
+    public void mapAndPeekDiff() {
+        List<User> list = Collections.singletonList(ObjectFactory.create(User.class, true));
+        Print.toPrint(list);
+        Print.toPrint(list.stream().map(User::getId).collect(Collectors.toList()));
+        Print.toPrint(list.stream().peek(e -> e.setId(1L)).collect(Collectors.toList()));
     }
 }

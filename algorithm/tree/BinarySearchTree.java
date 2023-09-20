@@ -299,9 +299,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     private void printTree(Node root) {
         int h = depth(root);
+        int interval = 2;
         int w = 2 * (int) Math.pow(2, h);
         var lines = new StringBuilder[h * 2];
-        for (int i = 0; i < h * 2; i++) {
+        for (int i = 0; i < h * interval; i++) {
             lines[i] = new StringBuilder(String.format("%" + w + "s", ""));
         }
 

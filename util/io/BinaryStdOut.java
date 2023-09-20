@@ -39,6 +39,22 @@ public final class BinaryStdOut {
      * has BinaryStdOut been called for first time?
      */
     private static boolean isInitialized;
+    /**
+     * 8 bit
+     */
+    private static final int BIT_8 = 8;
+    /**
+     * 16 bit
+     */
+    private static final int BIT_16 = 16;
+    /**
+     * 32 bit
+     */
+    private static final int BIT_32 = 32;
+    /**
+     * 256 bit
+     */
+    private static final int BIT_256 = 256;
 
     /**don't instantiate*/
     private BinaryStdOut() {
@@ -190,11 +206,11 @@ public final class BinaryStdOut {
      * @throws IllegalArgumentException if {@code x} is not between 0 and 2<sup>r</sup> - 1.
      */
     public static void write(int x, int r) {
-        if (r == 32) {
+        if (r == BIT_32) {
             write(x);
             return;
         }
-        if (r < 1 || r > 32) {
+        if (r < 1 || r > BIT_32) {
             throw new IllegalArgumentException("Illegal value for r = " + r);
         }
         if (x < 0 || x >= (1 << r)) {
@@ -258,7 +274,7 @@ public final class BinaryStdOut {
      * @throws IllegalArgumentException if {@code x} is not between 0 and 255.
      */
     public static void write(char x) {
-        if (x >= 256) {
+        if (x >= BIT_256) {
             throw new IllegalArgumentException("Illegal 8-bit char = " + x);
         }
         writeByte(x);
@@ -273,11 +289,11 @@ public final class BinaryStdOut {
      * @throws IllegalArgumentException if {@code x} is not between 0 and 2<sup>r</sup> - 1.
      */
     public static void write(char x, int r) {
-        if (r == 8) {
+        if (r == BIT_8) {
             write(x);
             return;
         }
-        if (r < 1 || r > 16) {
+        if (r < 1 || r > BIT_16) {
             throw new IllegalArgumentException("Illegal value for r = " + r);
         }
         if (x >= (1 << r)) {
