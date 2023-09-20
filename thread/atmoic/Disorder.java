@@ -1,6 +1,6 @@
 package thread.atmoic;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
  */
 class Disorder {
     private static int x = 0, y = 0, a = 0, b = 0;
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {

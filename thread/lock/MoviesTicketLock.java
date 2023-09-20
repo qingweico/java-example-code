@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 class MoviesTicketLock implements Runnable {
     private int ticket = 100;
     private final Lock lock = new ReentrantLock();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3, 3, 1);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(3, 3, 1);
 
     @Override
     public void run() {

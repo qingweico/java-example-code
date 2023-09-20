@@ -1,6 +1,6 @@
 package object.oop;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Method overloading
@@ -19,15 +19,15 @@ class Reload {
     }
 
     public static void main(String args) {
-        print("Override main: " + args);
+        Print.println("Override main: " + args);
     }
 
     public static void method(Object o) {
-        print("Object method: " + o);
+        Print.println("Object method: " + o);
     }
 
     public static void method(String s) {
-        print("String method: " + s);
+        Print.println("String method: " + s);
     }
 
     /**
@@ -38,6 +38,6 @@ class Reload {
      * @param i {@code Integer}
      */
     public static void method(Integer i) {
-        print("Integer method: " + i);
+        Print.println("Integer method: " + i);
     }
 }

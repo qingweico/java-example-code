@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -18,7 +18,7 @@ class Park {
     public static void main(String[] args) {
 
         CountDownLatch latch = new CountDownLatch(1);
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2, 2, 1);
         final Thread[] t1 = {null};
         pool.execute(() -> {
             // ensure t1 go first!

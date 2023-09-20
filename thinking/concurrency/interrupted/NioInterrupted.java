@@ -1,6 +1,7 @@
 package thinking.concurrency.interrupted;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -12,8 +13,6 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
-import static util.Print.print;
 
 /**
  * Blocked NIO channels automatically respond to interrupts
@@ -27,7 +26,7 @@ public class NioInterrupted {
     private static final String HOST = Constants.LOOP_BACK;
     private static final Integer PORT = Constants.DEFAULT_COMMON_PORT;
     public static void main(String[] args) throws IOException, InterruptedException {
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
         InetSocketAddress isa = new InetSocketAddress(HOST, PORT);
         SocketChannel sc1 = SocketChannel.open(isa);
         SocketChannel sc2 = SocketChannel.open(isa);
@@ -56,16 +55,16 @@ class NioBlocked implements Runnable {
     @Override
     public void run() {
         try {
-            print("Waiting for read() in " + this);
+            Print.println("Waiting for read() in " + this);
             sc.read(ByteBuffer.allocate(1));
         } catch (ClosedByInterruptException e) {
-            print("ClosedByInterruptException");
+            Print.println("ClosedByInterruptException");
         } catch (AsynchronousCloseException e) {
-            print("AsynchronousCloseException");
+            Print.println("AsynchronousCloseException");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        print("Exiting NIOBlocked.run() " + this);
+        Print.println("Exiting NIOBlocked.run() " + this);
     }
 
 }

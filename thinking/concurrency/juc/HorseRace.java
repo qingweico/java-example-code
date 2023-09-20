@@ -1,11 +1,11 @@
 package thinking.concurrency.juc;
 
+import util.Print;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
-
-import static util.Print.print;
 
 /**
  * Using CyclicBarriers
@@ -24,13 +24,13 @@ class HorseRace {
             StringBuilder s = new StringBuilder();
             // The fence on the racetrack
             s.append("=".repeat(FINISH_LINE));
-            print(s);
+            Print.println(s);
             for (Horse horse : horses) {
-                print(horse.tracks());
+                Print.println(horse.tracks());
             }
             for (Horse horse : horses) {
                 if (horse.getStrides() > FINISH_LINE) {
-                    print(horse + "won!");
+                    Print.println(horse + "won!");
                     exec.shutdownNow();
                     return;
 
@@ -39,7 +39,7 @@ class HorseRace {
             try {
                 TimeUnit.MILLISECONDS.sleep(pause);
             } catch (InterruptedException ex) {
-                print("barrier-action sleep interrupted");
+                Print.println("barrier-action sleep interrupted");
             }
         });
         for (int i = 0; i < nHorse; i++) {

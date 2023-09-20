@@ -1,7 +1,7 @@
 package thinking.holding;
 
+import static util.Print.println;
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * @author zqw
@@ -14,15 +14,15 @@ public class StackCollision {
             stack.push(s);
         }
         while (!stack.isEmpty()){
-            printnb(stack.pop() + " ");
+            print(stack.pop() + " ");
         }
-        print();
+        println();
         java.util.Stack<String> stringStack = new java.util.Stack<>();
         for(String s : "My dog has fleas".split(" ")){
             stringStack.push(s);
         }
         while (!stringStack.isEmpty()){
-            printnb(stringStack.pop() + " ");
+            print(stringStack.pop() + " ");
         }
 
     }

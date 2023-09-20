@@ -1,6 +1,6 @@
 package thread.aqs;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.Print;
 
 import java.util.concurrent.Exchanger;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 class Exg {
     static Exchanger<String> exchanger = new Exchanger<>();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
 
     public static void main(String[] args) {
 

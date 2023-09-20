@@ -1,6 +1,7 @@
 package thinking.concurrency.juc;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static util.Print.println;
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * DelayQueue
@@ -23,7 +24,7 @@ class Dq {
     public static void main(String[] args) {
         Random random = new Random(47);
         int taskCount = 20;
-        ExecutorService exec = CustomThreadPool.newFixedThreadPool(3);
+        ExecutorService exec = ThreadObjectPool.newFixedThreadPool(3);
         DelayQueue<DelayedTask> queue = new DelayQueue<>();
         // Fill with tasks that have random delays
         for (int i = 0; i < taskCount; i++) {
@@ -63,7 +64,7 @@ class DelayedTask implements Runnable, Delayed {
 
     @Override
     public void run() {
-        printnb(this + " ");
+        print(this + " ");
     }
 
     @Override
@@ -86,10 +87,10 @@ class DelayedTask implements Runnable, Delayed {
         @Override
         public void run() {
             for (DelayedTask dt : sequence) {
-                printnb(dt.summary() + " ");
+                print(dt.summary() + " ");
             }
-            print();
-            print(this + " Calling shutdownNow()");
+            println();
+            Print.println(this + " Calling shutdownNow()");
             exec.shutdownNow();
         }
     }
@@ -113,6 +114,6 @@ class DelayedTaskConsumer implements Runnable {
         } catch (InterruptedException e) {
             // Acceptable way to exit
         }
-        print("Finished DelayedTaskConsumer");
+        Print.println("Finished DelayedTaskConsumer");
     }
 }

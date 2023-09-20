@@ -1,6 +1,6 @@
 package design.singleton;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author zqw
  * @date 2021/2/3
+ * @see org.apache.commons.lang3.concurrent.LazyInitializer
  */
 public class DclSingleton {
     private static long id = 0;
@@ -63,7 +64,7 @@ public class DclSingleton {
     }
 
     public static void main(String[] args) {
-        CustomThreadPool pool = new CustomThreadPool();
+        ThreadObjectPool pool = new ThreadObjectPool();
         for (int i = 0; i < Constants.TWENTY; i++) {
             pool.execute(() -> {
                 System.out.println(DclSingleton.getInstance());

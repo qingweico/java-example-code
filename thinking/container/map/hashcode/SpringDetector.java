@@ -1,11 +1,10 @@
 package thinking.container.map.hashcode;
 
 import annotation.Pass;
+import util.Print;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
-
-import static util.Print.print;
 
 /**
  * What will the weather be?
@@ -25,13 +24,13 @@ class SpringDetector {
         for (int i = 0; i < COUNT; i++) {
             map.put(cons.newInstance(i), new Prediction());
         }
-        print("map = " + map);
+        Print.println("map = " + map);
         Groundhog gh = cons.newInstance(3);
-        print("Looking up prediction for " + gh);
+        Print.println("Looking up prediction for " + gh);
         if (map.containsKey(gh)) {
-            print(map.get(gh));
+            Print.println(map.get(gh));
         } else {
-            print("Key not found: " + gh);
+            Print.println("Key not found: " + gh);
         }
     }
 

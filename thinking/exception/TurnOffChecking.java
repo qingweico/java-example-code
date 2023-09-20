@@ -1,9 +1,9 @@
 package thinking.exception;
 
+import util.Print;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import static util.Print.print;
 
 /**
  * Converts checked exceptions to unchecked exceptions
@@ -29,7 +29,8 @@ public class TurnOffChecking {
         wce.throwRuntimeException(3);
 
         // Or, you can choose to catch exception:
-        for (int i = 0; i < 4; i++) {
+        int loopCount = 4;
+        for (int i = 0; i < loopCount; i++) {
             try {
                 if (i < 3) {
                     wce.throwRuntimeException(i);
@@ -37,16 +38,16 @@ public class TurnOffChecking {
                     throw new SomeOtherException();
                 }
             } catch (SomeOtherException e) {
-                print("SomeOtherException: " + e);
+                Print.println("SomeOtherException: " + e);
             } catch (RuntimeException re) {
                 try {
                     throw re.getCause();
                 } catch (FileNotFoundException e) {
-                    print("FileNotFoundException: " + e);
+                    Print.println("FileNotFoundException: " + e);
                 } catch (IOException e) {
-                    print("IOException: " + e);
+                    Print.println("IOException: " + e);
                 } catch (Throwable t) {
-                    print("Throwable: " + t);
+                    Print.println("Throwable: " + t);
                 }
             }
         }
@@ -57,13 +58,11 @@ class WrapCheckedException {
     void throwRuntimeException(int type) {
         try {
             switch (type) {
-                case 0:
-                    throw new FileNotFoundException();
-                case 1:
-                    throw new IOException();
-                case 2:
-                    throw new RuntimeException("where am I?");
-                default:
+                case 0 -> throw new FileNotFoundException();
+                case 1 -> throw new IOException();
+                case 2 -> throw new RuntimeException("where am I?");
+                default -> {
+                }
             }
         } catch (Exception ex) {
             // Adapt to unchecked:

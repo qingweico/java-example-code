@@ -1,7 +1,7 @@
 package jvm.thread.lock;
 
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.Vector;
@@ -20,7 +20,7 @@ public class SecurityTestingOfVector {
 
 
     public static void main(String[] args) {
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(20, 20, 20);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(20, 20, 20);
         int count = 10;
         while (count-- > 0) {
             for (int i = 0; i < Constants.TEN; i++) {

@@ -1,8 +1,8 @@
 package thinking.io;
 
-import java.io.*;
+import util.Print;
 
-import static util.Print.print;
+import java.io.*;
 
 /**
  * @author zqw
@@ -24,10 +24,10 @@ public class StoringAndRecoveringData {
                 new BufferedInputStream(
                         new FileInputStream("thinking/io/Data.txt"))
         );
-        print(in.readDouble());
+        Print.println(in.readDouble());
         // Only readUTF() will recover the Java-UTF String properly:
-        print(in.readUTF());
-        print(in.readDouble());
-        print(in.readUTF());
+        Print.println(in.readUTF());
+        Print.println(in.readDouble());
+        Print.println(in.readUTF());
     }
 }

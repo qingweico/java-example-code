@@ -1,13 +1,13 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static util.Print.printnb;
+import static util.Print.print;
 
 /**
  * Use three threads to alternate output ABC...
@@ -25,7 +25,7 @@ class LockCondition {
 
     static CountDownLatch latchB = new CountDownLatch(1);
     static CountDownLatch latchC = new CountDownLatch(1);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3, 3, 1);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(3, 3, 1);
 
     private static final int COUNT = 10;
 
@@ -34,7 +34,7 @@ class LockCondition {
             lock.lock();
             try {
                 for (int i = 0; i < COUNT; i++) {
-                    printnb("A");
+                    print("A");
                     cB.signal();
                     if (i == 0) {
                         latchB.countDown();
@@ -59,7 +59,7 @@ class LockCondition {
             lock.lock();
             try {
                 for (int i = 0; i < COUNT; i++) {
-                    printnb("B");
+                    print("B");
                     cC.signal();
                     if (i == 0) {
                         latchC.countDown();
@@ -84,7 +84,7 @@ class LockCondition {
             lock.lock();
             try {
                 for (int i = 0; i < COUNT; i++) {
-                    printnb("C");
+                    print("C");
                     cA.signal();
                     cC.await();
                 }

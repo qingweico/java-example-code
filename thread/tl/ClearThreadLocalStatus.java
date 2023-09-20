@@ -2,7 +2,7 @@ package thread.tl;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.extern.slf4j.Slf4j;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @Slf4j
 class ClearThreadLocalStatus {
-    static CustomThreadPool pool = new CustomThreadPool(1, 1);
+    static ThreadObjectPool pool = new ThreadObjectPool(1, 1);
     static ThreadLocal<Integer> tl = new ThreadLocal<>();
 
     public static void main(String[] args) {

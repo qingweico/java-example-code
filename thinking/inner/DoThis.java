@@ -1,7 +1,7 @@
 package thinking.inner;
 
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Qualifying access to the outer-class object
@@ -12,7 +12,7 @@ import static util.Print.print;
 public class DoThis {
 
     void f() {
-        print("DoThis.f()");
+        Print.println("DoThis.f()");
     }
 
     public class Inner {

@@ -1,6 +1,6 @@
 package thread.queue;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 import util.RandomDataGenerator;
 
@@ -27,7 +27,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @see DelayQueueTest {@link DelayQueue}
  */
 public class BlockingQueueTest {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 10);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 100, 10);
 
     public static void main(String[] args) {
         BlockingQueue<Integer> queue;

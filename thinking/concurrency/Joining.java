@@ -1,6 +1,6 @@
 package thinking.concurrency;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Understand join()
@@ -34,11 +34,11 @@ class Sleeper extends Thread {
         try {
             sleep(duration);
         } catch (InterruptedException e) {
-            print(getName() + " was interrupted. "
+            Print.println(getName() + " was interrupted. "
                     + "isInterrupted(): " + isInterrupted());
             return;
         }
-        print(getName() + " has awakened");
+        Print.println(getName() + " has awakened");
     }
 }
 
@@ -58,8 +58,8 @@ class Joiner extends Thread {
             // The Joiner thread will be suspended until the Sleep thread ends.
             sleeper.join();
         } catch (InterruptedException e) {
-            print("Interrupted");
+            Print.println("Interrupted");
         }
-        print(getName() + " join completed");
+        Print.println(getName() + " join completed");
     }
 }

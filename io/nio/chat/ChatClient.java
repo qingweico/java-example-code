@@ -1,6 +1,6 @@
 package io.nio.chat;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 import util.DateUtil;
 
@@ -72,7 +72,7 @@ public class ChatClient {
 
     public static void main(String[] args) {
         ChatClient chatClient = new ChatClient();
-        CustomThreadPool pool = new CustomThreadPool(2, 1);
+        ThreadObjectPool pool = new ThreadObjectPool(2, 1);
         pool.execute(chatClient::readMsgFromServer);
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {

@@ -1,6 +1,6 @@
 package thinking.exception;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Finally
@@ -23,7 +23,7 @@ public class WithFinally {
             SW.on();
             f();
         } catch (OnOff1Exception | OnOff2Exception e) {
-            print("OnOffException1 or OnOffException2...");
+            Print.println("OnOffException1 or OnOffException2...");
         } finally {
             // Ensure that the sw.off() method is executed in any case.
             SW.off();
@@ -44,7 +44,7 @@ class OnOffSwitch {
             f();
             SW.off();
         } catch (OnOff1Exception | OnOff2Exception e) {
-            print("OnOffException1 or OnOffException2...");
+            Print.println("OnOffException1 or OnOffException2...");
             SW.off();
         }
     }
@@ -88,18 +88,18 @@ class FourException extends Exception {
 
 class AlwaysFinally {
     public static void main(String[] args) {
-        print("Enter first try block");
+        Print.println("Enter first try block");
         try {
             try {
-                print("Enter second try block");
+                Print.println("Enter second try block");
                 throw new FourException();
             } finally {
-                print("finally in 2nd try block");
+                Print.println("finally in 2nd try block");
             }
         } catch (FourException e) {
-            print("Caught FourException in 1st try block");
+            Print.println("Caught FourException in 1st try block");
         } finally {
-            print("finally in 1st try block");
+            Print.println("finally in 1st try block");
         }
     }
 }

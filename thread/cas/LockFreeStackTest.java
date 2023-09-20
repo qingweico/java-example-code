@@ -2,7 +2,7 @@ package thread.cas;
 
 import org.junit.Test;
 import thinking.genericity.LinkedStack;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
@@ -22,7 +22,7 @@ public class LockFreeStackTest<T> {
     static int initialValue = Constants.ZERO;
     static AtomicInteger counter = new AtomicInteger(initialValue);
     static AtomicInteger casCount = new AtomicInteger(initialValue);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(100, true);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(100, true);
 
     public LockFreeStackTest() {
         head = new Node();

@@ -1,7 +1,7 @@
 package thinking.concurrency.interrupted;
 
 import lombok.extern.slf4j.Slf4j;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class SimpleInterrupt {
 
     static volatile boolean isStop = false;
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1);
 
     static CountDownLatch latch = new CountDownLatch(1);
     static Thread t;

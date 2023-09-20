@@ -1,7 +1,8 @@
 package thinking.concurrency.optimize;
 
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +11,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import static util.Print.print;
 
 /**
  * ReadWriteLock can have multiple readers at the same time, as long as none of them
@@ -47,7 +46,7 @@ public class ReadWriteList<T> {
         try {
             // Show that multiple readers may acquire the read lock.
             if (lock.getReadHoldCount() > 1) {
-                print(lock.getReadHoldCount());
+                Print.println(lock.getReadHoldCount());
             }
             return lockedList.get(index);
         } finally {
@@ -64,7 +63,7 @@ public class ReadWriteList<T> {
 class ReadWriteListTest {
     private static final int SIZE = 100;
     private static final int THREAD_COUNT = 30;
-    ExecutorService exec = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
+    ExecutorService exec = ThreadObjectPool.newFixedThreadPool(THREAD_COUNT);
     private static final Random R = new Random(47);
     private final ReadWriteList<Integer> list = new ReadWriteList<>(SIZE, 0);
 
@@ -80,7 +79,7 @@ class ReadWriteListTest {
             } catch (InterruptedException e) {
                 // Acceptable way to way
             }
-            print("Writer finished, shutting down");
+            Print.println("Writer finished, shutting down");
             exec.shutdownNow();
         }
     }
@@ -94,7 +93,7 @@ class ReadWriteListTest {
                     for (int i = 0; i < SIZE; i++) {
                         int val = list.get(i);
                         TimeUnit.MILLISECONDS.sleep(1);
-                        print(val);
+                        Print.println(val);
                     }
                 }
             } catch (InterruptedException e) {

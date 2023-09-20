@@ -1,7 +1,7 @@
 package thread;
 
 import com.google.common.util.concurrent.RateLimiter;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -21,7 +21,7 @@ class GuavaRateLimiter {
         var ref = new Object() {
             long prev = System.nanoTime();
         };
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(10);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10);
         for (int i = 0; i < Constants.NUM_100; i++) {
             limiter.acquire();
             pool.execute(() -> {

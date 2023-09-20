@@ -1,7 +1,7 @@
 package thread.queue;
 
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 import util.RandomDataGenerator;
 
@@ -30,7 +30,7 @@ class ProducerConsumerModel {
      * the sign of queue empty
      */
     Condition empty = lock.newCondition();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 100, 10);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 100, 10);
 
 
     double readData() throws InterruptedException {

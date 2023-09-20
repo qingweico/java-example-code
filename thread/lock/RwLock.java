@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.io.*;
@@ -24,7 +24,7 @@ import java.util.concurrent.locks.StampedLock;
  */
 class RwLock {
     static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10);
     static String fileName = Constants.DEFAULT_FILE_PATH_MAME;
 
     public static void main(String[] args) throws IOException {

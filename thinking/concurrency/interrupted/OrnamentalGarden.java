@@ -1,15 +1,13 @@
 package thinking.concurrency.interrupted;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -19,7 +17,7 @@ public class OrnamentalGarden {
 
     static Integer threadCount = 5;
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(threadCount);
         for (int i = 0; i < threadCount; i++) {
             pool.execute(new Entrance(i));
         }
@@ -30,10 +28,10 @@ public class OrnamentalGarden {
         // Wait for each task to finish, and return true if all tasks have finished
         // before the timeout is reached, otherwise return false.
         if (!pool.awaitTermination(250, TimeUnit.MILLISECONDS)) {
-            print("Some tasks were not terminated!");
+            Print.println("Some tasks were not terminated!");
         }
-        print("Total: " + Entrance.getTotalCount());
-        print("Sum of Entrances: " + Entrance.sumEntrance());
+        Print.println("Total: " + Entrance.getTotalCount());
+        Print.println("Sum of Entrances: " + Entrance.sumEntrance());
     }
 }
 
@@ -88,14 +86,14 @@ class Entrance implements Runnable {
             synchronized (this) {
                 ++number;
             }
-            print(this + " Total: " + COUNT.increment());
+            Print.println(this + " Total: " + COUNT.increment());
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {
-                print("sleep interrupted");
+                Print.println("sleep interrupted");
             }
         }
-        print("Stopping " + this);
+        Print.println("Stopping " + this);
     }
 
     public synchronized int getValue() {

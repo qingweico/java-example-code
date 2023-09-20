@@ -1,11 +1,11 @@
 package thinking.exception;
 
+import util.Print;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
-import static util.Print.print;
 
 /**
  * Paying attention to exception in constructors.
@@ -20,17 +20,17 @@ public class InputFile {
         try {
             in = new BufferedReader(new FileReader(fileName));
         } catch (FileNotFoundException e) {
-            print("Could not open " + fileName);
+            Print.println("Could not open " + fileName);
             throw e;
         } catch (Exception e) {
             try {
                 in.close();
             } catch (IOException ex) {
-                print("in.close() unsuccessful");
+                Print.println("in.close() unsuccessful");
             }
             throw e;
         } finally {
-            print("in.close()");
+            Print.println("in.close()");
         }
     }
 
@@ -47,7 +47,7 @@ public class InputFile {
     public void dispose() {
         try {
             in.close();
-            print("dispose() successful");
+            Print.println("dispose() successful");
         } catch (IOException ex) {
             throw new RuntimeException("in.close() failed");
         }

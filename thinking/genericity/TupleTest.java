@@ -4,8 +4,7 @@ import thinking.util.FiveTuple;
 import thinking.util.FourTuple;
 import thinking.util.ThreeTuple;
 import thinking.util.TwoTuple;
-
-import static util.Print.print;
+import util.Print;
 
 /**
  * @author zqw
@@ -33,10 +32,10 @@ public class TupleTest {
         TwoTuple<String, Integer> tt = f();
         // Compile error: final
         // tt.first = "there";
-        print(tt);
-        print(g());
-        print(h());
-        print(k());
+        Print.println(tt);
+        Print.println(g());
+        Print.println(h());
+        Print.println(k());
     }
 }
 

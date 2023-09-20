@@ -2,11 +2,10 @@ package oak.lambda;
 
 
 import object.entity.User;
+import util.Print;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static util.Print.print;
 
 /**
  * --------------- Functional Interface ---------------
@@ -91,7 +90,7 @@ class UserService {
         LoginService ls = new LoginService() {
             @Override
             public void login(UserService userService) {
-                print("[" + userService.getUser().getUsername() + "]INFO: "
+                Print.println("[" + userService.getUser().getUsername() + "]INFO: "
                         + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                         .format(new Date()) + " " + "is login...");
             }

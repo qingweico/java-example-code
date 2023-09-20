@@ -1,6 +1,6 @@
 package thread.concurrency.container;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.concurrent.*;
  */
 class ConcurrentMapAndSet {
     public static void main(String[] args) {
-        final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
+        final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(5, 10, 5);
         // Use ConcurrentHashMap instead of HashMap can avoid throw ConcurrentModificationException.
         Map<String, String> map = new ConcurrentHashMap<>(2);
 

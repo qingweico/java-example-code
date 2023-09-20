@@ -20,14 +20,14 @@ public class Print {
      *
      * @param obj The {@code Object} to be printed
      */
-    public static void print(Object obj) {
+    public static void println(Object obj) {
         System.out.println(obj);
     }
 
     /**
      * Print a newline by itself
      */
-    public static void print() {
+    public static void println() {
         System.out.println();
     }
 
@@ -36,7 +36,7 @@ public class Print {
      *
      * @param obj The {@code Object} to be printed
      */
-    public static void printnb(Object obj) {
+    public static void print(Object obj) {
         System.out.print(obj);
     }
 
@@ -47,6 +47,13 @@ public class Print {
      */
     public static void prints(Object o) {
         System.out.print(o + Symbol.WHITE_SPACE);
+    }
+
+    /**
+     * Print the spaces
+     */
+    public static void prints() {
+        System.out.print(Symbol.WHITE_SPACE);
     }
 
     /**
@@ -75,7 +82,10 @@ public class Print {
      * @return This output stream
      */
     public static PrintStream printf(String format, Object... args) {
-        return System.out.printf(format, args);
+        try (PrintStream printStream = System.out.printf(format, args)) {
+            printStream.flush();
+            return printStream;
+        }
     }
 
     /**
@@ -84,9 +94,9 @@ public class Print {
      * @param time long time
      */
     public static void time(String title, long time) {
-       try(PrintStream printStream = printf("%s time %s %d %s%n", title, Symbol.COLON, time, Constants.MS)) {
-           printStream.flush();
-       }
+        try (PrintStream printStream = printf("%s time %s %d %s%n", title, Symbol.COLON, time, Constants.MS)) {
+            printStream.flush();
+        }
     }
 
     /**
@@ -132,12 +142,12 @@ public class Print {
      * @param e 数组 e
      */
     public static <T> void printArray(T[] e, boolean isNewLine) {
-        if(isNewLine) {
-            for(T t : e){
-                print(t);
+        if (isNewLine) {
+            for (T t : e) {
+                println(t);
             }
-        }else {
-            print(Arrays.toString(e));
+        } else {
+            println(Arrays.toString(e));
         }
     }
 
@@ -153,11 +163,12 @@ public class Print {
     /**
      * System Logger {@since JDK9} {@link java.lang.System.Logger} 默认实现 {@link java.util.logging.Logger}
      * JUL {@link java.util.logging} {@since JDK1.4}
-     *
+     * <p>
      * 打印日志
-     * @param name the name of the logger
+     *
+     * @param name     the name of the logger
      * @param logLevel 日志级别
-     * @param message 打印信息
+     * @param message  打印信息
      */
     public static void log(@Nonnull String name, System.Logger.Level logLevel, String message) {
         System.getLogger(name).log(logLevel, message);

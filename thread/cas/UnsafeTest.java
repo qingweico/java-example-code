@@ -3,10 +3,9 @@ package thread.cas;
 import object.entity.User;
 import org.junit.Test;
 import sun.misc.Unsafe;
+import util.Print;
 
 import java.lang.reflect.Field;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -29,11 +28,11 @@ public class UnsafeTest {
         Field f = UnsafeTest.class.getDeclaredField("i");
         long offset = U.objectFieldOffset(f);
 
-        print(offset);
+        Print.println(offset);
 
         boolean success = U.compareAndSwapInt(INSTANCE, offset, 0, 1);
-        print(success);
-        print(INSTANCE.i);
+        Print.println(success);
+        Print.println(INSTANCE.i);
 
     }
 
@@ -55,8 +54,8 @@ public class UnsafeTest {
     @Test
     public void testUnsafe() {
         // 返回系统指针的大小 32机器为4; 64位机器为8
-        print(U.addressSize());
+        Print.println(U.addressSize());
         // 内存页的大小 此值为2的幂次方
-        print(U.pageSize());
+        Print.println(U.pageSize());
     }
 }

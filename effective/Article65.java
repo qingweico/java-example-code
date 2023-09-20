@@ -1,12 +1,13 @@
 package effective;
 
+import util.Print;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Set;
 
 import static util.Print.exit;
-import static util.Print.print;
 
 /**
  * 接口优先于反射机制
@@ -50,7 +51,7 @@ class Article65 {
         }
         // Exercise the set
         s.addAll(Arrays.asList(args).subList(1, args.length));
-        print(s);
+        Print.println(s);
 
         // A superclass of various reflection exception since JDK 7
         // ReflectiveOperationException
@@ -58,7 +59,7 @@ class Article65 {
     }
 
     private static void fatalError(String msg) {
-        print(msg);
+        Print.println(msg);
         exit(1);
     }
 }

@@ -33,7 +33,7 @@ public class CustomizableRejectedExecutionHandler implements RejectedExecutionHa
     }
 
     public static void main(String[] args) {
-        ExecutorService executorService = CustomThreadPool.newFixedThreadPool(2, 4, 5);
+        ExecutorService executorService = ThreadObjectPool.newFixedThreadPool(2, 4, 5);
         for (int i = 0; i < Constants.TEN; i++) {
             int finalI = i;
             executorService.execute(() -> ThreadUtils.gracePrint(String.valueOf(finalI)));

@@ -2,7 +2,7 @@ package thinking.genericity;
 
 import thinking.holding.pets.Person;
 import thinking.holding.pets.Pet;
-import util.collection.New;
+import util.collection.CollUtils;
 import util.Print;
 
 import java.util.List;
@@ -23,7 +23,7 @@ class ExplicitTypeSpecification {
     // After JDK7, the compiler can infer the display type parameters.
 
     public static void main(String[] args) {
-        f(New.map());
+        f(CollUtils.map());
         // f(New.<Person, List<Pet>>map());
     }
 }

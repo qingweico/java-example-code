@@ -2,7 +2,8 @@ package thread.atmoic;
 
 
 import org.testng.annotations.Test;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
@@ -11,8 +12,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.atomic.LongAccumulator;
 import java.util.concurrent.atomic.LongAdder;
-
-import static util.Print.print;
 
 /**
  * --------------------- volatile读写不会导致上下文切换 ------------------------
@@ -51,7 +50,7 @@ import static util.Print.print;
  */
 @SuppressWarnings("unused")
 public class VolatileAndAtomicTest {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 20, 10);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 20, 10);
     static CountDownLatch terminated = new CountDownLatch(Constants.TWENTY);
     private volatile int num = 0;
 
@@ -95,8 +94,8 @@ public class VolatileAndAtomicTest {
         // If the final result is 20,000, it is atomicity, otherwise it is not.
         // Console results: The output is calculated differently each time -- demonstrating that
         // volatile does not guarantee atomicity.
-        print(" The final value of num is : " + resource.num);
-        print(" The final value of num(atomic) is : " + resource.ai.get());
+        Print.println(" The final value of num is : " + resource.num);
+        Print.println(" The final value of num(atomic) is : " + resource.ai.get());
         pool.shutdown();
     }
 
@@ -143,7 +142,7 @@ public class VolatileAndAtomicTest {
 
             // Normal ends after one second.
             while (num == 0) {
-                print("Tasks in the t1 thread.");
+                Print.println("Tasks in the t1 thread.");
             }
         });
 
@@ -155,7 +154,7 @@ public class VolatileAndAtomicTest {
         num = 1;
 
         // setNum();
-        print(num);
+        Print.println(num);
         pool.shutdown();
     }
 }

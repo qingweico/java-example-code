@@ -14,7 +14,7 @@ import java.util.concurrent.*;
  * @date 2021/9/29
  */
 @Slf4j
-public class CustomThreadPool {
+public class ThreadObjectPool {
 
     private final BlockingDeque<Runnable> workQueue;
     private static final int DEFAULT_POOL_SIZE = 10;
@@ -22,7 +22,7 @@ public class CustomThreadPool {
 
     private volatile boolean isRun = true;
 
-    public CustomThreadPool(int poolSize, int queueSize) {
+    public ThreadObjectPool(int poolSize, int queueSize) {
 
         List<WorkThread> workThreads = new ArrayList<>(poolSize);
         for (int i = 0; i < poolSize; i++) {
@@ -34,7 +34,7 @@ public class CustomThreadPool {
         }
     }
 
-    public CustomThreadPool() {
+    public ThreadObjectPool() {
         this(DEFAULT_POOL_SIZE, DEFAULT_QUEUE_SIZE);
     }
 
@@ -90,8 +90,7 @@ public class CustomThreadPool {
     }
 
     public static void buildThreadFactory(ExecutorService executorService, ThreadFactory threadFactory) {
-        if (executorService instanceof ThreadPoolExecutor) {
-            ThreadPoolExecutor tpe = (ThreadPoolExecutor) executorService;
+        if (executorService instanceof ThreadPoolExecutor tpe) {
             tpe.setThreadFactory(threadFactory);
         }
     }

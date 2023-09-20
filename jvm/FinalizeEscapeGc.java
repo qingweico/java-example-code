@@ -1,6 +1,6 @@
 package jvm;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * finally method
@@ -12,13 +12,13 @@ class FinalizeEscapeGc {
     public static FinalizeEscapeGc SAVE_HOOK = null;
 
     public void isAlive() {
-        print("yes, i am still alive");
+        Print.println("yes, i am still alive");
     }
     @SuppressWarnings("deprecation")
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        print("finalize method executed!");
+        Print.println("finalize method executed!");
         FinalizeEscapeGc.SAVE_HOOK = this;
     }
 
@@ -36,7 +36,7 @@ class FinalizeEscapeGc {
         if(SAVE_HOOK != null) {
             SAVE_HOOK.isAlive();
         }else {
-            print("oh no, i am dead!");
+            Print.println("oh no, i am dead!");
         }
 
         SAVE_HOOK = null;
@@ -46,7 +46,7 @@ class FinalizeEscapeGc {
         if(SAVE_HOOK != null) {
             SAVE_HOOK.isAlive();
         }else {
-            print("oh no, i am dead!");
+            Print.println("oh no, i am dead!");
         }
     }
 }

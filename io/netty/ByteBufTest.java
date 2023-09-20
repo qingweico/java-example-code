@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.junit.Test;
 
-import static util.Print.print;
+import static util.Print.println;
 import static util.Print.prints;
 
 /**
@@ -23,7 +23,7 @@ public class ByteBufTest {
         for(int i = 0;i < byteBuf.capacity();i++) {
             prints(byteBuf.getByte(i));
         }
-        print();
+        println();
         for(int i = 0;i < byteBuf.capacity();i++) {
             // readerIndex++
            prints(byteBuf.readByte());

@@ -1,6 +1,6 @@
 package thread.concurrency.task;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.*;
 
@@ -20,7 +20,7 @@ import java.util.concurrent.*;
  * @see FutureTask {@code FutureTask(Runnable runnable, V result)}
  */
 public class SimpleFutureTask {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
 
     public static void main(String[] args) {
         FutureTask<String> futureTask = new FutureTask<>(() -> {

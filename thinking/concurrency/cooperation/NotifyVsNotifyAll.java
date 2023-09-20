@@ -1,15 +1,14 @@
 package thinking.concurrency.cooperation;
 
 import annotation.Pass;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import static util.Print.print;
 
 /**
  * notifyAll: Only tasks waiting for this lock are awakened.
@@ -21,7 +20,7 @@ import static util.Print.print;
 @SuppressWarnings("all")
 class NotifyVsNotifyAll {
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService exec = CustomThreadPool.newFixedThreadPool(10);
+        ExecutorService exec = ThreadObjectPool.newFixedThreadPool(10);
         for (int i = 0; i < Constants.FIVE; i++) {
             exec.execute(new Task());
         }
@@ -33,11 +32,11 @@ class NotifyVsNotifyAll {
             @Override
             public void run() {
                 if (prod) {
-                    print("notify()");
+                    Print.println("notify()");
                     Task.blocker.prod();
                     prod = false;
                 } else {
-                    print("notifyAll()");
+                    Print.println("notifyAll()");
                     Task.blocker.prodAll();
                     prod = true;
                 }
@@ -47,12 +46,12 @@ class NotifyVsNotifyAll {
         // Run for while...
         TimeUnit.SECONDS.sleep(5);
         timer.cancel();
-        print("Timer canceled");
+        Print.println("Timer canceled");
         TimeUnit.MILLISECONDS.sleep(500);
-        print("Task2.blocker.prodAll()");
+        Print.println("Task2.blocker.prodAll()");
         Task2.blocker.prodAll();
         TimeUnit.MILLISECONDS.sleep(500);
-        print("Shutting down");
+        Print.println("Shutting down");
         // Interrupted all tasks
         exec.shutdownNow();
 
@@ -64,7 +63,7 @@ class Blocker {
         try {
             while (!Thread.interrupted()) {
                 wait();
-                print(Thread.currentThread() + " ");
+                Print.println(Thread.currentThread() + " ");
             }
         } catch (InterruptedException e) {
             // OK to exit this way

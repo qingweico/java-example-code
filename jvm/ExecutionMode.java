@@ -1,6 +1,6 @@
 package jvm;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Java 后端编译执行模式
@@ -13,14 +13,14 @@ import static util.Print.print;
  */
 class ExecutionMode {
     public static void main(String[] args) {
-        print(System.getProperty("java.version"));
-        print(countDepth());
-        print(countDepth());
-        print(countDepth());
-        print(countDepth());
-        print(countDepth());
-        print(countDepth());
-        print(countDepth());
+        Print.println(System.getProperty("java.version"));
+        Print.println(countDepth());
+        Print.println(countDepth());
+        Print.println(countDepth());
+        Print.println(countDepth());
+        Print.println(countDepth());
+        Print.println(countDepth());
+        Print.println(countDepth());
     }
 
     static int countDepth() {

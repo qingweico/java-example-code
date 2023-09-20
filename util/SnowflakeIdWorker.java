@@ -1,6 +1,6 @@
 package util;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.net.Inet4Address;
@@ -55,7 +55,7 @@ public class SnowflakeIdWorker {
     public static void main(String[] args) throws InterruptedException {
         Map<Long, Long> map = new ConcurrentHashMap<>(1000);
         CountDownLatch latch = new CountDownLatch(THREAD_COUNT);
-        final ExecutorService pool = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
+        final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(THREAD_COUNT);
         for (int i = 0; i < THREAD_COUNT; i++) {
             pool.execute(() -> {
                 for (int j = 0; j < Constants.NUM_10000; j++) {

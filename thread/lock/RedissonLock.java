@@ -4,7 +4,7 @@ import frame.redis.DistributedLock;
 import frame.redis.RedissonConfig;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -25,7 +25,7 @@ public class RedissonLock {
     static int inventory = 100;
     static int THREAD_COUNT = Constants.NUM_100;
     private static final String REDIS_LOCK_KEY = "redis_lock";
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(THREAD_COUNT);
 
     public static void main(String[] args) {
         RedissonConfig config = new RedissonConfig();

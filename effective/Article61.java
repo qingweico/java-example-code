@@ -57,7 +57,8 @@ class Unbelievable{
         // Integer will be initialized to NULL, and the boxing primitive is automatically
         // unboxed when a mixture of primitive types and boxing primitive types is used in an operation,
         // so null object references are automatically boxed, throwing a null-pointer exception.
-        if(i == 42){
+        int amazing = 42;
+        if(i == amazing){
             System.out.println("Unbelievable!");
         }
     }

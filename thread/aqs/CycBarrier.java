@@ -1,6 +1,6 @@
 package thread.aqs;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 import util.Print;
 
@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
  */
 class CycBarrier {
     public static void main(String[] args) {
-        final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
+        final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(5, 10, 5);
 
         // It can be used multiple times
         CyclicBarrier cyclicBarrier = new CyclicBarrier(2, () -> System.out.println("main"));

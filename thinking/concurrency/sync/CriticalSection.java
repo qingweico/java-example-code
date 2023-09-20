@@ -1,12 +1,12 @@
 package thinking.concurrency.sync;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.exit;
-import static util.Print.print;
 
 /**
  * Synchronized blocks instead of entire methods, also demonstrates protection
@@ -18,7 +18,7 @@ import static util.Print.print;
 public class CriticalSection {
     /**Test two different approaches:*/
     static void testApproaches(AbstractPairManager p1, AbstractPairManager p2) {
-        ExecutorService exec = CustomThreadPool.newFixedThreadPool(10);
+        ExecutorService exec = ThreadObjectPool.newFixedThreadPool(10);
         PairManipulator pm1 = new PairManipulator(p1),
                 pm2 = new PairManipulator(p2);
         PairCheck pc1 = new PairCheck(p1),
@@ -30,9 +30,9 @@ public class CriticalSection {
         try {
             TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException e) {
-            print("Sleep interrupted");
+            Print.println("Sleep interrupted");
         }
-        print("pm1: " + pm1 + "\npm2: " + pm2);
+        Print.println("pm1: " + pm1 + "\npm2: " + pm2);
         exit(0);
     }
 

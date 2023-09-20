@@ -1,7 +1,7 @@
 package thread.queue;
 
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -27,7 +27,7 @@ class Scheduler {
 
     static AtomicInteger idCount = new AtomicInteger(0);
 
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(1000, 1000, 100);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1000, 1000, 100);
 
 
     public Scheduler(int works) {

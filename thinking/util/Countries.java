@@ -1,8 +1,8 @@
 package thinking.util;
 
-import java.util.*;
+import util.Print;
 
-import static util.Print.print;
+import java.util.*;
 
 /**
  * @author zqw
@@ -273,18 +273,18 @@ public class Countries {
     }
 
     public static void main(String[] args) {
-        print(capitals(10));
-        print(names(10));
-        print(new HashMap<>(capitals(3)));
-        print(new LinkedHashMap<>(capitals(3)));
-        print(new TreeMap<>(capitals(3)));
-        print(new Hashtable<>(capitals(3)));
-        print(new HashSet<>(names(6)));
-        print(new LinkedHashSet<>(names(6)));
-        print(new TreeSet<>(names(6)));
-        print(new ArrayList<>(names(6)));
-        print(new LinkedList<>(names(6)));
-        print(capitals().get("BRAZIL"));
+        Print.println(capitals(10));
+        Print.println(names(10));
+        Print.println(new HashMap<>(capitals(3)));
+        Print.println(new LinkedHashMap<>(capitals(3)));
+        Print.println(new TreeMap<>(capitals(3)));
+        Print.println(new Hashtable<>(capitals(3)));
+        Print.println(new HashSet<>(names(6)));
+        Print.println(new LinkedHashSet<>(names(6)));
+        Print.println(new TreeSet<>(names(6)));
+        Print.println(new ArrayList<>(names(6)));
+        Print.println(new LinkedList<>(names(6)));
+        Print.println(capitals().get("BRAZIL"));
     }
 } /* Output:
 {ALGERIA=Algiers, ANGOLA=Luanda, BENIN=Porto-Novo, BOTSWANA=Gaberone, BULGARIA=Sofia, BURKINA FASO=Ouagadougou, BURUNDI=Bujumbura, CAMEROON=Yaounde, CAPE VERDE=Praia, CENTRAL AFRICAN REPUBLIC=Bangui}

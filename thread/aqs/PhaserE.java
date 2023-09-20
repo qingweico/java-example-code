@@ -1,6 +1,6 @@
 package thread.aqs;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 class PhaserE {
     Phaser phaser = new Phaser();
 
-    final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 5, 1);
+    final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2, 5, 1);
 
     class Worker implements Runnable {
         @Override

@@ -1,10 +1,9 @@
 package thinking.concurrency;
 
 import thread.pool.ThreadPoolBuilder;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -19,7 +18,7 @@ class NativeExceptionHandling {
          pool.execute(new ExceptionThread());
       }catch (RuntimeException ue){
          // This statement will NOT execute!
-         print("Exception has been handled");
+         Print.println("Exception has been handled");
       }
    }
 }

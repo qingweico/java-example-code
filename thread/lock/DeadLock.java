@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReentrantLock;
@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2021/10/17
  */
 class DeadLock {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
 
     static class Friend {
         private final String name;

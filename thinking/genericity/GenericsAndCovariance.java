@@ -18,7 +18,6 @@ public class GenericsAndCovariance {
         // list.add(new Object());
 
         // Legal but uninteresting
-
         list.add(null);
         // We know that it returns Fruit at least.
         Fruit f = list.get(0);

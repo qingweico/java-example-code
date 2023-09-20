@@ -1,6 +1,7 @@
 package thinking.concurrency.juc;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import static util.Print.println;
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * @author zqw
@@ -20,7 +21,7 @@ import static util.Print.printnb;
  */
 public class PriorityBlockingQueueUsage {
     public static void main(String[] args) {
-        ExecutorService exec = CustomThreadPool.newFixedThreadPool(2, true);
+        ExecutorService exec = ThreadObjectPool.newFixedThreadPool(2, true);
         PriorityBlockingQueue<Runnable> queue = new PriorityBlockingQueue<>();
         exec.execute(new PrioritizedTaskProducer(queue, exec));
         exec.execute(new PrioritizedTaskConsumer(queue));
@@ -47,7 +48,7 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
         } catch (InterruptedException e) {
             // Acceptable way to exit
         }
-        print(this);
+        Print.println(this);
     }
 
     @Override
@@ -72,13 +73,13 @@ class PrioritizedTask implements Runnable, Comparable<PrioritizedTask> {
         public void run() {
             int count = 0;
             for (PrioritizedTask pt : sequence) {
-                printnb(pt.summary());
+                print(pt.summary());
                 if (++count > 5) {
-                    print();
+                    println();
                 }
             }
-            print();
-            print(this + " Calling shutdownNow()");
+            println();
+            Print.println(this + " Calling shutdownNow()");
             e.shutdownNow();
         }
     }
@@ -122,7 +123,7 @@ class PrioritizedTaskProducer implements Runnable {
         } catch (InterruptedException e) {
             // Acceptable way to exit
         }
-        print("Finished PrioritizedTaskProducer");
+        Print.println("Finished PrioritizedTaskProducer");
 
     }
 }
@@ -145,6 +146,6 @@ class PrioritizedTaskConsumer implements Runnable {
         } catch (InterruptedException e) {
             // Acceptable way to exit
         }
-        print("Finished PrioritizedTaskConsumer");
+        Print.println("Finished PrioritizedTaskConsumer");
     }
 }

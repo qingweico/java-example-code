@@ -1,6 +1,6 @@
 package thread;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import thread.queue.disruptor.DisruptorStarter;
 import util.constants.Constants;
 
@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
  */
 class CacheLinePadding {
     private static final int COUNT = Constants.NUM_100000000;
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
     static CountDownLatch latch = new CountDownLatch(2);
 
     @SuppressWarnings("unused")

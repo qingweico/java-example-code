@@ -1,12 +1,11 @@
 package thinking.concurrency.share;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-
-import static util.Print.print;
 
 /**
  * Locks in the concurrent library allow you to give up on trying to acquire a lock.
@@ -20,7 +19,7 @@ public class AttemptLocking {
     public void untimed() {
         boolean captured = lock.tryLock();
         try {
-            print("tryLock(): " + captured);
+            Print.println("tryLock(): " + captured);
         } finally {
             if (captured) {
                 lock.unlock();
@@ -36,7 +35,7 @@ public class AttemptLocking {
             throw new RuntimeException(e);
         }
         try {
-            print("tryLock(2, TimeUnit.SECONDS): " + captured);
+            Print.println("tryLock(2, TimeUnit.SECONDS): " + captured);
         } finally {
             if (captured) {
                 lock.unlock();
@@ -46,7 +45,7 @@ public class AttemptLocking {
 
     public static void main(String[] args) throws InterruptedException {
         final AttemptLocking al = new AttemptLocking();
-        final ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
+        final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1);
         al.untimed();
         al.timed();
         // Now create a separated task to grab the lock:
@@ -57,7 +56,7 @@ public class AttemptLocking {
 
             @Override
             public void run() {
-                print("acquired");
+                Print.println("acquired");
                 al.lock.lock();
                 try {
                     Thread.sleep(2100);

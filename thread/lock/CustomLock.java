@@ -2,7 +2,7 @@ package thread.lock;
 
 import sun.misc.Unsafe;
 import thread.cas.UnsafeSupport;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +21,7 @@ class CustomLock {
 
     private static Unsafe unsafe = null;
 
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(5, 10, 5);
 
     static {
         try {

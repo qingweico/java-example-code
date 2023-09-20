@@ -106,7 +106,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (node == null) {
             return;
         }
-        printnb(node.e + " ");
+        print(node.e + " ");
         preOrder(node.left);
         preOrder(node.right);
     }
@@ -307,7 +307,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
         printNode(lines, w, root, 0, 0);
         for (var line : lines) {
-            print(line.toString());
+            println(line.toString());
         }
 
     }

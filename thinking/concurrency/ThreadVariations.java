@@ -1,8 +1,8 @@
 package thinking.concurrency;
 
-import java.util.concurrent.TimeUnit;
+import util.Print;
 
-import static util.Print.print;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -37,7 +37,7 @@ class InnerThread {
         public void run() {
             try {
                 while (true) {
-                    print(this);
+                    Print.println(this);
                     if (--countDown == 0) {
                         return;
                     }
@@ -45,7 +45,7 @@ class InnerThread {
                 }
 
             } catch (InterruptedException e) {
-                print("interrupted");
+                Print.println("interrupted");
             }
         }
 
@@ -72,14 +72,14 @@ class InnerThread0 {
             public void run() {
                 try {
                     while (true) {
-                        print(this);
+                        Print.println(this);
                         if (--countDown == 0) {
                             return;
                         }
                         sleep(10);
                     }
                 } catch (InterruptedException e) {
-                    print("sleep() interrupted");
+                    Print.println("sleep() interrupted");
                 }
             }
 
@@ -110,14 +110,14 @@ class InnerRunnable {
         public void run() {
             try {
                 while (true) {
-                    print(this);
+                    Print.println(this);
                     if (--countDown == 0) {
                         return;
                     }
                     TimeUnit.MILLISECONDS.sleep(10);
                 }
             } catch (InterruptedException e) {
-                print("sleep() interrupted");
+                Print.println("sleep() interrupted");
             }
         }
 
@@ -144,14 +144,14 @@ class InnerRunnable0 {
             public void run() {
                 try {
                     while (true) {
-                        print(this);
+                        Print.println(this);
                         if (--countDown == 0) {
                             return;
                         }
                         TimeUnit.MILLISECONDS.sleep(10);
                     }
                 } catch (InterruptedException e) {
-                    print("sleep() interrupted");
+                    Print.println("sleep() interrupted");
                 }
             }
 
@@ -182,14 +182,14 @@ class ThreadMethod {
                 public void run() {
                     try {
                         while (true) {
-                            print(this);
+                            Print.println(this);
                             if (--countDown == 0) {
                                 return;
                             }
                             sleep(10);
                         }
                     } catch (InterruptedException e) {
-                        print("sleep() interrupted");
+                        Print.println("sleep() interrupted");
                     }
                 }
 

@@ -1,6 +1,6 @@
 package thread.concurrency.task;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 class CallableTask implements Callable<String> {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5);
+        final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(5);
         CallableTask callableTask = new CallableTask();
         FutureTask<String> futureTask = new FutureTask<>(callableTask);
         pool.submit(futureTask);

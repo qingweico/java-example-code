@@ -1,12 +1,13 @@
 package algorithm.tree;
 
 import org.junit.Test;
+import util.Print;
 import util.RandomDataGenerator;
 import util.Tools;
 
 import java.util.ArrayList;
 
-import static util.Print.print;
+import static util.Print.println;
 
 /**
  * @author zqw
@@ -21,13 +22,13 @@ public class BinarySearchTreeTest {
         for (int i = 0; i < size; i++) {
             binarySearchTree.add(RandomDataGenerator.randomInt(exclusive));
         }
-        print(binarySearchTree.size());
+        Print.println(binarySearchTree.size());
         ArrayList<Integer> list = new ArrayList<>();
         while (!binarySearchTree.isEmpty()) {
             list.add(binarySearchTree.deleteMax());
         }
         Tools.assertSorted(list, true);
-        print(list);
+        Print.println(list);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class BinarySearchTreeTest {
         binarySearchTree.reverse();
         binarySearchTree.printTree();
         binarySearchTree.levelOrder();
-        print();
+        println();
         binarySearchTree.preOrderNr();
     }
 }

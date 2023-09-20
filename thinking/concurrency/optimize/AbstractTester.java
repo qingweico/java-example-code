@@ -1,8 +1,9 @@
 package thinking.concurrency.optimize;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.collection.Generated;
 import util.RandomGenerator;
+import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -14,7 +15,7 @@ import java.util.concurrent.ExecutorService;
  * @author zqw
  * @date 2021/4/8
  */
-abstract class Tester<C> {
+abstract class AbstractTester<C> {
     static int testReps = 10;
     static int testCycles = 100;
     static int containerSize = 1000;
@@ -37,9 +38,9 @@ abstract class Tester<C> {
     volatile long readTime = 0;
     volatile long writeTime = 0;
     CountDownLatch endLatch;
-    static ExecutorService exec = CustomThreadPool.newFixedThreadPool(100);
+    static ExecutorService exec = ThreadObjectPool.newFixedThreadPool(100);
     Integer[] writeData;
-    Tester(String testId, int nReaders, int nWriters) {
+    AbstractTester(String testId, int nReaders, int nWriters) {
         this.testId = testId + " " + nReaders + "r " + nWriters + "w";
         this.nReaders = nReaders;
         this.nWriters = nWriters;
@@ -64,7 +65,7 @@ abstract class Tester<C> {
             System.out.printf("%-27s %14d\n","readTime + writeTime =", readTime + writeTime);
         }
     }
-    abstract class TestTask implements Runnable {
+    abstract class AbstractTestTask implements Runnable {
         /**
          * test
          */
@@ -80,20 +81,20 @@ abstract class Tester<C> {
             long startTime = System.nanoTime();
             test();
             duration = System.nanoTime() - startTime;
-            synchronized (Tester.this) {
+            synchronized (AbstractTester.this) {
                 putResults();
             }
             endLatch.countDown();
         }
     }
     public static void initMain(String[] args) {
-        if(args.length > 0) {
+        if(args.length > Constants.ZERO) {
             testReps = Integer.parseInt(args[0]);
         }
-        if(args.length > 1) {
+        if(args.length > Constants.ONE) {
             testCycles = Integer.parseInt(args[1]);
         }
-        if(args.length > 2) {
+        if(args.length > Constants.TWO) {
             containerSize = Integer.parseInt(args[2]);
         }
         System.out.printf("%-27s %14s %14s\n", "Type", "Read time", "Write time");

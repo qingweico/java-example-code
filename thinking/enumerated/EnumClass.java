@@ -1,9 +1,9 @@
 package thinking.enumerated;
 
 import org.apache.commons.lang3.StringUtils;
+import util.Print;
 
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * @author zqw
@@ -13,20 +13,20 @@ public class EnumClass {
     public static void main(String[] args) {
         for (Shrubbery s : Shrubbery.values()) {
             // Returns the order in which each enum instance is declared(from 0 begin)
-            print(s + " ordinal: " + s.ordinal());
-            printnb(s.compareTo(Shrubbery.CRAWLING) + " ");
-            printnb(s.equals(Shrubbery.CRAWLING) + " ");
-            print(s == Shrubbery.CRAWLING);
-            print(s.getDeclaringClass());
-            print(s.name());
-            print("----------------------");
+            Print.println(s + " ordinal: " + s.ordinal());
+            print(s.compareTo(Shrubbery.CRAWLING) + " ");
+            print(s.equals(Shrubbery.CRAWLING) + " ");
+            Print.println(s == Shrubbery.CRAWLING);
+            Print.println(s.getDeclaringClass());
+            Print.println(s.name());
+            Print.println("----------------------");
 
         }
         String values = "GROUND CRAWLING HANGING";
 
         for (String s : values.split( StringUtils.SPACE)) {
             Shrubbery shrub = Enum.valueOf(Shrubbery.class, s);
-            print(shrub);
+            Print.println(shrub);
         }
     }
 
@@ -47,7 +47,7 @@ enum Shrubbery {
     HANGING;
 
     Shrubbery() {
-        print("[Constructor]: " + this);
+        Print.println("[Constructor]: " + this);
     }
 }
 

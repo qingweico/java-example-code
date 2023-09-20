@@ -1,12 +1,12 @@
 package thinking.concurrency.cooperation;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * Basic task cooperation
@@ -18,7 +18,7 @@ import static util.Print.printnb;
 class WaxMatic {
     public static void main(String[] args) throws InterruptedException {
         Car car = new Car();
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
         pool.execute(new WaxOff(car));
         pool.execute(new WaxOn(car));
         TimeUnit.SECONDS.sleep(5);
@@ -65,15 +65,15 @@ class WaxOn implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                printnb("Wax On! ");
+                print("Wax On! ");
                 TimeUnit.MILLISECONDS.sleep(200);
                 car.waxed();
                 car.waitForBuffing();
             }
         } catch (InterruptedException e) {
-            print("Exiting via Interrupted");
+            Print.println("Exiting via Interrupted");
         }
-        print("Ending Wax on task");
+        Print.println("Ending Wax on task");
     }
 }
 
@@ -89,13 +89,13 @@ class WaxOff implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 car.waitForWaxing();
-                printnb("Wax Off! ");
+                print("Wax Off! ");
                 TimeUnit.MILLISECONDS.sleep(200);
                 car.buffed();
             }
         } catch (InterruptedException e) {
-            print("Exiting via Interrupted");
+            Print.println("Exiting via Interrupted");
         }
-        print("Ending Wax off task");
+        Print.println("Ending Wax off task");
     }
 }

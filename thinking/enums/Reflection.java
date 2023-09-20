@@ -1,12 +1,14 @@
 package thinking.enums;
 
+import util.Print;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static util.Print.print;
+import static util.Print.println;
 
 /**
  * @author zqw
@@ -14,19 +16,19 @@ import static util.Print.print;
  */
 public class Reflection {
     public static Set<String> analyse(Class<?> enumClass) {
-        print("-----Analysing-----" + enumClass + "-----");
-        print("interface : ");
+        Print.println("-----Analysing-----" + enumClass + "-----");
+        Print.println("interface : ");
         for (Type t : enumClass.getGenericInterfaces()) {
-            print("\t");
-            print(t);
+            Print.println("\t");
+            Print.println(t);
         }
-        print("Base : " + enumClass.getSuperclass());
-        print("Method : ");
+        Print.println("Base : " + enumClass.getSuperclass());
+        Print.println("Method : ");
         HashSet<String> methods = new HashSet<>();
         for (Method m : enumClass.getMethods()) {
             methods.add(m.getName());
         }
-        print(methods);
+        Print.println(methods);
         return methods;
     }
 
@@ -34,9 +36,9 @@ public class Reflection {
     public static void main(String[] args) {
         Set<String> exploreMethods = analyse(Explore.class);
         Set<String> enumMethods = analyse(Enum.class);
-        print(exploreMethods.containsAll(enumMethods));
-        print(exploreMethods.removeAll(enumMethods));
-        print(exploreMethods);
+        Print.println(exploreMethods.containsAll(enumMethods));
+        Print.println(exploreMethods.removeAll(enumMethods));
+        Print.println(exploreMethods);
     }
 }
 
@@ -62,9 +64,9 @@ class UpcastEnum {
         // [s.values();] Won't compile 因为 Enum 中看没有values方法
 
         for (Enum<?> en : s.getClass().getEnumConstants()) {
-            print(en);
+            Print.println(en);
         }
-        print();
+        println();
     }
 }
 

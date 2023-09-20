@@ -116,7 +116,7 @@ public class Iterator2StreamTest {
         Path path = Paths.get(Constants.DEFAULT_FILE_PATH_MAME);
         // Paths::lines 会返回一个包含了文件中所有行的 Stream;{@link FileIoResolvingTest#releaseFileHandle}
         try (Stream<String> lines = Files.lines(path)) {
-            lines.forEach(Print::print);
+            lines.forEach(Print::println);
         }
     }
 

@@ -1,10 +1,10 @@
 package thinking.concurrency.interrupted;
 
+import util.Print;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import static util.Print.print;
 
 /**
  * Interrupted a task blocked with a ReentrantLock
@@ -17,7 +17,7 @@ class InterruptedReentrantLock {
         Thread t = new Thread(new Blocked0());
         t.start();
         TimeUnit.SECONDS.sleep(1);
-        print("Issuing t.interrupted()");
+        Print.println("Issuing t.interrupted()");
         // Interrupted can interrupt a call that is blocked by a mutex.
         t.interrupt();
     }
@@ -42,7 +42,7 @@ class BlockMutex {
             // https://github.com/alibaba/p3c/issues/653
             lock.lockInterruptibly();
         } catch (InterruptedException e) {
-            print("Interrupted from lock acquisition in f()");
+            Print.println("Interrupted from lock acquisition in f()");
         }
         finally {
             lock.unlock();
@@ -55,8 +55,8 @@ class Blocked0 implements Runnable {
 
     @Override
     public void run() {
-        print("Waiting for f() in BlockMutex");
+        Print.println("Waiting for f() in BlockMutex");
         blocked.f();
-        print("Broken out of blocked all");
+        Print.println("Broken out of blocked all");
     }
 }

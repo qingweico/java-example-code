@@ -1,6 +1,6 @@
 package jvm;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * @author zqw
@@ -13,7 +13,7 @@ class ClassInit {
     static {
         num = 2;
         number = 20;
-        print(num);
+        Print.println(num);
 
         // Illegal forward reference
         // print(number);
@@ -27,10 +27,10 @@ class ClassInit {
 
     public static void main(String[] args) {
         // 2
-        print(num);
+        Print.println(num);
 
         // 10
-        print(number);
+        Print.println(number);
     }
 }
 

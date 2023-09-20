@@ -44,9 +44,9 @@ public class CaffeineTest {
         cache.put("k2", "v2");
         cache.put("k3", "v3");
         UnsafeSupport.shortWait(10);
-        Print.print(cache.getIfPresent("k1"));
-        Print.print(cache.getIfPresent("k2"));
-        Print.print(cache.getIfPresent("k3"));
+        Print.println(cache.getIfPresent("k1"));
+        Print.println(cache.getIfPresent("k2"));
+        Print.println(cache.getIfPresent("k3"));
         // 基于时间
         cache = Caffeine.newBuilder().
                 // 一秒钟后过期
@@ -54,7 +54,7 @@ public class CaffeineTest {
                 build();
         cache.put("k4", "v4");
         ProcessExecutor.waitFor(1);
-        Print.print(cache.getIfPresent("k4"));
+        Print.println(cache.getIfPresent("k4"));
         // 基于引用 即设置缓存为软引用或者为弱引用; 利用 GC 来清除缓存数据,性能较差,不推荐
 
         // tips: 当一个元素过期后,并不会立即清除,而是在一次读

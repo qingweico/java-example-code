@@ -1,11 +1,10 @@
 package thinking.concurrency;
 
 import thread.pool.ThreadPoolBuilder;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -19,10 +18,10 @@ class DaemonFromFactory implements Runnable {
         try {
             while (true) {
                 TimeUnit.MICROSECONDS.sleep(100);
-                print(Thread.currentThread() + " " + this);
+                Print.println(Thread.currentThread() + " " + this);
             }
         } catch (InterruptedException e) {
-            print("Interrupted");
+            Print.println("Interrupted");
         }
     }
 
@@ -32,7 +31,7 @@ class DaemonFromFactory implements Runnable {
         for (int i = 0; i < threadCount; i++) {
             pool.execute(new DaemonFromFactory());
         }
-        print("All daemon started");
+        Print.println("All daemon started");
         TimeUnit.MILLISECONDS.sleep(500);
     }
 }

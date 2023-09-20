@@ -1,7 +1,7 @@
 package thinking.concurrency;
 
 import jsr166e.extra.AtomicDouble;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -52,7 +52,7 @@ class ThreadPriority implements Runnable {
 
     public static void main(String[] args) {
         int threadCount = 5;
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount,true);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(threadCount,true);
         for (int i = 0; i < threadCount; i++) {
             pool.execute(new ThreadPriority(Thread.MIN_PRIORITY));
             pool.execute(new ThreadPriority(Thread.MAX_PRIORITY));

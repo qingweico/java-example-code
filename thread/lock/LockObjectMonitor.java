@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -28,11 +28,11 @@ import java.util.concurrent.locks.ReentrantLock;
 class LockObjectMonitor {
 
     static ReentrantLock lock = new ReentrantLock();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 5);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 10, 5);
 
     public static void main(String[] args) {
         List<Runnable> taskList = new ArrayList<>();
-        CustomThreadPool.monitor((ThreadPoolExecutor) pool);
+        ThreadObjectPool.monitor((ThreadPoolExecutor) pool);
         for (int i = 0; i < Constants.TEN; i++) {
             taskList.add(() -> {
                 // Don't get lock and enter EntryList.

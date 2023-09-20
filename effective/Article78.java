@@ -1,10 +1,10 @@
 package effective;
 
 
+import util.Print;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static util.Print.print;
 
 /**
  * 同步访问共享的可变数据
@@ -51,7 +51,7 @@ class NotStopThread {
 
         TimeUnit.SECONDS.sleep(1);
         stopRequested = true;
-        print(i);
+        Print.println(i);
         // The program will not terminate!
     }
 }
@@ -83,7 +83,7 @@ class StopThread {
 
         TimeUnit.SECONDS.sleep(1);
         requiredStop();
-        print(i);
+        Print.println(i);
 
     }
 }

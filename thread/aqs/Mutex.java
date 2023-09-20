@@ -1,6 +1,6 @@
 package thread.aqs;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 import util.Print;
 
@@ -74,7 +74,7 @@ public class Mutex extends AbstractQueuedSynchronizer {
 
     public static void main(String[] args) {
         Mutex mutex = new Mutex();
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 1);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 10, 1);
         CountDownLatch latch = new CountDownLatch(10);
         for (int i = 0; i < Constants.TEN; i++) {
             pool.execute(() -> {

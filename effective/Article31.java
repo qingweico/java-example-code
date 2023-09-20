@@ -1,9 +1,9 @@
 package effective;
 
+import util.Print;
+
 import java.util.*;
 import java.util.concurrent.ScheduledFuture;
-
-import static util.Print.print;
 
 /**
  * 利用有限制通配符提升API灵活性
@@ -20,17 +20,17 @@ class Article31 {
         Stack<Number> stack = new Stack<>();
         Collection<Integer> c = Arrays.asList(1, 2, 3);
         stack.pushAll(c);
-        print(c);
+        Print.println(c);
         Collection<Object> dst = new ArrayList<>();
         stack.popAll(dst);
-        print(dst);
+        Print.println(dst);
 
         Set<Integer> integers = Set.of(1, 3, 5);
         Set<Double> doubles = Set.of(2.0, 4.0, 6.0);
         Set<Number> numbers = Article30.union(integers, doubles);
         // Explicit type parameter - require prior to Java 8
         // Set<Number> numbers = Article30.<Number>union(integers, doubles);
-        print(numbers);
+        Print.println(numbers);
 
         List<ScheduledFuture<?>> scheduledFutures = new ArrayList<>();
         Article30.max(scheduledFutures);
@@ -46,7 +46,8 @@ class Article31 {
 
     public static void swap(int i, int j, List<?> list) {
         /*can't compile*/
-        // list.set(i, list.set(j, list.get(i)));
+
+        /*list.set(i, list.set(j, list.get(i)));*/
 
         swapHelper(list, i, j);
 
@@ -54,6 +55,5 @@ class Article31 {
 
     private static <E> void swapHelper(List<E> list, int i, int j) {
         list.set(i, list.set(j, list.get(i)));
-
     }
 }

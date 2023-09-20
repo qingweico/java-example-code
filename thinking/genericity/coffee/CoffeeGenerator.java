@@ -1,11 +1,10 @@
 package thinking.genericity.coffee;
 
 import util.Generator;
+import util.Print;
 
 import java.util.Iterator;
 import java.util.Random;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -75,7 +74,7 @@ public class CoffeeGenerator<Coffee> implements Generator<Coffee>, Iterable<Coff
         int size = 5;
         CoffeeGenerator<Object> gen = new CoffeeGenerator<>();
         for (int i = 0; i < size; i++) {
-            print(gen.next());
+            Print.println(gen.next());
         }
         System.out.println();
         CoffeeGenerator<thinking.genericity.coffee.Coffee> coffeeGenerator = new CoffeeGenerator<>(size);

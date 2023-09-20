@@ -1,12 +1,12 @@
 package algorithm.set;
 
 import org.junit.Test;
+import util.Print;
 import util.io.FileUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import static util.Print.print;
 import static util.Print.printf;
 
 /**
@@ -29,14 +29,14 @@ public class SetTest {
             var start = System.nanoTime();
             ArrayList<String> arrayList = new ArrayList<>();
             FileUtils.readFileToArrayList("algorithm/set/a-tale-of-two-cities.txt", arrayList);
-            print(arrayList.size());
+            Print.println(arrayList.size());
             for (String s : arrayList) {
                 inst.add(s);
             }
-            print(inst.size());
+            Print.println(inst.size());
             printf(rawInstance.getClass().getSimpleName()
                     + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
-            print("===================================================");
+            Print.println("===================================================");
         } catch (NoSuchMethodException
                 | InvocationTargetException
                 | InstantiationException

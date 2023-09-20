@@ -1,7 +1,7 @@
 package algorithm.sort;
 
 import org.junit.Test;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.Tools;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,7 +17,7 @@ import static util.Print.printf;
  */
 public class SortTest {
 
-    ExecutorService exec = CustomThreadPool.newFixedThreadPool(5, 10, 5);
+    ExecutorService exec = ThreadObjectPool.newFixedThreadPool(5, 10, 5);
 
 
     @Test

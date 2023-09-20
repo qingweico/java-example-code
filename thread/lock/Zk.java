@@ -4,7 +4,7 @@ import org.I0Itec.zkclient.IZkDataListener;
 import org.I0Itec.zkclient.ZkClient;
 import org.I0Itec.zkclient.serialize.SerializableSerializer;
 import org.apache.commons.lang3.StringUtils;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.Collections;
@@ -31,7 +31,7 @@ class Zk implements Runnable {
             new SerializableSerializer());
 
     static CountDownLatch latch = new CountDownLatch(THREAD_COUNT);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10);
 
     @Override
     public void run() {

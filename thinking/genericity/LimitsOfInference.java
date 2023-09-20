@@ -2,7 +2,7 @@ package thinking.genericity;
 
 import thinking.holding.pets.Person;
 import thinking.holding.pets.Pet;
-import util.collection.New;
+import util.collection.CollUtils;
 import util.Print;
 
 import java.util.List;
@@ -19,7 +19,7 @@ class LimitsOfInference {
 
    public static void main(String[] args) {
       // Does not compile (before JDK8);f(New.<Person, List<Pet>>map());
-      f(New.map());
+      f(CollUtils.map());
       // TODO
    }
 }

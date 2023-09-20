@@ -2,8 +2,7 @@ package thinking.concurrency;
 
 
 import annotation.Pass;
-
-import static util.Print.print;
+import util.Print;
 
 /**
  * User interface responsiveness
@@ -39,7 +38,7 @@ class ResponsiveUi extends Thread {
         System.out.println(System.in.read());
 
         // Show progress
-        print(d);
+        Print.println(d);
     }
 
 }

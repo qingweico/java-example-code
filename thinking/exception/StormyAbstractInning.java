@@ -1,6 +1,6 @@
 package thinking.exception;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Override methods may throw only exceptions specified in their
@@ -57,11 +57,11 @@ class StormyAbstractInning extends AbstractInning implements Storm {
             StormyAbstractInning si = new StormyAbstractInning();
             si.atBat();
         } catch (PopFoul e) {
-            print("Pop foul");
+            Print.println("Pop foul");
         } catch (RainedOut e) {
-            print("Rained out");
+            Print.println("Rained out");
         } catch (BaseballException e) {
-            print("Generic baseball exception");
+            Print.println("Generic baseball exception");
         }
 
         // Strikes not throw in derived version.
@@ -72,13 +72,13 @@ class StormyAbstractInning extends AbstractInning implements Storm {
             i.atBat();
             // You must catch the exception from the base-class version of the method.
         } catch (Strike e) {
-            print("Strike");
+            Print.println("Strike");
         } catch (Foul e) {
-            print("Foul");
+            Print.println("Foul");
         } catch (RainedOut e) {
-            print("Rained out");
+            Print.println("Rained out");
         } catch (BaseballException e) {
-            print("Generic baseball exception");
+            Print.println("Generic baseball exception");
         }
     }
 }

@@ -1,11 +1,10 @@
 package thinking.concurrency.sync;
 
 import thread.pool.ThreadPoolBuilder;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
-
-import static util.Print.print;
 
 /**
  * Synchronized on another object.
@@ -29,7 +28,7 @@ class DualSync {
 
     public synchronized void f() {
         for (int i = 0; i < Constants.FIVE; i++) {
-            print("f()");
+            Print.println("f()");
             Thread.yield();
         }
     }
@@ -38,7 +37,7 @@ class DualSync {
         // Synchronized blocks on a SyncObject object.
         synchronized (syncObject) {
             for (int i = 0; i < Constants.FIVE; i++) {
-                print("g()");
+                Print.println("g()");
                 Thread.yield();
             }
         }

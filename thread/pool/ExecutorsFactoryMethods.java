@@ -1,10 +1,9 @@
 package thread.pool;
 
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.*;
-
-import static util.Print.print;
 
 /**
  * --------------- Executors 中创建线程池的工厂方法 ---------------
@@ -90,13 +89,13 @@ class ExecutorsFactoryMethods {
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(3);
         scheduledThreadPool.schedule(() -> {
             // This is executed once after a delay of 3 seconds.
-            print("delay 3 second... execute!");
+            Print.println("delay 3 second... execute!");
         }, 3, TimeUnit.SECONDS);
 
 
         scheduledThreadPool.scheduleAtFixedRate(() -> {
             // Perform every three seconds after a delay of one second.
-            print("delay 1 second... every three seconds execute!");
+            Print.println("delay 1 second... every three seconds execute!");
         }, 1, 3, TimeUnit.SECONDS);
 
 

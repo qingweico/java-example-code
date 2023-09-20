@@ -1,7 +1,7 @@
 package thread.lock;
 
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -19,7 +19,7 @@ class NotifyAndWait {
     private static volatile boolean t2Start = false;
 
     static CountDownLatch latch = new CountDownLatch(1);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2, 2, 1);
 
     public static void main(String[] args) {
         final Object o = new Object();

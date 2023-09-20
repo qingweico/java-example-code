@@ -1,6 +1,6 @@
 package io.server;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ class BioPlainServer {
     // 当客户端读写数据不是很频繁时, 会造成大量线程资源浪费
 
 
-    private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(10);
+    private static final ExecutorService POOL = ThreadObjectPool.newFixedThreadPool(10);
     private static final int PORT = Constants.DEFAULT_COMMON_PORT;
 
     public static void serve() throws IOException {

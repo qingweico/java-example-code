@@ -1,10 +1,9 @@
 package thinking.container.map.hashcode;
 
 import thinking.util.Countries;
+import util.Print;
 
 import java.util.*;
-
-import static util.Print.print;
 
 /**
  * A Map implements with ArrayLists
@@ -51,8 +50,8 @@ public class SlowMap<K, V> extends AbstractMap<K, V> {
     public static void main(String[] args) {
         SlowMap<String, String> m = new SlowMap<>();
         m.putAll(Countries.capitals(15));
-        print(m);
-        print(m.get("BULGARIA"));
-        print(m.entrySet());
+        Print.println(m);
+        Print.println(m.get("BULGARIA"));
+        Print.println(m.entrySet());
     }
 }

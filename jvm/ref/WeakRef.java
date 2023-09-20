@@ -1,8 +1,8 @@
 package jvm.ref;
 
-import java.lang.ref.WeakReference;
+import util.Print;
 
-import static util.Print.print;
+import java.lang.ref.WeakReference;
 
 /**
  * @author zqw
@@ -14,14 +14,14 @@ public class WeakRef {
         Object o1 = new Object();
         WeakReference<Object> ref = new WeakReference<>(o1);
 
-        print(o1);
-        print(ref.get());
-        print("----------");
+        Print.println(o1);
+        Print.println(ref.get());
+        Print.println("----------");
 
         o1 = null;
         System.gc();
 
-        print(o1);
-        print(ref.get());
+        Print.println(o1);
+        Print.println(ref.get());
     }
 }

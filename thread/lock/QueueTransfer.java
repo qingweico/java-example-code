@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.*;
@@ -19,7 +19,7 @@ class QueueTransfer {
     static Semaphore semaphore = new Semaphore(1);
     static CyclicBarrier sync = new CyclicBarrier(2);
     static AtomicReference<String> threadName = new AtomicReference<>();
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 10, 10);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 10, 10);
     static volatile boolean flag = false;
 
     public static void main(String[] args) throws InterruptedException, BrokenBarrierException {

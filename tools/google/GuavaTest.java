@@ -105,7 +105,7 @@ public class GuavaTest {
         for (String s : Splitter.on(Symbol.DOT).split(str)) {
             Print.prints(s);
         }
-        Print.print();
+        Print.println();
         // 按固定长度分割
         for (String d : Splitter.fixedLength(Constants.TWO).split(str)) {
             Print.prints(d);

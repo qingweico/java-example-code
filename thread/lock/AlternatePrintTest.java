@@ -1,7 +1,7 @@
 package thread.lock;
 
 import org.junit.Test;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class AlternatePrintTest {
 
     private final CountDownLatch terminated = new CountDownLatch(Constants.TWO);
 
-    private final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+    private final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2, 2, 1);
 
     private final char[] numbers = "123456".toCharArray();
     private final char[] chars = "ABCDEF".toCharArray();

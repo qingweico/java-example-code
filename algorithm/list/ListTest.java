@@ -2,9 +2,8 @@ package algorithm.list;
 
 
 import org.testng.annotations.Test;
+import util.Print;
 import util.constants.Constants;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -17,8 +16,8 @@ public class ListTest {
         for (int i = 0; i < Constants.TEN; i++) {
             linkedList.addLast(i);
         }
-        print(linkedList);
+        Print.println(linkedList);
         linkedList.dummy.next = linkedList.reverseListR(linkedList.dummy.next);
-        print(linkedList);
+        Print.println(linkedList);
     }
 }

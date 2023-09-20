@@ -1,9 +1,9 @@
 package jvm;
 
 
-import java.security.Provider;
+import util.Print;
 
-import static util.Print.print;
+import java.security.Provider;
 
 /**
  * --------------- 类加载器 ---------------
@@ -16,24 +16,24 @@ class ClassLoaders {
 
         // Gets the system class loader
         ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
-        print(systemClassLoader);
+        Print.println(systemClassLoader);
 
         // Gets the parent class of the system class loader
         ClassLoader parent = systemClassLoader.getParent();
-        print(parent);
+        Print.println(parent);
 
         // Gets the bootstrap class loader
         ClassLoader bootstrapClassLoader = parent.getParent();
-        print(bootstrapClassLoader);
+        Print.println(bootstrapClassLoader);
 
         // User-defined classes are loaded by default using the system class loader
         ClassLoader userDefinedClassLoader = ClassLoaders.class.getClassLoader();
-        print(userDefinedClassLoader);
+        Print.println(userDefinedClassLoader);
 
         // Java's core class libraries are loaded using bootstrap classLoaders
         ClassLoader coreLibraryClassLoader = String.class.getClassLoader();
-        print(coreLibraryClassLoader);
+        Print.println(coreLibraryClassLoader);
         ClassLoader classLoader = Provider.class.getClassLoader();
-        print(classLoader);
+        Print.println(classLoader);
     }
 }

@@ -1,6 +1,6 @@
 package thinking.concurrency.atom;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,19 +37,19 @@ class AtomicityIntegerTest implements Runnable {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                print("Aborting");
+                println("Aborting");
                 exit(0);
             }
             // Terminate after 2 seconds
         }, 2000);
 
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(1, true);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1, true);
         AtomicityIntegerTest ait = new AtomicityIntegerTest();
         pool.execute(ait);
         while (true) {
             int val = ait.getValue();
             if (val % 2 != 0) {
-                print(val);
+                println(val);
                 exit(0);
                 break;
             }

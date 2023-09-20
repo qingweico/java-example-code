@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2022/6/25
  */
 public class FairAndUnfairLock {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3, true);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(3, true);
     static Integer ticketCount = 100;
     static Integer threadCount = 3;
     static boolean isFair = false;

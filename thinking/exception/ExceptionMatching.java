@@ -1,6 +1,6 @@
 package thinking.exception;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Catch exception hierarchies
@@ -15,16 +15,16 @@ public class ExceptionMatching {
         try {
            throw new Sneeze();
         }catch (Sneeze e){
-            print("Caught sneeze");
+            Print.println("Caught sneeze");
             // catch (Annoyance e) catches Annoyance and all the exceptions derived from it.
         }catch (AnnoyanceException e){
-            print("Caught Annoyance");
+            Print.println("Caught Annoyance");
         }
 
         try {
             throw new Sneeze();
         }catch (AnnoyanceException e){
-            print("Caught Annoyance");
+            Print.println("Caught Annoyance");
         }
     }
 }

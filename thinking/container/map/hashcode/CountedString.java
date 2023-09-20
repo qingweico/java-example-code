@@ -1,11 +1,11 @@
 package thinking.container.map.hashcode;
 
 
+import util.Print;
+
 import java.util.ArrayList;
 import java.util.*;
 import java.util.List;
-
-import static util.Print.print;
 
 /**
  * Creating a good hashcode
@@ -61,10 +61,10 @@ class CountedString {
             cs[i] = new CountedString("hi");
             map.put(cs[i], i);
         }
-        print(map);
+        Print.println(map);
         for (CountedString cString : cs) {
-            print("Looking up " + cString);
-            print(map.get(cString));
+            Print.println("Looking up " + cString);
+            Print.println(map.get(cString));
         }
     }
 }

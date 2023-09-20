@@ -1,11 +1,10 @@
 package thinking.container.map;
 
 import thinking.util.CountingMapData;
+import util.Print;
 
 import java.util.Iterator;
 import java.util.TreeMap;
-
-import static util.Print.print;
 
 /**
  *  What you can do with a TreeMap?
@@ -17,12 +16,12 @@ import static util.Print.print;
 class SortedMap {
     public static void main(String[] args) {
         TreeMap<Integer, String> sortedMap = new TreeMap<>(new CountingMapData(10));
-        print(sortedMap);
+        Print.println(sortedMap);
 
         Integer low = sortedMap.firstKey();
         Integer high = sortedMap.lastKey();
-        print(low);
-        print(high);
+        Print.println(low);
+        Print.println(high);
 
         Iterator<Integer> iterator = sortedMap.keySet().iterator();
         for (int i = 0; i <= 6; i++) {
@@ -36,15 +35,15 @@ class SortedMap {
             }
         }
 
-        print(low);
-        print(high);
+        Print.println(low);
+        Print.println(high);
 
         // [low, high)
-        print(sortedMap.subMap(low, high));
+        Print.println(sortedMap.subMap(low, high));
         // [0, high)
-        print(sortedMap.headMap(high));
+        Print.println(sortedMap.headMap(high));
         // [low, map.size)
-        print(sortedMap.tailMap(low));
+        Print.println(sortedMap.tailMap(low));
     }
 }
 

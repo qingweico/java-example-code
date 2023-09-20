@@ -23,10 +23,10 @@ class FormattedMemoryInput {
                     ));
 
             while (true) {
-                printnb((char) in.readByte());
+                print((char) in.readByte());
             }
         } catch (EOFException e) {
-            print("End of stream");
+            println("End of stream");
         }
     }
 }

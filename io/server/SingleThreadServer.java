@@ -1,13 +1,13 @@
 package io.server;
 
+import util.Print;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -27,19 +27,19 @@ class SingleThreadServer extends Thread {
     public void run() {
         while (true) {
             try {
-                print("Waiting for remote connection..., the port number is " + serverSocket.getLocalPort());
+                Print.println("Waiting for remote connection..., the port number is " + serverSocket.getLocalPort());
                 Socket socket = serverSocket.accept();
-                print("The remote host address: " + socket.getLocalSocketAddress());
+                Print.println("The remote host address: " + socket.getLocalSocketAddress());
                 DataInputStream in = new DataInputStream(socket.getInputStream());
-                print(in.readUTF());
+                Print.println(in.readUTF());
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 out.writeUTF("Thanks for connecting me! " + socket.getLocalSocketAddress() + "\nGoodBye!");
                 socket.close();
             } catch (SocketTimeoutException e) {
-                print("Socket Time Out!");
+                Print.println("Socket Time Out!");
                 break;
             } catch (IOException e) {
-                print("Socket Exit!");
+                Print.println("Socket Exit!");
             }
         }
     }

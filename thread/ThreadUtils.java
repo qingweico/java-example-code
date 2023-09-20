@@ -28,11 +28,11 @@ public final class ThreadUtils {
                 .add(String.valueOf(getThreadId()))
                 .add(attach);
 
-        Print.print(result);
+        Print.println(result);
     }
 
-    public static void main(String[] args) {
-        gracePrint("haha");
+    public static Thread getCurrentThread() {
+        return Thread.currentThread();
     }
 
 }

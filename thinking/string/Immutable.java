@@ -1,7 +1,8 @@
 package thinking.string;
 
+import util.Print;
+
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * override: An operator is given a particular meaning when applied to
@@ -18,7 +19,7 @@ class Immutable {
     public static void main(String[] args) {
         String q = "hello";
         String p = upCase(q);
-        print(q);
-        printnb(p);
+        Print.println(q);
+        print(p);
     }
 }

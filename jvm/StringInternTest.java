@@ -1,8 +1,7 @@
 package jvm;
 
 import org.junit.Test;
-
-import static util.Print.print;
+import util.Print;
 
 /**
  * String::intern 方法测试
@@ -18,7 +17,7 @@ public class StringInternTest {
         String s = "ab";
         // true
         // Using string constant or constant ref not use StringBuilder
-        print(s == a + b);
+        Print.println(s == a + b);
     }
 
     @Test
@@ -30,7 +29,7 @@ public class StringInternTest {
         s10.intern();
         String s12 = "ab";
         // true
-        print(s10 == s12);
+        Print.println(s10 == s12);
     }
 
     public static void main(String[] args) {
@@ -38,9 +37,9 @@ public class StringInternTest {
         String ss = s.intern();
         String str = "a";
         // false
-        print(s == str);
+        Print.println(s == str);
         // true
-        print(ss == str);
+        Print.println(ss == str);
 
 
         String s1 = new String("a") + new String("b");
@@ -50,37 +49,37 @@ public class StringInternTest {
         s1.intern();
         String s2 = "ab";
         // true
-        print(s1 == s2);
+        Print.println(s1 == s2);
 
 
         String s3 = new String("a") + new String("b");
         String s4 = "ab";
         String s5 = s3.intern();
         // false
-        print(s3 == s4);
+        Print.println(s3 == s4);
         // true
-        print(s5 == s4);
+        Print.println(s5 == s4);
 
 
         String s6 = "ab";
         String s7 = new String("a") + new String("b");
         String s8 = s7.intern();
         // false
-        print(s6 == s7);
+        Print.println(s6 == s7);
         // true
-        print(s6 == s8);
+        Print.println(s6 == s8);
 
 
         String s9 = new String("ab");
         s9.intern();
         String s11 = "ab";
         // false
-        print(s9 == s11);
+        Print.println(s9 == s11);
 
         String a = new String("abc") + new String("def");
         String b = "abcdef";
         // true
-        print(a.intern() == b);
+        Print.println(a.intern() == b);
 
     }
 }

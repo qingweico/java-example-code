@@ -1,8 +1,8 @@
 package thinking.rtti;
 
-import java.util.Random;
+import util.Print;
 
-import static util.Print.print;
+import java.util.Random;
 
 /**
  *
@@ -17,23 +17,23 @@ public class ClassInitialization {
         // Using .class to create a reference to a Class object does not automatically
         // initialize the Class object.
         Class<Inimitable> inimitable = Inimitable.class;
-        print("After creating Inimitable ref:" + inimitable.getCanonicalName());
+        Print.println("After creating Inimitable ref:" + inimitable.getCanonicalName());
 
         // Does not trigger Initializing:
         // StaticFinal is a compiler constant that can be read without initializing the class
-        print(Inimitable.STATIC_FINAL);
+        Print.println(Inimitable.STATIC_FINAL);
 
         // Does trigger Initializing:
         // Access to the staticFinal0 variable will force the initialization of the class
         // because it is not a compile-time constant.
-        print(Inimitable.STATIC_FINAL0);
+        Print.println(Inimitable.STATIC_FINAL0);
 
 
         // Does trigger Initializing:
-        print(Inimitable0.staticNoFinal);
+        Print.println(Inimitable0.staticNoFinal);
         Class<?> inimitable2 = Class.forName("thinking.rtti.Inimitable2");
-        print("After creating Inimitable2 ref: " + inimitable2.getCanonicalName());
-        print(Inimitable2.staticNoFinal);
+        Print.println("After creating Inimitable2 ref: " + inimitable2.getCanonicalName());
+        Print.println(Inimitable2.staticNoFinal);
 
 
     }

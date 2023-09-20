@@ -1,8 +1,8 @@
 package thinking.container;
 
-import java.util.*;
+import util.Print;
 
-import static util.Print.print;
+import java.util.*;
 
 /**
  * @author zqw
@@ -25,7 +25,7 @@ class TypesForSets {
         // Try to add duplicates
         fill(set, type);
         fill(set, type);
-        print(set);
+        Print.println(set);
 
     }
 
@@ -43,7 +43,7 @@ class TypesForSets {
             test(new TreeSet<>(), SetType.class);
 
         } catch (Exception e) {
-            print(e.getMessage());
+            Print.println(e.getMessage());
         }
 
 

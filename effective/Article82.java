@@ -1,7 +1,7 @@
 package effective;
 
 import annotation.Pass;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.Collections;
 import java.util.*;
@@ -67,7 +67,7 @@ class Article82<K, V> {
         int threadCount = 40;
         int incCount = 50;
         SlowCountDownLatch latch = new SlowCountDownLatch(threadCount);
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(threadCount);
         for (int i = 0; i < threadCount; i++) {
             pool.execute(() -> {
                 for (int j = 0; j < incCount; j++) {

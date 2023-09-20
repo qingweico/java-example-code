@@ -1,6 +1,6 @@
 package awt;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +33,7 @@ public class CodeRain extends JPanel {
      */
     private static final int SLEEP_TIME = 130;
 
-    private static final ExecutorService POOL = CustomThreadPool.newFixedThreadPool(1);
+    private static final ExecutorService POOL = ThreadObjectPool.newFixedThreadPool(1);
 
     /**
      * 字符集合(可从文件、外部配置读取) 二位数组

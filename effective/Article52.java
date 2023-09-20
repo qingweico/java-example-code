@@ -129,7 +129,7 @@ class PrintUtil {
         List<Integer> list = Arrays.asList(1, 4, 5, 6);
         // Call the System.out.println() method foreach element that enters the foreach.
         list.forEach(Print::prints);
-        print();
+        Print.println();
         list.forEach(new PrintUtil()::addNumber);
     }
 }

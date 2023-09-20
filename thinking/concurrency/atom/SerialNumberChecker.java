@@ -1,13 +1,13 @@
 package thinking.concurrency.atom;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.exit;
-import static util.Print.print;
 
 
 /**
@@ -19,7 +19,7 @@ import static util.Print.print;
 public class SerialNumberChecker {
     private static final int SIZE = 100;
     static CircularSet serials = new CircularSet(1000);
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(100,true);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(100,true);
 
     static class SerialChecker implements Runnable {
         @Override
@@ -30,7 +30,7 @@ public class SerialNumberChecker {
                 if (serials.contains(serial)) {
                     // When using synchronized keywords to modify
                     // methods nextSerialNumber(), this will not be executed.
-                    print("Duplicate: " + serial);
+                    Print.println("Duplicate: " + serial);
                 }
                 serials.add(serial);
             }
@@ -43,7 +43,7 @@ public class SerialNumberChecker {
             // Stop after n second if there's an argument
             if (args.length > 0) {
                 TimeUnit.SECONDS.sleep(Integer.parseInt(args[0]));
-                print("No duplicates detected");
+                Print.println("No duplicates detected");
                 exit(0);
             }
         }

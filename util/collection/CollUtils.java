@@ -6,12 +6,12 @@ import java.util.*;
  * @author zqw
  * @date 2021/4/9
  */
-public final class New {
-    private New() {
+public final class CollUtils {
+    private CollUtils() {
     }
 
     public static <K, V> Map<K, V> map() {
-        return map(1 << 4);
+        return map(mapSize(1 << 4));
     }
 
     public static <K, V> Map<K, V> map(int capacity) {
@@ -22,7 +22,7 @@ public final class New {
         return new ArrayList<>();
     }
 
-    public static <T> LinkedList<T> lList() {
+    public static <T> LinkedList<T> newLinkedList() {
         return new LinkedList<>();
     }
 
@@ -32,5 +32,9 @@ public final class New {
 
     public static <T> Queue<T> queue() {
         return new LinkedList<>();
+    }
+
+    public static int mapSize(int exceptedSize) {
+        return (int) ((float) exceptedSize / 0.75F + 1.0F);
     }
 }

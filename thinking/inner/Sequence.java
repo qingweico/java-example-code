@@ -1,5 +1,7 @@
 package thinking.inner;
 
+import util.Print;
+
 /**
  * @author zqw
  * @date 2021/1/29
@@ -45,14 +47,14 @@ public class Sequence {
     }
 
     public static void main(String[] args) {
-        Sequence sequence = new Sequence(10);
-        for (int i = 0; i < 10; i++) {
+        int size = 10;
+        Sequence sequence = new Sequence(size);
+        for (int i = 0; i < size; i++) {
             sequence.add(Integer.toString(i));
         }
-        // Selector selector = sequence.selector();
-        Sequence.SequenceSelector selector = sequence.new SequenceSelector();
+        Selector selector = sequence.selector();
         while (!selector.end()) {
-            System.out.print(selector.current() + " ");
+            Print.prints(selector.current());
             selector.next();
         }
     }

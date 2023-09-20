@@ -1,8 +1,7 @@
 package thinking.genericity.wildcard;
 
 import thinking.genericity.Holder;
-
-import static util.Print.print;
+import util.Print;
 
 /**
  * 通配符 ?
@@ -13,7 +12,7 @@ import static util.Print.print;
 class CaptureConversion {
     static <T> void f1(Holder<T> holder) {
         T t = holder.get();
-        print(t.getClass().getSimpleName());
+        Print.println(t.getClass().getSimpleName());
     }
 
     static void f2(Holder<?> holder) {

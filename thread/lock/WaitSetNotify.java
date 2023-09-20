@@ -1,6 +1,6 @@
 package thread.lock;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -18,7 +18,7 @@ class WaitSetNotify {
     static final Object O = new Object();
     static Semaphore block = new Semaphore(1);
     static boolean hasGoodNetwork = false;
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10, 20, 10);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 20, 10);
 
 
     public static void main(String[] args) {

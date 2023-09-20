@@ -1,6 +1,6 @@
 package thinking.concurrency.interrupted;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,15 +28,15 @@ import static util.Print.*;
  * @see SimpleInterrupt
  */
 public class Interrupting {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(4);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(4);
 
     static void test(Runnable r) throws InterruptedException {
         Future<?> task = pool.submit(r);
         TimeUnit.MILLISECONDS.sleep(100);
-        print("Interrupting " + r.getClass().getName());
+        println("Interrupting " + r.getClass().getName());
         // Interrupts if running
         task.cancel(true);
-        print("Interrupt sent to " + r.getClass().getName());
+        println("Interrupt sent to " + r.getClass().getName());
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -45,7 +45,7 @@ public class Interrupting {
         test(new SynchronizedBlocked());
         test(new LockBlocked());
         TimeUnit.SECONDS.sleep(3);
-        print("Aborting with System.exit(0)");
+        println("Aborting with System.exit(0)");
         // Since last 2 interrupts failed
         exit(0);
     }
@@ -61,9 +61,9 @@ class SleepBlocked implements Runnable {
         try {
             TimeUnit.SECONDS.sleep(100);
         } catch (InterruptedException e) {
-            print("InterruptedException");
+            println("InterruptedException");
         }
-        print("Exiting SleepBlocked.run()");
+        println("Exiting SleepBlocked.run()");
     }
 }
 
@@ -81,7 +81,7 @@ class IoBlocked implements Runnable {
     @Override
     public void run() {
         try {
-            print("Waiting for read()");
+            println("Waiting for read()");
             while (true) {
                 int read = in.read();
                 if (read == -1) {
@@ -90,12 +90,12 @@ class IoBlocked implements Runnable {
             }
         } catch (IOException e) {
             if (Thread.currentThread().isInterrupted()) {
-                print("Interrupted from blocked I/O");
+                println("Interrupted from blocked I/O");
             } else {
                 throw new RuntimeException(e);
             }
         }
-        print("Exiting IOBlocked.run()");
+        println("Exiting IOBlocked.run()");
     }
 }
 
@@ -104,7 +104,7 @@ class IoBlocked implements Runnable {
  */
 @SuppressWarnings("InfiniteLoopStatement")
 class SynchronizedBlocked implements Runnable {
-    ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
+    ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1);
 
     public synchronized void f() {
         // Never releases lock
@@ -131,7 +131,7 @@ class SynchronizedBlocked implements Runnable {
  */
 @SuppressWarnings("InfiniteLoopStatement")
 class LockBlocked implements Runnable {
-    ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
+    ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1);
     Lock lock = new ReentrantLock();
 
     @SuppressWarnings("all")

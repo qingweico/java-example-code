@@ -1,6 +1,6 @@
 package object.oop;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Method hiding and method overriding
@@ -17,8 +17,8 @@ class MethodHideAndCover {
         // A child class does not override the static methods of its parent class,
         // which is not visible to the child class, this is called hiding.
         Father father = new Son();
-        print(father.a);
-        print(father.b);
+        Print.println(father.a);
+        Print.println(father.b);
         father.c();
         father.d();
     }
@@ -40,7 +40,7 @@ class Father {
     // subclass, and output 1.
 
     void c() {
-        print(0);
+        Print.println(0);
     }
 
     // For static methods, only static binding is performed, so the JVM will bind by referring to
@@ -48,7 +48,7 @@ class Father {
     // parent class, and output 0.
 
     static void d() {
-        print(0);
+        Print.println(0);
     }
 }
 
@@ -62,10 +62,10 @@ class Son extends Father {
 
     @Override
     void c() {
-        print(1);
+        Print.println(1);
     }
 
     static void d() {
-        print(1);
+        Print.println(1);
     }
 }

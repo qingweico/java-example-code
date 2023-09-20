@@ -17,14 +17,14 @@ class Maps {
     static int initialCapacity = 10;
 
     public static void printKeys(Map<Integer, String> map) {
-        printnb("Size = " + map.size() + ", ");
-        printnb("Keys: ");
+        print("Size = " + map.size() + ", ");
+        print("Keys: ");
         // Produces a Set of the keys
-        print(map.keySet());
+        println(map.keySet());
     }
 
     public static void test(Map<Integer, String> map) {
-        print(map.getClass().getSimpleName());
+        println(map.getClass().getSimpleName());
         map.putAll(new CountingMapData(25));
 
         // Map has 'Set' behavior for keys
@@ -34,30 +34,30 @@ class Maps {
 
         // Producing a Collection of the values:
 
-        printnb("Values: ");
+        print("Values: ");
 
-        print(map.values());
+        println(map.values());
 
-        print(map);
+        println(map);
 
-        print("map.containsKey(11): " + map.containsKey(11));
+        println("map.containsKey(11): " + map.containsKey(11));
 
-        print("map.get(11): " + map.get(11));
+        println("map.get(11): " + map.get(11));
 
-        print("map.containsValue(\"F0\"): " + map.containsValue("F0"));
+        println("map.containsValue(\"F0\"): " + map.containsValue("F0"));
 
         Integer key = map.keySet().iterator().next();
-        print("First key in map: " + key);
+        println("First key in map: " + key);
         map.remove(key);
         printKeys(map);
         map.clear();
-        print("map.isEmpty()：" + true);
+        println("map.isEmpty()：" + true);
 
         map.putAll(new CountingMapData(25));
 
         // Operations on the Set change the Map:
         map.keySet().removeAll(map.keySet());
-        print("map.isEmpty()：" + map.isEmpty());
+        println("map.isEmpty()：" + map.isEmpty());
 
 
     }

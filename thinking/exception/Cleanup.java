@@ -1,7 +1,7 @@
 package thinking.exception;
 
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * @author zqw
@@ -14,16 +14,16 @@ public class Cleanup {
             try {
                 String s;
                 while ((s = in.getLine()) != null){
-                    print(s);
+                    Print.println(s);
                 }
             } catch (Exception e){
-                print("Caught Exception in main");
+                Print.println("Caught Exception in main");
                 e.printStackTrace(System.out);
             }finally {
                 in.dispose();
             }
         }catch (Exception e){
-            print("InputFile construction failed");
+            Print.println("InputFile construction failed");
         }
     }
 }

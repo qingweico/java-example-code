@@ -1,10 +1,9 @@
 package thinking.concurrency.share;
 
 import thread.pool.ThreadPoolBuilder;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
-
-import static util.Print.print;
 
 /**
  * 偶数校验
@@ -26,7 +25,7 @@ public class EvenChecker implements Runnable {
         while (!generator.isCanceled()) {
             int val = generator.next();
             if (val % 2 != 0) {
-                print("ThreadName " + id + ": " + val + " not even");
+                Print.println("ThreadName " + id + ": " + val + " not even");
                 // Cancels all EvenCheckers
                 generator.cancel();
             }
@@ -36,7 +35,7 @@ public class EvenChecker implements Runnable {
     // Test any type of IntGenerator
 
     public static void test(AbstractIntGenerator gp, int count) {
-        print("Press Control-C to exit");
+        Print.println("Press Control-C to exit");
         ExecutorService pool = ThreadPoolBuilder.builder().build();
         for (int i = 0; i < count; i++) {
             pool.execute(new EvenChecker(gp, i));

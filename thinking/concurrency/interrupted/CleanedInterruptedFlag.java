@@ -1,6 +1,6 @@
 package thinking.concurrency.interrupted;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2022/6/26
  */
 public class CleanedInterruptedFlag {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(1);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1);
 
     static Thread t;
 

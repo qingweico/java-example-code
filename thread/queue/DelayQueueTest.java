@@ -1,7 +1,7 @@
 package thread.queue;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import javax.annotation.Nonnull;
@@ -48,7 +48,7 @@ public class DelayQueueTest {
     static DelayQueue<DelayItem<Integer>> delay = new DelayQueue<>();
 
     public static void main(String[] args) {
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(2, 2, 1);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2, 2, 1);
 
         pool.execute(() -> {
             for (int i = 0; i < Constants.TWENTY; i++) {

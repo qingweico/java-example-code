@@ -1,6 +1,6 @@
 package thinking.container.map;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Associates keys and values
@@ -58,9 +58,9 @@ public class AssociativeArray<K, V> {
         try {
             map.put("extra", "object");
         }catch (ArrayIndexOutOfBoundsException e) {
-            print("Too many objects!");
+            Print.println("Too many objects!");
         }
-        print(map);
-        print(map.get(null));
+        Print.println(map);
+        Print.println(map.get(null));
     }
 }

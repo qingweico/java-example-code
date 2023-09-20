@@ -1,14 +1,13 @@
 package thinking.concurrency.juc;
 
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import static util.Print.print;
 
 /**
  * CountDownLatch:
@@ -24,7 +23,7 @@ class Cdl {
     static final int WAITING_TASK_COUNT = 10;
 
     public static void main(String[] args) {
-        ExecutorService exec = CustomThreadPool.newFixedThreadPool(THREAD_COUNT);
+        ExecutorService exec = ThreadObjectPool.newFixedThreadPool(THREAD_COUNT);
         // All must share a single CountDownLatch object
         CountDownLatch countDownLatch = new CountDownLatch(THREAD_COUNT);
         for (int i = 0; i < WAITING_TASK_COUNT; i++) {
@@ -33,7 +32,7 @@ class Cdl {
         for (int i = 0; i < THREAD_COUNT; i++) {
             exec.execute(new TaskPortion(countDownLatch));
         }
-        print("Launched all tasks");
+        Print.println("Launched all tasks");
         // Quit when all tasks complete
         exec.shutdown();
     }
@@ -67,7 +66,7 @@ class TaskPortion implements Runnable {
 
     public void doWork() throws InterruptedException {
         TimeUnit.MILLISECONDS.sleep(R.nextInt(2000));
-        print(this + "completed");
+        Print.println(this + "completed");
     }
 
     @Override
@@ -94,9 +93,9 @@ class WaitingTask implements Runnable {
             // Any call to await() method on this object(latch) will block until the
             // count reaches 0.
             latch.await();
-            print("Latched barrier pass for " + this);
+            Print.println("Latched barrier pass for " + this);
         } catch (InterruptedException ex) {
-            print(this + " interrupted");
+            Print.println(this + " interrupted");
         }
     }
 

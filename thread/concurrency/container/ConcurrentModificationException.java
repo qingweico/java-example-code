@@ -1,6 +1,6 @@
 package thread.concurrency.container;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 class ConcurrentModificationException {
     public static void main(String[] args) {
-        final ExecutorService pool = CustomThreadPool.newFixedThreadPool(5, 10, 5);
+        final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(5, 10, 5);
         // Using ArrayList will throw ConcurrentModificationException, because
         // ArrayList is thread-unsafe, so we could use Vector instead of ArrayList,
         // or using CopyOnWriteArrayList, or using the Collections.synchronizedList(Synchronous container class)

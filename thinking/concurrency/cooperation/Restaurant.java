@@ -1,12 +1,12 @@
 package thinking.concurrency.cooperation;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * The producer-consumer approach to task cooperation
@@ -16,7 +16,7 @@ import static util.Print.printnb;
  */
 class Restaurant {
    Meal meal;
-   ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+   ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
    final WaitPerson waitPerson = new WaitPerson(this);
    final Chef chef = new Chef(this);
    public Restaurant() {
@@ -56,7 +56,7 @@ class WaitPerson implements Runnable {
                    wait();
                }
             }
-            print("WaitPerson got " + restaurant.meal);
+            Print.println("WaitPerson got " + restaurant.meal);
             synchronized (restaurant.chef) {
                restaurant.meal = null;
                // Ready for another
@@ -64,7 +64,7 @@ class WaitPerson implements Runnable {
             }
          }
       }catch (InterruptedException e) {
-         print("WaitPerson interrupted");
+         Print.println("WaitPerson interrupted");
       }
    }
 }
@@ -85,10 +85,10 @@ class Chef implements Runnable {
                while (restaurant.meal != null) {wait();}
             }
             if(++count == 10) {
-               print("Out of food, closing");
+               Print.println("Out of food, closing");
                restaurant.pool.shutdownNow();
             }
-            printnb("Order up! ");
+            print("Order up! ");
             synchronized (restaurant.waitPerson) {
                restaurant.meal = new Meal(count);
                restaurant.waitPerson.notifyAll();
@@ -96,7 +96,7 @@ class Chef implements Runnable {
             TimeUnit.MILLISECONDS.sleep(100);
          }
       }catch (InterruptedException e) {
-         print("Chef interrupted");
+         Print.println("Chef interrupted");
       }
    }
 }

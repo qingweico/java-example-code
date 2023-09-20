@@ -4,10 +4,9 @@ import thinking.holding.pets.Hamster;
 import thinking.holding.pets.Pet;
 import thinking.holding.pets.Pets;
 import thinking.holding.pets.Rat;
+import util.Print;
 
 import java.util.LinkedList;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -16,43 +15,43 @@ import static util.Print.print;
 public class LinkedListFeatures {
     public static void main(String[] args) {
         LinkedList<Pet> pets = new LinkedList<>(Pets.arrayList(5));
-        print(pets);
+        Print.println(pets);
 
         // Identical
         // The getFirst() and element() methods are exactly the same in that they
         // both return the first element in the list without removing it, a
         // NoSuchElementException is thrown when the list is empty.
-        print("pets.getFirst(): " + pets.getFirst());
-        print("pets.element(): " + pets.element());
+        Print.println("pets.getFirst(): " + pets.getFirst());
+        Print.println("pets.element(): " + pets.element());
         // Only differs in empty-list behavior, it returns null if the list is empty.
-        print("pets.peek(): " + pets.peek());
+        Print.println("pets.peek(): " + pets.peek());
 
 
         // Identical
         // The remove() and removeFirst() methods are exactly the same in that they
         // remove and return the head of the list and throw a NoSuchElementException
         // when the list is empty.
-        print("pets.remove(): " + pets.remove());
-        print("pets.removeFirst(): " + pets.removeFirst());
+        Print.println("pets.remove(): " + pets.remove());
+        Print.println("pets.removeFirst(): " + pets.removeFirst());
         // Only differs in empty-list behavior, it returns null if the list is empty.
-        print("pets.poll(): " + pets.poll());
-        print(pets);
+        Print.println("pets.poll(): " + pets.poll());
+        Print.println(pets);
 
         // Insert an element at the head of the list
         pets.addFirst(new Rat());
-        print("After addFirst(): " + pets);
+        Print.println("After addFirst(): " + pets);
 
         // They both insert an element at the end of the list.
         pets.offer(Pets.randomPet());
-        print("After offer(): " + pets);
+        Print.println("After offer(): " + pets);
         pets.add(Pets.randomPet());
-        print("After add(): " + pets);
+        Print.println("After add(): " + pets);
         pets.addLast(new Hamster());
-        print("After addLast(): " + pets);
+        Print.println("After addLast(): " + pets);
 
 
         // The removeLast() method removes and returns the last element in the list.
-        print("pets.removeLast(): " + pets.removeLast());
+        Print.println("pets.removeLast(): " + pets.removeLast());
 
 
     }

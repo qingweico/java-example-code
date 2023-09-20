@@ -1,9 +1,9 @@
 package thinking.io;
 
+import util.Print;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -16,9 +16,9 @@ public class UsingRandomAccessFile {
     static void disPlay() throws IOException {
         RandomAccessFile rf = new RandomAccessFile(file, "r");
         for (int i = 0; i < COUNT; i++) {
-            print("Value " + i + ": " + rf.readDouble());
+            Print.println("Value " + i + ": " + rf.readDouble());
         }
-        print(rf.readUTF());
+        Print.println(rf.readUTF());
         rf.close();
     }
 

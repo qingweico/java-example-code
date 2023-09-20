@@ -1,8 +1,9 @@
 package algorithm.map;
 
+import util.Print;
 import util.Tools;
 import org.junit.Test;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.io.FileUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 
-import static util.Print.print;
 import static util.Print.printf;
 
 /**
@@ -18,7 +18,7 @@ import static util.Print.printf;
  * @date 2021/10/31
  */
 public class MapTest {
-    ExecutorService exec = CustomThreadPool.newFixedThreadPool(5, 10, 5);
+    ExecutorService exec = ThreadObjectPool.newFixedThreadPool(5, 10, 5);
 
     @Test
     public void test() {
@@ -86,7 +86,7 @@ public class MapTest {
             ArrayList<String> arrayList = new ArrayList<>();
             FileUtils.readFileToArrayList("algorithm/set/pride-and-prejudice.txt", arrayList);
             String clsName = rawInstance.getClass().getSimpleName();
-            print(clsName + " words: " + arrayList.size());
+            Print.println(clsName + " words: " + arrayList.size());
             for (String s : arrayList) {
                 if (inst.contains(s)) {
                     inst.set(s, inst.get(s) + 1);
@@ -94,7 +94,7 @@ public class MapTest {
                     inst.add(s, 1);
                 }
             }
-            print(clsName + " distinct: " + inst.size());
+            Print.println(clsName + " distinct: " + inst.size());
             printf(clsName + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms" +
                     "\n===================================================");
         } catch (NoSuchMethodException

@@ -1,6 +1,7 @@
 package io.server;
 
 import com.github.javafaker.Faker;
+import util.Print;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -9,8 +10,6 @@ import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.ForkJoinPool;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -36,7 +35,7 @@ class TestWebServePressure {
                         outputStream.write(resp.getBytes(StandardCharsets.UTF_8));
                         outputStream.flush();
                     } catch (SocketTimeoutException e) {
-                        print("socket time out!");
+                        Print.println("socket time out!");
                         System.exit(-1);
                     } catch (IOException e) {
                         e.printStackTrace(System.out);

@@ -1,10 +1,10 @@
 package thinking.io.nio;
 
+import util.Print;
+
 import java.io.FileOutputStream;
 import java.nio.channels.FileLock;
 import java.util.concurrent.TimeUnit;
-
-import static util.Print.print;
 
 /**
  * A simple column example of file lock-up
@@ -23,10 +23,10 @@ class FileLocking {
         // the entire file, but tryLock() is non-blocking, while Lock() is blocking.
         FileLock fl = fos.getChannel().tryLock();
         if (fl != null) {
-            print("Locked File");
+            Print.println("Locked File");
             TimeUnit.MILLISECONDS.sleep(100);
             fl.release();
-            print("Release Lock");
+            Print.println("Release Lock");
         }
         fos.close();
 

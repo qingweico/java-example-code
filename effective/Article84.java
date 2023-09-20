@@ -1,7 +1,7 @@
 package effective;
 
 import annotation.Pass;
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.LockSupport;
@@ -18,7 +18,7 @@ class Article84 {
         SlowCountDownLatch cdl = new SlowCountDownLatch(10);
 
         int threadCount = 10;
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(threadCount);
         for (int i = 0; i < threadCount; i++) {
             pool.execute(() -> {
                 System.out.println(Thread.currentThread().getName());

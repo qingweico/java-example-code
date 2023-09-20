@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static util.Print.print;
+import static util.Print.println;
 
 /**
  * Stream: Intermediate operations; Terminal operations
@@ -26,7 +26,7 @@ import static util.Print.print;
  */
 public class OperateStreamTest {
 
-    final List<Integer> container = Arrays.asList(9, 0, 1, 3, 5, 7, 8, 8);
+    public final List<Integer> container = Arrays.asList(9, 0, 1, 3, 5, 7, 8, 8);
 
     @Test
     public void optional() {
@@ -44,11 +44,11 @@ public class OperateStreamTest {
     @Test
     public void statefulStream() {
         container.stream().sorted().forEach(Print::prints);
-        print();
+        println();
         container.stream().limit(3).forEach(Print::prints);
-        print();
+        println();
         container.stream().skip(3).forEach(Print::prints);
-        print();
+        println();
         // The equals() and hashCode() methods need to be overridden when used on objects.
         container.stream().distinct().forEach(Print::prints);
     }
@@ -56,15 +56,15 @@ public class OperateStreamTest {
     @Test
     public void generate() {
         Stream.iterate(0, x -> x + 4).limit(5).forEach(Print::prints);
-        Print.print();
+        Print.println();
         // __ 占位符
         String payload = IntStream.rangeClosed(1, 10).mapToObj(String::valueOf)
                 .collect(Collectors.joining(Symbol.WHIFFLETREE)) + UUID.randomUUID();
-        print(payload);
+        Print.println(payload);
         Stream.generate(Math::random).limit(5).forEach(Print::prints);
-        Print.print();
+        Print.println();
         IntStream s = IntStream.iterate(0, x -> x + 4).limit(4);
-        print(Arrays.toString(s.toArray()));
+        Print.println(Arrays.toString(s.toArray()));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class OperateStreamTest {
 
         // Unordered, forEachOrdered() used with parallelStream() usually.
         container.parallelStream().forEach(Print::prints);
-        print();
+        println();
         // Ordered
         container.parallelStream().forEachOrdered(Print::prints);
 
@@ -116,7 +116,7 @@ public class OperateStreamTest {
                 .map(OperateStreamTest::filterCharacter);
 
         streamStream.forEach((stream) -> stream.forEach(Print::prints));
-        print();
+        println();
 
         // Using flatMap
         stringList.stream().flatMap(OperateStreamTest::filterCharacter).forEach(Print::prints);
@@ -142,10 +142,10 @@ public class OperateStreamTest {
     public void statistics() {
         // 平均值
         Double avlVal = container.stream().collect(Collectors.averagingInt(e -> e));
-        print(avlVal);
+        Print.println(avlVal);
         // 数据统计信息
         IntSummaryStatistics intSummaryStatistics = container.stream().collect(Collectors.summarizingInt(e -> e));
-        print(intSummaryStatistics);
+        Print.println(intSummaryStatistics);
     }
 
     @Test
@@ -153,5 +153,14 @@ public class OperateStreamTest {
         // 分组
         Map<Short, List<Integer>> listMap = container.stream().collect(Collectors.groupingBy(Integer::shortValue));
         Print.toPrint(listMap);
+    }
+
+    /**
+     * Stream 中 map 和 peek 的区别
+     */
+    @Test
+    public void mapAndPeakDiff() {
+        System.out.println(container.stream().map(e -> e + 1).collect(Collectors.toList()));
+        System.out.println(container.stream().peek(System.out::println).collect(Collectors.toList()));
     }
 }

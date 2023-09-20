@@ -1,6 +1,6 @@
 package thinking.exception;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * @author zqw
@@ -10,14 +10,14 @@ public class CleanupIdiom {
     public static void main(String[] args) {
         NeedCleanup nc1 = new NeedCleanup();
         try {
-            print("nc1");
+            Print.println("nc1");
         } finally {
             nc1.dispose();
         }
         NeedCleanup nc2 = new NeedCleanup();
         NeedCleanup nc3 = new NeedCleanup();
         try {
-            print("nc2");
+            Print.println("nc2");
         } finally {
             nc3.dispose();
             nc2.dispose();
@@ -27,17 +27,17 @@ public class CleanupIdiom {
             try {
                 NeedCleanup2 nc5 = new NeedCleanup2();
                 try {
-                    print("nc2");
+                    Print.println("nc2");
                 } finally {
                     nc5.dispose();
                 }
             } catch (ConstructorException e) {
-                print(e);
+                Print.println(e);
             } finally {
                 nc4.dispose();
             }
         } catch (ConstructorException e) {
-            print(e);
+            Print.println(e);
         }
     }
 }
@@ -47,7 +47,7 @@ class NeedCleanup {
     private final long id = counter++;
 
     public void dispose() {
-        print("NeedCleanup " + id + " dispose");
+        Print.println("NeedCleanup " + id + " dispose");
     }
 }
 

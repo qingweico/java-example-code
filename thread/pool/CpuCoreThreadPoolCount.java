@@ -103,7 +103,7 @@ class CpuCoreThreadPoolCount {
 
     public static void main(String[] args) {
 
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(threadCount);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(threadCount);
         List<Long> crtl = Collections.synchronizedList(new ArrayList<>());
         List<Long> cwtl = Collections.synchronizedList(new ArrayList<>());
         AbstractTask cpuType = new CpuType(crtl, cwtl);

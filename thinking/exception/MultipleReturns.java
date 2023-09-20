@@ -1,6 +1,6 @@
 package thinking.exception;
 
-import static util.Print.print;
+import util.Print;
 
 /**
  * Use finally in return
@@ -10,25 +10,25 @@ import static util.Print.print;
  */
 public class MultipleReturns {
     public static void f(int i){
-        print("Initialization that requires cleanup");
+        Print.println("Initialization that requires cleanup");
         try {
-            print("Point 1");
+            Print.println("Point 1");
             if(i == 1) {
                 return;
             }
-            print("Point 2");
+            Print.println("Point 2");
             if(i == 2) {
                 return;
             }
-            print("Point 3");
+            Print.println("Point 3");
             if(i == 3) {
                 return;
             }
-            print("End");
+            Print.println("End");
             return;
             // It doesn't matter where you return from.
         }finally {
-            print("Performing cleanup");
+            Print.println("Performing cleanup");
         }
     }
 

@@ -1,11 +1,12 @@
 package oak.lambda;
 
+import util.Print;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.function.Consumer;
 
 import static util.Print.err;
-import static util.Print.print;
 
 /**
  * --------------- Four Method References ---------------
@@ -18,7 +19,7 @@ class MessageBuilder {
     private static final String DEBUG_LEVEL = "DEBUG";
 
     public static void printMessage() {
-        print("printMessage");
+        Print.println("printMessage");
     }
 
     public MessageBuilder() {

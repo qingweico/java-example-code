@@ -2,7 +2,7 @@ package thinking.genericity;
 
 import thinking.holding.pets.Person;
 import thinking.holding.pets.Pet;
-import util.collection.New;
+import util.collection.CollUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 class SimplerPets {
     public static void main(String[] args) {
-        Map<Person, List<? extends Pet>> petPeople = New.map();
+        Map<Person, List<? extends Pet>> petPeople = CollUtils.map();
         System.out.println(petPeople);
     }
 }

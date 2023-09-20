@@ -1,11 +1,10 @@
 package jvm;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
-
-import static util.Print.print;
 
 /**
  * Java 虚拟机类加载机制
@@ -17,14 +16,14 @@ import static util.Print.print;
  * @date 2021/2/1
  */
 class Loading {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(3,
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(3,
             4, 1);
 
     public static void main(String[] args) {
         Runnable r = () -> {
-            print(Thread.currentThread().getName() + " begin loading...");
+            Print.println(Thread.currentThread().getName() + " begin loading...");
             new LoadingClass();
-            print(Thread.currentThread().getName() + " end loading...");
+            Print.println(Thread.currentThread().getName() + " end loading...");
         };
 
         for (int i = 0; i < Constants.TEN; i++) {

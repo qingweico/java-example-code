@@ -1,6 +1,6 @@
 package thread.aqs;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.BrokenBarrierException;
@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
  */
 class CyclicBarrierE {
     CyclicBarrier barrier;
-    final ExecutorService pool = CustomThreadPool.newFixedThreadPool(2);
+    final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
     int page = 0;
 
     public CyclicBarrierE() {

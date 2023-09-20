@@ -1,9 +1,10 @@
 package io.server;
 
+import util.Print;
+
 import java.io.*;
 import java.net.Socket;
 
-import static util.Print.print;
 /**
  * @author zqw
  * @date 2019/12/10
@@ -15,13 +16,13 @@ class Client {
         try {
             System.out.println("Connect to " + serveName + ":" + port);
             Socket client = new Socket(serveName, port);
-            print("Remote host address: " + client.getRemoteSocketAddress());
+            Print.println("Remote host address: " + client.getRemoteSocketAddress());
             OutputStream outToServe = client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServe);
             out.writeUTF("Hello from " + client.getLocalSocketAddress());
             InputStream inFromServe = client.getInputStream();
             DataInputStream in = new DataInputStream(inFromServe);
-            print("Server response: " + in.readUTF());
+            Print.println("Server response: " + in.readUTF());
             client.close();
         } catch (IOException e) {
             e.printStackTrace();

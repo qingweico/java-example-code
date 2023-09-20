@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static util.Print.println;
 import static util.Print.print;
-import static util.Print.printnb;
 
 /**
  * @author zqw
@@ -20,12 +20,12 @@ public class Foreach {
         strings.forEach(new Consumer<String>() {
             @Override
             public void accept(String s) {
-                printnb(s);
+                print(s);
             }
         });
-        print();
-        strings.forEach((s) -> printnb(s));
-        print();
-        strings.forEach(Print::printnb);
+        println();
+        strings.forEach((s) -> print(s));
+        println();
+        strings.forEach(Print::print);
     }
 }

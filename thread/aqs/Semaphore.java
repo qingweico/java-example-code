@@ -1,6 +1,6 @@
 package thread.aqs;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -13,7 +13,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @see Mutex
  */
 public class Semaphore extends AbstractQueuedSynchronizer {
-    static CustomThreadPool pool = new CustomThreadPool(5, 5);
+    static ThreadObjectPool pool = new ThreadObjectPool(5, 5);
 
     public Semaphore(int permits) {
         setState(permits);

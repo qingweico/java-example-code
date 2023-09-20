@@ -1,6 +1,6 @@
 package thread.atmoic;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 import util.Print;
 
@@ -31,7 +31,7 @@ class CompactCounter {
     }
 
     public static void main(String[] args) {
-        ExecutorService pool = CustomThreadPool.newFixedThreadPool(20, true);
+        ExecutorService pool = ThreadObjectPool.newFixedThreadPool(20, true);
         CompactCounter cc = new CompactCounter();
         for (int i = 0; i < Constants.TWENTY; i++) {
             pool.execute(cc::increase);

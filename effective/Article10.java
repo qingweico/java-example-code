@@ -1,13 +1,12 @@
 package effective;
 
 import annotation.Pass;
+import util.Print;
 
 import java.awt.*;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static util.Print.print;
 
 /**
  * 覆盖equals时请遵守通用约定
@@ -138,15 +137,15 @@ class ColorPoint extends Point {
     public static void main(String[] args) {
         ColorPoint cp = new ColorPoint(1, 2, Color.GREEN);
         Point p = new Point(1, 2);
-        print(p.equals(cp));
-        print(cp.equals(p));
+        Print.println(p.equals(cp));
+        Print.println(cp.equals(p));
         ColorPoint p2 = new ColorPoint(1, 2, Color.RED);
         // true
-        print(cp.equals(p));
+        Print.println(cp.equals(p));
         // true
-        print(p.equals(p2));
+        Print.println(p.equals(p2));
         // false
-        print(cp.equals(p2));
+        Print.println(cp.equals(p2));
 
     }
 }

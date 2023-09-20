@@ -1,10 +1,9 @@
 package thinking.container.map.hashcode;
 
 import thinking.util.Countries;
+import util.Print;
 
 import java.util.*;
-
-import static util.Print.print;
 
 /**
  * A demonstration hashed Map
@@ -78,8 +77,8 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
     public static void main(String[] args) {
         SimpleHashMap<String, String> m = new SimpleHashMap<>();
         m.putAll(Countries.capitals(25));
-        print(m);
-        print(m.get("ERITREA"));
-        print(m.entrySet());
+        Print.println(m);
+        Print.println(m.get("ERITREA"));
+        Print.println(m.entrySet());
     }
 }

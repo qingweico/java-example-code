@@ -1,6 +1,7 @@
 package thinking.concurrency.optimize;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.Random;
 import java.util.concurrent.CyclicBarrier;
@@ -10,7 +11,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static util.Print.print;
 import static util.Print.printf;
 
 /**
@@ -27,7 +27,7 @@ public class SynchronizationComparisons {
     static AtomicTest atom = new AtomicTest();
 
     static void test() {
-        print("============================");
+        Print.println("============================");
         printf("%-12s : %13d\n", "Cycles", AbstractAccumulator.cycles);
         baseLine.timeTest();
         sync.timeTest();
@@ -49,7 +49,7 @@ public class SynchronizationComparisons {
             iterations = Integer.parseInt(args[0]);
         }
         // The First time fills the thread pool:
-        print("Warmup");
+        Print.println("Warmup");
         baseLine.timeTest();
         // Now the initial test doesn't include the cost of starting the threads
         // for the first time.
@@ -69,7 +69,7 @@ abstract class AbstractAccumulator {
      * Number of Modifiers and Readers during each test:
      */
     private static final int N = 4;
-    public static ExecutorService exec = CustomThreadPool.newFixedThreadPool(N * 2);
+    public static ExecutorService exec = ThreadObjectPool.newFixedThreadPool(N * 2);
     private final CyclicBarrier barrier = new CyclicBarrier(N * 2 + 1);
     protected volatile int index = 0;
     protected volatile long value = 0;

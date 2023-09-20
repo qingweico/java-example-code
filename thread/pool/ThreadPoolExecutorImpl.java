@@ -58,7 +58,7 @@ public class ThreadPoolExecutorImpl extends ThreadPoolExecutor {
     protected void terminated() {
         super.terminated();
         if (isEnableMonitor) {
-            CustomThreadPool.monitor(this);
+            ThreadObjectPool.monitor(this);
             log.info("线程池中任务的最大执行时间为: {}ms", maxExecutionTime);
             log.info("线程池中任务的最小执行时间为: {}ms", minExecutionTime);
             log.info("线程池中任务的平均执行时间为: {}ms", totalExecutionTime / totalExecutionCount);

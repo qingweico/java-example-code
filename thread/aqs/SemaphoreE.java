@@ -1,14 +1,12 @@
 package thread.aqs;
 
-import thread.pool.CustomThreadPool;
+import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
 import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-
-import static util.Print.print;
 
 /**
  * Semaphore: Maintain the current number of threads
@@ -19,7 +17,7 @@ import static util.Print.print;
  * @see thread.aqs.Semaphore
  */
 class SemaphoreE {
-    static ExecutorService pool = CustomThreadPool.newFixedThreadPool(10,100,100);
+    static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10,100,100);
 
     public static void main(String[] args) {
 

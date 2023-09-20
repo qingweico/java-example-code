@@ -1,12 +1,11 @@
 package thinking.container;
 
+import util.Print;
 import util.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -20,13 +19,13 @@ public class ContainerComparison {
         for (int i = 0; i < Constants.FIVE; i++) {
             berylliumSpheres[i] = new BerylliumSphere();
         }
-        print(Arrays.toString(berylliumSpheres));
-        print(berylliumSpheres.length);
+        Print.println(Arrays.toString(berylliumSpheres));
+        Print.println(berylliumSpheres.length);
         List<BerylliumSphere> berylliumSphereList = new ArrayList<>();
         for (int i = 0; i < Constants.FIVE; i++) {
             berylliumSphereList.add(new BerylliumSphere());
         }
-        print(berylliumSphereList);
+        Print.println(berylliumSphereList);
     }
 
 
