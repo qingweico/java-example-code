@@ -10,7 +10,7 @@ import java.io.RandomAccessFile;
  * @date 2021/2/4
  */
 public class UsingRandomAccessFile {
-    static String file = "thinking/io/r.dat";
+    static String file = "thinking/io/ra.txt";
     static int COUNT = 7;
 
     static void disPlay() throws IOException {

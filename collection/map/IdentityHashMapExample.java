@@ -17,7 +17,7 @@ import java.util.IdentityHashMap;
 @Slf4j
 @SuppressWarnings("all")
 @Pass
-class IdentityHashMapEx {
+class IdentityHashMapExample {
     public static void main(String[] args) {
         User u1 = ObjectFactory.create(User.class, true);
         log.info("u1 hashCode: {}", u1.hashCode());

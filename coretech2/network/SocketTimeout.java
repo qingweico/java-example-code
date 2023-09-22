@@ -16,8 +16,6 @@ import java.net.SocketTimeoutException;
  */
 @Slf4j
 public class SocketTimeout {
-    // TODO HOST不可以加https协议 识别不了?
-
     private final static String HOST = "qingweico.cn";
     private final static Integer PORT = 443;
     private final static Integer TIME_OUT = 3_000;

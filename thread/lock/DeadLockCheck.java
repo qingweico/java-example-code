@@ -29,7 +29,6 @@ class DeadLockCheck {
                 System.out.println("not find dead lock threads");
             }
         };
-        // TODO 使用构建者模式 创建 ScheduledThreadPool
         ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(1);
 
         // delay 5 seconds, per 10 second do deadlock scan

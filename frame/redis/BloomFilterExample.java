@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
  */
 @Pass
 @SuppressWarnings("all")
-class BloomFilterEx {
+class BloomFilterExample {
 
     private BloomFilter<Integer> filter;
 
