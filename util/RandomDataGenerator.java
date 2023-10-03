@@ -2,10 +2,6 @@ package util;
 
 import com.github.javafaker.Faker;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -64,21 +60,7 @@ public class RandomDataGenerator {
         return TLR.nextFloat() * bound;
     }
 
-
-    public static Date randomDate() {
-        int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
-        int maxDay = (int) LocalDate.of(2022, 12, 31).toEpochDay();
-        long randomDay = minDay + randomInt(maxDay - minDay);
-        ZoneId zone = ZoneId.systemDefault();
-        Instant instant = LocalDate.ofEpochDay(randomDay).atStartOfDay().atZone(zone).toInstant();
-        return Date.from(instant);
-    }
-
     public static boolean tf() {
         return R.nextBoolean();
-    }
-
-    public static void main(String[] args) {
-        System.out.println(randomDate());
     }
 }

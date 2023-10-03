@@ -54,8 +54,7 @@ public class HttpServerTest {
 
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws URISyntaxException {
-            if (msg instanceof HttpRequest) {
-                HttpRequest request = (HttpRequest)msg;
+            if (msg instanceof HttpRequest request) {
                 URI uri = new URI(request.uri());
                 if(FAVICON.equals(uri.getPath())) {
                     return;

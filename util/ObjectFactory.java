@@ -67,7 +67,7 @@ public class ObjectFactory {
                     field.set(instance, SnowflakeIdWorker.nextId());
                 }
                 if (Constants.DATE.equalsIgnoreCase(field.getType().getSimpleName())) {
-                    field.set(instance, RandomDataGenerator.randomDate());
+                    field.set(instance, DateUtil.format());
                 }
                 if (Constants.DOUBLE.equalsIgnoreCase(field.getType().getSimpleName())) {
                     field.set(instance, RandomDataGenerator.randomDouble());

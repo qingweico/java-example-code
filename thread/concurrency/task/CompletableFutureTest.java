@@ -1,5 +1,6 @@
 package thread.concurrency.task;
 
+import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
@@ -8,10 +9,13 @@ import thread.cas.UnsafeSupport;
 import thread.pool.CustomizableThreadFactory;
 import thread.pool.ThreadPoolBuilder;
 import util.Print;
+import util.RandomDataGenerator;
+import util.constants.Symbol;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.*;
 import java.util.function.Supplier;
 
@@ -28,6 +32,7 @@ import java.util.function.Supplier;
  * {@link CompletableFuture#supplyAsync(Supplier, Executor)}
  * 若没有指定线程池, 则使用默认的ForkJoinPool.commonPool()[CommonPool的大小是CPU核数-1]
  * xxxAsync与不带Async后缀的方法的区别是同步与与异步的区别(如果注册时被依赖的操作已经完成,则直接由当前线程完成;如果注册时被依赖的操作还未完成,则由回调线程完成)
+ *
  * @author zqw
  * @date 2022/2/5
  */
@@ -36,13 +41,23 @@ public class CompletableFutureTest {
 
     private final static ExecutorService POOL = ThreadPoolBuilder.builder().threadFactory(CustomizableThreadFactory.basicThreadFactory()).build();
 
+    private final ExecutorService single = ThreadPoolBuilder.builder().corePoolSize(1).build();
+
     @Test
     public void runAsync() {
-        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> Print.grace("thread", Thread.currentThread().getName()));
+        // 异步执行任务 没有返回值
+        CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
+            UnsafeSupport.shortWait(2000);
+            Print.grace("thread", Thread.currentThread().getName());
+        });
         try {
-            System.out.println(cf.get());
+            /*get和join的区别 : get方法会抛出异常且可以指定阻塞时间*/
+            System.out.println(cf.get(1, TimeUnit.SECONDS));
+            System.out.println(cf.join());
         } catch (ExecutionException | InterruptedException ex) {
             // ignore
+        } catch (TimeoutException e) {
+            Print.err(e);
         }
     }
 
@@ -50,6 +65,143 @@ public class CompletableFutureTest {
     public void runAsyncWithThreadPool() throws ExecutionException, InterruptedException {
         CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> Print.grace("thread", Thread.currentThread().getName()), POOL);
         System.out.println(cf.get());
+    }
+
+    @Test
+    public void supplyAsync() {
+        // 对比于runAsync有返回值
+        CompletableFuture<String> cf = CompletableFuture.supplyAsync(ThreadUtils::getThreadName, POOL);
+        System.out.println(cf.join());
+    }
+
+    @Test
+    public void completedFuture() throws ExecutionException, InterruptedException {
+        FutureTask<String> r1 = new FutureTask<>(() -> this.doGet(true));
+        FutureTask<String> r2 = new FutureTask<>(() -> this.doGet(false));
+        POOL.submit(r1);
+        POOL.submit(r2);
+        CompletableFuture<String> cf = CompletableFuture.completedFuture(r1.get());
+        cf.thenAccept((result) -> {
+            try {
+                Print.grace(r2.get(), result);
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private String doGet(boolean i18n) {
+        Faker faker;
+        if (i18n) {
+            UnsafeSupport.shortWait(2000);
+            faker = new Faker(Locale.CHINA);
+        } else {
+            UnsafeSupport.shortWait(1000);
+            faker = new Faker(Locale.ENGLISH);
+        }
+        return ThreadUtils.getThreadName() + Symbol.COLON + faker.book().author();
+    }
+
+    @Test
+    public void newCompletableFuture() {
+        // 通过 new 的方式创建
+        CompletableFuture<String> cf = new CompletableFuture<>();
+        cf.complete("completed");
+        System.out.println(cf.join());
+    }
+
+
+    /**
+     * 链式处理
+     */
+
+    @Test
+    public void thenApply() {
+        // 用于 future 完成后要执行的逻辑
+        // 入参为上一个future执行的结果
+        CompletableFuture<Integer> cf = CompletableFuture.supplyAsync(() -> 1).thenApply((result) -> 2 + result)
+                .thenApply((result) -> 3 + result);
+        System.out.println(cf.join());
+    }
+
+    @Test
+    public void thenRun() {
+        CompletableFuture<Void> cf = CompletableFuture.supplyAsync(() -> 1).thenRun(() -> {
+            System.out.println("没有入参 没有返回值, 只是执行一段代码");
+        });
+        System.out.println(cf.join());
+    }
+
+    @Test
+    public void thenAccept() {
+        CompletableFuture<Void> cf = CompletableFuture.supplyAsync(() -> 1).thenAccept((result) -> {
+            System.out.println("消费上一步的结果 没有返回值");
+        });
+        System.out.println(cf.join());
+    }
+
+    @Test
+    public void thenCompose() {
+        // thenCompose 用于两个 CompletableFuture 组合, 这两个 CompletableFuture 是先后依赖关系
+        String firstStep = "第一步完成结果";
+        String secondStep = "等待第一步完成";
+        CompletableFuture<String> cf = CompletableFuture.supplyAsync(() -> firstStep);
+        cf.thenCompose(result -> CompletableFuture.runAsync(() -> System.out.println(result + secondStep)));
+    }
+
+    @Test
+    public void thenCombine() {
+        // thenCombine 用于组合两个独立的CompletableFuture, 这两个 CompletableFuture 没有依赖关系, 且只有这两个都完成才会计算后续的结果
+        CompletableFuture<Double> h = CompletableFuture.supplyAsync(() -> {
+            UnsafeSupport.shortWait(2000);
+            double height = 10.67d;
+            Print.grace(ThreadUtils.getThreadName(), String.format("完成计算, 结果为 \033[34m%s\033[0m", height));
+            return height;
+        });
+        CompletableFuture<Double> w = CompletableFuture.supplyAsync(() -> {
+            UnsafeSupport.shortWait(3000);
+            double weight = 5.12d;
+            Print.grace(ThreadUtils.getThreadName(), String.format("完成计算, 结果为 \033[34m%s\033[0m", weight));
+            return weight;
+
+        });
+        CompletableFuture<Double> combine = h.thenCombine(w, (height, weight) -> height * weight);
+        System.out.println(combine.join());
+    }
+
+    /**
+     * 异常处理
+     */
+    @Test
+    public void exceptionally() {
+        // 当 CompletableFuture 任意一步发生异常时都会进入该方法, 并返回异常发生时的默认值
+        CompletableFuture<Integer> cf = CompletableFuture.supplyAsync(() -> 1)
+                .thenApply((r) -> r + 2)
+                .thenApply((r) -> r / (RandomUtils.nextBoolean() ? 0 : 1))
+                .exceptionally(e -> {
+                    System.out.println(e.getMessage());
+                    return 0;
+                });
+
+        System.out.println(cf.join());
+
+    }
+
+    @Test
+    public void handle() {
+        CompletableFuture<Integer> handle = CompletableFuture.supplyAsync(() -> 1)
+                .thenApply((r) -> r + 2)
+                .thenApply((r) -> r / (RandomDataGenerator.tf() ? 0 : 1))
+                .handle((r, e) -> {
+                    if (e != null) {
+                        System.out.println(e.getMessage());
+                        return 0;
+                    }
+                    System.out.println("没有发生异常");
+                    return r + 3;
+
+                });
+        System.out.println(handle.join());
     }
 
     @Test
@@ -141,6 +293,7 @@ public class CompletableFutureTest {
         CompletableFuture<String> f2 = f0.applyToEither(f1, s -> s);
         System.out.println(f2.join());
     }
+
     @Test
     public void anyOf() {
         // anyOf 任意一个任务执行成功就会返回 [INPUT : CompletableFuture数组]
@@ -159,6 +312,7 @@ public class CompletableFutureTest {
         // 使用join拿到结果
         CompletableFuture.anyOf(c1, c2, c3).whenComplete((v, e) -> System.out.println(v));
     }
+
     @Test
     public void allOf() {
         // allOf 所有任务都执行成功才能继续执行 但是返回值并没有提供所有异步结果 [INPUT : CompletableFuture数组]
@@ -168,6 +322,7 @@ public class CompletableFutureTest {
         List<CompletableFuture<String>> result = Arrays.asList(c1, c2);
         CompletableFuture.allOf(result.toArray(new CompletableFuture[0])).whenComplete((r, e) -> result.stream().map(CompletableFuture::join).toList().forEach(System.out::println));
     }
+
     @Test
     public void allOfTest() throws IOException {
         CompletableFuture<Boolean> sendSms = CompletableFuture.supplyAsync(() -> {
@@ -182,7 +337,7 @@ public class CompletableFutureTest {
         // thenRun 和 thenRunAsync 的区别 前者会继续使用上一个任务的线程池 后者会使用新的线程池(如果传入线程池的话 否则使用ForkJoinPool)
         future.thenRunAsync(() -> {
             try {
-                if(sendSms.get() && sendEmail.get()) {
+                if (sendSms.get() && sendEmail.get()) {
                     callback();
                 }
             } catch (InterruptedException | ExecutionException e) {
@@ -193,16 +348,32 @@ public class CompletableFutureTest {
         // Simple block and nothing to do...
         System.out.println(System.in.read());
     }
+
     private void sendSms() {
         UnsafeSupport.shortWait(2000);
         log.info("endSms success...");
     }
+
     private void sendEmail() {
         UnsafeSupport.shortWait(3000);
         log.info("sendEmail success...");
     }
+
     private void callback() {
         log.info("callback success...");
+    }
+
+    @Test
+    public void threadHunger() {
+        // 线程饥饿 区别于死锁
+        // 解决 : 嵌套的异步执行任务避免使用同一个线程池
+        CompletableFuture<Void> future = CompletableFuture.runAsync(this::doSomething, single);
+        future.join();
+    }
+
+    public void doSomething() {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "do something", single);
+        log.info(future.join());
     }
 
     // https://blog.csdn.net/sermonlizhi/article/details/123356877
