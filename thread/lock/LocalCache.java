@@ -7,10 +7,12 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
+ * 使用读写锁 + Map构建本地缓存
+ *
  * @author zqw
  * @date 2022/2/4
  */
-public class Cache<K, V> {
+public class LocalCache<K, V> {
     final Map<K, V> cache = new HashMap<>();
     final ReadWriteLock rw = new ReentrantReadWriteLock();
     final Lock r = rw.readLock();

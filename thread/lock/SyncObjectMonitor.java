@@ -1,6 +1,9 @@
 package thread.lock;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import thread.pool.ThreadPoolBuilder;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ import java.util.concurrent.TimeUnit;
  */
 class SyncObjectMonitor {
     static List<Runnable> list = new ArrayList<>();
+    static Logger logger = LoggerFactory.getLogger(SyncObjectMonitor.class);
     static final Object O = new Object();
     static ExecutorService pool = ThreadPoolBuilder.builder()
             .preStartAllCore(true)
@@ -48,30 +52,34 @@ class SyncObjectMonitor {
             list.add(() -> {
                 // Don't get lock and enter EntryList
                 // The EntryList of synchronized follows the FILO.
-                System.out.println("\t" + Thread.currentThread().getName());
+                logger.info("\t{}", Thread.currentThread().getName());
                 synchronized (O) {
-                    System.out.println("\t" + Thread.currentThread().getName() + "\t");
+                    logger.info("\t{}", Thread.currentThread().getName() + "\t");
                     try {
                         TimeUnit.MILLISECONDS.sleep(200);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.log("Slf4j", System.Logger.Level.WARNING, e.getMessage());
+                        /* Clean up whatever needs to be handled before interrupting  */
+                        Thread.currentThread().interrupt();
                     }
                 }
             });
         }
 
         synchronized (O) {
-            System.out.println("Start Sequence:");
+            logger.info("Start Sequence:");
             for (Runnable runnable : list) {
                 pool.execute(runnable);
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.log("Slf4j", System.Logger.Level.WARNING, e.getMessage());
+                    /* Clean up whatever needs to be handled before interrupting  */
+                    Thread.currentThread().interrupt();
                 }
             }
         }
-        System.out.println("Awake Sequence:");
+        logger.info("Awake Sequence:");
         pool.shutdown();
     }
 }
