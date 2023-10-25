@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import object.entity.Student;
 import org.testng.annotations.Test;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 
 import java.io.*;
 
@@ -39,7 +39,7 @@ public class SerializeTest {
         FileOutputStream fis = new FileOutputStream(path + userFileName);
         ObjectOutputStream oos = new ObjectOutputStream(fis);
         User user = new User();
-        user.setUsername(RandomDataGenerator.randomName());
+        user.setUsername(RandomDataUtil.name());
         oos.writeObject(user);
         oos.flush();
         oos.close();
@@ -51,7 +51,7 @@ public class SerializeTest {
         FileOutputStream fis = new FileOutputStream(path + studentFileName);
         ObjectOutputStream oos = new ObjectOutputStream(fis);
         Student user = new Student();
-        user.setName(RandomDataGenerator.randomName());
+        user.setName(RandomDataUtil.name());
         oos.writeObject(user);
         oos.flush();
         oos.close();

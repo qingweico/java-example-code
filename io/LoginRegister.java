@@ -2,7 +2,7 @@ package io;
 
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 
 import java.io.*;
 import java.util.Scanner;
@@ -95,7 +95,7 @@ class GuessNumber {
 
     public static void start() {
         // Generate random numbers
-        int number = RandomDataGenerator.randomInt(10);
+        int number = RandomDataUtil.ri(10);
         while (true) {
             Scanner sc = new Scanner(System.in);
             println("请输入您猜测的数字: ");

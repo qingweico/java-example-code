@@ -3,7 +3,7 @@ package thread.queue;
 
 import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
@@ -34,8 +34,8 @@ class ProducerConsumerModel {
 
 
     double readData() throws InterruptedException {
-        Thread.sleep((RandomDataGenerator.randomInt(10)));
-        return RandomDataGenerator.randomInt(10);
+        Thread.sleep((RandomDataUtil.ri(10)));
+        return RandomDataUtil.ri(10);
     }
 
     /**

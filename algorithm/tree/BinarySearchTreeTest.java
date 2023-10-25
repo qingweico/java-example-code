@@ -2,7 +2,7 @@ package algorithm.tree;
 
 import org.junit.Test;
 import util.Print;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 import util.Tools;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class BinarySearchTreeTest {
         int size = 1000;
         int exclusive = 1000;
         for (int i = 0; i < size; i++) {
-            binarySearchTree.add(RandomDataGenerator.randomInt(exclusive));
+            binarySearchTree.add(RandomDataUtil.ri(exclusive));
         }
         Print.println(binarySearchTree.size());
         ArrayList<Integer> list = new ArrayList<>();

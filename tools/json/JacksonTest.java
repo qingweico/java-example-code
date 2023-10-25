@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import util.ObjectFactory;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -67,9 +67,9 @@ public class JacksonTest {
     @Test
     public void mapToPojo() throws JsonProcessingException {
         HashMap<String, Object> map = new HashMap<>(3);
-        map.put("name", RandomDataGenerator.randomName());
+        map.put("name", RandomDataUtil.name());
         map.put("date", new Date());
-        map.put("is_present", RandomDataGenerator.tf());
+        map.put("is_present", RandomDataUtil.tf());
         String json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(map);
         log.info("序列化:");
         System.out.println(json);

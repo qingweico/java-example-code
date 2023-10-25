@@ -2,7 +2,7 @@ package thread.queue;
 
 import thread.pool.ThreadObjectPool;
 import util.constants.Constants;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
@@ -42,7 +42,7 @@ public class BlockingQueueTest {
                     // Math.random()可能会返回0的数值(除零异常)且返回值是double,Random.nextInt(bound)从1开始到bound
                     // offer(E) 非阻塞;添加失败返回false
                     // add(E) 非阻塞;添加失败抛异常
-                    queue.put(RandomDataGenerator.randomInt(1000));
+                    queue.put(RandomDataUtil.ri(1000));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

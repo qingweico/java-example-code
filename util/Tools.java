@@ -54,7 +54,7 @@ public class Tools {
         int[] array = new int[n];
         for (int i = 0; i < n; i++) {
             // random -> [1, bound)
-            array[i] = RandomDataGenerator.randomInt(bound);
+            array[i] = RandomDataUtil.ri(bound);
         }
         return array;
     }
@@ -62,7 +62,7 @@ public class Tools {
     public static float[] genFloatArray(int n, int bound) {
         float[] array = new float[n];
         for (int i = 0; i < n; i++) {
-            array[i] = RandomDataGenerator.randomFloat(bound);
+            array[i] = RandomDataUtil.rf(bound);
         }
         return array;
     }

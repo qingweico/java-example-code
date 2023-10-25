@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import util.Print;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 import util.Tools;
 import util.constants.Constants;
 import util.constants.Symbol;
@@ -49,7 +49,7 @@ public class GuavaTest {
         List<String> adds = new ArrayList<>();
         int loops = 4;
         for (int i = 0; i < loops; i++) {
-            adds.add(RandomDataGenerator.randomAddress(true));
+            adds.add(RandomDataUtil.address(true));
         }
         mvm.put("Address", adds);
         Print.toPrint(mvm);

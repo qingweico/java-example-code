@@ -1,7 +1,7 @@
 package collection.map;
 
 import util.Print;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 import util.collection.CollUtils;
 
 import java.util.*;
@@ -18,7 +18,7 @@ class MapSort {
         int size = 10;
         Map<String, Integer> map = new HashMap<>(CollUtils.mapSize(size));
         for (int i = 0; i < size; i++) {
-            map.put(RandomDataGenerator.randomAddress(false), RandomDataGenerator.randomInt());
+            map.put(RandomDataUtil.address(false), RandomDataUtil.ri());
         }
         Print.toPrint(map);
         Print.println("\n\n//////// SortedMapByKey //////////");

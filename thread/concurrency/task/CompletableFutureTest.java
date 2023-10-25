@@ -9,7 +9,7 @@ import thread.cas.UnsafeSupport;
 import thread.pool.CustomizableThreadFactory;
 import thread.pool.ThreadPoolBuilder;
 import util.Print;
-import util.RandomDataGenerator;
+import util.RandomDataUtil;
 import util.constants.Symbol;
 
 import java.io.IOException;
@@ -191,7 +191,7 @@ public class CompletableFutureTest {
     public void handle() {
         CompletableFuture<Integer> handle = CompletableFuture.supplyAsync(() -> 1)
                 .thenApply((r) -> r + 2)
-                .thenApply((r) -> r / (RandomDataGenerator.tf() ? 0 : 1))
+                .thenApply((r) -> r / (RandomDataUtil.tf() ? 0 : 1))
                 .handle((r, e) -> {
                     if (e != null) {
                         System.out.println(e.getMessage());
