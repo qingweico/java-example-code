@@ -9,7 +9,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicStampedReference;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -102,7 +101,7 @@ public class LockFreeStackTest<T> {
                     });
                     t.start();
                     return t;
-                }).collect(Collectors.toList());
+                }).toList();
         list.forEach(t -> {
             try {
                 t.join();
