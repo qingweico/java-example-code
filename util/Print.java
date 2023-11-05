@@ -65,6 +65,18 @@ public class Print {
         System.err.println(o);
     }
 
+
+    /**
+     * Standard err stream [K : V]
+     *
+     * @param arg   k
+     * @param value v
+     */
+    public static void err(Object arg, Object value) {
+        System.err.printf("%s %s %s%n", arg, Symbol.COLON, value);
+    }
+
+
     /**
      * Exit
      *
