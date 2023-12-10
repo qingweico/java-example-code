@@ -49,4 +49,13 @@ public class CustomizableThreadFactory {
     public static BasicThreadFactory basicThreadFactory(boolean daemon) {
         return new BasicThreadFactory.Builder().namingPattern("[lang3]pool-thread-%s").uncaughtExceptionHandler(new CustomUncaughtExceptionHandler()).daemon(daemon).build();
     }
+
+    /**
+     * customizable-thread-pool-name
+     *
+     * @return the {@link NamedThreadFactory} implements {@link ThreadFactory}
+     */
+    public static ThreadFactory customizableThreadPoolName(String prefix) {
+        return new NamedThreadFactory(prefix);
+    }
 }

@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -45,11 +46,12 @@ public class NetworkUtils {
     /**
      * 使用 Apache Http Client
      *
-     * @param url 请求url
-     * @param param url参数
+     * @param url            请求url
+     * @param param          url参数
+     * @param defaultCharset 字符编码
      * @return 请求返回的内容
      */
-    public static String doGet(String url, HashMap<String, String> param) {
+    public static String doGet(String url, HashMap<String, String> param, Charset defaultCharset) {
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
         // 返回结果
@@ -74,7 +76,7 @@ public class NetworkUtils {
             response = httpclient.execute(httpGet);
             // 判断返回状态是否为200
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
+                resultString = EntityUtils.toString(response.getEntity(), defaultCharset);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,14 +92,19 @@ public class NetworkUtils {
         }
         return resultString;
     }
+
+    public static String doGet(String url, HashMap<String, String> param) {
+        return doGet(url, param, Charset.defaultCharset());
+    }
+
     /**
      * 使用 Java.net.URLConnection
      *
      * @param url         发送请求的 URL
      * @param param       请求参数, 请求参数应该是 name1=value1&name2=value2 的形式
-     * @param contentType 编码类型
+     * @param charsetName 编码类型
      */
-    public static void sendGet(String url, String param, String contentType) {
+    public static void sendGet(String url, String param, String charsetName) {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try {
@@ -109,7 +116,7 @@ public class NetworkUtils {
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             connection.connect();
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), contentType));
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), charsetName));
             String line;
             while ((line = in.readLine()) != null) {
                 result.append(line);

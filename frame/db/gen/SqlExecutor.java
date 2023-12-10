@@ -1,18 +1,21 @@
 package frame.db.gen;
 
 import org.apache.commons.lang3.tuple.Pair;
+import thread.pool.ThreadPoolBuilder;
 import util.DatabaseHelper;
 import util.constants.Symbol;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Arrays;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -25,16 +28,17 @@ public class SqlExecutor {
 
     static ThreadLocal<Connection> tlc;
 
-    public static Connection getConnection() throws SQLException {
-        if (tlc.get() == null) {
-            Connection connection = DatabaseHelper.getConnection();
-            tlc.set(connection);
-        }
-        return tlc.get();
+    public SqlExecutor() {
+        tlc = ThreadLocal.withInitial(SqlExecutor::getConnection);
+    }
+
+
+    public static Connection getConnection() {
+        return DatabaseHelper.getConnection();
     }
 
     private void createTable() throws IOException {
-        var file = new File("sql/post.sql");
+        var file = new File("data/sql/post.sql");
         try (FileInputStream fis = new FileInputStream(file)) {
             var content = new String(fis.readAllBytes(), StandardCharsets.UTF_8);
             Arrays.stream(
@@ -118,11 +122,11 @@ public class SqlExecutor {
 
     public void run(int num, int bucket) throws IOException, ClassNotFoundException, SQLException, ExecutionException, InterruptedException {
         this.createTable();
-        var pool = Executors.newFixedThreadPool(10);
+        var pool = ThreadPoolBuilder.builder().preStartAllCore(true).build();
         Stream.iterate(0, x -> x + 1)
                 .limit(10)
                 .map(i -> pool.submit(new Worker(i, num / 10, bucket)))
-                .collect(Collectors.toList())
+                .toList()
                 .forEach(future -> {
                     System.out.println(future);
                     try {
@@ -132,10 +136,11 @@ public class SqlExecutor {
                     }
                 });
         tlc.remove();
+        pool.shutdown();
     }
 
     public static void main(String[] args) throws Exception {
         var starter = new SqlExecutor();
-        starter.run(1_0000_0000, 1000);
+        starter.run(1000, 10);
     }
 }

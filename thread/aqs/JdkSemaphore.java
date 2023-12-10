@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/12/19
  * @see thread.aqs.Semaphore
  */
-class SemaphoreE {
+class JdkSemaphore {
     static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10,100,100);
 
     public static void main(String[] args) {

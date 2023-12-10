@@ -3,21 +3,27 @@ package frame.db.gen;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import thread.pool.ThreadPoolBuilder;
-import util.io.TextFile;
 import util.constants.FileSuffixConstants;
 import util.constants.Symbol;
+import util.io.TextFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpTimeoutException;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.time.Duration;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.AbstractQueue;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
@@ -39,8 +45,8 @@ class BookResourceLoader {
     /*[第0章] https://www.guichuideng.cc/huangpizifen/180.html*/
     /*[第54章] https://www.guichuideng.cc/huangpizifen/259.html*/
 
-    private final static Integer CHAPTER_NUMBER = 1;
-    private final static String SAVED_NOVEL_PATH = "novel";
+    private final static Integer CHAPTER_NUMBER = 120;
+    private final static String SAVED_NOVEL_PATH = "/data/novel";
 
     static {
         File file = new File(SAVED_NOVEL_PATH);
@@ -62,7 +68,7 @@ class BookResourceLoader {
                         .version(HttpClient.Version.HTTP_2)
                         .build()
         );
-        var pool = ThreadPoolBuilder.builder().isEnableMonitor(true).preStartAllCore(true).build();
+        var pool = ThreadPoolBuilder.builder().preStartAllCore(true).build();
         AtomicInteger counter = new AtomicInteger(0);
         var parallelTaskCount = 10;
         var joins = new Future[parallelTaskCount];
@@ -77,7 +83,7 @@ class BookResourceLoader {
                         var req = createRequest(resource);
                         var resp = client.get().send(
                                 req,
-                                HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+                                HttpResponse.BodyHandlers.ofString(Charset.forName("GBK")));
                         resource.setData(Chapter.fromBodyText(resp.body()));
                         // 保存数据到本地磁盘
                         resource.save(SAVED_NOVEL_PATH);
@@ -114,7 +120,7 @@ class BookResourceLoader {
             var req = createRequest(resource);
             var resp = client.send(
                     req,
-                    HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+                    HttpResponse.BodyHandlers.ofString(Charset.forName("GBK")));
             resource.setData(Chapter.fromBodyText(resp.body()));
             resource.save(SAVED_NOVEL_PATH);
         }
@@ -137,8 +143,8 @@ class BookResourceLoader {
 
     private Resource<Chapter> getChapterResource(int x) {
         return new Resource<>(
-                String.format("https://www.guichuideng.cc/huangpizifen/%d.html",
-                        x + 179), x);
+                String.format("http://www.purepen.com/hlm/%03d.htm", x),
+                x);
     }
 
     @Data

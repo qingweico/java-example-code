@@ -72,4 +72,8 @@ public interface Symbol {
      * WHIFFLETREE: "-"
      */
     String WHIFFLETREE = "-";
+    /**
+     * LINE_BREAK: "\n"
+     */
+    String LINE_BREAK = "\n";
 }

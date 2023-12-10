@@ -18,8 +18,8 @@ public class RandomDataUtil {
     private final static Random R = new Random();
     private final static ThreadLocalRandom TLR = ThreadLocalRandom.current();
 
-    private static Faker faker = null;
-    private static Faker localFaker = null;
+    public static Faker faker = null;
+    public static Faker localFaker = null;
     static  {
         try {
             faker = new LazyInitializer<Faker>() {

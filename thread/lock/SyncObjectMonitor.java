@@ -42,6 +42,7 @@ class SyncObjectMonitor {
     static ExecutorService pool = ThreadPoolBuilder.builder()
             .preStartAllCore(true)
             .isEnableMonitor(true)
+            .threadPoolName("sync-object-monitor")
             .build();
 
     public static void main(String[] args) {

@@ -26,6 +26,7 @@ public class ThreadPoolBuilder {
     public static ExecutorService single() {
         return single(false);
     }
+
     public static ExecutorService single(boolean daemon) {
         return builder(1)
                 .corePoolSize(1)
@@ -49,6 +50,7 @@ public class ThreadPoolBuilder {
         private boolean preStartAllCore = false;
         private boolean isEnableMonitor = false;
         private boolean allowCoreThreadTimeOut = false;
+        private String threadPoolName = null;
         private TimeUnit unit = TimeUnit.MILLISECONDS;
         private BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(blockQueueSize);
         private ThreadFactory threadFactory = CustomizableThreadFactory.basicThreadFactory();
@@ -110,6 +112,12 @@ public class ThreadPoolBuilder {
             return this;
         }
 
+        /*optional*/
+        public Builder threadPoolName(String threadPoolName) {
+            this.threadPoolName = threadPoolName;
+            return this;
+        }
+
         public ExecutorService build() {
             ThreadPoolExecutor executor = new ThreadPoolExecutorImpl(this.corePoolSize,
                     this.maxPoolSize, this.keepAliveTime, this.unit, this.workQueue, this.isEnableMonitor);
@@ -117,6 +125,8 @@ public class ThreadPoolBuilder {
                 log.info("Thread Pool allow core thread time out");
                 executor.allowCoreThreadTimeOut(true);
             }
+            // Set first ThreadFactor otherwise use DefaultThreadFactory!
+            executor.setThreadFactory(this.threadPoolName != null ? CustomizableThreadFactory.customizableThreadPoolName(threadPoolName) : this.threadFactory);
             if (this.preStartAllCore) {
                 int coreThreads = executor.prestartAllCoreThreads();
                 log.info("{} Core Thread are all started", coreThreads);
@@ -127,7 +137,6 @@ public class ThreadPoolBuilder {
                 log.info("Max Pool Size: {}", maxPoolSize);
                 log.info("Block Queue Size: {}", blockQueueSize);
             }
-            executor.setThreadFactory(this.threadFactory);
             executor.setRejectedExecutionHandler(new CustomizableRejectedExecutionHandler());
             return executor;
         }

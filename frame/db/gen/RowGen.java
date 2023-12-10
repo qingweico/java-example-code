@@ -4,12 +4,12 @@ import com.github.javafaker.Faker;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import lombok.extern.slf4j.Slf4j;
+import util.RandomDataUtil;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Locale;
 import java.util.function.Supplier;
 
 /**
@@ -17,11 +17,11 @@ import java.util.function.Supplier;
  */
 @Slf4j
 class RowGen {
-    Faker faker = new Faker(Locale.CHINA);
+    Faker faker = RandomDataUtil.localFaker;
 
     static ArrayList<BookResourceLoader.Sentence> sentences = null;
 
-    {
+    static {
         try {
             sentences = new BookResourceLoader().sentences();
         } catch (IOException | ClassNotFoundException e) {
@@ -43,7 +43,6 @@ class RowGen {
     }
 
     public String genUserBatch(int bucketSize) {
-
         var column = "`name`, `uname`, `pwd`, `salt`, `tel`, `address`, `avatar`, `ip`";
         return this.genBatch("user", column, bucketSize, () -> {
             var name = faker.name().firstName() + faker.name().lastName();
@@ -55,14 +54,12 @@ class RowGen {
             var address = faker.address().fullAddress();
             var avatar = faker.avatar().image();
             var ip = faker.internet().ipV4Address();
-            int[] ipVal = new int[4];
-            String[] parts = ip.split("\\.");
+            String[] ipValString = ip.split("\\.");
+            Integer[] ipVal =  Arrays.stream(ipValString).map(Integer::parseInt).toArray(Integer[]::new);
             long ipInt = 0;
-            for (int k = 0; k < 4; k++) {
+            for (int k = 0; k < ipValString.length; k++) {
                 ipInt += (long) ipVal[k] << (24 - (8 * k));
             }
-
-
             return String.format("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'",
                     name,
                     uname,
@@ -85,8 +82,6 @@ class RowGen {
             var approve = Math.round(Math.random() * 10000);
             var dislike = Math.round(Math.random() * 10000);
             var state = Math.round(Math.random() * 4);
-
-            var format = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
             title = title.replace("'", "\\'");
             if (title.length() > 12) {
                 title = title.substring(0, 12);
