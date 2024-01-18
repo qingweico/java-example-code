@@ -125,7 +125,7 @@ public class ThreadPoolBuilder {
                 log.info("Thread Pool allow core thread time out");
                 executor.allowCoreThreadTimeOut(true);
             }
-            // Set first ThreadFactor otherwise use DefaultThreadFactory!
+            // Set first ThreadFactory otherwise use DefaultThreadFactory!
             executor.setThreadFactory(this.threadPoolName != null ? CustomizableThreadFactory.customizableThreadPoolName(threadPoolName) : this.threadFactory);
             if (this.preStartAllCore) {
                 int coreThreads = executor.prestartAllCoreThreads();
