@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
+import util.Print;
 import util.constants.Constants;
 
 import java.io.FileReader;
@@ -86,7 +87,7 @@ public class FileIoResolvingTest {
                 stream.close();
                 // 使用try-catch-resources
             } catch (IOException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         });
         log.info("total: {}", la.longValue());

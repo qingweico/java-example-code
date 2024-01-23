@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -43,7 +44,7 @@ class LockCondition {
                 }
                 cB.signal();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 lock.unlock();
             }
@@ -54,7 +55,7 @@ class LockCondition {
             try {
                 latchB.await();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             lock.lock();
             try {
@@ -68,7 +69,7 @@ class LockCondition {
                 }
                 cC.signal();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 lock.unlock();
             }
@@ -79,7 +80,7 @@ class LockCondition {
             try {
                 latchC.await();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             lock.lock();
             try {
@@ -90,7 +91,7 @@ class LockCondition {
                 }
                 cA.signal();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 lock.unlock();
             }

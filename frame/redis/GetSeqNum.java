@@ -46,7 +46,7 @@ class GetSeqNum {
             }
             return seq;
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
             throw new RuntimeException(e);
         } finally {
             if (lock != null && lock.isHeldByCurrentThread()) {

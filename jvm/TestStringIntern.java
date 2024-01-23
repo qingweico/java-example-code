@@ -32,7 +32,7 @@ class TestStringIntern {
         try {
             TimeUnit.SECONDS.sleep(Constants.NUM_10000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         System.gc();
     }

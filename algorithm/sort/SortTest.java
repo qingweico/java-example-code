@@ -2,6 +2,7 @@ package algorithm.sort;
 
 import org.junit.Test;
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.Tools;
 
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +41,7 @@ public class SortTest {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -65,7 +66,7 @@ public class SortTest {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -84,7 +85,7 @@ public class SortTest {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
     @Test
@@ -117,7 +118,7 @@ public class SortTest {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
     @Test
@@ -143,7 +144,7 @@ public class SortTest {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -176,7 +177,7 @@ public class SortTest {
                 | InvocationTargetException
                 | InstantiationException
                 | IllegalAccessException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

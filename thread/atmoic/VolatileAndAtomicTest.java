@@ -88,7 +88,7 @@ public class VolatileAndAtomicTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
 
         // If the final result is 20,000, it is atomicity, otherwise it is not.
@@ -149,7 +149,7 @@ public class VolatileAndAtomicTest {
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         num = 1;
 

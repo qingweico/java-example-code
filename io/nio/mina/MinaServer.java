@@ -8,6 +8,7 @@ import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactor
 import org.apache.mina.filter.codec.textline.LineDelimiter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import util.Print;
 import util.constants.Constants;
 
 import java.net.InetSocketAddress;
@@ -46,7 +47,7 @@ class MinaServer {
             ia.bind(pt);
             log.info("服务端启动成功..., 端口号为 : {}", PORT);
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

@@ -1,6 +1,7 @@
 package thread.concurrency.container;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.Map;
@@ -28,7 +29,7 @@ class ConcurrentMapAndSet {
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
                 set.add("a");
                 System.out.println(set);

@@ -26,7 +26,7 @@ class Exg {
                 String girl = exchanger.exchange("我其实暗恋你很久了......");
                 Print.grace("女生说", girl);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         });
 
@@ -39,7 +39,7 @@ class Exg {
                 String boy = exchanger.exchange("我很喜欢你......");
                 Print.grace("男生说", boy);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         });
         pool.shutdown();

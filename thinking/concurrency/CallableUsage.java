@@ -1,6 +1,7 @@
 package thinking.concurrency;
 
 import thread.pool.ThreadPoolBuilder;
+import util.Print;
 
 import java.util.ArrayList;
 import java.util.concurrent.*;
@@ -30,7 +31,7 @@ class CallableUsage {
                 fs.cancel(true);
                 System.out.println(fs.get(1, TimeUnit.SECONDS));
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 exec.shutdown();
             }

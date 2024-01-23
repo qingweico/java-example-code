@@ -2,6 +2,7 @@ package jvm;
 
 import javassist.*;
 import org.junit.Test;
+import util.Print;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class CustomClassLoaderTest {
                 try {
                     return defineClass(className, genClass(), 0, genClass().length);
                 } catch (CannotCompileException | IOException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
 
             }
@@ -70,7 +71,7 @@ public class CustomClassLoaderTest {
                 try {
                     return defineClass(className, genClass(), 0, genClass().length);
                 } catch (CannotCompileException | IOException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
 
             }

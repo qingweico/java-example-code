@@ -204,7 +204,7 @@ public final class NewDatetimeApiTest {
                     try {
                         System.out.println(THREAD_SAFE_SIMPLE_DATE_FORMAT.get().parse("2020-01-01 11:12:13"));
                     } catch (ParseException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
             });

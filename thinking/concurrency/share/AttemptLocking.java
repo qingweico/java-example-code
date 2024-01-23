@@ -55,7 +55,7 @@ public class AttemptLocking {
             try {
                 Thread.sleep(2100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 al.lock.unlock();
             }

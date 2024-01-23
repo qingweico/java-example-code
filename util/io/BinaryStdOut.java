@@ -1,5 +1,6 @@
 package util.io;
 
+import util.Print;
 import util.constants.Constants;
 
 import java.io.BufferedOutputStream;
@@ -104,7 +105,7 @@ public final class BinaryStdOut {
             try {
                 out.write(x);
             } catch (IOException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             return;
         }
@@ -133,7 +134,7 @@ public final class BinaryStdOut {
         try {
             out.write(buffer);
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         n = 0;
         buffer = 0;
@@ -148,7 +149,7 @@ public final class BinaryStdOut {
         try {
             out.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -162,7 +163,7 @@ public final class BinaryStdOut {
             out.close();
             isInitialized = false;
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 

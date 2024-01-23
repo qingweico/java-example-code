@@ -1,5 +1,6 @@
 package io.nio.chat;
 
+import util.Print;
 import util.constants.Constants;
 import util.DateUtil;
 
@@ -28,7 +29,7 @@ public class ChatServer {
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
             System.out.println("Listening for connection on port: " + PORT);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Print.err(ex.getMessage());
         }
     }
 
@@ -58,7 +59,7 @@ public class ChatServer {
                 }
 
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Print.err(ex.getMessage());
                 break;
             }
         }
@@ -83,7 +84,7 @@ public class ChatServer {
                 key.cancel();
                 socketChannel.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
     }

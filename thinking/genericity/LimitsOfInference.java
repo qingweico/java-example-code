@@ -14,7 +14,7 @@ import java.util.Map;
  */
 class LimitsOfInference {
    static void f(Map<Person, List<? extends Pet>> petPerson) {
-      Print.toPrint(petPerson);
+      Print.printMap(petPerson);
    }
 
    public static void main(String[] args) {

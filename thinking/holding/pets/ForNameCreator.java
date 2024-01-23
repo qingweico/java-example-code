@@ -47,7 +47,7 @@ public class ForNameCreator extends AbstractPetCreator {
 
     public static void main(String[] args) {
         ForNameCreator creator = new ForNameCreator();
-        Print.toPrint(creator.types());
+        Print.printColl(creator.types());
 
     }
 }

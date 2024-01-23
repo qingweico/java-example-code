@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -31,7 +32,7 @@ class WaitSetNotify {
                         // (ObjectMonitor::WaitSet)
                         O.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
                 if (!hasGoodNetwork) {
@@ -47,7 +48,7 @@ class WaitSetNotify {
         try {
             block.acquire();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
 
         pool.execute(() -> {
@@ -55,7 +56,7 @@ class WaitSetNotify {
                 try {
                     TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
 
                 /*
@@ -74,7 +75,7 @@ class WaitSetNotify {
         try {
             block.acquire();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
 
         for (int i = 0; i < Constants.TEN; i++) {

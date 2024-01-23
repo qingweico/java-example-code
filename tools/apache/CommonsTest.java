@@ -93,11 +93,11 @@ public class CommonsTest {
         map.put(1, "a");
         map.put(2, "b");
         map.put(3, "c");
-        Print.toPrint(map);
+        Print.printMap(map);
         System.out.println(map.get(2));
         System.out.println(map.getKey("a"));
         System.out.println(map.removeValue("c"));
-        Print.toPrint(map);
+        Print.printMap(map);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package jvm;
 
 import object.entity.Student;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -17,11 +18,11 @@ class EscapeAnalysis {
         for (int i = 0; i < Constants.NUM_100000000; i++) {
             alloc();
         }
-        System.out.println(System.currentTimeMillis() - start + "ms");
+        Print.time("time", System.currentTimeMillis() - start);
         try {
             TimeUnit.SECONDS.sleep(1000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
 
     }

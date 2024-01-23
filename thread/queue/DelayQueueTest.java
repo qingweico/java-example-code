@@ -2,6 +2,7 @@ package thread.queue;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import javax.annotation.Nonnull;
@@ -62,7 +63,7 @@ public class DelayQueueTest {
                     var item = delay.take();
                     System.out.println(item);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                     break;
                 }
             }

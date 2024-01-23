@@ -402,7 +402,7 @@ public class ReflectionUtils {
                 }
                 fieldsAsMap.put(fieldName, fieldValue);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
         return fieldsAsMap;

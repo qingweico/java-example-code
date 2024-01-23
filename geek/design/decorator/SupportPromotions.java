@@ -1,6 +1,7 @@
 package geek.design.decorator;
 
 import lombok.Data;
+import util.Print;
 
 /**
  * 促销类型
@@ -38,7 +39,7 @@ public class SupportPromotions implements Cloneable {
         try {
             supportPromotions = (SupportPromotions) super.clone();
         } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         return supportPromotions;
     }

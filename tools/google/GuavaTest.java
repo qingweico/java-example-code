@@ -27,8 +27,8 @@ public class GuavaTest {
         // 不可变集合
         ImmutableList<String> list = ImmutableList.of("A", "B", "C");
         ImmutableMap<Integer, String> map = ImmutableMap.of(1, "A", 2, "B", 3, "C");
-        Print.toPrint(list);
-        Print.toPrint(map);
+        Print.printColl(list);
+        Print.printMap(map);
     }
 
     @Test
@@ -52,14 +52,14 @@ public class GuavaTest {
             adds.add(RandomDataUtil.address(true));
         }
         mvm.put("Address", adds);
-        Print.toPrint(mvm);
+        Print.printMap(mvm);
 
         // Apache
         org.apache.commons.collections.map.MultiValueMap multi = new org.apache.commons.collections.map.MultiValueMap();
         multi.put("Entry", "first");
         multi.put("Entry", "second");
         multi.put("Entry", "third");
-        Print.toPrint(multi);
+        Print.printMap(multi);
     }
 
     @Test
@@ -80,8 +80,8 @@ public class GuavaTest {
         map.put("T2", 20);
         map.put("T3", 21);
         Map<String, Integer> filtedmap = Maps.filterValues(map, val -> val > 20);
-        Print.toPrint(map);
-        Print.toPrint(filtedmap);
+        Print.printMap(map);
+        Print.printMap(filtedmap);
     }
 
     @Test

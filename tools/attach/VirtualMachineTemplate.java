@@ -2,6 +2,7 @@ package tools.attach;
 
 import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
+import lombok.Getter;
 
 import java.io.IOException;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
  * @author zqw
  * @see VirtualMachine
  */
+@Getter
 public class VirtualMachineTemplate {
 
     /**
@@ -31,10 +33,10 @@ public class VirtualMachineTemplate {
      * Execute {@link VirtualMachineCallback}
      *
      * @param callback {@link VirtualMachineCallback}
-     * @param <T>      //
-     * @return //
-     * @throws AttachNotSupportedException //
-     * @throws IOException                 //
+     * @param <T>      VirtualMachineCallback<V, T> callback
+     * @return V extends VirtualMachine
+     * @throws AttachNotSupportedException AttachNotSupportedException
+     * @throws IOException                 IOException
      */
     public final <V extends VirtualMachine, T> T execute(VirtualMachineCallback<V, T> callback) throws AttachNotSupportedException, IOException {
         VirtualMachine virtualMachine = null;
@@ -52,12 +54,4 @@ public class VirtualMachineTemplate {
     }
 
 
-    /**
-     * Get {@link #processId}
-     *
-     * @return processId
-     **/
-    public String getProcessId() {
-        return processId;
-    }
 }

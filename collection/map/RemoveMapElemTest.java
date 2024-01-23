@@ -36,7 +36,7 @@ public class RemoveMapElemTest {
                 INIT_MAP.remove(entities.getKey());
             }
         }
-        Print.toPrint(INIT_MAP);
+        Print.printMap(INIT_MAP);
     }
 
     @Test
@@ -47,19 +47,19 @@ public class RemoveMapElemTest {
                map.remove(k);
             }
         });
-        Print.toPrint(map);
+        Print.printMap(map);
     }
 
     @Test
     public void iterRemove() {
         // 底层使用迭代器
         INIT_MAP.entrySet().removeIf(entry -> entry.getKey().equals(1));
-        Print.toPrint(INIT_MAP);
+        Print.printMap(INIT_MAP);
     }
 
     @Test
     public void streamRemove() {
         Map<Integer,String> map = INIT_MAP.entrySet().stream().filter(entry -> entry.getKey() != 1).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
-        Print.toPrint(map);
+        Print.printMap(map);
     }
 }

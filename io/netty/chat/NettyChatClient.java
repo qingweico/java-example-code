@@ -7,6 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.Scanner;
@@ -42,7 +43,7 @@ public class NettyChatClient {
             }
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             eventExecutors.shutdownGracefully();
         }

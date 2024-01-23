@@ -1,6 +1,6 @@
 package thinking.genericity;
 
-import com.google.common.base.MoreObjects;
+import util.Print;
 
 import java.util.Arrays;
 
@@ -24,14 +24,14 @@ class CovariantArrays {
             // ArrayStoreException
             fruits[0] = new Fruit();
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         try {
             // Compiler allows you to add Orange.
             // ArrayStoreException
             fruits[0] = new Orange();
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         // However, the array mechanism at runtime knows that it is dealing with an
         // Apple type and therefore throws an exception when a heterogeneous type

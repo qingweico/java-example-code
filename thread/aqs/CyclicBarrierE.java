@@ -1,6 +1,7 @@
 package thread.aqs;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.BrokenBarrierException;
@@ -32,7 +33,7 @@ class CyclicBarrierE {
                 // return the number of thread that waiting in the barrier.
                 System.out.println(barrier.await());
             } catch (InterruptedException | BrokenBarrierException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
     }
@@ -43,7 +44,7 @@ class CyclicBarrierE {
                 System.out.println("prepare deliver order...");
                 System.out.println(barrier.await());
             } catch (InterruptedException | BrokenBarrierException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
     }

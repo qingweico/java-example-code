@@ -1,4 +1,5 @@
 package algorithm.queue;
+import util.Print;
 import util.Tools;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class QueueTest {
                 | InvocationTargetException
                 | InstantiationException
                 | IllegalAccessException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

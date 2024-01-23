@@ -41,7 +41,7 @@ public class SetTest {
                 | InvocationTargetException
                 | InstantiationException
                 | IllegalAccessException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

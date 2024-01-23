@@ -9,6 +9,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
+import util.Print;
 import util.constants.Constants;
 
 /**
@@ -35,7 +36,7 @@ public class HeartBeat {
             ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             boosGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

@@ -25,7 +25,7 @@ public class StatisticsKeyCounts {
         sw.start();
         StatisticsKeyCounts inst = new StatisticsKeyCounts();
         Map<String, Long> map = inst.statisticsKeyCounts();
-        Print.toPrint(map);
+        Print.printMap(map);
         sw.stop();
         System.out.println(sw.getTime(TimeUnit.MILLISECONDS));
 

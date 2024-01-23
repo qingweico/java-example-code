@@ -1,5 +1,7 @@
 package io.tomcat;
 
+import util.Print;
+
 import java.io.IOException;
 
 /**
@@ -13,7 +15,7 @@ class LoginServlet extends Servlet {
         try {
             response.write("[get] login");
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -22,7 +24,7 @@ class LoginServlet extends Servlet {
         try {
             response.write("[post] login");
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

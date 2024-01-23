@@ -1,5 +1,7 @@
 package thinking.concurrency;
 
+import util.Print;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -30,7 +32,7 @@ class LiftOff implements Runnable {
                 // Exceptions cannot be propagated across threads, so you must handle all
                 // exceptions generated within the task locally.
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
 
             // Calling the yield method will signal to the thread scheduler that you've

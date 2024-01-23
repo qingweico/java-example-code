@@ -16,7 +16,7 @@ import java.util.Map;
  */
 class ExplicitTypeSpecification {
     static void f(Map<Person, List<Pet>> petPerson) {
-        Print.toPrint(petPerson);
+        Print.printMap(petPerson);
     }
 
 

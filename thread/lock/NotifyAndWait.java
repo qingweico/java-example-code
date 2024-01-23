@@ -2,6 +2,7 @@ package thread.lock;
 
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -32,14 +33,14 @@ class NotifyAndWait {
                 // The thread on CountDownLatch gets blocked in await().
                 latch.await();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             synchronized (o) {
                 while (!t2Start) {
                     try {
                         o.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
                 for (char n : numbers) {
@@ -51,7 +52,7 @@ class NotifyAndWait {
                         // Block the current thread to allow the lock, to enter the wait queue.
                         o.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
                 o.notify();
@@ -68,7 +69,7 @@ class NotifyAndWait {
                         o.notify();
                         o.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
                 o.notify();

@@ -1,6 +1,8 @@
 package thread.atmoic;
 
 
+import util.Print;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,7 +31,7 @@ class NoVisibility {
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         num = 42;
         ready = true;

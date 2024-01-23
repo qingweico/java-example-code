@@ -27,6 +27,6 @@ class MapMerge {
             // key 相同 value 相加
             map.merge(student.getName(), student.getScore(), Integer::sum);
         });
-        Print.toPrint(map);
+        Print.printMap(map);
     }
 }

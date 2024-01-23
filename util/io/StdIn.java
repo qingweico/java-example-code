@@ -23,6 +23,7 @@ package util.io;
  *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
  */
 
+import util.Print;
 import util.constants.Constants;
 
 import java.io.*;
@@ -678,7 +679,7 @@ public final class StdIn {
             in = new StdIn(urlName);
             System.out.println(in.readAll());
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         System.out.println();
 
@@ -696,7 +697,7 @@ public final class StdIn {
                 System.out.println(s);
             }
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         System.out.println();
 
@@ -715,7 +716,7 @@ public final class StdIn {
                 System.out.print(c);
             }
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         System.out.println();
 
@@ -758,7 +759,7 @@ public final class StdIn {
                 System.out.println(s);
             }
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 

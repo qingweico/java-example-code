@@ -1,5 +1,7 @@
 package misc;
 
+import util.Print;
+
 /**
  * 使用 \r 符号和 jline 库实现进度条
  *
@@ -15,7 +17,7 @@ class ConsoleProgressBar {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
 

@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import util.Print;
 import util.constants.Constants;
 import util.DateUtil;
 
@@ -40,7 +41,7 @@ public class NettyChatServer {
             ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             boosGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

@@ -2,6 +2,7 @@ package thread.lock;
 
 import org.junit.Test;
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class AlternatePrintTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         pool.shutdown();
     }
@@ -95,7 +96,7 @@ public class AlternatePrintTest {
                     q1.put("ok");
                     q2.take();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
 
             }
@@ -106,13 +107,13 @@ public class AlternatePrintTest {
                 try {
                     q1.take();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
                 prints(c);
                 try {
                     q2.put("ok");
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             }
             terminated.countDown();
@@ -121,7 +122,7 @@ public class AlternatePrintTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         pool.shutdown();
     }
@@ -157,7 +158,7 @@ public class AlternatePrintTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         pool.shutdown();
     }
@@ -185,7 +186,7 @@ public class AlternatePrintTest {
                 }
                 cc.signal();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 lock.unlock();
                 terminated.countDown();
@@ -195,7 +196,7 @@ public class AlternatePrintTest {
             try {
                 run.await();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             lock.lock();
             try {
@@ -206,7 +207,7 @@ public class AlternatePrintTest {
                 }
                 nc.signal();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 lock.unlock();
                 terminated.countDown();
@@ -215,7 +216,7 @@ public class AlternatePrintTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         pool.shutdown();
     }
@@ -254,7 +255,7 @@ public class AlternatePrintTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         pool.shutdown();
     }
@@ -282,7 +283,7 @@ public class AlternatePrintTest {
                     input2.read(buffer);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 terminated.countDown();
             }
@@ -298,7 +299,7 @@ public class AlternatePrintTest {
                     output1.write(message.getBytes());
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 terminated.countDown();
             }
@@ -307,7 +308,7 @@ public class AlternatePrintTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         pool.shutdown();
     }
@@ -324,7 +325,7 @@ public class AlternatePrintTest {
                     prints(transferQueue.take());
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 terminated.countDown();
             }
@@ -337,7 +338,7 @@ public class AlternatePrintTest {
                     transferQueue.transfer(c);
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             } finally {
                 terminated.countDown();
             }
@@ -346,7 +347,7 @@ public class AlternatePrintTest {
         try {
             terminated.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         pool.shutdown();
     }

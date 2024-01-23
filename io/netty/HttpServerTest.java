@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
+import util.Print;
 import util.constants.Constants;
 import util.DateUtil;
 
@@ -43,7 +44,7 @@ public class HttpServerTest {
             ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             boosGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

@@ -79,7 +79,7 @@ public class NetworkUtils {
                 resultString = EntityUtils.toString(response.getEntity(), defaultCharset);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             try {
                 if (response != null) {
@@ -87,7 +87,7 @@ public class NetworkUtils {
                 }
                 httpclient.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
         return resultString;
