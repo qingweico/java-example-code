@@ -1,5 +1,6 @@
 package io.server;
 
+import util.Print;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ class AioPlainServer {
                 try {
                     serverChannel.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 } finally {
                     latch.countDown();
                 }
@@ -48,7 +49,7 @@ class AioPlainServer {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         serverChannel.close();
     }
@@ -79,7 +80,7 @@ class AioPlainServer {
                     try {
                         channel.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
             });
@@ -90,7 +91,7 @@ class AioPlainServer {
             try {
                 channel.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
     }

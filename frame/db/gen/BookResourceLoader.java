@@ -3,6 +3,7 @@ package frame.db.gen;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import thread.pool.ThreadPoolBuilder;
+import util.Print;
 import util.constants.FileSuffixConstants;
 import util.constants.Symbol;
 import util.io.TextFile;
@@ -93,7 +94,7 @@ class BookResourceLoader {
                         System.out.println("timeout retry.");
                         queue.add(resource);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
             });
@@ -115,7 +116,7 @@ class BookResourceLoader {
                 .connectTimeout(Duration.ofMillis(2000))
                 .build();
 
-        while (queue.size() > 0) {
+        while (!queue.isEmpty()) {
             var resource = queue.pop();
             var req = createRequest(resource);
             var resp = client.send(

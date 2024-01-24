@@ -57,15 +57,15 @@ public class BuildTree {
         StopWatch sw = new StopWatch("Build Tree Data Comparison");
         Print.println("-------------");
         sw.start("getChildrenNode");
-        Print.toPrint(bt.getChildrenNode("0", bt.loadTreeDataToMap()));
+        Print.printColl(bt.getChildrenNode("0", bt.loadTreeDataToMap()));
         sw.stop();
         Print.println("-------------");
         sw.start("getTreesFast");
-        Print.toPrint(bt.getTreesFast(bt.loadTreeDataToEntity()));
+        Print.printColl(bt.getTreesFast(bt.loadTreeDataToEntity()));
         sw.stop();
         Print.println("-------------");
         sw.start("buildTreeNode");
-        Print.toPrint(bt.buildTreeNode(bt.loadTreeDataToEntity()));
+        Print.printColl(bt.buildTreeNode(bt.loadTreeDataToEntity()));
         sw.stop();
         System.out.println(sw.prettyPrint());
     }

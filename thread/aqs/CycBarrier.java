@@ -28,7 +28,7 @@ class CycBarrier {
                         // A thread on the method calling await will block.
                         cyclicBarrier.await();
                     } catch (InterruptedException | BrokenBarrierException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
             });

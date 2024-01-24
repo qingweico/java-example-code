@@ -50,7 +50,7 @@ class SingleThreadServer extends Thread {
             Thread t = new SingleThreadServer(port);
             t.start();
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

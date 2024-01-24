@@ -1,5 +1,7 @@
 package thinking.rtti;
 
+import util.Print;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -41,7 +43,7 @@ class Toys {
             System.out.println("Cannot access");
             System.exit(1);
         } catch (NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         assert obj != null;
         printInfo(obj.getClass());

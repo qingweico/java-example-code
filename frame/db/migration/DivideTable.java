@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.shardingsphere.driver.api.yaml.YamlShardingSphereDataSourceFactory;
 import rx.Observable;
 import rx.schedulers.Schedulers;
+import util.Print;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class DivideTable {
             }
             stmt.executeBatch();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Print.err(ex.getMessage());
             System.out.println(sql);
         }
     }
@@ -106,7 +107,7 @@ public class DivideTable {
                                                     try {
                                                         copy(table, rs, connection);
                                                     } catch (Exception ex) {
-                                                        ex.printStackTrace();
+                                                        Print.err(ex.getMessage());
                                                         System.out.println(ex.getCause().getMessage());
                                                     }
                                                     rs.close();

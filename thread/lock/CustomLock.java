@@ -3,6 +3,7 @@ package thread.lock;
 import sun.misc.Unsafe;
 import thread.cas.UnsafeSupport;
 import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -59,7 +60,7 @@ class CustomLock {
             try {
                 TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                Print.err(ex.getMessage());
             }
             System.out.println("t1 release the lock");
             cl.unlock();

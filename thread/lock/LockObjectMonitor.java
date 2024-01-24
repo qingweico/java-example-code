@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ class LockObjectMonitor {
                     try {
                         TimeUnit.MILLISECONDS.sleep(200);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 } finally {
                     lock.unlock();
@@ -58,7 +59,7 @@ class LockObjectMonitor {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             }
         } finally {

@@ -1,5 +1,7 @@
 package io.tomcat;
 
+import util.Print;
+
 import java.io.IOException;
 
 /**
@@ -12,7 +14,7 @@ public class UserServlet extends Servlet {
         try {
             response.write("[get] user");
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -21,7 +23,7 @@ public class UserServlet extends Servlet {
         try {
             response.write("[post] user");
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

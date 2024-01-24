@@ -3,6 +3,7 @@ package geek.reflect;
 import annotation.Pass;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import util.Print;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -87,7 +88,7 @@ class ReflectionWithAnnotationAndGenericTest {
                     try {
                         method.invoke(son, "son");
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 });
 
@@ -106,7 +107,7 @@ class ReflectionWithAnnotationAndGenericTest {
                     try {
                         method.invoke(child, "child");
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 });
         System.out.println(child);

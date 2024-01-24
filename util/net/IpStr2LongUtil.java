@@ -2,6 +2,7 @@ package util.net;
 
 import thread.aqs.ObjectPool;
 import util.DatabaseHelper;
+import util.Print;
 import util.constants.Symbol;
 
 import java.sql.Connection;
@@ -64,7 +65,7 @@ public final class IpStr2LongUtil {
                 ip = Long.parseLong(resultSet.getString(1));
                 System.out.println(ip);
             } catch (SQLException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             return ip;
         }));
@@ -80,7 +81,7 @@ public final class IpStr2LongUtil {
                 resultSet.next();
                 System.out.println(resultSet.getString(1));
             } catch (SQLException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }));
     }

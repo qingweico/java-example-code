@@ -20,12 +20,12 @@ class MapSort {
         for (int i = 0; i < size; i++) {
             map.put(RandomDataUtil.address(false), RandomDataUtil.ri());
         }
-        Print.toPrint(map);
+        Print.printMap(map);
         Print.println("\n\n//////// SortedMapByKey //////////");
         LinkedHashMap<String, Integer> sortedMapByKey = map.entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (newV, olderV) -> olderV, LinkedHashMap::new));
 
-        Print.toPrint(sortedMapByKey);
+        Print.printMap(sortedMapByKey);
 
 
         Print.println("\n\n//////// SortedMapByValue //////////");
@@ -33,12 +33,12 @@ class MapSort {
         LinkedHashMap<String, Integer> sortedMapByValue = map.entrySet().stream().sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (newV, olderV) -> olderV, LinkedHashMap::new));
 
-        Print.toPrint(sortedMapByValue);
+        Print.printMap(sortedMapByValue);
         Print.println("\n\n//////// TreeMap //////////");
         // 或者直接使用 TreeMap(自定义比较器只能排序Key) 按照 Key 字典顺序倒序
         TreeMap<String, Integer> treeMap = new TreeMap<>(Comparator.reverseOrder());
         treeMap.putAll(map);
-        Print.toPrint(treeMap);
+        Print.printMap(treeMap);
 
     }
 }

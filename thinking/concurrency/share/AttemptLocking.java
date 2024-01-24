@@ -1,6 +1,6 @@
 package thinking.concurrency.share;
 
-import thread.pool.ThreadObjectPool;
+import thread.pool.ThreadPoolBuilder;
 import util.Print;
 
 import java.util.concurrent.ExecutorService;
@@ -19,7 +19,7 @@ public class AttemptLocking {
     public void untimed() {
         boolean captured = lock.tryLock();
         try {
-            Print.println("tryLock(): " + captured);
+            Print.grace("tryLock()", captured);
         } finally {
             if (captured) {
                 lock.unlock();
@@ -35,7 +35,7 @@ public class AttemptLocking {
             throw new RuntimeException(e);
         }
         try {
-            Print.println("tryLock(2, TimeUnit.SECONDS): " + captured);
+            Print.grace("tryLock(2, TimeUnit.SECONDS)", captured);
         } finally {
             if (captured) {
                 lock.unlock();
@@ -45,29 +45,22 @@ public class AttemptLocking {
 
     public static void main(String[] args) throws InterruptedException {
         final AttemptLocking al = new AttemptLocking();
-        final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(1);
+        final ExecutorService single = ThreadPoolBuilder.single(true);
         al.untimed();
         al.timed();
         // Now create a separated task to grab the lock:
-        new Thread() {
-            {
-                setDaemon(true);
+        single.execute(() -> {
+            Print.println("acquired");
+            al.lock.lock();
+            try {
+                Thread.sleep(2100);
+            } catch (InterruptedException e) {
+                Print.err(e.getMessage());
+            } finally {
+                al.lock.unlock();
             }
-
-            @Override
-            public void run() {
-                Print.println("acquired");
-                al.lock.lock();
-                try {
-                    Thread.sleep(2100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    al.lock.unlock();
-                }
-            }
-        }.start();
-
+        });
+        single.shutdown();
         Thread.sleep(100);
         al.untimed();
         al.timed();

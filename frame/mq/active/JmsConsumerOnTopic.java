@@ -1,6 +1,7 @@
 package frame.mq.active;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import util.Print;
 
 import javax.jms.*;
 
@@ -24,7 +25,7 @@ public class JmsConsumerOnTopic {
                 try {
                     System.out.println("topic MessageListener " + textMessage.getText());
                 } catch (JMSException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             }
         });

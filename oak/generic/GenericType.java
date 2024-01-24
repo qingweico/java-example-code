@@ -52,13 +52,13 @@ class BasicType extends GenericType<Integer, Boolean, Long> {
 
     public static void main(String[] args) {
         BasicType st = new BasicType();
-        Print.toPrint(st.getGenericEntityType());
+        Print.printColl(st.getGenericEntityType());
     }
 }
 class ComplexType extends GenericType<List<User>, Map<String, Map<String, User>>, Set<List<Boolean>>> {
     public static void main(String[] args) {
         ComplexType ct = new ComplexType();
-        Print.toPrint(ct.getGenericEntityType());
+        Print.printColl(ct.getGenericEntityType());
     }
 }
 
@@ -73,6 +73,6 @@ class JsonWithinGenericType {
         TypeReference<List<Student>> tr = new TypeReference<>() {
         };
         List<Student> list = new ObjectMapper().readValue(json, tr);
-        Print.toPrint(list);
+        Print.printColl(list);
     }
 }

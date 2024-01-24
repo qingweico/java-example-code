@@ -1,6 +1,7 @@
 package thread.concurrency.task;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ class CallableTask implements Callable<String> {
             // block
             returnValue = futureTask.get();
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         System.out.println(returnValue);
 
@@ -46,7 +47,7 @@ class CallableTask implements Callable<String> {
         try {
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         return "Callable Task";
     }

@@ -45,7 +45,7 @@ public class MapTest {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
     @Test
@@ -73,7 +73,7 @@ public class MapTest {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -101,7 +101,7 @@ public class MapTest {
                 | InvocationTargetException
                 | InstantiationException
                 | IllegalAccessException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 
@@ -121,10 +121,10 @@ public class MapTest {
             String clsName = rawInstance.getClass().getSimpleName();
             printf(clsName + " time: %s\n", (System.nanoTime() - start) / 1_000_000.0 + " ms");
         } catch (NoSuchMethodException
-                | InvocationTargetException
-                | InstantiationException
-                | IllegalAccessException e) {
-            e.printStackTrace();
+                 | InvocationTargetException
+                 | InstantiationException
+                 | IllegalAccessException e) {
+            Print.err(e.getMessage());
         }
     }
 }

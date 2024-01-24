@@ -5,6 +5,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import util.Print;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +55,7 @@ class Start {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 

@@ -12,7 +12,7 @@ import java.io.InputStream;
  */
 @Getter
 @ToString
-class Request {
+public class Request {
     private String url;
     private HttpRequestType method;
     private static final Integer KB = 8;

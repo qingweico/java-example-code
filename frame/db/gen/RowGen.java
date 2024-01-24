@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import lombok.extern.slf4j.Slf4j;
+import util.Print;
 import util.RandomDataUtil;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ class RowGen {
         try {
             sentences = new BookResourceLoader().sentences();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 

@@ -7,7 +7,7 @@ import java.io.OutputStream;
  * @author zqw
  * @date 2022/7/5
  */
-class Response {
+public class Response {
     public Response(OutputStream os) {
         this.os = os;
     }

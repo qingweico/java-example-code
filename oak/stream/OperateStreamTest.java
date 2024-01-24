@@ -154,7 +154,7 @@ public class OperateStreamTest {
     public void group() {
         // 分组
         Map<Short, List<Integer>> listMap = container.stream().collect(Collectors.groupingBy(Integer::shortValue));
-        Print.toPrint(listMap);
+        Print.printMap(listMap);
     }
 
     /**
@@ -163,8 +163,8 @@ public class OperateStreamTest {
     @Test
     public void mapAndPeekDiff() {
         List<User> list = Collections.singletonList(ObjectFactory.create(User.class, true));
-        Print.toPrint(list);
-        Print.toPrint(list.stream().map(User::getId).collect(Collectors.toList()));
-        Print.toPrint(list.stream().peek(e -> e.setId(1L)).collect(Collectors.toList()));
+        Print.printColl(list);
+        Print.printColl(list.stream().map(User::getId).collect(Collectors.toList()));
+        Print.printColl(list.stream().peek(e -> e.setId(1L)).collect(Collectors.toList()));
     }
 }

@@ -3,6 +3,7 @@ package tools.apache;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.junit.Test;
+import util.Print;
 import util.constants.Constants;
 
 import java.io.File;
@@ -40,7 +41,7 @@ public class CompressTest {
             zipOutput.close();
             fis.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

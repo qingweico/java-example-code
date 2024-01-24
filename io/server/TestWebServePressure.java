@@ -44,7 +44,7 @@ class TestWebServePressure {
                         try {
                             clientSocket.close();
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            Print.err(e.getMessage());
                         }
                     }
                 });

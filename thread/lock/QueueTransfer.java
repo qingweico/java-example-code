@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.*;
@@ -30,7 +31,7 @@ class QueueTransfer {
                     try {
                         O.wait();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
                 System.err.println("thread: " + Thread.currentThread().getName() + " run...");
@@ -40,7 +41,7 @@ class QueueTransfer {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         TimeUnit.MILLISECONDS.sleep(10);
         synchronized (O) {
@@ -48,7 +49,7 @@ class QueueTransfer {
                 try {
                     semaphore.acquire();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
 
                 pool.execute(() -> {
@@ -57,7 +58,7 @@ class QueueTransfer {
                     try {
                         sync.await();
                     } catch (InterruptedException | BrokenBarrierException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                     synchronized (O) {
                         System.out.println("thread: " + curThreadName + " run...");

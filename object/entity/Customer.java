@@ -70,7 +70,7 @@ public class Customer implements Comparable<Object> {
         customers.add(ObjectFactory.create(Customer.class, true));
         customers.add(ObjectFactory.create(Customer.class, true));
         customers.add(ObjectFactory.create(Customer.class, true));
-        Print.toPrint(customers);
+        Print.printColl(customers);
 
         // 构建比较器: 按多个字段排序 默认升序, reversed() 降序
         Comparator<Customer> comparator = Comparator.comparing(Customer::getAge).thenComparing(Customer::getName).reversed();
@@ -79,6 +79,6 @@ public class Customer implements Comparable<Object> {
                 ObjectFactory.create(Customer.class, true))
         );
         list.sort(comparator);
-        Print.toPrint(list);
+        Print.printColl(list);
     }
 }

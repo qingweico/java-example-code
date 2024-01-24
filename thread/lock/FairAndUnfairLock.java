@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
@@ -49,13 +50,13 @@ public class FairAndUnfairLock {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         var ret = System.currentTimeMillis() - start;
         if (isFair) {
-            System.out.println("[Fair Lock] cost time: " + ret + "ms");
+            Print.time("[Fair Lock] cost time", ret);
         } else {
-            System.out.println("[Unfair Lock] cost time: " + ret + "ms");
+            Print.time("[Unfair Lock] cost time", ret);
         }
         pool.shutdown();
     }

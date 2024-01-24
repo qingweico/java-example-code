@@ -2,6 +2,7 @@ package thread.queue;
 
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -52,7 +53,7 @@ class Scheduler {
                     runner.run();
                     System.out.format("work done by id=%d\n", id);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                     break;
                 }
             }
@@ -80,7 +81,7 @@ class Scheduler {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             });
         }

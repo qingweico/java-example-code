@@ -17,6 +17,7 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
+import util.Print;
 import util.constants.Constants;
 import util.DateUtil;
 
@@ -106,7 +107,7 @@ public class NettyServerTest {
             ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             boosGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
@@ -131,7 +132,7 @@ public class NettyServerTest {
             ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             eventExecutors.shutdownGracefully();
         }
@@ -175,7 +176,7 @@ public class NettyServerTest {
             ChannelFuture channelFuture = bootstrap.bind(PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             boosGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
@@ -214,7 +215,7 @@ public class NettyServerTest {
             ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             eventExecutors.shutdownGracefully();
         }

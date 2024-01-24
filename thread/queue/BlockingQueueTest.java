@@ -1,6 +1,7 @@
 package thread.queue;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 import util.RandomDataUtil;
 
@@ -44,7 +45,7 @@ public class BlockingQueueTest {
                     // add(E) 非阻塞;添加失败抛异常
                     queue.put(RandomDataUtil.ri(1000));
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             });
         }
@@ -60,14 +61,14 @@ public class BlockingQueueTest {
                         // remove() 非阻塞;添加失败抛异常
                         x = queue.take();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                         break;
                     }
                     System.out.println("Receive: " + x);
                     try {
                         TimeUnit.MILLISECONDS.sleep(10);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 }
             });

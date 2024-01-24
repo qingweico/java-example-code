@@ -25,7 +25,7 @@ class Client {
             Print.println("Server response: " + in.readUTF());
             client.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

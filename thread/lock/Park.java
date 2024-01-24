@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -33,13 +34,13 @@ class Park {
             try {
                 latch.await();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             System.out.println("un-park before t2");
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             LockSupport.unpark(t1[0]);
             System.out.println("un-park after t2");

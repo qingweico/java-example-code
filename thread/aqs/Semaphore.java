@@ -1,6 +1,7 @@
 package thread.aqs;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -49,7 +50,7 @@ public class Semaphore extends AbstractQueuedSynchronizer {
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 } finally {
                     System.out.println(Thread.currentThread().getId() + " pass");
                 }

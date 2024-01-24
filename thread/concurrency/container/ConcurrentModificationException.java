@@ -1,6 +1,7 @@
 package thread.concurrency.container;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ class ConcurrentModificationException {
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
                 list.add("a");
                 System.out.println(list);

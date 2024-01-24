@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,7 @@ class ReenterableSynchronized {
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             // After 1 second, the lock is completely released
             // and the resource can be used by other tasks.

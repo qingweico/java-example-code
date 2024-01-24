@@ -42,7 +42,7 @@ public class JmsConsumer {
                 try {
                     Print.grace("queue MessageListener", textMessage.getText());
                 } catch (JMSException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             }
         });

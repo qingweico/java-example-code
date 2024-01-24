@@ -1,6 +1,7 @@
 package io.server;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ class BioPlainServer {
                         }
                     });
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                     break;
                 }
             }

@@ -1,6 +1,7 @@
 package io.nio.chat;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 import util.DateUtil;
 
@@ -34,7 +35,7 @@ public class ChatClient {
             username = socketChannel.getLocalAddress().toString().substring(1);
             System.out.println("client " + socketChannel.getLocalAddress() + " connected");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Print.err(ex.getMessage());
         }
     }
     public void sendMsgToServer(String msg) {
@@ -64,7 +65,7 @@ public class ChatClient {
                     iterator.remove();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Print.err(ex.getMessage());
                 break;
             }
         }

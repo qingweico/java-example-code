@@ -1,5 +1,7 @@
 package geek.object;
 
+import util.Print;
+
 import java.lang.reflect.Field;
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -68,7 +70,7 @@ class IntegerCache {
             field.setAccessible(true);
             field.set(i, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
 
     }

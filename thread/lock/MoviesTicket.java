@@ -1,6 +1,7 @@
 package thread.lock;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,7 @@ class MoviesTicket implements Runnable {
                         try {
                             TimeUnit.SECONDS.sleep(1);
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            Print.err(e.getMessage());
                         }
                         System.out.println(Thread.currentThread().getName() + "正在出售第" + (ticket--) + "张票");
                     } else {
@@ -45,7 +46,7 @@ class MoviesTicket implements Runnable {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             System.out.println(Thread.currentThread().getName() + "正在出售第" + (ticket--) + "张票");
         }

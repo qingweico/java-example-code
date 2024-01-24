@@ -1,5 +1,7 @@
 package io.server;
 
+import util.Print;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -36,7 +38,7 @@ class NioSelectorServer {
                 // 通过一个阻塞对象监听多路连接请求;
                 selector.select();
             } catch (IOException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
                 break;
             }
             Set<SelectionKey> readyKeys = selector.selectedKeys();

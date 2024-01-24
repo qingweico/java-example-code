@@ -1,5 +1,7 @@
 package util.io;
 
+import util.Print;
+
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -26,7 +28,7 @@ public final class StdOut {
         try {
             out = new PrintWriter(new OutputStreamWriter(System.out, CHARSET_NAME), true);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 

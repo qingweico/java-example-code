@@ -27,7 +27,7 @@ public class LocaleSampleTest {
         System.out.println(Locale.getDefault(Locale.Category.FORMAT));
         Print.printArray(TimeZone.getAvailableIDs(), true);
         Print.printArray(Calendar.getAvailableLocales(), true);
-        Print.toPrint(Calendar.getAvailableCalendarTypes());
+        Print.printColl(Calendar.getAvailableCalendarTypes());
     }
     @Test
     public void timeAndLocale() {

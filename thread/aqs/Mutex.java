@@ -90,7 +90,7 @@ public class Mutex extends AbstractQueuedSynchronizer {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         Print.grace("shared", shared);
     }

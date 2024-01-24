@@ -1,5 +1,6 @@
 package algorithm.stack;
 
+import util.Print;
 import util.Tools;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class StackTest {
                 | InvocationTargetException
                 | InstantiationException
                 | IllegalAccessException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
     }
 }

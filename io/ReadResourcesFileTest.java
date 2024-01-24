@@ -127,7 +127,7 @@ public class ReadResourcesFileTest {
     public void m9(){
         /*设置环境变量*/
         Map<String, String> envMap = System.getenv();
-        Print.toPrint(envMap);
+        Print.printMap(envMap);
         File dict = new File("");
         String key = "env_path";
         String value = dict.getAbsolutePath();

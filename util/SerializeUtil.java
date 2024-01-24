@@ -36,7 +36,7 @@ public class SerializeUtil {
             oos.writeObject(object);
             bytes = byteArrayOutput.toByteArray();
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             close(oos);
             close(byteArrayOutput);
@@ -72,7 +72,7 @@ public class SerializeUtil {
             ObjectInputStream ois = new ObjectInputStream(fis);
             return ois.readObject();
         }catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         return null;
     }
@@ -97,7 +97,7 @@ public class SerializeUtil {
             ois = new ObjectInputStream(byteArrayInput);
             return ois.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             close(byteArrayInput);
             close(ois);
@@ -127,7 +127,7 @@ public class SerializeUtil {
             }
             bytes = byteArrayOutput.toByteArray();
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             close(oos);
             close(byteArrayOutput);
@@ -161,7 +161,7 @@ public class SerializeUtil {
                 list.add(obj);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             close(byteArrayInput);
             close(ois);
@@ -179,7 +179,7 @@ public class SerializeUtil {
             try {
                 closeable.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
     }

@@ -2,6 +2,7 @@ package thread.queue;
 
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 import util.RandomDataUtil;
 
@@ -96,7 +97,7 @@ class ProducerConsumerModel {
                     try {
                         p.readDb();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                         break;
                     }
                 }
@@ -107,7 +108,7 @@ class ProducerConsumerModel {
                 try {
                     p.calculate();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                     break;
                 }
             }

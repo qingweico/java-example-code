@@ -1,6 +1,7 @@
 package thread.aqs;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -34,7 +35,7 @@ class PhaserE {
                     System.out.println("I'm work@" + phaser.getPhase());
                     phaser.arriveAndAwaitAdvance();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             }
         }

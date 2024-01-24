@@ -5,6 +5,7 @@ import org.I0Itec.zkclient.ZkClient;
 import org.I0Itec.zkclient.serialize.SerializableSerializer;
 import org.apache.commons.lang3.StringUtils;
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.Collections;
@@ -44,7 +45,7 @@ class Zk implements Runnable {
             }
             System.out.println(inventory);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         } finally {
             new Zk().unlock();
         }
@@ -112,7 +113,7 @@ class Zk implements Runnable {
                 System.out.println("加锁失败, 等待");
                 latch.await();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         }
         ZK_CLIENT.unsubscribeDataChanges(beforePath, listener);

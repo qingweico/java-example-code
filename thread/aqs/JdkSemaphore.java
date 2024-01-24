@@ -30,7 +30,7 @@ class JdkSemaphore {
                     // Mock execution task!
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 } finally {
                     // Release
                     semaphore.release();

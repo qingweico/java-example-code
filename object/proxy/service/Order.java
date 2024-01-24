@@ -2,6 +2,7 @@ package object.proxy.service;
 
 import object.proxy.aspect.TimeUsageAspect;
 import object.proxy.annotation.Aspect;
+import util.Print;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +19,7 @@ public class Order implements IOrder {
         try {
             TimeUnit.MILLISECONDS.sleep(1000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
         this.state = 1;
     }

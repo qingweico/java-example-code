@@ -29,7 +29,7 @@ public class UrlConnectionTest {
         // getHeaderFieldKey 获取响应头的第n个键 若n=0或者大于消息头字段总数则返回null
         System.out.println(conn.getHeaderFieldKey(1));
         // getHeaderFields 返回一个包含了消息头中所有字段的标准Map对象
-        Print.toPrint(conn.getHeaderFields());
+        Print.printMap(conn.getHeaderFields());
         // 使用 getHeaderField(0) 或者 getHeaderField(null) 来获取响应状态行
         System.out.println(conn.getHeaderField(0));
         System.out.println(conn.getHeaderField(null));

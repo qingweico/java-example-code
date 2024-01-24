@@ -3,6 +3,7 @@ package thread.cas;
 import org.junit.Test;
 import thinking.genericity.LinkedStack;
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
@@ -95,7 +96,7 @@ public class LockFreeStackTest<T> {
                                 stack.push(j);
                                 Thread.sleep(1);
                             } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                Print.err(e.getMessage());
                             }
                         }
                     });
@@ -106,7 +107,7 @@ public class LockFreeStackTest<T> {
             try {
                 t.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
         });
         int count = 0;
@@ -132,7 +133,7 @@ public class LockFreeStackTest<T> {
         try {
             pushLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
 
         for (int i = 0; i < Constants.NUM_100; i++) {
@@ -146,7 +147,7 @@ public class LockFreeStackTest<T> {
         try {
             popLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Print.err(e.getMessage());
         }
 
         System.out.format("counter = %d\n", counter.get());

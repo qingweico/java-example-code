@@ -1,6 +1,7 @@
 package thread.cas;
 
 import thread.pool.ThreadObjectPool;
+import util.Print;
 import util.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
@@ -27,7 +28,7 @@ class AtomicMarkableReference {
             try {
                 TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Print.err(e.getMessage());
             }
             if (atomicStampedReference.compareAndSet(value, UPDATE_NUM, 1, stamp + 1)) {
                 System.out.println(Thread.currentThread().getName() + " currentValue:" + atomicStampedReference.getReference() +

@@ -3,6 +3,7 @@ package frame.db.gen;
 import org.apache.commons.lang3.tuple.Pair;
 import thread.pool.ThreadPoolBuilder;
 import util.DatabaseHelper;
+import util.Print;
 import util.constants.Symbol;
 
 import java.io.File;
@@ -104,7 +105,7 @@ public class SqlExecutor {
                     execute(sql);
                     System.out.format("finished %d/%d\n", counter.incrementAndGet(), buckets);
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    Print.err(e.getMessage());
                 }
             }
             return null;
@@ -132,7 +133,7 @@ public class SqlExecutor {
                     try {
                         future.get();
                     } catch (InterruptedException | ExecutionException e) {
-                        e.printStackTrace();
+                        Print.err(e.getMessage());
                     }
                 });
         tlc.remove();

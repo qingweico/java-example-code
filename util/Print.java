@@ -101,7 +101,7 @@ public class Print {
     }
 
     /**
-     * Formatting and printing the cost time
+     * Formatting and printing the cost time(ms)
      *
      * @param time long time
      */
@@ -116,9 +116,9 @@ public class Print {
      *
      * @param map the map to print
      */
-    public static void toPrint(Map<?, ?> map) {
-        if (map == null || map.size() == 0) {
-            System.err.println("map is null or size == 0");
+    public static void printMap(Map<?, ?> map) {
+        if (map == null || map.isEmpty()) {
+            System.out.println(map);
             return;
         }
         Set<? extends Map.Entry<?, ?>> entrySet = map.entrySet();
@@ -128,11 +128,15 @@ public class Print {
     }
 
     /**
-     * To print collection
+     * To print Collection
      *
      * @param c ? extends Collection<?>
      */
-    public static void toPrint(Collection<?> c) {
+    public static void printColl(Collection<?> c) {
+        if (c == null || c.isEmpty()) {
+            System.out.println(c);
+            return;
+        }
         for (Object o : c) {
             System.out.println(o);
         }
