@@ -68,7 +68,12 @@ public class DateProblemTest {
 
             Calendar c = Calendar.getInstance();
             log.info("now date : {}, now millisecond : {}", c.getTime(), c.get(Calendar.MILLISECOND));
-            c.set(year, month, day, 0, 0, 0);
+            c.set(Calendar.YEAR, year);
+            c.set(Calendar.MONTH, month);
+            c.set(Calendar.DAY_OF_MONTH, day);
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);;
             log.info("{} parse millisecond >>>> {}", dateString, c.get(Calendar.MILLISECOND));
             return c.getTime();
         }

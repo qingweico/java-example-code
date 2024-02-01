@@ -1,5 +1,7 @@
 package object.proxy.aspect;
 
+import util.Print;
+
 /**
  * @author zqw
  * @date 2021/9/28
@@ -16,6 +18,6 @@ public class TimeUsageAspect implements IAspect {
     @Override
     public void after() {
         var usage = System.currentTimeMillis() - start;
-        System.out.format("time usage: %dms\n", usage);
+        Print.time("time usage", usage);
     }
 }

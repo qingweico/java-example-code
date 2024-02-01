@@ -1,6 +1,7 @@
 package collection.iter;
 
 import object.entity.Customer;
+import util.Print;
 
 import java.util.Comparator;
 import java.util.Set;
@@ -23,6 +24,6 @@ class CustomerComparator implements Comparator<Customer> {
         set.add(new Customer("Tom", 28));
         set.add(new Customer("Jerry", 20));
         set.add(new Customer("Rose", 24));
-        System.out.println(set);
+        Print.printColl(set);
      }
 }

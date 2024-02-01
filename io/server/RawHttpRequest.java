@@ -17,7 +17,7 @@ import java.net.Socket;
 public class RawHttpRequest {
     public static void main(String[] args) {
         try (Socket client = new Socket();) {
-            client.connect(new InetSocketAddress("www.qingweico.cn", 80));
+            client.connect(new InetSocketAddress("www.baidu.com", 80));
             OutputStream out = client.getOutputStream();
             out.write("GET / HTTP/1.0\n\n".getBytes());
             out.flush();
@@ -36,7 +36,7 @@ public class RawHttpRequest {
             System.out.println("\033[36m-----------------end of response-----------------\033[0m");
             System.out.println("\033[37m-----------------end of response-----------------\033[0m");
         } catch (Exception e) {
-            Print.err("connect error: " + e.getMessage());
+            Print.err("connect error", e);
         }
     }
 }

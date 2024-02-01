@@ -1,7 +1,9 @@
 package io.buffer;
 
 import org.junit.Test;
+import util.Print;
 import util.constants.Constants;
+import util.math.NumberFormatter;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -90,8 +92,8 @@ public class BufferTest {
             String s = "AsYouWish";
             buffer.put(s.getBytes());
             buffer.flip();
-            fileChannel.write(buffer);
-            System.out.format("%fms", (System.nanoTime() - start) / 1000_000.0);
+            int written = fileChannel.write(buffer);
+            System.out.format("written byte : %s, time : %sms", written, NumberFormatter.fixDouble((System.nanoTime() - start) / 1000_000.0));
         }
     }
 
@@ -141,9 +143,9 @@ public class BufferTest {
         }
         intBuffer.flip();
         while (intBuffer.hasRemaining()) {
-            System.out.print(intBuffer.get() + " ");
+            Print.prints(intBuffer.get());
         }
-        System.out.println();
+        Print.println();
         intBuffer.flip();
         for (int i = 0; i < intBuffer.capacity(); i++) {
             intBuffer.put(i + 1);
@@ -152,7 +154,7 @@ public class BufferTest {
         intBuffer.limit(5);
         // position < limit
         while (intBuffer.hasRemaining()) {
-            System.out.print(intBuffer.get() + " ");
+            Print.prints(intBuffer.get());
         }
     }
 

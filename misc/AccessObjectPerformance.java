@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 /**
  * <a href="https://www.optaplanner.org/blog/2018/01/09/JavaReflectionButMuchFaster.html"></a>
- *
+ * Java Reflection, but much faster
  * @author zqw
  * @date 2023/9/20
  */

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author zqw
  * @date 2021/10/17
  */
-class PhaserE {
+class JdkPhaser {
     Phaser phaser = new Phaser();
 
     final ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2, 5, 1);
@@ -57,7 +57,7 @@ class PhaserE {
     }
 
     public static void main(String[] args) {
-        var phaser = new PhaserE();
+        var phaser = new JdkPhaser();
         phaser.run();
     }
 }

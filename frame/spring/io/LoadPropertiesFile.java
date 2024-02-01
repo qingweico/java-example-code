@@ -21,7 +21,7 @@ public class LoadPropertiesFile {
     public static void main(String[] args) throws IOException {
         Resource resource = new ClassPathResource("db.properties");
         Properties properties = PropertiesLoaderUtils.loadProperties(resource);
-        Print.toPrint(properties);
+        Print.printMap(properties);
     }
 }
 
