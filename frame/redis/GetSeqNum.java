@@ -3,6 +3,7 @@ package frame.redis;
 import frame.db.JdbcConfig;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import thread.pool.ThreadPoolBuilder;
 import util.Print;
@@ -26,8 +27,8 @@ class GetSeqNum {
         RedissonConfig config = new RedissonConfig();
         final RedissonClient client = config.redisson();
         RLock lock = null;
-        JdbcConfig jdbcConfig = new JdbcConfig();
-        JdbcTemplate jdbcTemplate = jdbcConfig.createTemplate();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(JdbcConfig.class);
+        JdbcTemplate jdbcTemplate = context.getBean(JdbcTemplate.class);
         try {
             lock = client.getLock(LOCK_KEY + mark);
             lock.lock(10, TimeUnit.SECONDS);

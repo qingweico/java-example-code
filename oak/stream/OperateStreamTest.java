@@ -1,9 +1,14 @@
 package oak.stream;
 
+import cn.hutool.core.collection.CollUtil;
+import frame.db.JdbcConfig;
 import object.entity.User;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.testng.annotations.Test;
 import util.ObjectFactory;
 import util.Print;
+import util.constants.Constants;
 import util.constants.Symbol;
 
 import java.util.*;
@@ -166,5 +171,39 @@ public class OperateStreamTest {
         Print.printColl(list);
         Print.printColl(list.stream().map(User::getId).collect(Collectors.toList()));
         Print.printColl(list.stream().peek(e -> e.setId(1L)).collect(Collectors.toList()));
+    }
+
+    /**
+     * CREATE TABLE unq_idx_table (
+     *     id INT AUTO_INCREMENT PRIMARY KEY,
+     *     field1 VARCHAR(50),
+     *     field2 VARCHAR(50),
+     *     field3 VARCHAR(50),
+     *     field4 VARCHAR(50),
+     *     UNIQUE INDEX unique_index_field1_field2 (field1, field2),
+     *     UNIQUE INDEX unique_index_field3 (field3),
+     *     UNIQUE INDEX unique_index_field4 (field4)
+     * );
+     */
+    @Test
+    public void groupingBy() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(JdbcConfig.class);
+        JdbcTemplate jdbcTemplate = context.getBean(JdbcTemplate.class);
+        String queryTableUnqIdx = "SHOW INDEX FROM ${Table_Name} WHERE Non_unique = 0";
+        List<Map<String, Object>> result;
+        String tableName = "unq_idx_table";
+        result = jdbcTemplate.queryForList(queryTableUnqIdx.replace("${Table_Name}", tableName));
+        if (CollUtil.isNotEmpty(result)) {
+            Map<String, List<String>> uniqueIndexMap = result.stream()
+                    .filter(map -> !Constants.PRIMARY.equals(map.get("Key_name")))
+                    // classifier : 接受流中的每个元素作为输入, 返回一个用于分组的键
+                    // downstream 下游收集器 : 指定了对每个分组中的元素的搜集策略
+                    // 根据map中Key_name列的元素分组
+                    .collect(Collectors.groupingBy(map -> (String) map.get("Key_name"),
+                            // 搜集map中Column_name列的元素为List
+                            Collectors.mapping(map -> (String) map.get("Column_name"),
+                                    Collectors.toList())));
+            Print.printMap(uniqueIndexMap);
+        }
     }
 }

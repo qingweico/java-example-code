@@ -3,6 +3,8 @@ package frame.db;
 import com.zaxxer.hikari.HikariDataSource;
 import object.enums.DbConProperty;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,8 +24,10 @@ import java.util.Properties;
  * @author zqw
  * @date 2023/2/18
  */
+@Configuration
 public class JdbcConfig {
 
+    @Bean
     public JdbcTemplate createTemplate() {
         HikariDataSource hds = new HikariDataSource();
         Properties properties = DatabaseHelper.loadDbConfig();

@@ -70,7 +70,7 @@ public class RandomDataUtil {
     public static String address(boolean isChinese) {
         String ret;
         if (isChinese) {
-            ret = new Faker(Locale.CHINA).address().fullAddress();
+            ret = localFaker.address().fullAddress();
         } else {
             ret = faker.address().fullAddress();
         }
