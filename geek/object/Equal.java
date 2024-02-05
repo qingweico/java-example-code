@@ -21,7 +21,7 @@ public class Equal {
         long begin = System.currentTimeMillis();
         list = IntStream.rangeClosed(1, Constants.NUM_10000000)
                 .mapToObj(i -> String.valueOf(i).intern())
-                .collect(Collectors.toList());
+                .toList();
         // 字符串常量池是一个大小固定的 Map, 一千万个字符串intern操作耗时41.386s;
         // 字符串太多,桶的数量默认只有60013,哈希冲突严重,导致每一个桶中的字符串数量很多,搜索速度很慢
         // solved: 使用 VM 参数:-XX:StringTableSize=10000000 指定更多数量的桶即可,耗时3128ms

@@ -1,5 +1,7 @@
 package effective;
 
+import lombok.Getter;
+
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -36,6 +38,7 @@ class Article34 {
 /**
  * Enumeration in Java is essentially an int value
  */
+@Getter
 enum Planet {
     // 枚举常量
     /**
@@ -98,18 +101,6 @@ enum Planet {
         this.surfaceGravity = G * mass / (radius * radius);
     }
 
-    public double getMass() {
-        return mass;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public double getSurfaceGravity() {
-        return surfaceGravity;
-    }
-
     public double getSurfaceWeight(double mass) {
         return mass * surfaceGravity;
     }
@@ -140,18 +131,13 @@ enum BaseOperations {
      * Do the arithmetic operation represented by this constant
      */
     public double apply(double x, double y) {
-        switch (this) {
-            case PLUS:
-                return x + y;
-            case MINUS:
-                return x - y;
-            case TIMES:
-                return x * y;
-            case DIVIDE:
-                return x / y;
-        }
+        return switch (this) {
+            case PLUS -> x + y;
+            case MINUS -> x - y;
+            case TIMES -> x * y;
+            case DIVIDE -> x / y;
+        };
         // It cannot compile without a throw statement
-        throw new AssertionError("Unknown op: " + this);
     }
 
     public static void main(String[] args) {

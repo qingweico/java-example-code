@@ -1,5 +1,7 @@
 package collection.iter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /**
@@ -14,6 +16,7 @@ public class RandomStringGenerator<T> implements Iterable<T> {
         this.list = list;
     }
 
+    @NotNull
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {

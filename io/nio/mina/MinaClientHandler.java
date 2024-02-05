@@ -10,6 +10,7 @@ import org.apache.mina.core.session.IoSession;
  */
 @Slf4j
 class MinaClientHandler extends IoHandlerAdapter {
+    @Override
     public void messageReceived(IoSession session, Object message) {
         String msg = message.toString();
         log.info("client rev data : {}", msg);

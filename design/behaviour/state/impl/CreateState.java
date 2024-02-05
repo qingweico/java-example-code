@@ -10,6 +10,7 @@ import util.Print;
  */
 public class CreateState implements TaskState {
 
+    @Override
     public void create(Task task) {
         Print.grace("任务创建", task);
         task.setState(new StartState());
