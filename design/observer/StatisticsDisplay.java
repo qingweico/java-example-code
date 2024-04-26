@@ -13,4 +13,9 @@ public class StatisticsDisplay implements Observer {
     public void update(float temp, float humidity, float pressure) {
         System.out.println("StatisticsDisplay.update: " + temp + " " + humidity + " " + pressure);
     }
+
+    @Override
+    public void cancel(Subject weatherData) {
+        weatherData.removeObserver(this);
+    }
 }

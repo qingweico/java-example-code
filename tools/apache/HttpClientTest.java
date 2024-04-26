@@ -31,12 +31,14 @@ public class HttpClientTest {
                 .setConnectTimeout(2000)
                 .build();
         // 建立client
-        CloseableHttpClient client = HttpClients
+        String contentJson;
+        try (CloseableHttpClient client = HttpClients
                 .custom()
                 .setDefaultRequestConfig(requestConfig)
-                .build();
-        HttpGet getContentJson = new HttpGet("https://www.baidu.com");
-        String contentJson = EntityUtils.toString(client.execute(getContentJson).getEntity());
+                .build()) {
+            HttpGet getContentJson = new HttpGet("https://www.baidu.com");
+            contentJson = EntityUtils.toString(client.execute(getContentJson).getEntity());
+        }
         System.out.println(contentJson);
     }
 

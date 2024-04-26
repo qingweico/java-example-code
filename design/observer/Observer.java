@@ -18,4 +18,11 @@ public interface Observer {
      * @param pressure 气压
      */
     void update(float temp, float humidity, float pressure);
+
+    /**
+     * cancel
+     *
+     * @param s Subject instance
+     */
+    void cancel(Subject s);
 }

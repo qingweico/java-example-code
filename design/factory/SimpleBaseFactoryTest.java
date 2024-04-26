@@ -44,7 +44,8 @@ public class SimpleBaseFactoryTest {
     @Test
     public void simpleFactory() {
         SimpleBaseFactoryTest simpleFactory = new SimpleBaseFactoryTest();
-        simpleFactory.createProduct(1);
+        Product product = simpleFactory.createProduct(1);
+        System.out.println(product);
     }
 
 }

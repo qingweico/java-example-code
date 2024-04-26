@@ -13,4 +13,9 @@ public class CurrentConditionsDisplay implements Observer {
     public void update(float temp, float humidity, float pressure) {
         System.out.println("CurrentConditionsDisplay.update " + temp + " " + humidity + " " + pressure);
     }
+
+    @Override
+    public void cancel(Subject weatherData) {
+        weatherData.removeObserver(this);
+    }
 }

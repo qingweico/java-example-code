@@ -4,6 +4,7 @@ package design.observer;
  * @author zqw
  * @date 2022/3/2
  */
+@SuppressWarnings("deprecation")
 public interface Subject {
     /**
      * ~

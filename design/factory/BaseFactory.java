@@ -14,7 +14,8 @@ abstract class BaseFactory {
     abstract public Product factoryMethod();
 
     public void doSomething() {
-        factoryMethod();
+        @SuppressWarnings("unused")
+        Product product = factoryMethod();
     }
 }
 
