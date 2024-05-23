@@ -1,5 +1,6 @@
 package thread.lock;
 
+import lombok.Getter;
 import thread.pool.ThreadObjectPool;
 
 import java.util.concurrent.ExecutorService;
@@ -13,15 +14,12 @@ class DeadLock {
     static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(2);
 
     static class Friend {
+        @Getter
         private final String name;
         private final ReentrantLock lock = new ReentrantLock();
 
         public Friend(String name) {
             this.name = name;
-        }
-
-        public String getName() {
-            return name;
         }
 
         public void bow(Friend bow) {

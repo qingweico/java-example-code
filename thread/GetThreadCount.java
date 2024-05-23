@@ -1,6 +1,6 @@
 package thread;
 
-import util.constants.Symbol;
+import util.Print;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
@@ -19,7 +19,7 @@ class GetThreadCount {
         long[] threadIds = threadMxBean.getAllThreadIds();
         ThreadInfo[] threadInfos = threadMxBean.getThreadInfo(threadIds);
         for (ThreadInfo threadInfo : threadInfos) {
-            System.out.println(threadInfo.getThreadId() + Symbol.COLON + Symbol.WHITE_SPACE + threadInfo.getThreadName());
+            Print.grace(threadInfo.getThreadId(), threadInfo.getThreadName());
         }
         System.out.println("============= ThreadGroup =============");
         ThreadGroup group = Thread.currentThread().getThreadGroup();
@@ -36,7 +36,7 @@ class GetThreadCount {
         Thread[] lstThreads = new Thread[nowThreads];
         topGroup.enumerate(lstThreads);
         for (int i = 0; i < nowThreads; i++) {
-            System.out.println(i + ": " + lstThreads[i].getName());
+            Print.grace(i, lstThreads[i].getName());
         }
     }
 }
