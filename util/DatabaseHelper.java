@@ -37,15 +37,6 @@ public class DatabaseHelper {
 
     static {
         Properties properties = loadDbConfig();
-        FileInputStream fin;
-        // 设置 JDBC 日志流到控制台
-        DriverManager.setLogWriter(new PrintWriter(new PrintStream(System.out), true, Charset.defaultCharset()));
-        try {
-            fin = new FileInputStream(db);
-            properties.load(fin);
-        } catch (IOException e) {
-            log.error("load {} error, {}", db, e.getMessage());
-        }
         driveClassName = properties.getProperty(DbConProperty.DRIVE_CLASS_NAME.getProperty());
         dbUlr = properties.getProperty(DbConProperty.JDBC_URL.getProperty());
         username = properties.getProperty(DbConProperty.USERNAME.getProperty());

@@ -119,7 +119,7 @@ public class ReflectUtils {
         try {
             result = field.get(obj);
         } catch (IllegalAccessException e) {
-            log.error("不可能抛出的异常{}", e.getMessage());
+            log.error(e.getMessage());
         }
         return result;
     }
@@ -137,7 +137,7 @@ public class ReflectUtils {
         try {
             field.set(obj, value);
         } catch (IllegalAccessException e) {
-            log.error("不可能抛出的异常:{}", e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -164,14 +164,14 @@ public class ReflectUtils {
      * 用于一次性调用的情况,否则应使用getAccessibleMethodByName()函数获得Method后反复调用.
      * 只匹配函数名,如果有多个同名函数调用第一个。
      */
-    public static Object invokeMethodByName(final Object obj, final String methodName, final Object[] args) {
+    public static void invokeMethodByName(final Object obj, final String methodName, final Object[] args) {
         Method method = getAccessibleMethodByName(obj, methodName);
         if (method == null) {
             throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
         }
 
         try {
-            return method.invoke(obj, args);
+            method.invoke(obj, args);
         } catch (Exception e) {
             throw convertReflectionExceptionToUnchecked(e);
         }
@@ -190,9 +190,8 @@ public class ReflectUtils {
                 Field field = superClass.getDeclaredField(fieldName);
                 makeAccessible(field);
                 return field;
-            } catch (NoSuchFieldException e) {//NOSONAR
+            } catch (NoSuchFieldException e) {
                 // Field不在当前类定义,继续向上转型
-                // new add
             }
         }
         return null;
@@ -216,7 +215,6 @@ public class ReflectUtils {
                 return method;
             } catch (NoSuchMethodException e) {
                 // Method不在当前类定义,继续向上转型
-                // new add
             }
         }
         return null;
@@ -306,11 +304,11 @@ public class ReflectUtils {
         }
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
         if (index >= params.length || index < 0) {
-            log.warn("Index: " + index + ", Size of " + clazz.getSimpleName() + "'s Parameterized Type: " + params.length);
+            log.warn("Index: {}, Size of {}'s Parameterized Type: {}", index, clazz.getSimpleName(), params.length);
             return (Class<T>) Object.class;
         }
         if (!(params[index] instanceof Class)) {
-            log.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
+            log.warn("{} not set the actual class on superclass generic parameter", clazz.getSimpleName());
             return (Class<T>) Object.class;
         }
         return (Class<T>) params[index];
@@ -319,7 +317,7 @@ public class ReflectUtils {
     public static Class<?> getUserClass(Object instance) {
         Validate.notNull(instance, "Instance must not be null");
         Class<?> clazz = instance.getClass();
-        if (clazz != null && clazz.getName().contains(CGLIB_CLASS_SEPARATOR)) {
+        if (clazz.getName().contains(CGLIB_CLASS_SEPARATOR)) {
             Class<?> superClass = clazz.getSuperclass();
             if (superClass != null && !Object.class.equals(superClass)) {
                 return superClass;
