@@ -80,13 +80,17 @@ public class SerializeUtil {
         return deserialize(DEFAULT_FILE_NAME);
     }
 
+    public static Object deserialize(byte[] bytes) {
+        return deserialize(bytes, null);
+    }
+
     /**
      * 反序列化
-     *
      * @param bytes 字节数组
+     * @param whiteClassList 反序列化类白名单
      * @return 反序列化后得到的对象
      */
-    public static Object deserialize(byte[] bytes) {
+    public static Object deserialize(byte[] bytes, List<String> whiteClassList) {
         if (bytes == null) {
             return null;
         }
@@ -95,6 +99,14 @@ public class SerializeUtil {
         try {
             byteArrayInput = new ByteArrayInputStream(bytes);
             ois = new ObjectInputStream(byteArrayInput);
+            if (whiteClassList != null && !whiteClassList.isEmpty()) {
+                ois.setObjectInputFilter(filter -> {
+                    if (filter.serialClass() != null && whiteClassList.contains(filter.serialClass().getName())) {
+                        return ObjectInputFilter.Status.ALLOWED;
+                    }
+                    return ObjectInputFilter.Status.REJECTED;
+                });
+            }
             return ois.readObject();
         } catch (Exception e) {
             Print.err(e.getMessage());

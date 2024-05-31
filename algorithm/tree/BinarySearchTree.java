@@ -102,6 +102,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         preOrder(root);
     }
 
+    /**深度优先搜索(Depth-First Search)*/
     private void preOrder(Node node) {
         if (node == null) {
             return;
@@ -134,6 +135,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         levelOrder(root);
     }
 
+    /**广度优先搜索(Breadth-First Search)*/
     private void levelOrder(Node node) {
         LinkedList<Node> queue = new LinkedList<>();
         queue.add(node);

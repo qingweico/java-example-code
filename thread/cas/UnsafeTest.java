@@ -1,18 +1,26 @@
 package thread.cas;
 
+import lombok.Getter;
+import lombok.Setter;
 import object.entity.User;
 import org.junit.Test;
 import sun.misc.Unsafe;
+import thread.pool.ThreadPoolBuilder;
 import util.Print;
+import util.RandomDataUtil;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.ExecutorService;
 
 /**
+ * Unsafe的使用
  * @author zqw
  * @date 2021/3/5
  */
 public class UnsafeTest {
     private static final Unsafe U = UnsafeSupport.reflectGetUnsafe();
+
+    ExecutorService pool = ThreadPoolBuilder.builder().build();
 
     static {
         if (U == null) {
@@ -57,5 +65,49 @@ public class UnsafeTest {
         Print.println(U.addressSize());
         // 内存页的大小 此值为2的幂次方
         Print.println(U.pageSize());
+    }
+
+    // 类、对象和变量相关方法
+
+    @Test
+    public void getSetObject() throws Exception {
+        User user = new User();
+        user.setUsername(RandomDataUtil.name());
+        Field username = User.class.getDeclaredField("username");
+        // 返回 非静态属性 在其对象存储分配中的位置(偏移地址), 对静态属性使用会抛异常
+        // 其方法staticFieldOffset与其相反
+        long offset = U.objectFieldOffset(username);
+        // 根据 对象中的偏移地址 offset 来获取值 突破修饰符的限制
+        Object value = U.getObject(user, offset);
+        System.out.println(value);
+        // 根据 对象中的偏移地址 offset 来设置值 突破修饰符的限制
+        U.putObject(user, offset, "Unsafe putObject");
+        System.out.println(user.getUsername());
+    }
+
+    @Test
+    public void getSetVolatileObject() throws Exception {
+        // # getObjectVolatile
+        // # putObjectVolatile
+        @Setter
+        @Getter
+        class O {
+            Integer value;
+        }
+        O o = new O();
+        o.setValue(1);
+        pool.execute(() -> {
+            for (; ; ) {
+                if (o.getValue() != 1) {
+                    break;
+                }
+            }
+            System.out.println("o.getValue() == 2");
+        });
+        UnsafeSupport.shortWait(100);
+        pool.execute(() -> {
+            o.setValue(2);
+        });
+        System.out.println(System.in.read());
     }
 }

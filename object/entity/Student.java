@@ -1,5 +1,6 @@
 package object.entity;
 
+import lombok.Getter;
 import util.constants.Symbol;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.Objects;
  * @author zqw
  * @date 2021/11/17
  */
+@Getter
 public class Student implements Serializable {
     String name;
     Integer score;
@@ -33,14 +35,6 @@ public class Student implements Serializable {
 
     public String get() {
         return this.name + Symbol.COLON + this.score;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getScore() {
-        return score;
     }
 
     @Override

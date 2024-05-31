@@ -1,21 +1,32 @@
 package util.net;
 
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.util.Assert;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.*;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zqw
@@ -132,6 +143,57 @@ public class NetworkUtils {
             } catch (Exception ex) {
                 log.error("sendGet close, url={}, param={}: {}", url, param, ex.getMessage());
             }
+        }
+    }
+
+
+    /**
+     * @param url         请求 url
+     * @param headers     Map<String, String> 请求头
+     * @param requestBody { json str }  请求体以 JSON 格式发送, 请求头部为 {@code Content-Type : application/json}
+     *                    发送表单数据, {@code Content-Type : application/x-www-form-urlencoded} {@link  UrlEncodedFormEntity} {@link BasicNameValuePair}
+     */
+    public static void sendPost(String url, Map<String, String> headers, String requestBody) {
+        Assert.notNull(url, "url must not be null");
+        Assert.isTrue(isValidJson(requestBody), "requestBody must be valid json");
+        String charset = "UTF-8";
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpPost httpPost = new HttpPost(url);
+            setHttpPost(httpPost, headers, requestBody, charset);
+            HttpResponse response = httpClient.execute(httpPost);
+            int statusCode = response.getStatusLine().getStatusCode();
+            log.info("Response Code : {}", statusCode);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                String responseContent = EntityUtils.toString(entity);
+                log.info("Response Content : {}", responseContent);
+            }
+        } catch (IOException e) {
+            log.error("{}", e.getCause().getMessage());
+        }
+    }
+
+    private static void setHttpPost(HttpPost httpPost, Map<String, String> headers, String requestBody, String charset) throws UnsupportedEncodingException {
+        httpPost.addHeader("User-Agent", "Mozilla/5.0");
+        httpPost.addHeader("Content-Type", "application/json");
+        if (headers != null) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                String headerName = entry.getKey();
+                String headerValue = entry.getValue();
+                httpPost.setHeader(headerName, headerValue);
+            }
+        }
+        StringEntity stringEntity = new StringEntity(requestBody, charset);
+        httpPost.setEntity(stringEntity);
+    }
+
+    public static boolean isValidJson(String jsonString) {
+        try {
+            JsonParser parser = new JsonParser();
+            parser.parse(jsonString);
+            return true;
+        } catch (JsonSyntaxException e) {
+            return false;
         }
     }
 

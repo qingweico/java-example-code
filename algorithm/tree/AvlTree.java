@@ -38,7 +38,7 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
             height = 1;
         }
     }
-    // ############################################# public api #############################################
+    // ------------------------------ Public ------------------------------
 
     public boolean isBalanced() {
         return isBalanced(root);
@@ -243,7 +243,7 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
         }
     }
 
-    // ############################################# private #############################################
+    // ------------------------------ Private ------------------------------
 
     private Node min(Node node) {
         if (node.left == null) {

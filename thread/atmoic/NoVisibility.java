@@ -33,6 +33,11 @@ class NoVisibility {
         } catch (InterruptedException e) {
             Print.err(e.getMessage());
         }
+        // 没有使用 volatile 关键字修饰, 理论上来说会无限循环,主线程对变量的修改 其他线程看不到
+        // 实际上还是会终止
+        // 1 Thread.yield(), 让当前线程让出CPU时间片, 有助于触发内存刷新
+        // 2 缓存一致性
+        // 3 JVM优化
         num = 42;
         ready = true;
     }
