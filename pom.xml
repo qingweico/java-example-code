@@ -304,7 +304,7 @@
             <artifactId>zookeeper</artifactId>
             <version>3.4.6</version>
             <!-- 排除log412;使用logback日志 -->
-            <!-- 若使用logback日志 请打开以下注释并 同时打开logback-classic -->
+            <!-- 若使用logback日志 请打开以下注释并同时打开logback-classic -->
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -393,14 +393,22 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
         </plugins>
-        <sourceDirectory>/</sourceDirectory>
+        <sourceDirectory>${basedir}</sourceDirectory>
         <resources>
             <resource>
                 <filtering>true</filtering>
-                <directory>resources</directory>
+                <directory>${basedir}/</directory>
                 <includes>
-                    <include>*.*</include>
+                    <include>**/*</include>
                 </includes>
             </resource>
         </resources>

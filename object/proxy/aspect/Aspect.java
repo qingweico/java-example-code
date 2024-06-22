@@ -4,7 +4,6 @@ import util.monad.Try;
 
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * @author zqw
@@ -36,7 +35,7 @@ public interface Aspect {
         var aspectInstances = Arrays.stream(aspects).map(name -> Try.ofFailable(() -> {
             var cl = Class.forName(name);
             return (Aspect) cl.getDeclaredConstructor().newInstance();
-        })).filter(Try::isSuccess).collect(Collectors.toList());
+        })).filter(Try::isSuccess).toList();
 
         var inst = cls.getConstructor().newInstance();
 

@@ -45,7 +45,7 @@ public class ThreadObjectPool {
     class WorkThread extends Thread {
         @Override
         public void run() {
-            while (isRun || workQueue.size() > 0) {
+            while (isRun || !workQueue.isEmpty()) {
                 Runnable run;
                 try {
                     run = workQueue.take();

@@ -12,6 +12,9 @@ public class MdcRunnable extends MdcAround implements Runnable {
 
     public MdcRunnable(Runnable runnable) {
         traceId = TraceIdContext.getTraceId();
+        if (traceId == null) {
+            traceId = TraceIdContext.generateTraceId();
+        }
         this.runnable = runnable;
     }
 

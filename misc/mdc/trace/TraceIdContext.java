@@ -27,7 +27,6 @@ public class TraceIdContext {
     }
 
     public static void clearTraceId() {
-        CURRENT_TRACE_ID.set(null);
         CURRENT_TRACE_ID.remove();
     }
 }

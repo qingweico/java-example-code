@@ -20,26 +20,19 @@ import java.util.concurrent.ExecutorService;
 public class TraceLog {
 
     public static void main(String[] args) {
-        // TODO logback.xml [%X{traceId}]
+        // logback.xml <pattern></pattern> 增加 %X{TRACE_ID}
         final ExecutorService pool = ThreadPoolBuilder.builder().build();
 
         final ThreadPoolTaskExecutor poolTaskExecutor = ThreadPoolExecutorBuilder.builder().build();
 
-        pool.execute(new MdcRunnable( ()-> {
-            log.info("{}", RandomDataUtil.address());
-        }));
+        pool.execute(new MdcRunnable(() -> log.info("{}", RandomDataUtil.address())));
 
-        pool.execute(new MdcRunnable( ()-> {
-            log.info("{}", RandomDataUtil.address());
-        }));
+        pool.execute(new MdcRunnable(() -> log.info("{}", RandomDataUtil.address())));
 
-        poolTaskExecutor.execute( () -> {
-            log.info("{}", RandomDataUtil.address());
-        });
+        // No log TraceId If not ues MdcRunnable class wrap
+        poolTaskExecutor.execute(() -> log.info("{}", RandomDataUtil.address()));
 
-        poolTaskExecutor.execute(() -> {
-            log.info("{}", RandomDataUtil.address());
-        });
+        poolTaskExecutor.execute(() -> log.info("{}", RandomDataUtil.address()));
         pool.shutdown();
     }
 }
