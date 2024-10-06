@@ -18,11 +18,11 @@
 - ...
 
 ### 项目整体结构
-![](https://cdn.qingweico.cn/Snipaste_2022-11-22_05-20-39.png)
+![](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/Snipaste_2022-11-22_05-20-39.png)
 
 ### 代码风格
-![](https://cdn.qingweico.cn/Snipaste_2022-10-22_20-52-57.png)
+![](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/Snipaste_2022-10-22_20-52-57.png)
 
-![](https://cdn.qingweico.cn/Snipaste_2022-11-22_05-17-46.png)
+![](https://static-i0.oss-cn-shanghai.aliyuncs.com/pic/Snipaste_2022-11-22_05-17-46.png)
 
 ### 项目持续更新...
