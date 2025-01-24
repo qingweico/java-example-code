@@ -39,7 +39,7 @@ import java.util.function.Supplier;
 @Slf4j
 public class CompletableFutureTest {
 
-    private final static ExecutorService POOL = ThreadPoolBuilder.builder().threadFactory(CustomizableThreadFactory.basicThreadFactory()).build();
+    private static final ExecutorService POOL = ThreadPoolBuilder.builder().threadFactory(CustomizableThreadFactory.basicThreadFactory()).build();
 
     private final ExecutorService single = ThreadPoolBuilder.builder().corePoolSize(1).build();
 

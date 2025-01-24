@@ -23,10 +23,9 @@ class MapMerge {
             students.add(student);
         }
         HashMap<String, Integer> map = new HashMap<>(16);
-        students.forEach(student -> {
-            // key 相同 value 相加
-            map.merge(student.getName(), student.getScore(), Integer::sum);
-        });
+        students.forEach(student ->
+                // key 相同 value 相加
+                map.merge(student.getName(), student.getScore(), Integer::sum));
         Print.printMap(map);
     }
 }

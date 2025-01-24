@@ -1,5 +1,7 @@
 package thread.atmoic;
 
+import sun.misc.Unsafe;
+
 /**
  * --------------- 内存屏障 ---------------
  * JMM 中共有四种内存屏障
@@ -40,6 +42,11 @@ package thread.atmoic;
  * 即时编译器将根据具体的底层体系架构,将这些内存屏障替换成具体的CPU指令,不同的CPU架构
  * 会有不同的指令体现; X86_64中,读读,读写以及写写内存屏障是空操作(no-op),只有写读内存屏障
  * 会被替换成具体指令(HotSpot 中选取的具体指令是 lock add,而非mfence)
+ * LoadLoad {@link Unsafe#loadFence()}
+ * StoreStore {@link Unsafe#storeFence()}
+ * StoreLoad {@link Unsafe#fullFence()}
+ * LoadStore 屏障应用场景叫少, 且在常见处理器(如 x86)中已天然受支持, 因此没有单独提供 API, 也是权衡复杂性和实用性的结果
+ * 若需要实现类似效果时, 可以使用 loadFence 和 storeFence 或者更高层次的同步工具(如volatile)
  * --------------- 关于 final 字段发布问题 ---------------
  * 即时编译器会在final字段的写操作后插入一个写写屏障(x86_64是空操作),以防止某些优化将新建
  * 的对象的发布(即将实例对象写入到一个共享引用中)重排序至final字段的写操作之前

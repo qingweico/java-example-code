@@ -16,13 +16,9 @@ import java.util.stream.Stream;
  * @date 2023/3/18
  */
 public class RemoveMapElemTest {
-    private static final Map<Integer,String>INIT_MAP = new HashMap<>() {
-        {
-            Stream.iterate(1, e -> e + 1).limit(4).forEach(i -> {
-                put(i, UUID.randomUUID().toString());
-            });
-        }
-    };
+    private static final Map<Integer, String> INIT_MAP = Stream.iterate(1, e -> e + 1)
+            .limit(4)
+            .collect(Collectors.toMap(i -> i, i -> UUID.randomUUID().toString()));
 
     @Test
     public void removeFor() {
