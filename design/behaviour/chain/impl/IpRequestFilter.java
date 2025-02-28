@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class IpRequestFilter implements RequestFilter {
 
-    private final static String IP = "ip";
+    private static final String IP = "ip";
 
     @Override
     public void doFilter(Request request, Response response, RequestFilterChain chain) {

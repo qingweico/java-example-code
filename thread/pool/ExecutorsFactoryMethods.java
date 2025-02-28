@@ -128,7 +128,7 @@ class ExecutorsFactoryMethods {
         // and throw exception if the thread pool queue is full.
         for (int i = 0; i < Constants.FIVE; i++) {
             int finalI = i;
-            executorService.execute(() -> System.out.println(Thread.currentThread().getName() + ": " + finalI));
+            executorService.execute(() -> Print.grace(Thread.currentThread().getName(), finalI));
         }
 
         // The shutdown method performs a gentle process of shutting down: no new tasks are accepted,

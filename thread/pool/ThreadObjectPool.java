@@ -104,7 +104,7 @@ public class ThreadObjectPool {
         ScheduledExecutorService scheduledExecutorService =  new ScheduledThreadPoolExecutor(
                 1,
                 new NamedThreadFactory("thread-pool-monitor")
-        );;
+        );
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             // 线程池的线程数量
             log.info("Pool Size: {}", executor.getPoolSize());

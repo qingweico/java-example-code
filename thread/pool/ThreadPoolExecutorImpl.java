@@ -2,9 +2,13 @@ package thread.pool;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author zqw
@@ -22,19 +26,19 @@ public class ThreadPoolExecutorImpl extends ThreadPoolExecutor {
         this.isEnableMonitor = isEnableMonitor;
     }
 
-    long start = 0;
-    long thisTimeCost = 0;
-    double maxExecutionTime = -1;
-    int totalExecutionCount = 0;
-    double minExecutionTime = Integer.MAX_VALUE;
-    double totalExecutionTime = 0.0;
+    private final ThreadLocal<Long> startTimeTl = ThreadLocal.withInitial(() -> 0L);
+    private final ThreadLocal<BigDecimal> thisTimeCostTl = ThreadLocal.withInitial(() -> BigDecimal.ZERO);
+    private final AtomicReference<BigDecimal> maxExecutionTime = new AtomicReference<>(BigDecimal.valueOf(-1));
+    private final AtomicReference<BigDecimal> minExecutionTime = new AtomicReference<>(BigDecimal.valueOf(Double.MAX_VALUE));
+    private final AtomicReference<BigDecimal> totalExecutionTime = new AtomicReference<>(BigDecimal.ZERO);
+    private final AtomicInteger totalExecutionCount = new AtomicInteger(0);
     boolean isEnableMonitor;
 
     @Override
     protected void beforeExecute(Thread t, Runnable r) {
         super.beforeExecute(t, r);
         if (isEnableMonitor) {
-            start = System.currentTimeMillis();
+            startTimeTl.set(System.currentTimeMillis());
         }
     }
 
@@ -42,15 +46,16 @@ public class ThreadPoolExecutorImpl extends ThreadPoolExecutor {
     protected void afterExecute(Runnable r, Throwable t) {
         super.afterExecute(r, t);
         if (isEnableMonitor) {
-            thisTimeCost = System.currentTimeMillis() - start;
-            totalExecutionTime += thisTimeCost;
-            totalExecutionCount++;
-            if (minExecutionTime > thisTimeCost) {
-                minExecutionTime = thisTimeCost;
-            }
-            if (thisTimeCost > maxExecutionTime) {
-                maxExecutionTime = thisTimeCost;
-            }
+            long start = startTimeTl.get();
+            BigDecimal thisTimeCost = BigDecimal.valueOf(System.currentTimeMillis() - start);
+            totalExecutionTime.updateAndGet(currentTime -> currentTime.add(thisTimeCost));
+            maxExecutionTime.updateAndGet(current -> current.compareTo(thisTimeCost) < 0 ? thisTimeCost : current);
+            minExecutionTime.updateAndGet(current -> current.compareTo(thisTimeCost) > 0 ? thisTimeCost : current);
+            totalExecutionCount.incrementAndGet();
+            thisTimeCostTl.set(thisTimeCost);
+            // remove tl
+            startTimeTl.remove();
+            thisTimeCostTl.remove();
         }
     }
 
@@ -59,9 +64,10 @@ public class ThreadPoolExecutorImpl extends ThreadPoolExecutor {
         super.terminated();
         if (isEnableMonitor) {
             ThreadObjectPool.monitor(this);
-            log.info("线程池中任务的最大执行时间为: {}ms", maxExecutionTime);
-            log.info("线程池中任务的最小执行时间为: {}ms", minExecutionTime);
-            log.info("线程池中任务的平均执行时间为: {}ms", totalExecutionTime / totalExecutionCount);
+            BigDecimal averageExecutionTime = totalExecutionTime.get().divide(BigDecimal.valueOf(totalExecutionCount.get()), 2, RoundingMode.HALF_UP);
+            log.info("线程池中任务的最大执行时间为: {}ms", maxExecutionTime.get());
+            log.info("线程池中任务的最小执行时间为: {}ms", minExecutionTime.get());
+            log.info("线程池中任务的平均执行时间为: {}ms", averageExecutionTime);
         }
     }
 }
