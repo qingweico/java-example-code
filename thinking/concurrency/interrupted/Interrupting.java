@@ -22,6 +22,8 @@ import static util.Print.*;
  * 该线程需要不断检测标识位来判断是否来中断自身, 中断不活动的线程不会产生影响
  * {@link Thread#interrupted()} 判断线程是否被中断并清除当前中断状态
  * {@link Thread#isInterrupted()} 判断线程是否被中断 {@code 都使用了Thread类中volatile类型的标志位interrupted}
+ * interrupted方法 和 isInterrupted方法的区别: 前者用于检查当前线程的中断状态, 并且会清除该线程的中断标志, 后者用于
+ * 检查当前线程的中断状态, 并且不会清除中断标志
  *
  * @author zqw
  * @date 2021/1/31
