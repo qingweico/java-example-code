@@ -18,7 +18,9 @@ import java.util.concurrent.ExecutorService;
 public class DistributedLock {
 
     private static final String LOCK_SUCCESS = "OK";
+    /**NX: key not exist. then set  XX: key exist. then set*/
     private static final String SET_IF_NOT_EXIST = "NX";
+    /**EX: expire unit(s)  PX: expire unit(ms)*/
     private static final String SET_WITH_EXPIRE_TIME = "PX";
     private static final int DEFAULT_EXPIRE_TIME = 1000;
     private static final Long RELEASE_SUCCESS = 1L;

@@ -15,8 +15,8 @@ import java.util.concurrent.ExecutorService;
  * 基于 redis setnx 和 lua 实现 {@link DistributedLock}
  * Redisson 分布式锁原理
  * 可重入: 利用 hash 结构记录线程 id 和重入次数
- * 可重试: 利用信号量和发布订阅功能实现等待,唤醒,获取锁失败的重试机制
- * 超时续约: 利用 watchDag 隔一段时间,重置超时时间
+ * 可重试: 利用信号量和发布订阅功能实现等待、唤醒、获取锁失败的重试机制
+ * 超时续约: 利用 watch dog 隔一段时间, 重置超时时间
  *
  * @author zqw
  * @date 2022/3/13

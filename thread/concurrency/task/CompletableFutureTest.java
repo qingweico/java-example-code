@@ -376,6 +376,32 @@ public class CompletableFutureTest {
         log.info(future.join());
     }
 
+    /**
+     * CompletableFuture在自定义线程池中的异常处理
+     */
+    @Test
+    public void exceptionHandlerInThreadPool() {
+        CompletableFuture.runAsync(() -> {
+            throw new IllegalStateException("use exceptionally() handle");
+        }, single).exceptionally(err -> {
+            // 不要在 exceptionally 内部抛出新的异常, 因为这里的异常不会被处理, 且exceptionally方法没有返回值, 导致CompletableFuture进入异常状态
+            log.error("{}", err.getMessage(), err);
+            return null;
+        });
+
+        // handle可以同时处理正常结果和异常情况
+        CompletableFuture.supplyAsync(() -> {
+            throw new IllegalStateException("use handle() handle");
+        }, single).handle((result, err) -> {
+            if (err != null) {
+                log.error("{}", err.getMessage(), err);
+            }
+            log.info("result: {}", result);
+            return null;
+        });
+        // exceptionallyCompose 可以返回新的 CompletableFuture 进行异常恢复
+    }
+
     // https://blog.csdn.net/sermonlizhi/article/details/123356877
     // https://mp.weixin.qq.com/s/ODjEpzFNozQJBDYQVtGlPA
 }
