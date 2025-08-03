@@ -1,8 +1,8 @@
 package collection.map;
 
-import util.Print;
-import util.RandomDataUtil;
-import util.collection.CollUtils;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
+import cn.qingweico.collection.CollUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ class MapSort {
         int size = 10;
         Map<String, Integer> map = new HashMap<>(CollUtils.mapSize(size));
         for (int i = 0; i < size; i++) {
-            map.put(RandomDataUtil.address(false), RandomDataUtil.ri());
+            map.put(RandomDataGenerator.address(false), RandomDataGenerator.rndInt());
         }
         Print.printMap(map);
         Print.println("\n\n//////// SortedMapByKey //////////");

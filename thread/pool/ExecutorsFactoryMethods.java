@@ -1,7 +1,7 @@
 package thread.pool;
 
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.*;
 
@@ -18,7 +18,6 @@ import java.util.concurrent.*;
  * 2: 在底层 操作系统内核将这些线程映射到硬件处理器上
  * {@link ScheduledThreadPoolExecutor extends ThreadPoolExecutor} 主要用来在给定的延迟之后运行任务
  * 或定期者执行任务
- *
  * 任务       任务       任务
  *  |          |         |
  *  |          |         |

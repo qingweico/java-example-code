@@ -11,7 +11,7 @@ import io.netty.handler.codec.http.HttpServerExpectContinueHandler;
  * @author zqw
  * @date 2024/5/28
  */
-public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
+class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) {
         ChannelPipeline p = ch.pipeline();

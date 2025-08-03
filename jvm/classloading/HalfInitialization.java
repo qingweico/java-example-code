@@ -1,6 +1,6 @@
 package jvm.classloading;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * 对象的半初始化状态

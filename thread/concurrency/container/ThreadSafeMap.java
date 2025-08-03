@@ -25,7 +25,7 @@ import java.util.stream.LongStream;
  * @date 2022/7/4
  */
 @Slf4j
-public class ThreadSafeMap {
+class ThreadSafeMap {
     /**线程个数**/
     private static final int THREAD_COUNT = 10;
     /**总元素数量**/

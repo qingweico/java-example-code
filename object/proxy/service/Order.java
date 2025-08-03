@@ -2,7 +2,7 @@ package object.proxy.service;
 
 import object.proxy.aspect.TimeUsageAspect;
 import object.proxy.annotation.Aspect;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.TimeUnit;
 

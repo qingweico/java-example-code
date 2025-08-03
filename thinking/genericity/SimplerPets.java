@@ -2,7 +2,7 @@ package thinking.genericity;
 
 import thinking.holding.pets.Person;
 import thinking.holding.pets.Pet;
-import util.collection.CollUtils;
+import cn.qingweico.collection.CollUtils;
 
 import java.util.List;
 import java.util.Map;

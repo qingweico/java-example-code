@@ -1,8 +1,8 @@
 package thinking.string;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
-import static util.Print.print;
+import static cn.qingweico.io.Print.print;
 
 /**
  * override: An operator is given a particular meaning when applied to

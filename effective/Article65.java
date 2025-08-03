@@ -1,13 +1,13 @@
 package effective;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Set;
 
-import static util.Print.exit;
+import static cn.qingweico.io.Print.exit;
 
 /**
  * 接口优先于反射机制

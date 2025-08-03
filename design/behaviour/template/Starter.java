@@ -1,6 +1,6 @@
 package design.behaviour.template;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * 模板模式(Template Pattern)是一种行为设计模式, 它允许你定义一个算法的框架, 但将一些步骤的实现延迟到子类中

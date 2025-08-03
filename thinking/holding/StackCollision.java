@@ -1,7 +1,7 @@
 package thinking.holding;
 
-import static util.Print.println;
-import static util.Print.print;
+import static cn.qingweico.io.Print.println;
+import static cn.qingweico.io.Print.print;
 
 /**
  * @author zqw

@@ -1,6 +1,6 @@
 package thinking.concurrency.interrupted;
 
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 /**
  * ################################# Interrupting a blocked thread #################################

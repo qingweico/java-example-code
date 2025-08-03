@@ -1,12 +1,12 @@
 package oak.lambda;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.function.Consumer;
 
-import static util.Print.err;
+import static cn.qingweico.io.Print.err;
 
 /**
  * --------------- Four Method References ---------------

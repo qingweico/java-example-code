@@ -1,10 +1,9 @@
 package geek.reflect;
 
 import annotation.Pass;
+import cn.qingweico.io.Print;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import util.Print;
-
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 

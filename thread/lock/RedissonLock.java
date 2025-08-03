@@ -4,8 +4,8 @@ import frame.redis.DistributedLock;
 import frame.redis.RedissonConfig;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import thread.pool.ThreadObjectPool;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
 

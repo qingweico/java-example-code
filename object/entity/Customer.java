@@ -3,8 +3,8 @@ package object.entity;
 import com.google.common.base.MoreObjects;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import util.ObjectFactory;
-import util.Print;
+import cn.qingweico.supplier.ObjectFactory;
+import cn.qingweico.io.Print;
 
 import javax.annotation.Nonnull;
 import java.util.*;

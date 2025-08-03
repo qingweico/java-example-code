@@ -8,7 +8,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.net.InetSocketAddress;
 import java.util.HashMap;

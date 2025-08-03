@@ -1,7 +1,7 @@
 package thinking.container.map.hashcode;
 
 import annotation.Pass;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.reflect.Constructor;
 import java.util.*;

@@ -1,12 +1,12 @@
 package frame.redis;
 
 import lombok.extern.slf4j.Slf4j;
-import object.enums.RedisConProperty;
+import cn.qingweico.model.enums.RedisConProperty;
 import org.apache.commons.lang3.StringUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import util.constants.PathConstants;
+import cn.qingweico.constants.PathConstants;
 
 import java.io.*;
 import java.util.Properties;

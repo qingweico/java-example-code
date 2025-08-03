@@ -7,7 +7,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
-import util.net.NetworkUtils;
+import cn.qingweico.network.NetworkUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

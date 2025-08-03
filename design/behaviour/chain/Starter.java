@@ -1,7 +1,7 @@
 package design.behaviour.chain;
 
+import cn.qingweico.collection.CollUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import util.collection.CollUtils;
 
 import java.util.HashMap;
 import java.util.Map;

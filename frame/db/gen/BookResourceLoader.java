@@ -2,10 +2,10 @@ package frame.db.gen;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import thread.pool.ThreadPoolBuilder;
-import util.Print;
-import util.constants.FileSuffixConstants;
-import util.constants.Symbol;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.FileSuffixConstants;
+import cn.qingweico.constants.Symbol;
 import util.io.TextFile;
 
 import java.io.File;

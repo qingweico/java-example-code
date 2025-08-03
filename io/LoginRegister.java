@@ -1,13 +1,13 @@
 package io;
 
+import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
-import util.RandomDataUtil;
 
 import java.io.*;
 import java.util.Scanner;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 /**
  * Use io stream
@@ -95,7 +95,7 @@ class GuessNumber {
 
     public static void start() {
         // Generate random numbers
-        int number = RandomDataUtil.ri(10);
+        int number = RandomDataGenerator.rndInt(10);
         while (true) {
             Scanner sc = new Scanner(System.in);
             println("请输入您猜测的数字: ");

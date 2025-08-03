@@ -1,6 +1,6 @@
 package misc.mdc.task;
 
-import frame.spring.pool.ThreadPoolTaskDecorator;
+import cn.qingweico.concurrent.pool.ThreadPoolTaskDecorator;
 import misc.mdc.trace.TraceIdContext;
 import org.apache.commons.lang3.StringUtils;
 

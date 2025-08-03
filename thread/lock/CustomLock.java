@@ -1,9 +1,9 @@
 package thread.lock;
 
 import sun.misc.Unsafe;
-import thread.cas.UnsafeSupport;
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.UnsafeSupport;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;

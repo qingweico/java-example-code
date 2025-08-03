@@ -1,6 +1,6 @@
 package object.entity;
 
-import annotation.Ignore;
+import cn.qingweico.annotation.Ignore;
 import com.google.common.base.MoreObjects;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

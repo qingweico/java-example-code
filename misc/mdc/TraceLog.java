@@ -1,11 +1,11 @@
 package misc.mdc;
 
-import frame.spring.pool.ThreadPoolExecutorBuilder;
+import cn.qingweico.concurrent.pool.ThreadPoolExecutorBuilder;
 import lombok.extern.slf4j.Slf4j;
 import misc.mdc.runable.MdcRunnable;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import thread.pool.ThreadPoolBuilder;
-import util.RandomDataUtil;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.supplier.RandomDataGenerator;
 
 import java.util.concurrent.ExecutorService;
 
@@ -25,14 +25,14 @@ public class TraceLog {
 
         final ThreadPoolTaskExecutor poolTaskExecutor = ThreadPoolExecutorBuilder.builder().build();
 
-        pool.execute(new MdcRunnable(() -> log.info("{}", RandomDataUtil.address())));
+        pool.execute(new MdcRunnable(() -> log.info("{}", RandomDataGenerator.address())));
 
-        pool.execute(new MdcRunnable(() -> log.info("{}", RandomDataUtil.address())));
+        pool.execute(new MdcRunnable(() -> log.info("{}", RandomDataGenerator.address())));
 
         // No log TraceId If not ues MdcRunnable class wrap
-        poolTaskExecutor.execute(() -> log.info("{}", RandomDataUtil.address()));
+        poolTaskExecutor.execute(() -> log.info("{}", RandomDataGenerator.address()));
 
-        poolTaskExecutor.execute(() -> log.info("{}", RandomDataUtil.address()));
+        poolTaskExecutor.execute(() -> log.info("{}", RandomDataGenerator.address()));
         pool.shutdown();
     }
 }

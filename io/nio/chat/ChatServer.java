@@ -1,8 +1,8 @@
 package io.nio.chat;
 
-import util.Print;
-import util.constants.Constants;
-import util.DateUtil;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.datetime.DateUtil;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -45,7 +45,7 @@ public class ChatServer {
                         SocketChannel socketChannel = serverSocketChannel.accept();
                         String clientName = socketChannel.getRemoteAddress().toString().substring(1);
                         System.out.printf("[%s] Accepted connection from: %s%n",
-                                DateUtil.format(), clientName);
+                                DateUtil.now(), clientName);
                         socketChannel.configureBlocking(false);
                         socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1000));
                         // 向其他客户端提示上线
@@ -77,7 +77,7 @@ public class ChatServer {
             try {
                 String clientName = socketChannel.getLocalAddress().toString().substring(1);
                 System.out.printf("[%s] %s has disconnected... %n",
-                        DateUtil.format(), clientName);
+                        DateUtil.now(), clientName);
                 // 向其他客户端提示下线
                 String msg = "[client " + clientName + " off line]";
                 relay(msg, socketChannel, false);
@@ -91,7 +91,7 @@ public class ChatServer {
 
     private void relay(String msg, SocketChannel sender, boolean textMessage) throws IOException {
         if (textMessage) {
-            System.out.printf("[%s] received the message from %s%n", DateUtil.format(),
+            System.out.printf("[%s] received the message from %s%n", DateUtil.now(),
                     sender.getRemoteAddress().toString().substring(1));
         }
         try {
@@ -101,9 +101,9 @@ public class ChatServer {
                     SocketChannel socketChannel = (SocketChannel) selectableChannel;
                     ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
                     if (textMessage) {
-                        System.out.printf("[%s] message relaying...%n", DateUtil.format());
+                        System.out.printf("[%s] message relaying...%n", DateUtil.now());
                         socketChannel.write(buffer);
-                        System.out.printf("[%s] message has forwarding to %s%n", DateUtil.format(),
+                        System.out.printf("[%s] message has forwarding to %s%n", DateUtil.now(),
                                 socketChannel.getRemoteAddress().toString().substring(1));
                     } else {
                         if (selectableChannel != sender) {
@@ -113,7 +113,7 @@ public class ChatServer {
                 }
             }
         } catch (Exception ex) {
-            System.out.printf("[%s] server error%n", DateUtil.format());
+            System.out.printf("[%s] server error%n", DateUtil.now());
         }
 
     }

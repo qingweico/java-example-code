@@ -1,7 +1,7 @@
 package algorithm.heap;
 
-import util.RandomDataUtil;
-import util.Tools;
+import cn.qingweico.supplier.RandomDataGenerator;
+import cn.qingweico.supplier.Tools;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class HeapTest {
         int size = 100_000;
         int exclusive = 100_0000;
         for (int i = 0; i < size; i++) {
-            maxHeap.add(RandomDataUtil.ri(exclusive));
+            maxHeap.add(RandomDataGenerator.rndInt(exclusive));
         }
         System.out.println(maxHeap.size());
         ArrayList<Integer> list = new ArrayList<>();

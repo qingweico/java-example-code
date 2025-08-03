@@ -1,8 +1,8 @@
 package thread.aqs;
 
-import thread.pool.ThreadObjectPool;
-import util.constants.Constants;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;

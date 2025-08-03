@@ -5,7 +5,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.IOException;
 import java.io.InputStream;

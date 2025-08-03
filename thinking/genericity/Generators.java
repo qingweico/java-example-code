@@ -2,7 +2,7 @@ package thinking.genericity;
 
 import thinking.genericity.coffee.Coffee;
 import thinking.genericity.coffee.CoffeeGenerator;
-import util.Generator;
+import cn.qingweico.supplier.Generator;
 
 import java.util.ArrayList;
 import java.util.Collection;

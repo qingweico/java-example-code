@@ -1,6 +1,6 @@
 package thinking.io.nio;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.FileOutputStream;
 import java.nio.channels.FileLock;

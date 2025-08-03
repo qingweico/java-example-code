@@ -1,6 +1,6 @@
 package jcip;
 
-import util.DateUtil;
+import cn.qingweico.datetime.DateUtil;
 
 import java.util.Date;
 import java.util.Timer;
@@ -22,7 +22,7 @@ class ThreadTimer {
             @Override
             public void run() {
                 // Output system time every second
-                System.out.println(DateUtil.format());
+                System.out.println(DateUtil.now());
                 // t.cancel();
             }
         }, new Date(), 1000);

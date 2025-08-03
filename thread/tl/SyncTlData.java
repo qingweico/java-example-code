@@ -1,7 +1,7 @@
 package thread.tl;
 
 import thinking.genericity.Holder;
-import thread.pool.ThreadPoolBuilder;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 
 import java.util.HashSet;
 import java.util.Optional;

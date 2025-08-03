@@ -1,8 +1,8 @@
 package jvm;
 
 import object.entity.Student;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.TimeUnit;
 

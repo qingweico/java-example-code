@@ -1,7 +1,7 @@
 package thinking.concurrency.interrupted;
 
 import lombok.extern.slf4j.Slf4j;
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

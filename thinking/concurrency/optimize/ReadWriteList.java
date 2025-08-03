@@ -1,8 +1,8 @@
 package thinking.concurrency.optimize;
 
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.ArrayList;
 import java.util.Collections;

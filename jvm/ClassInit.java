@@ -1,6 +1,6 @@
 package jvm;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * @author zqw

@@ -1,8 +1,8 @@
 package thread.cas;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;

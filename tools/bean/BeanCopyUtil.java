@@ -12,7 +12,7 @@ import org.springframework.cglib.core.Converter;
 import object.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.beans.BeanCopier;
-import util.ObjectFactory;
+import cn.qingweico.supplier.ObjectFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,14 +41,12 @@ public class BeanCopyUtil {
         System.out.println(userDto);
 
         // CGLIB BeanCopier
-        // VM options : --add-opens java.base/java.lang=ALL-UNNAMED
+        // VM options: --add-opens java.base/java.lang=ALL-UNNAMED
         // 使用转换器可以实现不同类型的拷贝
         // BeanCopier只拷贝名称和类型都相同的属性
         BeanCopier copier = BeanCopier.create(User.class, UserDto.class, false);
         userDto = new UserDto();
         copier.copy(user, userDto, null);
-
-        // TODO
 
         // mapstruct
     }

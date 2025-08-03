@@ -17,9 +17,9 @@ import java.util.Formatter;
 /**
  * 几种加密算法测试
  * 不可逆加密 MD5  SHA-256
- * 可你加密
- * -对称加密: DES AES
- * -非对称加密: RSA
+ * 可逆加密
+ * 对称加密: DES AES
+ * 非对称加密: RSA
  *
  * @author zqw
  * @date 2023/6/18

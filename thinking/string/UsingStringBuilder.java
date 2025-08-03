@@ -1,6 +1,6 @@
 package thinking.string;
 
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.util.Random;
 

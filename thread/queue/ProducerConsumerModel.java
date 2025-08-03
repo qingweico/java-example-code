@@ -1,10 +1,10 @@
 package thread.queue;
 
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
-import util.RandomDataUtil;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.supplier.RandomDataGenerator;
 
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
@@ -24,19 +24,19 @@ class ProducerConsumerModel {
     final LinkedList<Double> queue = new LinkedList<>();
     ReentrantLock lock = new ReentrantLock();
     /**
-     * the sign of queue full
+     * the sign of the queue full
      */
     Condition full = lock.newCondition();
     /**
-     * the sign of queue empty
+     * the sign of the queue empty
      */
     Condition empty = lock.newCondition();
     static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(10, 100, 10);
 
 
     double readData() throws InterruptedException {
-        Thread.sleep((RandomDataUtil.ri(10)));
-        return RandomDataUtil.ri(10);
+        Thread.sleep((RandomDataGenerator.rndInt(10)));
+        return RandomDataGenerator.rndInt(10);
     }
 
     /**
@@ -54,7 +54,7 @@ class ProducerConsumerModel {
             }
             var data = readData();
             // 队列为空 唤醒一个生产者生产
-            if (queue.size() == 0) {
+            if (queue.isEmpty()) {
                 empty.signal();
             }
             queue.add(data);
@@ -73,7 +73,7 @@ class ProducerConsumerModel {
         lock.lock();
         try {
             // 队列已空 消费者阻塞
-            if (queue.size() == 0) {
+            if (queue.isEmpty()) {
                 full.await();
                 return;
             }

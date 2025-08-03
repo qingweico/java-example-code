@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import object.entity.User;
 import org.junit.Test;
-import util.ObjectFactory;
+import cn.qingweico.supplier.ObjectFactory;
 
 import java.util.Date;
 

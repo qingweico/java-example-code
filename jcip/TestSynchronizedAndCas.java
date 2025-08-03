@@ -1,9 +1,9 @@
 package jcip;
 
 
-import thread.pool.ThreadPoolBuilder;
-import util.constants.Constants;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -20,8 +20,7 @@ class TestSynchronizedAndCas {
     static long acc = 10000;
 
     private static void exec(Object o, CountDownLatch latch) {
-        if (o instanceof CasCounter) {
-            CasCounter casCounter = (CasCounter) o;
+        if (o instanceof CasCounter casCounter) {
             for (int i = 0; i < THREAD_COUNT; i++) {
                 pool.execute(() -> {
                     for (int j = 0; j < acc; j++) {
@@ -30,8 +29,7 @@ class TestSynchronizedAndCas {
                     latch.countDown();
                 });
             }
-        } else if (o instanceof SynchronizedInteger) {
-            SynchronizedInteger integer = (SynchronizedInteger) o;
+        } else if (o instanceof SynchronizedInteger integer) {
             for (int i = 0; i < THREAD_COUNT; i++) {
                 pool.execute(() -> {
                     for (int j = 0; j < acc; j++) {

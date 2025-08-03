@@ -3,7 +3,7 @@ package frame.spring.io;
 import org.junit.Test;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.io.File;
 import java.io.FileInputStream;

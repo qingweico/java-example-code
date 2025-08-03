@@ -1,7 +1,7 @@
 package effective;
 
 import annotation.Pass;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.io.*;
 

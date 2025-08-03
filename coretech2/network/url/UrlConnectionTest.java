@@ -1,7 +1,7 @@
 package coretech2.network.url;
 
 import org.junit.Test;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

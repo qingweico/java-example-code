@@ -1,7 +1,7 @@
 package thinking.container.map.hashcode;
 
 import thinking.util.Countries;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.*;
 

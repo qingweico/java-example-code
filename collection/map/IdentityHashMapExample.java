@@ -3,7 +3,7 @@ package collection.map;
 import annotation.Pass;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
-import util.ObjectFactory;
+import cn.qingweico.supplier.ObjectFactory;
 
 import java.util.IdentityHashMap;
 

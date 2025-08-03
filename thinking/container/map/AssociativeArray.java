@@ -1,6 +1,6 @@
 package thinking.container.map;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Associates keys and values

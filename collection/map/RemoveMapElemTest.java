@@ -1,8 +1,8 @@
 package collection.map;
 
 
+import cn.qingweico.io.Print;
 import org.testng.annotations.Test;
-import util.Print;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

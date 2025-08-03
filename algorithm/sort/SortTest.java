@@ -1,16 +1,16 @@
 package algorithm.sort;
 
 import org.junit.Test;
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.Tools;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.Tools;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 
-import static util.Print.printf;
+import static cn.qingweico.io.Print.printf;
 
 /**
  * @author zqw

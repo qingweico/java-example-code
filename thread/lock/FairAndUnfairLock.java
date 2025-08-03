@@ -1,8 +1,8 @@
 package thread.lock;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zqw
  * @date 2022/6/25
  */
-public class FairAndUnfairLock {
+class FairAndUnfairLock {
     static ExecutorService pool = ThreadObjectPool.newFixedThreadPool(3, true);
     static Integer ticketCount = 100;
     static Integer threadCount = 3;

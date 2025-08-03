@@ -2,8 +2,8 @@ package jvm;
 
 import javassist.*;
 import org.junit.Test;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

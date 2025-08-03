@@ -2,8 +2,8 @@ package frame.db.gen;
 
 
 import lombok.Data;
-import util.constants.FileSuffixConstants;
-import util.constants.Symbol;
+import cn.qingweico.constants.FileSuffixConstants;
+import cn.qingweico.constants.Symbol;
 import util.io.TextFile;
 
 import java.io.*;

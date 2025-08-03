@@ -1,7 +1,7 @@
 package design.factory;
 
 import org.testng.annotations.Test;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.util.Scanner;
 

@@ -1,7 +1,7 @@
 package effective;
 
 import annotation.Pass;
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 
 import java.util.Collections;
 import java.util.*;

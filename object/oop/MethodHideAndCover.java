@@ -1,6 +1,6 @@
 package object.oop;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Method hiding and method overriding
@@ -15,7 +15,7 @@ class MethodHideAndCover {
     @SuppressWarnings("static-access")
     public static void main(String[] args) {
         // A child class does not override the static methods of its parent class,
-        // which is not visible to the child class, this is called hiding.
+        // which is not visible to the child class; this is called hiding.
         Father father = new Son();
         Print.println(father.a);
         Print.println(father.b);

@@ -1,6 +1,6 @@
 package effective;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.*;
 import java.util.concurrent.ScheduledFuture;

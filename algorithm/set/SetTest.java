@@ -1,13 +1,13 @@
 package algorithm.set;
 
+import cn.qingweico.io.FileUtils;
+import cn.qingweico.io.Print;
 import org.junit.Test;
-import util.Print;
-import util.io.FileUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import static util.Print.printf;
+import static cn.qingweico.io.Print.printf;
 
 /**
  * @author zqw

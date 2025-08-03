@@ -1,6 +1,6 @@
 package thread;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;

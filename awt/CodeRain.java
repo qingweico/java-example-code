@@ -1,6 +1,6 @@
 package awt;
 
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 
 import javax.swing.*;
 import java.awt.*;

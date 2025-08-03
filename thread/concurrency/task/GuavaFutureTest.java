@@ -3,9 +3,9 @@ package thread.concurrency.task;
 import com.google.common.util.concurrent.*;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import thread.pool.ThreadPoolBuilder;
-import util.Print;
-import util.RandomDataUtil;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
 
 import java.util.concurrent.ExecutionException;
 
@@ -20,7 +20,7 @@ public class GuavaFutureTest {
 
     @Test
     public void callback() throws ExecutionException, InterruptedException {
-        ListenableFuture<String> future = service.submit(() -> RandomDataUtil.address());
+        ListenableFuture<String> future = service.submit(() -> RandomDataGenerator.address());
         // 将异步任务的输出转换成另一种格式或类型 Futures.transform
         Futures.addCallback(future, new FutureCallback<>() {
             @Override

@@ -1,6 +1,6 @@
 package thinking.concurrency.juc;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.ArrayList;
 import java.util.List;

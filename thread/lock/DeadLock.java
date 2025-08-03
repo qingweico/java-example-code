@@ -1,7 +1,7 @@
 package thread.lock;
 
 import lombok.Getter;
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReentrantLock;

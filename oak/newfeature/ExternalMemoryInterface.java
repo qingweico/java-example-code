@@ -3,8 +3,8 @@ package oak.newfeature;
 import jdk.incubator.foreign.MemoryAccess;
 import jdk.incubator.foreign.MemorySegment;
 import jdk.incubator.foreign.ResourceScope;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.nio.ByteBuffer;
 
@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
  * 这些产品一般倾向于使用 JVM 之外的内存来存储和管理数据,这样的数据,就是我们常说的堆外数据
  * 使用堆外存储最常用的办法,就是使用 ByteBuffer 这个类来分配直接存储空间(direct buffer)
  * JVM 虚拟机会尽最大努力直接在直接存储空间上执行 IO 操作,避免数据在本地和 JVM 之间的拷贝
- * 由于频繁的内存拷贝是性能的主要障碍之一 所以为了极致的性能,应用程序通常也会尽量避免内存的拷贝 
+ * 由于频繁的内存拷贝是性能的主要障碍之一 所以为了极致的性能,应用程序通常也会尽量避免内存的拷贝
  * 理想的状况下,一份数据只需要一份内存空间,这就是我们常说的零拷贝
  * {@link ByteBuffer} 是异步编程和非阻塞编程的核心类,几乎所有的 Java 异步模式或者非阻塞模式
  * 的代码,都要直接或者间接地使用 {@code ByteBuffer} 来管理数据

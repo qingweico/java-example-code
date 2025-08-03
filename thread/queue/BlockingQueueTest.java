@@ -1,9 +1,9 @@
 package thread.queue;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
-import util.RandomDataUtil;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
 
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
@@ -43,7 +43,7 @@ public class BlockingQueueTest {
                     // Math.random()可能会返回0的数值(除零异常)且返回值是double,Random.nextInt(bound)从1开始到bound
                     // offer(E) 非阻塞;添加失败返回false
                     // add(E) 非阻塞;添加失败抛异常
-                    queue.put(RandomDataUtil.ri(1000));
+                    queue.put(RandomDataGenerator.rndInt(1000));
                 } catch (InterruptedException e) {
                     Print.err(e.getMessage());
                 }
@@ -64,7 +64,7 @@ public class BlockingQueueTest {
                         Print.err(e.getMessage());
                         break;
                     }
-                    System.out.println("Receive: " + x);
+                    Print.grace("Receive", x);
                     try {
                         TimeUnit.MILLISECONDS.sleep(10);
                     } catch (InterruptedException e) {

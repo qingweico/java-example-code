@@ -10,9 +10,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
-import util.Print;
-import util.constants.Constants;
-import util.DateUtil;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.datetime.DateUtil;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -60,7 +60,7 @@ public class HttpServerTest {
                 if(FAVICON.equals(uri.getPath())) {
                     return;
                 }
-                System.out.printf("[%s %s] [request from client %s]%n", DateUtil.format(),
+                System.out.printf("[%s %s] [request from client %s]%n", DateUtil.now(),
                         Thread.currentThread().getName(), ctx.channel().remoteAddress());
                 ByteBuf content = Unpooled.copiedBuffer("netty http server", CharsetUtil.UTF_8);
                 DefaultFullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1,

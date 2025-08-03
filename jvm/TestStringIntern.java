@@ -1,9 +1,9 @@
 package jvm;
 
 import annotation.Pass;
-import util.Print;
-import util.constants.Constants;
-import util.Tools;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.supplier.Tools;
 
 import java.util.concurrent.TimeUnit;
 

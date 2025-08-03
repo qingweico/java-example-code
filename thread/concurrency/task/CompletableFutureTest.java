@@ -4,13 +4,13 @@ import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
-import thread.ThreadUtils;
-import thread.cas.UnsafeSupport;
-import thread.pool.CustomizableThreadFactory;
-import thread.pool.ThreadPoolBuilder;
-import util.Print;
-import util.RandomDataUtil;
-import util.constants.Symbol;
+import cn.qingweico.concurrent.thread.ThreadUtils;
+import cn.qingweico.concurrent.UnsafeSupport;
+import cn.qingweico.concurrent.pool.CustomizableThreadFactory;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
+import cn.qingweico.constants.Symbol;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -191,7 +191,7 @@ public class CompletableFutureTest {
     public void handle() {
         CompletableFuture<Integer> handle = CompletableFuture.supplyAsync(() -> 1)
                 .thenApply((r) -> r + 2)
-                .thenApply((r) -> r / (RandomDataUtil.tf() ? 0 : 1))
+                .thenApply((r) -> r / (RandomDataGenerator.rndBoolean() ? 0 : 1))
                 .handle((r, e) -> {
                     if (e != null) {
                         System.out.println(e.getMessage());

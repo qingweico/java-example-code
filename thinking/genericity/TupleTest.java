@@ -4,7 +4,7 @@ import thinking.util.FiveTuple;
 import thinking.util.FourTuple;
 import thinking.util.ThreeTuple;
 import thinking.util.TwoTuple;
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * @author zqw

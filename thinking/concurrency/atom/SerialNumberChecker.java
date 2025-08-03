@@ -1,17 +1,17 @@
 package thinking.concurrency.atom;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static util.Print.exit;
+import static cn.qingweico.io.Print.exit;
 
 
 /**
- * Operations that may seem safe are not, when thread are present.
+ * Operations that may seem safe are not when thread is present.
  *
  * @author zqw
  * @date 2021/1/19
@@ -67,7 +67,7 @@ class CircularSet {
 
     public synchronized void add(int i) {
         array[index] = i;
-        // Wrap index add write over old element
+        // Wrap index adds write over an old element
         index = ++index % len;
     }
 

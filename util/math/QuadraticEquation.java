@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author zqw
  * @date 2022/5/7
  */
-public class QuadraticEquation {
+class QuadraticEquation {
     private Double a;
     private Double b;
     private Double c;

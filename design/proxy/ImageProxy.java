@@ -1,6 +1,6 @@
 package design.proxy;
 
-import thread.cas.UnsafeSupport;
+import cn.qingweico.concurrent.UnsafeSupport;
 
 /**
  * @author zqw

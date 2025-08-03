@@ -1,7 +1,7 @@
 package thinking.exception;
 
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * @author zqw

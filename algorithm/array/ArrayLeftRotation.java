@@ -1,6 +1,6 @@
 package algorithm.array;
 
-import util.Tools;
+import cn.qingweico.supplier.Tools;
 
 import java.util.Arrays;
 

@@ -1,7 +1,7 @@
 package design.singleton;
 
-import thread.pool.ThreadObjectPool;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -26,12 +26,14 @@ public class DclSingleton {
     }
 
     /**
-     * Ensure that instructions around student are not reordered.
+     * The singleton instance using double-checked locking pattern.
+     * Marked as volatile to prevent instruction reordering and ensure
+     * thread-safe publication of the fully initialized instance.
      */
     private static volatile DclSingleton instance = null;
 
     /**
-     * DCL(Double Check Lock)
+     * DCL (Double Check Lock)
      *
      * @return the instance of DclSingleton
      */

@@ -2,7 +2,11 @@ package collection.list;
 
 /**
  * 参考 redis src/t_zset.c 实现跳跃表
- *
+ * redis 中 Zset 实现为什么不使用 二叉树或者堆, 而使用跳表
+ * 1 时间复杂度 跳表支持 O(logN) 的插入、删除和查找
+ * 2 空间复杂度 仅需额外存储少量层级指针, 更节省内存
+ * 3 跳表范围查询的高效性
+ * 4 跳表实现更简单性
  * @author zqw
  * @date 2023/12/9
  */

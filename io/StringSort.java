@@ -1,6 +1,6 @@
 package io;
 
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.util.*;
 import java.io.BufferedReader;

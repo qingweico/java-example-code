@@ -1,6 +1,6 @@
 package misc;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * 使用 \r 符号和 jline 库实现进度条

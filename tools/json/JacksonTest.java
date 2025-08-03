@@ -1,6 +1,6 @@
 package tools.json;
 
-import annotation.Ignore;
+import cn.qingweico.annotation.Ignore;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import util.ObjectFactory;
-import util.RandomDataUtil;
+import cn.qingweico.supplier.ObjectFactory;
+import cn.qingweico.supplier.RandomDataGenerator;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * --------------- Jackson(Spring Boot 默认的JSON解析框架) ---------------
+ * --------------- Jackson (Spring Boot 默认的JSON解析框架) ---------------
  *
  * @author zqw
  * @date 2022/7/18
@@ -67,9 +67,9 @@ public class JacksonTest {
     @Test
     public void mapToPojo() throws JsonProcessingException {
         HashMap<String, Object> map = new HashMap<>(3);
-        map.put("name", RandomDataUtil.name());
+        map.put("name", RandomDataGenerator.name());
         map.put("date", new Date());
-        map.put("is_present", RandomDataUtil.tf());
+        map.put("is_present", RandomDataGenerator.rndBoolean());
         String json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(map);
         log.info("序列化:");
         System.out.println(json);

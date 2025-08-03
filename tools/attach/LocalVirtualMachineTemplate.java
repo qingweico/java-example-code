@@ -1,6 +1,6 @@
 package tools.attach;
 
-import util.ManagementUtils;
+import cn.qingweico.runtime.ManagementUtils;
 
 /**
  * Local {@link VirtualMachineTemplate}

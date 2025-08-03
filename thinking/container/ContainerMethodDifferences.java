@@ -1,6 +1,6 @@
 package thinking.container;
 
-import util.collection.SetUtils;
+import cn.qingweico.collection.SetUtils;
 
 import java.lang.reflect.Method;
 import java.util.*;

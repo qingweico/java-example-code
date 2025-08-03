@@ -2,8 +2,8 @@ package thread.tl;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.extern.slf4j.Slf4j;
-import thread.pool.ThreadObjectPool;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.ThreadLocalRandom;
 

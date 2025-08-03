@@ -1,6 +1,6 @@
 package algorithm.sort;
 
-import util.Tools;
+import cn.qingweico.supplier.Tools;
 
 import java.util.Random;
 

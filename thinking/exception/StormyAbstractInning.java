@@ -1,6 +1,6 @@
 package thinking.exception;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Override methods may throw only exceptions specified in their

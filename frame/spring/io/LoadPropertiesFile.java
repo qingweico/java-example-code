@@ -5,7 +5,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderSupport;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.IOException;
 import java.util.Properties;

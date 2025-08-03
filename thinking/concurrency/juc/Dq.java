@@ -1,7 +1,7 @@
 package thinking.concurrency.juc;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static util.Print.println;
-import static util.Print.print;
+import static cn.qingweico.io.Print.println;
+import static cn.qingweico.io.Print.print;
 
 /**
  * DelayQueue

@@ -3,8 +3,8 @@ package design.behaviour.strategy;
 import cn.hutool.json.JSONUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import util.ApiResponse;
-import util.SnowflakeIdWorker;
+import cn.qingweico.model.ApiResponse;
+import cn.qingweico.supplier.SnowflakeIdWorker;
 
 /**
  * 策略模式(Strategy Pattern)是一种面向对象设计模式, 用于定义一组算法, 将每个算法封装在独立的类中, 并使它们可以互相替换

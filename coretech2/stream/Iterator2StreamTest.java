@@ -3,9 +3,9 @@ package coretech2.stream;
 import cn.hutool.core.date.StopWatch;
 import collection.iter.RandomStringGenerator;
 import org.junit.Test;
-import util.Print;
-import util.Tools;
-import util.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.Tools;
+import cn.qingweico.constants.Constants;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -145,7 +145,7 @@ public class Iterator2StreamTest {
         Stream<String> stream = list.stream();
         list.add("END");
         long count = stream.distinct().count();
-        // result is 6, Well, normal work but not recommended!
+        // the result is 6, Well, normal work but not recommended!
         System.out.println(count);
 
         int max = 3;

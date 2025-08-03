@@ -2,7 +2,7 @@ package oak.newfeature;
 
 import cn.hutool.core.date.StopWatch;
 import jdk.incubator.vector.FloatVector;
-import util.Tools;
+import cn.qingweico.supplier.Tools;
 
 /**
  * -------------------- 矢量运算 --------------------

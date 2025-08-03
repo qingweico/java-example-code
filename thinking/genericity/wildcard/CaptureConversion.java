@@ -1,7 +1,7 @@
 package thinking.genericity.wildcard;
 
 import thinking.genericity.Holder;
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * 通配符 ?
@@ -16,7 +16,7 @@ class CaptureConversion {
     }
 
     static void f2(Holder<?> holder) {
-        // Call with capture type
+        // Call with a capture type
         f1(holder);
     }
 
@@ -24,7 +24,7 @@ class CaptureConversion {
     public static void main(String[] args) {
         // 装箱 int -> Integer
         Holder raw = new Holder<>(1);
-        // Produces warning
+        // Produce warning
         f1(raw);
         // No warning
         // The parameter type is captured during the call to f2(), so it can be used

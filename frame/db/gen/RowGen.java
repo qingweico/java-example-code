@@ -4,8 +4,8 @@ import com.github.javafaker.Faker;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import lombok.extern.slf4j.Slf4j;
-import util.Print;
-import util.RandomDataUtil;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.function.Supplier;
  */
 @Slf4j
 class RowGen {
-    Faker faker = RandomDataUtil.localFaker;
+    Faker faker = RandomDataGenerator.localFaker;
 
     static ArrayList<BookResourceLoader.Sentence> sentences = null;
 

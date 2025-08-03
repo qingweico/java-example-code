@@ -5,7 +5,7 @@ import thinking.util.CountingMapData;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 /**
  * Things you can do with Maps

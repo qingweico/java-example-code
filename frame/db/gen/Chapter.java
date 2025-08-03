@@ -2,7 +2,7 @@ package frame.db.gen;
 
 import lombok.AllArgsConstructor;
 import org.jsoup.Jsoup;
-import util.constants.Symbol;
+import cn.qingweico.constants.Symbol;
 
 import java.io.Serializable;
 

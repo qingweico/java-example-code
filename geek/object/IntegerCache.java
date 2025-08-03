@@ -1,6 +1,6 @@
 package geek.object;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.reflect.Field;
 import java.util.IdentityHashMap;

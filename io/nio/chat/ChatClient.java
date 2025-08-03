@@ -1,9 +1,9 @@
 package io.nio.chat;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
-import util.DateUtil;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.datetime.DateUtil;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -43,7 +43,7 @@ public class ChatClient {
             msg = username + ": " + msg;
             socketChannel.write(ByteBuffer.wrap(msg.getBytes()));
         } catch (IOException e) {
-            System.out.printf("[%s] server error%n", DateUtil.format());
+            System.out.printf("[%s] server error%n", DateUtil.now());
         }
     }
 
@@ -59,7 +59,7 @@ public class ChatClient {
                         ByteBuffer buffer = ByteBuffer.allocate(1000);
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         int read = socketChannel.read(buffer);
-                        System.out.printf("[%s] %s%n", DateUtil.format(),
+                        System.out.printf("[%s] %s%n", DateUtil.now(),
                                 new String(buffer.array(), 0, read));
                     }
                     iterator.remove();

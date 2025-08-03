@@ -9,7 +9,7 @@ import java.util.Date;
  * @date 2024/5/28
  */
 @Data
-public class HttpParam {
+class HttpParam {
     private String method;
     private Date date;
 }

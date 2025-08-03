@@ -8,7 +8,7 @@ import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.spi.AttachProvider;
 import junit.framework.Assert;
 import org.junit.Test;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;

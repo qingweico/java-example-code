@@ -1,6 +1,6 @@
 package thinking.concurrency.juc;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -13,7 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2021/2/7
  */
 
-// Tasks that block on a ReentrantLock task have the ability to be interrupted,
+// Tasks that block on a ReentrantLock task can be interrupted,
 // unlike those that block on synchronized methods or critical sections
 
 class ReentrantLockInterrupted {
@@ -22,7 +22,7 @@ class ReentrantLockInterrupted {
         t.start();
         TimeUnit.SECONDS.sleep(1);
         Print.println("Issuing t.interrupted");
-        // Interrupted() can interrupt a call that was blocked by a mutex.
+        // Interrupted() can interrupt a call was blocked by a mutex.
         // Although it is unlikely, t.interrupt() calls can indeed occur before blockedMutex.f().
         t.interrupt();
     }
@@ -60,8 +60,7 @@ class Blocked implements Runnable {
     @Override
     public void run() {
         Print.println("Waining for f() in BlockedMutex");
-        // Blocked
-        // The Lock has been taken by the BlockedMutex object, and the lock is not released.
+        // Blocked, The Lock has been taken by the BlockedMutex object, and the lock is not released.
         blockedMutex.f();
         Print.println("Broken out of blocked call");
     }

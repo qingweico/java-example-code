@@ -1,6 +1,6 @@
 package algorithm.graph;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * 邻接矩阵 -> 有向图

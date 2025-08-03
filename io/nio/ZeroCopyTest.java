@@ -1,7 +1,7 @@
 package io.nio;
 
 import org.junit.Test;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.io.*;
 import java.net.InetSocketAddress;

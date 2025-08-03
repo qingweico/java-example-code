@@ -3,8 +3,8 @@ package tools.lombok;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
-import util.RandomDataUtil;
-import util.SnowflakeIdWorker;
+import cn.qingweico.supplier.RandomDataGenerator;
+import cn.qingweico.supplier.SnowflakeIdWorker;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,7 @@ import java.util.Set;
 @Slf4j
 public class LombokCallSuper {
     public static void main(String[] args) {
-        String address = RandomDataUtil.address();
+        String address = RandomDataGenerator.address();
         SuperUser s1 = new SuperUser(1L, "s1", false, address);
         SuperUser s2 = new SuperUser(2L, "s2", true, address);
         // true
@@ -37,7 +37,7 @@ public class LombokCallSuper {
         log.info("set size: {}, set: [{}]", set.size(), set);
 
 
-        String username = RandomDataUtil.name();
+        String username = RandomDataGenerator.name();
         User u1 = new User();
         u1.setId(SnowflakeIdWorker.nextId());
         u1.setUsername(username);

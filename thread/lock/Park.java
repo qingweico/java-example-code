@@ -1,7 +1,7 @@
 package thread.lock;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

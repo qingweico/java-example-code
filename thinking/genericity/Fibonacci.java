@@ -1,8 +1,8 @@
 package thinking.genericity;
 
-import util.Generator;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.supplier.Generator;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 /**
  * @author zqw

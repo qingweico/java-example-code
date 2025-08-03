@@ -2,7 +2,7 @@ package tools.apache;
 
 import org.apache.commons.lang3.ThreadUtils;
 import org.junit.Test;
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicReference;

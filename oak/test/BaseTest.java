@@ -4,17 +4,23 @@ import cn.hutool.Hutool;
 import cn.hutool.core.collection.EnumerationIter;
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.ReflectUtil;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.model.RequestConfigOptions;
+import cn.qingweico.network.NetworkUtils;
+import cn.qingweico.reflect.ReflectUtils;
+import cn.qingweico.serialize.SerializeUtil;
+import cn.qingweico.supplier.Builder;
+import cn.qingweico.supplier.ObjectFactory;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
-import util.ObjectFactory;
-import util.Print;
-import util.constants.Constants;
-
+import java.io.IOException;
+import java.lang.reflect.Modifier;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -136,4 +142,48 @@ public final class BaseTest {
         String res = ToStringBuilder.reflectionToString(user);
         System.out.println(res);
     }
+    @Test
+    public void reflection() {
+        User user = ObjectFactory.create(User.class, true);
+        Arrays.stream(ReflectUtil.getFields(User.class)).toList()
+                .stream().filter(field -> !Modifier.isStatic(field.getModifiers()))
+                .forEach(field -> Print.grace(field.getName(), ReflectUtil.getFieldValue(user, field)));
+        Print.printMap(ReflectUtils.readFieldsAsMap(user));
+    }
+    @Test
+    public void sendProxyPostTest() throws IOException {
+        Map<String, Object> body = new HashMap<>();
+        body.put("ttl", "3");
+        System.out.println(NetworkUtils.sendProxyPost("https://httpbin.org/post", body, RequestConfigOptions.builder()
+                .connectTimeout(1000)
+                .build()));
+    }
+    @Test
+    public void builder() {
+        User user = Builder.builder(User::new)
+                .with(User::setUsername, "username")
+                .with(User::setId, 1L)
+                .build();
+        System.out.println(user);
+    }
+    @Test
+    public void serialize() {
+        // Object
+        System.out.println("Object---------------------------");
+        User user = ObjectFactory.create(User.class, true);
+        byte[] bytes = SerializeUtil.serialize(user);
+        System.out.println(cn.qingweico.serialize.SerializeUtil.deserialize(bytes));
+
+        System.out.println("List---------------------------");
+        // List
+        List<User> list = new ArrayList<>();
+        int size = 5;
+        for (int i = 0; i < size; i++) {
+            list.add(ObjectFactory.create(User.class, true));
+        }
+        bytes = SerializeUtil.serializeList(list);
+        List<User> users = SerializeUtil.deserializeList(bytes);
+        users.forEach(System.out::println);
+    }
+
 }

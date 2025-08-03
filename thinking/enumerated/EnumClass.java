@@ -1,9 +1,9 @@
 package thinking.enumerated;
 
 import org.apache.commons.lang3.StringUtils;
-import util.Print;
+import cn.qingweico.io.Print;
 
-import static util.Print.print;
+import static cn.qingweico.io.Print.print;
 
 /**
  * @author zqw

@@ -1,8 +1,8 @@
 package coretech2.stream;
 
 import org.junit.Test;
-import util.Print;
-import util.Tools;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.Tools;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 
 /**

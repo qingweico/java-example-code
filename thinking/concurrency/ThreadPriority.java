@@ -1,8 +1,8 @@
 package thinking.concurrency;
 
 import jsr166e.extra.AtomicDouble;
-import thread.pool.ThreadObjectPool;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.ExecutorService;
 

@@ -1,12 +1,12 @@
 package thinking.concurrency.sync;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static util.Print.exit;
+import static cn.qingweico.io.Print.exit;
 
 /**
  * Synchronized blocks instead of entire methods, also demonstrates protection

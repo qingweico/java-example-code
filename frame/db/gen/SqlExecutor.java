@@ -1,10 +1,10 @@
 package frame.db.gen;
 
+import cn.qingweico.database.DatabaseHelper;
 import org.apache.commons.lang3.tuple.Pair;
-import thread.pool.ThreadPoolBuilder;
-import util.DatabaseHelper;
-import util.Print;
-import util.constants.Symbol;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Symbol;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,7 +44,7 @@ public class SqlExecutor {
             var content = new String(fis.readAllBytes(), StandardCharsets.UTF_8);
             Arrays.stream(
                             content.split(Symbol.SEMICOLON))
-                    .filter(x -> x.length() > 0)
+                    .filter(x -> !x.isEmpty())
                     .forEach(x -> {
                         try {
                             execute(x);

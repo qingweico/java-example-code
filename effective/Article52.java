@@ -1,10 +1,10 @@
 package effective;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.*;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 /**
  * 慎用重载

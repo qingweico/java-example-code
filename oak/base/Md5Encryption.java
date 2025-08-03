@@ -1,6 +1,6 @@
 package oak.base;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

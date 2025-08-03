@@ -1,7 +1,7 @@
 package thinking.concurrency;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.ExecutorService;

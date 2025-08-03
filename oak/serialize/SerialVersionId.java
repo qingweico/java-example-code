@@ -1,7 +1,7 @@
 package oak.serialize;
 
+import cn.qingweico.serialize.SerializeUtil;
 import object.entity.User;
-import util.SerializeUtil;
 
 /**
  * 实体类中序列化id的作用

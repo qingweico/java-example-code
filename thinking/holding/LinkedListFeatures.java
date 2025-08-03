@@ -4,7 +4,7 @@ import thinking.holding.pets.Hamster;
 import thinking.holding.pets.Pet;
 import thinking.holding.pets.Pets;
 import thinking.holding.pets.Rat;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.LinkedList;
 

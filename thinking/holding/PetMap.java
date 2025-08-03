@@ -1,8 +1,8 @@
 package thinking.holding;
 
+import cn.qingweico.io.Print;
 import thinking.holding.pets.Cat;
 import thinking.holding.pets.Pet;
-import util.Print;
 
 import java.util.*;
 

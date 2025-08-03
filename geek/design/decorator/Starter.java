@@ -1,6 +1,6 @@
 package geek.design.decorator;
 
-import util.SnowflakeIdWorker;
+import cn.qingweico.supplier.SnowflakeIdWorker;
 
 import java.io.IOException;
 import java.math.BigDecimal;

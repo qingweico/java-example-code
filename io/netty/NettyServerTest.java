@@ -17,9 +17,9 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.util.CharsetUtil;
 import org.junit.Test;
-import util.Print;
-import util.constants.Constants;
-import util.DateUtil;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.datetime.DateUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -231,13 +231,13 @@ public class NettyServerTest {
         public void channelRead(ChannelHandlerContext ctx, Object msg) {
             // 提交任务到taskQueue中; 异步执行
             ctx.channel().eventLoop().execute(() ->
-                    System.out.printf("[%s %s] [%s]%n", DateUtil.format(),
+                    System.out.printf("[%s %s] [%s]%n", DateUtil.now(),
                             Thread.currentThread().getName(), "Async Task"));
             // 定时任务
-            ctx.channel().eventLoop().schedule(() -> System.out.printf("[%s %s] [%s]%n", DateUtil.format(),
+            ctx.channel().eventLoop().schedule(() -> System.out.printf("[%s %s] [%s]%n", DateUtil.now(),
                     Thread.currentThread().getName(), "Scheduled Task"), 2, TimeUnit.SECONDS);
             ByteBuf buf = (ByteBuf) msg;
-            System.out.printf("[%s %s] [rcv: %s, from client %s]%n", DateUtil.format(),
+            System.out.printf("[%s %s] [rcv: %s, from client %s]%n", DateUtil.now(),
                     Thread.currentThread().getName(),
                     buf.toString(CharsetUtil.UTF_8), ctx.channel().remoteAddress());
         }
@@ -259,7 +259,7 @@ public class NettyServerTest {
         public void channelRead(ChannelHandlerContext ctx, Object msg) {
             // 接受从客户端发送的 StudentObject.Student 类型的数据
             StudentObject.Student student = (StudentObject.Student) msg;
-            System.out.printf("[%s %s] [rcv: %s, from client %s]%n", DateUtil.format(),
+            System.out.printf("[%s %s] [rcv: %s, from client %s]%n", DateUtil.now(),
                     Thread.currentThread().getName(),
                     student.getName(), ctx.channel().remoteAddress());
         }
@@ -291,7 +291,7 @@ public class NettyServerTest {
     static class ServerCodecHandler extends SimpleChannelInboundHandler<Long> {
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, Long msg) {
-            System.out.printf("[%s] [rcv: %s, from client %s]%n", DateUtil.format(), msg
+            System.out.printf("[%s] [rcv: %s, from client %s]%n", DateUtil.now(), msg
                     , ctx.channel().remoteAddress());
             System.out.println("ServerCodecHandler");
             ctx.writeAndFlush(msg);
@@ -308,7 +308,7 @@ public class NettyServerTest {
 
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, Long msg) {
-            System.out.printf("[%s] [rcv: %s, from server %s]%n", DateUtil.format(), msg
+            System.out.printf("[%s] [rcv: %s, from server %s]%n", DateUtil.now(), msg
                     , ctx.channel().remoteAddress());
         }
 
@@ -334,7 +334,7 @@ public class NettyServerTest {
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) {
             ByteBuf buf = (ByteBuf) msg;
-            System.out.printf("[%s %s] [rcv: %s, from server %s]%n", DateUtil.format(),
+            System.out.printf("[%s %s] [rcv: %s, from server %s]%n", DateUtil.now(),
                     Thread.currentThread().getName(),
                     buf.toString(CharsetUtil.UTF_8), ctx.channel().remoteAddress());
         }

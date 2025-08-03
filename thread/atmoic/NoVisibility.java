@@ -1,7 +1,7 @@
 package thread.atmoic;
 
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.TimeUnit;
 

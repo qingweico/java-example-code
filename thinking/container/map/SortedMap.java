@@ -1,13 +1,13 @@
 package thinking.container.map;
 
 import thinking.util.CountingMapData;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.Iterator;
 import java.util.TreeMap;
 
 /**
- *  What you can do with a TreeMap?
+ *  What can you do with a TreeMap?
  * <p>
  * SortedMap
  * @author zqw

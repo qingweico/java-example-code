@@ -2,7 +2,7 @@ package thinking.concurrency;
 
 
 import annotation.Pass;
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * User interface responsiveness

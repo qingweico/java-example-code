@@ -1,8 +1,8 @@
 package thread;
 
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 import thread.queue.disruptor.DisruptorStarter;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

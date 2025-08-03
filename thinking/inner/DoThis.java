@@ -1,7 +1,7 @@
 package thinking.inner;
 
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Qualifying access to the outer-class object

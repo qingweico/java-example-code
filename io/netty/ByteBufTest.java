@@ -4,8 +4,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.junit.Test;
 
-import static util.Print.println;
-import static util.Print.prints;
+import static cn.qingweico.io.Print.println;
+import static cn.qingweico.io.Print.prints;
 
 /**
  * @author zqw

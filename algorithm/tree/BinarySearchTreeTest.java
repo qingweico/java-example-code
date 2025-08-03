@@ -1,13 +1,13 @@
 package algorithm.tree;
 
 import org.junit.Test;
-import util.Print;
-import util.RandomDataUtil;
-import util.Tools;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
+import cn.qingweico.supplier.Tools;
 
 import java.util.ArrayList;
 
-import static util.Print.println;
+import static cn.qingweico.io.Print.println;
 
 /**
  * @author zqw
@@ -20,7 +20,7 @@ public class BinarySearchTreeTest {
         int size = 1000;
         int exclusive = 1000;
         for (int i = 0; i < size; i++) {
-            binarySearchTree.add(RandomDataUtil.ri(exclusive));
+            binarySearchTree.add(RandomDataGenerator.rndInt(exclusive));
         }
         Print.println(binarySearchTree.size());
         ArrayList<Integer> list = new ArrayList<>();

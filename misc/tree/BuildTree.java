@@ -5,8 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StopWatch;
-import util.Print;
-import util.io.FileUtils;
+import cn.qingweico.io.Print;
+import cn.qingweico.io.FileUtils;
 
 import java.util.*;
 
@@ -21,7 +21,7 @@ public class BuildTree {
                 .filter(e -> StringUtils.equals(e.get("pid").toString(), parentId))
                 .sorted(Comparator.comparing(e -> String.valueOf(e.get("sort"))))
                 .toList();
-        if (nodes.size() > 0) {
+        if (!nodes.isEmpty()) {
             nodes.forEach(node -> {
                 List<Map<String, Object>> childrenNode =
                         this.getChildrenNode(node.get("id").toString(), menuNodes);

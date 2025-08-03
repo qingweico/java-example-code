@@ -1,7 +1,7 @@
 package frame.mq.active;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import javax.jms.*;
 import java.io.IOException;

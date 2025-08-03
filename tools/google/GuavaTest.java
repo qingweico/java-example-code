@@ -7,11 +7,11 @@ import com.google.common.primitives.Ints;
 import org.junit.Test;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import util.Print;
-import util.RandomDataUtil;
-import util.Tools;
-import util.constants.Constants;
-import util.constants.Symbol;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
+import cn.qingweico.supplier.Tools;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.constants.Symbol;
 
 import java.util.*;
 
@@ -49,7 +49,7 @@ public class GuavaTest {
         List<String> adds = new ArrayList<>();
         int loops = 4;
         for (int i = 0; i < loops; i++) {
-            adds.add(RandomDataUtil.address(true));
+            adds.add(RandomDataGenerator.address(true));
         }
         mvm.put("Address", adds);
         Print.printMap(mvm);

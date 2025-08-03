@@ -1,9 +1,9 @@
 package collection.map;
 
 import object.entity.Student;
-import util.ObjectFactory;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.supplier.ObjectFactory;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;

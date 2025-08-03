@@ -1,8 +1,8 @@
 package thinking.concurrency.juc;
 
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;

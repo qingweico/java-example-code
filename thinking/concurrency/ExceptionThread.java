@@ -1,6 +1,6 @@
 package thinking.concurrency;
 
-import thread.pool.ThreadPoolBuilder;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 
 import java.util.concurrent.ExecutorService;
 

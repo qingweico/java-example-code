@@ -1,6 +1,6 @@
 package object.oop;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Method overloading
@@ -11,7 +11,7 @@ import util.Print;
 class Reload {
     public static void main(String[] args) {
         // Output "String method"
-        // Because null is not an object and the compiler selects the
+        // Because null is not an object, and the compiler selects the
         // most specific argument to invoke the overloaded method.
         method((String) null);
         // The main method could be reloaded in java but must be invoked in main(String[] args).
@@ -32,8 +32,8 @@ class Reload {
 
     /**
      * However, when an overloaded method contains both Integer and String arguments, the compiler
-     * fails, because both String and Integer are concrete types, and the compiler cannot make a choice,
-     * so it needs to be seen as having made the choice(For example, cast using Integer).
+     * fails. Both String and Integer are concrete types, and the compiler cannot make a choice,
+     * so it needs to be seen as having made the choice (For example, cast using Integer).
      *
      * @param i {@code Integer}
      */

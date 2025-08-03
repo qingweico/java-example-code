@@ -1,6 +1,6 @@
 package jvm.ref;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.ref.WeakReference;
 

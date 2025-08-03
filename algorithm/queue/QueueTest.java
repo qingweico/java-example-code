@@ -1,11 +1,11 @@
 package algorithm.queue;
-import util.Print;
-import util.Tools;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.Tools;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static util.Print.printf;
+import static cn.qingweico.io.Print.printf;
 
 /**
  * ------------------------- 基于 数组 和 链表实现的队列测试 -------------------------

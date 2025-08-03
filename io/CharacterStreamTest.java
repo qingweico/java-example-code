@@ -3,9 +3,9 @@ package io;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import util.Print;
-import util.constants.Constants;
-import util.constants.Symbol;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.constants.Symbol;
 
 import java.io.*;
 

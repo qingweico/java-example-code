@@ -1,6 +1,6 @@
 package thinking.concurrency;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Understand join()

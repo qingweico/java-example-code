@@ -1,6 +1,6 @@
 package object.proxy.aspect;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * @author zqw

@@ -3,7 +3,7 @@ package oak.newfeature;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;

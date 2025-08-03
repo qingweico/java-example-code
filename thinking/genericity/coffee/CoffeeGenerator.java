@@ -1,7 +1,7 @@
 package thinking.genericity.coffee;
 
-import util.Generator;
-import util.Print;
+import cn.qingweico.supplier.Generator;
+import cn.qingweico.io.Print;
 
 import java.util.Iterator;
 import java.util.Random;

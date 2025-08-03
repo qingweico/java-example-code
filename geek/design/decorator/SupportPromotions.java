@@ -1,7 +1,7 @@
 package geek.design.decorator;
 
+import cn.qingweico.io.Print;
 import lombok.Data;
-import util.Print;
 
 /**
  * 促销类型

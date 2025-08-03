@@ -1,8 +1,8 @@
 package jvm.thread.lock;
 
 
-import thread.pool.ThreadObjectPool;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.constants.Constants;
 
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;

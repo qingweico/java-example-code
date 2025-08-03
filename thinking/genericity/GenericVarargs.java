@@ -1,6 +1,6 @@
 package thinking.genericity;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

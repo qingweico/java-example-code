@@ -1,7 +1,7 @@
 package jcip;
 
-import thread.pool.ThreadPoolBuilder;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

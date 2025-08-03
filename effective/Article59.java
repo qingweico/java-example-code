@@ -1,6 +1,6 @@
 package effective;
 
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;

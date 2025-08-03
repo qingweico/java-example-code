@@ -1,5 +1,8 @@
 package io;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -7,7 +10,9 @@ import java.io.Reader;
  * @author zqw
  * @date 2020/03/06
  */
+@Getter
 class LineNumReader {
+    @Setter
     private Reader r;
     private int lineNumber;
 
@@ -17,18 +22,6 @@ class LineNumReader {
     public LineNumReader(Reader r) {
         super();
         this.r = r;
-    }
-
-    public Reader getR() {
-        return r;
-    }
-
-    public void setR(Reader r) {
-        this.r = r;
-    }
-
-    public int getLineNumber() {
-        return lineNumber;
     }
 
     public String readLine() throws IOException {
@@ -49,7 +42,7 @@ class LineNumReader {
                 sb.append((char) ch);
             }
         }
-        if (sb.length() > 0) {
+        if (!sb.isEmpty()) {
             return sb.toString();
         } else {
             return null;
@@ -62,7 +55,5 @@ class LineNumReader {
         while ((s = lineNumReader.readLine()) != null) {
             System.out.println(lineNumReader.getLineNumber() + ":" + s);
         }
-
-
     }
 }

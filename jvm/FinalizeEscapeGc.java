@@ -1,9 +1,9 @@
 package jvm;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
- * finally method
+ * finalize method
  * Objects can save themselves when they are GC.
  * @author zqw
  * @date 2021/3/31

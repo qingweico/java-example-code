@@ -1,10 +1,9 @@
 package thinking.exception;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Finally
- *
  * What does finally do?
  * The `finally clause` is used when resources other
  * than memory are restored to their initial state.

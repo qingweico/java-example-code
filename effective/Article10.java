@@ -1,7 +1,7 @@
 package effective;
 
 import annotation.Pass;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.awt.*;
 import java.util.Objects;

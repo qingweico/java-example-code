@@ -1,22 +1,22 @@
 package oak.stream;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.constants.Symbol;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.ObjectFactory;
 import frame.db.JdbcConfig;
 import object.entity.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.testng.annotations.Test;
-import util.ObjectFactory;
-import util.Print;
-import util.constants.Constants;
-import util.constants.Symbol;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static util.Print.println;
+import static cn.qingweico.io.Print.println;
 
 /**
  * Stream: Intermediate operations; Terminal operations
@@ -45,7 +45,7 @@ public class OperateStreamTest {
         x.ifPresentOrElse(System.out::println, () -> System.out.println("no such element found"));
         System.out.println(y);
         // 集合判空处理
-        // Optional.ofNullable(null).orElse(Collections.emptyList())
+        // Optional.ofNullable(null).orElse(Collections.emptyList());
     }
 
     @Test
@@ -63,15 +63,15 @@ public class OperateStreamTest {
     @Test
     public void generate() {
         Stream.iterate(0, x -> x + 4).limit(5).forEach(Print::prints);
-        Print.println();
+        println();
         // __ 占位符
         String payload = IntStream.rangeClosed(1, 10).mapToObj(String::valueOf)
                 .collect(Collectors.joining(Symbol.WHIFFLETREE)) + UUID.randomUUID();
-        Print.println(payload);
+        println(payload);
         Stream.generate(Math::random).limit(5).forEach(Print::prints);
-        Print.println();
+        println();
         IntStream s = IntStream.iterate(0, x -> x + 4).limit(4);
-        Print.println(Arrays.toString(s.toArray()));
+        println(Arrays.toString(s.toArray()));
     }
 
     @Test
@@ -149,10 +149,10 @@ public class OperateStreamTest {
     public void statistics() {
         // 平均值
         Double avlVal = container.stream().collect(Collectors.averagingInt(e -> e));
-        Print.println(avlVal);
+        println(avlVal);
         // 数据统计信息
         IntSummaryStatistics intSummaryStatistics = container.stream().collect(Collectors.summarizingInt(e -> e));
-        Print.println(intSummaryStatistics);
+        println(intSummaryStatistics);
     }
 
     @Test

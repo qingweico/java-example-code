@@ -1,7 +1,7 @@
 package effective;
 
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -57,7 +57,7 @@ class NotStopThread {
 }
 
 /**
- * Properly synchronized cooperative thread terminate.
+ * Properly synchronized cooperative thread terminates.
  */
 class StopThread {
     private static boolean stopRequested = false;

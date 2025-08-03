@@ -1,10 +1,10 @@
 package collection.array;
 
-import util.Tools;
+import cn.qingweico.supplier.Tools;
 import object.entity.Customer;
 import thinking.genericity.BasicGenerator;
-import util.collection.CollectionData;
-import util.ObjectFactory;
+import cn.qingweico.collection.CollectionData;
+import cn.qingweico.supplier.ObjectFactory;
 
 import java.util.Arrays;
 import java.util.List;

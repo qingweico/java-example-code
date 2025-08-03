@@ -1,7 +1,7 @@
 package thinking.concurrency.share;
 
-import thread.pool.ThreadPoolBuilder;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;

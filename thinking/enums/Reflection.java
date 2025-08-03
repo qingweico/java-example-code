@@ -1,6 +1,6 @@
 package thinking.enums;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static util.Print.println;
+import static cn.qingweico.io.Print.println;
 
 /**
  * @author zqw

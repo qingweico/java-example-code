@@ -1,7 +1,7 @@
 package thread.coroutines;
 
 import co.paralleluniverse.fibers.Fiber;
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Quasar 基于 Java instrument 技术

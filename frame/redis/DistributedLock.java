@@ -1,8 +1,8 @@
 package frame.redis;
 
 import redis.clients.jedis.Jedis;
-import thread.pool.ThreadPoolBuilder;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.io.Print;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 public class DistributedLock {
 
     private static final String LOCK_SUCCESS = "OK";
-    /**NX: key not exist. then set  XX: key exist. then set*/
+    /**NX: key not exist. then set XX: key exists. then set*/
     private static final String SET_IF_NOT_EXIST = "NX";
     /**EX: expire unit(s)  PX: expire unit(ms)*/
     private static final String SET_WITH_EXPIRE_TIME = "PX";

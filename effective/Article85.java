@@ -1,8 +1,8 @@
 package effective;
 
 
-import util.Print;
-import util.SerializeUtil;
+import cn.qingweico.io.Print;
+import cn.qingweico.serialize.SerializeUtil;
 
 import java.util.HashSet;
 import java.util.Set;

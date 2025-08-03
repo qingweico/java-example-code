@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.io.FileReader;
 import java.io.IOException;

@@ -3,7 +3,7 @@ package design.behaviour.strategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
-import util.ApiResponse;
+import cn.qingweico.model.ApiResponse;
 
 /**
  * @author zqw

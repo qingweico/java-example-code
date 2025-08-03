@@ -2,7 +2,7 @@ package oak.lambda;
 
 
 import object.entity.User;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

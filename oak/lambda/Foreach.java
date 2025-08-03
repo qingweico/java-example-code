@@ -1,13 +1,11 @@
 package oak.lambda;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static util.Print.println;
-import static util.Print.print;
 
 /**
  * @author zqw
@@ -20,12 +18,12 @@ public class Foreach {
         strings.forEach(new Consumer<String>() {
             @Override
             public void accept(String s) {
-                print(s);
+                Print.print(s);
             }
         });
-        println();
-        strings.forEach((s) -> print(s));
-        println();
+        Print.println();
+        strings.forEach((s) -> Print.print(s));
+        Print.println();
         strings.forEach(Print::print);
     }
 }

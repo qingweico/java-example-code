@@ -1,6 +1,6 @@
 package oak.stream;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.Comparator;
 import java.util.Random;

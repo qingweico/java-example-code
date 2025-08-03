@@ -1,6 +1,6 @@
 package jcip;
 
-import thread.pool.ThreadPoolBuilder;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,14 @@
 package thread.cas;
 
+import cn.qingweico.concurrent.UnsafeSupport;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.Getter;
 import lombok.Setter;
 import object.entity.User;
 import org.junit.Test;
 import sun.misc.Unsafe;
-import thread.pool.ThreadPoolBuilder;
-import util.Print;
-import util.RandomDataUtil;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
@@ -72,7 +73,7 @@ public class UnsafeTest {
     @Test
     public void getSetObject() throws Exception {
         User user = new User();
-        user.setUsername(RandomDataUtil.name());
+        user.setUsername(RandomDataGenerator.name());
         Field username = User.class.getDeclaredField("username");
         // 返回 非静态属性 在其对象存储分配中的位置(偏移地址), 对静态属性使用会抛异常
         // 其方法staticFieldOffset与其相反

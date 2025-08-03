@@ -1,12 +1,11 @@
 package io;
 
-import util.DatabaseHelper;
-import util.Print;
+import cn.qingweico.database.DatabaseHelper;
 
 import java.sql.*;
 import java.util.Scanner;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 /**
  * Use sql statement
@@ -36,7 +35,7 @@ class Login {
             println("2注册");
             println("3退出");
             println("--------------------------");
-            Print.println();
+            println();
             Scanner sc = new Scanner(System.in);
             String choiceString = sc.nextLine();
             switch (choiceString) {

@@ -1,6 +1,6 @@
 package util.io;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

@@ -1,6 +1,6 @@
 package algorithm.stack.monotonous;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.Arrays;
 import java.util.Stack;

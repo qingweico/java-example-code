@@ -1,7 +1,7 @@
 package thread;
 
 import annotation.Pass;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 /**
  * 4-byte buffer inside the CPU

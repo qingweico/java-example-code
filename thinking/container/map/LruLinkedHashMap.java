@@ -1,12 +1,12 @@
 package thinking.container.map;
 
 import thinking.util.CountingMapData;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.LinkedHashMap;
 
 /**
- *  What you can do with a LinkedHashMap?
+ *  What can you do with a LinkedHashMap?
  *
  * @author zqw
  * @date 2021/2/24

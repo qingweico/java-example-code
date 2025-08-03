@@ -1,6 +1,6 @@
 package design.behaviour.strategy;
 
-import util.ApiResponse;
+import cn.qingweico.model.ApiResponse;
 
 /**
  * @author zqw

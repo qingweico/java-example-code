@@ -1,7 +1,7 @@
 package geek.object;
 
 import lombok.extern.slf4j.Slf4j;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.util.List;
 import java.util.stream.Collectors;

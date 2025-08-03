@@ -1,9 +1,9 @@
 package thinking.genericity;
 
+import cn.qingweico.io.Print;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static util.Print.prints;
 
 /**
  * @author zqw
@@ -27,7 +27,7 @@ public class RandomList<T> {
             rList.add(s);
         }
         for (int i = 0; i < 10; i++) {
-            prints(rList.select());
+            Print.prints(rList.select());
         }
     }
 }

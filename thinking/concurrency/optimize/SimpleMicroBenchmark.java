@@ -3,7 +3,7 @@ package thinking.concurrency.optimize;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static util.Print.printf;
+import static cn.qingweico.io.Print.printf;
 
 
 /**

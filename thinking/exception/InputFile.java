@@ -1,6 +1,6 @@
 package thinking.exception;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

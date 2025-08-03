@@ -1,6 +1,6 @@
 package thinking.genericity;
 
-import util.Generator;
+import cn.qingweico.supplier.Generator;
 
 import java.util.*;
 

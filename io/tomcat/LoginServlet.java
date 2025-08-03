@@ -1,6 +1,6 @@
 package io.tomcat;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.IOException;
 

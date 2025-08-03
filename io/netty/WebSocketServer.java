@@ -10,9 +10,9 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
-import util.Print;
-import util.constants.Constants;
-import util.DateUtil;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.datetime.DateUtil;
 
 /**
  * @author zqw
@@ -54,8 +54,8 @@ public class WebSocketServer {
 
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
-            System.out.printf("[%s] server rcv: %s%n", DateUtil.format(), msg.text());
-            String reply = String.format("[%s] server reply: %s%n", DateUtil.format(), msg.text());
+            System.out.printf("[%s] server rcv: %s%n", DateUtil.now(), msg.text());
+            String reply = String.format("[%s] server reply: %s%n", DateUtil.now(), msg.text());
             ctx.channel().writeAndFlush(new TextWebSocketFrame(reply));
         }
 

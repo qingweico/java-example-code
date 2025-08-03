@@ -1,6 +1,6 @@
 package geek.io.nio;
 
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.nio.ByteBuffer;
 

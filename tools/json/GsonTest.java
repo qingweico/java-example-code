@@ -5,8 +5,8 @@ import com.google.gson.Gson;
 import object.entity.User;
 import org.junit.Test;
 import thinking.genericity.BasicGenerator;
-import util.collection.CollectionData;
-import util.ObjectFactory;
+import cn.qingweico.collection.CollectionData;
+import cn.qingweico.supplier.ObjectFactory;
 
 import java.util.List;
 

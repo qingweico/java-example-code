@@ -2,16 +2,18 @@ package io.netty.http;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
 import io.netty.util.AsciiString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.codec.Charsets;
 import org.apache.http.entity.ContentType;
+import cn.qingweico.constants.Symbol;
 
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,7 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  * @date 2024/5/28
  */
 @Slf4j
-public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
     private static final String FAVICON_ICO = "/favicon.ico";
     private static final AsciiString CONTENT_TYPE = AsciiString.cached("Content-Type");
@@ -64,6 +66,9 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
                     QueryStringDecoder queryDecoder = new QueryStringDecoder(jsonStr, false);
                     logReqParam(queryDecoder);
                 }
+            } else if (method.equals(HttpMethod.CONNECT)) {
+                // 处理 HTTPS CONNECT 请求
+                handleConnect(ctx, request);
             }
             byte[] content = JSON.toJSONString(hp).getBytes();
             FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(content));
@@ -97,6 +102,46 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
             for (String attrVal : attr.getValue()) {
                 log.info("{}={}", attr.getKey(), attrVal);
             }
+        }
+    }
+
+    private void handleConnect(ChannelHandlerContext ctx, HttpRequest request) {
+        // 解析目标地址 如 CONNECT domain:443 HTTP/1.1
+        String[] parts = request.uri().split(Symbol.COLON);
+        String host = parts[0];
+        int port = parts.length > 1 ? Integer.parseInt(parts[1]) : 443;
+
+        Bootstrap bootstrap = new Bootstrap()
+                .group(ctx.channel().eventLoop())
+                .channel(NioSocketChannel.class)
+                .handler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    protected void initChannel(SocketChannel ch) {
+                        ch.pipeline().addLast(new RelayHandler(ctx.channel()));
+                    }
+                });
+
+        bootstrap.connect(host, port).addListener(future -> {
+            if (future.isSuccess()) {
+                ctx.writeAndFlush(new DefaultHttpResponse(
+                        HttpVersion.HTTP_1_1,
+                        HttpResponseStatus.OK
+                ));
+            } else {
+                ctx.close();
+            }
+        });
+    }
+    public static class RelayHandler extends ChannelInboundHandlerAdapter {
+        private final Channel relayChannel;
+
+        public RelayHandler(Channel relayChannel) {
+            this.relayChannel = relayChannel;
+        }
+
+        @Override
+        public void channelRead(ChannelHandlerContext ctx, Object msg) {
+            relayChannel.writeAndFlush(msg);
         }
     }
 }

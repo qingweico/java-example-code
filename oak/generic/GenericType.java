@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.Student;
 import object.entity.User;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

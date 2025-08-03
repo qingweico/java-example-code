@@ -1,9 +1,9 @@
 package thread.queue;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.DelayQueue;

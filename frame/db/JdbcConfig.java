@@ -1,7 +1,8 @@
 package frame.db;
 
+import cn.qingweico.database.DatabaseHelper;
+import cn.qingweico.model.enums.DbConProperty;
 import com.zaxxer.hikari.HikariDataSource;
-import object.enums.DbConProperty;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,6 @@ import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
-import util.DatabaseHelper;
 
 import java.util.List;
 import java.util.Properties;

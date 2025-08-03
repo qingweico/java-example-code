@@ -3,7 +3,7 @@ package algorithm.tree;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 /**
  * 二叉搜索树

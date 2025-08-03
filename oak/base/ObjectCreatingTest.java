@@ -3,7 +3,7 @@ package oak.base;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import org.junit.Test;
-import util.ObjectFactory;
+import cn.qingweico.supplier.ObjectFactory;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

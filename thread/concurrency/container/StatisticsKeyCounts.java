@@ -2,7 +2,7 @@ package thread.concurrency.container;
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.jboss.netty.util.internal.ConcurrentHashMap;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.Map;
 import java.util.concurrent.ForkJoinPool;
@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
  * @author zqw
  * @date 2022/7/4
  */
-public class StatisticsKeyCounts {
+class StatisticsKeyCounts {
     private static final int LOOP_COUNT = 10000000;
     private static final int THREAD_COUNT = 10;
     private static final int ITEM_COUNT = 10;

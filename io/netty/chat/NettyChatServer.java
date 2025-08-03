@@ -10,9 +10,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.concurrent.GlobalEventExecutor;
-import util.Print;
-import util.constants.Constants;
-import util.DateUtil;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.datetime.DateUtil;
 
 /**
  * @author zqw
@@ -57,11 +57,11 @@ public class NettyChatServer {
             Channel channel = ctx.channel();
             channelGroup.forEach(ch -> {
                 if (channel != ch) {
-                    ch.writeAndFlush(String.format("[%s] %s: %s%n", DateUtil.format(),
+                    ch.writeAndFlush(String.format("[%s] %s: %s%n", DateUtil.now(),
                             channel.remoteAddress().toString().substring(1), msg));
                 } else {
                     ch.writeAndFlush(String.format("[%s] [*]%s",
-                            DateUtil.format(), msg));
+                            DateUtil.now(), msg));
                 }
             });
         }
@@ -69,7 +69,7 @@ public class NettyChatServer {
         @Override
         public void handlerAdded(ChannelHandlerContext ctx) {
             Channel channel = ctx.channel();
-            channelGroup.writeAndFlush(String.format("[%s] %s 加入聊天%n", DateUtil.format(),
+            channelGroup.writeAndFlush(String.format("[%s] %s 加入聊天%n", DateUtil.now(),
                     channel.remoteAddress().toString().substring(1)));
             channelGroup.add(channel);
         }
@@ -77,19 +77,19 @@ public class NettyChatServer {
         @Override
         public void handlerRemoved(ChannelHandlerContext ctx) {
             Channel channel = ctx.channel();
-            channelGroup.writeAndFlush(String.format("client [%s] %s 退出聊天%n", DateUtil.format(),
+            channelGroup.writeAndFlush(String.format("client [%s] %s 退出聊天%n", DateUtil.now(),
                     channel.remoteAddress().toString().substring(1)));
         }
 
         @Override
         public void channelActive(ChannelHandlerContext ctx) {
-            System.out.printf("[%s] %s 上线了%n", DateUtil.format(),
+            System.out.printf("[%s] %s 上线了%n", DateUtil.now(),
                     ctx.channel().remoteAddress().toString().substring(1));
         }
 
         @Override
         public void channelInactive(ChannelHandlerContext ctx) {
-            System.out.printf("[%s] %s 下线了%n", DateUtil.format(),
+            System.out.printf("[%s] %s 下线了%n", DateUtil.now(),
                     ctx.channel().remoteAddress().toString().substring(1));
         }
 

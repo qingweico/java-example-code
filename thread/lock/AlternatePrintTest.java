@@ -1,9 +1,9 @@
 package thread.lock;
 
 import org.junit.Test;
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.io.IOException;
 import java.io.PipedInputStream;
@@ -15,7 +15,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static util.Print.prints;
+import static cn.qingweico.io.Print.prints;
 
 /**
  * Alternate print ABCDEF 123456

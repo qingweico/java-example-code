@@ -1,6 +1,6 @@
 package thinking.io.nio;
 
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

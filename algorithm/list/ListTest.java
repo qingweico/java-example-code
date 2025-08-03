@@ -2,8 +2,8 @@ package algorithm.list;
 
 
 import org.testng.annotations.Test;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 /**
  * @author zqw

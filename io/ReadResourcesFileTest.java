@@ -3,9 +3,9 @@ package io;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
-import util.Print;
-import util.constants.Constants;
-import util.constants.Symbol;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.constants.Symbol;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -81,8 +81,7 @@ public class ReadResourcesFileTest {
         getFileContent(filePath);
     }
 
-    @
-            Test
+    @Test
     public void m4() {
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
         getFileContent(inputStream);

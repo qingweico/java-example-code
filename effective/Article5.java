@@ -1,6 +1,6 @@
 package effective;
 
-import util.constants.Symbol;
+import cn.qingweico.constants.Symbol;
 
 import java.util.ArrayList;
 import java.util.List;

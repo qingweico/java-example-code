@@ -1,7 +1,7 @@
 package jvm;
 
 import org.junit.Test;
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * String::intern 方法测试

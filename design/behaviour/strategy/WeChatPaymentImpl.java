@@ -1,9 +1,9 @@
 package design.behaviour.strategy;
 
+import cn.qingweico.model.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
-import util.ApiResponse;
 
 /**
  * @author zqw

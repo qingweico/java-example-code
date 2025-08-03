@@ -7,6 +7,12 @@
     <artifactId>java-example-code</artifactId>
     <version>20210331</version>
     <dependencies>
+        <!-- https://github.com/qingweico/we-common-library -->
+        <dependency>
+            <groupId>cn.qingweico</groupId>
+            <artifactId>we-common-library</artifactId>
+            <version>20250802</version>
+        </dependency>
         <!-- //////////////////// 字节码相关 //////////////////// -->
         <dependency>
             <groupId>asm</groupId>
@@ -126,7 +132,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.42.Final</version>
+            <version>4.1.77.Final</version>
         </dependency>
         <dependency>
             <groupId>com.google.protobuf</groupId>
@@ -212,7 +218,7 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.9.1</version>
+            <version>4.12.0</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -264,6 +270,23 @@
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <version>2.3.2</version>
+        </dependency>
+        <!-- Bouncy Castle -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.78.1</version>
+        </dependency>
+        <!-- RSocket -->
+        <dependency>
+            <groupId>io.rsocket</groupId>
+            <artifactId>rsocket-core</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rsocket</groupId>
+            <artifactId>rsocket-transport-netty</artifactId>
+            <version>1.1.1</version>
         </dependency>
         <!-- //////////////////// 日志相关 //////////////////// -->
         <dependency>

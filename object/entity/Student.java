@@ -1,7 +1,7 @@
 package object.entity;
 
+import cn.qingweico.constants.Symbol;
 import lombok.Getter;
-import util.constants.Symbol;
 
 import java.io.Serializable;
 import java.util.Objects;

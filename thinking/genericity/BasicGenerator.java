@@ -1,6 +1,6 @@
 package thinking.genericity;
 
-import util.Generator;
+import cn.qingweico.supplier.Generator;
 
 /**
  * Automatically create a generator, give a class with a default(no-args) constructor

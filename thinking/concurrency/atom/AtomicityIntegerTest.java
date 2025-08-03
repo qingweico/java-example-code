@@ -1,13 +1,13 @@
 package thinking.concurrency.atom;
 
-import thread.pool.ThreadObjectPool;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static util.Print.*;
+import static cn.qingweico.io.Print.*;
 
 /**
  * @author zqw

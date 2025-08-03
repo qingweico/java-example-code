@@ -1,14 +1,14 @@
 package thread.lock;
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static util.Print.print;
+import static cn.qingweico.io.Print.print;
 
 /**
  * Use three threads to alternate output ABC...

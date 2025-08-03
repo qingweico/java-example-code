@@ -76,7 +76,7 @@ public class TextFile extends ArrayList<String> {
     }
 
     public static void main(String[] args) {
-        // Break into unique sorted list of word:
+        // Break into a unique sorted list of word:
         TreeSet<String> words = new TreeSet<>(
                 new TextFile("util/TextFile.java", "\\W+")
         );

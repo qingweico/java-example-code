@@ -1,8 +1,8 @@
 package thread.lock;
 
 
-import thread.pool.ThreadObjectPool;
-import util.Print;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -46,7 +46,7 @@ class NotifyAndWait {
                 for (char n : numbers) {
                     System.out.print(n);
                     try {
-                        // notify:    Wakes up a thread in the current waiting queue.
+                        // notify: Wakes up a thread in the current waiting queue.
                         // notifyAll: Wakes up all threads in the current waiting queue.
                         o.notify();
                         // Block the current thread to allow the lock, to enter the wait queue.

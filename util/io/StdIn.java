@@ -23,8 +23,8 @@ package util.io;
  *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
  */
 
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.constants.Constants;
+import cn.qingweico.io.Print;
 
 import java.io.*;
 import java.net.Socket;

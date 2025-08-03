@@ -1,6 +1,6 @@
 package thinking.io;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.io.*;
 

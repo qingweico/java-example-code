@@ -1,7 +1,7 @@
 package collection.iter;
 
 import object.entity.Customer;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.Comparator;
 import java.util.Set;

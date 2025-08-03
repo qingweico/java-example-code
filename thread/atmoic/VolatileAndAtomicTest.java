@@ -2,9 +2,9 @@ package thread.atmoic;
 
 
 import org.testng.annotations.Test;
-import thread.pool.ThreadObjectPool;
-import util.Print;
-import util.constants.Constants;
+import cn.qingweico.concurrent.pool.ThreadObjectPool;
+import cn.qingweico.io.Print;
+import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -69,6 +69,7 @@ public class VolatileAndAtomicTest {
     }
 
     // Or using volatile keyword, the t1 thread will see the value of num in the main thread.
+
     // private static volatile int num = 0;
 
 
@@ -91,7 +92,7 @@ public class VolatileAndAtomicTest {
             Print.err(e.getMessage());
         }
 
-        // If the final result is 20,000, it is atomicity, otherwise it is not.
+        // If the final result is 20,000, it is an atomicity, otherwise it is not.
         // Console results: The output is calculated differently each time -- demonstrating that
         // volatile does not guarantee atomicity.
         Print.println(" The final value of num is : " + resource.num);
@@ -102,7 +103,7 @@ public class VolatileAndAtomicTest {
     @Test
     public void atomicFieldUpdater() {
         AtomicIntegerFieldUpdater<VolatileAndAtomicTest> fieldUpdater = AtomicIntegerFieldUpdater.
-                // Field must be volatile, or throw IllegalArgumentException
+                // The Field must be volatile, or throw IllegalArgumentException
                         newUpdater(VolatileAndAtomicTest.class, "num");
         int updatedNum = fieldUpdater.updateAndGet(new VolatileAndAtomicTest(), (x) -> x + 1);
         System.out.println(updatedNum);
@@ -129,9 +130,9 @@ public class VolatileAndAtomicTest {
     @Test
     public void visibility() {
         pool.execute(() -> {
-            // This thread will not end, because t1 thread will save the variable
-            // back to main memory after it completes the task and re-read the
-            // latest value of the variable in main memory, whereas if it
+            // This thread will not end. T1 thread will save the variable
+            // back to the main memory after it completes the task and re-read the
+            // latest value of the variable in the main memory, whereas if it
             // is an empty task, it will not perform the latter.
 
             // while (num == 0) {}

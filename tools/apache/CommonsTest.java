@@ -9,9 +9,10 @@ import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.text.CaseUtils;
 import org.apache.commons.text.WordUtils;
 import org.junit.Test;
-import util.Print;
+import cn.qingweico.io.Print;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class CommonsTest {
         // 十位ASCII随机数
         System.out.println(RandomStringUtils.randomAscii(10));
         // 十位数字和字母混合
-        System.out.println(RandomStringUtils.random(10,true,true));
+        System.out.println(RandomStringUtils.random(10, true, true));
         // or
         System.out.println(RandomStringUtils.randomAlphanumeric(10));
 
@@ -103,8 +104,8 @@ public class CommonsTest {
     @Test
     public void strOpe() {
         // 合并两个数组
-        String[] s1 = new String[] { "1", "2", "3" };
-        String[] s2 = new String[] { "a", "b", "c" };
+        String[] s1 = new String[]{"1", "2", "3"};
+        String[] s2 = new String[]{"a", "b", "c"};
         String[] s = ArrayUtils.addAll(s1, s2);
         Print.printArray(s);
         // 字符串截取
@@ -134,5 +135,10 @@ public class CommonsTest {
         System.out.println(StringUtils.contains("abc", "ba"));
         // 左边的字符
         System.out.println(StringUtils.left("abc", 2));
+    }
+
+    @Test
+    public void camelCase() {
+        System.out.println(CaseUtils.toCamelCase("userName", false, '-'));
     }
 }

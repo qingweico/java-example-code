@@ -1,6 +1,6 @@
 package jvm;
 
-import util.Print;
+import cn.qingweico.io.Print;
 
 /**
  * Java 虚拟机运行时内存空间大小

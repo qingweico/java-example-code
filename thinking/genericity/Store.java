@@ -1,6 +1,6 @@
 package thinking.genericity;
 
-import util.ObjectFactory;
+import cn.qingweico.supplier.ObjectFactory;
 
 /**
  * @author zqw
