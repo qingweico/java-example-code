@@ -2,13 +2,13 @@ package thread.lock;
 
 
 import cn.hutool.core.io.FileUtil;
+import cn.qingweico.io.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.util.FileCopyUtils;
 import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
-import cn.qingweico.io.FastFileHandler;
 
 import java.io.File;
 import java.io.FileReader;
@@ -51,7 +51,7 @@ class ReentrantLockPerformanceTest {
     private static final String OUTPUT_COPYWRITING = "[{}] 读写测试结果: {} ms";
 
     public static void main(String[] args) throws InterruptedException {
-        FastFileHandler.fillTextToFile(parentDir, e -> StringUtils.startsWith(e, "r"), 1024 * 1024 * 50, filenames);
+        FileUtils.fillTextToFile(parentDir, e -> StringUtils.startsWith(e, "r"), 1024 * 1024 * 50, filenames);
         CountDownLatch terminal = new CountDownLatch(2);
         main.execute(() -> {
             try {

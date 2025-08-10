@@ -12,6 +12,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author zqw
  * @date 2021/2/3
  * @see org.apache.commons.lang3.concurrent.LazyInitializer
+ * @see JrtFileSystemProvider#getTheFileSystem
+ * @see java.util.ResourceBundle#handleKeySet
  */
 public class DclSingleton {
     private static long id = 0;
