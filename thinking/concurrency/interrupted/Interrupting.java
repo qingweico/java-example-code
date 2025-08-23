@@ -14,7 +14,7 @@ import static cn.qingweico.io.Print.*;
 
 /**
  * ################################# Interrupting a blocked thread #################################
- * Java 中 synchronized 以获取锁地线程不可以响应外部中断 而 Lock 接口提供了 {@link Lock#lockInterruptibly()}
+ * Java 中 synchronized 已获取锁的线程不可以响应外部中断 而 Lock 接口提供了 {@link Lock#lockInterruptibly()}
  * 用来响应中断,抛出异常,同时释放锁
  * Sleep 可以被中断,但是阻塞式 IO 不可以被中断
  * ================================= Java 中断 API =================================

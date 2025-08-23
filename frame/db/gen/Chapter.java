@@ -18,7 +18,7 @@ class Chapter implements Serializable {
 
     @Override
     public String toString() {
-        return this.title + Symbol.LINE_BREAK + this.content;
+        return this.title + Symbol.LF + this.content;
     }
 
 

@@ -20,6 +20,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -185,5 +186,10 @@ public final class BaseTest {
         List<User> users = SerializeUtil.deserializeList(bytes);
         users.forEach(System.out::println);
     }
-
+    @Test
+    public void messageFormatter() {
+        String formattedMessage = MessageFormat.format("在缓冲区[{1}]位置添加[{0}]字节时发生溢出错误",
+                5, "buf_read0");
+        System.out.println(formattedMessage);
+    }
 }

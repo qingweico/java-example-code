@@ -66,7 +66,7 @@ public class OperateStreamTest {
         println();
         // __ 占位符
         String payload = IntStream.rangeClosed(1, 10).mapToObj(String::valueOf)
-                .collect(Collectors.joining(Symbol.WHIFFLETREE)) + UUID.randomUUID();
+                .collect(Collectors.joining(Symbol.DASHED)) + UUID.randomUUID();
         println(payload);
         Stream.generate(Math::random).limit(5).forEach(Print::prints);
         println();

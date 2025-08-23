@@ -108,7 +108,7 @@ class DelayedTaskConsumer implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                // Run task with the current thread
+                // Run a task with the current thread
                 q.take().run();
             }
         } catch (InterruptedException e) {
