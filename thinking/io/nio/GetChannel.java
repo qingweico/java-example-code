@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * Getting channel from streams
+ * Getting a channel from streams
  * <p>
  * FileOutputStream, FileInputStream, RandomAccessFile
  * can be used to generate a FileChannel.

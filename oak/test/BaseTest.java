@@ -3,9 +3,14 @@ package oak.test;
 import cn.hutool.Hutool;
 import cn.hutool.core.collection.EnumerationIter;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.extra.emoji.EmojiUtil;
+import cn.hutool.extra.spring.SpringUtil;
+import cn.qingweico.concurrent.thread.ThreadUtils;
 import cn.qingweico.constants.Constants;
+import cn.qingweico.constants.Symbol;
 import cn.qingweico.io.Print;
 import cn.qingweico.model.RequestConfigOptions;
 import cn.qingweico.network.NetworkUtils;
@@ -13,10 +18,17 @@ import cn.qingweico.reflect.ReflectUtils;
 import cn.qingweico.serialize.SerializeUtil;
 import cn.qingweico.supplier.Builder;
 import cn.qingweico.supplier.ObjectFactory;
+import cn.qingweico.supplier.RandomDataGenerator;
+import frame.db.JdbcConfig;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.net.URL;
@@ -93,6 +105,7 @@ public final class BaseTest {
     }
 
     @Test
+    @SuppressWarnings("ConstantValue")
     public void isAssignableFrom() {
         // 原始类型 该Class对象和参数类型一致时才返回true
         // 对象类型 父接口或者父类都会返回true
@@ -143,6 +156,7 @@ public final class BaseTest {
         String res = ToStringBuilder.reflectionToString(user);
         System.out.println(res);
     }
+
     @Test
     public void reflection() {
         User user = ObjectFactory.create(User.class, true);
@@ -151,6 +165,7 @@ public final class BaseTest {
                 .forEach(field -> Print.grace(field.getName(), ReflectUtil.getFieldValue(user, field)));
         Print.printMap(ReflectUtils.readFieldsAsMap(user));
     }
+
     @Test
     public void sendProxyPostTest() throws IOException {
         Map<String, Object> body = new HashMap<>();
@@ -159,6 +174,7 @@ public final class BaseTest {
                 .connectTimeout(1000)
                 .build()));
     }
+
     @Test
     public void builder() {
         User user = Builder.builder(User::new)
@@ -167,6 +183,7 @@ public final class BaseTest {
                 .build();
         System.out.println(user);
     }
+
     @Test
     public void serialize() {
         // Object
@@ -186,10 +203,79 @@ public final class BaseTest {
         List<User> users = SerializeUtil.deserializeList(bytes);
         users.forEach(System.out::println);
     }
+
     @Test
     public void messageFormatter() {
         String formattedMessage = MessageFormat.format("在缓冲区[{1}]位置添加[{0}]字节时发生溢出错误",
                 5, "buf_read0");
         System.out.println(formattedMessage);
+    }
+
+    @Test
+    public void printSystemProperties() {
+        Properties properties = System.getProperties();
+        properties.keySet().forEach(e -> Print.grace(e, properties.get(e)));
+    }
+
+    @Test
+    public void pi() {
+        System.out.println(Math.asin(1) * 2);
+        System.out.println(Math.acos(-1));
+        System.out.println(Math.atan(1) * 4);
+        System.out.println(Math.acos(0) * 2);
+    }
+
+    @Test
+    public void stringJoiner() {
+        StringJoiner sj = new StringJoiner(",", "[", "]");
+        sj.add("你").add("好").add("世").add("界");
+        System.out.println(sj);
+        System.out.println(sj.length());
+    }
+
+    /**
+     * {@link StringTokenizer} 已过时, 不再建议使用, 请使用 {@link String#split(String)}
+     * 或者正则工具替代, 目前大部分存在于遗留的代码, 为了向后兼容
+     */
+    @Test
+    public void stringTokenizer() {
+        String str = RandomDataGenerator.address();
+        StringTokenizer tokenizer = new StringTokenizer(str, Symbol.WHITE_SPACE, false);
+        while (tokenizer.hasMoreTokens()) {
+            System.out.println(tokenizer.nextToken());
+        }
+    }
+    @Test
+    public void emoji() {
+        System.out.println(EmojiUtil.isEmoji("\uD83E\uDD23"));
+    }
+
+    /**
+     * @see cn.hutool.extra.compress.CompressUtil
+     * @see cn.hutool.core.util.ZipUtil
+     */
+    @Test
+    public void hutoolCompress() {
+
+    }
+
+    @Test
+    public void hutoolThreadUtil() {
+        ThreadUtil.execAsync(() -> ThreadUtils.gracePrint(RandomDataGenerator.name()));
+        ThreadUtil.safeSleep(1000);
+        // ...
+    }
+    @Test
+    public void createSpringEnv() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(JdbcConfig.class);
+        context.register(SpringUtil.class);
+        context.refresh();
+        NamedParameterJdbcTemplate jdbcTemplate = SpringUtil.getBean(NamedParameterJdbcTemplate.class);
+        String sql = "select username from t_user where id = :id";
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("id", 1L);
+        // Single Column, Multip Column use queryForMap
+        System.out.println(jdbcTemplate.queryForObject(sql, sqlParameterSource, String.class));
+        context.close();
     }
 }

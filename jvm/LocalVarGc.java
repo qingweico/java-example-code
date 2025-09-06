@@ -43,7 +43,7 @@ class LocalVarGc {
         System.gc();
     }
 
-    // -XX:+PrintGCDetails is deprecated. Will use -Xlog:gc* instead.
+    // VM args: -XX:+PrintGCDetails is deprecated. Will use -Xlog:gc* instead.
 
     public static void main(String[] args) {
         LocalVarGc localVarGc = new LocalVarGc();

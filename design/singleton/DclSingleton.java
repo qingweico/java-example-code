@@ -4,6 +4,7 @@ import cn.qingweico.concurrent.pool.ThreadObjectPool;
 import cn.qingweico.constants.Constants;
 
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.random.RandomGeneratorFactory;
 
 /**
  * 懒汉式DCL
@@ -14,6 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @see org.apache.commons.lang3.concurrent.LazyInitializer
  * @see JrtFileSystemProvider#getTheFileSystem
  * @see java.util.ResourceBundle#handleKeySet
+ * @see RandomGeneratorFactory#getConstructors(Class)
  */
 public class DclSingleton {
     private static long id = 0;

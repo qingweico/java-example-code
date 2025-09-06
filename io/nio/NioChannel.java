@@ -22,7 +22,7 @@ class NioChannel {
         FileChannel fileInChannel = fin.getChannel();
         // Get the output section stream of the file
         FileOutputStream fo = new FileOutputStream(dist);
-        // Obtain the file channel of the output byte stream
+        // Get the file channel of the output byte stream
         FileChannel fileOutChannel = fo.getChannel();
         // Allocate 1024 bytes for the buffer
         ByteBuffer buffer = ByteBuffer.allocateDirect(1024);

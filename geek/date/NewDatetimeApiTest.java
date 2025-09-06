@@ -386,6 +386,8 @@ public final class NewDatetimeApiTest {
     public void arithmeticTime() {
         // Date
         Date d = Date.from(Instant.now());
+        // GregorianCalendar 是公历(格里高利历)的具体实现类
+        // 支持儒略历(Julian Calendar)向公历的转换
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(d);
         // ----------------- 添加操作 -----------------

@@ -1,9 +1,11 @@
 package io.buffer;
 
-import org.junit.Test;
-import cn.qingweico.io.Print;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.convert.NumberFormatter;
+import cn.qingweico.io.Print;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.util.internal.SystemPropertyUtil;
+import org.junit.Test;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -217,5 +219,21 @@ public class BufferTest {
     public void oom() {
         // java.nio.Bits#reserverMemory 中 System.gc() 被显示地调用
         // VM: -XX:+DisableExplicitGC 禁用显示 GC 比如 System.gc()
+    }
+
+    @Test
+    public void position() {
+        String vmName = SystemPropertyUtil.get("java.vm.name");
+        System.out.println(vmName);
+        byte[] bytes = new byte[12];
+        String dump = ByteBufUtil.hexDump(bytes);
+        System.out.println(dump);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(12);
+        byteBuffer.putInt(1);
+        byteBuffer.putInt(2);
+        byteBuffer.position(3);
+        byteBuffer.putInt(127);
+        byteBuffer.putInt(3);
+        System.out.println(Arrays.toString(byteBuffer.array()));
     }
 }

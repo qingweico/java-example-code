@@ -28,5 +28,9 @@ public class ByteBufTest {
             // readerIndex++
            prints(byteBuf.readByte());
         }
+        println();
+        // 触发自动扩容 {@link AbstractByteBufAllocator#calculateNewCapacity(int, int)}
+        byteBuf.writeByte(0);
+        prints(byteBuf.capacity());
     }
 }

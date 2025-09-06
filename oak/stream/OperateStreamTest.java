@@ -5,6 +5,7 @@ import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
 import cn.qingweico.io.Print;
 import cn.qingweico.supplier.ObjectFactory;
+import cn.qingweico.supplier.Tools;
 import frame.db.JdbcConfig;
 import object.entity.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -205,5 +206,18 @@ public class OperateStreamTest {
                                     Collectors.toList())));
             Print.printMap(uniqueIndexMap);
         }
+    }
+
+    @Test
+    public void doubleSummaryStatistics() {
+        double[] data = Tools.genDoubleArray(10, 100);
+        Print.print(data);
+        DoubleSummaryStatistics statistics = Arrays.stream(data)
+                .summaryStatistics();
+        Print.grace("数量", statistics.getCount());
+        Print.grace("总和", statistics.getSum());
+        Print.grace("最小值", statistics.getMin());
+        Print.grace("最大值", statistics.getMax());
+        Print.grace("平均值", statistics.getAverage());
     }
 }
