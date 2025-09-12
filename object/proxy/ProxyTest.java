@@ -1,5 +1,6 @@
 package object.proxy;
 
+import com.google.common.reflect.Reflection;
 import object.proxy.aop.ObjectFactory;
 import object.proxy.aspect.Aspect;
 import object.proxy.service.IOrder;
@@ -26,6 +27,7 @@ public class ProxyTest {
         order.pay();
         order.show();
     }
+
     @Test
     public void jdkProxy() {
         JdkProxy jdkProxy = new JdkProxy();
@@ -33,6 +35,7 @@ public class ProxyTest {
         order.pay();
         order.show();
     }
+
     @Test
     public void cglibProxy() {
         CglibProxy cglibProxy = new CglibProxy();
@@ -41,4 +44,17 @@ public class ProxyTest {
         order.show();
     }
 
+    @Test
+    public void newProxy() {
+        Task task = new Task();
+        Runnable runnable = Reflection.newProxy(Runnable.class, new RunnableInvocationHandler(task));
+        runnable.run();
+    }
+
+    static class Task implements Runnable {
+        @Override
+        public void run() {
+            System.out.println("Task!");
+        }
+    }
 }

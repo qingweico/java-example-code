@@ -2,12 +2,17 @@ package oak.test;
 
 import cn.hutool.Hutool;
 import cn.hutool.core.collection.EnumerationIter;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.extra.emoji.EmojiUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 import cn.qingweico.concurrent.thread.ThreadUtils;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
@@ -28,12 +33,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.util.FileCopyUtils;
 
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -245,6 +255,7 @@ public final class BaseTest {
             System.out.println(tokenizer.nextToken());
         }
     }
+
     @Test
     public void emoji() {
         System.out.println(EmojiUtil.isEmoji("\uD83E\uDD23"));
@@ -265,6 +276,7 @@ public final class BaseTest {
         ThreadUtil.safeSleep(1000);
         // ...
     }
+
     @Test
     public void createSpringEnv() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
@@ -277,5 +289,52 @@ public final class BaseTest {
         // Single Column, Multip Column use queryForMap
         System.out.println(jdbcTemplate.queryForObject(sql, sqlParameterSource, String.class));
         context.close();
+    }
+
+    @Test
+    public void readExcel() throws IOException {
+        byte[] bytes = HttpUtil.downloadBytes("https://go.microsoft.com/fwlink/?LinkID=521962");
+        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes)) {
+            ExcelReader reader = ExcelUtil.getReader(inputStream);
+            Print.println(reader.readAsText(false));
+        }
+    }
+
+    @Test
+    public void cancelFuture() throws InterruptedException {
+        ExecutorService pool = ThreadPoolBuilder.create();
+        Future<String> future = pool.submit(() -> {
+            Duration of = Duration.of(1, ChronoUnit.SECONDS);
+            for (int i = 0; i < 10; i++) {
+                org.apache.commons.lang3.ThreadUtils.sleep(of);
+                log.info("For loop {}", i);
+            }
+            return "complete!";
+        });
+        org.apache.commons.lang3.ThreadUtils.sleep(Duration.of(3, ChronoUnit.SECONDS));
+        // mayInterruptIfRunning
+        // true 通过interrupt终止当前正在运行的任务
+        // false 则等到当前任务全部完成后cancel
+        future.cancel(true);
+        System.out.println(future.isCancelled());
+        System.out.println(future.isDone());
+        pool.shutdown();
+        if (pool.awaitTermination(10, TimeUnit.SECONDS)) {
+            System.out.println("thread pool termination!");
+        }
+    }
+
+    @Test
+    public void getInputStreamByUrl() throws IOException {
+        try (InputStream inputStream = NetworkUtils.getInputStreamByUrl("https://www.baidu.com");) {
+            System.out.println(FileCopyUtils.copyToString(new InputStreamReader(inputStream)));
+        }
+    }
+
+    @Test
+    public void downloadFileByUrl() throws IOException {
+        String url = "https://download.microsoft.com/download/1/4/E/14EDED28-6C58-4055-A65C-23B4DA81C4DE/Financial%20Sample.xlsx";
+        File tempFile = new File("temp_excel.xlsx");
+        FileUtil.writeFromStream(NetworkUtils.getInputStreamByUrl(url), tempFile);
     }
 }
