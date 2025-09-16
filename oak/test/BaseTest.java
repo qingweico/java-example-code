@@ -30,12 +30,15 @@ import object.entity.User;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -336,5 +339,17 @@ public final class BaseTest {
         String url = "https://download.microsoft.com/download/1/4/E/14EDED28-6C58-4055-A65C-23B4DA81C4DE/Financial%20Sample.xlsx";
         File tempFile = new File("temp_excel.xlsx");
         FileUtil.writeFromStream(NetworkUtils.getInputStreamByUrl(url), tempFile);
+    }
+
+    @Test
+    public void reflect() throws ClassNotFoundException {
+        Class<?> forName = ClassUtils.forName(org.apache.commons.lang3.ClassUtils.getName(this.getClass()), ClassUtils.getDefaultClassLoader());
+        Method[] declaredMethods = forName.getDeclaredMethods();
+        Arrays.stream(declaredMethods).forEach(System.out::println);
+        Method loadMethod = ClassUtils.getMethod(BaseTest.class, "reflect");
+        Test test = AnnotationUtils.findAnnotation(loadMethod, Test.class);
+        if (test != null) {
+            Print.print(AnnotationUtils.getAnnotationAttributes(test));
+        }
     }
 }

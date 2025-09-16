@@ -5,6 +5,9 @@ import cn.qingweico.convert.NumberFormatter;
 import cn.qingweico.io.Print;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.util.internal.SystemPropertyUtil;
+import jodd.util.StringPool;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 
 import java.io.*;
@@ -16,6 +19,7 @@ import java.nio.channels.AsynchronousFileChannel;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
@@ -235,5 +239,40 @@ public class BufferTest {
         byteBuffer.putInt(127);
         byteBuffer.putInt(3);
         System.out.println(Arrays.toString(byteBuffer.array()));
+    }
+    @Test
+    public void fileChannel() throws IOException {
+        File in = new File(ClassUtils.getName(this.getClass()).replace(StringPool.DOT, File.separator) + StringPool.DOT_JAVA);
+        // 读文件和写文件路径和文件都必须存在
+        if (!in.exists()) {
+            return;
+        }
+        File out = new File(Constants.DEFAULT_FILE_OUTPUT_PATH_MAME);
+        File outParentFile = cn.qingweico.io.FileUtils.getParentFile(out);
+        if (!outParentFile.exists()) {
+            FileUtils.forceMkdir(outParentFile);
+        }
+        if (!out.exists()) {
+            Files.createFile(out.toPath());
+        }
+        try (FileChannel readChannel = FileChannel.open(in.toPath(), StandardOpenOption.READ, StandardOpenOption.WRITE);
+             FileChannel writeChannel = FileChannel.open(out.toPath(), StandardOpenOption.READ, StandardOpenOption.WRITE)) {
+            MappedByteBuffer buffer = readChannel.map(FileChannel.MapMode.READ_WRITE, 0, in.length());
+            byte[] bytes = new byte[(int) buffer.limit()];
+            buffer.get(bytes);
+            // 将缓冲区的位置(position)重置为 0,
+            // 保持限制(limit)不变
+            // 从缓冲区的开头重新读取或写入数据
+            // 通常用于重新读取或写入缓冲区中的数据
+            buffer.rewind();
+            buffer.put(bytes);
+            // 将缓冲区的位置(position)重置为 0,
+            // 将限制(limit)设置为当前的位置(position)
+            // 通常用于在读取和写入之间切换
+            buffer.flip();
+            writeChannel.write(buffer);
+            // 清空缓冲区
+            buffer.clear();
+        }
     }
 }

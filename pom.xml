@@ -323,7 +323,8 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.5.18</version>
+            <!--logback 1.4.x 需要 slf4j-api API 2.0.x 支持 -->
+            <version>1.2.3</version>
         </dependency>
         <!-- //////////////////// 数据库相关 //////////////////// -->
         <dependency>
