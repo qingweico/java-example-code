@@ -7,6 +7,7 @@ import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.core.util.ZipUtil;
 import cn.hutool.extra.emoji.EmojiUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.http.HttpUtil;
@@ -41,6 +42,7 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -48,6 +50,9 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 /**
  * 更多测试请参考微基准测试工具jmh
@@ -350,6 +355,23 @@ public final class BaseTest {
         Test test = AnnotationUtils.findAnnotation(loadMethod, Test.class);
         if (test != null) {
             Print.print(AnnotationUtils.getAnnotationAttributes(test));
+        }
+    }
+
+    @Test
+    public void zipFile() throws IOException {
+        try (ZipFile zipFile = ZipUtil.toZipFile(new File("lib/InstrumentationAgent.jar"), StandardCharsets.UTF_8)) {
+            final Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
+            while (zipEntries.hasMoreElements()) {
+                final ZipEntry zipEntry = zipEntries.nextElement();
+                System.out.println(zipEntry.getName());
+            }
+        }
+        System.out.println("--------------------");
+        ZipInputStream zis = new ZipInputStream(new FileInputStream("lib/InstrumentationAgent.jar"));
+        ZipEntry entry;
+        while ((entry = zis.getNextEntry()) != null) {
+            System.out.println(entry.getName());
         }
     }
 }
