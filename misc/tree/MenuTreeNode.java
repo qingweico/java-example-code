@@ -1,5 +1,7 @@
 package misc.tree;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -14,24 +16,12 @@ public class MenuTreeNode implements TreeNode<String, MenuTreeNode> {
 
     private String id;
     private String pid;
+    @Setter
+    @Getter
     private String name;
+    @Setter
+    @Getter
     private String sort;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSort() {
-        return sort;
-    }
-
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
 
     private List<MenuTreeNode> children = new ArrayList<>();
 

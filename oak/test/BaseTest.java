@@ -9,7 +9,10 @@ import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.ZipUtil;
 import cn.hutool.extra.emoji.EmojiUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.http.ContentType;
+import cn.hutool.http.Header;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
@@ -17,6 +20,7 @@ import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 import cn.qingweico.concurrent.thread.ThreadUtils;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
+import cn.qingweico.io.FileUtils;
 import cn.qingweico.io.Print;
 import cn.qingweico.model.RequestConfigOptions;
 import cn.qingweico.network.NetworkUtils;
@@ -28,7 +32,9 @@ import cn.qingweico.supplier.RandomDataGenerator;
 import frame.db.JdbcConfig;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.bouncycastle.util.encoders.Hex;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -50,9 +56,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
+import java.util.zip.*;
 
 /**
  * 更多测试请参考微基准测试工具jmh
@@ -373,5 +377,62 @@ public final class BaseTest {
         while ((entry = zis.getNextEntry()) != null) {
             System.out.println(entry.getName());
         }
+    }
+
+    /**
+     * 使用 Deflater 压缩数据
+     * 使用 Inflater 解压数据
+     */
+    @Test
+    public void deflater() {
+        String inputString = "Hello, this is a test string to compress using Deflater.";
+        byte[] input = inputString.getBytes();
+        Deflater deflater = new Deflater();
+        deflater.setInput(input);
+        deflater.finish();
+        try (ByteArrayOutputStream compressedOutputStream = new ByteArrayOutputStream(input.length)) {
+            byte[] buffer = new byte[1024];
+            while (!deflater.finished()) {
+                int compressed = deflater.deflate(buffer);
+                compressedOutputStream.write(buffer, 0, compressed);
+            }
+            byte[] compressedOutput = compressedOutputStream.toByteArray();
+            log.info("Original : {}, Size : {}", new String(input), input.length);
+            // 查看压缩后的二进制字节数组, 使用Base64或者十六进制
+            log.info("Compressed : \nBase64 -> {}\nHex -> {}, Size : {}",  Base64.getEncoder().encodeToString(compressedOutput),
+                    Hex.toHexString(compressedOutput), compressedOutput.length);
+            Inflater inflater = new Inflater();
+            inflater.setInput(compressedOutput);
+            try (ByteArrayOutputStream decompressedOutputStream = new ByteArrayOutputStream(compressedOutput.length);) {
+                while (!inflater.finished()) {
+                    int uncompressed = inflater.inflate(buffer);
+                    decompressedOutputStream.write(buffer, 0, uncompressed);
+                }
+                String decompressedOutput = decompressedOutputStream.toString();
+                log.info("Decompressed : {}", decompressedOutput);
+            } catch (IOException | DataFormatException e) {
+                log.info(e.getMessage(), e);
+            }
+        } catch (IOException e) {
+            log.info(e.getMessage(), e);
+        }
+    }
+    @Test
+    public void tmpdir() throws IOException {
+        String tmpdir = System.getProperty("java.io.tmpdir") + File.separator + System.currentTimeMillis() + ".txt";
+        FileCopyUtils.copy("tmpdir".getBytes(), new FileOutputStream(tmpdir));
+        System.out.println(FileCopyUtils.copyToString(new FileReader(tmpdir)));
+        FileUtils.delete(tmpdir);
+    }
+
+    @Test
+    public void readUrl() {
+        Map<String, String> requestProperty = new HashMap<>();
+        requestProperty.put(Header.ACCEPT.getValue(), ContentType.JSON.getValue());
+        requestProperty.put(Header.ACCEPT_LANGUAGE.getValue(), "zh-CN,zh;q=0.90");
+        String token = RandomStringUtils.random(24, true, true);
+        requestProperty.put(Header.AUTHORIZATION.getValue(), "Bearer " + token);
+        System.out.println(FileUtils.readUrl("https://httpbin.org/bearer",
+                ServletUtil.METHOD_GET, requestProperty));
     }
 }

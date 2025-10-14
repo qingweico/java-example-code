@@ -6,13 +6,15 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author zqw
@@ -37,4 +39,39 @@ public class XmlParser {
             log.error(e.getMessage(), e);
         }
     }
+
+    public static void sax(String xmlFile) {
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            SAXParser saxParser = factory.newSAXParser();
+
+            DefaultHandler handler = new DefaultHandler() {
+                @Override
+                public void startElement(String uri, String localName, String qName, Attributes attributes) {
+                    Print.grace("Start Element", qName);
+                }
+
+                @Override
+                public void endElement(String uri, String localName, String qName) {
+                    Print.grace("End Element", qName);
+                }
+
+                @Override
+                public void characters(char[] ch, int start, int length) {
+                    Print.grace("Characters", new String(ch, start, length));
+                }
+            };
+
+            InputStream inputStream = new FileInputStream(xmlFile);
+            saxParser.parse(inputStream, handler);
+        } catch (Exception e) {
+            log.info(e.getMessage(), e);
+        }
+    }
+
+    public static void main(String[] args) {
+        sax("logback.xml");
+    }
+
 }

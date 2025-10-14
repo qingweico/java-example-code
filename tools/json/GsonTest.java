@@ -1,14 +1,22 @@
 package tools.json;
 
+import cn.qingweico.collection.CollectionData;
+import cn.qingweico.io.Print;
+import cn.qingweico.supplier.ObjectFactory;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import misc.tree.MenuTreeNode;
 import object.entity.User;
 import org.junit.Test;
 import thinking.genericity.BasicGenerator;
-import cn.qingweico.collection.CollectionData;
-import cn.qingweico.supplier.ObjectFactory;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 /**
  * --------------- Gson ---------------
@@ -47,5 +55,15 @@ public class GsonTest {
         for (User u : users) {
             System.out.println(u);
         }
+    }
+    @Test
+    public void toJsonByReader() throws FileNotFoundException {
+        Reader reader = new FileReader("misc/tree/MenuTree.json");
+        Gson gson = new Gson();
+        JsonReader jsonReader = gson.newJsonReader(reader);
+        // Type 用来处理泛型
+        Type type = new TypeToken<Map<String, List<MenuTreeNode>>>() {}.getType();
+        Map<String, List<MenuTreeNode>> root = gson.fromJson(jsonReader, type);
+        Print.printColl(root.get("root"));
     }
 }
