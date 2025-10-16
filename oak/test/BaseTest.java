@@ -16,10 +16,12 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import cn.qingweico.collection.CollUtils;
 import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 import cn.qingweico.concurrent.thread.ThreadUtils;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
+import cn.qingweico.database.DatabaseHelper;
 import cn.qingweico.io.FileUtils;
 import cn.qingweico.io.Print;
 import cn.qingweico.model.RequestConfigOptions;
@@ -29,6 +31,9 @@ import cn.qingweico.serialize.SerializeUtil;
 import cn.qingweico.supplier.Builder;
 import cn.qingweico.supplier.ObjectFactory;
 import cn.qingweico.supplier.RandomDataGenerator;
+import com.alibaba.druid.util.JdbcUtils;
+import com.alibaba.druid.util.MySqlUtils;
+import com.zaxxer.hikari.HikariDataSource;
 import frame.db.JdbcConfig;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
@@ -44,11 +49,13 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.FileCopyUtils;
 
+import javax.sql.DataSource;
 import java.io.*;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -432,7 +439,31 @@ public final class BaseTest {
         requestProperty.put(Header.ACCEPT_LANGUAGE.getValue(), "zh-CN,zh;q=0.90");
         String token = RandomStringUtils.random(24, true, true);
         requestProperty.put(Header.AUTHORIZATION.getValue(), "Bearer " + token);
+        Map<String, String> requestBody = new HashMap<>();
+        CollUtils.fillMap(requestBody, 10, () -> UUID.randomUUID().toString(), () -> RandomStringUtils.random(12, true, true));
         System.out.println(FileUtils.readUrl("https://httpbin.org/bearer",
-                ServletUtil.METHOD_GET, requestProperty));
+                ServletUtil.METHOD_GET, requestProperty, null));
+    }
+
+    @Test
+    public void mysqlDatasource() throws SQLException {
+        DataSource dataSource = DatabaseHelper.getDatasource();
+        System.out.println(MySqlUtils.showTables(dataSource.getConnection()));
+        System.out.println(JdbcUtils.executeQuery(dataSource, "select 1"));
+    }
+
+    @Test
+    public void hikari() throws SQLException {
+        HikariDataSource dataSource = DatabaseHelper.getHikari();
+        System.out.println(MySqlUtils.showTables(dataSource.getConnection()));
+        dataSource.close();
+    }
+
+    @Test
+    public void stackTrace() {
+        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
+        for (StackTraceElement stackTraceElement : stackTrace) {
+            System.out.println(stackTraceElement.toString());
+        }
     }
 }

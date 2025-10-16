@@ -5,6 +5,7 @@ import cn.qingweico.io.Print;
 import cn.qingweico.supplier.ObjectFactory;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import misc.tree.MenuTreeNode;
 import object.entity.User;
@@ -40,8 +41,12 @@ public class GsonTest {
     @Test
     public void toPojo() {
         String json = "{\"id\":6953332975908970496,\"username\":\"Dr. Gregory Wiegand\",\"isVip\":false}";
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id", "6953332975908970496");
+        jsonObject.addProperty("username", "Dr. Gregory Wiegand");
         Gson gson = new Gson();
         System.out.println(gson.fromJson(json, User.class));
+        System.out.println(gson.fromJson(jsonObject, User.class));
     }
 
     @Test
