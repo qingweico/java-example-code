@@ -9,7 +9,6 @@ import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.ZipUtil;
 import cn.hutool.extra.emoji.EmojiUtil;
-import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
@@ -24,6 +23,7 @@ import cn.qingweico.constants.Symbol;
 import cn.qingweico.database.DatabaseHelper;
 import cn.qingweico.io.FileUtils;
 import cn.qingweico.io.Print;
+import cn.qingweico.model.HttpRequestEntity;
 import cn.qingweico.model.RequestConfigOptions;
 import cn.qingweico.network.NetworkUtils;
 import cn.qingweico.reflect.ReflectUtils;
@@ -345,16 +345,20 @@ public final class BaseTest {
 
     @Test
     public void getInputStreamByUrl() throws IOException {
-        try (InputStream inputStream = NetworkUtils.getInputStreamByUrl("https://www.baidu.com");) {
+        try (InputStream inputStream = NetworkUtils.getInputStreamByUrl(HttpRequestEntity.builder()
+                .requestUrl("https://www.baidu.com")
+                .build())) {
             System.out.println(FileCopyUtils.copyToString(new InputStreamReader(inputStream)));
         }
     }
 
     @Test
     public void downloadFileByUrl() throws IOException {
-        String url = "https://download.microsoft.com/download/1/4/E/14EDED28-6C58-4055-A65C-23B4DA81C4DE/Financial%20Sample.xlsx";
+        HttpRequestEntity hre = HttpRequestEntity.builder()
+                .requestUrl("https://download.microsoft.com/download/1/4/E/14EDED28-6C58-4055-A65C-23B4DA81C4DE/Financial%20Sample.xlsx")
+                .build();
         File tempFile = new File("temp_excel.xlsx");
-        FileUtil.writeFromStream(NetworkUtils.getInputStreamByUrl(url), tempFile);
+        FileUtil.writeFromStream(NetworkUtils.getInputStreamByUrl(hre), tempFile);
     }
 
     @Test
@@ -441,8 +445,11 @@ public final class BaseTest {
         requestProperty.put(Header.AUTHORIZATION.getValue(), "Bearer " + token);
         Map<String, String> requestBody = new HashMap<>();
         CollUtils.fillMap(requestBody, 10, () -> UUID.randomUUID().toString(), () -> RandomStringUtils.random(12, true, true));
-        System.out.println(FileUtils.readUrl("https://httpbin.org/bearer",
-                ServletUtil.METHOD_GET, requestProperty, null));
+        HttpRequestEntity hre = HttpRequestEntity.builder()
+                .requestUrl("https://httpbin.org/bearer")
+                .requestHeaders(requestProperty)
+                .build();
+        System.out.println(FileUtils.readUrl(hre));
     }
 
     @Test

@@ -3,7 +3,8 @@ package io;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
-import cn.hutool.json.JSONUtil;
+import cn.qingweico.convert.Convert;
+import cn.qingweico.model.HttpRequestEntity;
 import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
@@ -17,7 +18,6 @@ import org.springframework.util.MimeTypeUtils;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -41,19 +41,18 @@ public class OkHttpTest {
                 .build();
     }
 
-    public static String sendPost(String url, Map<String, Object> params) {
-        if (params == null) {
-            params = new HashMap<>(0);
-        }
-        return sendPost(url, params, null, 0);
-    }
 
-    public static String sendPost(String url, Map<String, Object> params, String host, int port) {
+
+    public static String sendPost(HttpRequestEntity hre) {
         Response response = null;
         String responseBodyString = null;
+        String url = hre.getRequestUrl();
+        Map<String, String> requestBody = hre.getRequestBody();
         MediaType mediaType = MediaType.parse(ContentType.JSON.getValue());
         JSONObject jsonObject = new JSONObject();
-        params.forEach(jsonObject::put);
+        if (requestBody != null) {
+            requestBody.forEach(jsonObject::put);
+        }
         RequestBody body = RequestBody.create(jsonObject.toString(), mediaType);
         try {
             Request request = new Request.Builder()
@@ -62,10 +61,10 @@ public class OkHttpTest {
                     .addHeader(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue()).build();
             OkHttpClient.Builder builder = new OkHttpClient()
                     .newBuilder()
-                    .readTimeout(59, TimeUnit.SECONDS)
-                    .connectTimeout(10, TimeUnit.SECONDS);
-            if (StringUtils.isNotEmpty(host)) {
-                builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host, port)));
+                    .readTimeout(hre.getReadTimeout(), TimeUnit.MILLISECONDS)
+                    .connectTimeout(hre.getConnectTimeout(), TimeUnit.MILLISECONDS);
+            if (StringUtils.isNotEmpty(hre.getProxyHost())) {
+                builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(hre.getProxyHost(), hre.getProxyPort())));
             }
             OkHttpClient httpClient = builder.build();
             log.info("POST 请求 URL ===> {}", url);
@@ -151,12 +150,18 @@ public class OkHttpTest {
             Buffer buffer = new Buffer();
             formBody.writeTo(buffer);
             String content = buffer.readUtf8();
-            if (JSONUtil.isTypeJSON(content)) {
-                return new JSONObject(content).toString(4);
-            }
-            return content;
+            return Convert.prettyJson(content);
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public static void main(String[] args) {
+        HttpRequestEntity httpRequestEntity = HttpRequestEntity.builder()
+                .requestUrl("https://google.com.hk/search?q=YouTube")
+                .proxyHost("127.0.0.1")
+                .proxyPort(10808)
+                .build();
+        System.out.println(sendPost(httpRequestEntity));
     }
 }
