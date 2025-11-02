@@ -10,6 +10,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.parsers.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,11 +18,22 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * SAX 是 Simple API for XML 的简称, 其作为 XML 处理的基石技术
+ * w3c 以及 dom4j 和 jaxb 读取 xml
+ *
  * @author zqw
  * @date 2025/8/9
+ * @see cn.hutool.core.util.XmlUtil
+ * @see cn.qingweico.convert.XmlConvert
+ * @see DocumentBuilderFactory W3C DOM(Java 标准 API)
+ * @see SAXParser 是 Java 中基于 SAX 的 XML 解析器(Java 标准 API)
+ * @see org.dom4j.io.SAXReader DOM4J 库
+ * @see JAXBContext Java 标准库中的 SAX 应用(JAXB)
  */
 @Slf4j
 public class XmlParser {
+
+    /*W3C DOM 标准读XML*/
     public static void printXml(String file) {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();

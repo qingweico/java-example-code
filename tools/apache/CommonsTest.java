@@ -47,7 +47,7 @@ public class CommonsTest {
 
     @Test
     public void isNumeric() {
-        // isNumeric : Only Unicode digits, A decimal point is not a Unicode digit
+        // isNumeric: Only Unicode digits, A decimal point is not a Unicode digit
         System.out.println(StringUtils.isNumeric("1"));
         System.out.println(StringUtils.isNumeric("1 2"));
         System.out.println(StringUtils.isNumeric("123abc"));

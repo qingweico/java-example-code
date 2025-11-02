@@ -3,12 +3,11 @@ package io;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
-import cn.qingweico.convert.Convert;
 import cn.qingweico.model.HttpRequestEntity;
+import cn.qingweico.network.NetworkUtils;
 import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
-import okio.Buffer;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -68,7 +67,7 @@ public class OkHttpTest {
             }
             OkHttpClient httpClient = builder.build();
             log.info("POST 请求 URL ===> {}", url);
-            log.info("请求体 ===>  {}", formBodyToString(body));
+            log.info("请求体 ===>  {}", NetworkUtils.formBodyToString(body));
             response = httpClient.newCall(request).execute();
             ResponseBody responseBody = response.body();
             if (responseBody != null) {
@@ -134,7 +133,7 @@ public class OkHttpTest {
                 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36")
                 .addHeader(Header.CONTENT_TYPE.getValue(), ContentType.FORM_URLENCODED.getValue()).build();
         log.info("POST 请求 URL : {}", request.url());
-        log.info("请求体 : {}", formBodyToString(formBody));
+        log.info("请求体 : {}", NetworkUtils.formBodyToString(formBody));
         try (Response response = HTTP_CLIENT.newCall(request).execute()) {
             log.info("response.isSuccessful : {}", response.isSuccessful());
             if (response.body() != null) {
@@ -145,16 +144,7 @@ public class OkHttpTest {
         }
     }
 
-    private static String formBodyToString(RequestBody formBody) {
-        try {
-            Buffer buffer = new Buffer();
-            formBody.writeTo(buffer);
-            String content = buffer.readUtf8();
-            return Convert.prettyJson(content);
-        } catch (IOException e) {
-            return null;
-        }
-    }
+
 
     public static void main(String[] args) {
         HttpRequestEntity httpRequestEntity = HttpRequestEntity.builder()

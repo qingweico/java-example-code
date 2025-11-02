@@ -4,6 +4,7 @@ import cn.hutool.Hutool;
 import cn.hutool.core.collection.EnumerationIter;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -15,11 +16,13 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.setting.yaml.YamlUtil;
 import cn.qingweico.collection.CollUtils;
 import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 import cn.qingweico.concurrent.thread.ThreadUtils;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
+import cn.qingweico.convert.Convert;
 import cn.qingweico.database.DatabaseHelper;
 import cn.qingweico.io.FileUtils;
 import cn.qingweico.io.Print;
@@ -37,6 +40,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import frame.db.JdbcConfig;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bouncycastle.util.encoders.Hex;
@@ -55,6 +59,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileStore;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.time.Duration;
@@ -410,7 +417,7 @@ public final class BaseTest {
             byte[] compressedOutput = compressedOutputStream.toByteArray();
             log.info("Original : {}, Size : {}", new String(input), input.length);
             // 查看压缩后的二进制字节数组, 使用Base64或者十六进制
-            log.info("Compressed : \nBase64 -> {}\nHex -> {}, Size : {}",  Base64.getEncoder().encodeToString(compressedOutput),
+            log.info("Compressed : \nBase64 -> {}\nHex -> {}, Size : {}", Base64.getEncoder().encodeToString(compressedOutput),
                     Hex.toHexString(compressedOutput), compressedOutput.length);
             Inflater inflater = new Inflater();
             inflater.setInput(compressedOutput);
@@ -428,6 +435,7 @@ public final class BaseTest {
             log.info(e.getMessage(), e);
         }
     }
+
     @Test
     public void tmpdir() throws IOException {
         String tmpdir = System.getProperty("java.io.tmpdir") + File.separator + System.currentTimeMillis() + ".txt";
@@ -472,5 +480,34 @@ public final class BaseTest {
         for (StackTraceElement stackTraceElement : stackTrace) {
             System.out.println(stackTraceElement.toString());
         }
+    }
+
+    @Test
+    public void fileStore() throws IOException {
+        // 获取 WindowsFileStore
+        FileStore store = Files.getFileStore(Paths.get("C://"));
+        // JrtFileStore 不支持getTotalSpace(UnsupportedOperationException)
+        // 通过使用 FileSystemsTest#zipFileSystem 创建 ZipFileSystem, 再获取 ZipFileStore
+        System.out.println(Convert.byteCountToDisplaySize(store.getTotalSpace()));
+    }
+
+    @Test
+    public void verbosePrint() {
+        Map<String, Object> map = new HashMap<>();
+        CollUtils.fillMap(map, 10, () -> UUID.randomUUID().toString(), () -> RandomStringUtils.randomAlphanumeric(16));
+        MapUtils.verbosePrint(System.out, null, map);
+    }
+
+    /**
+     * @see org.yaml.snakeyaml.resolver.Resolver 中 no 会被解析为 bool
+     */
+    @Test
+    public void yamlResolver() {
+        Dict dict = YamlUtil.load(new StringReader("""
+                    port: 8080
+                    pic:
+                       no: xxx
+                """));
+        Print.print(dict);
     }
 }
