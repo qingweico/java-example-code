@@ -17,8 +17,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class UriComponentsBuilderTest {
 
     @Test
-    public void buildUri() {
-
-
+    public void urlEncode() {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("http://localhost")
+                .path("/api/a/b")
+                .queryParam("query", "关键字");
+        System.out.println(builder.toUriString());
+        // encoded = true 表示传入的参数已经是经过 URL 编码的, 而不是决定是否要编码, 过去式
+        System.out.println(builder.build(false).toUriString());
     }
 }
