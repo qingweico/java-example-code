@@ -24,6 +24,7 @@ import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
 import cn.qingweico.convert.Convert;
 import cn.qingweico.database.DatabaseHelper;
+import cn.qingweico.database.NamedSqlTmplQuery;
 import cn.qingweico.io.FileUtils;
 import cn.qingweico.io.Print;
 import cn.qingweico.model.HttpRequestEntity;
@@ -36,9 +37,14 @@ import cn.qingweico.supplier.ObjectFactory;
 import cn.qingweico.supplier.RandomDataGenerator;
 import com.alibaba.druid.util.JdbcUtils;
 import com.alibaba.druid.util.MySqlUtils;
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.NativeLong;
+import com.sun.jna.Pointer;
 import com.zaxxer.hikari.HikariDataSource;
 import frame.db.JdbcConfig;
 import lombok.extern.slf4j.Slf4j;
+import misc.CLibrary;
 import object.entity.User;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -48,10 +54,11 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.FileCopyUtils;
+import oshi.SystemInfo;
+import oshi.hardware.GlobalMemory;
+import oshi.hardware.HardwareAbstractionLayer;
 
 import javax.sql.DataSource;
 import java.io.*;
@@ -308,12 +315,14 @@ public final class BaseTest {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(JdbcConfig.class);
         context.register(SpringUtil.class);
+        context.register(NamedSqlTmplQuery.class);
         context.refresh();
-        NamedParameterJdbcTemplate jdbcTemplate = SpringUtil.getBean(NamedParameterJdbcTemplate.class);
+        NamedSqlTmplQuery namedSqlTmplQuery = SpringUtil.getBean(NamedSqlTmplQuery.class);
         String sql = "select username from t_user where id = :id";
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("id", 1L);
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource("id", 1L);
         // Single Column, Multip Column use queryForMap
-        System.out.println(jdbcTemplate.queryForObject(sql, sqlParameterSource, String.class));
+        String result = namedSqlTmplQuery.queryForObject(sql, sqlParameterSource, "String");
+        System.out.println(result);
         context.close();
     }
 
@@ -445,7 +454,7 @@ public final class BaseTest {
     }
 
     @Test
-    public void readUrl() {
+    public void httpRequest() {
         Map<String, String> requestProperty = new HashMap<>();
         requestProperty.put(Header.ACCEPT.getValue(), ContentType.JSON.getValue());
         requestProperty.put(Header.ACCEPT_LANGUAGE.getValue(), "zh-CN,zh;q=0.90");
@@ -457,7 +466,7 @@ public final class BaseTest {
                 .requestUrl("https://httpbin.org/bearer")
                 .requestHeaders(requestProperty)
                 .build();
-        System.out.println(FileUtils.readUrl(hre));
+        System.out.println(NetworkUtils.httpRequest(hre));
     }
 
     @Test
@@ -509,5 +518,40 @@ public final class BaseTest {
                        no: xxx
                 """));
         Print.print(dict);
+    }
+
+    @Test
+    public void jna() {
+        Pointer timePtr = new Memory(Native.LONG_SIZE);
+        long time = CLibrary.INSTANCE.time(timePtr);
+        System.out.println("timestamp: " + time);
+        Pointer tmPtr = CLibrary.INSTANCE.localtime(timePtr);
+        CLibrary.tm timeinfo = new CLibrary.tm(tmPtr);
+
+        System.out.println("Current local time: " +
+                (timeinfo.tm_year + 1900) + "-" +
+                (timeinfo.tm_mon + 1) + "-" +
+                timeinfo.tm_mday + " " +
+                timeinfo.tm_hour + ":" +
+                timeinfo.tm_min + ":" +
+                timeinfo.tm_sec);
+
+
+        Memory buffer = new Memory(32);
+        NativeLong result = CLibrary.INSTANCE.strftime(buffer, new NativeLong(32), "%Y-%m-%d %H:%M:%S", timeinfo);
+
+        if (result.intValue() > 0) {
+            System.out.println("Formatted time: " + buffer.getString(0));
+        }
+    }
+
+    @Test
+    public void oshi() {
+        SystemInfo systemInfo = new SystemInfo();
+        HardwareAbstractionLayer hardware = systemInfo.getHardware();
+        GlobalMemory memory = hardware.getMemory();
+        System.out.println(Convert.byteCountToDisplaySize(memory.getTotal()));
+        System.out.println(memory.getPhysicalMemory());
+        System.out.println(Convert.byteCountToDisplaySize(memory.getAvailable()));
     }
 }

@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.MimeTypeUtils;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -21,10 +20,22 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Mime 常量 {@link ContentType} {@link MimeTypeUtils} {@link org.springframework.util.MimeType}
+ * HTTP Header key/value Constants
  *
  * @author zqw
  * @date 2025/7/23
+ * ----- Key -----
+ * @see org.json.HTTP
+ * @see cn.hutool.http.Header
+ * @see org.apache.http.protocol.HTTP
+ * @see org.springframework.http.HttpHeaders
+ * @see com.google.common.net.HttpHeaders
+ * @see org.apache.http.HttpHeaders
+ * ----- Value -----
+ * @see cn.hutool.http.ContentType
+ * @see org.springframework.http.MediaType
+ * @see org.apache.http.entity.ContentType
+ * @see org.springframework.util.MimeTypeUtils
  */
 @Slf4j
 public class OkHttpTest {
@@ -39,7 +50,6 @@ public class OkHttpTest {
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .build();
     }
-
 
 
     public static String sendPost(HttpRequestEntity hre) {
@@ -143,7 +153,6 @@ public class OkHttpTest {
             log.info("x-www-form-urlencoded POST 请求失败 : {}", e.getMessage(), e);
         }
     }
-
 
 
     public static void main(String[] args) {
