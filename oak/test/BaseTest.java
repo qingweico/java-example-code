@@ -25,6 +25,7 @@ import cn.qingweico.constants.Symbol;
 import cn.qingweico.convert.Convert;
 import cn.qingweico.database.DatabaseHelper;
 import cn.qingweico.database.NamedSqlTmplQuery;
+import cn.qingweico.database.SqlTmplQuery;
 import cn.qingweico.io.FileUtils;
 import cn.qingweico.io.Print;
 import cn.qingweico.model.HttpRequestEntity;
@@ -43,6 +44,7 @@ import com.sun.jna.NativeLong;
 import com.sun.jna.Pointer;
 import com.zaxxer.hikari.HikariDataSource;
 import frame.db.JdbcConfig;
+import frame.db.SqlServerConfig;
 import lombok.extern.slf4j.Slf4j;
 import misc.CLibrary;
 import object.entity.User;
@@ -553,5 +555,18 @@ public final class BaseTest {
         System.out.println(Convert.byteCountToDisplaySize(memory.getTotal()));
         System.out.println(memory.getPhysicalMemory());
         System.out.println(Convert.byteCountToDisplaySize(memory.getAvailable()));
+    }
+
+    @Test
+    public void sqlServer() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(SqlServerConfig.class);
+        context.register(SpringUtil.class);
+        context.register(SqlTmplQuery.class);
+        context.refresh();
+        SqlTmplQuery sqlTmplQuery = SpringUtil.getBean(SqlTmplQuery.class);
+        String sql = "SELECT name FROM sys.tables;";
+        Print.print(sqlTmplQuery.queryForList(sql, "String"));
+        context.close();
     }
 }

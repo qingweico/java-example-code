@@ -1,10 +1,12 @@
 package frame.db;
 
 import cn.qingweico.database.DatabaseHelper;
-import cn.qingweico.database.NamedSqlTmplQuery;
-import cn.qingweico.database.SqlTmplQuery;
 import cn.qingweico.model.enums.DbConProperty;
 import com.zaxxer.hikari.HikariDataSource;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,10 +22,11 @@ import java.util.Properties;
  * @see NamedParameterJdbcTemplate
  */
 @Configuration
-public class JdbcConfig {
+public class JdbcConfig extends AbstractTmplConfig implements ApplicationContextAware {
+    private ApplicationContext applicationContext;
 
     @Bean
-    public DataSource dataSource() {
+    public HikariDataSource hikariDataSource() {
         HikariDataSource hds = new HikariDataSource();
         Properties properties = DatabaseHelper.loadDbConfig();
         hds.setDriverClassName(properties.getProperty(DbConProperty.DRIVE_CLASS_NAME.getProperty()));
@@ -34,18 +37,13 @@ public class JdbcConfig {
     }
 
 
-    /**
-     * @see SqlTmplQuery
-     */
-    @Bean
-    public JdbcTemplate createTemplate(DataSource hds) {
-        return new JdbcTemplate(hds);
+    @Override
+    public DataSource getDataSource() {
+        return applicationContext.getBean(HikariDataSource.class);
     }
-    /**
-     * @see NamedSqlTmplQuery
-     */
-    @Bean
-    public NamedParameterJdbcTemplate createNamedParameterJdbcTemplate(DataSource hds) {
-        return new NamedParameterJdbcTemplate(hds);
+
+    @Override
+    public void setApplicationContext(@NotNull ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }
