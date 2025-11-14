@@ -50,6 +50,7 @@ import misc.CLibrary;
 import object.entity.User;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Test;
@@ -67,6 +68,7 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileStore;
 import java.nio.file.Files;
@@ -536,7 +538,7 @@ public final class BaseTest {
                 timeinfo.tm_mday + " " +
                 timeinfo.tm_hour + ":" +
                 timeinfo.tm_min + ":" +
-                timeinfo.tm_sec);
+                timeinfo.tm_sec + ", 本年的第 " + timeinfo.tm_yday + " 天, 本周的第 " + timeinfo.tm_wday + " 天");
 
 
         Memory buffer = new Memory(32);
@@ -568,5 +570,72 @@ public final class BaseTest {
         String sql = "SELECT name FROM sys.tables;";
         Print.print(sqlTmplQuery.queryForList(sql, "String"));
         context.close();
+    }
+
+    @Test
+    public void printf() {
+        CLibrary.INSTANCE.printf("%s %d", "忆往昔峥嵘岁月".getBytes(StandardCharsets.UTF_8), 20);
+    }
+
+    public String cread(String in) {
+        // 打开文件
+        Pointer ptr = CLibrary.INSTANCE.fopen(in, "r");
+        long sz = getFileSize(in);
+        if (ptr == null || sz == -1) {
+            return StringUtils.EMPTY;
+        }
+        Pointer bufferPtr = new Memory(sz);
+        // 读文件
+        int bytesRead = CLibrary.INSTANCE.fread(bufferPtr, new NativeLong(1), new NativeLong(sz), ptr);
+        byte[] buffer = new byte[bytesRead];
+        bufferPtr.read(0, buffer, 0, bytesRead);
+        String read = new String(buffer, 0, bytesRead, StandardCharsets.UTF_8);
+        // 关闭 Stream
+        CLibrary.INSTANCE.fclose(ptr);
+        return read;
+
+    }
+
+    public static long getFileSize(String filePath) {
+        Pointer filePtr = CLibrary.INSTANCE.fopen(filePath, "rb");
+        if (filePtr == null) {
+            return -1;
+        }
+        int seek = CLibrary.INSTANCE.fseek(filePtr, new NativeLong(0), CLibrary.SEEK_END);
+        if (seek != 0) {
+            CLibrary.INSTANCE.fclose(filePtr);
+            return -1;
+        }
+        long fileSize = CLibrary.INSTANCE.ftell(filePtr).longValue();
+        CLibrary.INSTANCE.fseek(filePtr, new NativeLong(0), CLibrary.SEEK_SET);
+        CLibrary.INSTANCE.fclose(filePtr);
+        return fileSize;
+    }
+
+
+    public void cwrite(String out, String data) {
+        cwrite(out, data, StandardCharsets.UTF_8);
+    }
+
+    public void cwrite(String out, String data, Charset charset) {
+        Pointer ptr = CLibrary.INSTANCE.fopen(out, "w");
+        if (ptr == null) {
+            return;
+        }
+        long size = data.getBytes(charset).length;
+        // 加上一个终止符
+        Pointer bufferPtr = new Memory(size + 1);
+        bufferPtr.setString(0, data, charset.toString());
+        int bytesWritten = CLibrary.INSTANCE.fwrite(bufferPtr, new NativeLong(1),
+                new NativeLong(size), ptr);
+        if (log.isDebugEnabled()) {
+            log.debug("数据写入成功, 写入数据大小为 -> {}", Convert.byteCountToDisplaySize(bytesWritten));
+        }
+        int fclose = CLibrary.INSTANCE.fclose(ptr);
+        if (fclose == 0) {
+            if (log.isDebugEnabled()) {
+                log.debug("已关闭文件流...");
+            }
+        }
     }
 }

@@ -59,4 +59,21 @@ public interface CLibrary extends Library {
 
     NativeLong strftime(Pointer s, NativeLong maxsize, String format, tm timeptr);
 
+
+    int printf(String format, Object... args);
+
+    Pointer fopen(String filename, String mode);
+
+    int fclose(Pointer stream);
+
+    int fread(Pointer ptr, NativeLong size, NativeLong nmemb, Pointer stream);
+
+    int fwrite(Pointer ptr, NativeLong size, NativeLong nmemb, Pointer stream);
+
+    int fseek(Pointer stream, NativeLong offset, int whence);
+    NativeLong ftell(Pointer stream);
+
+    int SEEK_SET = 0;
+    int SEEK_END = 2;
+
 }
