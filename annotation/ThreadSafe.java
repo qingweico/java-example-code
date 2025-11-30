@@ -1,5 +1,7 @@
 package annotation;
 
+import org.apache.http.annotation.ThreadingBehavior;
+
 import java.lang.annotation.*;
 
 /*
@@ -23,6 +25,7 @@ import java.lang.annotation.*;
  * @author Brian Goetz
  * @author Tim Peierls
  * {@code jsr305} {@link javax.annotation.concurrent.ThreadSafe}
+ * @see ThreadingBehavior
  */
 @Documented
 @Target(ElementType.TYPE)

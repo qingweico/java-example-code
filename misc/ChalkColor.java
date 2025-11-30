@@ -1,5 +1,6 @@
 package misc;
 
+import cn.qingweico.io.Print;
 import cn.qingweico.supplier.RandomDataGenerator;
 import jodd.chalk.Chalk;
 import jodd.chalk.Chalk256;
@@ -15,5 +16,11 @@ class ChalkColor {
         chalk.underline();
         chalk.bold();
         chalk.print(RandomDataGenerator.address());
+
+        for (int i = 0; i < 8; i++) {
+            Print.grace(i, Chalk256.chalk()
+                    .bright(i)
+                    .on(RandomDataGenerator.address(true)));
+        }
     }
 }

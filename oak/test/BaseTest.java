@@ -23,6 +23,7 @@ import cn.qingweico.concurrent.thread.ThreadUtils;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
 import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.TimeUnitConverter;
 import cn.qingweico.database.DatabaseHelper;
 import cn.qingweico.database.NamedSqlTmplQuery;
 import cn.qingweico.database.SqlTmplQuery;
@@ -34,6 +35,7 @@ import cn.qingweico.network.NetworkUtils;
 import cn.qingweico.reflect.ReflectUtils;
 import cn.qingweico.serialize.SerializeUtil;
 import cn.qingweico.supplier.Builder;
+import cn.qingweico.supplier.Mathematics;
 import cn.qingweico.supplier.ObjectFactory;
 import cn.qingweico.supplier.RandomDataGenerator;
 import com.alibaba.druid.util.JdbcUtils;
@@ -52,6 +54,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.time.StopWatch;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -75,12 +78,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.MessageFormat;
-import java.time.Duration;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import java.util.zip.*;
 
 /**
@@ -637,5 +641,82 @@ public final class BaseTest {
                 log.debug("已关闭文件流...");
             }
         }
+    }
+
+    @Test
+    public void complexMathCalcV() {
+        System.out.println(Mathematics.complexMathCalc());
+    }
+
+    @Test
+    public void complexMathCalcTime() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        IntStream.range(0, 100).forEach(i -> Mathematics.complexMathCalc());
+        stopWatch.stop();
+        System.out.println(TimeUnitConverter.convertMills(stopWatch.getTime()));
+    }
+
+    @Test
+    public void instant() {
+        Instant now = Instant.now();
+        LocalDate today = now.atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate tomorrow = today.plusDays(1);
+        Instant tomorrowInstant = tomorrow.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        System.out.println("今天的日期: " + today);
+        System.out.println("明天的日期: " + tomorrow);
+        System.out.println("明天的 Instant: " + tomorrowInstant);
+    }
+
+    @Test
+    public void betweenInstantAndLocalDateTimeConversion() {
+        // System.out.println(Duration.ofSeconds(System.currentTimeMillis()).plusDays(1).getSeconds());
+        Instant now = Instant.now();
+        // Instant -> ZonedDateTime -> LocalDateTime
+        LocalDateTime ldt = now.atZone(ZoneId.systemDefault()).toLocalDateTime();
+        // LocalDateTime -> ZonedDateTime
+        ZonedDateTime zdt = ldt.plus(Duration.ofSeconds(5)).atZone(ZoneId.systemDefault());
+        // ZonedDateTime -> Instant
+        System.out.println(zdt.toInstant());
+        // LocalDateTime -> (时区偏移量) Instant
+        System.out.println(ldt.toInstant(ZoneOffset.of("+08:00")));
+    }
+
+    @Test
+    public void zoneId() {
+        ZoneId zoneId = ZoneId.systemDefault();
+        System.out.println(zoneId);
+        System.out.println(zoneId.getRules());
+    }
+
+    /* 使用 ZonedDateTime 获取 ZoneOffset*/
+    @Test
+    public void getZoneOffsetByZdt() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
+        ZoneOffset zoneOffset = zonedDateTime.getOffset();
+        System.out.println(zoneOffset);
+    }
+
+    @Test
+    public void getZoneOffsetOf() {
+        ZoneOffset zoneOffset = ZoneOffset.of("+08:00");
+        System.out.println(zoneOffset);
+    }
+
+    @Test
+    public void getZoneOffsetByZoneId() {
+        ZoneId zoneId = ZoneId.systemDefault();
+        ZoneOffset zoneOffset = zoneId.getRules().getOffset(LocalDateTime.now());
+        System.out.println(zoneOffset);
+    }
+
+    @Test
+    public void epochMilli() {
+        System.out.println(Instant.now().plusSeconds(5).toEpochMilli());
+        System.out.println(Duration.of(5, ChronoUnit.SECONDS)
+                .plusMillis(System.currentTimeMillis())
+                .toMillis());
     }
 }
