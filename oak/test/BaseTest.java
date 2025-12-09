@@ -49,6 +49,9 @@ import frame.db.JdbcConfig;
 import frame.db.SqlServerConfig;
 import lombok.extern.slf4j.Slf4j;
 import misc.CLibrary;
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.modifier.Visibility;
+import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import object.entity.User;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -718,5 +721,15 @@ public final class BaseTest {
         System.out.println(Duration.of(5, ChronoUnit.SECONDS)
                 .plusMillis(System.currentTimeMillis())
                 .toMillis());
+    }
+    @Test
+    public void byteBuddy() {
+        Class<? extends User> loaded = new ByteBuddy()
+                .subclass(User.class)
+                .defineField("idCard", String.class, Visibility.PRIVATE)
+                .make()
+                .load(User.class.getClassLoader(), ClassLoadingStrategy.Default.INJECTION)
+                .getLoaded();
+        System.out.println(Arrays.toString(loaded.getDeclaredFields()));
     }
 }

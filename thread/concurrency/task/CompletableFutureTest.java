@@ -134,9 +134,9 @@ public class CompletableFutureTest {
 
     @Test
     public void thenAccept() {
-        CompletableFuture<Void> cf = CompletableFuture.supplyAsync(() -> 1).thenAccept((result) -> {
-            System.out.println("消费上一步的结果 没有返回值");
-        });
+        CompletableFuture<Void> cf = CompletableFuture
+                .supplyAsync(() -> 1)
+                .thenAccept((result) -> System.out.println("消费上一步的结果 没有返回值"));
         System.out.println(cf.join());
     }
 
