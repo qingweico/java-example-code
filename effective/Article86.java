@@ -1,8 +1,6 @@
 package effective;
 
-import java.io.InvalidObjectException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 /**
  * 谨慎地实现 Serializable 接口
@@ -18,7 +16,4 @@ public class Article86 {
 
     }
 
-    private void readObjectNoData() throws InvalidObjectException {
-        throw new InvalidObjectException("Stream data required");
-    }
 }

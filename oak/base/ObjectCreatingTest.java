@@ -1,9 +1,10 @@
 package oak.base;
 
+import cn.qingweico.serialize.SerializeUtil;
+import cn.qingweico.supplier.ObjectFactory;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
 import org.junit.Test;
-import cn.qingweico.supplier.ObjectFactory;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -26,6 +27,17 @@ public class ObjectCreatingTest {
     // 反射
 
     // 序列化(序列化和反序列化生成的对象不是同一个)
+    // 序列化/反序列化创建的是新对象
+    @Test
+    public void serialize(){
+        User user = ObjectFactory.create(User.class, true);
+        // hashCode 被重写, 使用 System.identityHashCode
+        System.out.println(System.identityHashCode(user));
+        Object deserialize = SerializeUtil.deserialize(SerializeUtil.serialize(user));
+        System.out.println(System.identityHashCode(deserialize));
+        System.out.println(deserialize);
+    }
+
 
     // Unsafe(@see UnsafeTest#createObjectVol)
 

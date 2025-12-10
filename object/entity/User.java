@@ -8,8 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 
 /**
  * @author zqw
@@ -74,4 +73,30 @@ public class User implements Serializable, Cloneable {
             throw new AssertionError();
         }
     }
+
+    @Serial
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        ObjectOutputStream.PutField fields = out.putFields();
+        log.info("序列化前的 id : {}",  this.id);
+        log.info("序列化前的 username : {}",  this.username);
+        fields.put("id", this.id);
+        fields.put("username", "序列化后用户名");
+        out.writeFields();
+    }
+
+    @Serial
+    private void readObject(ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        ObjectInputStream.GetField fields = in.readFields();
+        log.info("序列化后的 id : {}",  fields.get("id", Long.class));
+        log.info("序列化后的 username : {}",  fields.get("username", String.class));
+        this.username = "反序列化后的用户名";
+    }
+
+    @Serial
+    private void readObjectNoData() throws ObjectStreamException {
+        // 该方法用于处理序列化前后对象版本兼容性问题
+        throw new InvalidObjectException("Stream data required");
+    }
+
 }
