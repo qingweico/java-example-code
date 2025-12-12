@@ -11,17 +11,11 @@ import static cn.qingweico.io.Print.*;
  * @author zqw
  * @date 2021/10/28
  */
-public class BinarySearchTree<E extends Comparable<E>> {
+public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K>{
 
-    class Node {
-        E e;
-        Node left;
-        Node right;
-
-        public Node(E e) {
-            this.e = e;
-            this.left = null;
-            this.right = null;
+    private class Node extends BaseNode<Node, K, K> {
+        Node(K k) {
+            super(k, null);
         }
     }
 
@@ -36,65 +30,65 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return size == 0;
     }
 
-    public void add(E e) {
-        root = add(root, e);
+    public void add(K k) {
+        root = add(root, k);
     }
 
-    private Node add(Node node, E e) {
+    private Node add(Node node, K k) {
         if (node == null) {
             size++;
-            return new Node(e);
+            return new Node(k);
         }
-        if (e.compareTo(node.e) < 0) {
-            node.left = add(node.left, e);
-        } else if (e.compareTo(node.e) > 0) {
-            node.right = add(node.right, e);
+        if (k.compareTo(node.key) < 0) {
+            node.left = add(node.left, k);
+        } else if (k.compareTo(node.key) > 0) {
+            node.right = add(node.right, k);
         }
         return node;
     }
 
-    public void put(E e) {
-        Node node = new Node(e);
+    public void put(K k) {
+        Node node = new Node(k);
         if (root == null) {
             root = node;
             size++;
             return;
         }
-        put(root, e);
+        put(root, k);
     }
 
-    private void put(Node node, E e) {
+    private void put(Node node, K k) {
 
-        if (e.compareTo(node.e) < 0) {
+        if (k.compareTo(node.key) < 0) {
             if (node.left == null) {
-                node.left = new Node(e);
+                node.left = new Node(k);
                 size++;
             }
-            put(node.left, e);
-        } else if (e.compareTo(node.e) > 0) {
+            put(node.left, k);
+        } else if (k.compareTo(node.key) > 0) {
             if (node.right == null) {
-                node.right = new Node(e);
+                node.right = new Node(k);
                 size++;
             }
-            put(node.right, e);
+            put(node.right, k);
         }
-        // ignore e.compareTo(node.e) == 0
+        // ignore k.compareTo(node.key) == 0
     }
 
-    public boolean contains(E e) {
-        return contains(root, e);
+    public boolean contains(K k) {
+        return contains(root, k);
     }
 
-    private boolean contains(Node node, E e) {
+    private boolean contains(Node node, K k) {
         if (node == null) {
             return false;
         }
-        if (e.compareTo(node.e) == 0) {
+        if (k.compareTo(node.key) == 0) {
             return true;
-        } else if (e.compareTo(node.e) < 0) {
-            return contains(node.left, e);
+        } else if (k.compareTo(node.key) < 0) {
+            return contains(node.left, k);
         } else {
-            return contains(node.right, e);
+            return contains(node.right, k);
         }
     }
 
@@ -107,7 +101,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (node == null) {
             return;
         }
-        print(node.e + " ");
+        print(node.key + " ");
         preOrder(node.left);
         preOrder(node.right);
     }
@@ -121,7 +115,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         stack.add(node);
         while (!stack.isEmpty()) {
             Node cur = stack.pop();
-            prints(cur.e);
+            prints(cur.key);
             if (cur.right != null) {
                 stack.push(cur.right);
             }
@@ -141,7 +135,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         queue.add(node);
         while (!queue.isEmpty()) {
             Node cur = queue.remove();
-            prints(cur.e);
+            prints(cur.key);
             if (cur.left != null) {
                 queue.add(cur.left);
             }
@@ -174,25 +168,22 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return node == null ? 0 : Math.max(depth(node.left), depth(node.right)) + 1;
     }
 
-    public E min() {
+    public K min() {
         if (size == 0) {
             throw new IllegalStateException("tree size = 0");
         }
-        return min(root).e;
+        return min(root).key;
     }
 
     private Node min(Node node) {
-        if (node.left == null) {
-            return node;
-        }
-        return min(node.left);
+        return minBst(node, createNodeHandler());
     }
 
-    public E max() {
+    public K max() {
         if (size == 0) {
             throw new IllegalStateException("tree size = 0");
         }
-        return max(root).e;
+        return max(root).key;
     }
 
     private Node max(Node node) {
@@ -202,10 +193,10 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return max(node.right);
     }
 
-    public E deleteMin() {
-        E e = min();
+    public K deleteMin() {
+        K k = min();
         root = deleteMin(root);
-        return e;
+        return k;
     }
 
     /**
@@ -214,20 +205,13 @@ public class BinarySearchTree<E extends Comparable<E>> {
      * @see BinarySearchTree#deleteMax(Node)
      */
     private Node deleteMin(Node node) {
-        if (node.left == null) {
-            Node rightNode = node.right;
-            node.right = null;
-            size--;
-            return rightNode;
-        }
-        node.left = deleteMin(node.left);
-        return node;
+        return deleteMinBst(node, createNodeHandler(), n -> size--);
     }
 
-    public E deleteMax() {
-        E e = max();
+    public K deleteMax() {
+        K k = max();
         root = deleteMax(root);
-        return e;
+        return k;
     }
 
     /**
@@ -246,53 +230,24 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return node;
     }
 
-    public void remove(E e) {
-        root = remove(root, e);
+    public void remove(K k) {
+        root = remove(root, k);
     }
 
-    private Node remove(Node node, E e) {
-        if (node == null) {
-            return null;
-        }
-        if (e.compareTo(node.e) < 0) {
-            node.left = remove(node.left, e);
-            return node;
-        } else if (e.compareTo(node.e) > 0) {
-            node.right = remove(node.right, e);
-            return node;
-        } else {
-            // e.compareTo(node.e) == 0
+    /*参考 AvlTree 的 remove*/
+    private Node remove(Node node, K k) {
+        return removeBst(node, k, createNodeHandler(), null, n -> {
+            size--;
+            n.left = null;
+            n.right = null;
+        });
+    }
 
-            //     x
-            //    / \
-            //  null  y
-            if (node.left == null) {
-                Node rightNode = node.right;
-                node.right = null;
-                size--;
-                return rightNode;
-            }
-            //     x
-            //    / \
-            //   y  null
-            if (node.right == null) {
-                Node leftNode = node.left;
-                node.left = null;
-                size--;
-                return leftNode;
-            }
-            //              node                successor
-            //              / \                  /     \
-            //             x   y      ==>       x       y
-            //                / \                      / \
-            //        successor   o                  null o
-            Node successor = min(node.right);
-            successor.right = deleteMin(node.right);
-            successor.left = node.left;
-            node.left = null;
-            node.right = null;
-            return successor;
-        }
+    private BstNodeHandler<Node, K, K> createNodeHandler() {
+        return createStandardBstHandler((key, value) -> {
+            size++;
+            return new Node(key);
+        });
     }
 
     public void printTree() {
@@ -319,7 +274,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         var number = Math.pow(2, h);
         var pos = base + (int) (w / (number * 2));
 
-        var str = node.e.toString();
+        var str = node.key.toString();
         for (int i = 0; i < str.length(); i++) {
             lines[h * 2].setCharAt(pos + i, str.charAt(i));
         }
@@ -347,7 +302,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
             sb.append(generateDepthString(depth)).append("null\n");
             return;
         }
-        sb.append(generateDepthString(depth)).append(node.e).append("\n");
+        sb.append(generateDepthString(depth)).append(node.key).append("\n");
         generateBstString(node.left, depth + 1, sb);
         generateBstString(node.right, depth + 1, sb);
     }

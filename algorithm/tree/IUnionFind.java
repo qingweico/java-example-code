@@ -21,8 +21,8 @@ public interface IUnionFind {
     boolean isConnected(int p, int q);
 
     /**
-     *
-     * @return
+     * 获取并查集中元素的总数量
+     * @return 并查集中元素的总个数
      */
     int size();
 }

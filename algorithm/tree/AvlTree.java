@@ -4,6 +4,9 @@ package algorithm.tree;
 import java.util.NoSuchElementException;
 
 /**
+ * 平衡二叉搜索树
+ * 1. 首先是一颗二叉搜索树（BST）
+ * 2. 平衡因子: 每个节点的左右子树高度差不超过 1
  * @author zqw
  * @date 2021/11/1
  */
@@ -24,18 +27,12 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
         return size == 0;
     }
 
-    private class Node {
-        K key;
-        V value;
-        Node left, right;
+    private class Node extends BaseNode<Node, K, V> {
         int height;
 
         Node(K k, V v) {
-            this.key = k;
-            this.value = v;
-            left = null;
-            right = null;
-            height = 1;
+            super(k, v);
+            this.height = 1;
         }
     }
     // ------------------------------ Public ------------------------------
@@ -45,7 +42,24 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
     }
 
     public void add(K k, V v) {
-        root = add(root, k, v);
+        root = addBst(root, k, v, createNodeHandler(), this::postProcessAfterInsert);
+    }
+
+    /**
+     * AVL树插入后处理: 执行平衡调整
+     */
+    private Node postProcessAfterInsert(Node node) {
+        return rebalance(node);
+    }
+
+    /**
+     * 创建AVL树的节点
+     */
+    private BstNodeHandler<Node, K, V> createNodeHandler() {
+        return createStandardBstHandler((key, value) -> {
+            size++;
+            return new Node(key, value);
+        });
     }
 
     public K min() {
@@ -195,52 +209,9 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
     }
 
-    private Node add(Node node, K k, V v) {
-        if (node == null) {
-            size++;
-            return new Node(k, v);
-        }
-        if (k.compareTo(node.key) < 0) {
-            node.left = add(node.left, k, v);
-        } else if (k.compareTo(node.key) > 0) {
-            node.right = add(node.right, k, v);
-        } else {
-            node.value = v;
-        }
-        node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
-        int balanceFactor = getBalanceFactor(node);
-        // RR
-        if (balanceFactor > 1 && getBalanceFactor((node.left)) >= 0) {
-            return rightRotate(node);
-        }
-        // LL
-        if (balanceFactor < -1 && getBalanceFactor((node.right)) <= 0) {
-            return leftRotate(node);
-        }
-        // LR
-        if (balanceFactor > 1 && getBalanceFactor((node.left)) < 0) {
-            node.left = leftRotate(node.left);
-            return rightRotate(node);
-        }
-        // RL
-        if (balanceFactor < -1 && getBalanceFactor((node.right)) > 0) {
-            node.right = rightRotate(node.right);
-            return leftRotate(node);
-        }
-        return node;
-    }
 
     private Node getNode(Node node, K k) {
-        if (node == null) {
-            return null;
-        }
-        if (k.compareTo(node.key) == 0) {
-            return node;
-        } else if (k.compareTo(node.key) < 0) {
-            return getNode(node.left, k);
-        } else {
-            return getNode(node.right, k);
-        }
+        return getNode(node, k, n -> n.key, n -> n.left, n -> n.right);
     }
 
     // ------------------------------ Private ------------------------------
@@ -264,7 +235,7 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
             node.right = remove(node.right, k);
             cur = node;
         } else {
-            // e.compareTo(node.e) == 0
+            // k.compareTo(node.key) == 0
 
             if (node.left == null) {
                 Node rightNode = node.right;
@@ -288,27 +259,7 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
         if (cur == null) {
             return null;
         }
-        cur.height = 1 + Math.max(getHeight(cur.left), getHeight(cur.right));
-        int balanceFactor = getBalanceFactor(cur);
-        // RR
-        if (balanceFactor > 1 && getBalanceFactor((cur.left)) >= 0) {
-            return rightRotate(cur);
-        }
-        // LL
-        if (balanceFactor < -1 && getBalanceFactor((cur.right)) <= 0) {
-            return leftRotate(cur);
-        }
-        // LR
-        if (balanceFactor > 1 && getBalanceFactor((cur.left)) < 0) {
-            node.left = leftRotate(cur.left);
-            return rightRotate(cur);
-        }
-        // RL
-        if (balanceFactor < 1 && getBalanceFactor((cur.right)) > 0) {
-            node.right = rightRotate(cur.right);
-            return leftRotate(cur);
-        }
-        return cur;
+        return rebalance(cur);
     }
 
     private boolean isValidBst(Node node, K min) {
@@ -324,27 +275,27 @@ public class AvlTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
         return false;
     }
 
-    private Node handleRotate(Node node, Node cur) {
-        setHeight(cur);
-        int balanceFactor = getBalanceFactor(cur);
+    private Node rebalance(Node node) {
+        setHeight(node);
+        int balanceFactor = getBalanceFactor(node);
         // RR
-        if (balanceFactor > 1 && getBalanceFactor((cur.left)) >= 0) {
-            return rightRotate(cur);
+        if (balanceFactor > 1 && getBalanceFactor((node.left)) >= 0) {
+            return rightRotate(node);
         }
         // LL
-        if (balanceFactor < -1 && getBalanceFactor((cur.right)) <= 0) {
-            return leftRotate(cur);
+        if (balanceFactor < -1 && getBalanceFactor((node.right)) <= 0) {
+            return leftRotate(node);
         }
         // LR
-        if (balanceFactor > 1 && getBalanceFactor((cur.left)) < 0) {
-            node.left = leftRotate(cur.left);
-            return rightRotate(cur);
+        if (balanceFactor > 1 && getBalanceFactor((node.left)) < 0) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
         }
         // RL
-        if (balanceFactor < -1 && getBalanceFactor((cur.right)) > 0) {
-            node.right = leftRotate(cur.right);
-            return leftRotate(cur);
+        if (balanceFactor < -1 && getBalanceFactor((node.right)) > 0) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
         }
-        return cur;
+        return node;
     }
 }

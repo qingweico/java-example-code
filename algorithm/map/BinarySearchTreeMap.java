@@ -1,12 +1,14 @@
 package algorithm.map;
 
+import algorithm.tree.AbstractTree;
+
 import java.util.NoSuchElementException;
 
 /**
  * @author zqw
  * @date 2021/10/31
  */
-public class BinarySearchTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
+public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractTree<K, V> implements Map<K, V> {
     private Node root;
     private int size;
 
@@ -15,50 +17,32 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> implements Map<K, V
         size = 0;
     }
 
-    private class Node {
-        K key;
-        V value;
-        Node left, right;
-
+    /**
+     * 二叉搜索树节点
+     */
+    private class Node extends BaseNode<Node, K, V> {
         Node(K k, V v) {
-            this.key = k;
-            this.value = v;
-            left = null;
-            right = null;
+            super(k, v);
         }
     }
 
     @Override
     public void add(K k, V v) {
-        root = add(root, k, v);
+        root = addBst(root, k, v, createNodeHandler(), null);
     }
 
-    private Node add(Node node, K k, V v) {
-        if (node == null) {
+    /**
+     * 创建节点处理器
+     */
+    private BstNodeHandler<Node, K, V> createNodeHandler() {
+        return createStandardBstHandler((key, value) -> {
             size++;
-            return new Node(k, v);
-        }
-        if (k.compareTo(node.key) < 0) {
-            node.left = add(node.left, k, v);
-        } else if (k.compareTo(node.key) > 0) {
-            node.right = add(node.right, k, v);
-        } else {
-            node.value = v;
-        }
-        return node;
+            return new Node(key, value);
+        });
     }
 
     private Node getNode(Node node, K k) {
-        if (node == null) {
-            return null;
-        }
-        if (k.compareTo(node.key) == 0) {
-            return node;
-        } else if (k.compareTo(node.key) < 0) {
-            return getNode(node.left, k);
-        } else {
-            return getNode(node.right, k);
-        }
+        return getNode(node, k, n -> n.key, n -> n.left, n -> n.right);
     }
 
 
@@ -105,37 +89,11 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> implements Map<K, V
     }
 
     private Node remove(Node node, K k) {
-        if (node == null) {
-            return null;
-        }
-        if (k.compareTo(node.key) < 0) {
-            node.left = remove(node.left, k);
-            return node;
-        } else if (k.compareTo(node.key) > 0) {
-            node.right = remove(node.right, k);
-            return node;
-        } else {
-            // k == node.key
-
-            if (node.left == null) {
-                Node rightNode = node.right;
-                node.right = null;
-                size--;
-                return rightNode;
-            }
-            if (node.right == null) {
-                Node leftNode = node.left;
-                node.left = null;
-                size--;
-                return leftNode;
-            }
-            Node successor = min(node.right);
-            successor.right = deleteMin(node.right);
-            successor.left = node.left;
-            node.left = null;
-            node.right = null;
-            return successor;
-        }
+        return removeBst(node, k, createNodeHandler(), null, n -> {
+            size--;
+            n.left = null;
+            n.right = null;
+        });
     }
 
     public K min() {
@@ -146,10 +104,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> implements Map<K, V
     }
 
     private Node min(Node node) {
-        if (node.left == null) {
-            return node;
-        }
-        return min(node.left);
+        return minBst(node, createNodeHandler());
     }
 
     public K deleteMin() {
@@ -159,13 +114,9 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> implements Map<K, V
     }
 
     private Node deleteMin(Node node) {
-        if (node.left == null) {
-            Node rightNode = node.right;
-            node.right = null;
+        return deleteMinBst(node, createNodeHandler(), n -> {
             size--;
-            return rightNode;
-        }
-        node.left = deleteMin(node.left);
-        return node;
+            n.right = null;
+        });
     }
 }

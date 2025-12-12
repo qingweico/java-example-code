@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
  * @author zqw
  * @date 2021/11/1
  */
-public class RedBlackTree<K extends Comparable<K>, V> extends AbstractTree {
+public class RedBlackTree<K extends Comparable<K>, V> extends AbstractTree<K, V> {
 
     private Node root;
     private int size;
@@ -38,18 +38,15 @@ public class RedBlackTree<K extends Comparable<K>, V> extends AbstractTree {
         return size == 0;
     }
 
-    private class Node {
-        K key;
-        V value;
-        Node left, right;
+    /**
+     * 红黑树节点,继承BaseNode并添加color字段
+     */
+    private class Node extends BaseNode<Node, K, V> {
         boolean color;
 
         Node(K k, V v) {
-            this.key = k;
-            this.value = v;
-            left = null;
-            right = null;
-            color = RED;
+            super(k, v);
+            this.color = RED;
         }
     }
 
@@ -85,22 +82,28 @@ public class RedBlackTree<K extends Comparable<K>, V> extends AbstractTree {
     }
 
     public void add(K k, V v) {
-        root = add(root, k, v);
+        root = addBst(root, k, v, createNodeHandler(), this::postProcessAfterInsert);
         root.color = BLACK;
     }
 
-    private Node add(Node node, K k, V v) {
-        if (node == null) {
+    /**
+     * 红黑树插入后处理：执行颜色调整和旋转
+     */
+    private Node postProcessAfterInsert(Node node) {
+        return adjustColors(node);
+    }
+
+    /**
+     * 创建红黑树的节点处理器
+     */
+    private BstNodeHandler<Node, K, V> createNodeHandler() {
+        return createStandardBstHandler((key, value) -> {
             size++;
-            return new Node(k, v);
-        }
-        if (k.compareTo(node.key) < 0) {
-            node.left = add(node.left, k, v);
-        } else if (k.compareTo(node.key) > 0) {
-            node.right = add(node.right, k, v);
-        } else {
-            node.value = v;
-        }
+            return new Node(key, value);
+        });
+    }
+
+    private Node adjustColors(Node node) {
         if (isRed(node.right) && !isRed(node.left)) {
             node = leftRotate(node);
         }
@@ -118,16 +121,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends AbstractTree {
     }
 
     private Node getNode(Node node, K k) {
-        if (node == null) {
-            return null;
-        }
-        if (k.compareTo(node.key) == 0) {
-            return node;
-        } else if (k.compareTo(node.key) < 0) {
-            return getNode(node.left, k);
-        } else {
-            return getNode(node.right, k);
-        }
+        return getNode(node, k, n -> n.key, n -> n.left, n -> n.right);
     }
 
     public V get(K k) {
