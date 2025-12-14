@@ -50,7 +50,7 @@ public abstract class AbstractTree<K extends Comparable<K>, V> {
      * @param getRight 获取右子节点的函数
      * @param <N>      Node类型
      * @param <K>      Key类型
-     * @return 找到的节点,如果不存在返回null
+     * @return 找到的节点, 如果不存在返回null
      */
     protected static <N, K extends Comparable<K>> N getNode(
             N node, K key,

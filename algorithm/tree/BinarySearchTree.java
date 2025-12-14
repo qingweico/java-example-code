@@ -11,11 +11,11 @@ import static cn.qingweico.io.Print.*;
  * @author zqw
  * @date 2021/10/28
  */
-public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K>{
+public class BinarySearchTree<E extends Comparable<E>> extends AbstractTree<E, Void>{
 
-    private class Node extends BaseNode<Node, K, K> {
-        Node(K k) {
-            super(k, null);
+    private class Node extends BaseNode<Node, E, Void> {
+        Node(E e) {
+            super(e, null);
         }
     }
 
@@ -30,65 +30,65 @@ public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K
         return size == 0;
     }
 
-    public void add(K k) {
-        root = add(root, k);
+    public void add(E e) {
+        root = add(root, e);
     }
 
-    private Node add(Node node, K k) {
+    private Node add(Node node, E e) {
         if (node == null) {
             size++;
-            return new Node(k);
+            return new Node(e);
         }
-        if (k.compareTo(node.key) < 0) {
-            node.left = add(node.left, k);
-        } else if (k.compareTo(node.key) > 0) {
-            node.right = add(node.right, k);
+        if (e.compareTo(node.key) < 0) {
+            node.left = add(node.left, e);
+        } else if (e.compareTo(node.key) > 0) {
+            node.right = add(node.right, e);
         }
         return node;
     }
 
-    public void put(K k) {
-        Node node = new Node(k);
+    public void put(E e) {
+        Node node = new Node(e);
         if (root == null) {
             root = node;
             size++;
             return;
         }
-        put(root, k);
+        put(root, e);
     }
 
-    private void put(Node node, K k) {
+    private void put(Node node, E e) {
 
-        if (k.compareTo(node.key) < 0) {
+        if (e.compareTo(node.key) < 0) {
             if (node.left == null) {
-                node.left = new Node(k);
+                node.left = new Node(e);
                 size++;
             }
-            put(node.left, k);
-        } else if (k.compareTo(node.key) > 0) {
+            put(node.left, e);
+        } else if (e.compareTo(node.key) > 0) {
             if (node.right == null) {
-                node.right = new Node(k);
+                node.right = new Node(e);
                 size++;
             }
-            put(node.right, k);
+            put(node.right, e);
         }
-        // ignore k.compareTo(node.key) == 0
+        // ignore e.compareTo(node.key) == 0
     }
 
-    public boolean contains(K k) {
-        return contains(root, k);
+    public boolean contains(E e) {
+        return contains(root, e);
     }
 
-    private boolean contains(Node node, K k) {
+    private boolean contains(Node node, E e) {
         if (node == null) {
             return false;
         }
-        if (k.compareTo(node.key) == 0) {
+        if (e.compareTo(node.key) == 0) {
             return true;
-        } else if (k.compareTo(node.key) < 0) {
-            return contains(node.left, k);
+        } else if (e.compareTo(node.key) < 0) {
+            return contains(node.left, e);
         } else {
-            return contains(node.right, k);
+            return contains(node.right, e);
         }
     }
 
@@ -168,7 +168,7 @@ public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K
         return node == null ? 0 : Math.max(depth(node.left), depth(node.right)) + 1;
     }
 
-    public K min() {
+    public E min() {
         if (size == 0) {
             throw new IllegalStateException("tree size = 0");
         }
@@ -179,7 +179,7 @@ public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K
         return minBst(node, createNodeHandler());
     }
 
-    public K max() {
+    public E max() {
         if (size == 0) {
             throw new IllegalStateException("tree size = 0");
         }
@@ -193,10 +193,10 @@ public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K
         return max(node.right);
     }
 
-    public K deleteMin() {
-        K k = min();
+    public E deleteMin() {
+        E e = min();
         root = deleteMin(root);
-        return k;
+        return e;
     }
 
     /**
@@ -208,10 +208,10 @@ public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K
         return deleteMinBst(node, createNodeHandler(), n -> size--);
     }
 
-    public K deleteMax() {
-        K k = max();
+    public E deleteMax() {
+        E e = max();
         root = deleteMax(root);
-        return k;
+        return e;
     }
 
     /**
@@ -230,20 +230,20 @@ public class BinarySearchTree<K extends Comparable<K>> extends AbstractTree<K, K
         return node;
     }
 
-    public void remove(K k) {
-        root = remove(root, k);
+    public void remove(E e) {
+        root = remove(root, e);
     }
 
     /*参考 AvlTree 的 remove*/
-    private Node remove(Node node, K k) {
-        return removeBst(node, k, createNodeHandler(), null, n -> {
+    private Node remove(Node node, E e) {
+        return removeBst(node, e, createNodeHandler(), null, n -> {
             size--;
             n.left = null;
             n.right = null;
         });
     }
 
-    private BstNodeHandler<Node, K, K> createNodeHandler() {
+    private BstNodeHandler<Node, E, Void> createNodeHandler() {
         return createStandardBstHandler((key, value) -> {
             size++;
             return new Node(key);
