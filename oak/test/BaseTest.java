@@ -22,7 +22,7 @@ import cn.qingweico.concurrent.pool.ThreadPoolBuilder;
 import cn.qingweico.concurrent.thread.ThreadUtils;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.constants.Symbol;
-import cn.qingweico.convert.Convert;
+import cn.qingweico.convert.ByteUnitConverter;
 import cn.qingweico.convert.TimeUnitConverter;
 import cn.qingweico.database.DatabaseHelper;
 import cn.qingweico.database.NamedSqlTmplQuery;
@@ -508,7 +508,7 @@ public final class BaseTest {
         FileStore store = Files.getFileStore(Paths.get("C://"));
         // JrtFileStore 不支持getTotalSpace(UnsupportedOperationException)
         // 通过使用 FileSystemsTest#zipFileSystem 创建 ZipFileSystem, 再获取 ZipFileStore
-        System.out.println(Convert.byteCountToDisplaySize(store.getTotalSpace()));
+        System.out.println(ByteUnitConverter.convert(store.getTotalSpace()));
     }
 
     @Test
@@ -561,9 +561,9 @@ public final class BaseTest {
         SystemInfo systemInfo = new SystemInfo();
         HardwareAbstractionLayer hardware = systemInfo.getHardware();
         GlobalMemory memory = hardware.getMemory();
-        System.out.println(Convert.byteCountToDisplaySize(memory.getTotal()));
+        System.out.println(ByteUnitConverter.convert(memory.getTotal()));
         System.out.println(memory.getPhysicalMemory());
-        System.out.println(Convert.byteCountToDisplaySize(memory.getAvailable()));
+        System.out.println(ByteUnitConverter.convert(memory.getAvailable()));
     }
 
     @Test
@@ -636,7 +636,7 @@ public final class BaseTest {
         int bytesWritten = CLibrary.INSTANCE.fwrite(bufferPtr, new NativeLong(1),
                 new NativeLong(size), ptr);
         if (log.isDebugEnabled()) {
-            log.debug("数据写入成功, 写入数据大小为 -> {}", Convert.byteCountToDisplaySize(bytesWritten));
+            log.debug("数据写入成功, 写入数据大小为 -> {}", ByteUnitConverter.convert(bytesWritten));
         }
         int fclose = CLibrary.INSTANCE.fclose(ptr);
         if (fclose == 0) {
