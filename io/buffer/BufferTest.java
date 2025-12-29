@@ -1,7 +1,7 @@
 package io.buffer;
 
 import cn.qingweico.constants.Constants;
-import cn.qingweico.convert.NumberFormatter;
+import cn.qingweico.convert.NumberConvert;
 import cn.qingweico.io.Print;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.util.internal.SystemPropertyUtil;
@@ -99,7 +99,7 @@ public class BufferTest {
             buffer.put(s.getBytes());
             buffer.flip();
             int written = fileChannel.write(buffer);
-            System.out.format("written byte : %s, time : %sms", written, NumberFormatter.fixDouble((System.nanoTime() - start) / 1000_000.0));
+            System.out.format("written byte : %s, time : %sms", written, NumberConvert.fixDouble((System.nanoTime() - start) / 1000_000.0));
         }
     }
 
