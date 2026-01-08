@@ -3,8 +3,8 @@ package frame.db.migration;
 import frame.db.gen.SqlExecutor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.shardingsphere.driver.api.yaml.YamlShardingSphereDataSourceFactory;
-import rx.Observable;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import cn.qingweico.io.Print;
 
 import java.io.File;

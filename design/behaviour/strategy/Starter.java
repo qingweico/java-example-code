@@ -1,7 +1,7 @@
 package design.behaviour.strategy;
 
 import cn.hutool.json.JSONUtil;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import cn.qingweico.model.ApiResponse;
 import cn.qingweico.supplier.SnowflakeIdWorker;

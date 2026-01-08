@@ -3,13 +3,13 @@ package tools.apache;
 import org.apache.commons.collections.BidiMap;
 import org.apache.commons.collections.bidimap.TreeBidiMap;
 import org.apache.commons.collections.list.LazyList;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.text.CaseUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.text.WordUtils;
 import org.junit.Test;
 import cn.qingweico.io.Print;
@@ -123,7 +123,7 @@ public class CommonsTest {
         System.out.println(ClassUtils.getPackageName(CommonsTest.class));
 
         // HTML 标签转义
-        System.out.println(StringEscapeUtils.escapeHtml("<html>"));
+        System.out.println(StringEscapeUtils.escapeHtml4("<html>"));
 
         System.out.println(StringUtils.join(s1, ","));
         System.out.println(StringUtils.rightPad("abc", 6, '0'));

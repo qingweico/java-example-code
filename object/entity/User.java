@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.util.Objects;
 
 /**
  * @author zqw
@@ -51,8 +52,11 @@ public class User implements Serializable, Cloneable {
         if (this == o) {
             return true;
         }
-        return o instanceof User;
-
+        if (!(o instanceof User user)) {
+            return false;
+        }
+        return Objects.equals(id, user.id) &&
+                Objects.equals(username, user.username);
     }
 
     @Override
