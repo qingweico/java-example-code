@@ -1,4 +1,4 @@
-package design.singleton;
+package design.creational.singleton;
 
 import cn.qingweico.concurrent.pool.ThreadObjectPool;
 import cn.qingweico.constants.Constants;

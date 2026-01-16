@@ -1,7 +1,7 @@
-package design.factory;
+package design.creational.factory;
 
-import org.testng.annotations.Test;
 import cn.qingweico.constants.Constants;
+import org.testng.annotations.Test;
 
 import java.util.Scanner;
 
@@ -41,6 +41,7 @@ public class SimpleBaseFactoryTest {
         System.out.println(product);
         scanner.close();
     }
+
     @Test
     public void simpleFactory() {
         SimpleBaseFactoryTest simpleFactory = new SimpleBaseFactoryTest();

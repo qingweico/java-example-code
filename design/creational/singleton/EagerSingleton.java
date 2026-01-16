@@ -1,4 +1,4 @@
-package design.singleton;
+package design.creational.singleton;
 
 /**
  * @author zqw

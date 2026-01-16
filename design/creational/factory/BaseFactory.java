@@ -1,4 +1,4 @@
-package design.factory;
+package design.creational.factory;
 
 /**
  * 工厂方法
