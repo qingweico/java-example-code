@@ -1,4 +1,4 @@
-package design.adapter;
+package design.structural.adapter;
 
 import lombok.AllArgsConstructor;
 
