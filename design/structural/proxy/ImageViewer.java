@@ -1,4 +1,4 @@
-package design.proxy;
+package design.structural.proxy;
 
 import java.net.MalformedURLException;
 import java.net.URL;

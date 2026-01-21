@@ -1,4 +1,6 @@
-package design.proxy;
+package design.structural.proxy;
+
+import lombok.Getter;
 
 import java.net.URL;
 
@@ -7,17 +9,12 @@ import java.net.URL;
  * @date 2022/3/10
  */
 public class HighResolutionImage implements Image {
-    private URL imageUrl;
-    private long startTime;
-    private long width;
-    private long height;
-
-    public long getWidth() {
-        return width;
-    }
-    public long getHeight() {
-        return height;
-    }
+    private final URL imageUrl;
+    private final long startTime;
+    @Getter
+    private final long width;
+    @Getter
+    private final long height;
 
     public HighResolutionImage(URL imageUrl) {
         this.imageUrl = imageUrl;

@@ -1,4 +1,4 @@
-package design.observer;
+package design.behaviour.observer;
 
 /**
  * @author zqw

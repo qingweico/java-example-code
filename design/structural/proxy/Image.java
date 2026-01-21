@@ -1,4 +1,4 @@
-package design.proxy;
+package design.structural.proxy;
 
 /**
  * @author zqw

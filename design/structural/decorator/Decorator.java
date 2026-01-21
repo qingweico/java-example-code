@@ -1,8 +1,8 @@
-package design.decorator;
+package design.structural.decorator;
 
 
 /**
- * Decorator mode
+ * Decorator mode: 装饰器模式允许在不修改原类的情况下, 给对象增加新的功能
  *
  * @author zqw
  * @date 2020/11/5

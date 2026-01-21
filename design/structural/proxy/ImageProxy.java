@@ -1,4 +1,4 @@
-package design.proxy;
+package design.structural.proxy;
 
 import cn.qingweico.concurrent.UnsafeSupport;
 
