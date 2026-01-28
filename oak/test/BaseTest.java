@@ -61,6 +61,8 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigUtils;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.util.ClassUtils;
@@ -731,5 +733,25 @@ public final class BaseTest {
                 .load(User.class.getClassLoader(), ClassLoadingStrategy.Default.INJECTION)
                 .getLoaded();
         System.out.println(Arrays.toString(loaded.getDeclaredFields()));
+    }
+
+    @Test
+    public void dbTimestamp() {
+        GenericApplicationContext context = new GenericApplicationContext();
+        AnnotationConfigUtils.registerAnnotationConfigProcessors(context);
+        context.registerBean(JdbcConfig.class);
+        context.registerBean(SqlTmplQuery.class);
+        context.refresh();
+        SqlTmplQuery sqlTmplQuery = context.getBean(SqlTmplQuery.class);
+        String now = sqlTmplQuery.queryForObject("SELECT NOW();", "String");
+        long unixTimestamp = sqlTmplQuery.queryForObject("SELECT UNIX_TIMESTAMP(NOW());", "long");
+        context.close();
+        // NOW() 会受 session time_zone 影响
+        // 但 UNIX_TIMESTAMP(NOW()) 的结果不会(因为都会先转换为 UTC, 最终 UTC 一样, 时间戳当然一样)
+        System.out.println(now);
+        System.out.println(unixTimestamp);
+        System.out.println(System.currentTimeMillis());
+        System.out.println(new Date(unixTimestamp * 1000));
+        System.out.println(new Date(System.currentTimeMillis()));
     }
 }
