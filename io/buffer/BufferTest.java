@@ -221,8 +221,8 @@ public class BufferTest {
 
     @Test
     public void oom() {
-        // java.nio.Bits#reserverMemory 中 System.gc() 被显示地调用
-        // VM: -XX:+DisableExplicitGC 禁用显示 GC 比如 System.gc()
+        // java.nio.Bits#reserveMemory 中 System.gc() 被显式地调用
+        // VM: -XX:+DisableExplicitGC 禁用显式 GC, 比如 System.gc()
     }
 
     @Test

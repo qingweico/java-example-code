@@ -112,7 +112,7 @@ class SetList {
             set.remove(i);
             // boolean remove(Object o);
             list.remove((Integer) i);
-            //list.remove(i); 选择该重载方法 E remove(int index); 会改变集合中元素的顺序
+            // list.remove(i); 选择该重载方法 E remove(int index); 会改变集合中元素的顺序
         }
         System.out.println(set + " " + list);
     }

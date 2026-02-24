@@ -1,8 +1,10 @@
 package io;
 
+import cn.qingweico.constants.Constants;
 import cn.qingweico.supplier.RandomDataGenerator;
 import lombok.extern.slf4j.Slf4j;
 import object.entity.User;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.Scanner;
@@ -35,7 +37,7 @@ interface UserDao {
 
 @Slf4j
 class UserDaoImpl implements UserDao {
-    static File userFile = new File("C://Java/user.txt");
+    static File userFile = new File(Constants.DEFAULT_FILE_PATH_MAME);
 
     static {
         if (!userFile.exists()) {
@@ -60,7 +62,9 @@ class UserDaoImpl implements UserDao {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split("-----");
-                if (data[0].equals(username) && data[1].equals(password)) {
+                if (data.length >= 2 &&
+                        StringUtils.equals(data[0], username)
+                        && StringUtils.equals(data[1], password)){
                     flag = true;
                     break;
                 }

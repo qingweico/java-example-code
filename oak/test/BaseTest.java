@@ -200,7 +200,7 @@ public final class BaseTest {
 
     @Test
     public void timeUnit() {
-        // 600s 将给定参数 转换为 unit 相对应的单位的秒数
+        // 600s 将给定参数转换为 unit 相对应的单位的秒数
         System.out.println(TimeUnit.MINUTES.toSeconds(10));
     }
 
