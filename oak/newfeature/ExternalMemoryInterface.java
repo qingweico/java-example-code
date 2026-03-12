@@ -40,7 +40,7 @@ class ExternalMemoryInterface {
     public static void main(String[] args) {
 
         int sz = Constants.BYTE;
-        // 实现了 AutoCloseable 的接口 就可以使用 try-with-resource 这样的语句,,及时地释放掉它管理的内存了
+        // 实现了 AutoCloseable 的接口 就可以使用 try-with-resource 这样的语句, 及时地释放掉它管理的内存了
         // 解决了 ByteBuffer 的第一个缺陷
         try (ResourceScope scope = ResourceScope.newConfinedScope()) {
             MemorySegment segment = MemorySegment.allocateNative(sz, scope);

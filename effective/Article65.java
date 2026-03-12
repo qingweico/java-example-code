@@ -28,7 +28,7 @@ class Article65 {
         } catch (ClassNotFoundException e) {
             fatalError("Class not found");
         }
-        // Get the construct
+        // Get the constructor
         Constructor<? extends Set<String>> cons = null;
         try {
             cons = cls.getDeclaredConstructor();
