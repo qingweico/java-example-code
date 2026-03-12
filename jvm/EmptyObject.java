@@ -10,7 +10,7 @@ package jvm;
 class EmptyObject {
     @SuppressWarnings("unused")
     public static void main(String[] args) {
-        // VM　options: -javaagent:lib\InstrumentationAgent.jar
+        // VM　options: -javaagent:lib/InstrumentationAgent.jar
         // 对象头(MarkWord) 占用8个字节
         // 类型指针(class point) 占用4个字节
         // 实例数据

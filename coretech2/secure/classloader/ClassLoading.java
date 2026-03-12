@@ -1,7 +1,7 @@
 package coretech2.secure.classloader;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -28,18 +28,13 @@ import java.net.URLClassLoader;
 class ClassLoading {
     public static void main(String[] args) {
         // 加载插件类
-        URL url = null;
-        try {
-            url = new URL("file:///lib/InstrumentationAgent.jar");
-        } catch (MalformedURLException e) {
-            System.err.println("url error");
-        }
-        try (var loader = new URLClassLoader(new URL[]{url})) {
-            // TODO JDK11 JDK14 重新编辑jar即可
+        File jar = new File("lib/InstrumentationAgent.jar");
+
+        try (var loader = new URLClassLoader(new URL[]{jar.toURI().toURL()})) {
             // UnsupportedClassVersionError: InstrumentationAgent has been compiled by
             // a more recent version of the Java Runtime (class file version 58.0), this
             // version of the Java Runtime only recognizes class file versions up to 55.0
-            Class<?> cls = loader.loadClass("InstrumentationAgent");
+            Class<?> cls = loader.loadClass("jvm.InstrumentationAgent");
             System.out.println(cls);
         } catch (ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);

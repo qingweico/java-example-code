@@ -9,13 +9,19 @@ import java.util.concurrent.Executors;
 
 /**
  * 避免过度同步
- *
+ * <a href="https://github.com/clxering/Effective-Java-3rd-edition-Chinese-English-bilingual/blob/dev/Chapter-11/Chapter-11-Item-79-Avoid-excessive-synchronization.md">Item 79: Avoid excessive synchronization(避免过度同步)</a>
+ * 在持有锁的情况下调用一个可能被子类重写的方法或外部代码, 由于这种调用是开放的, 因此无法控制被调用代码的行为
+ * 并发设计中的 open call: 在不持有锁的情况下调用外部方(alien method)
  * @author zqw
  * @date 2021/3/27
  */
 class Article79 {
     public static void main(String[] args) {
-        // TODO
+        ObservableSet<Integer> set = new ObservableSet<>(new HashSet<>());
+        set.addObserver((s, e) -> System.out.println(e));
+        for (int i = 0; i < 100; i++) {
+            set.add(i);
+        }
     }
 }
 
@@ -39,9 +45,7 @@ class ObservableSet<E> extends ForwardingSet<E> {
         }
     }
 
-    /**
-     * Alien method moved outside synchronized block - open calls.
-     */
+
     private void notifyElementAdded(E element) {
         synchronized (observers) {
             for (SetObserver<E> observer : observers) {
@@ -49,9 +53,12 @@ class ObservableSet<E> extends ForwardingSet<E> {
             }
         }
     }
-
+    /**
+     * Alien method moved outside synchronized block - open calls.
+     * 在同步区域之外调用的外来方法称为 open call
+     */
     private void notifyElementAdded0(E element) {
-        List<SetObserver<E>> snapshot = null;
+        List<SetObserver<E>> snapshot;
         synchronized (observers) {
             snapshot = new ArrayList<>(observers);
         }
@@ -127,7 +134,7 @@ interface SetObserver<E> {
     void added(ObservableSet<E> set, E element);
 
 }
-
+// Thread-safe observable set with CopyOnWriteArrayList
 class SafeObservableSet<E> extends ForwardingSet<E> {
     private final List<SafeSetObserver<E>> observers = new CopyOnWriteArrayList<>();
 
@@ -176,3 +183,5 @@ interface SafeSetObserver<E> {
      */
     void added(SafeObservableSet<E> set, E element);
 }
+// 为了避免死锁和数据损坏, 永远不要从同步区域内调用外来方法
+// 更一般地说, 将你在同步区域内所做的工作量保持在最小
