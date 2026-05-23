@@ -1,0 +1,5 @@
+Benchmark                               Mode  Cnt       Score      Error   Units
+RandomBenchmark.testRandom             thrpt    5  120886.454 ±  668.078  ops/ms
+RandomBenchmark.testSecureRandom       thrpt    5    8933.311 ±   92.993  ops/ms
+RandomBenchmark.testSplittableRandom   thrpt    5  617300.527 ± 9882.967  ops/ms
+RandomBenchmark.testThreadLocalRandom  thrpt    5  573650.632 ± 7947.031  ops/ms
