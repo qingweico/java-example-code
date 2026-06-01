@@ -2,6 +2,7 @@ package oak;
 
 import cn.qingweico.datetime.DateUtil;
 import jodd.util.StringPool;
+import org.apache.commons.lang3.StringUtils;
 import oshi.SystemInfo;
 import oshi.hardware.*;
 import oshi.software.os.OSProcess;
@@ -13,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Welcome, What doesn't kill you makes you stronger
@@ -40,7 +40,7 @@ public class MachineInfo {
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
 
-        printBanner();
+        printBanner(os);
         printOsInfo(os);
         printCpuInfo(hal.getProcessor());
         printMemoryInfo(hal.getMemory());
@@ -56,10 +56,10 @@ public class MachineInfo {
     // ══════════════════════════════════════════════════════════════════════════
     //  Banner
     // ══════════════════════════════════════════════════════════════════════════
-    static void printBanner() {
+    static void printBanner(OperatingSystem os) {
         String now = DateUtil.now();
-        String machine = Optional.ofNullable(System.getenv("COMPUTERNAME"))
-                .orElse(System.getenv("HOSTNAME")) + StringPool.LEFT_BRACKET + System.getProperty("user.name") + StringPool.RIGHT_BRACKET;
+        String machine = os.getNetworkParams().getHostName() +
+                StringPool.LEFT_BRACKET + System.getProperty("user.name") + StringPool.RIGHT_BRACKET;
         System.out.println();
         printDoubleLine();
         printCentered("  ██████╗ ███████╗██╗  ██╗██╗███╗   ██╗███████╗ ██████╗  ");
@@ -85,7 +85,7 @@ public class MachineInfo {
         printRow("OS Family", os.getFamily());
         printRow("Manufacturer", os.getManufacturer());
         printRow("Version", ver.getVersion() + "  build " + ver.getBuildNumber());
-        printRow("Code Name", ver.getCodeName().isEmpty() ? "N/A" : ver.getCodeName());
+        printRow("Code Name", StringUtils.isEmpty(ver.getCodeName()) ? "N/A" : ver.getCodeName());
         printRow("Architecture", os.getBitness() + "-bit");
         printRow("System Uptime", formatUptime(uptimeSec));
         printRow("Boot Time", formatEpoch(os.getSystemBootTime()));
