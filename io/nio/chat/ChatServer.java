@@ -1,8 +1,9 @@
 package io.nio.chat;
 
-import cn.qingweico.io.Print;
 import cn.qingweico.constants.Constants;
 import cn.qingweico.datetime.DateUtil;
+import cn.qingweico.io.Print;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -15,6 +16,7 @@ import java.util.Set;
  * @author zqw
  * @date 2022/1/26
  */
+@Slf4j
 public class ChatServer {
     private static final int PORT = Constants.DEFAULT_COMMON_PORT;
     private Selector selector;
@@ -50,6 +52,7 @@ public class ChatServer {
                         socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1000));
                         // 向其他客户端提示上线
                         String msg = "[client " + clientName + " on line]";
+                        // TODO 接收文件保存到本地(自定义协议头)
                         relay(msg, socketChannel, false);
                     }
                     if (selectionKey.isReadable()) {
@@ -96,24 +99,24 @@ public class ChatServer {
         }
         try {
             for (SelectionKey selectionKey : selector.keys()) {
-                SelectableChannel selectableChannel = selectionKey.channel();
-                if (selectableChannel instanceof SocketChannel) {
-                    SocketChannel socketChannel = (SocketChannel) selectableChannel;
-                    ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
-                    if (textMessage) {
-                        System.out.printf("[%s] message relaying...%n", DateUtil.now());
-                        socketChannel.write(buffer);
-                        System.out.printf("[%s] message has forwarding to %s%n", DateUtil.now(),
-                                socketChannel.getRemoteAddress().toString().substring(1));
-                    } else {
-                        if (selectableChannel != sender) {
+                try (SelectableChannel selectableChannel = selectionKey.channel()) {
+                    if (selectableChannel instanceof SocketChannel socketChannel) {
+                        ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
+                        if (textMessage) {
+                            System.out.printf("[%s] message relaying...%n", DateUtil.now());
                             socketChannel.write(buffer);
+                            System.out.printf("[%s] message has forwarding to %s%n", DateUtil.now(),
+                                    socketChannel.getRemoteAddress().toString().substring(1));
+                        } else {
+                            if (selectableChannel != sender) {
+                                socketChannel.write(buffer);
+                            }
                         }
                     }
                 }
             }
         } catch (Exception ex) {
-            System.out.printf("[%s] server error%n", DateUtil.now());
+            log.error("server error : {}", ex.getMessage(), ex);
         }
 
     }

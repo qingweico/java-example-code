@@ -1,5 +1,6 @@
 package io.nio;
 
+import cn.qingweico.convert.ByteUnitConverter;
 import org.junit.Test;
 import cn.qingweico.constants.Constants;
 
@@ -118,18 +119,25 @@ public class ZeroCopyTest {
             FileChannel fileChannel = fis.getChannel();
             long start = System.currentTimeMillis();
             long send;
-            long sendBytes = 0;
+            long sendSize = 0;
             long size = fileChannel.size();
             // TODO
-            while (sendBytes < size) {
+            while (sendSize < size) {
                 // transferTo() 方法底层使用了零拷贝(sendfile()方法)
-                // VM: jdk.nio.enableFastFileTransfer 解除在window下一次传输8M限制
-                send = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
-                sendBytes += send;
+                // 由于Windows下存在单次最大8MB限制, 使用fileChannel.transferTo(0, fileChannel.size(), socketChannel);
+                // 会存在问题 VM: jdk.nio.enableFastFileTransfer 解除在Windows下一次传输8M限制
+                send = fileChannel.transferTo(sendSize, size - sendSize, socketChannel);
+                sendSize += send;
             }
-            System.out.printf("[sendBytes: %s, time: %sms]%n", sendBytes, (System.currentTimeMillis() - start));
-            fileChannel.close();
+            System.out.printf("[sendSize: %s, time: %sms]%n", ByteUnitConverter.convert(sendSize), (System.currentTimeMillis() - start));
+            // 告知服务端文件发完了
+            socketChannel.shutdownOutput();
+
+            // 等服务端处理完并关闭连接
+            ByteBuffer buf = ByteBuffer.allocate(1);
+            socketChannel.read(buf);
             socketChannel.close();
+            fileChannel.close();
         }
     }
 }
